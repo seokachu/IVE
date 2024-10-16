@@ -1,6 +1,12 @@
 {
   "git.ignoreLimitWarning": true,
   "cSpell.words": [
-    "tailwindcss"
+    "clsx",
+    "lucide",
+    "shadcn",
+    "signup",
+    "tailwindcss",
+    "tanstack",
+    "zustand"
   ]
 }

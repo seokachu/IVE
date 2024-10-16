@@ -3,6 +3,8 @@ import "./globals.css";
 import ThemeProvider from "@/providers/ThemeProvider";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
+import QueryProvider from "@/providers/QueryProvider";
+import { notoSansKr } from "@/assets/fonts/fonts";
 
 export const metadata: Metadata = {
   title: "IVE-DIVE",
@@ -16,16 +18,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="">
+      <body className={notoSansKr.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          {children}
-          <Footer />
+          <QueryProvider>
+            <Header />
+            {children}
+            <Footer />
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>

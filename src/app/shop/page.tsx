@@ -1,7 +1,5 @@
-import React from "react";
-
 const page = () => {
-  return <div></div>;
+  return <div>굿즈샵</div>;
 };
 
 export default page;
