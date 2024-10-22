@@ -4,7 +4,7 @@ import ThemeProvider from "@/providers/ThemeProvider";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import QueryProvider from "@/providers/QueryProvider";
-import { notoSansKr } from "@/assets/fonts/fonts";
+import { notoSansKr } from "../assets/fonts/fonts";
 
 export const metadata: Metadata = {
   title: "IVE-DIVE",
