@@ -1,8 +1,4 @@
-import Image from "next/image";
-import TestImage from "@/assets/images/test.webp";
-import { LuMusic4 } from "react-icons/lu";
-import Link from "next/link";
-import { musicIcon } from "@/lib/data";
+import MusicListCarousel from "@/components/MusicListCarousel";
 
 export default function Home() {
   return (
@@ -42,35 +38,8 @@ export default function Home() {
         />
         <div className="absolute max-w-[1320px] w-full flex items-center justify-center flex-col lg:justify-start lg:text-left text-white">
           <h2 className="text-2xl lg:text-4xl">Album</h2>
-          <ul className="">
-            <li className="">
-              <Image src={TestImage} alt="앨범" />
-              <h3>SWITCH</h3>
-              <ul>
-                <li>
-                  <p>2024.10.15</p>
-                  <p>발라드</p>
-                  <p>1곡</p>
-                </li>
-              </ul>
-              <h3 className="flex items-center gap-1">
-                <LuMusic4 size={30} />
-                음원듣기
-              </h3>
-              <ul className="flex gap-2">
-                {musicIcon.map((el, index) => (
-                  <li key={index}>
-                    <Link href="" target="_blank">
-                      <Image
-                        src={el.icon}
-                        alt={el.label}
-                        className="rounded-[46px]"
-                      />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </li>
+          <ul>
+            <MusicListCarousel />
           </ul>
         </div>
       </section>
