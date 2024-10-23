@@ -6,10 +6,10 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { musicIcon } from "@/lib/data";
-import TestImage from "@/assets/images/test.webp";
 import Image from "next/image";
 import { LuMusic4 } from "react-icons/lu";
 import Link from "next/link";
+import TestImage from "@/assets/images/test.webp";
 
 const MusicListCarousel = () => {
   return (
@@ -17,41 +17,48 @@ const MusicListCarousel = () => {
       opts={{
         align: "start",
       }}
-      className="w-full max-w-sm"
+      className="w-full max-w-sm md:max-w-md lg:max-w-lg"
     >
       <CarouselContent>
         {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-            <div className="p-1">
-              <li className="">
-                <Image src={TestImage} alt="앨범" />
-                <h3>SWITCH 앨범제목</h3>
-                <ul>
-                  <li>
-                    <p>2024.10.15</p>
-                    <p>발라드</p>
-                    <p>1곡</p>
+          <CarouselItem
+            key={index}
+            className="md:basis-1/2 md:mr-16 lg:basis-3/5"
+          >
+            <li className="">
+              <Image src={TestImage} alt="앨범" />
+              <h3 className="text-xl lg:text-2xl font-bold text-center mt-5">
+                SWITCH 앨범제목
+              </h3>
+              <ul>
+                <li className="flex justify-center gap-3 text-sm lg:text-base text-silver-gray opacity-90">
+                  <p className="relative after:content-['•'] after:absolute after:left-[calc(100%+4px)] after:top-0">
+                    2024.10.15
+                  </p>
+                  <p className="relative after:content-['•'] after:absolute after:left-[calc(100%+4px)] after:top-0">
+                    j팝
+                  </p>
+                  <p>1곡</p>
+                </li>
+              </ul>
+              <h3 className="flex items-center justify-center gap-1 font-bold my-5 border-b-[1px] pb-3">
+                <LuMusic4 size={20} className="translate-y-[1px]" />
+                음원듣기
+              </h3>
+              <ul className="flex items-center justify-center gap-3">
+                {musicIcon.map((el, index) => (
+                  <li key={index}>
+                    <Link href="" target="_blank" className="size-12 block">
+                      <Image
+                        src={el.icon}
+                        alt={el.label}
+                        className="rounded-[48px] object-cover size-12"
+                      />
+                    </Link>
                   </li>
-                </ul>
-                <h3 className="flex items-center gap-1">
-                  <LuMusic4 size={30} />
-                  음원듣기
-                </h3>
-                <ul className="flex gap-2">
-                  {musicIcon.map((el, index) => (
-                    <li key={index}>
-                      <Link href="" target="_blank">
-                        <Image
-                          src={el.icon}
-                          alt={el.label}
-                          className="rounded-[46px]"
-                        />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            </div>
+                ))}
+              </ul>
+            </li>
           </CarouselItem>
         ))}
       </CarouselContent>

@@ -17,7 +17,7 @@ export default function Home() {
               IVE INTO DIVE
             </h1>
             <p className="[text-shadow:_1px_3px_5px_rgb(0_0_0_/_0.3)] font-bold lg:text-xl">
-              내 가수의 정보를 한눈에!
+              내 가수 정보를 한눈에!
             </p>
             <p className="[text-shadow:_1px_3px_5px_rgb(0_0_0_/_0.3)] font-bold lg:text-xl">
               나의 최애 가수에게 응원의 한마디를 남겨보세요.
@@ -36,9 +36,9 @@ export default function Home() {
           muted
           loop
         />
-        <div className="absolute max-w-[1320px] w-full flex items-center justify-center flex-col lg:justify-start lg:text-left text-white">
-          <h2 className="text-2xl lg:text-4xl">Album</h2>
-          <ul>
+        <div className="absolute max-w-[1320px] w-full flex items-center justify-center flex-col gap-12 lg:justify-start lg:text-left text-white">
+          <h2 className="text-2xl font-bold lg:text-4xl">Album</h2>
+          <ul className="lg:w-full px-10">
             <MusicListCarousel />
           </ul>
         </div>
