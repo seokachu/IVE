@@ -1,0 +1,13 @@
+.swiper-pagination.swiper-pagination-fraction.swiper-pagination-horizontal {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.swiper-pagination.swiper-pagination-fraction.swiper-pagination-horizontal
+  span {
+  font-size: 20px;
+  display: block;
+}

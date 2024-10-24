@@ -38,19 +38,19 @@ export default function Home() {
           muted
           loop
         />
-        <div className="absolute w-full flex justify-center items-center flex-col gap-[120px] lg:justify-start lg:text-left text-white">
+        <div className="absolute w-full flex justify-center items-center flex-col lg:gap-[80px] lg:justify-start  text-white">
           <h2 className="text-2xl font-bold lg:text-4xl">Album</h2>
-          <ul className="lg:w-full lg:pl-10">
+          <ul className="px-5 w-full">
             <MusicList />
           </ul>
         </div>
       </section>
-      <section className="bg-white">자유게시판</section>
+      {/* <section className="bg-white h-full">자유게시판</section>
       <section className="bg-white">
         <ul className="lg:w-full">
           <ShopListCarousel />
         </ul>
-      </section>
+      </section> */}
     </>
   );
 }
