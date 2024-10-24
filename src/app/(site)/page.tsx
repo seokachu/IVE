@@ -1,4 +1,6 @@
-import MusicListCarousel from "@/components/MusicListCarousel";
+import MusicList from "@/components/MusicList";
+import MusicListItem from "@/components/MusicListItem";
+import ShopListCarousel from "@/components/ShopListCarousel";
 
 export default function Home() {
   return (
@@ -36,15 +38,19 @@ export default function Home() {
           muted
           loop
         />
-        <div className="absolute max-w-[1320px] w-full flex items-center justify-center flex-col gap-12 lg:justify-start lg:text-left text-white">
+        <div className="absolute w-full flex justify-center items-center flex-col gap-[120px] lg:justify-start lg:text-left text-white">
           <h2 className="text-2xl font-bold lg:text-4xl">Album</h2>
-          <ul className="lg:w-full px-10">
-            <MusicListCarousel />
+          <ul className="lg:w-full lg:pl-10">
+            <MusicList />
           </ul>
         </div>
       </section>
-      <section>자유게시판</section>
-      <section>굿즈샵</section>
+      <section className="bg-white">자유게시판</section>
+      <section className="bg-white">
+        <ul className="lg:w-full">
+          <ShopListCarousel />
+        </ul>
+      </section>
     </>
   );
 }

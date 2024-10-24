@@ -11,19 +11,19 @@ import { LuMusic4 } from "react-icons/lu";
 import Link from "next/link";
 import TestImage from "@/assets/images/test.webp";
 
-const MusicListCarousel = () => {
+const MusicListItem = () => {
   return (
     <Carousel
       opts={{
         align: "start",
       }}
-      className="w-full max-w-sm md:max-w-md lg:max-w-lg"
+      className="w-full m-auto max-w-sm md:max-w-md lg:max-w-[100%]"
     >
       <CarouselContent>
         {Array.from({ length: 5 }).map((_, index) => (
           <CarouselItem
             key={index}
-            className="md:basis-1/2 md:mr-16 lg:basis-3/5"
+            className="md:basis-1/2 mr-16 lg:w-[calc(100%/2.5)]"
           >
             <li className="">
               <Image src={TestImage} alt="앨범" />
@@ -48,11 +48,11 @@ const MusicListCarousel = () => {
               <ul className="flex items-center justify-center gap-3">
                 {musicIcon.map((el, index) => (
                   <li key={index}>
-                    <Link href="" target="_blank" className="size-12 block">
+                    <Link href="" target="_blank" className="size-10 block">
                       <Image
                         src={el.icon}
                         alt={el.label}
-                        className="rounded-[48px] object-cover size-12"
+                        className="rounded-[40px] object-cover size-10"
                       />
                     </Link>
                   </li>
@@ -68,4 +68,4 @@ const MusicListCarousel = () => {
   );
 };
 
-export default MusicListCarousel;
+export default MusicListItem;
