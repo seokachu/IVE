@@ -4,10 +4,11 @@ import VisualSection from "@/components/main/VisualSection";
 import BoardSection from "@/components/main/BoardSection";
 import ShopSection from "@/components/main/ShopSection";
 import PhotoCardImage from "@/assets/images/main_photo_card.avif";
+import GoTopButton from "@/components/elements/GoTopButton";
 
 export default function Home() {
   return (
-    <>
+    <main>
       <VisualSection />
       <AlbumSection />
       <BoardSection />
@@ -25,6 +26,7 @@ export default function Home() {
         </div>
       </section>
       <ShopSection />
-    </>
+      <GoTopButton />
+    </main>
   );
 }

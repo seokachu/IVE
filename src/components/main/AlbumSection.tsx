@@ -2,7 +2,10 @@ import AlbumList from "@/components/main/AlbumList";
 
 const AlbumSection = () => {
   return (
-    <section className="h-screen w-full relative flex items-center justify-center">
+    <section
+      id="second-section"
+      className="h-screen w-full relative flex items-center justify-center"
+    >
       <video
         className="h-screen w-full object-cover absolute"
         src="https://res.cloudinary.com/dknj7kdek/video/upload/v1729011643/1110732_Animation_Blurred_3840x2160_diyuzd.mp4"
