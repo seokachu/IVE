@@ -1,4 +1,4 @@
-import Navigation from "@/components/Navigation";
+import Navigator from "@/components/Navigator";
 import Image from "next/image";
 import LogoImage from "@/assets/images/logo.svg";
 import Link from "next/link";
@@ -15,7 +15,7 @@ const Header = () => {
             <Image src={LogoImage} alt="logo" width={80} height={50} />
           </Link>
         </h1>
-        <Navigation />
+        <Navigator />
         <UserMenu />
       </div>
     </header>

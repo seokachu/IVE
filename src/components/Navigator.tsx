@@ -2,7 +2,7 @@ import type { gnbArrayList } from "@/types";
 import { gnbArray } from "@/lib/data";
 import Link from "next/link";
 
-const Navigation = () => {
+const Navigator = () => {
   return (
     <nav>
       <ul className="hidden lg:flex lg:gap-10 lg:items-center">
@@ -16,4 +16,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default Navigator;

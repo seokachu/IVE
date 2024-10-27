@@ -206,7 +206,7 @@ const CarouselPrevious = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute h-[52px] w-[52px]",
+        "absolute h-[40px] w-[40px]",
         orientation === "horizontal"
           ? "hidden lg:block lg:right-[60px] lg:bottom-full lg:-translate-y-1/2"
           : "hidden lg:block lg:-top-12 lg:left-1/2 lg:-translate-x-1/2 lg:rotate-90",

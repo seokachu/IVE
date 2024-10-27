@@ -22,7 +22,7 @@ const UserMenu = () => {
         </li>
         <li>
           {!isLogin ? (
-            <Link href="/signup">회원가입</Link>
+            <Link href="/signup">로그인/회원가입</Link>
           ) : (
             <button onClick={onClickLogout}>로그아웃</button>
           )}
