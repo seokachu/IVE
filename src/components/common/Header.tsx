@@ -68,8 +68,8 @@ const Header = () => {
       >
         <HeaderAside />
         <h1 className="cursor-pointer absolute top-[20px] left-2/4 -translate-x-2/4 lg:static lg:translate-x-0">
-          <Link href="/">
-            <Image src={logoSrc} alt="logo" width={80} height={50} />
+          <Link href="/" className="relative w-[80px] h-auto block">
+            <Image src={logoSrc} alt="logo" className="fill" priority />
           </Link>
         </h1>
         <Navigator />
