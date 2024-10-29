@@ -15,6 +15,7 @@ const config: Config = {
         foreground: "hsl(var(--foreground))",
         "silver-gray": "var(--silver-gray)",
         "dark-gray": "var(--dark-gray)",
+        "font-color": "var(--font-primary)",
         orange: "var(--orange)",
         pink: "var(--pink)",
         purple: "var(--purple)",
