@@ -9,11 +9,17 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import SignInContent from "./SignInContent";
+import { ButtonHTMLAttributes } from "react";
 
-const SignIn = ({ title = "로그인/회원가입" }) => {
+interface SignInProps {
+  title?: string;
+  className?: ButtonHTMLAttributes<HTMLButtonElement>["className"];
+}
+
+const SignIn = ({ title = "로그인/회원가입", className }: SignInProps) => {
   return (
     <Dialog>
-      <DialogTrigger>{title}</DialogTrigger>
+      <DialogTrigger className={className}>{title}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="relative w-[100px] h-auto mb-5">

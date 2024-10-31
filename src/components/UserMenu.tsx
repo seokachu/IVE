@@ -3,11 +3,11 @@ import { useState } from "react";
 import Link from "next/link";
 import SignIn from "./auth/modal/SignIn";
 
-const UserMenu = ({ className = "hidden lg:block" }) => {
+const UserMenu = () => {
   const [isLogin] = useState(false);
 
   return (
-    <nav className={className}>
+    <nav className="hidden lg:block">
       <ul className="flex gap-3 items-center">
         <li>
           <Link href="cart">

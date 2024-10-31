@@ -10,8 +10,8 @@ import {
 import Image from "next/image";
 import { RxHamburgerMenu } from "react-icons/rx";
 import LogoImage from "@/assets/images/logo_black.svg";
-
 import MobileNavigator from "./MobileNavigator";
+import MobileUserMenu from "./MobileUserMenu";
 
 const HeaderAside = () => {
   return (
@@ -26,6 +26,7 @@ const HeaderAside = () => {
               <Image src={LogoImage} alt="logo" className="fill" />
             </SheetTitle>
             <SheetDescription className="sr-only">IVE MENU</SheetDescription>
+            <MobileUserMenu />
             <MobileNavigator />
           </SheetHeader>
         </SheetContent>
