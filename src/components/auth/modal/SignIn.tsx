@@ -18,7 +18,7 @@ const SignIn = ({ title = "로그인/회원가입" }) => {
         <DialogHeader>
           <DialogTitle className="relative w-[100px] h-auto mb-5">
             <Image src={LogoImage} alt="logo image" className="fill" />
-            <DialogDescription className="hidden">회원가입</DialogDescription>
+            <DialogDescription className="sr-only">회원가입</DialogDescription>
           </DialogTitle>
         </DialogHeader>
         <SignInContent />
