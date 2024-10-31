@@ -9,12 +9,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import SignInContent from "./SignInContent";
-import { ButtonHTMLAttributes } from "react";
-
-interface SignInProps {
-  title?: string;
-  className?: ButtonHTMLAttributes<HTMLButtonElement>["className"];
-}
+import type { SignInProps } from "@/types";
 
 const SignIn = ({ title = "로그인/회원가입", className }: SignInProps) => {
   return (

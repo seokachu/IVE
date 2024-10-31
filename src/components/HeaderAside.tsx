@@ -6,7 +6,6 @@ import {
   SheetTrigger,
   SheetTitle,
   SheetDescription,
-  SheetClose,
 } from "@/components/ui/sheet";
 import Image from "next/image";
 import { RxHamburgerMenu } from "react-icons/rx";

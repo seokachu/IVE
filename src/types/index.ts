@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import * as SheetPrimitive from "@radix-ui/react-dialog";
+import { ButtonHTMLAttributes } from "react";
 
 export interface gnbArrayList {
   label: string;
@@ -8,4 +8,9 @@ export interface gnbArrayList {
 
 export interface LoginModeProps {
   setIsLoginMode: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface SignInProps {
+  title?: string;
+  className?: ButtonHTMLAttributes<HTMLButtonElement>["className"];
 }
