@@ -7,19 +7,19 @@ import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import { useState } from "react";
 import SignInEmail from "./SignInEmail";
+import { IoIosArrowBack } from "react-icons/io";
+import { DialogClose } from "@/components/ui/dialog";
 
 const SignInContent = () => {
   const [showEmailSignIn, setShowEmailSignIn] = useState(false);
 
-  const onClickSignInEmail = () => {
-    setShowEmailSignIn(true);
+  const toggleEmailSignIn = () => {
+    setShowEmailSignIn((prev) => !prev);
   };
 
   return (
     <div className="flex flex-col items-center w-full gap-5">
-      {showEmailSignIn ? (
-        <SignInEmail />
-      ) : (
+      {!showEmailSignIn ? (
         <div>
           <button className="w-full bg-[#fee500] px-20 py-3 rounded-full flex items-center justify-center relative text-sm font-bold mb-3">
             <IoChatbubble
@@ -29,7 +29,7 @@ const SignInContent = () => {
             카카오로 3초 만에 시작하기
           </button>
           <button
-            onClick={onClickSignInEmail}
+            onClick={toggleEmailSignIn}
             className="w-full border border-1 border-dark-gray px-20 py-3 rounded-full flex items-center justify-center relative text-sm font-bold"
           >
             <MdOutlineEmail
@@ -63,11 +63,23 @@ const SignInContent = () => {
           <div className="flex gap-3 text-sm items-center justify-center">
             <p className="text-dark-gray text-xs">
               아직 계정이 없으신가요?
-              <Link href="/signup" className="text-font-color ml-1">
-                회원가입하기
-              </Link>
+              <DialogClose asChild>
+                <Link href="/signup" className="text-font-color ml-1">
+                  회원가입하기
+                </Link>
+              </DialogClose>
             </p>
           </div>
+        </div>
+      ) : (
+        <div>
+          <button onClick={toggleEmailSignIn} className="absolute top-5 left-5">
+            <IoIosArrowBack
+              size={25}
+              className="text-[#5e5e5e] hover:text-font-color"
+            />
+          </button>
+          <SignInEmail />
         </div>
       )}
     </div>
