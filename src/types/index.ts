@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import * as SheetPrimitive from "@radix-ui/react-dialog";
 
 export interface gnbArrayList {
   label: string;

@@ -6,6 +6,7 @@ import {
   SheetTrigger,
   SheetTitle,
   SheetDescription,
+  SheetClose,
 } from "@/components/ui/sheet";
 import Image from "next/image";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -25,7 +26,9 @@ const HeaderAside = () => {
             <SheetTitle className="p-[20px] relative w-[120px] h-auto">
               <Image src={LogoImage} alt="logo" className="fill" />
             </SheetTitle>
-            <SheetDescription className="sr-only">IVE MENU</SheetDescription>
+            <SheetDescription className="sr-only">
+              Navigation Menu
+            </SheetDescription>
             <MobileUserMenu />
             <MobileNavigator />
           </SheetHeader>
