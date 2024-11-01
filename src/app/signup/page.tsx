@@ -22,8 +22,11 @@ const SignUp = () => {
           <SignupForm setIsLoginMode={setIsLoginMode} />
           <div className="text-dark-gray text-sm flex items-center gap-2 justify-center mt-5 ">
             <p>이미 회원이신가요?</p>
-            <div className="text-font-color underline underline-offset-1">
-              <SignIn title="로그인하기" />
+            <div className="text-font-color">
+              <SignIn
+                title="로그인하기"
+                className="underline underline-offset-1"
+              />
             </div>
           </div>
         </div>

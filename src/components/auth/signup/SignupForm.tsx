@@ -9,14 +9,18 @@ import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LoginModeProps } from "@/types";
 import JSConfetti from "js-confetti";
 
 const SignupForm = ({ setIsLoginMode }: LoginModeProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordCheck, setShowPasswordCheck] = useState(false);
-  const jsConfetti = new JSConfetti();
+  const [jsConfetti, setJsConfetti] = useState<JSConfetti | null>(null);
+
+  useEffect(() => {
+    setJsConfetti(new JSConfetti());
+  }, []);
 
   const form = useForm<SignUpType>({
     mode: "onChange",
@@ -29,7 +33,7 @@ const SignupForm = ({ setIsLoginMode }: LoginModeProps) => {
   const handleSubmit = (data: SignUpType) => {
     console.log(data);
     setIsLoginMode(true);
-    jsConfetti.addConfetti({
+    jsConfetti?.addConfetti({
       confettiColors: ["#ff9f87", "#FFFFFF", "#EB7FEC", "#E72424"],
       confettiRadius: 5,
       confettiNumber: 300,
