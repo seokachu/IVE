@@ -17,6 +17,20 @@ const SignInContent = () => {
     setShowEmailSignIn((prev) => !prev);
   };
 
+  const onCLickSignUp = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const sheetElement = document.querySelector(
+      '[role="dialog"][data-state="open"].fixed'
+    );
+    if (sheetElement) {
+      const closeButton = sheetElement.querySelector("button.absolute");
+      (closeButton as HTMLButtonElement)?.click();
+    }
+    setTimeout(() => {
+      window.location.href = "/signup";
+    }, 100);
+  };
+
   return (
     <div className="flex flex-col items-center w-full gap-5">
       {!showEmailSignIn ? (
@@ -64,7 +78,11 @@ const SignInContent = () => {
             <p className="text-dark-gray text-xs">
               아직 계정이 없으신가요?
               <DialogClose asChild>
-                <Link href="/signup" className="text-font-color ml-1">
+                <Link
+                  href="/signup"
+                  className="text-font-color ml-1"
+                  onClick={onCLickSignUp}
+                >
                   회원가입하기
                 </Link>
               </DialogClose>
