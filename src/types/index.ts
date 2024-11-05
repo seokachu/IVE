@@ -14,3 +14,7 @@ export interface SignInProps {
   title?: string;
   className?: ButtonHTMLAttributes<HTMLButtonElement>["className"];
 }
+
+export interface classNameProps {
+  className?: ButtonHTMLAttributes<HTMLButtonElement>["className"];
+}

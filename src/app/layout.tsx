@@ -5,6 +5,7 @@ import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import QueryProvider from "@/providers/QueryProvider";
 import { notoSansKr } from "../assets/fonts/fonts";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "IVE-DIVE",
@@ -28,6 +29,7 @@ export default function RootLayout({
           <QueryProvider>
             <Header />
             {children}
+            <Toaster />
             <Footer />
           </QueryProvider>
         </ThemeProvider>

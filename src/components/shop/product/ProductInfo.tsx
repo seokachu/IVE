@@ -1,9 +1,9 @@
 import TestImage from "@/assets/images/test.webp";
 import { CiSquarePlus } from "react-icons/ci";
 import { CiSquareMinus } from "react-icons/ci";
-import { IoMdShare } from "react-icons/io";
 import Image from "next/image";
 import ProductActions from "./ProductActions";
+import ShareButton from "@/components/elements/ShareButton";
 
 const ProductInfo = () => {
   return (
@@ -17,9 +17,7 @@ const ProductInfo = () => {
             앨범제목
             이마ㅓㄴㅇ;리ㅏㅓㅁ;ㅣㄴ얼;미asdfasdfasdfasdfasdfasdasdfasasdfasdfasdfasdfasdfas
           </h2>
-          <button className="mt-[2px]">
-            <IoMdShare size={25} />
-          </button>
+          <ShareButton className="mt-[2px]" />
         </div>
         <div className="my-5">
           <p className="text-lg line-through text-dark-gray mb-1">50,000원</p>

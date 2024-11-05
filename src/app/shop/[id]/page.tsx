@@ -7,7 +7,6 @@ const page = () => {
     <main className="px-5 pt-14 pb-28 lg:px-8 max-w-[1320px] m-auto flex flex-col items-center justify-center">
       <ProductInfo />
       <ProductDescription />
-
       <section className="w-full">
         <div>
           <h2 className="text-xl font-bold mb-5">자주 묻는 질문 FAQ</h2>
