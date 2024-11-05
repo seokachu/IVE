@@ -10,9 +10,9 @@ const SignUp = () => {
   const [isLoginMode, setIsLoginMode] = useState(false);
 
   return (
-    <section className="w-full h-screen flex items-center justify-center">
+    <main className="w-full h-screen flex items-center justify-center">
       {!isLoginMode ? (
-        <div className="max-w-[500px] px-5">
+        <section className="max-w-[500px] px-5">
           <div className="flex justify-center items-center flex-col gap-3 mb-12">
             <h2 className="relative w-[100px] h-auto">
               <Image src={LogoImage} alt="logo image" className="fill" />
@@ -29,9 +29,9 @@ const SignUp = () => {
               />
             </div>
           </div>
-        </div>
+        </section>
       ) : (
-        <div className="max-w-[500px] px-5">
+        <section className="max-w-[500px] px-5">
           <div className="flex items-center justify-center flex-col mb-10">
             <h2 className="relative w-[100px] h-auto my-5">
               <Image src={LogoImage} alt="logo image" className="fill" />
@@ -42,9 +42,9 @@ const SignUp = () => {
             <p>함께 응원하고, 소중한 순간들을 나눠보세요.</p>
           </div>
           <SignInEmail />
-        </div>
+        </section>
       )}
-    </section>
+    </main>
   );
 };
 

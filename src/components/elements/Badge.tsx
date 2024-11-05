@@ -4,6 +4,9 @@ const Badge = () => {
       <span className="bg-purple text-xs px-2 py-1 rounded-md text-white">
         무료배송
       </span>
+      <span className="bg-orange text-xs px-2 py-1 rounded-md text-white">
+        Best👍
+      </span>
     </div>
   );
 };
