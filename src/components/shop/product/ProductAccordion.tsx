@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import Link from "next/link";
 
-const DetailAccordion = () => {
+const ProductAccordion = () => {
   return (
     <Accordion type="single" collapsible>
       <AccordionItem value="item-1">
@@ -161,4 +161,4 @@ const DetailAccordion = () => {
   );
 };
 
-export default DetailAccordion;
+export default ProductAccordion;

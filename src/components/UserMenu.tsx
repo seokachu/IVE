@@ -10,7 +10,7 @@ const UserMenu = () => {
     <nav className="hidden lg:block">
       <ul className="flex gap-3 items-center">
         <li>
-          <Link href="cart">
+          <Link href="/cart">
             <IoCartOutline className="cursor-pointer" size={24} />
           </Link>
         </li>
