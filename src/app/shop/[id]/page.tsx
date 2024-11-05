@@ -10,11 +10,11 @@ import { IoMdShare } from "react-icons/io";
 const page = () => {
   return (
     <main className="px-5 pt-14 pb-28 lg:px-8 max-w-[1320px] m-auto flex flex-col items-center justify-center">
-      <section className="lg:flex lg:gap-8 lg:justify-between items-center">
-        <div className="overflow-hidden relative h-auto w-2/4">
-          <Image src={TestImage} alt="test" className="fill" />
+      <section className="flex flex-col lg:flex-row lg:gap-8 justify-center lg:justify-between items-center">
+        <div className="overflow-hidden relative h-auto lg:w-2/4 w-full">
+          <Image src={TestImage} alt="test" className="fill m-auto" />
         </div>
-        <div className="my-8 w-2/4 lg:my-0">
+        <div className="my-8 lg:w-2/4 lg:my-0">
           <div className="flex items-start">
             <h2 className="text-xl font-bold break-all pr-10">
               앨범제목
@@ -100,8 +100,8 @@ const page = () => {
             <p>고급 면 소재로 제작되어 편안한 착용감을 제공하며,</p>
             <p>앞면에 깔끔한 로고가 프린트 되어 있습니다.</p>
           </div>
-          <div className="w-[500px] h-auto m-auto relative my-16">
-            <Image src={TestImage} alt="text" className="fill" />
+          <div className="w-full h-auto m-auto relative my-16">
+            <Image src={TestImage} alt="text" className="fill m-auto" />
           </div>
         </div>
       </section>
