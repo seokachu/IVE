@@ -20,7 +20,7 @@ const ProductInfo = () => {
           <ShareButton className="mt-[2px]" />
         </div>
         <div className="my-5">
-          <p className="text-lg line-through text-dark-gray mb-1">50,000원</p>
+          <s className="text-lg text-dark-gray mb-1">50,000원</s>
           <div className="flex gap-2 items-center">
             <strong className="text-xl text-purple">10%</strong>
             <strong className="text-xl">45,000원</strong>

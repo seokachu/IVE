@@ -19,6 +19,8 @@ const config: Config = {
         orange: "var(--orange)",
         pink: "var(--pink)",
         purple: "var(--purple)",
+        red: "var(--red)",
+        "dark-orange": "var(--dark-orange)",
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
