@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { IoHeart } from "react-icons/io5";
 import { RiMessage2Line } from "react-icons/ri";
+import CommentForm from "@/components/board/CommentForm";
+import CommentListItems from "@/components/board/CommentListItems";
 
 const page = () => {
   return (
@@ -60,42 +62,9 @@ const page = () => {
         <div className="flex gap-4 mt-5 border-t pt-5 pb-5">
           <p className="font-bold text-lg">댓글 1개</p>
         </div>
-        <div className="flex items-center mb-5">
-          <h3 className="relative w-[40px] h-auto overflow-hidden rounded-full mr-3 shrink-0">
-            <Image src={TestImage} alt="test" className="fill" />
-          </h3>
-          <textarea
-            className="border-b w-full"
-            placeholder="댓글을 입력해 주세요."
-          />
-          <button className="bg-purple rounded-md text-sm py-4 px-5 shrink-0 text-white">
-            등록
-          </button>
-        </div>
+        <CommentForm />
         <ul className="text-sm">
-          <li className="py-5">
-            <div className="flex gap-2 items-center">
-              <h3 className="relative w-[40px] h-auto overflow-hidden rounded-full">
-                <Image src={TestImage} alt="test" className="fill" />
-              </h3>
-              <div>
-                <div className="flex gap-2">
-                  <h2>익명의아이브</h2>
-                  <time className="text-dark-gray">2024.04.04</time>
-                </div>
-                <p className="text-sm">
-                  뭐 거진 대부분 돈이 없죠 돈이 없어서 문제예요 흑흑...
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4 pl-12 mt-1">
-              <p className="flex items-center gap-1">
-                <IoHeart size={15} />
-                <span>0</span>
-              </p>
-              <button>답변</button>
-            </div>
-          </li>
+          <CommentListItems />
         </ul>
       </section>
     </main>
