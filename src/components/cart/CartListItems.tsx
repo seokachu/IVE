@@ -16,10 +16,13 @@ const CartListItems = () => {
           <Image src={TestImage} alt="test" className="object-cover fill" />
         </div>
         <div className="flex lg:gap-3 lg:flex-row flex-col lg:items-center lg:justify-between">
-          <h3 className="flex-[4] mr-9">
-            이것은 아이브 앨범입니다이것은 아이브 앨범입니다이것은 아이브
-            앨범입니다
-          </h3>
+          <div className="flex-[4] mr-9">
+            <h3>
+              이것은 아이브 앨범입니다이것은 아이브 앨범입니다이것은 아이브
+              앨범입니다
+            </h3>
+            <p className="text-sm mt-1 text-gray-400">수량 1</p>
+          </div>
           <div className="lg:text-right flex-1">
             <span className="mr-1 text-purple font-bold">30%</span>
             <s className="text-dark-gray text-sm mr-1 lg:mr-0 text-nowrap">

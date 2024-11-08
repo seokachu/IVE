@@ -1,6 +1,7 @@
 import { IoSearch } from "react-icons/io5";
 import PaginationControl from "@/components/common/PaginationControl";
 import BoardListItems from "@/components/board/BoardListItems";
+import BoardListHeader from "@/components/board/BoardListHeader";
 
 const page = () => {
   return (
@@ -26,14 +27,7 @@ const page = () => {
           </form>
         </div>
         <div className="mt-10">
-          <ul className="flex text-center pb-3 border-b border-dark-gray text-sm lg:text-base">
-            <li className="w-[10%]">번호</li>
-            <li className="w-[50%]">제목</li>
-            <li className="w-[20%] text-left">글쓴이</li>
-            <li className="w-[20%]">등록일</li>
-            <li className="w-[10%] hidden lg:block">댓글</li>
-            <li className="w-[10%] hidden lg:block">추천</li>
-          </ul>
+          <BoardListHeader />
           <ul>
             <BoardListItems />
           </ul>
