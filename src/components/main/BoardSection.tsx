@@ -1,5 +1,5 @@
 import MoreButton from "../elements/MoreButton";
-import BoardListItems from "./items/BoardListItems";
+import MainBoardListItems from "./items/MainBoardListItems";
 
 const BoardSection = () => {
   return (
@@ -12,8 +12,8 @@ const BoardSection = () => {
           <MoreButton />
         </div>
         <ul className="flex flex-wrap">
-          <BoardListItems />
-          <BoardListItems />
+          <MainBoardListItems />
+          <MainBoardListItems />
         </ul>
       </div>
     </section>

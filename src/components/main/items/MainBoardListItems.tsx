@@ -2,7 +2,7 @@ import Image from "next/image";
 import { BiCommentDots } from "react-icons/bi";
 import TestImage from "@/assets/images/test.webp";
 
-const BoardListItems = () => {
+const MainBoardListItems = () => {
   return (
     <li className="flex gap-5 items-center justify-center mt-5 w-full lg:w-2/4 lg:justify-start">
       <div className="border overflow-hidden rounded-lg">
@@ -33,4 +33,4 @@ const BoardListItems = () => {
   );
 };
 
-export default BoardListItems;
+export default MainBoardListItems;
