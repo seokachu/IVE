@@ -58,7 +58,7 @@ const Header = () => {
     <header
       className={cn(
         isMainPage ? "fixed" : "relative",
-        "right-0 top-0 left-0 z-10",
+        "right-0 top-0 left-0 z-10 w-screen overflow-x-hidden",
         isScrolled && "bg-white text-black shadow-sm"
       )}
     >
@@ -76,7 +76,6 @@ const Header = () => {
         </h1>
         <Navigator />
         {/* 로그인하면 유저 아바타, 비로그인시 UserMenu 아바타 클릭하면 select 박스*/}
-        <UserAvatar />
         <UserMenu />
       </div>
     </header>

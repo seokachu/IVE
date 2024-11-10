@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className={notoSansKr.className}>
+      <body className={`${notoSansKr.className} w-screen overflow-x-hidden`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

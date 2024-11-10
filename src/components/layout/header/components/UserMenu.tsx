@@ -2,14 +2,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { useState } from "react";
 import Link from "next/link";
 import SignIn from "../../../auth/modal/SignIn";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import UserDropdownMenu from "./UserDropdownMenu";
 
 const UserMenu = () => {
   const [isLogin] = useState(false);
@@ -22,9 +15,7 @@ const UserMenu = () => {
             <IoCartOutline className="cursor-pointer" size={24} />
           </Link>
         </li>
-        <li>
-          {!isLogin ? <SignIn /> : <Link href="/mypage">마이페이지</Link>}
-        </li>
+        <li>{isLogin ? <SignIn /> : <UserDropdownMenu />}</li>
       </ul>
     </nav>
   );
