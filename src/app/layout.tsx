@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ThemeProvider from "@/providers/ThemeProvider";
-import Header from "@/components/common/Header";
-import Footer from "@/components/common/Footer";
+import Header from "@/components/layout/header/Header";
+import Footer from "@/components/layout/footer/Footer";
 import QueryProvider from "@/providers/QueryProvider";
 import { notoSansKr } from "../assets/fonts/fonts";
 import { Toaster } from "@/components/ui/toaster";

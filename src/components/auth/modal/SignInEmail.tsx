@@ -1,5 +1,5 @@
 import { Form } from "@/components/ui/form";
-import { RHFInput } from "@/components/elements/RHFInput";
+import { RHFInput } from "@/components/common/RHFInput";
 import { Button } from "@/components/ui/button";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";

@@ -1,7 +1,15 @@
 import { IoCartOutline } from "react-icons/io5";
 import { useState } from "react";
 import Link from "next/link";
-import SignIn from "./auth/modal/SignIn";
+import SignIn from "../../../auth/modal/SignIn";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const UserMenu = () => {
   const [isLogin] = useState(false);

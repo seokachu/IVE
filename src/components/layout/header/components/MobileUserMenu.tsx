@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { IoCartOutline } from "react-icons/io5";
-import SignIn from "./auth/modal/SignIn";
+import SignIn from "../../../auth/modal/SignIn";
 import { GoHeart } from "react-icons/go";
 import { SheetClose } from "@/components/ui/sheet";
 

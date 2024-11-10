@@ -1,5 +1,5 @@
 import TestImage from "@/assets/images/test.webp";
-import ShareButton from "@/components/elements/ShareButton";
+import ShareButton from "@/components/common/button/ShareButton";
 import Image from "next/image";
 import Link from "next/link";
 import { IoHeart } from "react-icons/io5";

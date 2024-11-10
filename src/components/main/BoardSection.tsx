@@ -1,4 +1,4 @@
-import MoreButton from "../elements/MoreButton";
+import MoreButton from "../common/button/MoreButton";
 import MainBoardListItems from "./items/MainBoardListItems";
 
 const BoardSection = () => {

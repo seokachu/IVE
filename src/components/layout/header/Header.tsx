@@ -1,14 +1,15 @@
 "use client";
-import Navigator from "@/components/Navigator";
+import Navigator from "@/components/layout/header/components/Navigator";
 import Image from "next/image";
 import LogoImage from "@/assets/images/logo.svg";
 import SubLogoImage from "@/assets/images/logo_black.svg";
 import Link from "next/link";
-import UserMenu from "../UserMenu";
-import HeaderAside from "../HeaderAside";
+import UserMenu from "./components/UserMenu";
+import HeaderAside from "./components/HeaderAside";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import UserAvatar from "../../common/UserAvatar";
 
 const Header = () => {
   const pathname = usePathname();
@@ -74,6 +75,8 @@ const Header = () => {
           </Link>
         </h1>
         <Navigator />
+        {/* 로그인하면 유저 아바타, 비로그인시 UserMenu 아바타 클릭하면 select 박스*/}
+        <UserAvatar />
         <UserMenu />
       </div>
     </header>

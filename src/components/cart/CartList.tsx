@@ -1,4 +1,4 @@
-import SelectionControl from "../common/SelectionControl";
+import SelectionControl from "../common/select/SelectionControl";
 import CartListItems from "./CartListItems";
 import { useId } from "react";
 

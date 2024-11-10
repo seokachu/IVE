@@ -1,6 +1,6 @@
 import { Form } from "@/components/ui/form";
 import { FaExclamationCircle } from "react-icons/fa";
-import { RHFInput } from "@/components/elements/RHFInput";
+import { RHFInput } from "@/components/common/RHFInput";
 import { Button } from "@/components/ui/button";
 import { SignUpType, userDefaultValues, userSchemas } from "@/hooks/user";
 import { useForm } from "react-hook-form";

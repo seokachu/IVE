@@ -4,7 +4,7 @@ import VisualSection from "@/components/main/VisualSection";
 import BoardSection from "@/components/main/BoardSection";
 import ShopSection from "@/components/main/ShopSection";
 import PhotoCardImage from "@/assets/images/main_photo_card.avif";
-import GoTopButton from "@/components/elements/GoTopButton";
+import GoTopButton from "@/components/common/button/GoTopButton";
 
 export default function Home() {
   return (

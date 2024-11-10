@@ -1,5 +1,5 @@
 import ShopListCarousel from "@/components/main/items/ShopListCarousel";
-import MoreButton from "../elements/MoreButton";
+import MoreButton from "../common/button/MoreButton";
 
 const ShopSection = () => {
   return (

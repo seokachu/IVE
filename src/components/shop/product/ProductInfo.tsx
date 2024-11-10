@@ -3,7 +3,7 @@ import { CiSquarePlus } from "react-icons/ci";
 import { CiSquareMinus } from "react-icons/ci";
 import Image from "next/image";
 import ProductActions from "./ProductActions";
-import ShareButton from "@/components/elements/ShareButton";
+import ShareButton from "@/components/common/button/ShareButton";
 
 const ProductInfo = () => {
   return (
