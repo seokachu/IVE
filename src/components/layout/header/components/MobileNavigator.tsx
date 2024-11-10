@@ -1,8 +1,8 @@
-import { gnbArray } from "@/lib/data";
 import { VscChevronRight } from "react-icons/vsc";
 import { useRouter } from "next/navigation";
 import { SheetClose } from "@/components/ui/sheet";
 import type { gnbArrayList } from "@/types";
+import { gnbArray } from "@/utils/constants";
 
 const MobileNavigator = () => {
   const { push } = useRouter();

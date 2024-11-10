@@ -16,12 +16,12 @@ const UserDropdownMenu = () => {
         <UserAvatar />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>닉네임</DropdownMenuLabel>
+        <DropdownMenuLabel>닉네임닉네임</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem asChild className="cursor-pointer">
           <Link href="/mypage">마이페이지</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="text-dark-gray text-xs">
+        <DropdownMenuItem className="text-dark-gray text-xs cursor-pointer">
           로그아웃
         </DropdownMenuItem>
       </DropdownMenuContent>

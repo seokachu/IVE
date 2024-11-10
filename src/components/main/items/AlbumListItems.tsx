@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { LuMusic4 } from "react-icons/lu";
-import { musicIcon } from "@/lib/data";
+import { musicIcon } from "@/utils/constants";
 import TestImage from "@/assets/images/test.webp";
 
 const AlbumListItems = () => {

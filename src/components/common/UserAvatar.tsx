@@ -5,7 +5,7 @@ const UserAvatar = () => {
   return (
     <Avatar>
       <AvatarImage src={UserDefaultImage.src} alt="@shadcn" />
-      <AvatarFallback>유저1</AvatarFallback>
+      <AvatarFallback>user</AvatarFallback>
     </Avatar>
   );
 };

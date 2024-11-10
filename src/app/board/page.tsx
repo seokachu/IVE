@@ -26,7 +26,7 @@ const page = () => {
             </div>
           </form>
         </div>
-        <div className="mt-10">
+        <div className="mt-10 min-h-screen">
           <BoardListHeader />
           <ul>
             <BoardListItems />

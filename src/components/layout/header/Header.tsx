@@ -8,8 +8,7 @@ import UserMenu from "./components/UserMenu";
 import HeaderAside from "./components/HeaderAside";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
-import UserAvatar from "../../common/UserAvatar";
+import { cn } from "@/utils/utils";
 
 const Header = () => {
   const pathname = usePathname();

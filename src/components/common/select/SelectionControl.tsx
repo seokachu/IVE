@@ -13,7 +13,10 @@ const SelectionControl = () => {
         />
         전체선택 1/3
       </label>
-      <button className="px-2 py-1 border rounded-md">전체삭제</button>
+      <div className="flex gap-2">
+        <button className="px-2 py-1 border rounded-md">선택삭제</button>
+        <button className="px-2 py-1 border rounded-md">전체삭제</button>
+      </div>
     </div>
   );
 };

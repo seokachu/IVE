@@ -1,5 +1,5 @@
 import type { gnbArrayList } from "@/types";
-import { gnbArray } from "@/lib/data";
+import { gnbArray } from "@/utils/constants";
 import Link from "next/link";
 
 const Navigator = () => {
