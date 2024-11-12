@@ -1,11 +1,12 @@
 import { IoCartOutline } from "react-icons/io5";
-import { useState } from "react";
 import Link from "next/link";
 import SignIn from "../../../auth/modal/SignIn";
 import UserDropdownMenu from "./UserDropdownMenu";
+import { useRecoilValue } from "recoil";
+import { sessionState } from "@/store";
 
 const UserMenu = () => {
-  const [isLogin] = useState(false);
+  const session = useRecoilValue(sessionState);
 
   return (
     <nav className="hidden lg:block">
@@ -15,7 +16,7 @@ const UserMenu = () => {
             <IoCartOutline className="cursor-pointer" size={24} />
           </Link>
         </li>
-        <li>{isLogin ? <SignIn /> : <UserDropdownMenu />}</li>
+        <li>{!session ? <SignIn /> : <UserDropdownMenu />}</li>
       </ul>
     </nav>
   );

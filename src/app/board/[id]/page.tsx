@@ -47,7 +47,7 @@ const page = () => {
             <span>1</span>
           </p>
         </div>
-        <div className="flex bg-silver-gray rounded-md py-3 px-5">
+        <div className="flex bg-gray-100 rounded-md py-3 px-5">
           <div className="flex gap-2 items-center">
             <h3 className="relative w-[40px] h-auto overflow-hidden rounded-full">
               <Image src={TestImage} alt="test" className="fill" />

@@ -6,6 +6,7 @@ import Footer from "@/components/layout/footer/Footer";
 import QueryProvider from "@/providers/QueryProvider";
 import { notoSansKr } from "../assets/fonts/fonts";
 import { Toaster } from "@/components/ui/toaster";
+import RecoilProvider from "@/providers/RecoilProvider";
 
 export const metadata: Metadata = {
   title: "IVE-DIVE",
@@ -26,12 +27,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <QueryProvider>
-            <Header />
-            {children}
-            <Toaster />
-            <Footer />
-          </QueryProvider>
+          <RecoilProvider>
+            <QueryProvider>
+              <Header />
+              {children}
+              <Toaster />
+            </QueryProvider>
+          </RecoilProvider>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

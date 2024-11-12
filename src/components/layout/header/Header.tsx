@@ -74,7 +74,6 @@ const Header = () => {
           </Link>
         </h1>
         <Navigator />
-        {/* 로그인하면 유저 아바타, 비로그인시 UserMenu 아바타 클릭하면 select 박스*/}
         <UserMenu />
       </div>
     </header>

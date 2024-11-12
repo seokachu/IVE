@@ -1,12 +1,11 @@
 const BoardListHeader = () => {
   return (
-    <ul className="flex text-center py-3 border-b border-dark-gray text-sm lg:text-base">
+    <ul className="flex text-center py-3 bg-gray-100 text-sm border-dark-gray lg:text-base">
       <li className="w-[10%]">번호</li>
       <li className="w-[50%]">제목</li>
-      <li className="w-[20%] text-left">글쓴이</li>
-      <li className="w-[20%]">등록일</li>
-      <li className="w-[10%] hidden lg:block">댓글</li>
-      <li className="w-[10%] hidden lg:block">추천</li>
+      <li className="w-[20%] text-left">작성자</li>
+      <li className="w-[20%]">작성일</li>
+      <li className="w-[10%] hidden lg:block">조회</li>
     </ul>
   );
 };

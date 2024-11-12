@@ -10,9 +10,8 @@ const page = () => {
     <div className="px-5 lg:pt-14 pb-28 lg:px-8">
       <h2 className="font-bold text-xl mb-5 hidden lg:block">결제 목록</h2>
       <SelectionControl />
-      <BoardListHeader />
+      {/* <BoardListHeader /> */}
       <ul>
-        <CartListItems />
         <CartListItems />
         <CartListItems />
         <CartListItems />

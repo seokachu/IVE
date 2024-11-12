@@ -1,7 +1,6 @@
 "use client";
 import { IoChatbubble } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
-import { FaApple } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
@@ -9,9 +8,12 @@ import { useState } from "react";
 import SignInEmail from "./SignInEmail";
 import { IoIosArrowBack } from "react-icons/io";
 import { DialogClose } from "@/components/ui/dialog";
+import { oAuthLogin } from "@/lib/supabase/auth";
+import { useToast } from "@/hooks/use-toast";
 
 const SignInContent = () => {
   const [showEmailSignIn, setShowEmailSignIn] = useState(false);
+  const { toast } = useToast();
 
   const toggleEmailSignIn = () => {
     setShowEmailSignIn((prev) => !prev);
@@ -29,6 +31,22 @@ const SignInContent = () => {
     setTimeout(() => {
       window.location.href = "/signup";
     }, 100);
+  };
+
+  //login button
+  const onClickLogin = async () => {
+    try {
+      await oAuthLogin("google");
+      toast({
+        title: "로그인 되었습니다.",
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          title: error.message,
+        });
+      }
+    }
   };
 
   return (
@@ -57,13 +75,11 @@ const SignInContent = () => {
               또는
             </p>
             <ul className="flex gap-5 items-center justify-center mt-3">
-              {/* <li>
-                <button className="rounded-full p-1 w-10 h-10 bg-black">
-                  <FaApple size={28} color="white" className="m-auto" />
-                </button>
-              </li> */}
               <li>
-                <button className="rounded-full border p-1 w-10 h-10">
+                <button
+                  onClick={onClickLogin}
+                  className="rounded-full border p-1 w-10 h-10"
+                >
                   <FcGoogle size={30} className="m-auto" />
                 </button>
               </li>
