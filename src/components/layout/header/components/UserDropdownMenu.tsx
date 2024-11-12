@@ -25,7 +25,7 @@ const UserDropdownMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <UserAvatar />
+        <UserAvatar size="sm" />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>

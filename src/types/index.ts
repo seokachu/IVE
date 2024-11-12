@@ -18,3 +18,5 @@ export interface SignInProps {
 export interface classNameProps {
   className?: ButtonHTMLAttributes<HTMLButtonElement>["className"];
 }
+
+export type OAuthProvider = "google" | "github" | "kakao";

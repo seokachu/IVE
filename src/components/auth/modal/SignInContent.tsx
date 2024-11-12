@@ -10,6 +10,8 @@ import { IoIosArrowBack } from "react-icons/io";
 import { DialogClose } from "@/components/ui/dialog";
 import { oAuthLogin } from "@/lib/supabase/auth";
 import { useToast } from "@/hooks/use-toast";
+import { OAuthProvider } from "@/types";
+import OAuthButton from "@/components/common/button/OAuthButton";
 
 const SignInContent = () => {
   const [showEmailSignIn, setShowEmailSignIn] = useState(false);
@@ -34,9 +36,9 @@ const SignInContent = () => {
   };
 
   //login button
-  const onClickLogin = async () => {
+  const handleOAuthLogin = async (provider: OAuthProvider) => {
     try {
-      await oAuthLogin("google");
+      await oAuthLogin(provider);
       toast({
         title: "로그인 되었습니다.",
       });
@@ -53,13 +55,14 @@ const SignInContent = () => {
     <div className="flex flex-col items-center w-full gap-5">
       {!showEmailSignIn ? (
         <div>
-          <button className="w-full bg-[#fee500] px-20 py-3 rounded-full flex items-center justify-center relative text-sm font-bold mb-3">
-            <IoChatbubble
-              className="absolute left-5 top-2/4 -translate-y-2/4"
-              size={20}
-            />
-            카카오로 3초 만에 시작하기
-          </button>
+          <OAuthButton
+            onClick={() => handleOAuthLogin("kakao")}
+            className="w-full bg-[#fee500] px-20 py-3 rounded-full flex items-center justify-center relative text-sm font-bold mb-3"
+            text="카카오로 3초 만에 시작하기"
+            icon={IoChatbubble}
+            size={20}
+            iconStyle="absolute left-5 top-2/4 -translate-y-2/4"
+          />
           <button
             onClick={toggleEmailSignIn}
             className="w-full border border-1 border-dark-gray px-20 py-3 rounded-full flex items-center justify-center relative text-sm font-bold"
@@ -76,17 +79,22 @@ const SignInContent = () => {
             </p>
             <ul className="flex gap-5 items-center justify-center mt-3">
               <li>
-                <button
-                  onClick={onClickLogin}
+                <OAuthButton
+                  onClick={() => handleOAuthLogin("google")}
                   className="rounded-full border p-1 w-10 h-10"
-                >
-                  <FcGoogle size={30} className="m-auto" />
-                </button>
+                  icon={FcGoogle}
+                  size={30}
+                  iconStyle="m-auto"
+                />
               </li>
               <li>
-                <button className="w-10 h-10">
-                  <FaGithub size={38} className="translate-y-[2px]" />
-                </button>
+                <OAuthButton
+                  onClick={() => handleOAuthLogin("github")}
+                  className="w-10 h-10"
+                  icon={FaGithub}
+                  size={38}
+                  iconStyle="translate-y-[2px]"
+                />
               </li>
             </ul>
           </div>
