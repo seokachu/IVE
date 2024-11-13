@@ -10,9 +10,6 @@ const UserMenu = () => {
   const session = useRecoilValue(sessionState);
   const loading = useRecoilValue(loadingState);
 
-  if (loading) {
-  }
-
   return (
     <nav className="hidden lg:block">
       <ul className="flex gap-3 items-center">
