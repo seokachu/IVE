@@ -1,5 +1,4 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import UserDefaultImage from "@/assets/images/profile_user.webp";
 import { useRecoilValue } from "recoil";
 import { sessionState } from "@/store";
 
@@ -16,13 +15,17 @@ const UserAvatar = ({ size = "md" }: AvatarProps) => {
     lg: "w-12 h-12",
   };
 
+  const avatarUrl = session?.user.user_metadata.avatar_url;
+
   return (
     <Avatar className={sizeStyles[size]}>
       <AvatarImage
-        src={session?.user.user_metadata.avatar_url || UserDefaultImage}
+        src={avatarUrl}
         alt={session?.user.user_metadata.avatar_url || "유저 프로필"}
       />
-      <AvatarFallback>{session?.user.user_metadata.name}</AvatarFallback>
+      <AvatarFallback className="text-xs">
+        {session?.user.user_metadata.name || "사용자"}
+      </AvatarFallback>
     </Avatar>
   );
 };

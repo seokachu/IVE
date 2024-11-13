@@ -1,3 +1,4 @@
+"use client";
 import { Form } from "@/components/ui/form";
 import { RHFInput } from "@/components/common/RHFInput";
 import { Button } from "@/components/ui/button";
@@ -67,7 +68,7 @@ const SignInEmail = () => {
           disabled={!isValid || !isDirty || isSubmitting}
           className="w-full rounded-full mt-6 p-6 transition ease-in delay-300"
         >
-          {isSubmitting ? "처리 중..." : "로그인하기"}
+          {isSubmitting ? "처리 중..." : "로그인"}
         </Button>
       </form>
     </Form>

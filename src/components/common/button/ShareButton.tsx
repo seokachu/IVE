@@ -13,9 +13,11 @@ const ShareButton = ({ className }: classNameProps) => {
         title: "링크가 복사되었습니다.",
       });
     } catch (error) {
-      toast({
-        title: "링크 복사에 실패했습니다.",
-      });
+      if (error instanceof Error) {
+        toast({
+          title: "링크 복사에 실패했습니다.",
+        });
+      }
     }
   };
 

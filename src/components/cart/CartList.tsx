@@ -1,6 +1,5 @@
 import SelectionControl from "../common/select/SelectionControl";
 import CartListItems from "./CartListItems";
-import { useId } from "react";
 
 const CartList = () => {
   return (

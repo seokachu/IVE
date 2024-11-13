@@ -1,3 +1,4 @@
+"use client";
 import { Form } from "@/components/ui/form";
 import { FaExclamationCircle } from "react-icons/fa";
 import { RHFInput } from "@/components/common/RHFInput";
@@ -10,12 +11,14 @@ import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { LoginModeProps } from "@/types";
 import JSConfetti from "js-confetti";
 import { toast } from "@/hooks/use-toast";
 import { signUpEmail } from "@/lib/supabase/auth";
+import getRandomNickname from "@/lib/api/nickname";
+import { useRouter } from "next/navigation";
 
-const SignupForm = ({ setIsLoginMode }: LoginModeProps) => {
+const SignupForm = () => {
+  const { push } = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordCheck, setShowPasswordCheck] = useState(false);
   const [jsConfetti, setJsConfetti] = useState<JSConfetti | null>(null);
@@ -34,15 +37,15 @@ const SignupForm = ({ setIsLoginMode }: LoginModeProps) => {
 
   const handleSubmit = async (data: SignUpType) => {
     try {
+      const nickname = await getRandomNickname();
       await signUpEmail(data.email, data.password, {
-        name: `테스트유저${Math.floor(Math.random() * 1000)}`,
+        name: nickname.data,
       });
       toast({
         title: "회원가입이 완료되었습니다!",
       });
       console.log(data);
-
-      setIsLoginMode(true);
+      push("/login");
       jsConfetti?.addConfetti({
         confettiColors: ["#ff9f87", "#FFFFFF", "#EB7FEC", "#E72424"],
         confettiRadius: 5,
