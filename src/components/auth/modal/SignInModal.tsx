@@ -11,7 +11,7 @@ import {
 import SignInContent from "./SignInContent";
 import type { SignInProps } from "@/types";
 
-const SignIn = ({ title = "로그인/회원가입", className }: SignInProps) => {
+const SignInModal = ({ title = "로그인/회원가입", className }: SignInProps) => {
   return (
     <Dialog>
       <DialogTrigger className={className}>{title}</DialogTrigger>
@@ -28,4 +28,4 @@ const SignIn = ({ title = "로그인/회원가입", className }: SignInProps) =>
   );
 };
 
-export default SignIn;
+export default SignInModal;

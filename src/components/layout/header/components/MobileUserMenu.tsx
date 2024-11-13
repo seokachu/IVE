@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { IoCartOutline } from "react-icons/io5";
-import SignIn from "../../../auth/modal/SignIn";
+import SignInModal from "../../../auth/modal/SignInModal";
 import { SheetClose } from "@/components/ui/sheet";
 import { useRecoilValue } from "recoil";
 import { sessionState } from "@/store";
@@ -26,7 +26,7 @@ const MobileUserMenu = () => {
         </li>
         <li className="flex-1 hover:bg-zinc-500">
           {!session ? (
-            <SignIn
+            <SignInModal
               title="로그인"
               className="block w-full border p-7 border-dark-gray h-[80px] border-r-0 hover:text-white"
             />

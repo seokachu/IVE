@@ -1,6 +1,6 @@
 import { IoCartOutline } from "react-icons/io5";
 import Link from "next/link";
-import SignIn from "../../../auth/modal/SignIn";
+import SignInModal from "../../../auth/modal/SignInModal";
 import UserDropdownMenu from "./UserDropdownMenu";
 import { useRecoilValue } from "recoil";
 import { loadingState, sessionState } from "@/store";
@@ -22,7 +22,7 @@ const UserMenu = () => {
           {loading ? (
             <LoadingSkeleton />
           ) : !session ? (
-            <SignIn />
+            <SignInModal />
           ) : (
             <UserDropdownMenu />
           )}
