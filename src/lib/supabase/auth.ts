@@ -7,14 +7,16 @@ export const oAuthLogin = async (provider: Provider) => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `http://localhost:3000`, //FIXME - 수정 예정
+        redirectTo: `${window.location.origin}`,
       },
     });
 
     if (error) throw error;
     return data;
   } catch (error) {
-    throw new Error("로그인에 실패했습니다.");
+    if (error instanceof Error) {
+      throw new Error(`로그인에 실패했습니다. ${error.message}`);
+    }
   }
 };
 

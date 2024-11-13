@@ -12,9 +12,12 @@ import { oAuthLogin } from "@/lib/supabase/auth";
 import { useToast } from "@/hooks/use-toast";
 import { OAuthProvider } from "@/types";
 import OAuthButton from "@/components/common/button/OAuthButton";
+import { useSetRecoilState } from "recoil";
+import { loadingState } from "@/store";
 
 const SignInContent = () => {
   const [showEmailSignIn, setShowEmailSignIn] = useState(false);
+  const setLoading = useSetRecoilState(loadingState);
   const { toast } = useToast();
 
   const toggleEmailSignIn = () => {
@@ -38,6 +41,7 @@ const SignInContent = () => {
   //login button
   const handleOAuthLogin = async (provider: OAuthProvider) => {
     try {
+      setLoading(true);
       await oAuthLogin(provider);
       toast({
         title: "로그인 되었습니다.",
@@ -48,6 +52,8 @@ const SignInContent = () => {
           title: error.message,
         });
       }
+    } finally {
+      setLoading(false);
     }
   };
 
