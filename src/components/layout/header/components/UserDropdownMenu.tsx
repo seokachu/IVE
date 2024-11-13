@@ -10,17 +10,10 @@ import {
 import Link from "next/link";
 import { useRecoilValue } from "recoil";
 import { sessionState } from "@/store";
-import { signOut } from "@/lib/supabase/auth";
+import SignOutButton from "@/components/common/button/SignOutButton";
 
 const UserDropdownMenu = () => {
   const session = useRecoilValue(sessionState);
-
-  console.log(session);
-
-  const onClickSignOut = async () => {
-    await signOut();
-    alert("로그아웃 완료");
-  };
 
   return (
     <DropdownMenu>
@@ -29,14 +22,14 @@ const UserDropdownMenu = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>
-          {session?.user?.user_metadata?.name}
+          {session?.user.user_metadata?.name}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild className="cursor-pointer">
           <Link href="/mypage">마이페이지</Link>
         </DropdownMenuItem>
         <DropdownMenuItem className="text-dark-gray text-xs cursor-pointer">
-          <button onClick={onClickSignOut}>로그아웃</button>
+          <SignOutButton />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

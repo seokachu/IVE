@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { IoCartOutline } from "react-icons/io5";
 import SignIn from "../../../auth/modal/SignIn";
-import { GoHeart } from "react-icons/go";
 import { SheetClose } from "@/components/ui/sheet";
 import { useRecoilValue } from "recoil";
 import { sessionState } from "@/store";
