@@ -1,10 +1,6 @@
 import { Provider } from "@supabase/supabase-js";
 import { supabase } from "./client";
-
-//FIXME - 닉네임 수정 예정
-type UserMetadata = {
-  name?: string;
-};
+import getRandomNickname from "../api/nickname";
 
 //소셜 로그인
 export const oAuthLogin = async (provider: Provider) => {
@@ -26,19 +22,20 @@ export const oAuthLogin = async (provider: Provider) => {
 };
 
 //일반 회원가입
-export const signUpEmail = async (
-  email: string,
-  password: string,
-  metadata?: UserMetadata
-) => {
+export const signUpEmail = async (email: string, password: string) => {
   try {
+    const nickname = await getRandomNickname();
+
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        data: metadata,
+        data: {
+          name: nickname.data,
+        },
       },
     });
+
     if (error) throw error;
     return data;
   } catch (error) {
