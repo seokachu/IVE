@@ -1,7 +1,7 @@
 import Image from "next/image";
 import LogoImage from "@/assets/images/logo_pink.svg";
-import SignupForm from "@/components/auth/signup/SignupForm";
 import SignInModal from "@/components/auth/modal/SignInModal";
+import SignUpForm from "@/components/auth/signup/SignupForm";
 
 const SignUp = () => {
   return (
@@ -13,7 +13,7 @@ const SignUp = () => {
           </h2>
           <h3 className="text-xl font-bold">회원가입</h3>
         </div>
-        <SignupForm />
+        <SignUpForm />
         <div className="text-dark-gray text-sm flex items-center gap-2 justify-center mt-5 ">
           <p>이미 회원이신가요?</p>
           <div className="text-font-color">
