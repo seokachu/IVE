@@ -10,9 +10,14 @@ import { LoginType, userDefaultValues, userSchemas } from "@/hooks/user";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { signInWithEmail } from "@/lib/supabase/auth";
+import { toast } from "@/hooks/use-toast";
+// import { useRecoilState } from "recoil";
+// import { sessionState } from "@/store";
 
 const SignInEmail = () => {
   const [showPassword, setShowPassword] = useState(false);
+  // const [session, setSession] = useRecoilState(sessionState);
   const form = useForm<LoginType>({
     mode: "onChange",
     resolver: zodResolver(userSchemas.loginSchema),
@@ -21,8 +26,21 @@ const SignInEmail = () => {
 
   const { isValid, isDirty, isSubmitting } = form.formState;
 
-  const handleSubmit = (data: LoginType) => {
-    console.log(data);
+  const handleSubmit = async (data: LoginType) => {
+    try {
+      console.log(data);
+      const result = await signInWithEmail(data.email, data.password);
+      console.log("result", result);
+      if (result?.user) {
+        // setSession({ user: result?.user });
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          title: error.message,
+        });
+      }
+    }
   };
 
   return (

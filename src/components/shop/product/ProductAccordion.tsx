@@ -19,7 +19,7 @@ const ProductAccordion = () => {
             </li>
             <li>
               <h3 className="font-bold mb-1">전화번호</h3>
-              <p>010-4548-3334</p>
+              <p>1111-1000</p>
             </li>
             <li>
               <h3 className="font-bold mb-1">이메일</h3>
