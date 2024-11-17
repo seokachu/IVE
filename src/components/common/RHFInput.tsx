@@ -14,7 +14,10 @@ interface RHFInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export function RHFInput({ name, ...props }: RHFInputProps) {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <FormField
@@ -26,6 +29,7 @@ export function RHFInput({ name, ...props }: RHFInputProps) {
             <Input
               {...props}
               {...field}
+              error={!!errors[name]}
               value={field.value || ""}
               onChange={(e) => {
                 field.onChange(e.target.value);

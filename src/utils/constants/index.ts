@@ -13,9 +13,9 @@ export const gnbArray = [
 
 //main album music icon list
 export const musicIcon = [
-  { icon: AppleMusicIcon, label: "apple", path: "" },
-  { icon: MelonMusicIcon, label: "Melon", path: "" },
-  { icon: FloMusicIcon, label: "FLO", path: "" },
-  { icon: BugsMusicIcon, label: "Bugs", path: "" },
-  { icon: GenieMusicIcon, label: "Genie", path: "" },
+  { icon: AppleMusicIcon, label: "apple", link: "apple_link" },
+  { icon: MelonMusicIcon, label: "Melon", link: "melon_link" },
+  { icon: FloMusicIcon, label: "FLO", link: "flo_link" },
+  { icon: BugsMusicIcon, label: "Bugs", link: "bugs_link" },
+  { icon: GenieMusicIcon, label: "Genie", link: "genie_link" },
 ];

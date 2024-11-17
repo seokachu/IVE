@@ -11,13 +11,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { signInWithEmail } from "@/lib/supabase/auth";
-import { toast } from "@/hooks/use-toast";
-// import { useRecoilState } from "recoil";
-// import { sessionState } from "@/store";
 
 const SignInEmail = () => {
   const [showPassword, setShowPassword] = useState(false);
-  // const [session, setSession] = useRecoilState(sessionState);
+
   const form = useForm<LoginType>({
     mode: "onChange",
     resolver: zodResolver(userSchemas.loginSchema),
@@ -28,17 +25,17 @@ const SignInEmail = () => {
 
   const handleSubmit = async (data: LoginType) => {
     try {
-      console.log(data);
-      const result = await signInWithEmail(data.email, data.password);
-      console.log("result", result);
-      if (result?.user) {
-        // setSession({ user: result?.user });
-      }
+      await signInWithEmail(data.email, data.password);
     } catch (error) {
       if (error instanceof Error) {
-        toast({
-          title: error.message,
-        });
+        if (error.message.includes("Invalid login credentials")) {
+          form.setError("email", {
+            message: "이메일 또는 비밀번호가 일치하지 않습니다.",
+          });
+          form.setError("password", {
+            message: "이메일 또는 비밀번호가 일치하지 않습니다.",
+          });
+        }
       }
     }
   };

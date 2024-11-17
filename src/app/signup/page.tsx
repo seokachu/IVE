@@ -1,7 +1,7 @@
 import Image from "next/image";
 import LogoImage from "@/assets/images/logo_pink.svg";
 import SignInModal from "@/components/auth/modal/SignInModal";
-import SignUpForm from "@/components/auth/signup/SignupForm";
+import SignUpForm from "@/components/auth/signup/SignUpForm";
 
 const SignUp = () => {
   return (

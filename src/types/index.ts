@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
+import { Tables } from "@/types/supabase";
 
 export interface gnbArrayList {
   label: string;
@@ -15,3 +16,7 @@ export interface classNameProps {
 }
 
 export type OAuthProvider = "google" | "github" | "kakao";
+
+export interface AlbumItemProps {
+  album: Tables<"album">;
+}

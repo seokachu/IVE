@@ -6,8 +6,28 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "@/styles/swiper.css";
 import AlbumListItems from "./items/AlbumListItems";
+import { getAlbums } from "@/lib/supabase/album";
+import { useEffect, useState } from "react";
+import { Tables } from "@/types/supabase";
 
 const AlbumList = () => {
+  const [albums, setAlbums] = useState<Tables<"album">[]>([]);
+
+  useEffect(() => {
+    const fetchAlbums = async () => {
+      try {
+        const data = await getAlbums();
+        setAlbums(data);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.log(error.message);
+        }
+      }
+    };
+
+    fetchAlbums();
+  }, []);
+
   return (
     <Swiper
       effect={"coverflow"}
@@ -28,9 +48,14 @@ const AlbumList = () => {
       className="w-full h-full !pb-[60px]"
       spaceBetween={50}
     >
-      <SwiperSlide className="bg-cover bg-center lg:!w-max lg:!h-full lg:pr-5">
-        <AlbumListItems />
-      </SwiperSlide>
+      {albums.map((album) => (
+        <SwiperSlide
+          key={album.title}
+          className="bg-cover bg-center lg:!w-max lg:!h-full lg:pr-5"
+        >
+          <AlbumListItems album={album} />
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 };
