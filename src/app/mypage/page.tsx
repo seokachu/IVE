@@ -1,4 +1,3 @@
-import TestImage from "@/assets/images/test.webp";
 import BoardListHeader from "@/components/board/BoardListHeader";
 import BoardListItems from "@/components/board/BoardListItems";
 import CartListItems from "@/components/cart/CartListItems";

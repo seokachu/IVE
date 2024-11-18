@@ -19,3 +19,9 @@ export const musicIcon = [
   { icon: BugsMusicIcon, label: "Bugs", link: "bugs_link" },
   { icon: GenieMusicIcon, label: "Genie", link: "genie_link" },
 ];
+
+//shop sort options
+export const productSortOptions = [
+  { value: "best", title: "인기순" },
+  { value: "latest", title: "최신순" },
+];

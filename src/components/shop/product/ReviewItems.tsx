@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { FaRegStar } from "react-icons/fa";
-import TestImage from "@/assets/images/test.webp";
+import TestImage from "@/assets/images/album_img.webp";
 
 const ReviewItems = () => {
   return (

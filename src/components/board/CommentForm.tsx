@@ -1,4 +1,4 @@
-import TestImage from "@/assets/images/test.webp";
+import TestImage from "@/assets/images/album_img.webp";
 import Image from "next/image";
 
 const CommentForm = () => {

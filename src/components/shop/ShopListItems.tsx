@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import TestImage from "@/assets/images/test.webp";
+import TestImage from "@/assets/images/album_img.webp";
 import Badge from "@/components/common/Badge";
 import { FaStar } from "react-icons/fa";
 import { GoHeartFill } from "react-icons/go";

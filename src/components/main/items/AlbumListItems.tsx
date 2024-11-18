@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { LuMusic4 } from "react-icons/lu";
 import { musicIcon } from "@/utils/constants";
-import DefaultImage from "@/assets/images/test.webp";
+import DefaultImage from "@/assets/images/album_img.webp";
 
 import { AlbumItemProps } from "@/types";
 
@@ -39,7 +39,7 @@ const AlbumListItems = ({ album }: AlbumItemProps) => {
         <Image
           src={album.album_image || DefaultImage}
           alt={album.title}
-          className="fill object-cover w-[500px] h-auto"
+          className="fill object-cover"
           width={500}
           height={500}
         />
