@@ -5,8 +5,10 @@ import Badge from "@/components/common/Badge";
 import { FaStar } from "react-icons/fa";
 import { GoHeartFill } from "react-icons/go";
 import { useRouter } from "next/navigation";
+import { ShopListItemProps } from "@/types";
+import { getDiscountedPrice } from "@/utils/calculateDiscount";
 
-const ShopListItems = () => {
+const ShopListItems = ({ item }: ShopListItemProps) => {
   const { push } = useRouter();
 
   const onClickDetail = () => {
@@ -23,6 +25,9 @@ const ShopListItems = () => {
     }
   };
 
+  //할인율 적용
+  const price = getDiscountedPrice(item);
+
   return (
     <>
       <li
@@ -34,9 +39,11 @@ const ShopListItems = () => {
       >
         <div className="relative w-full h-auto rounded-lg overflow-hidden border">
           <Image
-            src={TestImage}
-            alt="앨범"
+            src={item.thumbnail || TestImage}
+            alt="썸네일"
             className="fill group-hover:scale-110 transition-transform duration-300"
+            width={250}
+            height={250}
           />
           <button
             onClick={onClickHeart}
@@ -47,17 +54,17 @@ const ShopListItems = () => {
           </button>
         </div>
         <div className="flex flex-col gap-1">
-          <Badge />
+          <Badge item={item} />
           <h3 className="text-base overflow-hidden overflow-ellipsis whitespace-nowrap">
-            SWITCH 앨범제목!
+            {item.title}
           </h3>
           <div className="font-bold flex items-center gap-2 text-xl">
-            <span className="text-purple">10%</span>
-            <span className="">45,000 원</span>
+            <span className="text-purple">{item.discount_rate}%</span>
+            <span>{price}원</span>
           </div>
           <div className="flex items-center gap-1 text-[#878f91] text-sm">
             <FaStar />
-            <span>4.8</span>
+            <span>{item.rating}</span>
           </div>
         </div>
       </li>

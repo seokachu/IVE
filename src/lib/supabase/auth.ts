@@ -18,6 +18,7 @@ export const oAuthLogin = async (provider: Provider) => {
     if (error instanceof Error) {
       throw new Error(`로그인에 실패했습니다. ${error.message}`);
     }
+    throw error;
   }
 };
 
@@ -44,6 +45,7 @@ export const signUpEmail = async (email: string, password: string) => {
     if (error instanceof Error) {
       throw new Error(`회원가입에 실패했습니다. ${error.message}`);
     }
+    throw error;
   }
 };
 
@@ -60,6 +62,7 @@ export const signInWithEmail = async (email: string, password: string) => {
     if (error instanceof Error) {
       throw new Error(`로그인에 실패했습니다. ${error.message}`);
     }
+    throw error;
   }
 };
 
@@ -70,4 +73,5 @@ export const signOut = async () => {
   if (error) {
     throw new Error("로그아웃에 실패했습니다.");
   }
+  throw error;
 };
