@@ -5,7 +5,8 @@ import Image from "next/image";
 import ProductActions from "./ProductActions";
 import ShareButton from "@/components/common/button/ShareButton";
 
-const ProductInfo = () => {
+const ProductInfo = ({ product }: any) => {
+  console.log(product);
   return (
     <section className="flex flex-col lg:flex-row gap-8 justify-center lg:justify-between items-center">
       <div className="overflow-hidden relative h-auto lg:w-2/4 w-full">

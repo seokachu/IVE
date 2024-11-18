@@ -44,7 +44,7 @@ export interface ShopListItemProps {
 
 export interface DiscountedPrice {
   price: number;
-  discount_rate: number | null;
+  discount_rate?: number | null;
 }
 
 export type PriceKeys = "price" | "discount_rate";

@@ -12,6 +12,7 @@ const ShopList = () => {
       try {
         const data = await getGoodsShop();
         setShopItems(data);
+        console.log(data);
       } catch (error) {
         if (error instanceof Error) {
           throw new Error(

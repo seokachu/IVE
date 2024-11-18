@@ -6,7 +6,7 @@ const ProductDescription = () => {
   return (
     <section className="py-28 w-full">
       <TabMenu />
-      {/* <DescriptionTab /> */}
+      <DescriptionTab />
       <ReviewTab />
     </section>
   );

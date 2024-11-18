@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import TestImage from "@/assets/images/album_img.webp";
 import Badge from "@/components/common/Badge";
@@ -13,13 +14,15 @@ const ShopListItems = ({ item }: ShopListItemProps) => {
   const { push } = useRouter();
   const [averageRating, setAverageRating] = useState(0);
 
+  console.log(item);
+
   useEffect(() => {
     const fetchRating = async () => {
       const rating = await getAverageRating(item.id);
       setAverageRating(rating);
     };
     fetchRating();
-  }, [item.id]);
+  }, [item]);
 
   const onClickDetail = () => {
     push(`/shop/${item.id}`);
