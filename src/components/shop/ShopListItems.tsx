@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import TestImage from "@/assets/images/album_img.webp";
 import Badge from "@/components/common/Badge";
@@ -7,12 +6,23 @@ import { GoHeartFill } from "react-icons/go";
 import { useRouter } from "next/navigation";
 import { ShopListItemProps } from "@/types";
 import { getDiscountedPrice } from "@/utils/calculateDiscount";
+import { useEffect, useState } from "react";
+import { getAverageRating } from "@/lib/supabase/review";
 
 const ShopListItems = ({ item }: ShopListItemProps) => {
   const { push } = useRouter();
+  const [averageRating, setAverageRating] = useState(0);
+
+  useEffect(() => {
+    const fetchRating = async () => {
+      const rating = await getAverageRating(item.id);
+      setAverageRating(rating);
+    };
+    fetchRating();
+  }, [item.id]);
 
   const onClickDetail = () => {
-    push(`/shop/${1}`);
+    push(`/shop/${item.id}`);
   };
 
   const onClickHeart = (e: React.MouseEvent) => {
@@ -64,7 +74,7 @@ const ShopListItems = ({ item }: ShopListItemProps) => {
           </div>
           <div className="flex items-center gap-1 text-[#878f91] text-sm">
             <FaStar />
-            <span>{item.rating}</span>
+            <span>{averageRating}</span>
           </div>
         </div>
       </li>
