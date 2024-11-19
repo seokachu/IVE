@@ -4,9 +4,10 @@ import { CiSquareMinus } from "react-icons/ci";
 import Image from "next/image";
 import ProductActions from "./ProductActions";
 import ShareButton from "@/components/common/button/ShareButton";
+import { ProductProps } from "@/types";
 
-const ProductInfo = ({ product }: any) => {
-  console.log(product);
+const ProductInfo = ({ id }: ProductProps) => {
+  console.log(id);
   return (
     <section className="flex flex-col lg:flex-row gap-8 justify-center lg:justify-between items-center">
       <div className="overflow-hidden relative h-auto lg:w-2/4 w-full">

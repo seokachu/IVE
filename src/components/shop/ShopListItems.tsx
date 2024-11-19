@@ -1,20 +1,18 @@
 "use client";
 import Image from "next/image";
-import TestImage from "@/assets/images/album_img.webp";
+import DefaultImage from "@/assets/images/album_img.webp";
 import Badge from "@/components/common/Badge";
 import { FaStar } from "react-icons/fa";
 import { GoHeartFill } from "react-icons/go";
 import { useRouter } from "next/navigation";
-import { ShopListItemProps } from "@/types";
 import { getDiscountedPrice } from "@/utils/calculateDiscount";
 import { useEffect, useState } from "react";
 import { getAverageRating } from "@/lib/supabase/review";
+import type { ShopListItemProps } from "@/types";
 
 const ShopListItems = ({ item }: ShopListItemProps) => {
   const { push } = useRouter();
   const [averageRating, setAverageRating] = useState(0);
-
-  console.log(item);
 
   useEffect(() => {
     const fetchRating = async () => {
@@ -52,7 +50,7 @@ const ShopListItems = ({ item }: ShopListItemProps) => {
       >
         <div className="relative w-full h-auto rounded-lg overflow-hidden border">
           <Image
-            src={item.thumbnail || TestImage}
+            src={item.thumbnail || DefaultImage}
             alt="썸네일"
             className="fill group-hover:scale-110 transition-transform duration-300"
             width={250}

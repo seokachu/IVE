@@ -57,3 +57,7 @@ export type BadgeFields = Pick<
 export interface BadgeItemProps {
   item: BadgeFields;
 }
+
+export interface ProductProps {
+  id: string;
+}
