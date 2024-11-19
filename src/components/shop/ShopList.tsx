@@ -10,7 +10,6 @@ import type { SortProps } from "@/types";
 const ShopList = ({ sort }: SortProps) => {
   const [shopItems, setShopItems] = useState<Tables<"goods">[]>([]);
   const { data, error, isLoading } = useShops(sort);
-  console.log(sort);
 
   useEffect(() => {
     if (data) return setShopItems(data);
@@ -19,7 +18,7 @@ const ShopList = ({ sort }: SortProps) => {
   //loading
   if (isLoading) {
     return (
-      <ul className="flex items-center justify-between flex-wrap">
+      <ul className="flex flex-wrap gap-6 sm:justify-center md:justify-start">
         {Array.from({ length: 8 }).map((_, index) => (
           <ShopSkeleton key={index} />
         ))}
@@ -31,7 +30,7 @@ const ShopList = ({ sort }: SortProps) => {
   if (error) return <Error />;
 
   return (
-    <ul className="flex items-center justify-between flex-wrap">
+    <ul className="flex flex-wrap gap-6 sm:justify-center md:justify-start">
       {shopItems.map((el) => (
         <ShopListItems key={el.title} item={el} />
       ))}

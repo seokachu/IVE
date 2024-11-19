@@ -44,7 +44,7 @@ const ShopListItems = ({ item }: ShopListItemProps) => {
       <li
         onClick={onClickDetail}
         onKeyDown={handleKeyDown}
-        className="w-[280px] border p-4 rounded-lg cursor-pointer hover:shadow-lg group mb-10"
+        className="w-[90%] sm:w-[280px] md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.2rem)] border p-4 rounded-lg cursor-pointer hover:shadow-lg group mb-5"
         role="button"
         tabIndex={0}
       >
