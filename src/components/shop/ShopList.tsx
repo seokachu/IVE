@@ -5,10 +5,12 @@ import { Tables } from "@/types/supabase";
 import { useShops } from "@/hooks/queries/useShops";
 import ShopSkeleton from "../common/loading/ShopSkeleton";
 import Error from "../common/error/Error";
+import type { SortProps } from "@/types";
 
-const ShopList = () => {
+const ShopList = ({ sort }: SortProps) => {
   const [shopItems, setShopItems] = useState<Tables<"goods">[]>([]);
-  const { data, error, isLoading } = useShops();
+  const { data, error, isLoading } = useShops(sort);
+  console.log(sort);
 
   useEffect(() => {
     if (data) return setShopItems(data);

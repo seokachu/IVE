@@ -1,8 +1,8 @@
 import { VscChevronRight } from "react-icons/vsc";
 import { useRouter } from "next/navigation";
 import { SheetClose } from "@/components/ui/sheet";
-import type { gnbArrayList } from "@/types";
-import { gnbArray } from "@/utils/constants";
+import type { GnbArrayList } from "@/types";
+import { GNB_ARRAY } from "@/utils/constants";
 
 const MobileNavigator = () => {
   const { push } = useRouter();
@@ -10,7 +10,7 @@ const MobileNavigator = () => {
   return (
     <nav>
       <ul className="flex flex-col justify-center">
-        {gnbArray.map((el: gnbArrayList) => (
+        {GNB_ARRAY.map((el: GnbArrayList) => (
           <li
             key={el.label}
             className="data-[state=closed] flex items-center justify-between border-b-[1px] border-dark-gray cursor-pointer hover:bg-zinc-500 hover:text-white"

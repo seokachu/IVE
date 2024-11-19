@@ -1,11 +1,12 @@
 import { getGoodsShop, getGoodsShopDetail } from "@/lib/supabase/shop";
 import { useQuery } from "@tanstack/react-query";
+import type { SortOptionList } from "@/types";
 
 //상품 목록
-export const useShops = () => {
+export const useShops = (sortBy: SortOptionList) => {
   return useQuery({
-    queryKey: ["shops"],
-    queryFn: getGoodsShop,
+    queryKey: ["shops", sortBy],
+    queryFn: () => getGoodsShop(sortBy),
   });
 };
 

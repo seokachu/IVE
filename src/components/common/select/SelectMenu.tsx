@@ -3,22 +3,23 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 
 interface SelectMenuProps<T> {
   options: T[];
-  defaultValue?: string;
+  onChange: (value: string) => void;
+  value: string;
 }
 
 const SelectMenu = <T extends { value: string; title: string }>({
   options,
-  ...props
+  value,
+  onChange,
 }: SelectMenuProps<T>) => {
   return (
-    <Select>
+    <Select value={value} onValueChange={onChange}>
       <SelectTrigger className="lg:w-[180px] w-full">
         <SelectValue placeholder={options[0]?.title} />
       </SelectTrigger>
@@ -29,8 +30,6 @@ const SelectMenu = <T extends { value: string; title: string }>({
               {el.title}
             </SelectItem>
           ))}
-          {/* <SelectItem value="best">인기순</SelectItem>
-          <SelectItem value="latest">최신순</SelectItem> */}
         </SelectGroup>
       </SelectContent>
     </Select>

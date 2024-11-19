@@ -1,12 +1,20 @@
 import { supabase } from "@/lib/supabase/client";
+import type { SortOptionList } from "@/types";
+import { SORT_OPTIONS } from "@/utils/constants";
 
 //상품 목록
-export const getGoodsShop = async () => {
+export const getGoodsShop = async (sortBy: SortOptionList) => {
   try {
+    const sortOption = SORT_OPTIONS[sortBy];
+
+    if (!sortOption) {
+      throw new Error(`sortBy error : ${sortBy}`);
+    }
+
     const { data, error } = await supabase
       .from("goods")
       .select("*")
-      .order("created_at", { ascending: false })
+      .order(sortOption.column, { ascending: sortOption.ascending })
       .limit(20);
 
     if (error) throw error;

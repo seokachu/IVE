@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { LuMusic4 } from "react-icons/lu";
-import { musicIcon } from "@/utils/constants";
+import { MUSIC_ICONS } from "@/utils/constants";
 import DefaultImage from "@/assets/images/album_img.webp";
 import type { AlbumItemProps } from "@/types";
 
 const AlbumListItems = ({ album }: AlbumItemProps) => {
-  const musicLinks = musicIcon.map((el) => {
+  const musicLinks = MUSIC_ICONS.map((el) => {
     const link = (() => {
       switch (el.label.toLowerCase()) {
         case "apple":

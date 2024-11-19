@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 import { Tables } from "@/types/supabase";
 
-export interface gnbArrayList {
+export interface GnbArrayList {
   label: string;
   path: string;
 }
@@ -60,4 +60,19 @@ export interface BadgeItemProps {
 
 export interface ProductProps {
   id: string;
+}
+
+export type SortOptionList =
+  | "best"
+  | "latest"
+  | "price_low_to_high"
+  | "price_high_to_low";
+
+export interface SortOption {
+  column: string;
+  ascending: boolean;
+}
+
+export interface SortProps {
+  sort: SortOptionList;
 }
