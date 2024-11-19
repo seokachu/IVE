@@ -19,12 +19,7 @@ const ReviewTab = () => {
         </div>
       </div>
       <div>
-        <div className="flex justify-between items-center">
-          <h2 className="text-xl font-bold mb-2">리뷰 (11)</h2>
-          <button className="py-2 px-5 bg-purple rounded-md text-sm text-white">
-            글쓰기
-          </button>
-        </div>
+        <h2 className="text-xl font-bold mb-2">리뷰 (11)</h2>
         <ul>
           <ReviewItems />
         </ul>

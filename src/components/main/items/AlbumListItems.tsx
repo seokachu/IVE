@@ -3,8 +3,7 @@ import Link from "next/link";
 import { LuMusic4 } from "react-icons/lu";
 import { musicIcon } from "@/utils/constants";
 import DefaultImage from "@/assets/images/album_img.webp";
-
-import { AlbumItemProps } from "@/types";
+import type { AlbumItemProps } from "@/types";
 
 const AlbumListItems = ({ album }: AlbumItemProps) => {
   const musicLinks = musicIcon.map((el) => {
