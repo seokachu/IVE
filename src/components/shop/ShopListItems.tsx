@@ -20,7 +20,7 @@ const ShopListItems = ({ item }: ShopListItemProps) => {
       setAverageRating(rating);
     };
     fetchRating();
-  }, [item]);
+  }, [item.id]);
 
   const onClickDetail = () => {
     push(`/shop/${item.id}`);
@@ -65,7 +65,9 @@ const ShopListItems = ({ item }: ShopListItemProps) => {
           </button>
         </div>
         <div className="flex flex-col gap-1">
-          <Badge item={item} />
+          <div className="mt-4 mb-1 min-h-[20px]">
+            <Badge item={item} />
+          </div>
           <h3 className="text-base overflow-hidden overflow-ellipsis whitespace-nowrap">
             {item.title}
           </h3>

@@ -51,7 +51,7 @@ export type PriceKeys = "price" | "discount_rate";
 
 export type BadgeFields = Pick<
   ShopListItem,
-  "shipping_type" | "review_count" | "rating"
+  "shipping_type" | "review_count" | "rating" | "id"
 >;
 
 export interface BadgeItemProps {
