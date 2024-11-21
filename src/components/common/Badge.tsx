@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 const Badge = ({ item }: BadgeItemProps) => {
   const [averageRating, setAverageRating] = useState(0);
 
+
   useEffect(() => {
     const fetchRating = async () => {
       try {

@@ -36,3 +36,8 @@ export const SORT_OPTIONS: Record<SortOptionList, SortOption> = {
   price_low_to_high: { column: "price", ascending: true },
   price_high_to_low: { column: "price", ascending: false },
 };
+
+export const BADGE_TYPES = {
+  FREE_DELIVERY: "무료배송",
+  BEST: "Best👍",
+} as const;
