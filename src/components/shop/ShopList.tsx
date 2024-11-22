@@ -1,19 +1,18 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import ShopListItems from "./ShopListItems";
-import { Tables } from "@/types/supabase";
 import { useShops } from "@/hooks/queries/useShops";
 import ShopSkeleton from "../common/loading/ShopSkeleton";
 import Error from "../common/error/Error";
 import type { SortProps } from "@/types";
+import { sortItems } from "@/utils/sorting";
 
 const ShopList = ({ sort }: SortProps) => {
-  const [shopItems, setShopItems] = useState<Tables<"goods">[]>([]);
   const { data, error, isLoading } = useShops(sort);
 
-  useEffect(() => {
-    if (data) return setShopItems(data);
-  }, [data]);
+  const sortedItems = useMemo(() => {
+    return sortItems(data || [], sort);
+  }, [data, sort]);
 
   //loading
   if (isLoading) {
@@ -31,7 +30,7 @@ const ShopList = ({ sort }: SortProps) => {
 
   return (
     <ul className="flex flex-wrap gap-6 sm:justify-center md:justify-start">
-      {shopItems.map((el) => (
+      {sortedItems.map((el) => (
         <ShopListItems key={el.title} item={el} />
       ))}
     </ul>
