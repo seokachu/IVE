@@ -66,7 +66,7 @@ const ShopListItems = ({ item }: ShopListItemProps) => {
         </div>
         <div className="flex flex-col gap-1">
           <div className="mt-4 mb-1 min-h-[20px]">
-            <Badge item={item} />
+            <Badge item={item} averageRating={averageRating} />
           </div>
           <h3 className="text-base overflow-hidden overflow-ellipsis whitespace-nowrap">
             {item.title}

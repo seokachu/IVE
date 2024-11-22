@@ -6,7 +6,7 @@ import type { SortOptionList } from "@/types";
 export const useShops = (sortBy: SortOptionList) => {
   return useQuery({
     queryKey: ["shops", sortBy],
-    queryFn: () => getGoodsShop(sortBy),
+    queryFn: () => getGoodsShop(),
   });
 };
 

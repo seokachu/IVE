@@ -56,6 +56,7 @@ export type BadgeFields = Pick<
 
 export interface BadgeItemProps {
   item: BadgeFields;
+  averageRating: number;
 }
 
 export interface ProductProps {

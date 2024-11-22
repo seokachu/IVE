@@ -1,27 +1,20 @@
-import { getAverageRating } from "@/lib/supabase/review";
 import type { BadgeItemProps } from "@/types";
-import { calculateBadge, getBadgeColor } from "@/utils/calculateBadge";
-import { useEffect, useState } from "react";
+import { calculateBadge } from "@/utils/calculateBadge";
+import { BADGE_TYPES } from "@/utils/constants";
 
-const Badge = ({ item }: BadgeItemProps) => {
-  const [averageRating, setAverageRating] = useState(0);
+// badge color 설정
+const getBadgeColor = (badge: string) => {
+  switch (badge) {
+    case BADGE_TYPES.FREE_DELIVERY:
+      return `bg-purple`;
+    case BADGE_TYPES.BEST:
+      return `bg-custom-orange`;
+    default:
+      return `bg-gray-500`;
+  }
+};
 
-
-  useEffect(() => {
-    const fetchRating = async () => {
-      try {
-        const rating = await getAverageRating(item.id);
-        setAverageRating(rating);
-      } catch (error) {
-        if (error instanceof Error) {
-          console.log(`평점 조회에 실패했습니다. : ${error.message}`);
-        }
-      }
-    };
-
-    fetchRating();
-  }, [item.id]);
-
+const Badge = ({ item, averageRating }: BadgeItemProps) => {
   const badges = calculateBadge({ ...item, rating: averageRating });
   if (badges.length === 0) return null;
 
