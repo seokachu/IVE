@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { BiCommentDots } from "react-icons/bi";
-import TestImage from "@/assets/images/album_img.webp";
+import TestImage from "@/assets/images/default_image.avif";
 
 const MainBoardListItems = () => {
   return (

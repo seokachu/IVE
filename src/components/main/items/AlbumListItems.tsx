@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { LuMusic4 } from "react-icons/lu";
 import { MUSIC_ICONS } from "@/utils/constants";
-import DefaultImage from "@/assets/images/album_img.webp";
+import DefaultImage from "@/assets/images/default_image.avif";
 import type { AlbumItemProps } from "@/types";
 
 const AlbumListItems = ({ album }: AlbumItemProps) => {

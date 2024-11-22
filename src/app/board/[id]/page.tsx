@@ -1,4 +1,4 @@
-import TestImage from "@/assets/images/album_img.webp";
+import TestImage from "@/assets/images/default_image.avif";
 import ShareButton from "@/components/common/button/ShareButton";
 import Image from "next/image";
 import Link from "next/link";

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import TestImage from "@/assets/images/album_img.webp";
+import TestImage from "@/assets/images/default_image.avif";
 
 const DescriptionTab = () => {
   return (

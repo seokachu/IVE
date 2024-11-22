@@ -1,4 +1,4 @@
-import TestImage from "@/assets/images/album_img.webp";
+import TestImage from "@/assets/images/default_image.avif";
 import { CiSquarePlus } from "react-icons/ci";
 import { CiSquareMinus } from "react-icons/ci";
 import Image from "next/image";
