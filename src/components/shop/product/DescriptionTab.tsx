@@ -1,17 +1,54 @@
 import Image from "next/image";
-import TestImage from "@/assets/images/default_image.avif";
+import DefaultImage from "@/assets/images/default_image.avif";
+import { useShop } from "@/hooks/queries/useShops";
+import type { ShopMenuProps } from "@/types";
+import ShopDescriptionSkeleton from "@/components/common/loading/ShopDescriptionSkeleton";
+import Error from "@/components/common/error/Error";
 
-const DescriptionTab = () => {
+const DescriptionTab = ({ id }: ShopMenuProps) => {
+  const { data, isLoading, isError } = useShop(id);
+
+  if (isLoading) return <ShopDescriptionSkeleton />;
+  if (isError) return <Error />;
+
   return (
     <div className="text-center">
-      <h3 className="font-bold text-2xl mb-10">검은색 로고 티셔츠</h3>
+      <h3 className="font-bold text-2xl mb-10">{data.title}</h3>
       <div className="flex flex-col gap-1">
-        <p>심플하면서도 스타일리시한 디자인의 검은색 티셔츠 입니다.</p>
-        <p>고급 면 소재로 제작되어 편안한 착용감을 제공하며,</p>
-        <p>앞면에 깔끔한 로고가 프린트 되어 있습니다.</p>
+        <p>{data.description?.[0]}</p>
       </div>
       <div className="w-full h-auto m-auto relative my-16">
-        <Image src={TestImage} alt="text" className="fill m-auto" />
+        <Image
+          src={data.images?.[0] || DefaultImage}
+          alt={data.title}
+          className="fill m-auto"
+          width={500}
+          height={500}
+        />
+      </div>
+      <div>
+        <p>{data.description?.[1]}</p>
+      </div>
+      <div className="w-full h-auto m-auto relative my-16">
+        <Image
+          src={data.images?.[0] || DefaultImage}
+          alt={data.title}
+          className="fill m-auto"
+          width={500}
+          height={500}
+        />
+      </div>
+      <div className="w-full h-auto m-auto relative my-16">
+        <Image
+          src={data.images?.[0] || DefaultImage}
+          alt={data.title}
+          className="fill m-auto"
+          width={500}
+          height={500}
+        />
+      </div>
+      <div>
+        <p>{data.description?.[1]}</p>
       </div>
     </div>
   );

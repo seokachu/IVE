@@ -84,10 +84,10 @@ export type Database = {
           color: string | null
           created_at: string | null
           delivery_info: string | null
-          description: string | null
+          description: Json | null
           discount_rate: number | null
           id: string
-          images: string | null
+          images: Json | null
           price: number
           rating: number | null
           review_count: number | null
@@ -100,10 +100,10 @@ export type Database = {
           color?: string | null
           created_at?: string | null
           delivery_info?: string | null
-          description?: string | null
+          description?: Json | null
           discount_rate?: number | null
           id?: string
-          images?: string | null
+          images?: Json | null
           price: number
           rating?: number | null
           review_count?: number | null
@@ -116,10 +116,10 @@ export type Database = {
           color?: string | null
           created_at?: string | null
           delivery_info?: string | null
-          description?: string | null
+          description?: Json | null
           discount_rate?: number | null
           id?: string
-          images?: string | null
+          images?: Json | null
           price?: number
           rating?: number | null
           review_count?: number | null

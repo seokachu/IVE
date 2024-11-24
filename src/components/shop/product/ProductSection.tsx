@@ -8,7 +8,7 @@ const ProductSection = () => {
   const id = params?.id as string;
 
   return (
-    <section>
+    <section className="w-full">
       <ProductInfo id={id} />
       <ProductDescription id={id} />
     </section>

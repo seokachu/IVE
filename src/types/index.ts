@@ -59,10 +59,6 @@ export interface BadgeItemProps {
   averageRating: number;
 }
 
-export interface ProductProps {
-  id: string;
-}
-
 export type SortOptionList =
   | "best"
   | "latest"
@@ -76,4 +72,26 @@ export interface SortOption {
 
 export interface SortProps {
   sort: SortOptionList;
+}
+
+export interface TabMenuProps {
+  activeTab: "description" | "review";
+  setActiveTab: (tab: "description" | "review") => void;
+  id: string;
+}
+
+export type ShopMenuProps = Pick<ShopListItem, "id">;
+
+export interface ReviewItemProps {
+  item: ReviewItem;
+}
+
+export interface ReviewItem {
+  rating: number;
+  id: string;
+  content: string;
+  created_at: string;
+  user: {
+    name: string;
+  };
 }

@@ -4,7 +4,13 @@ export const getGoodsReviews = async (goodsId: string) => {
   try {
     const { data, error } = await supabase
       .from("goods_reviews")
-      .select("*")
+      .select(
+        `*,
+        user:user_id(
+        name
+        )
+        `
+      )
       .eq("goods_id", goodsId)
       .order("created_at", { ascending: false });
 
