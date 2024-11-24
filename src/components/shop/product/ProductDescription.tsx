@@ -6,11 +6,11 @@ import { ProductProps } from "@/types";
 const ProductDescription = ({ id }: ProductProps) => {
   console.log(id);
   return (
-    <section className="py-28 w-full">
+    <div className="py-28 w-full">
       <TabMenu />
       <DescriptionTab />
       <ReviewTab />
-    </section>
+    </div>
   );
 };
 

@@ -1,31 +1,48 @@
 "use client";
+import ActionButton from "@/components/common/button/ActionButton";
+import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { IoIosHeartEmpty } from "react-icons/io";
 
 const ProductActions = () => {
   const { push } = useRouter();
-  const onClickCart = () => {};
+  const onClickCart = () => {
+    toast({
+      title: "장바구니에 담았습니다.",
+    });
+  };
 
   const onClickBuying = () => {
     push("/cart");
   };
 
   return (
-    <ul className="flex items-center justify-center gap-3">
-      <li className="w-1/6 border-2 border-purple cursor-pointer flex items-center justify-center py-3 rounded-md bg-purple">
-        <IoIosHeartEmpty size={25} className="text-white" />
+    <ul className="flex items-stretch justify-center gap-3">
+      <li className="w-1/6">
+        <ActionButton
+          variant="primary"
+          className="w-full h-full flex items-center justify-center py-5"
+        >
+          <IoIosHeartEmpty size={25} className="text-white" />
+        </ActionButton>
       </li>
-      <li
-        onClick={onClickCart}
-        className="w-2/4 border-2 border-purple py-3 text-center cursor-pointer rounded-md"
-      >
-        장바구니
+      <li className="w-2/4">
+        <ActionButton
+          onClick={onClickCart}
+          variant="outline"
+          className="w-full py-3 text-center"
+        >
+          장바구니
+        </ActionButton>
       </li>
-      <li
-        onClick={onClickBuying}
-        className="w-2/4 border-2 border-purple bg-purple py-3 text-center cursor-pointer rounded-md text-white"
-      >
-        구매하기
+      <li className="w-2/4">
+        <ActionButton
+          onClick={onClickBuying}
+          variant="primary"
+          className="w-full py-3 text-center"
+        >
+          구매하기
+        </ActionButton>
       </li>
     </ul>
   );

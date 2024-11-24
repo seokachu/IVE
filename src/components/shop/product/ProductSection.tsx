@@ -8,10 +8,10 @@ const ProductSection = () => {
   const id = params?.id as string;
 
   return (
-    <>
+    <section>
       <ProductInfo id={id} />
       <ProductDescription id={id} />
-    </>
+    </section>
   );
 };
 

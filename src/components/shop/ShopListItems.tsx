@@ -5,7 +5,7 @@ import Badge from "@/components/common/Badge";
 import { FaStar } from "react-icons/fa";
 import { GoHeartFill } from "react-icons/go";
 import { useRouter } from "next/navigation";
-import { getDiscountedPrice } from "@/utils/calculateDiscount";
+import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import { useEffect, useState } from "react";
 import { getAverageRating } from "@/lib/supabase/review";
 import type { ShopListItemProps } from "@/types";
@@ -73,7 +73,7 @@ const ShopListItems = ({ item }: ShopListItemProps) => {
           </h3>
           <div className="font-bold flex items-center gap-2 text-xl">
             <span className="text-purple">{item.discount_rate}%</span>
-            <span>{price}원</span>
+            <span>{formatPrice(price)}원</span>
           </div>
           <div className="flex items-center gap-1 text-[#878f91] text-sm">
             <FaStar />

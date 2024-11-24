@@ -21,7 +21,5 @@ export const getDiscountedPrice = (
 ) => {
   const price = item[priceKey] as number;
   const discountRate = item[discountKey] ?? 0;
-
-  const discountedPrice = calculateDiscount(price, discountRate);
-  return formatPrice(discountedPrice);
+  return calculateDiscount(price, discountRate);
 };
