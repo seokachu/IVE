@@ -2,8 +2,10 @@ import { FaRegStar } from "react-icons/fa";
 import { formatDate } from "@/utils/formatDate";
 import UserAvatar from "@/components/common/UserAvatar";
 import type { ReviewItemProps } from "@/types";
+import RenderStars from "@/utils/renderStars";
 
 const ReviewItems = ({ item }: ReviewItemProps) => {
+  console.log("item", item);
   return (
     <li className="border-b py-6">
       <div className="flex gap-4 justify-between items-center">
@@ -13,11 +15,7 @@ const ReviewItems = ({ item }: ReviewItemProps) => {
             <h3 className="font-bold">{item.user.name}</h3>
             <div className="flex gap-1 items-center justify-center">
               <div className="flex">
-                <FaRegStar size={15} />
-                <FaRegStar size={15} />
-                <FaRegStar size={15} />
-                <FaRegStar size={15} />
-                <FaRegStar size={15} />
+                <RenderStars rating={item.rating} size={15} />
               </div>
               <strong className="-translate-y-[1px]">{item.rating}</strong>
             </div>

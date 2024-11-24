@@ -5,7 +5,7 @@ const TabMenu = ({ activeTab, setActiveTab, id }: TabMenuProps) => {
   const { data } = useShop(id);
 
   return (
-    <div className="mb-28">
+    <div className="mb-16">
       <ul className="flex justify-between items-center text-center cursor-pointer">
         <li
           onClick={() => setActiveTab("description")}
