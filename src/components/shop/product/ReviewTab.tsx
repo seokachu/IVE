@@ -5,9 +5,11 @@ import { useReviews } from "@/hooks/queries/useReviews";
 import Error from "@/components/common/error/Error";
 import ReviewSkeleton from "@/components/common/loading/ReviewSkeleton";
 import RenderStars from "@/utils/RenderStars";
+import { useState } from "react";
 
 const ReviewTab = ({ id }: ShopMenuProps) => {
   const { data, isLoading, isError } = useReviews(id);
+  const [currentPage, setCurrentPage] = useState(1);
 
   if (isLoading) return <ReviewSkeleton />;
   if (isError) return <Error />;

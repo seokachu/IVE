@@ -5,7 +5,6 @@ import type { ReviewItemProps } from "@/types";
 import RenderStars from "@/utils/RenderStars";
 
 const ReviewItems = ({ item }: ReviewItemProps) => {
-  console.log("item", item);
   return (
     <li className="border-b py-6">
       <div className="flex gap-4 justify-between items-center">
