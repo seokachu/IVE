@@ -12,7 +12,8 @@ export const getGoodsReviews = async (goodsId: string) => {
         `
       )
       .eq("goods_id", goodsId)
-      .order("created_at", { ascending: false });
+      .order("created_at", { ascending: false })
+      .limit(5);
 
     if (error) throw error;
 

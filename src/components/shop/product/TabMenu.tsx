@@ -15,7 +15,9 @@ const TabMenu = ({ activeTab, setActiveTab, id }: TabMenuProps) => {
               : "border-b"
           } w-2/4 py-4`}
         >
-          <h3 className="font-bold">상세정보</h3>
+          <h3 className={`${activeTab === "description" ? "font-bold" : ""}`}>
+            상세정보
+          </h3>
         </li>
         <li
           onClick={() => setActiveTab("review")}
@@ -23,7 +25,11 @@ const TabMenu = ({ activeTab, setActiveTab, id }: TabMenuProps) => {
             activeTab === "review" ? "border-b-2 border-dark-gray" : "border-b"
           } w-2/4 py-4`}
         >
-          <h3 className="flex gap-2 justify-center items-center">
+          <h3
+            className={`${
+              activeTab === "review" ? "font-bold" : ""
+            } flex gap-2 justify-center items-center`}
+          >
             리뷰<span>{data?.review_count}</span>
           </h3>
         </li>

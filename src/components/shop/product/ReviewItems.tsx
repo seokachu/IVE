@@ -2,7 +2,7 @@ import { FaRegStar } from "react-icons/fa";
 import { formatDate } from "@/utils/formatDate";
 import UserAvatar from "@/components/common/UserAvatar";
 import type { ReviewItemProps } from "@/types";
-import RenderStars from "@/utils/renderStars";
+import RenderStars from "@/utils/RenderStars";
 
 const ReviewItems = ({ item }: ReviewItemProps) => {
   console.log("item", item);

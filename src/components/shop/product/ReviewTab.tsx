@@ -4,7 +4,7 @@ import type { ShopMenuProps } from "@/types";
 import { useReviews } from "@/hooks/queries/useReviews";
 import Error from "@/components/common/error/Error";
 import ReviewSkeleton from "@/components/common/loading/ReviewSkeleton";
-import RenderStars from "@/utils/renderStars";
+import RenderStars from "@/utils/RenderStars";
 
 const ReviewTab = ({ id }: ShopMenuProps) => {
   const { data, isLoading, isError } = useReviews(id);
