@@ -87,11 +87,16 @@ export interface ReviewItemProps {
 }
 
 export interface ReviewItem {
-  rating: number;
   id: string;
+  rating: number;
   content: string;
   created_at: string;
   user: {
     name: string;
   };
+}
+
+export interface ReviewResponse {
+  reviews: ReviewItem[];
+  totalCount: number;
 }

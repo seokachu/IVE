@@ -1,7 +1,18 @@
 import { supabase } from "@/lib/supabase/client";
 
-export const getGoodsReviews = async (goodsId: string) => {
+export const getGoodsReviews = async (goodsId: string, page: number) => {
+  const itemsPerPage = 5;
+  const from = (page - 1) * itemsPerPage;
+  const to = from + itemsPerPage - 1;
+
   try {
+    //전체 개수 가져오기
+    const { count } = await supabase
+      .from("goods_reviews")
+      .select("*", { count: "exact", head: true })
+      .eq("goods_id", goodsId);
+
+    //페이지 데이터 가져오기
     const { data, error } = await supabase
       .from("goods_reviews")
       .select(
@@ -13,11 +24,14 @@ export const getGoodsReviews = async (goodsId: string) => {
       )
       .eq("goods_id", goodsId)
       .order("created_at", { ascending: false })
-      .limit(5);
+      .range(from, to);
 
     if (error) throw error;
 
-    return data;
+    return {
+      reviews: data || [],
+      totalCount: count || 0,
+    };
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`리뷰 정보를 가져오는 데 실패했습니다. ${error.message}`);

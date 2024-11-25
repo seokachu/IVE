@@ -31,7 +31,7 @@ const DescriptionTab = ({ id }: ShopMenuProps) => {
       </div>
       <div className="w-full h-auto m-auto relative my-16">
         <Image
-          src={data.images?.[0] || DefaultImage}
+          src={data.images?.[1] || DefaultImage}
           alt={data.title}
           className="fill m-auto"
           width={500}
@@ -40,7 +40,7 @@ const DescriptionTab = ({ id }: ShopMenuProps) => {
       </div>
       <div className="w-full h-auto m-auto relative my-16">
         <Image
-          src={data.images?.[0] || DefaultImage}
+          src={data.images?.[2] || DefaultImage}
           alt={data.title}
           className="fill m-auto"
           width={500}
@@ -48,7 +48,7 @@ const DescriptionTab = ({ id }: ShopMenuProps) => {
         />
       </div>
       <div>
-        <p>{data.description?.[1]}</p>
+        <p>{data.description?.[2]}</p>
       </div>
     </div>
   );

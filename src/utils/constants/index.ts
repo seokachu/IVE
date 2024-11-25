@@ -41,3 +41,8 @@ export const BADGE_TYPES = {
   FREE_DELIVERY: "무료배송",
   BEST: "Best👍",
 } as const;
+
+export const PAGINATION = {
+  ITEMS_PER_PAGE: 5,
+  MAX_DISPLAY_PAGES: 5,
+} as const;

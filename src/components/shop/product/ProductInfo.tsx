@@ -108,7 +108,7 @@ const ProductInfo = ({ id }: ShopMenuProps) => {
               </div>
             </li>
           </ul>
-          <div className="justify-end flex gap-3 items-center">
+          <div className="justify-end flex gap-3 items-baseline">
             <p className="text-sm">총 상품금액</p>
             <strong className="text-xl">{formatPrice(totalPrice)}원</strong>
           </div>

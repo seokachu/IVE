@@ -9,9 +9,9 @@ const RenderStars = ({ rating, size }: RenderStarsProps) => {
   return Array.from({ length: 5 }).map((_, index) => (
     <span key={index}>
       {index < rating ? (
-        <FaStar size={size} className="text-yellow-400" />
+        <FaStar size={size} color="#FACC15" />
       ) : (
-        <FaRegStar size={size} className="text-yellow-400" />
+        <FaRegStar size={size} color="#FACC15" />
       )}
     </span>
   ));
