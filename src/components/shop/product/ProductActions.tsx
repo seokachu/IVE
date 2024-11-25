@@ -1,24 +1,23 @@
 "use client";
 import ActionButton from "@/components/common/button/ActionButton";
-import { useRouter } from "next/navigation";
 import { IoIosHeartEmpty } from "react-icons/io";
-import AddToCartModal from "./AddToCartModal";
 import { useState } from "react";
+import AddToCartDrawer from "./AddToCartDrawer";
 
 const ProductActions = () => {
-  const { push } = useRouter();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const onClickCart = () => {
-    setIsModalOpen(true);
+    setIsDrawerOpen(true);
+    //로컬스토리지 저장
   };
 
-  const onClickCloseModal = () => {
-    setIsModalOpen(false);
+  const onClickCloseDrawer = () => {
+    setIsDrawerOpen(false);
   };
 
   const onClickBuying = () => {
-    push("/cart");
+    //결제 페이지로 넘어가야 함
   };
 
   return (
@@ -51,8 +50,8 @@ const ProductActions = () => {
           </ActionButton>
         </li>
       </ul>
-      {isModalOpen && (
-        <AddToCartModal isOpen={isModalOpen} onClose={onClickCloseModal} />
+      {isDrawerOpen && (
+        <AddToCartDrawer isOpen={isDrawerOpen} onClose={onClickCloseDrawer} />
       )}
     </>
   );
