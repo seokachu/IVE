@@ -3,16 +3,16 @@ import ReviewItems from "./ReviewItems";
 import type { ShopMenuProps } from "@/types";
 import { useReviews } from "@/hooks/queries/useReviews";
 import Error from "@/components/common/error/Error";
-import ReviewSkeleton from "@/components/common/loading/ReviewSkeleton";
 import RenderStars from "@/utils/RenderStars";
 import { useState } from "react";
 import { PAGINATION } from "@/utils/constants";
+import ReviewTabSkeleton from "@/components/common/loading/ReviewTabSkeleton";
 
 const ReviewTab = ({ id }: ShopMenuProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const { data, isLoading, isError } = useReviews({ id, page: currentPage });
 
-  if (isLoading) return <ReviewSkeleton />;
+  if (isLoading) return <ReviewTabSkeleton />;
   if (isError) return <Error />;
 
   const reviews = data?.reviews || [];

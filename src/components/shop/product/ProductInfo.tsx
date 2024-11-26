@@ -9,14 +9,14 @@ import ShareButton from "@/components/common/button/ShareButton";
 import { useShop } from "@/hooks/queries/useShops";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import Error from "@/components/common/error/Error";
-import ShopInfoSkeleton from "@/components/common/loading/ShopInfoSkeleton";
 import type { ShopMenuProps } from "@/types";
+import ProductInfoSkeleton from "@/components/common/loading/ProductInfoSkeleton";
 
 const ProductInfo = ({ id }: ShopMenuProps) => {
   const [count, setCount] = useState(1);
   const { data, isLoading, isError } = useShop(id);
 
-  if (isLoading) return <ShopInfoSkeleton />;
+  if (isLoading) return <ProductInfoSkeleton />;
   if (isError) return <Error />;
 
   const price = getDiscountedPrice(data);
