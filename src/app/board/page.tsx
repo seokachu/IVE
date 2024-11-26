@@ -29,7 +29,7 @@ const page = () => {
             <BoardListItems />
           </ul>
         </div>
-        <PaginationControl />
+        {/* <PaginationControl /> */}
       </section>
     </main>
   );

@@ -1,16 +1,16 @@
-import DefaultImage from "@/assets/images/default_image.avif";
-import { CiSquarePlus } from "react-icons/ci";
-import { CiSquareMinus } from "react-icons/ci";
 import Image from "next/image";
-import ProductActions from "./ProductActions";
-import ShareButton from "@/components/common/button/ShareButton";
-import type { ShopMenuProps } from "@/types";
-import { useShop } from "@/hooks/queries/useShops";
-import Error from "@/components/common/error/Error";
-import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
+import DefaultImage from "@/assets/images/default_image.avif";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
+import { CiSquarePlus } from "react-icons/ci";
+import { CiSquareMinus } from "react-icons/ci";
+import ProductActions from "./ProductActions";
+import ShareButton from "@/components/common/button/ShareButton";
+import { useShop } from "@/hooks/queries/useShops";
+import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
+import Error from "@/components/common/error/Error";
 import ShopInfoSkeleton from "@/components/common/loading/ShopInfoSkeleton";
+import type { ShopMenuProps } from "@/types";
 
 const ProductInfo = ({ id }: ShopMenuProps) => {
   const [count, setCount] = useState(1);
@@ -113,7 +113,7 @@ const ProductInfo = ({ id }: ShopMenuProps) => {
             <strong className="text-xl">{formatPrice(totalPrice)}원</strong>
           </div>
         </div>
-        <ProductActions />
+        <ProductActions product={data} quantity={count} />
       </div>
     </div>
   );

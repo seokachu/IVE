@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { IoCartOutline } from "react-icons/io5";
 import SignInModal from "../../../auth/modal/SignInModal";
 import { SheetClose } from "@/components/ui/sheet";
 import { useRecoilValue } from "recoil";
 import { sessionState } from "@/store";
+import CartIcon from "./CartIcon";
 
 const MobileUserMenu = () => {
   const session = useRecoilValue(sessionState);
@@ -13,15 +13,12 @@ const MobileUserMenu = () => {
       <ul className="flex items-center justify-center">
         <li className="flex-1 hover:bg-zinc-500">
           <SheetClose asChild>
-            <Link
-              href="/cart"
-              className="block border p-7 border-dark-gray group w-full h-[80px] border-r-0"
-            >
-              <IoCartOutline
-                size={28}
-                className="group-hover:[color:white] m-auto"
-              />
-            </Link>
+            <CartIcon
+              iconSize={28}
+              iconClassName="group-hover:[color:white] m-auto"
+              linkClassName="block border p-7 border-dark-gray group w-full h-[80px] border-r-0"
+              className="left-2/4"
+            />
           </SheetClose>
         </li>
         <li className="flex-1 hover:bg-zinc-500">

@@ -7,7 +7,6 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
 } from "@/components/ui/drawer";
 import { useRouter } from "next/navigation";
 
@@ -40,11 +39,16 @@ const AddToCartDrawer = ({ isOpen, onClose }: CartDrawerProps) => {
           >
             장바구니 보기
           </ActionButton>
-          <DrawerClose className="w-full lg:w-2/4">
-            <ActionButton variant="primary" className="w-full py-3 text-center">
-              계속 쇼핑하기
-            </ActionButton>
-          </DrawerClose>
+          <div className="w-full lg:w-2/4">
+            <DrawerClose asChild>
+              <ActionButton
+                variant="primary"
+                className="w-full py-3 text-center"
+              >
+                계속 쇼핑하기
+              </ActionButton>
+            </DrawerClose>
+          </div>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

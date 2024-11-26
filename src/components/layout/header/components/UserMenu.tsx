@@ -1,32 +1,19 @@
-import { IoCartOutline } from "react-icons/io5";
-import Link from "next/link";
-import SignInModal from "../../../auth/modal/SignInModal";
+import CartIcon from "./CartIcon";
 import UserDropdownMenu from "./UserDropdownMenu";
 import { useRecoilValue } from "recoil";
-import { loadingState, sessionState } from "@/store";
-import LoadingSkeleton from "@/components/common/loading/LoadingSkeleton";
+import { sessionState } from "@/store";
+import SignInModal from "@/components/auth/modal/SignInModal";
 
 const UserMenu = () => {
   const session = useRecoilValue(sessionState);
-  const loading = useRecoilValue(loadingState);
 
   return (
     <nav className="hidden lg:block">
       <ul className="flex gap-3 items-center">
         <li>
-          <Link href="/cart">
-            <IoCartOutline className="cursor-pointer" size={24} />
-          </Link>
+          <CartIcon className="left-3" />
         </li>
-        <li>
-          {loading ? (
-            <LoadingSkeleton />
-          ) : !session ? (
-            <SignInModal />
-          ) : (
-            <UserDropdownMenu />
-          )}
-        </li>
+        <li>{!session ? <SignInModal /> : <UserDropdownMenu />}</li>
       </ul>
     </nav>
   );

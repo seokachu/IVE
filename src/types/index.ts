@@ -38,6 +38,10 @@ export interface ShopListItem {
   title: string;
 }
 
+export interface CartItem extends Omit<ShopListItem, "quantity"> {
+  quantity: number;
+}
+
 export interface ShopListItemProps {
   item: ShopListItem;
 }
@@ -99,4 +103,9 @@ export interface ReviewItem {
 export interface ReviewResponse {
   reviews: ReviewItem[];
   totalCount: number;
+}
+
+export interface ProductActionsProps {
+  product: ShopListItem;
+  quantity: number;
 }
