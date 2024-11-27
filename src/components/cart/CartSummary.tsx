@@ -1,3 +1,5 @@
+import ActionButton from "../common/button/ActionButton";
+
 const CartSummary = () => {
   return (
     <div className="lg:sticky lg:top-5 flex-1 border rounded-md bg-white shadow-sm p-10 h-fit">
@@ -18,9 +20,12 @@ const CartSummary = () => {
           <span className="text-dark-orange">-73,755원</span>
         </p>
       </div>
-      <button className="block text-center w-full rounded-md py-2 bg-purple text-white">
+      <ActionButton
+        variant="primary"
+        className="block text-center w-full rounded-md py-2 bg-purple text-white"
+      >
         결제하기
-      </button>
+      </ActionButton>
     </div>
   );
 };

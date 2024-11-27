@@ -32,7 +32,7 @@ const CartListItems = () => {
           </div>
         </div>
       </label>
-      <button className="absolute right-2 top-1">&times;</button>
+      <button className="absolute right-2 top-[10px]">&times;</button>
     </li>
   );
 };
