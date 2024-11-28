@@ -109,3 +109,7 @@ export interface ProductActionsProps {
   product: ShopListItem;
   quantity: number;
 }
+
+export interface CartListItemProps {
+  item: CartItem;
+}
