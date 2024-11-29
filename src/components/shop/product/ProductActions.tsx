@@ -58,7 +58,7 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
         <li className="w-1/6">
           <ActionButton
             variant="primary"
-            className="w-full h-full flex items-center justify-center py-5"
+            className="w-full flex items-center justify-center py-3"
           >
             <IoIosHeartEmpty size={25} className="text-white" />
           </ActionButton>

@@ -4,6 +4,7 @@ import CartListItems from "./CartListItems";
 import { useRecoilState } from "recoil";
 import { cartState } from "@/store";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const CartList = () => {
   const [cartItems] = useRecoilState(cartState);
@@ -31,9 +32,12 @@ const CartList = () => {
           <p className="text-gray-500 text-sm mb-5">
             원하는 상품을 담아보세요!
           </p>
-          <button className="border text-sm py-2 px-5 rounded-md border-purple text-purple hover:text-white hover:bg-purple transition-all ease-out duration-300">
+          <Link
+            href="/shop"
+            className="border text-sm py-2 px-5 rounded-md border-purple text-purple hover:text-white hover:bg-purple transition-all ease-out duration-300"
+          >
             쇼핑하기
-          </button>
+          </Link>
         </div>
       )}
     </div>

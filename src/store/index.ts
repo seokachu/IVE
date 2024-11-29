@@ -1,6 +1,7 @@
 import { atom } from "recoil";
 import { Session } from "@supabase/supabase-js";
 import { cartStorage } from "@/utils/cartStorage";
+import type { CartItem } from "@/types";
 
 export const sessionState = atom<Session | null>({
   key: "sessionState",
@@ -15,4 +16,9 @@ export const loadingState = atom({
 export const cartState = atom({
   key: "cartState",
   default: cartStorage.getCart(),
+});
+
+export const selectedItemState = atom<CartItem["id"][]>({
+  key: "selectedItemsState",
+  default: [],
 });
