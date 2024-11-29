@@ -1,26 +1,32 @@
 "use client";
 import { useRecoilState } from "recoil";
 import ActionButton from "../common/button/ActionButton";
-import { cartState } from "@/store";
+import { cartState, selectedItemState } from "@/store";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import { useEffect, useState } from "react";
 import CartSummarySkeleton from "../common/loading/CartSummarySkeleton";
 
 const CartSummary = () => {
   const [cartItems] = useRecoilState(cartState);
+  const [selectedItems] = useRecoilState(selectedItemState);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  //선택된 아이템을 필터링
+  const selectedCartItems = cartItems.filter((item) =>
+    selectedItems.includes(item.id)
+  );
+
   //총 상품 금액
-  const totalOriginalPrice = cartItems.reduce((sum, item) => {
+  const totalOriginalPrice = selectedCartItems.reduce((sum, item) => {
     return sum + item.price * item.quantity;
   }, 0);
 
   //할인된 총 금액
-  const totalDiscountedPrice = cartItems.reduce((sum, item) => {
+  const totalDiscountedPrice = selectedCartItems.reduce((sum, item) => {
     const discountedPrice = getDiscountedPrice(item);
     return sum + discountedPrice * item.quantity;
   }, 0);

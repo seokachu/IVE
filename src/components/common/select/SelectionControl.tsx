@@ -3,7 +3,7 @@ import ActionButton from "../button/ActionButton";
 import { useRecoilState } from "recoil";
 import { cartState, selectedItemState } from "@/store";
 import { toast } from "@/hooks/use-toast";
-import ConfirmModal from "../modal/confirmModal";
+import ConfirmModal from "../modal/ConfirmModal";
 
 const SelectionControl = () => {
   const id = useId();
