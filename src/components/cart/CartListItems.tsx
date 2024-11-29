@@ -5,6 +5,8 @@ import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import Image from "next/image";
 import { useId } from "react";
 import { useRecoilState } from "recoil";
+import QuantitySelector from "../common/QuantitySelector";
+import { toast } from "@/hooks/use-toast";
 
 const CartListItems = ({ item }: CartListItemProps) => {
   const id = useId();
@@ -39,6 +41,43 @@ const CartListItems = ({ item }: CartListItemProps) => {
     }
   };
 
+  const handleIncrease = () => {
+    if (item.quantity >= 5) {
+      toast({
+        title: "최대 5개 까지 구매 가능합니다.",
+      });
+      return;
+    }
+
+    const newCartItems = cartItems.map((cartItem) => {
+      if (cartItem.id === item.id) {
+        return {
+          ...cartItem,
+          quantity: Math.min(cartItem.quantity + 1, 5),
+        };
+      }
+      return cartItem;
+    });
+
+    localStorage.setItem("shopping_cart", JSON.stringify(newCartItems));
+    setCartItems(newCartItems);
+  };
+
+  const handleDecrease = () => {
+    const newCartItems = cartItems.map((cartItem) => {
+      if (cartItem.id === item.id) {
+        return {
+          ...cartItem,
+          quantity: Math.max(cartItem.quantity - 1, 1),
+        };
+      }
+      return cartItem;
+    });
+
+    localStorage.setItem("shopping_cart", JSON.stringify(newCartItems));
+    setCartItems(newCartItems);
+  };
+
   return (
     <li className="px-2 py-4 relative border-b cursor-pointer">
       <label htmlFor={`${item.id}-${id}`} className="flex cursor-pointer">
@@ -59,9 +98,14 @@ const CartListItems = ({ item }: CartListItemProps) => {
           />
         </div>
         <div className="flex w-full lg:gap-3 lg:flex-row flex-col lg:items-center lg:justify-between">
-          <div className="flex-[4] mr-9 flex flex-col justify-between">
+          <div className="flex-[4] mr-9 flex flex-col justify-between gap-2">
             <h3>{item.title}</h3>
-            <p className="text-sm mt-1 text-gray-400">수량 {item.quantity}</p>
+            <QuantitySelector
+              className="text-sm text-gray-400 mr-3"
+              quantity={item.quantity}
+              increase={handleIncrease}
+              decrease={handleDecrease}
+            />
           </div>
           <div className="lg:text-right flex-1">
             <span className="mr-1 text-purple font-bold">

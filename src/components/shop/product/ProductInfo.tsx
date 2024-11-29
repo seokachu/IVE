@@ -1,9 +1,5 @@
 import Image from "next/image";
 import DefaultImage from "@/assets/images/default_image.avif";
-import { useState } from "react";
-import { toast } from "@/hooks/use-toast";
-import { CiSquarePlus } from "react-icons/ci";
-import { CiSquareMinus } from "react-icons/ci";
 import ProductActions from "./ProductActions";
 import ShareButton from "@/components/common/button/ShareButton";
 import { useShop } from "@/hooks/queries/useShops";
@@ -11,9 +7,13 @@ import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import Error from "@/components/common/error/Error";
 import type { ShopMenuProps } from "@/types";
 import ProductInfoSkeleton from "@/components/common/loading/ProductInfoSkeleton";
+import QuantitySelector from "@/components/common/QuantitySelector";
+import { toast } from "@/hooks/use-toast";
+import { useState } from "react";
 
 const ProductInfo = ({ id }: ShopMenuProps) => {
   const [count, setCount] = useState(1);
+
   const { data, isLoading, isError } = useShop(id);
 
   if (isLoading) return <ProductInfoSkeleton />;
@@ -83,29 +83,12 @@ const ProductInfo = ({ id }: ShopMenuProps) => {
               <p className="uppercase">{data.color}</p>
             </li>
             <li className="flex py-3 px-3 border-b">
-              <h3 className="w-[100px]">수량</h3>
-              <div className="flex gap-3 items-center">
-                <button
-                  onClick={handleDecrease}
-                  disabled={count === 1}
-                  className={`${
-                    count === 1
-                      ? "opacity-50 cursor-not-allowed"
-                      : "hover:text-purple"
-                  }`}
-                >
-                  <CiSquareMinus size={25} />
-                </button>
-                <p>{count}</p>
-                <button
-                  onClick={handleIncrease}
-                  className={`${
-                    count >= 5 ? "opacity-50 " : "hover:text-purple"
-                  }`}
-                >
-                  <CiSquarePlus size={25} />
-                </button>
-              </div>
+              <QuantitySelector
+                className="w-[100px]"
+                quantity={count}
+                increase={handleIncrease}
+                decrease={handleDecrease}
+              />
             </li>
           </ul>
           <div className="justify-end flex gap-3 items-baseline">
