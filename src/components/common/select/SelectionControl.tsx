@@ -59,7 +59,7 @@ const SelectionControl = () => {
 
   return (
     <div className="flex text-sm items-center justify-between mt-5 pb-5 border-b border-dark-gray">
-      <label htmlFor={`selectAll-${id}`}>
+      <label htmlFor={`selectAll-${id}`} className="cursor-pointer">
         <input
           type="checkbox"
           id={`selectAll-${id}`}
