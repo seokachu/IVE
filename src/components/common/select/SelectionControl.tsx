@@ -11,10 +11,10 @@ const SelectionControl = () => {
   const [selectedItems, setSelectedItems] = useRecoilState(selectedItemState);
   const [isModal, setIsModal] = useState(false);
 
-  //컴포넌트가 마운트 되었을 때 장바구니 모든 아이템 선택하기
+  //컴포넌트가 마운트 되었을 때 장바구니 모든 아이템 선택하기, 선택삭제 버튼 클릭시 남은 item 선택
   useEffect(() => {
     setSelectedItems(cartItems.map((item) => item.id));
-  }, []);
+  }, [cartItems]);
 
   //전체선택
   const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
