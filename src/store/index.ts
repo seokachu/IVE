@@ -22,3 +22,12 @@ export const selectedItemState = atom<CartItem["id"][]>({
   key: "selectedItemsState",
   default: [],
 });
+
+export const agreementsState = atom({
+  key: "agreementsState",
+  default: {
+    main: false,
+    privacy: false,
+    refund: false,
+  },
+});

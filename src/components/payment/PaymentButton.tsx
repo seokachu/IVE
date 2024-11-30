@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 import ActionButton from "../common/button/ActionButton";
 import { loadTossPayments } from "@tosspayments/payment-sdk";
-import { sessionState } from "@/store";
+import { agreementsState, sessionState } from "@/store";
 import { savePayment } from "@/lib/supabase/payment";
 import { formatPrice } from "@/utils/calculateDiscount";
 import { toast } from "@/hooks/use-toast";
@@ -13,8 +13,18 @@ interface PaymentButtonProps {
 
 const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
   const session = useRecoilValue(sessionState);
+  const agreements = useRecoilValue(agreementsState);
 
   const handlePayment = async () => {
+    if (!agreements.privacy || !agreements.refund) {
+      toast({
+        title: "약관 동의가 필요합니다",
+        description: "필수 약관에 모두 동의해주세요.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     try {
       const tossPayments = await loadTossPayments(
         process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY!

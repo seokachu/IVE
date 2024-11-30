@@ -79,8 +79,8 @@ const CartListItems = ({ item }: CartListItemProps) => {
   };
 
   return (
-    <li className="px-2 py-4 relative border-b cursor-pointer">
-      <label htmlFor={`${item.id}-${id}`} className="flex cursor-pointer">
+    <li className="px-2 py-4 relative border-b">
+      <label htmlFor={`${item.id}-${id}`} className="flex">
         <input
           onChange={handleCheck}
           checked={isChecked}

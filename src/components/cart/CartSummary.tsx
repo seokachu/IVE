@@ -1,11 +1,10 @@
 "use client";
 import { useRecoilState } from "recoil";
 import { cartState, selectedItemState } from "@/store";
-import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
+import { getDiscountedPrice } from "@/utils/calculateDiscount";
 import { useEffect, useState } from "react";
 import CartSummarySkeleton from "../common/loading/CartSummarySkeleton";
 import PaymentButton from "../payment/PaymentButton";
-import ActionButton from "../common/button/ActionButton";
 import OrderPriceSummary from "./OrderPriceSummary";
 import OrderCustomerInfo from "./OrderCustomerInfo";
 import OrderShippingInfo from "./OrderShippingInfo";
