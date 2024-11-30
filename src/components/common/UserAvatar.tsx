@@ -10,7 +10,7 @@ const UserAvatar = ({ size = "md" }: AvatarProps) => {
   const session = useRecoilValue(sessionState);
 
   const sizeStyles = {
-    sm: "w-[35px] h-auto",
+    sm: "w-[30px] h-auto",
     md: "w-10 h-10",
     lg: "w-12 h-12",
   };

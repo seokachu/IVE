@@ -12,7 +12,7 @@ const CartSummarySkeleton = () => {
         </div>
       </div>
       <div className="pt-5 mb-10">
-        <div className="mb-1 flex justify-between items-center">
+        <div className="mb-2 flex justify-between items-center">
           <Skeleton className="h-5 w-16" />
           <Skeleton className="h-5 w-20" />
         </div>

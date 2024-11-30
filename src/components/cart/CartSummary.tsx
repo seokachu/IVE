@@ -1,10 +1,10 @@
 "use client";
 import { useRecoilState } from "recoil";
-import ActionButton from "../common/button/ActionButton";
 import { cartState, selectedItemState } from "@/store";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import { useEffect, useState } from "react";
 import CartSummarySkeleton from "../common/loading/CartSummarySkeleton";
+import PaymentButton from "../payment/PaymentButton";
 
 const CartSummary = () => {
   const [cartItems] = useRecoilState(cartState);
@@ -58,12 +58,12 @@ const CartSummary = () => {
           </span>
         </p>
       </div>
-      <ActionButton
-        variant="primary"
-        className="block text-center w-full rounded-md py-2 bg-purple text-white"
-      >
-        결제하기
-      </ActionButton>
+      <PaymentButton
+        amount={totalDiscountedPrice}
+        orderName={`${selectedCartItems[0]?.title} 외 ${
+          selectedCartItems.length - 1
+        }건`}
+      />
     </div>
   ) : (
     <CartSummarySkeleton />

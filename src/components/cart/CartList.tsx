@@ -5,14 +5,21 @@ import { useRecoilState } from "recoil";
 import { cartState } from "@/store";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import useLoading from "@/hooks/useLoading";
+import CartListLoading from "../common/loading/CartListLoading";
 
 const CartList = () => {
   const [cartItems] = useRecoilState(cartState);
   const [mounted, setMounted] = useState(false);
+  const { startLoading, stopLoading } = useLoading();
 
   useEffect(() => {
+    startLoading();
     setMounted(true);
+    stopLoading();
   }, []);
+
+  if (!mounted) return <CartListLoading />;
 
   return (
     <div className="flex-[2] p-10 border rounded-md bg-white shadow-sm min-h-[500px]">

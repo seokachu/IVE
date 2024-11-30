@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useId, useState } from "react";
 import ActionButton from "../button/ActionButton";
 import { useRecoilState } from "recoil";

@@ -57,13 +57,13 @@ const Header = () => {
     <header
       className={cn(
         isMainPage ? "fixed" : "relative",
-        "right-0 top-0 left-0 z-10 w-screen overflow-x-hidden",
+        "right-0 top-0 left-0 z-10 w-screen overflow-x-hidden h-[75px] flex items-center",
         isScrolled && "bg-white text-black shadow-sm"
       )}
     >
       <div
         className={cn(
-          "flex p-[20px] justify-between items-center max-w-[1320px] m-auto relative text-white",
+          "flex w-full p-[20px] justify-between items-center max-w-[1320px] m-auto relative text-white",
           isScrolled && "text-font-color"
         )}
       >
