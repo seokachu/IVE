@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { sessionState } from "@/store";
 
 interface AvatarProps {
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
 }
 
 const UserAvatar = ({ size = "md" }: AvatarProps) => {
@@ -13,12 +13,13 @@ const UserAvatar = ({ size = "md" }: AvatarProps) => {
     sm: "w-[30px] h-auto",
     md: "w-10 h-10",
     lg: "w-12 h-12",
+    xl: "w-16 h-16",
   };
 
   const avatarUrl = session?.user.user_metadata.avatar_url;
 
   return (
-    <Avatar className={sizeStyles[size]}>
+    <Avatar className={`border ${sizeStyles[size]}`}>
       <AvatarImage
         src={avatarUrl}
         alt={session?.user.user_metadata.avatar_url || "유저 프로필"}

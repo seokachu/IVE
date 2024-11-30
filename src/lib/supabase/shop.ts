@@ -9,7 +9,7 @@ export const getGoodsShop = async () => {
     return data;
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(`상품 정보를 불러오는 데 실패했습니다. ${error.message}`);
+      throw new Error(`상품 정보를 불러오는데 실패했습니다. ${error.message}`);
     }
     throw error;
   }
@@ -28,7 +28,7 @@ export const getGoodsShopDetail = async (id: string) => {
     return data;
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(`상품 정보를 불러오는 데 실패했습니다. ${error.message}`);
+      throw new Error(`상품 정보를 불러오는데 실패했습니다. ${error.message}`);
     }
     throw error;
   }

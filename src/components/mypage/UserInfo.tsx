@@ -1,15 +1,18 @@
-import TestImage from "@/assets/images/default_image.avif";
+"use client";
+import DefaultImage from "@/assets/images/default_image.avif";
+import { sessionState } from "@/store";
 import Image from "next/image";
+import { useRecoilValue } from "recoil";
+import UserAvatar from "../common/UserAvatar";
 
 const UserInfo = () => {
+  const session = useRecoilValue(sessionState);
   return (
     <section>
       <div>
-        <div className="relative overflow-hidden rounded-full w-[80px] h-auto">
-          <Image src={TestImage} alt="test" className="fill" />
-        </div>
+        <UserAvatar size="xl" />
         <div className="flex justify-between mt-5">
-          <h2 className="font-bold">닉네임님</h2>
+          <h2 className="font-bold">{session?.user.user_metadata.name}</h2>
           <button className="text-sm text-white py-1 px-3 bg-purple rounded-md">
             수정
           </button>
@@ -27,8 +30,10 @@ const UserInfo = () => {
       </div>
       <ul className="flex lg:flex-col gap-5 border-b lg:border-b-0 pb-5 text-center lg:text-left">
         <li className="font-bold">찜목록</li>
-        <li>내가 쓴 글</li>
         <li>결제 목록</li>
+        <li>내가 쓴 글</li>
+        <li>배송지 관리</li>
+        <li>회원탈퇴</li>
       </ul>
     </section>
   );

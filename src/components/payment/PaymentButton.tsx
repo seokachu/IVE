@@ -2,8 +2,9 @@ import { useRecoilValue } from "recoil";
 import ActionButton from "../common/button/ActionButton";
 import { loadTossPayments } from "@tosspayments/payment-sdk";
 import { sessionState } from "@/store";
-import { getPayments, savePayment } from "@/lib/supabase/payment";
+import { savePayment } from "@/lib/supabase/payment";
 import { formatPrice } from "@/utils/calculateDiscount";
+import { toast } from "@/hooks/use-toast";
 
 interface PaymentButtonProps {
   amount: number;
@@ -19,9 +20,11 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
         process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY!
       );
 
-      const response = await tossPayments.requestPayment("카드", {
+      const orderId = `ORDER_${crypto.randomUUID()}`;
+
+      await tossPayments.requestPayment("카드", {
         amount,
-        orderId: `ORDER_${new Date().getTime()}`,
+        orderId: orderId,
         orderName,
         customerName: session?.user.user_metadata?.name,
         successUrl: `${window.location.origin}/payment/success`,
@@ -31,15 +34,28 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
       //결제 성공 데이터 저장
       const paymentData = {
         user_id: session?.user.id!,
-        order_id: `ORDER_${new Date().getTime()}`,
+        order_id: orderId,
         amount,
         order_name: orderName,
         payment_method: "카드",
-        status: "성공",
+        status: "pending",
+        recipient_name: "받는사람 이름",
+        recipient_phone: "010-0000-0000",
+        address_line1: "주소",
+        address_line2: "상세주소",
+        postal_code: "03139",
+        delivery_status: "배송전",
+        created_at: new Date(),
       };
 
       await savePayment(paymentData);
     } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          title: "결제 요청 중 오류가 발생했습니다.",
+          description: error.message,
+        });
+      }
       console.error(error);
     }
   };
@@ -49,7 +65,7 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
       onClick={handlePayment}
       variant="primary"
       className="flex items-center justify-center text-center w-full rounded-md py-2 bg-purple text-white"
-      disabled={!amount}
+      disabled={!amount || !session}
     >
       <strong className="text-xl mr-[2px]">{formatPrice(amount)}</strong>원
       결제하기

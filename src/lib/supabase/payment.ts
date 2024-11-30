@@ -23,6 +23,13 @@ export const savePayment = async (paymentData: {
   order_name: string;
   payment_method: string;
   status: string;
+  recipient_name: string;
+  recipient_phone: string;
+  address_line1: string;
+  address_line2: string;
+  postal_code: string;
+  delivery_status: string;
+  created_at: Date;
 }) => {
   try {
     const { data, error } = await supabase
