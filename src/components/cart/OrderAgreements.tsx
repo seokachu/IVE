@@ -4,9 +4,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import AgreementModal from "./AgreementModal";
 import { useRecoilState } from "recoil";
 import { agreementsState } from "@/store";
-
-type AgreementType = "main" | "privacy" | "refund";
-type ModalType = "privacy" | "refund" | null;
+import type { AgreementType, ModalType } from "@/types";
 
 const OrderAgreements = () => {
   const [agreements, setAgreements] = useRecoilState(agreementsState);

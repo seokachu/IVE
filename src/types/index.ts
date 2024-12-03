@@ -113,3 +113,7 @@ export interface ProductActionsProps {
 export interface CartListItemProps {
   item: CartItem;
 }
+
+//장바구니 약관동의 page checkbox
+export type AgreementType = "main" | "privacy" | "refund";
+export type ModalType = "privacy" | "refund" | null;
