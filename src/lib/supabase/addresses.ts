@@ -10,6 +10,8 @@ type ShippingAddressInsert =
 //배송지 목록 조회 (여러개)
 export const getShippingAddresses = async (userId: string) => {
   try {
+    if (!userId) return null;
+
     const { data, error } = await supabase
       .from("shipping_addresses")
       .select("*")

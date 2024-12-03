@@ -69,7 +69,7 @@ export const myPageAddressSchema = z.object({
   phoneLast: phoneCheckSchema,
   request: z.string(),
   customRequest: z.string().optional(),
-  isDefault: z.boolean().default(false),
+  isDefault: z.boolean().default(true),
 });
 
 //타입 지정

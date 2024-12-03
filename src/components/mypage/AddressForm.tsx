@@ -19,7 +19,10 @@ import { useRouter } from "next/navigation";
 import type { AddressChange } from "@/types";
 import { sessionState } from "@/store";
 import { useRecoilValue } from "recoil";
-import { useAddShippingAddress } from "@/hooks/queries/useShippingAddress";
+import {
+  useAddShippingAddress,
+  useShippingAddresses,
+} from "@/hooks/queries/useShippingAddress";
 
 const AddressForm = () => {
   const { push } = useRouter();
@@ -27,11 +30,18 @@ const AddressForm = () => {
   const [isAddress, setIsAddress] = useState(false);
   const [showRequested, setShowRequested] = useState(false);
   const { mutate: addShippingAddress } = useAddShippingAddress();
+  const { data: addresses } = useShippingAddresses();
+
+  //첫 배송지 확인
+  const isFirstAddress = !addresses || addresses.length === 0;
 
   const form = useForm<AddressType>({
     mode: "onChange",
     resolver: zodResolver(myPageAddressSchema),
-    defaultValues: userDefaultValues.myPageAddressValues,
+    defaultValues: {
+      ...userDefaultValues.myPageAddressValues,
+      isDefault: true,
+    },
   });
 
   const { isValid, isSubmitting } = form.formState;
@@ -74,7 +84,7 @@ const AddressForm = () => {
       address_line1: data.address,
       address_line2: data.detailAddress || "",
       request: data.customRequest || data.request,
-      is_default: data.isDefault,
+      is_default: isFirstAddress ? true : data.isDefault,
       created_at: new Date().toISOString(),
     };
 
@@ -239,6 +249,9 @@ const AddressForm = () => {
               className="w-[20px] h-[20px] mr-2"
             />
             기본 배송지로 저장
+            <span className="ml-1 text-gray-500 text-xs">
+              (첫 배송지는 자동으로 기본 배송지로 저장됩니다.)
+            </span>
           </Label>
         </div>
         <Button

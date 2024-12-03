@@ -12,10 +12,11 @@ type ShippingAddressUpdate =
   Database["public"]["Tables"]["shipping_addresses"]["Update"];
 
 //배송지 목록 조회(여러개)
-export const useShippingAddresses = (userId: string) => {
+export const useShippingAddresses = (userId?: string) => {
   return useQuery({
     queryKey: ["shippingAddresses", userId],
-    queryFn: () => getShippingAddresses,
+    queryFn: () => getShippingAddresses(userId!),
+    enabled: !!userId,
   });
 };
 
