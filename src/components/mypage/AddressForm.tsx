@@ -17,11 +17,16 @@ import { RHFSelect } from "../common/select/RHFSelect";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import type { AddressChange } from "@/types";
+import { sessionState } from "@/store";
+import { useRecoilValue } from "recoil";
+import { useAddShippingAddress } from "@/hooks/queries/useShippingAddress";
 
 const AddressForm = () => {
   const { push } = useRouter();
+  const session = useRecoilValue(sessionState);
   const [isAddress, setIsAddress] = useState(false);
   const [showRequested, setShowRequested] = useState(false);
+  const { mutate: addShippingAddress } = useAddShippingAddress();
 
   const form = useForm<AddressType>({
     mode: "onChange",
@@ -61,10 +66,34 @@ const AddressForm = () => {
 
   //제출 form
   const handleSubmit = (data: AddressType) => {
-    console.log(data);
+    const addressData = {
+      user_id: session!.user.id,
+      recipient_name: data.recipient,
+      recipient_phone: `${data.phoneFirst}-${data.phoneMiddle}-${data.phoneLast}`,
+      postal_code: data.zonecode,
+      address_line1: data.address,
+      address_line2: data.detailAddress || "",
+      request: data.customRequest || data.request,
+      is_default: data.isDefault,
+      created_at: new Date().toISOString(),
+    };
 
-    toast({ title: "배송지 정보가 저장되었습니다." });
-    push("/mypage/address");
+    addShippingAddress(addressData, {
+      onSuccess: () => {
+        toast({ title: "배송지 정보가 저장되었습니다." });
+        push("/mypage/address");
+        console.log(data);
+      },
+      onError: (error) => {
+        toast({
+          title: "배송지 저장에 실패했습니다.",
+          description:
+            error instanceof Error
+              ? error.message
+              : "알 수 없는 오류가 발생했습니다.",
+        });
+      },
+    });
   };
 
   return (

@@ -272,40 +272,40 @@ export type Database = {
       }
       shipping_addresses: {
         Row: {
-          address_line1: string | null
+          address_line1: string
           address_line2: string | null
-          created_at: string | null
+          created_at: string
           id: string
-          is_default: boolean | null
-          postal_code: string | null
-          recipient_name: string | null
-          recipient_phone: string | null
-          request: string | null
-          user_id: string | null
+          is_default: boolean
+          postal_code: string
+          recipient_name: string
+          recipient_phone: string
+          request: string
+          user_id: string
         }
         Insert: {
-          address_line1?: string | null
+          address_line1: string
           address_line2?: string | null
-          created_at?: string | null
+          created_at: string
           id?: string
-          is_default?: boolean | null
-          postal_code?: string | null
-          recipient_name?: string | null
-          recipient_phone?: string | null
-          request?: string | null
-          user_id?: string | null
+          is_default: boolean
+          postal_code: string
+          recipient_name: string
+          recipient_phone: string
+          request: string
+          user_id: string
         }
         Update: {
-          address_line1?: string | null
+          address_line1?: string
           address_line2?: string | null
-          created_at?: string | null
+          created_at?: string
           id?: string
-          is_default?: boolean | null
-          postal_code?: string | null
-          recipient_name?: string | null
-          recipient_phone?: string | null
-          request?: string | null
-          user_id?: string | null
+          is_default?: boolean
+          postal_code?: string
+          recipient_name?: string
+          recipient_phone?: string
+          request?: string
+          user_id?: string
         }
         Relationships: [
           {

@@ -1,34 +1,69 @@
 import { supabase } from "@/lib/supabase/client";
+import type { Database } from "@/types/supabase";
 
-//배송지 목록 조회
-export const getShippingAddress = async (userId: string) => {
+// 타입 정의
+type ShippingAddressUpdate =
+  Database["public"]["Tables"]["shipping_addresses"]["Update"];
+type ShippingAddressInsert =
+  Database["public"]["Tables"]["shipping_addresses"]["Insert"];
+
+//배송지 목록 조회 (여러개)
+export const getShippingAddresses = async (userId: string) => {
   try {
     const { data, error } = await supabase
       .from("shipping_addresses")
       .select("*")
       .eq("user_id", userId)
+      .order("is_default", { ascending: false }) //기본배송지 설정
+      .order("created_at", { ascending: false }); //최근 등록순
+
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    return [];
+  }
+};
+
+//단일 배송지 조회
+export const getShippingAddress = async (addressId: string) => {
+  try {
+    const { data, error } = await supabase
+      .from("shipping_addresses")
+      .select("*")
+      .eq("id", addressId)
       .single();
 
     if (error) throw error;
     return data;
   } catch (error) {
-    return null; // 배송지가 없는 경우
+    if (error instanceof Error) {
+      throw new Error(`배송지를 가져오는 데 실패했습니다. ${error.message}`);
+    }
   }
 };
 
 // 배송지 저장하기
-export const saveShippingAddress = async (addressData: {
-  user_id: string;
-  recipient_name: string;
-  recipient_phone: string;
-  postal_code: string;
-  address_line1: string;
-  address_line2: string;
-}) => {
+export const saveShippingAddress = async (
+  addressData: ShippingAddressInsert
+) => {
+  const { user_id, is_default } = addressData;
+
   try {
+    //기존 모든 배송지 해제
+    if (is_default) {
+      const { error: updateError } = await supabase
+        .from("shipping_addresses")
+        .update({ is_default: false })
+        .eq("user_id", user_id)
+        .eq("is_default", true);
+
+      if (updateError) throw updateError;
+    }
+
+    //새 배송지 추가
     const { data, error } = await supabase
       .from("shipping_addresses")
-      .upsert(addressData) // 이미 있으면 업데이트하고, 없으면 새로 생성 로직
+      .insert(addressData)
       .select();
 
     if (error) throw error;
@@ -36,6 +71,61 @@ export const saveShippingAddress = async (addressData: {
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`배송지 저장에 실패했습니다: ${error.message}`);
+    }
+    throw error;
+  }
+};
+
+//배송지 수정하기
+export const updateShippingAddress = async (
+  addressId: string,
+  addressData: ShippingAddressUpdate
+) => {
+  const { user_id, is_default } = addressData;
+
+  try {
+    if (is_default) {
+      //다른 기본 배송지 해제
+      const { error: updateError } = await supabase
+        .from("shipping_addresses")
+        .update({ is_default: false })
+        .eq("user_id", user_id!)
+        .neq("id", addressId) // 현재 수정하는 주소는 제외
+        .eq("is_default", true);
+
+      if (updateError) throw updateError;
+    }
+
+    //배송지 정보 업데이트
+    const { data, error } = await supabase
+      .from("shipping_addresses")
+      .update(addressData)
+      .eq("id", addressId)
+      .select();
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`배송지 수정에 실패했습니다: ${error.message}`);
+    }
+    throw error;
+  }
+};
+
+// 배송지 삭제하기
+export const deleteShippingAddress = async (addressId: string) => {
+  try {
+    const { error } = await supabase
+      .from("shipping_addresses")
+      .delete()
+      .eq("id", addressId);
+
+    if (error) throw error;
+    return true;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`배송지 삭제에 실패했습니다: ${error.message}`);
     }
     throw error;
   }
