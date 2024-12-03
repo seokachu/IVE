@@ -1,11 +1,22 @@
+import { useRouter } from "next/navigation";
 import ActionButton from "../common/button/ActionButton";
 
 const OrderShippingInfo = () => {
+  const { push } = useRouter();
+
+  const handleShippingAddressChange = () => {
+    push("/mypage/address");
+  };
+
   return (
     <div className="mb-12">
       <div className="flex justify-between border-b pb-4 mb-5">
         <h2 className="font-bold">배송 정보</h2>
-        <ActionButton variant="primary" className="text-xs px-2">
+        <ActionButton
+          onClick={handleShippingAddressChange}
+          variant="primary"
+          className="text-xs px-2"
+        >
           배송지 변경
         </ActionButton>
       </div>

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-// extractDefaultValues 함수 구현
+// extractDefaultValues 함수
 function extractDefaultValues<T extends z.ZodTypeAny>(
   schema: T
 ): Partial<z.infer<T>> {
@@ -36,6 +36,8 @@ const passwordCheckSchema = z
   .string()
   .min(1, { message: "비밀번호를 한번 더 입력해주세요." });
 
+const phoneCheckSchema = z.string().regex(/^\d{3,4}$/, "숫자만 입력해 주세요.");
+
 //스키마 object
 const signUpSchema = z
   .object({
@@ -57,10 +59,24 @@ const myPageSchema = z.object({
   nickname: nicknameSchema,
 });
 
+export const myPageAddressSchema = z.object({
+  recipient: z.string().nonempty("받는 사람을 입력해 주세요."),
+  zonecode: z.string().nonempty("우편번호를 입력해 주세요."),
+  address: z.string().nonempty("주소를 입력해 주세요."),
+  detailAddress: z.string().optional(),
+  phoneFirst: z.string().default("010"),
+  phoneMiddle: phoneCheckSchema,
+  phoneLast: phoneCheckSchema,
+  request: z.string(),
+  customRequest: z.string().optional(),
+  isDefault: z.boolean().default(false),
+});
+
 //타입 지정
 export type SignUpType = z.infer<typeof signUpSchema>;
 export type LoginType = z.infer<typeof loginSchema>;
 export type MyPageType = z.infer<typeof myPageSchema>;
+export type AddressType = z.infer<typeof myPageAddressSchema>;
 
 //스키마 내보내기
 export const userSchemas = {
@@ -74,4 +90,5 @@ export const userDefaultValues = {
   signUpDefaultValues: extractDefaultValues(signUpSchema),
   loginDefaultValues: extractDefaultValues(loginSchema),
   myPageDefaultValues: extractDefaultValues(myPageSchema),
+  myPageAddressValues: extractDefaultValues(myPageAddressSchema),
 };

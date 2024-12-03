@@ -11,9 +11,15 @@ import { useFormContext } from "react-hook-form";
 
 interface RHFInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
+  messageClassName?: string;
 }
 
-export function RHFInput({ name, ...props }: RHFInputProps) {
+export function RHFInput({
+  name,
+  messageClassName,
+  type = "text",
+  ...props
+}: RHFInputProps) {
   const {
     control,
     formState: { errors },
@@ -26,17 +32,29 @@ export function RHFInput({ name, ...props }: RHFInputProps) {
       render={({ field }) => (
         <FormItem>
           <FormControl>
-            <Input
-              {...props}
-              {...field}
-              error={!!errors[name]}
-              value={field.value || ""}
-              onChange={(e) => {
-                field.onChange(e.target.value);
-              }}
-            />
+            {type === "checkbox" ? (
+              <Input
+                {...props}
+                {...field}
+                type="checkbox"
+                checked={field.value ?? false}
+                onChange={(e) => {
+                  field.onChange(e.target.checked);
+                }}
+              />
+            ) : (
+              <Input
+                {...props}
+                {...field}
+                value={field.value || ""}
+                error={!!errors[name]}
+                onChange={(e) => {
+                  field.onChange(e.target.value);
+                }}
+              />
+            )}
           </FormControl>
-          <FormMessage />
+          <FormMessage className={messageClassName} />
         </FormItem>
       )}
     />

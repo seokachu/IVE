@@ -9,18 +9,20 @@ import {
 
 interface SelectMenuProps<T> {
   options: T[];
-  onChange: (value: string) => void;
-  value: string;
+  onChange?: (value: string) => void;
+  value?: string;
+  className?: string;
 }
 
 const SelectMenu = <T extends { value: string; title: string }>({
   options,
   value,
   onChange,
+  className,
 }: SelectMenuProps<T>) => {
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className="lg:w-[180px] w-full">
+      <SelectTrigger className={className}>
         <SelectValue placeholder={options[0]?.title} />
       </SelectTrigger>
       <SelectContent>

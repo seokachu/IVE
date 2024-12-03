@@ -29,6 +29,14 @@ export const PRODUCT_SORT_OPTIONS = [
   { value: "price_high_to_low", title: "가격 높은 순" },
 ];
 
+//mypage nav
+export const MYPAGE_GNB_ARRAY = [
+  { label: "찜 목록", path: "/mypage/wishlist" },
+  { label: "결제 목록", path: "/mypage/orders" },
+  { label: "내가 쓴 글", path: "/mypage/posts" },
+  { label: "배송지 관리", path: "/mypage/address" },
+];
+
 //굿즈샵 정렬 조건 객체 맵핑
 export const SORT_OPTIONS: Record<SortOptionList, SortOption> = {
   best: { column: "review_count", ascending: false },
@@ -95,3 +103,60 @@ export const AGREEMENT_CONTENTS = {
     ],
   },
 };
+
+//배송정보 입력 요청사항,정보 option
+export const RECIPIENT_DELIVERY_OPTIONS = [
+  { value: "메시지선택(선택사항)", title: "-- 메시지 선택 (선택사항) --" },
+  {
+    value: "배송 전에 미리 연락 바랍니다.",
+    title: "배송 전에 미리 연락 바랍니다.",
+  },
+  {
+    value: "부재 시 경비실에 맡겨주세요.",
+    title: "부재 시 경비실에 맡겨주세요.",
+  },
+  {
+    value: "부재 시 문 앞에 놓아주세요.",
+    title: "부재 시 문 앞에 놓아주세요.",
+  },
+  {
+    value: "빠른 배송 부탁드립니다.",
+    title: "빠른 배송 부탁드립니다.",
+  },
+  {
+    value: "택배함에 보관해 주세요.",
+    title: "택배함에 보관해 주세요.",
+  },
+  {
+    value: "직접 입력",
+    title: "직접 입력",
+  },
+];
+
+//휴대폰번호 입력 option
+export const PHONE_OPTIONS = [
+  {
+    value: "010",
+    title: "010",
+  },
+  {
+    value: "011",
+    title: "011",
+  },
+  {
+    value: "016",
+    title: "016",
+  },
+  {
+    value: "017",
+    title: "017",
+  },
+  {
+    value: "018",
+    title: "018",
+  },
+  {
+    value: "019",
+    title: "019",
+  },
+];

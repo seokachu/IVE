@@ -1,12 +1,15 @@
 "use client";
-import DefaultImage from "@/assets/images/default_image.avif";
 import { sessionState } from "@/store";
-import Image from "next/image";
 import { useRecoilValue } from "recoil";
 import UserAvatar from "../common/UserAvatar";
+import Link from "next/link";
+import { MYPAGE_GNB_ARRAY } from "@/utils/constants";
+import { usePathname } from "next/navigation";
 
 const UserInfo = () => {
   const session = useRecoilValue(sessionState);
+  const pathname = usePathname();
+
   return (
     <section>
       <div>
@@ -29,11 +32,19 @@ const UserInfo = () => {
         </div>
       </div>
       <ul className="flex lg:flex-col gap-5 border-b lg:border-b-0 pb-5 text-center lg:text-left">
-        <li className="font-bold">찜목록</li>
-        <li>결제 목록</li>
-        <li>내가 쓴 글</li>
-        <li>배송지 관리</li>
-        <li>회원탈퇴</li>
+        {MYPAGE_GNB_ARRAY.map((el, index) => (
+          <li
+            key={index}
+            className={`hover:font-bold ${
+              pathname === el.path ? "font-bold" : ""
+            }`}
+          >
+            <Link href={el.path}>{el.label}</Link>
+          </li>
+        ))}
+        {/* <li>
+          <button className="text-dark-gray text-sm">회원탈퇴</button>
+        </li> */}
       </ul>
     </section>
   );

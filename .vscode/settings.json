@@ -1,9 +1,11 @@
 {
   "git.ignoreLimitWarning": true,
   "cSpell.words": [
+    "bname",
     "Chatbubble",
     "clsx",
     "coverflow",
+    "Daum",
     "hookform",
     "kakao",
     "lucide",
@@ -18,6 +20,7 @@
     "tanstack",
     "tosspayments",
     "webp",
+    "zonecode",
     "zustand"
   ]
 }

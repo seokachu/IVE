@@ -32,6 +32,7 @@ const ShopContainer = () => {
           options={PRODUCT_SORT_OPTIONS}
           value={sort}
           onChange={handleSortChange}
+          className="lg:w-[180px] w-full"
         />
       </div>
       <ShopList sort={sort} />
