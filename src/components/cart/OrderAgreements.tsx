@@ -5,45 +5,55 @@ import AgreementModal from "./AgreementModal";
 import { useRecoilState } from "recoil";
 import { agreementsState } from "@/store";
 
+type AgreementType = "main" | "privacy" | "refund";
+type ModalType = "privacy" | "refund" | null;
+
 const OrderAgreements = () => {
   const [agreements, setAgreements] = useRecoilState(agreementsState);
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedAgreement, setSelectedAgreement] = useState<
-    "privacy" | "refund" | null
-  >(null);
+  const [selectedAgreement, setSelectedAgreement] = useState<ModalType>(null);
 
+  //필수 동의 - 부모 checkbox
+  const handleMainCheckbox = (isChecked: boolean) => {
+    setAgreements({
+      main: isChecked,
+      privacy: isChecked,
+      refund: isChecked,
+    });
+  };
+
+  //필수 동의 - 자식 checkbox
+  const handleSubCheckBox = (type: AgreementType, isChecked: boolean) => {
+    const updatedAgreements = {
+      ...agreements,
+      [type]: isChecked,
+    };
+
+    updatedAgreements.main =
+      updatedAgreements.privacy && updatedAgreements.refund;
+
+    setAgreements(updatedAgreements);
+  };
+
+  //통합 핸들러
+  const handleAgreementChange =
+    (type: AgreementType) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const isChecked = e.target.checked;
+
+      if (type === "main") {
+        handleMainCheckbox(isChecked);
+      } else {
+        handleSubCheckBox(type, isChecked);
+      }
+    };
+
+  //모달창 열기
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
-  // 체크박스 변경 핸들러
-  const handleAgreementChange =
-    (type: "main" | "privacy" | "refund") =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const isChecked = e.target.checked;
-
-      if (type === "main") {
-        // 메인 체크박스 클릭 시 모든 체크박스 상태 변경
-        setAgreements({
-          main: isChecked,
-          privacy: isChecked,
-          refund: isChecked,
-        });
-      } else {
-        // 개별 체크박스 상태 변경
-        setAgreements((prev) => ({
-          ...prev,
-          [type]: isChecked,
-          main:
-            type === "privacy"
-              ? isChecked && prev.refund
-              : prev.privacy && isChecked,
-        }));
-      }
-    };
-
   // 모달 열기 핸들러
-  const handleOpenModal = (type: "privacy" | "refund") => {
+  const handleOpenModal = (type: Exclude<ModalType, null>) => {
     setSelectedAgreement(type);
   };
 
