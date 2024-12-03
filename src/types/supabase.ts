@@ -136,7 +136,7 @@ export type Database = {
           created_at: string | null
           goods_id: string | null
           id: string
-          images: string | null
+          name: string | null
           rating: number | null
           user_id: string | null
         }
@@ -145,7 +145,7 @@ export type Database = {
           created_at?: string | null
           goods_id?: string | null
           id?: string
-          images?: string | null
+          name?: string | null
           rating?: number | null
           user_id?: string | null
         }
@@ -154,7 +154,7 @@ export type Database = {
           created_at?: string | null
           goods_id?: string | null
           id?: string
-          images?: string | null
+          name?: string | null
           rating?: number | null
           user_id?: string | null
         }
@@ -204,6 +204,112 @@ export type Database = {
           },
           {
             foreignKeyName: "likes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payments: {
+        Row: {
+          address_line1: string | null
+          address_line2: string | null
+          amount: string | null
+          created_at: string | null
+          delivery_status: string | null
+          id: string
+          order_id: string | null
+          order_name: string | null
+          payment_method: string | null
+          postal_code: string | null
+          recipient_name: string | null
+          recipient_phone: string | null
+          states: string | null
+          user_id: string | null
+        }
+        Insert: {
+          address_line1?: string | null
+          address_line2?: string | null
+          amount?: string | null
+          created_at?: string | null
+          delivery_status?: string | null
+          id?: string
+          order_id?: string | null
+          order_name?: string | null
+          payment_method?: string | null
+          postal_code?: string | null
+          recipient_name?: string | null
+          recipient_phone?: string | null
+          states?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          address_line1?: string | null
+          address_line2?: string | null
+          amount?: string | null
+          created_at?: string | null
+          delivery_status?: string | null
+          id?: string
+          order_id?: string | null
+          order_name?: string | null
+          payment_method?: string | null
+          postal_code?: string | null
+          recipient_name?: string | null
+          recipient_phone?: string | null
+          states?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      shipping_addresses: {
+        Row: {
+          address_line1: string | null
+          address_line2: string | null
+          created_at: string | null
+          id: string
+          is_default: boolean | null
+          postal_code: string | null
+          recipient_name: string | null
+          recipient_phone: string | null
+          request: string | null
+          user_id: string | null
+        }
+        Insert: {
+          address_line1?: string | null
+          address_line2?: string | null
+          created_at?: string | null
+          id?: string
+          is_default?: boolean | null
+          postal_code?: string | null
+          recipient_name?: string | null
+          recipient_phone?: string | null
+          request?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          address_line1?: string | null
+          address_line2?: string | null
+          created_at?: string | null
+          id?: string
+          is_default?: boolean | null
+          postal_code?: string | null
+          recipient_name?: string | null
+          recipient_phone?: string | null
+          request?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shipping_addresses_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "user"

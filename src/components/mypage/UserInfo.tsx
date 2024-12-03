@@ -10,6 +10,14 @@ const UserInfo = () => {
   const session = useRecoilValue(sessionState);
   const pathname = usePathname();
 
+  //하위 경로 포함 체크 active
+  const isActivePath = (path: string, exact: boolean) => {
+    if (exact) {
+      return pathname === path;
+    }
+    return pathname.startsWith(path);
+  };
+
   return (
     <section>
       <div>
@@ -33,13 +41,15 @@ const UserInfo = () => {
       </div>
       <ul className="flex lg:flex-col gap-5 border-b lg:border-b-0 pb-5 text-center lg:text-left">
         {MYPAGE_GNB_ARRAY.map((el, index) => (
-          <li
-            key={index}
-            className={`hover:font-bold ${
-              pathname === el.path ? "font-bold" : ""
-            }`}
-          >
-            <Link href={el.path}>{el.label}</Link>
+          <li key={index}>
+            <Link
+              href={el.path}
+              className={`hover:font-bold ${
+                isActivePath(el.path, el.exact) ? "font-bold" : ""
+              }`}
+            >
+              {el.label}
+            </Link>
           </li>
         ))}
         {/* <li>

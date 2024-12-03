@@ -31,10 +31,10 @@ export const PRODUCT_SORT_OPTIONS = [
 
 //mypage nav
 export const MYPAGE_GNB_ARRAY = [
-  { label: "찜 목록", path: "/mypage/wishlist" },
-  { label: "결제 목록", path: "/mypage/orders" },
-  { label: "내가 쓴 글", path: "/mypage/posts" },
-  { label: "배송지 관리", path: "/mypage/address" },
+  { label: "찜 목록", path: "/mypage/wishlist", exact: false },
+  { label: "결제 목록", path: "/mypage/orders", exact: false },
+  { label: "내가 쓴 글", path: "/mypage/posts", exact: false },
+  { label: "배송지 관리", path: "/mypage/address", exact: false },
 ];
 
 //굿즈샵 정렬 조건 객체 맵핑

@@ -16,11 +16,7 @@ import { Button } from "../ui/button";
 import { RHFSelect } from "../common/select/RHFSelect";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
-
-interface AddressChange {
-  zonecode: string;
-  fullAddress: string;
-}
+import type { AddressChange } from "@/types";
 
 const AddressForm = () => {
   const { push } = useRouter();
@@ -63,6 +59,7 @@ const AddressForm = () => {
     setShowRequested(value === "직접 입력");
   };
 
+  //제출 form
   const handleSubmit = (data: AddressType) => {
     console.log(data);
 

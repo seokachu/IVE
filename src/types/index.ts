@@ -117,3 +117,9 @@ export interface CartListItemProps {
 //장바구니 약관동의 page checkbox
 export type AgreementType = "main" | "privacy" | "refund";
 export type ModalType = "privacy" | "refund" | null;
+
+//마이페이지 배송지정보 form
+export interface AddressChange {
+  zonecode: string;
+  fullAddress: string;
+}
