@@ -1,4 +1,3 @@
-import MoreButton from "../common/button/MoreButton";
 import MainBoardListItems from "./items/MainBoardListItems";
 
 const BoardSection = () => {
@@ -8,9 +7,7 @@ const BoardSection = () => {
         <h2 className="text-2xl font-bold lg:text-4xl text-center mb-14">
           FREE BOARD
         </h2>
-        <div>
-          <MoreButton />
-        </div>
+        <div>{/* <MoreButton /> */}</div>
         <ul className="flex flex-wrap">
           <MainBoardListItems />
           <MainBoardListItems />

@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabase/client";
 import type { Database } from "@/types/supabase";
 
-// 타입 정의
+//타입 정의
 type ShippingAddressUpdate =
   Database["public"]["Tables"]["shipping_addresses"]["Update"];
 type ShippingAddressInsert =
@@ -51,19 +51,19 @@ export const saveShippingAddress = async (
   const { user_id, is_default } = addressData;
 
   try {
-    //새 배송지 추가
+    // 새 배송지 추가
     const { data, error } = await supabase
       .from("shipping_addresses")
-      .insert(addressData)
+      .insert(addressData) // 원본 데이터 그대로 사용하기
       .select()
       .single();
 
     if (error) throw error;
 
-    //기본배송지로 설정해야 하는 경우
+    //is_default가 true일 때만 RPC 호출
     if (is_default) {
       const { error: rpcError } = await supabase.rpc("set_default_address", {
-        p_address_id: data.id, // 새로 생성된 주소의 ID
+        p_address_id: data.id,
         p_user_id: user_id,
       });
 
@@ -72,14 +72,11 @@ export const saveShippingAddress = async (
 
     return data;
   } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(`배송지 저장에 실패했습니다: ${error.message}`);
-    }
     throw error;
   }
 };
 
-//배송지 수정하기
+// 배송지 수정하기
 export const updateShippingAddress = async (
   addressId: string,
   addressData: ShippingAddressUpdate
@@ -87,14 +84,22 @@ export const updateShippingAddress = async (
   const { user_id } = addressData;
 
   try {
-    // 기본배송지 설정
+    //먼저 해당 주소를 true로 업데이트
+    const { error: updateError } = await supabase
+      .from("shipping_addresses")
+      .update({ is_default: true })
+      .eq("id", addressId);
+
+    if (updateError) throw updateError;
+
+    //rpc 호출로 다른 주소들을 false로
     const { error } = await supabase.rpc("set_default_address", {
       p_address_id: addressId,
       p_user_id: user_id,
     });
+
     if (error) throw error;
 
-    // 업데이트된 데이터 조회
     const { data: updatedData, error: fetchError } = await supabase
       .from("shipping_addresses")
       .select()
@@ -104,9 +109,6 @@ export const updateShippingAddress = async (
     if (fetchError) throw fetchError;
     return updatedData;
   } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(`배송지 수정에 실패했습니다: ${error.message}`);
-    }
     throw error;
   }
 };

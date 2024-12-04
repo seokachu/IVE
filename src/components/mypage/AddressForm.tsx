@@ -30,7 +30,7 @@ const AddressForm = () => {
   const [isAddress, setIsAddress] = useState(false);
   const [showRequested, setShowRequested] = useState(false);
   const { mutate: addShippingAddress } = useAddShippingAddress();
-  const { data: addresses } = useShippingAddresses();
+  const { data: addresses } = useShippingAddresses(session?.user?.id);
 
   //첫 배송지 확인
   const isFirstAddress = !addresses || addresses.length === 0;
@@ -40,7 +40,7 @@ const AddressForm = () => {
     resolver: zodResolver(myPageAddressSchema),
     defaultValues: {
       ...userDefaultValues.myPageAddressValues,
-      isDefault: true,
+      isDefault: isFirstAddress,
     },
   });
 
@@ -92,7 +92,6 @@ const AddressForm = () => {
       onSuccess: () => {
         toast({ title: "배송지 정보가 저장되었습니다." });
         push("/mypage/address");
-        console.log(data);
       },
       onError: (error) => {
         toast({
