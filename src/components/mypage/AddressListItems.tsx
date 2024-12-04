@@ -4,10 +4,7 @@ import { FiMapPin } from "react-icons/fi";
 import { useUpdateShippingAddress } from "@/hooks/queries/useShippingAddress";
 import { toast } from "@/hooks/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
-
-interface AddressListItems {
-  item: Tables<"shipping_addresses">;
-}
+import type { AddressListItems } from "@/types";
 
 const AddressListItems = ({ item }: AddressListItems) => {
   const queryClient = useQueryClient();

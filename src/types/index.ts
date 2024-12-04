@@ -123,3 +123,11 @@ export interface AddressChange {
   zonecode: string;
   fullAddress: string;
 }
+
+export interface AddressListProps {
+  addresses: Tables<"shipping_addresses">[];
+}
+
+export interface AddressListItems {
+  item: Tables<"shipping_addresses">;
+}
