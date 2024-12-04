@@ -83,30 +83,25 @@ export const updateShippingAddress = async (
   addressId: string,
   addressData: ShippingAddressUpdate
 ) => {
-  const { user_id, is_default } = addressData;
+  const { user_id } = addressData;
 
   try {
-    if (is_default) {
-      //다른 기본 배송지 해제
-      const { error: updateError } = await supabase
-        .from("shipping_addresses")
-        .update({ is_default: false })
-        .eq("user_id", user_id!)
-        .neq("id", addressId) // 현재 수정하는 주소는 제외
-        .eq("is_default", true);
-
-      if (updateError) throw updateError;
-    }
-
-    //배송지 정보 업데이트
-    const { data, error } = await supabase
-      .from("shipping_addresses")
-      .update(addressData)
-      .eq("id", addressId)
-      .select();
-
+    // 기본배송지 설정
+    const { error } = await supabase.rpc("set_default_address", {
+      p_address_id: addressId,
+      p_user_id: user_id,
+    });
     if (error) throw error;
-    return data;
+
+    // 업데이트된 데이터 조회
+    const { data: updatedData, error: fetchError } = await supabase
+      .from("shipping_addresses")
+      .select()
+      .eq("id", addressId)
+      .single();
+
+    if (fetchError) throw fetchError;
+    return updatedData;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`배송지 수정에 실패했습니다: ${error.message}`);
