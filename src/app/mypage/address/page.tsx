@@ -38,9 +38,7 @@ const AddressManagementPage = () => {
                   damping: 30,
                   layout: { duration: 0.3 },
                 }}
-                className={`mb-5 ${
-                  address.is_default ? "pointer-events-none" : ""
-                }`}
+                className="mb-5"
               >
                 <AddressListItems item={address} />
               </motion.div>

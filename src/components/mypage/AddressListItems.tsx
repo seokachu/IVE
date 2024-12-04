@@ -47,7 +47,11 @@ const AddressListItems = ({ item }: AddressListItems) => {
   return (
     <li className="bg-gray-50 rounded-lg p-4 lg:p-7 shadow-sm flex flex-col gap-2">
       <div className="flex justify-between items-center">
-        <div className="flex gap-2 items-stretch">
+        <div
+          className={`flex gap-2 items-stretch ${
+            item.is_default ? "pointer-events-none" : ""
+          }`}
+        >
           <h3>{item.recipient_name}</h3>
           {item.is_default ? (
             <ActionButton
@@ -69,8 +73,12 @@ const AddressListItems = ({ item }: AddressListItems) => {
           )}
         </div>
         <div className="flex gap-2 text-xs">
-          <button className="hover">수정</button>
-          <button>삭제</button>
+          <ActionButton variant="default" className="border-none">
+            수정
+          </ActionButton>
+          <ActionButton variant="default" className="border-none">
+            삭제
+          </ActionButton>
         </div>
       </div>
 

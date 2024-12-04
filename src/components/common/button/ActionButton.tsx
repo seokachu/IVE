@@ -19,7 +19,7 @@ const ActionButton = ({
   const variantStyles = {
     primary: "bg-purple border border-purple text-white",
     outline: "border border-purple",
-    default: "border",
+    default: "border hover:text-purple",
   };
 
   return (

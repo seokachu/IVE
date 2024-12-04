@@ -51,24 +51,25 @@ export const saveShippingAddress = async (
   const { user_id, is_default } = addressData;
 
   try {
-    //기존 모든 배송지 해제
-    if (is_default) {
-      const { error: updateError } = await supabase
-        .from("shipping_addresses")
-        .update({ is_default: false })
-        .eq("user_id", user_id)
-        .eq("is_default", true);
-
-      if (updateError) throw updateError;
-    }
-
     //새 배송지 추가
     const { data, error } = await supabase
       .from("shipping_addresses")
       .insert(addressData)
-      .select();
+      .select()
+      .single();
 
     if (error) throw error;
+
+    //기본배송지로 설정해야 하는 경우
+    if (is_default) {
+      const { error: rpcError } = await supabase.rpc("set_default_address", {
+        p_address_id: data.id, // 새로 생성된 주소의 ID
+        p_user_id: user_id,
+      });
+
+      if (rpcError) throw rpcError;
+    }
+
     return data;
   } catch (error) {
     if (error instanceof Error) {
