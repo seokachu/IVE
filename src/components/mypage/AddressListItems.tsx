@@ -45,7 +45,7 @@ const AddressListItems = ({ item }: AddressListItems) => {
   };
 
   return (
-    <li className="bg-gray-50 mb-5 rounded-lg p-4 lg:p-7 shadow-sm flex flex-col gap-2">
+    <li className="bg-gray-50 rounded-lg p-4 lg:p-7 shadow-sm flex flex-col gap-2">
       <div className="flex justify-between items-center">
         <div className="flex gap-2 items-stretch">
           <h3>{item.recipient_name}</h3>

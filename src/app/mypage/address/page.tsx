@@ -5,6 +5,7 @@ import AddressListItems from "@/components/mypage/AddressListItems";
 import { useShippingAddresses } from "@/hooks/queries/useShippingAddress";
 import { sessionState } from "@/store";
 import { useRecoilValue } from "recoil";
+import { motion, AnimatePresence } from "framer-motion";
 
 const AddressManagementPage = () => {
   const session = useRecoilValue(sessionState);
@@ -22,11 +23,30 @@ const AddressManagementPage = () => {
         {addresses ? <AddressAddButton /> : null}
       </div>
       {addresses ? (
-        <ul className="mt-5">
-          {addresses.map((address) => (
-            <AddressListItems key={address.id} item={address} />
-          ))}
-        </ul>
+        <AnimatePresence initial={false}>
+          <motion.ul layout className="mt-5">
+            {addresses.map((address) => (
+              <motion.div
+                key={address.id}
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 30,
+                  layout: { duration: 0.3 },
+                }}
+                className={`mb-5 ${
+                  address.is_default ? "pointer-events-none" : ""
+                }`}
+              >
+                <AddressListItems item={address} />
+              </motion.div>
+            ))}
+          </motion.ul>
+        </AnimatePresence>
       ) : (
         <div className="flex flex-col gap-3 items-center justify-center w-full h-[500px]">
           <h3>배송지가 없습니다.</h3>
