@@ -3,7 +3,7 @@ import ActionButton from "../common/button/ActionButton";
 import { FiMapPin } from "react-icons/fi";
 import { useUpdateShippingAddress } from "@/hooks/queries/useShippingAddress";
 import { toast } from "@/hooks/use-toast";
-import { QueryClient, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface AddressListItems {
   item: Tables<"shipping_addresses">;

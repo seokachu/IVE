@@ -6,6 +6,7 @@ import { useShippingAddresses } from "@/hooks/queries/useShippingAddress";
 import { sessionState } from "@/store";
 import { useRecoilValue } from "recoil";
 import { motion, AnimatePresence } from "framer-motion";
+import AddressManagementLoading from "@/components/common/loading/AddressManagementLoading";
 
 const AddressManagementPage = () => {
   const session = useRecoilValue(sessionState);
@@ -13,16 +14,15 @@ const AddressManagementPage = () => {
     session?.user?.id
   );
 
-  //로딩 추가해야함
-  if (isLoading) return null;
+  if (isLoading) return <AddressManagementLoading />;
 
   return (
     <div className="px-5 lg:pt-14 pb-28 lg:px-8">
       <div className="flex justify-between items-center mt-5 lg:mt-0">
         <h2 className="font-bold text-xl mb-5 hidden lg:block">배송지 관리</h2>
-        {addresses ? <AddressAddButton /> : null}
+        {addresses && addresses.length > 0 && <AddressAddButton />}
       </div>
-      {addresses ? (
+      {addresses && addresses.length > 0 ? (
         <AnimatePresence initial={false}>
           <motion.ul layout className="mt-5">
             {addresses.map((address) => (
