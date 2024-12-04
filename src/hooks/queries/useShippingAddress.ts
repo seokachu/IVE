@@ -11,6 +11,11 @@ import type { Database } from "@/types/supabase";
 type ShippingAddressUpdate =
   Database["public"]["Tables"]["shipping_addresses"]["Update"];
 
+type DeleteAddressParams = {
+  addressId: string;
+  userId: string;
+};
+
 //배송지 목록 조회(여러개)
 export const useShippingAddresses = (userId?: string) => {
   return useQuery({
@@ -48,10 +53,14 @@ export const useDeleteShippingAddress = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: deleteShippingAddress,
-    onSuccess: (_, addressId) => {
+    mutationFn: ({ addressId, userId }: DeleteAddressParams) =>
+      deleteShippingAddress(addressId),
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["shippingAddresses", addressId],
+        queryKey: ["shippingAddresses", variables.userId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["shippingAddress", variables.userId],
       });
     },
   });

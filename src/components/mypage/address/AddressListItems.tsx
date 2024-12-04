@@ -36,7 +36,8 @@ const AddressListItems = ({ item }: AddressListItems) => {
           );
 
           toast({
-            title: "기본 배송지로 설정 되었습니다.",
+            title: "기본 배송지가 변경 되었습니다.",
+            description: ``,
           });
         },
         onError: () => {
@@ -56,46 +57,29 @@ const AddressListItems = ({ item }: AddressListItems) => {
 
   //삭제 핸들러
   const handleDelete = () => {
-    deleteAddress(item.id, {
-      // onSuccess: () => {
-
-      //   console.log("Delete successful");
-      //   queryClient.setQueryData<Tables<"shipping_addresses">[]>(
-      //     ["shippingAddresses", item.user_id],
-      //     (oldData) => {
-      //       console.log("Old data:", oldData);
-      //       if (!oldData) return oldData;
-      //       console.log(
-      //         "Filtered data:",
-      //         oldData.filter((address) => address.id !== item.id)
-      //       );
-      //       return oldData.filter((address) => address.id !== item.id);
-      //     }
-      //   );
-
-      //   setIsOpen(false);
-      //   toast({
-      //     title: "배송지가 삭제 되었습니다.",
-      //   });
-      // },
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ["shippingAddresses", item.id],
-        });
-
-        const updatedData = queryClient.getQueryData([
-          "shippingAddresses",
-          item.user_id,
-        ]);
-        console.log("Updated cache data:", updatedData); // 디버깅용 로그
-      },
-      onError: () => {
-        toast({
-          title: "배송지 삭제에 실패했습니다.",
-          description: "다시 시도해 주세요.",
-        });
-      },
+    console.log("Deleting address:", {
+      addressId: item.id,
+      userId: item.user_id,
     });
+    deleteAddress(
+      { addressId: item.id, userId: item.user_id },
+      {
+        onSuccess: () => {
+          console.log("Delete successful");
+          setIsOpen(false);
+          toast({
+            title: "배송지가 삭제 되었습니다.",
+          });
+        },
+        onError: (error) => {
+          console.error("Delete failed:", error);
+          toast({
+            title: "배송지 삭제에 실패했습니다.",
+            description: "다시 시도해 주세요.",
+          });
+        },
+      }
+    );
   };
 
   //수정 버튼

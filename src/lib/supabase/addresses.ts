@@ -123,17 +123,45 @@ export const updateShippingAddress = async (
 // 배송지 삭제하기
 export const deleteShippingAddress = async (addressId: string) => {
   try {
-    const { error } = await supabase
+    //삭제하려고 하는 배송지 정보 조회
+    const { data: addressToDelete, error: fetchError } = await supabase
+      .from("shipping_addresses")
+      .select("*")
+      .eq("id", addressId)
+      .single();
+
+    console.log("Address to delete:", addressToDelete);
+
+    if (fetchError) throw fetchError;
+
+    //삭제 실행
+    const { error: deleteError } = await supabase
       .from("shipping_addresses")
       .delete()
       .eq("id", addressId);
 
-    if (error) throw error;
+    if (deleteError) throw deleteError;
+
+    //삭제한 배송지가 기본 배송지면
+    if (addressToDelete.is_default) {
+      console.log("Deleted address was default, updating new default");
+
+      //RPC 호출로 새로운 기본 배송지 설정
+      const { error: rpcError } = await supabase.rpc("update_default_address", {
+        p_user_id: addressToDelete.user_id,
+      });
+
+      if (rpcError) {
+        console.error("RPC error:", rpcError);
+        throw rpcError;
+      }
+
+      console.log("Successfully set new default address via RPC");
+    }
+
     return true;
   } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(`배송지 삭제에 실패했습니다: ${error.message}`);
-    }
+    console.error("Delete shipping address error:", error);
     throw error;
   }
 };

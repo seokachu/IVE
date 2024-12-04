@@ -12,7 +12,7 @@ const AddressManagementPage = () => {
   const { data: addresses, isLoading } = useShippingAddresses(
     session?.user?.id
   );
-
+  console.log("AddressManagementPage render:", { addresses, isLoading });
   if (isLoading) return <MyPageLoading title="배송지 관리" />;
 
   return (
