@@ -1,14 +1,22 @@
 import { Tables } from "@/types/supabase";
-import ActionButton from "../common/button/ActionButton";
+import ActionButton from "../../common/button/ActionButton";
 import { FiMapPin } from "react-icons/fi";
-import { useUpdateShippingAddress } from "@/hooks/queries/useShippingAddress";
+import {
+  useDeleteShippingAddress,
+  useUpdateShippingAddress,
+} from "@/hooks/queries/useShippingAddress";
 import { toast } from "@/hooks/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
 import type { AddressListItems } from "@/types";
+import { useState } from "react";
+import AddressConfirmModal from "./AddressConfirmModal";
 
 const AddressListItems = ({ item }: AddressListItems) => {
   const queryClient = useQueryClient();
+  const [isOpen, setIsOpen] = useState(false);
   const { mutate: updateAddress } = useUpdateShippingAddress();
+  const { mutate: deleteAddress } = useDeleteShippingAddress();
+  const { mutate: editAddress } = useUpdateShippingAddress();
 
   const onClickDefaultRecipient = () => {
     updateAddress(
@@ -41,6 +49,58 @@ const AddressListItems = ({ item }: AddressListItems) => {
     );
   };
 
+  //삭제 버튼 모달
+  const onClickDelete = () => {
+    setIsOpen(true);
+  };
+
+  //삭제 핸들러
+  const handleDelete = () => {
+    deleteAddress(item.id, {
+      // onSuccess: () => {
+
+      //   console.log("Delete successful");
+      //   queryClient.setQueryData<Tables<"shipping_addresses">[]>(
+      //     ["shippingAddresses", item.user_id],
+      //     (oldData) => {
+      //       console.log("Old data:", oldData);
+      //       if (!oldData) return oldData;
+      //       console.log(
+      //         "Filtered data:",
+      //         oldData.filter((address) => address.id !== item.id)
+      //       );
+      //       return oldData.filter((address) => address.id !== item.id);
+      //     }
+      //   );
+
+      //   setIsOpen(false);
+      //   toast({
+      //     title: "배송지가 삭제 되었습니다.",
+      //   });
+      // },
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ["shippingAddresses", item.id],
+        });
+
+        const updatedData = queryClient.getQueryData([
+          "shippingAddresses",
+          item.user_id,
+        ]);
+        console.log("Updated cache data:", updatedData); // 디버깅용 로그
+      },
+      onError: () => {
+        toast({
+          title: "배송지 삭제에 실패했습니다.",
+          description: "다시 시도해 주세요.",
+        });
+      },
+    });
+  };
+
+  //수정 버튼
+  const onClickEdit = () => {};
+
   return (
     <li className="bg-gray-50 rounded-lg p-4 lg:p-7 shadow-sm flex flex-col gap-2">
       <div className="flex justify-between items-center">
@@ -70,15 +130,22 @@ const AddressListItems = ({ item }: AddressListItems) => {
           )}
         </div>
         <div className="flex gap-2 text-xs">
-          <ActionButton variant="default" className="border-none">
+          <ActionButton
+            onClick={onClickEdit}
+            variant="default"
+            className="border-none"
+          >
             수정
           </ActionButton>
-          <ActionButton variant="default" className="border-none">
+          <ActionButton
+            onClick={onClickDelete}
+            variant="default"
+            className="border-none"
+          >
             삭제
           </ActionButton>
         </div>
       </div>
-
       <div className="flex flex-col lg:flex-row lg:items-center gap-1 text-gray-600">
         <p className="flex items-center gap-1">
           <span>
@@ -95,6 +162,13 @@ const AddressListItems = ({ item }: AddressListItems) => {
       {item.request ? (
         <p className="text-xs text-gray-500">{item.request}</p>
       ) : null}
+      {isOpen && (
+        <AddressConfirmModal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          onDelete={handleDelete}
+        />
+      )}
     </li>
   );
 };

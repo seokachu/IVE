@@ -1,5 +1,5 @@
 "use client";
-import AddressForm from "@/components/mypage/AddressForm";
+import AddressForm from "@/components/mypage/address/AddressForm";
 
 const page = () => {
   return (

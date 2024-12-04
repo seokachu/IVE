@@ -50,7 +50,7 @@ export const useDeleteShippingAddress = () => {
     mutationFn: deleteShippingAddress,
     onSuccess: (_, addressId) => {
       queryClient.invalidateQueries({
-        queryKey: ["shippingAddresses"],
+        queryKey: ["shippingAddresses", addressId],
       });
     },
   });

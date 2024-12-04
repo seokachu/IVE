@@ -1,10 +1,10 @@
 "use client";
 
-import AddressAddButton from "@/components/mypage/AddressAddButton";
+import AddressAddButton from "@/components/mypage/address/AddressAddButton";
 import { useShippingAddresses } from "@/hooks/queries/useShippingAddress";
 import { sessionState } from "@/store";
 import { useRecoilValue } from "recoil";
-import AddressList from "@/components/mypage/AddressList";
+import AddressList from "@/components/mypage/address/AddressList";
 import MyPageLoading from "@/components/common/loading/MyPageLoading";
 
 const AddressManagementPage = () => {
