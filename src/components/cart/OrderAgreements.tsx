@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { IoIosArrowUp } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
 import AgreementModal from "./AgreementModal";
 import { useRecoilState } from "recoil";
 import { agreementsState } from "@/store";
 import type { AgreementType, ModalType } from "@/types";
+import AgreementCheckbox from "./AgreementCheckbox";
 
 const OrderAgreements = () => {
   const [agreements, setAgreements] = useRecoilState(agreementsState);
@@ -79,7 +79,7 @@ const OrderAgreements = () => {
                 checked={agreements.main}
                 onChange={handleAgreementChange("main")}
               />
-              [필수] 주문 내역에 대한 필수 동의
+              &#91;필수&#93; 주문 내역에 대한 필수 동의
             </label>
             <button type="button" className="text-gray-500">
               <IoIosArrowUp
@@ -91,34 +91,18 @@ const OrderAgreements = () => {
           </div>
           {isOpen && (
             <div className="pl-6 mt-3 space-y-2">
-              <div className="flex items-center justify-between">
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    className="mr-2"
-                    checked={agreements.privacy}
-                    onChange={handleAgreementChange("privacy")}
-                  />
-                  [필수] 개인정보 수집 및 이용 및 제 3자 제공 동의
-                </label>
-                <button onClick={() => handleOpenModal("privacy")}>
-                  <IoIosArrowForward className="text-gray-500" />
-                </button>
-              </div>
-              <div className="flex items-center justify-between">
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    className="mr-2"
-                    checked={agreements.refund}
-                    onChange={handleAgreementChange("refund")}
-                  />
-                  [필수] 결제 이후 환불 및 취소 불가 동의
-                </label>
-                <button onClick={() => handleOpenModal("refund")}>
-                  <IoIosArrowForward className="text-gray-500" />
-                </button>
-              </div>
+              <AgreementCheckbox
+                modalType={() => handleOpenModal("privacy")}
+                onChange={handleAgreementChange("privacy")}
+                checked={agreements.privacy}
+                labelText="&#91;필수&#93; 개인정보 수집 및 이용 및 제 3자 제공 동의"
+              />
+              <AgreementCheckbox
+                modalType={() => handleOpenModal("refund")}
+                onChange={handleAgreementChange("refund")}
+                checked={agreements.refund}
+                labelText="&#91;필수&#93; 결제 이후 환불 및 취소 불가 동의"
+              />
             </div>
           )}
         </div>
