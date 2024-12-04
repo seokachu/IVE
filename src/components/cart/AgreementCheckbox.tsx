@@ -15,10 +15,10 @@ const AgreementCheckbox = ({
 }: AgreementCheckboxProps) => {
   return (
     <div className="flex items-center justify-between">
-      <label className="flex items-center">
+      <label className="flex items-baseline">
         <input
           type="checkbox"
-          className="mr-2"
+          className="mr-2 translate-y-[1px]"
           checked={checked}
           onChange={onChange}
         />

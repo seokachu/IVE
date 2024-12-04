@@ -22,18 +22,24 @@ export const getShippingAddresses = async (userId: string) => {
     if (error) throw error;
     return data || [];
   } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(
+        `배송지 목록을 가져오는 데 실패했습니다. ${error.message}`
+      );
+    }
     return [];
   }
 };
 
 //단일 배송지 조회
-export const getShippingAddress = async (addressId: string) => {
+export const getShippingAddress = async (userId: string) => {
   try {
     const { data, error } = await supabase
       .from("shipping_addresses")
       .select("*")
-      .eq("id", addressId)
-      .single();
+      .eq("user_id", userId)
+      .eq("is_default", true)
+      .maybeSingle();
 
     if (error) throw error;
     return data;
@@ -41,6 +47,7 @@ export const getShippingAddress = async (addressId: string) => {
     if (error instanceof Error) {
       throw new Error(`배송지를 가져오는 데 실패했습니다. ${error.message}`);
     }
+    throw error;
   }
 };
 

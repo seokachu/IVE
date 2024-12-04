@@ -17,7 +17,7 @@ const CartList = () => {
     startLoading();
     setMounted(true);
     stopLoading();
-  }, []);
+  }, [startLoading, stopLoading]);
 
   if (!mounted) return <CartListLoading />;
 

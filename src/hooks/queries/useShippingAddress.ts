@@ -20,11 +20,12 @@ export const useShippingAddresses = (userId?: string) => {
   });
 };
 
-//단일 배송지 조회
-export const useShippingAddress = (userId: string) => {
+//기본 목록 배송지 조회
+export const useShippingAddress = (userId?: string) => {
   return useQuery({
     queryKey: ["shippingAddress", userId],
-    queryFn: () => getShippingAddress,
+    queryFn: () => getShippingAddress(userId!),
+    enabled: !!userId,
   });
 };
 
