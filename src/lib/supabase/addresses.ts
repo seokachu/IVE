@@ -144,7 +144,6 @@ export const updateShippingAddress = async (
       .eq("id", addressId);
 
     if (updateError) {
-      console.error("Update error:", updateError);
       throw updateError;
     }
 
