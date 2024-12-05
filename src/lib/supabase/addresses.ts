@@ -83,43 +83,6 @@ export const saveShippingAddress = async (
   }
 };
 
-// 배송지 수정하기
-export const updateShippingAddress = async (
-  addressId: string,
-  addressData: ShippingAddressUpdate
-) => {
-  const { user_id } = addressData;
-
-  try {
-    //먼저 해당 주소를 true로 업데이트
-    const { error: updateError } = await supabase
-      .from("shipping_addresses")
-      .update({ is_default: true })
-      .eq("id", addressId);
-
-    if (updateError) throw updateError;
-
-    //rpc 호출로 다른 주소들을 false로
-    const { error } = await supabase.rpc("set_default_address", {
-      p_address_id: addressId,
-      p_user_id: user_id,
-    });
-
-    if (error) throw error;
-
-    const { data: updatedData, error: fetchError } = await supabase
-      .from("shipping_addresses")
-      .select()
-      .eq("id", addressId)
-      .single();
-
-    if (fetchError) throw fetchError;
-    return updatedData;
-  } catch (error) {
-    throw error;
-  }
-};
-
 // 배송지 삭제하기
 export const deleteShippingAddress = async (addressId: string) => {
   try {
@@ -129,8 +92,6 @@ export const deleteShippingAddress = async (addressId: string) => {
       .select("*")
       .eq("id", addressId)
       .single();
-
-    console.log("Address to delete:", addressToDelete);
 
     if (fetchError) throw fetchError;
 
@@ -144,8 +105,6 @@ export const deleteShippingAddress = async (addressId: string) => {
 
     //삭제한 배송지가 기본 배송지면
     if (addressToDelete.is_default) {
-      console.log("Deleted address was default, updating new default");
-
       //RPC 호출로 새로운 기본 배송지 설정
       const { error: rpcError } = await supabase.rpc("update_default_address", {
         p_user_id: addressToDelete.user_id,
@@ -155,13 +114,66 @@ export const deleteShippingAddress = async (addressId: string) => {
         console.error("RPC error:", rpcError);
         throw rpcError;
       }
-
-      console.log("Successfully set new default address via RPC");
     }
 
     return true;
   } catch (error) {
     console.error("Delete shipping address error:", error);
+    throw error;
+  }
+};
+
+// 배송지 수정하기
+export const updateShippingAddress = async (
+  addressId: string,
+  addressData: ShippingAddressUpdate
+) => {
+  try {
+    // 업데이트 전 데이터 확인
+    const { data: beforeUpdate } = await supabase
+      .from("shipping_addresses")
+      .select()
+      .eq("id", addressId)
+      .eq("user_id", addressData.user_id)
+      .single();
+
+    // 업데이트 실행
+    const { error: updateError } = await supabase
+      .from("shipping_addresses")
+      .update(addressData)
+      .eq("id", addressId);
+
+    if (updateError) {
+      console.error("Update error:", updateError);
+      throw updateError;
+    }
+
+    // 업데이트 후 데이터 확인
+    const { data: afterUpdate } = await supabase
+      .from("shipping_addresses")
+      .select()
+      .eq("id", addressId)
+      .single();
+
+    // 기본 배송지로 설정된 경우
+    if (addressData.is_default) {
+      const { error: rpcError } = await supabase.rpc("set_default_address", {
+        p_address_id: addressId,
+        p_user_id: addressData.user_id,
+      });
+
+      if (rpcError) {
+        console.error("RPC error:", rpcError);
+        throw rpcError;
+      }
+    }
+
+    // 변경 여부 확인
+    const isChanged =
+      JSON.stringify(beforeUpdate) !== JSON.stringify(afterUpdate);
+    return afterUpdate;
+  } catch (error) {
+    console.error("Update failed:", error);
     throw error;
   }
 };

@@ -78,9 +78,27 @@ export const useUpdateShippingAddress = () => {
       addressId: string;
       data: ShippingAddressUpdate;
     }) => updateShippingAddress(addressId, data),
-    onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({
+    onSuccess: async (updatedData, variables) => {
+      console.log("Mutation succeeded with updated data:", updatedData);
+
+      // 즉시 캐시 업데이트
+      queryClient.setQueryData<any>(
+        ["shippingAddresses", variables.data.user_id],
+        (old: any) => {
+          if (!old) return old;
+          return old.map((address: any) =>
+            address.id === variables.addressId ? updatedData : address
+          );
+        }
+      );
+
+      // 쿼리 무효화
+      await queryClient.invalidateQueries({
         queryKey: ["shippingAddresses", variables.data.user_id],
+      });
+
+      await queryClient.invalidateQueries({
+        queryKey: ["shippingAddress", variables.data.user_id],
       });
     },
   });

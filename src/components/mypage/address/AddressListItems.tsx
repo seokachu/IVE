@@ -10,10 +10,12 @@ import { useQueryClient } from "@tanstack/react-query";
 import type { AddressListItems } from "@/types";
 import { useState } from "react";
 import AddressConfirmModal from "./AddressConfirmModal";
+import AddressEditModal from "./AddressEditModal";
 
 const AddressListItems = ({ item }: AddressListItems) => {
   const queryClient = useQueryClient();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const { mutate: updateAddress } = useUpdateShippingAddress();
   const { mutate: deleteAddress } = useDeleteShippingAddress();
   const { mutate: editAddress } = useUpdateShippingAddress();
@@ -52,21 +54,17 @@ const AddressListItems = ({ item }: AddressListItems) => {
 
   //삭제 버튼 모달
   const onClickDelete = () => {
-    setIsOpen(true);
+    setIsDeleteModalOpen(true);
   };
 
   //삭제 핸들러
   const handleDelete = () => {
-    console.log("Deleting address:", {
-      addressId: item.id,
-      userId: item.user_id,
-    });
     deleteAddress(
       { addressId: item.id, userId: item.user_id },
       {
         onSuccess: () => {
-          console.log("Delete successful");
-          setIsOpen(false);
+
+          setIsDeleteModalOpen(false);
           toast({
             title: "배송지가 삭제 되었습니다.",
           });
@@ -83,7 +81,9 @@ const AddressListItems = ({ item }: AddressListItems) => {
   };
 
   //수정 버튼
-  const onClickEdit = () => {};
+  const onClickEdit = () => {
+    setIsEditModalOpen(true);
+  };
 
   return (
     <li className="bg-gray-50 rounded-lg p-4 lg:p-7 shadow-sm flex flex-col gap-2">
@@ -146,11 +146,18 @@ const AddressListItems = ({ item }: AddressListItems) => {
       {item.request ? (
         <p className="text-xs text-gray-500">{item.request}</p>
       ) : null}
-      {isOpen && (
+      {isDeleteModalOpen && (
         <AddressConfirmModal
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
+          isOpen={isDeleteModalOpen}
+          onClose={() => setIsDeleteModalOpen(false)}
           onDelete={handleDelete}
+        />
+      )}
+      {isEditModalOpen && (
+        <AddressEditModal
+          isOpen={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+          addressData={item}
         />
       )}
     </li>
