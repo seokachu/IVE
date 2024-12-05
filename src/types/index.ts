@@ -131,3 +131,12 @@ export interface AddressListProps {
 export interface AddressListItems {
   item: Tables<"shipping_addresses">;
 }
+
+export interface CustomerInfoFormProps {
+  initialData?: any;
+  defaultValues?: {
+    name?: string;
+    email?: string;
+  };
+  onSuccess: () => void;
+}

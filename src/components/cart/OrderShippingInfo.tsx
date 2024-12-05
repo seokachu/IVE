@@ -3,13 +3,21 @@ import ActionButton from "../common/button/ActionButton";
 import { useRecoilValue } from "recoil";
 import { sessionState } from "@/store";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
+import EmptyStateMessage from "./EmptyStateMessage";
 
 const OrderShippingInfo = () => {
   const { push } = useRouter();
   const session = useRecoilValue(sessionState);
-  const { data } = useShippingAddress(session?.user.id);
+  const { data: shippingAddress } = useShippingAddress(session?.user.id);
 
-  const hasShippingAddress = data && Object.keys(data).length > 0;
+  if (!session) {
+    return (
+      <EmptyStateMessage title="배송 정보" message="배송 정보가 없습니다." />
+    );
+  }
+
+  const hasShippingAddress =
+    shippingAddress && Object.keys(shippingAddress).length > 0;
 
   const handleShippingAddressChange = () => {
     push("/mypage/address");
@@ -30,7 +38,7 @@ const OrderShippingInfo = () => {
         )}
       </div>
       <ul className="flex flex-col justify-between gap-2 text-sm">
-        {!session || !hasShippingAddress ? (
+        {!hasShippingAddress ? (
           <li className="flex items-center justify-center flex-col gap-1 my-8">
             <h3>배송 정보가 없습니다.</h3>
             <p>배송지를 추가해 주세요.</p>
@@ -39,30 +47,30 @@ const OrderShippingInfo = () => {
           <>
             <li className="flex">
               <h3 className="w-[100px] text-gray-400">받는 분</h3>
-              <p className="flex-shrink-0">{data?.recipient_name}</p>
+              <p className="flex-shrink-0">{shippingAddress?.recipient_name}</p>
             </li>
             <li className="flex">
               <h3 className="w-[100px] flex-shrink-0 text-gray-400">
                 휴대폰 번호
               </h3>
-              <p>{data?.recipient_phone}</p>
+              <p>{shippingAddress?.recipient_phone}</p>
             </li>
             <li className="flex">
               <h3 className="w-[100px] flex-shrink-0 text-gray-400">
                 배송지 정보
               </h3>
               <div>
-                <span className="mr-1">{data?.postal_code}</span>
-                <span className="mr-1">{data?.address_line1}</span>
-                <span>{data?.address_line2}</span>
+                <span className="mr-1">{shippingAddress?.postal_code}</span>
+                <span className="mr-1">{shippingAddress?.address_line1}</span>
+                <span>{shippingAddress?.address_line2}</span>
               </div>
             </li>
-            {data?.request && (
+            {shippingAddress?.request && (
               <li className="flex">
                 <h3 className="w-[100px] flex-shrink-0 text-gray-400">
                   요청사항
                 </h3>
-                {data.request}
+                {shippingAddress.request}
               </li>
             )}
           </>

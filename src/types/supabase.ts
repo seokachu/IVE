@@ -79,6 +79,33 @@ export type Database = {
         }
         Relationships: []
       }
+      customer_info: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string
+          phone: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          phone: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          phone?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       goods: {
         Row: {
           color: string | null
@@ -343,7 +370,25 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      set_default_address: {
+        Args: {
+          p_address_id: string
+          p_user_id: string
+        }
+        Returns: undefined
+      }
+      set_latest_as_default: {
+        Args: {
+          p_user_id: string
+        }
+        Returns: undefined
+      }
+      update_default_address: {
+        Args: {
+          p_user_id: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
