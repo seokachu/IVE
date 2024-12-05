@@ -140,3 +140,8 @@ export interface CustomerInfoFormProps {
   };
   onSuccess: () => void;
 }
+
+export interface PaymentButtonProps {
+  amount: number;
+  orderName: string;
+}

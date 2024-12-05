@@ -17,8 +17,8 @@ const ActionButton = ({
 }: ButtonProps) => {
   const baseStyles = "cursor-pointer rounded-md";
   const variantStyles = {
-    primary: "bg-purple border border-purple text-white",
-    outline: "border border-purple",
+    primary: "bg-purple border border-purple text-white hover:opacity-90",
+    outline: "border border-purple hover:bg-gray-50",
     default: "border hover:text-purple",
   };
 

@@ -63,7 +63,6 @@ const AddressListItems = ({ item }: AddressListItems) => {
       { addressId: item.id, userId: item.user_id },
       {
         onSuccess: () => {
-
           setIsDeleteModalOpen(false);
           toast({
             title: "배송지가 삭제 되었습니다.",
@@ -107,7 +106,7 @@ const AddressListItems = ({ item }: AddressListItems) => {
               onClick={onClickDefaultRecipient}
               variant="default"
               type="button"
-              className="text-xs rounded-sm px-1 text-gray-600 hover:bg-silver-gray"
+              className="text-xs rounded-sm px-1 text-gray-600 hover:bg-silver-gray hover:text-primary"
             >
               기본 배송지로 설정
             </ActionButton>

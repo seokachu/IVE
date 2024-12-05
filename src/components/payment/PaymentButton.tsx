@@ -5,15 +5,15 @@ import { agreementsState, sessionState } from "@/store";
 import { savePayment } from "@/lib/supabase/payment";
 import { formatPrice } from "@/utils/calculateDiscount";
 import { toast } from "@/hooks/use-toast";
-
-interface PaymentButtonProps {
-  amount: number;
-  orderName: string;
-}
+import type { PaymentButtonProps } from "@/types";
+import { useCustomerInfo } from "@/hooks/queries/useCustomerInfo";
+import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
 
 const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
   const session = useRecoilValue(sessionState);
   const agreements = useRecoilValue(agreementsState);
+  const { data: customerInfo } = useCustomerInfo(session?.user.id);
+  const { data: address } = useShippingAddress(session?.user.id);
 
   const handlePayment = async () => {
     //로그인 체크
@@ -56,7 +56,7 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
         amount,
         orderId: orderId,
         orderName,
-        customerName: session?.user?.user_metadata?.name,
+        customerName: customerInfo.name,
         successUrl: `${window.location.origin}/payment/success`,
         failUrl: `${window.location.origin}/payment/fail`,
       });
@@ -69,11 +69,11 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
         order_name: orderName,
         payment_method: "카드",
         status: "pending",
-        recipient_name: "받는사람 이름",
-        recipient_phone: "010-0000-0000",
-        address_line1: "주소",
-        address_line2: "상세주소",
-        postal_code: "03139",
+        recipient_name: address?.recipient_name,
+        recipient_phone: address?.recipient_phone,
+        address_line1: address?.address_line1,
+        address_line2: address?.address_line2,
+        postal_code: address?.postal_code,
         delivery_status: "배송전",
         created_at: new Date(),
       };
