@@ -6,5 +6,6 @@ export const useOrderItems = (orderId: string) => {
     queryKey: ["orderItems", orderId],
     queryFn: () => getOrderItems(orderId),
     enabled: !!orderId,
+    staleTime: Infinity,
   });
 };

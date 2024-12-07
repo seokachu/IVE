@@ -14,6 +14,7 @@ import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
 import { useQueryClient } from "@tanstack/react-query";
 import { saveOrderItems } from "@/lib/supabase/orders";
 import { formatPrice } from "@/utils/calculateDiscount";
+import { formatPaymentDate } from "@/utils/formatDate";
 
 const page = () => {
   const searchParams = useSearchParams();
@@ -40,40 +41,53 @@ const page = () => {
   console.log("orderItems", orderItems);
 
   useEffect(() => {
-    if (!orderId || !paymentKey || !amount || !address || !session) return;
+    if (
+      !orderId ||
+      !paymentKey ||
+      !amount ||
+      !address ||
+      !session ||
+      !cartItems
+    )
+      return;
 
     const savePaymentData = async () => {
       try {
-        // 먼저 기존 결제 데이터가 있는지 확인
-        const existingPayment = await getPaymentByOrderId(orderId);
-
-        // 이미 결제 데이터가 있다면 저장 프로세스 스킵
-        if (existingPayment) {
-          console.log("Payment data already exists:", existingPayment);
-          return;
-        }
-
-        // 토스페이먼츠 결제 조회 API 호출
+        // 결제 승인 API 호출
         const response = await fetch(
-          `https://api.tosspayments.com/v1/payments/${paymentKey}`,
+          `https://api.tosspayments.com/v1/payments/confirm`,
           {
-            method: "GET",
+            method: "POST",
             headers: {
               Authorization: `Basic ${Buffer.from(
                 `${process.env.NEXT_PUBLIC_TOSS_SECRET_KEY}:`
               ).toString("base64")}`,
+              "Content-Type": "application/json",
             },
+            body: JSON.stringify({
+              paymentKey,
+              orderId,
+              amount: Number(amount),
+            }),
           }
         );
 
         const paymentInfo = await response.json();
+        console.log("최종 결제 승인 데이터:", paymentInfo);
+
+        if (paymentInfo.status !== "DONE") {
+          console.error("결제 승인 실패:", paymentInfo);
+          return;
+        }
 
         const paymentData = {
           user_id: session.user.id,
           order_id: orderId,
           amount: Number(amount),
           order_name: orderName,
-          payment_method: "카드",
+          payment_method: paymentInfo.easyPay
+            ? `${paymentInfo.easyPay.provider} 간편결제`
+            : paymentInfo.method || "카드",
           status: "결제 완료",
           installment_months: paymentInfo.card?.installmentPlanMonths || 0,
           recipient_name: address.recipient_name,
@@ -82,10 +96,8 @@ const page = () => {
           address_line2: address.address_line2,
           postal_code: address.postal_code,
           delivery_status: "배송전",
-          created_at: new Date().toISOString(),
+          created_at: paymentInfo.approvedAt,
         };
-
-        await savePayment(paymentData);
 
         const orderItemsData = cartItems.map((item: any) => ({
           user_id: session.user.id,
@@ -97,28 +109,33 @@ const page = () => {
           quantity: item.quantity,
           shipping_type: item.shipping_type,
         }));
+
+        await savePayment(paymentData);
         await saveOrderItems(orderItemsData);
 
-        // 데이터 저장 후 즉시 쿼리 무효화 및 리패치
-        await queryClient.invalidateQueries({
-          queryKey: ["payment", orderId],
-        });
-        await queryClient.refetchQueries({
-          queryKey: ["payment", orderId],
-        });
+        await Promise.all([
+          queryClient.invalidateQueries({ queryKey: ["payment", orderId] }),
+          queryClient.invalidateQueries({ queryKey: ["orderItems", orderId] }),
+        ]);
       } catch (error) {
         console.error("Detailed error in savePaymentData:", error);
       }
     };
 
     savePaymentData();
-  }, [orderId, paymentKey, amount, address, session, queryClient]);
+  }, [orderId, paymentKey, amount, address, session, cartItems, queryClient]);
 
   // 모든 데이터 로딩 중일 때
-  if (paymentLoading || itemsLoading) {
+  const isLoading = paymentLoading || itemsLoading;
+  const hasData = payment && orderItems && orderItems.length > 0;
+
+  if (isLoading || !hasData) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div>결제 정보를 불러오는 중...</div>
+        <div className="flex flex-col items-center gap-4">
+          <div>결제 정보를 처리하고 있습니다...</div>
+          <div className="text-sm text-gray-500">잠시만 기다려주세요.</div>
+        </div>
       </div>
     );
   }
@@ -139,9 +156,7 @@ const page = () => {
         <div className="max-w-[1320px] w-full m-auto flex flex-col gap-5 px-5">
           <div className="flex flex-col gap-4 items-center mb-10">
             <h2 className="font-bold text-xl">주문이 완료되었습니다.</h2>
-            <h3 className="text-gray-500">
-              주문상품 번호 : {payment.order_id}
-            </h3>
+            <h3 className="text-gray-500">주문번호 : {payment.order_id}</h3>
             <div className="flex gap-3">
               <ActionButton
                 variant="default"
@@ -254,15 +269,7 @@ const page = () => {
                 </li>
                 <li>
                   <span className="text-gray-500 mr-1">결제 일시 :</span>
-                  <span>
-                    {new Date().toLocaleDateString("ko-KR", {
-                      year: "numeric",
-                      month: "2-digit",
-                      day: "2-digit",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </span>
+                  <span>{formatPaymentDate(payment.created_at)}</span>
                 </li>
                 <li>
                   <span className="text-gray-500 mr-1">주문 상태 :</span>
