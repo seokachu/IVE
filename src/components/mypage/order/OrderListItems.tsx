@@ -1,9 +1,11 @@
-import { formatPrice } from "@/utils/calculateDiscount";
+import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import Image from "next/image";
 import DefaultImage from "@/assets/images/default_image.avif";
 import type { OrderListItemsProps } from "@/types";
 
 const OrderListItems = ({ item }: OrderListItemsProps) => {
+  const price = getDiscountedPrice(item);
+
   return (
     <li
       key={item.id}
@@ -19,7 +21,7 @@ const OrderListItems = ({ item }: OrderListItemsProps) => {
       <div className="flex flex-col gap-1">
         <strong>{item.product_name}</strong>
         <p className="text-sm">
-          <span>{formatPrice(item.price)}원</span>
+          <span>{formatPrice(price)}원</span>
           <span className="px-1 inline-block -translate-y-[1px]">|</span>
           <span>수량 {item.quantity}개</span>
         </p>

@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes } from "react";
 import { Tables } from "@/types/supabase";
+import { QueryClient } from "@tanstack/react-query";
 
 export interface GnbArrayList {
   label: string;
@@ -156,5 +157,31 @@ export interface PaymentDetailsProps {
 
 export interface PaymentOverviewProps {
   title: string;
-  payment: Tables<"payments">[];
+  payment: Tables<"payments">;
+}
+
+export interface PaymentConfirmParams {
+  paymentKey: string;
+  orderId: string;
+  amount: number;
+}
+
+export interface PaymentInfo {
+  status: string;
+  easyPay?: {
+    provider: string;
+  };
+  method?: string;
+  card?: {
+    installmentPlanMonths: number;
+  };
+  approvedAt: string;
+}
+
+export interface Address {
+  recipient_name: string;
+  recipient_phone: string;
+  address_line1: string;
+  address_line2: string;
+  postal_code: string;
 }

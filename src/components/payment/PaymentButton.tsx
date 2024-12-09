@@ -6,14 +6,14 @@ import { formatPrice } from "@/utils/calculateDiscount";
 import { toast } from "@/hooks/use-toast";
 import type { PaymentButtonProps } from "@/types";
 import { useCustomerInfo } from "@/hooks/queries/useCustomerInfo";
-import { saveOrderItems } from "@/lib/supabase/orders";
+import { randomOrderId } from "@/utils/randomOrderName";
 
 const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
   const session = useRecoilValue(sessionState);
   const agreements = useRecoilValue(agreementsState);
   const { data: customerInfo } = useCustomerInfo(session?.user.id);
 
-  const orderId = `ORDER_${crypto.randomUUID()}`;
+  const orderId = randomOrderId;
 
   const handlePayment = async () => {
     //로그인 체크
