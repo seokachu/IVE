@@ -4,8 +4,8 @@ import { usePayment } from "@/hooks/queries/usePayment";
 import { useOrderItems } from "@/hooks/queries/useOrderItems";
 import Error from "@/components/common/error/Error";
 import { useEffect } from "react";
-import { useRecoilValue } from "recoil";
-import { cartState, selectedItemState, sessionState } from "@/store";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { cartState, sessionState } from "@/store";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
 import { useQueryClient } from "@tanstack/react-query";
 import PaymentSuccessLoading from "@/components/common/loading/PaymentSuccessLoading";
@@ -20,7 +20,7 @@ const PaymentSuccessPage = () => {
   const searchParams = useSearchParams();
   const queryClient = useQueryClient();
   const session = useRecoilValue(sessionState);
-  const cartItems = useRecoilValue(cartState);
+  const [cartItems, setCartItems] = useRecoilState(cartState);
 
   const orderId = searchParams.get("orderId") as string;
   const paymentKey = searchParams.get("paymentKey");
@@ -146,6 +146,12 @@ const PaymentSuccessPage = () => {
         await queryClient.invalidateQueries({
           queryKey: ["orderItems", orderId],
         });
+        const updatedCart = cartItems.filter(
+          (item) => !checkoutItems.includes(item.id)
+        );
+        localStorage.setItem("shopping_cart", JSON.stringify(updatedCart));
+        setCartItems(updatedCart);
+
         localStorage.removeItem("checkout_items");
       } catch (error) {
         console.log("데이터 저장 중 오류가 발생했습니다.");
