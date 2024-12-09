@@ -238,6 +238,60 @@ export type Database = {
           },
         ]
       }
+      order_items: {
+        Row: {
+          created_at: string
+          id: string
+          order_id: string
+          price: number
+          product_id: string
+          product_image: string | null
+          product_name: string
+          quantity: number
+          shipping_type: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          order_id: string
+          price: number
+          product_id: string
+          product_image?: string | null
+          product_name: string
+          quantity: number
+          shipping_type?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          order_id?: string
+          price?: number
+          product_id?: string
+          product_image?: string | null
+          product_name?: string
+          quantity?: number
+          shipping_type?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "payments"
+            referencedColumns: ["order_id"]
+          },
+          {
+            foreignKeyName: "order_items_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       payments: {
         Row: {
           address_line1: string | null
@@ -246,13 +300,14 @@ export type Database = {
           created_at: string | null
           delivery_status: string | null
           id: string
+          installment_months: number | null
           order_id: string | null
           order_name: string | null
           payment_method: string | null
           postal_code: string | null
           recipient_name: string | null
           recipient_phone: string | null
-          states: string | null
+          status: string | null
           user_id: string | null
         }
         Insert: {
@@ -262,13 +317,14 @@ export type Database = {
           created_at?: string | null
           delivery_status?: string | null
           id?: string
+          installment_months?: number | null
           order_id?: string | null
           order_name?: string | null
           payment_method?: string | null
           postal_code?: string | null
           recipient_name?: string | null
           recipient_phone?: string | null
-          states?: string | null
+          status?: string | null
           user_id?: string | null
         }
         Update: {
@@ -278,13 +334,14 @@ export type Database = {
           created_at?: string | null
           delivery_status?: string | null
           id?: string
+          installment_months?: number | null
           order_id?: string | null
           order_name?: string | null
           payment_method?: string | null
           postal_code?: string | null
           recipient_name?: string | null
           recipient_phone?: string | null
-          states?: string | null
+          status?: string | null
           user_id?: string | null
         }
         Relationships: [

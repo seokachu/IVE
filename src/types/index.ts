@@ -145,3 +145,16 @@ export interface PaymentButtonProps {
   amount: number;
   orderName: string;
 }
+
+export interface OrderListItemsProps {
+  item: Tables<"order_items">;
+}
+
+export interface PaymentDetailsProps {
+  item: Tables<"payments">;
+}
+
+export interface PaymentOverviewProps {
+  title: string;
+  payment: Tables<"payments">[];
+}

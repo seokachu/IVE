@@ -1,7 +1,5 @@
 "use client";
 import ActionButton from "@/components/common/button/ActionButton";
-import Image from "next/image";
-import DefaultImage from "@/assets/images/default_image.avif";
 import { useSearchParams } from "next/navigation";
 import { usePayment } from "@/hooks/queries/usePayment";
 import { useOrderItems } from "@/hooks/queries/useOrderItems";
@@ -9,14 +7,18 @@ import Error from "@/components/common/error/Error";
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { cartState, sessionState } from "@/store";
-import { getPaymentByOrderId, savePayment } from "@/lib/supabase/payment";
+import { savePayment } from "@/lib/supabase/payment";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
 import { useQueryClient } from "@tanstack/react-query";
 import { saveOrderItems } from "@/lib/supabase/orders";
-import { formatPrice } from "@/utils/calculateDiscount";
-import { formatPaymentDate } from "@/utils/formatDate";
+import { confirmPayment } from "@/lib/api/payment";
+import PaymentSuccessLoading from "@/components/common/loading/PaymentSuccessLoading";
+import OrderListItems from "@/components/mypage/order/OrderListItems";
+import { Tables } from "@/types/supabase";
+import PaymentOverview from "@/components/mypage/order/PaymentOverview";
+import { toast } from "@/hooks/use-toast";
 
-const page = () => {
+const PaymentSuccessPage = () => {
   const searchParams = useSearchParams();
   const queryClient = useQueryClient();
   const session = useRecoilValue(sessionState);
@@ -53,26 +55,12 @@ const page = () => {
 
     const savePaymentData = async () => {
       try {
-        // 결제 승인 API 호출
-        const response = await fetch(
-          `https://api.tosspayments.com/v1/payments/confirm`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Basic ${Buffer.from(
-                `${process.env.NEXT_PUBLIC_TOSS_SECRET_KEY}:`
-              ).toString("base64")}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              paymentKey,
-              orderId,
-              amount: Number(amount),
-            }),
-          }
-        );
+        const paymentInfo = await confirmPayment({
+          paymentKey,
+          orderId,
+          amount: Number(amount),
+        });
 
-        const paymentInfo = await response.json();
         console.log("최종 결제 승인 데이터:", paymentInfo);
 
         if (paymentInfo.status !== "DONE") {
@@ -80,6 +68,7 @@ const page = () => {
           return;
         }
 
+        //결제 데이터 저장
         const paymentData = {
           user_id: session.user.id,
           order_id: orderId,
@@ -99,6 +88,7 @@ const page = () => {
           created_at: paymentInfo.approvedAt,
         };
 
+        //결제 목록 리스트 저장
         const orderItemsData = cartItems.map((item: any) => ({
           user_id: session.user.id,
           order_id: orderId,
@@ -113,12 +103,15 @@ const page = () => {
         await savePayment(paymentData);
         await saveOrderItems(orderItemsData);
 
+        //결제 목록 데이터 저장하고 리스트 불러올때까지 기다리기
         await Promise.all([
           queryClient.invalidateQueries({ queryKey: ["payment", orderId] }),
           queryClient.invalidateQueries({ queryKey: ["orderItems", orderId] }),
         ]);
       } catch (error) {
-        console.error("Detailed error in savePaymentData:", error);
+        toast({
+          title: "데이터를 저장하는데 실패했습니다.",
+        });
       }
     };
 
@@ -130,14 +123,7 @@ const page = () => {
   const hasData = payment && orderItems && orderItems.length > 0;
 
   if (isLoading || !hasData) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <div>결제 정보를 처리하고 있습니다...</div>
-          <div className="text-sm text-gray-500">잠시만 기다려주세요.</div>
-        </div>
-      </div>
-    );
+    return <PaymentSuccessLoading />;
   }
 
   // 에러 발생 시
@@ -169,7 +155,6 @@ const page = () => {
               </ActionButton>
             </div>
           </div>
-
           <div className="border rounded-lg p-6 mb-8">
             <h2 className="text-xl mb-8 border-b pb-4">
               <strong>
@@ -179,104 +164,15 @@ const page = () => {
               </strong>
             </h2>
             <ul className="flex flex-col w-full">
-              {orderItems?.map((item: any) => (
-                <li
-                  key={item.id}
-                  className="flex gap-4 items-center mb-5 p-4 rounded-lg bg-[#F5F5F5]"
-                >
-                  <Image
-                    src={item.product_image || DefaultImage}
-                    alt={item.product_name}
-                    className="w-20 h-20 object-cover rounded-md border"
-                    width={500}
-                    height={500}
-                  />
-                  <div className="flex flex-col gap-1">
-                    <strong>{item.product_name}</strong>
-                    <p className="text-sm">
-                      <span>{formatPrice(item.price)}원</span>
-                      <span className="px-1 inline-block -translate-y-[1px]">
-                        |
-                      </span>
-                      <span>수량 {item.quantity}개</span>
-                    </p>
-                  </div>
-                </li>
+              {orderItems?.map((item: Tables<"order_items">) => (
+                <OrderListItems key={item.id} item={item} />
               ))}
             </ul>
           </div>
           <div className="flex flex-col lg:flex-row gap-6">
-            <div className="flex-1 border border-gray-200 rounded-lg p-6">
-              <h3 className="font-bold mb-4 border-b pb-2">배송 정보</h3>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <span className="flex-shrink-0 text-gray-500 mr-2">
-                    받는 분 :
-                  </span>
-                  <span>{payment.recipient_name}</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-gray-500">휴대폰 번호 :</span>
-                  <span>{payment.recipient_phone}</span>
-                </li>
-                <li className="flex items-stretch gap-2">
-                  <span className="flex-shrink-0 text-gray-500">
-                    배송지 정보 :
-                  </span>
-                  <span>
-                    &#91;{payment.postal_code}&#93; {payment.address_line1}
-                    {payment.address_line2}
-                  </span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="flex-1 border border-gray-200 rounded-lg p-6">
-              <h3 className="font-bold mb-4 border-b pb-2">결제 정보</h3>
-              <ul className="space-y-2 text-sm">
-                <li className="flex justify-between">
-                  <span className="text-gray-500">총 주문 금액 :</span>
-                  <span>{formatPrice(payment.amount)} 원</span>
-                </li>
-                <li className="flex justify-between border-b pb-2">
-                  <span className="text-gray-500">총 배송비 :</span>
-                  {/* 추후 수정필요 */}
-                  <span>0 원</span>
-                </li>
-                <li className="flex justify-between font-medium">
-                  <span className="text-gray-500">총 결제 금액 :</span>
-                  <span className="font-bold text-base">
-                    {formatPrice(payment.amount)} 원
-                  </span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="flex-1 border border-gray-200 rounded-lg p-6">
-              <h3 className="font-bold mb-4 border-b pb-2">결제 수단</h3>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <span className="text-gray-500 mr-1">결제 방법 :</span>
-                  <span>{payment.payment_method}</span>
-                </li>
-                <li>
-                  <span className="text-gray-500 mr-1">본인 납부 :</span>
-                  <span>
-                    {payment.installment_months > 0
-                      ? `${payment.installment_months}개월 할부`
-                      : "일시불"}
-                  </span>
-                </li>
-                <li>
-                  <span className="text-gray-500 mr-1">결제 일시 :</span>
-                  <span>{formatPaymentDate(payment.created_at)}</span>
-                </li>
-                <li>
-                  <span className="text-gray-500 mr-1">주문 상태 :</span>
-                  <span>{payment.status}</span>
-                </li>
-              </ul>
-            </div>
+            <PaymentOverview title="배송 정보" payment={payment} />
+            <PaymentOverview title="결제 정보" payment={payment} />
+            <PaymentOverview title="결제 수단" payment={payment} />
           </div>
         </div>
       </section>
@@ -284,4 +180,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default PaymentSuccessPage;

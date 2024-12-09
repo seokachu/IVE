@@ -1,0 +1,36 @@
+import type { PaymentOverviewProps } from "@/types";
+import type { Tables } from "@/types/supabase";
+import RecipientInfo from "./RecipientInfo";
+import OrderPaymentInfo from "./OrderPaymentInfo";
+import OrderPaymentDetails from "./OrderPaymentDetails";
+
+const PaymentOverview = ({ title, payment }: PaymentOverviewProps) => {
+  const getComponent = (title: string) => {
+    switch (title) {
+      case "배송 정보":
+        return RecipientInfo;
+      case "결제 정보":
+        return OrderPaymentInfo;
+      case "결제 수단":
+        return OrderPaymentDetails;
+      default:
+        return null;
+    }
+  };
+
+  const SelectedComponent = getComponent(title);
+
+  return (
+    <div className="flex-1 border border-gray-200 rounded-lg p-6">
+      <h3 className="font-bold mb-4 border-b pb-2">{title}</h3>
+      <ul className="space-y-2 text-sm">
+        {SelectedComponent &&
+          payment.map((item: Tables<"payments">) => (
+            <SelectedComponent key={item.id} item={item} />
+          ))}
+      </ul>
+    </div>
+  );
+};
+
+export default PaymentOverview;
