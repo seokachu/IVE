@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 import ActionButton from "../common/button/ActionButton";
 import { loadTossPayments } from "@tosspayments/payment-sdk";
-import { agreementsState, sessionState } from "@/store";
+import { agreementsState, selectedItemState, sessionState } from "@/store";
 import { formatPrice } from "@/utils/calculateDiscount";
 import { toast } from "@/hooks/use-toast";
 import type { PaymentButtonProps } from "@/types";
@@ -11,6 +11,7 @@ import { randomOrderId } from "@/utils/randomOrderName";
 const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
   const session = useRecoilValue(sessionState);
   const agreements = useRecoilValue(agreementsState);
+  const selectedItems = useRecoilValue(selectedItemState);
   const { data: customerInfo } = useCustomerInfo(session?.user.id);
 
   const orderId = randomOrderId;
@@ -46,6 +47,8 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
 
     //결제 처리
     try {
+      localStorage.setItem("checkout_items", JSON.stringify(selectedItems));
+
       const tossPayments = await loadTossPayments(
         process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY!
       );
@@ -63,6 +66,8 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
         failUrl: `${window.location.origin}/payment/fail`,
       });
     } catch (error) {
+      localStorage.removeItem("checkout_items");
+
       if (error instanceof Error) {
         toast({
           title: "결제 요청 중 오류가 발생했습니다.",

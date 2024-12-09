@@ -18,11 +18,6 @@ export const cartState = atom({
   default: cartStorage.getCart(),
 });
 
-export const selectedItemState = atom<CartItem["id"][]>({
-  key: "selectedItemsState",
-  default: [],
-});
-
 export const agreementsState = atom({
   key: "agreementsState",
   default: {
@@ -30,4 +25,9 @@ export const agreementsState = atom({
     privacy: false,
     refund: false,
   },
+});
+
+export const selectedItemState = atom<CartItem["id"][]>({
+  key: "selectedItemsState",
+  default: [],
 });
