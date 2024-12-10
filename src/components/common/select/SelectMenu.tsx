@@ -14,7 +14,9 @@ interface SelectMenuProps<T> {
   className?: string;
 }
 
-const SelectMenu = <T extends { value: string; title: string }>({
+const SelectMenu = <
+  T extends { value: string; title: string; disabled?: boolean }
+>({
   options,
   value,
   onChange,
@@ -27,8 +29,8 @@ const SelectMenu = <T extends { value: string; title: string }>({
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          {options.map((el) => (
-            <SelectItem key={el.value} value={el.value}>
+          {options.map((el, index) => (
+            <SelectItem key={el.value} value={el.value} disabled={index === 0}>
               {el.title}
             </SelectItem>
           ))}

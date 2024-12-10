@@ -105,6 +105,11 @@ const AddressForm = ({
   };
 
   const handleRequestChange = (value: string) => {
+    if (!value || value === "메시지선택(선택사항)") {
+      form.setValue("request", "");
+      form.setValue("customRequest", "");
+      return;
+    }
     setShowRequested(value === "직접 입력");
   };
 

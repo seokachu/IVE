@@ -20,7 +20,11 @@ const OrderShippingInfo = () => {
     shippingAddress && Object.keys(shippingAddress).length > 0;
 
   const handleShippingAddressChange = () => {
-    push("/mypage/address");
+    if (hasShippingAddress) {
+      push("/mypage/address");
+    } else {
+      push("/mypage/address/new");
+    }
   };
 
   return (

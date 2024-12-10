@@ -106,7 +106,10 @@ export const AGREEMENT_CONTENTS = {
 
 //배송정보 입력 요청사항,정보 option
 export const RECIPIENT_DELIVERY_OPTIONS = [
-  { value: "메시지선택(선택사항)", title: "-- 메시지 선택 (선택사항) --" },
+  {
+    value: "메시지선택(선택사항)",
+    title: "-- 메시지 선택 (선택사항) --",
+  },
   {
     value: "배송 전에 미리 연락 바랍니다.",
     title: "배송 전에 미리 연락 바랍니다.",
