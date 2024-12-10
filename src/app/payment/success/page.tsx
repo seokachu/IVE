@@ -102,7 +102,10 @@ const PaymentSuccessPage = () => {
         const paymentInfo = await response.json();
 
         if (!response.ok || paymentInfo.status !== "DONE") {
-          console.log("결제 승인에 실패했습니다.");
+          // 실패시 fail 페이지로 리다이렉트
+          window.location.href = `/payment/fail?message=${encodeURIComponent(
+            paymentInfo.message
+          )}`;
           return;
         }
 
@@ -146,6 +149,8 @@ const PaymentSuccessPage = () => {
         await queryClient.invalidateQueries({
           queryKey: ["orderItems", orderId],
         });
+
+        //결제한 장바구니 데이터 비우기
         const updatedCart = cartItems.filter(
           (item) => !checkoutItems.includes(item.id)
         );
@@ -154,7 +159,7 @@ const PaymentSuccessPage = () => {
 
         localStorage.removeItem("checkout_items");
       } catch (error) {
-        console.log("데이터 저장 중 오류가 발생했습니다.");
+        console.log("데이터 저장 중 오류가 발생했습니다.", error);
       }
     };
 
@@ -169,6 +174,7 @@ const PaymentSuccessPage = () => {
     queryClient,
     orderName,
     payment,
+    setCartItems,
   ]);
 
   if (paymentLoading || itemsLoading || !payment) {

@@ -3,18 +3,32 @@ import { cartState, selectedItemState } from "@/store";
 import type { CartListItemProps } from "@/types";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import Image from "next/image";
-import { useId } from "react";
+import { useEffect, useId } from "react";
 import { useRecoilState } from "recoil";
 import QuantitySelector from "../common/QuantitySelector";
 import { toast } from "@/hooks/use-toast";
+import { useSearchParams } from "next/navigation";
 
 const CartListItems = ({ item }: CartListItemProps) => {
   const id = useId();
+  const searchParams = useSearchParams();
+  const selectedParam = searchParams.get("selected");
   const price = getDiscountedPrice(item);
   const [selectedItems, setSelectedItems] = useRecoilState(selectedItemState);
   const [cartItems, setCartItems] = useRecoilState(cartState);
 
   const isChecked = selectedItems.includes(item.id);
+
+  useEffect(() => {
+    if (selectedParam) {
+      try {
+        const parsedSelected = JSON.parse(decodeURIComponent(selectedParam));
+        setSelectedItems(parsedSelected);
+      } catch (error) {
+        console.error("Failed to parse selected items:", error);
+      }
+    }
+  }, [selectedParam, setSelectedItems]);
 
   const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {

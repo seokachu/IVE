@@ -24,8 +24,6 @@ const CartSummary = () => {
     selectedItems.includes(item.id)
   );
 
-  console.log(selectedCartItems);
-
   //총 상품 금액
   const totalOriginalPrice = selectedCartItems.reduce((sum, item) => {
     return sum + item.price * item.quantity;
