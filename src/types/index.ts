@@ -147,7 +147,7 @@ export interface PaymentButtonProps {
   orderName: string;
 }
 
-export interface OrderListItemsProps {
+export interface OrderListItemProps {
   item: Tables<"order_items">;
 }
 

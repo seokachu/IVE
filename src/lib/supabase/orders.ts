@@ -29,12 +29,12 @@ export const saveOrderItems = async (
 };
 
 //결제데이터 불러오기
-export const getOrderItems = async (orderId: string) => {
+export const getOrderItems = async (userId: string) => {
   try {
     const { data, error } = await supabase
       .from("order_items")
       .select("*")
-      .eq("order_id", orderId);
+      .eq("user_id", userId);
 
     if (error) throw error;
     return data;
@@ -47,12 +47,12 @@ export const getOrderItems = async (orderId: string) => {
 };
 
 //결제목록 삭제
-export const deleteOrderItems = async (itemsIds: string[]) => {
+export const deleteOrderItems = async (itemIds: string[]) => {
   try {
     const { data, error } = await supabase
       .from("order_items")
       .delete()
-      .in("id", itemsIds);
+      .in("id", itemIds);
 
     if (error) throw error;
     return data;

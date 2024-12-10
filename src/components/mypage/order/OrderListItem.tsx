@@ -1,9 +1,9 @@
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import Image from "next/image";
 import DefaultImage from "@/assets/images/default_image.avif";
-import type { OrderListItemsProps } from "@/types";
+import type { OrderListItemProps } from "@/types";
 
-const OrderListItems = ({ item }: OrderListItemsProps) => {
+const OrderListItem = ({ item }: OrderListItemProps) => {
   const price = getDiscountedPrice(item);
 
   return (
@@ -30,4 +30,4 @@ const OrderListItems = ({ item }: OrderListItemsProps) => {
   );
 };
 
-export default OrderListItems;
+export default OrderListItem;

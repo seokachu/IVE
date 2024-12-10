@@ -9,7 +9,7 @@ import { cartState, sessionState } from "@/store";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
 import { useQueryClient } from "@tanstack/react-query";
 import PaymentSuccessLoading from "@/components/common/loading/PaymentSuccessLoading";
-import OrderListItems from "@/components/mypage/order/OrderListItems";
+import OrderListItem from "@/components/mypage/order/OrderListItem";
 import type { Tables } from "@/types/supabase";
 import PaymentOverview from "@/components/mypage/order/PaymentOverview";
 import PaymentSuccessHeader from "@/components/payment/success/PaymentSuccessHeader";
@@ -205,7 +205,7 @@ const PaymentSuccessPage = () => {
             {orderItems && orderItems.length > 0 && (
               <ul className="flex flex-col w-full">
                 {orderItems.map((item: Tables<"order_items">) => (
-                  <OrderListItems key={item.id} item={item} />
+                  <OrderListItem key={item.id} item={item} />
                 ))}
               </ul>
             )}

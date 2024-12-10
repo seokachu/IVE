@@ -6,11 +6,11 @@ import {
 } from "@/lib/supabase/orders";
 
 //결제목록 가져오기
-export const useOrderItems = (orderId: string) => {
+export const useOrderItems = (userId?: string) => {
   return useQuery({
-    queryKey: ["orderItems", orderId],
-    queryFn: () => getOrderItems(orderId),
-    enabled: !!orderId,
+    queryKey: ["orderItems", userId],
+    queryFn: () => getOrderItems(userId!),
+    enabled: !!userId,
     staleTime: Infinity,
   });
 };
@@ -20,7 +20,7 @@ export const useDeleteOrderItems = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (itemsIds: string[]) => deleteOrderItems(itemsIds),
+    mutationFn: (itemIds: string[]) => deleteOrderItems(itemIds),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["orderItems"] });
     },
