@@ -1,61 +1,37 @@
 "use client";
-import { useEffect, useId, useState } from "react";
+import { useId, useState } from "react";
 import ActionButton from "../button/ActionButton";
-import { useRecoilState } from "recoil";
-import { cartState, selectedItemState } from "@/store";
-import { toast } from "@/hooks/use-toast";
 import ConfirmModal from "../modal/ConfirmModal";
 
-const SelectionControl = () => {
+interface SelectionControlProps {
+  totalItems: number;
+  selectedCount: number;
+  onSelectAll: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onDeleteSelected: () => void;
+  onConfirm: () => void;
+  title: string;
+  description: string;
+  cancelText: string;
+  confirmText: string;
+}
+
+const SelectionControl = ({
+  totalItems,
+  selectedCount,
+  onSelectAll,
+  onDeleteSelected,
+  onConfirm,
+  title,
+  description,
+  cancelText,
+  confirmText,
+}: SelectionControlProps) => {
   const id = useId();
-  const [cartItems, setCartItems] = useRecoilState(cartState);
-  const [selectedItems, setSelectedItems] = useRecoilState(selectedItemState);
   const [isModal, setIsModal] = useState(false);
-
-  //컴포넌트가 마운트 되었을 때 장바구니 모든 아이템 선택하기, 선택삭제 버튼 클릭시 남은 item 선택
-  useEffect(() => {
-    setSelectedItems(cartItems.map((item) => item.id));
-  }, [cartItems]);
-
-  //전체선택
-  const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) {
-      setSelectedItems(cartItems.map((item) => item.id));
-    } else {
-      setSelectedItems([]);
-    }
-  };
-
-  //선택삭제 버튼
-  const handleDeleteSelected = () => {
-    if (selectedItems.length === 0) {
-      toast({
-        title: "선택한 내용이 없습니다.",
-        variant: "destructive",
-      });
-      return;
-    }
-    const newCartItems = cartItems.filter(
-      (item) => !selectedItems.includes(item.id)
-    );
-    localStorage.setItem("shopping_cart", JSON.stringify(newCartItems));
-    setCartItems(newCartItems);
-    setSelectedItems([]);
-    toast({
-      title: "선택한 내용이 삭제 되었습니다.",
-    });
-  };
 
   //전체삭제 버튼 클릭시 모달
   const handleDeleteAll = () => {
     setIsModal(true);
-  };
-
-  //전체삭제 확인 액션
-  const handleConfirmDeleteAll = () => {
-    localStorage.setItem("shopping_cart", JSON.stringify([]));
-    setCartItems([]);
-    setSelectedItems([]);
   };
 
   return (
@@ -65,16 +41,16 @@ const SelectionControl = () => {
           type="checkbox"
           id={`selectAll-${id}`}
           className="mr-[6px] w-4 h-4 translate-y-[3px]"
-          checked={selectedItems.length === cartItems.length}
-          onChange={handleSelectAll}
+          checked={selectedCount === totalItems}
+          onChange={onSelectAll}
         />
-        전체선택 {selectedItems.length}/{cartItems.length}
+        전체선택 {selectedCount}/{totalItems}
       </label>
       <div className="flex gap-2">
         <ActionButton
           variant="outline"
           className="px-2 py-1 border rounded-md"
-          onClick={handleDeleteSelected}
+          onClick={onDeleteSelected}
         >
           선택삭제
         </ActionButton>
@@ -89,11 +65,11 @@ const SelectionControl = () => {
       {isModal && (
         <ConfirmModal
           isOpen={setIsModal}
-          onConfirm={handleConfirmDeleteAll}
-          title="장바구니 비우기"
-          description="장바구니의 모든 상품이 삭제됩니다. 정말 비우시겠습니까?"
-          cancelText="취소"
-          confirmText="비우기"
+          onConfirm={onConfirm}
+          title={title}
+          description={description}
+          cancelText={cancelText}
+          confirmText={confirmText}
         />
       )}
     </div>
