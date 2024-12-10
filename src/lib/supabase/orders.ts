@@ -47,12 +47,12 @@ export const getOrderItems = async (orderId: string) => {
 };
 
 //결제목록 삭제
-export const deleteOrderItems = async (itemsId: string[]) => {
+export const deleteOrderItems = async (itemsIds: string[]) => {
   try {
     const { data, error } = await supabase
       .from("order_items")
       .delete()
-      .in("id", itemsId);
+      .in("id", itemsIds);
 
     if (error) throw error;
     return data;
