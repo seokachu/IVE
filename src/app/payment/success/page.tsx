@@ -10,7 +10,7 @@ import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
 import { useQueryClient } from "@tanstack/react-query";
 import PaymentSuccessLoading from "@/components/common/loading/PaymentSuccessLoading";
 import OrderListItems from "@/components/mypage/order/OrderListItems";
-import { Tables } from "@/types/supabase";
+import type { Tables } from "@/types/supabase";
 import PaymentOverview from "@/components/mypage/order/PaymentOverview";
 import PaymentSuccessHeader from "@/components/payment/success/PaymentSuccessHeader";
 import { saveOrderItems } from "@/lib/supabase/orders";
