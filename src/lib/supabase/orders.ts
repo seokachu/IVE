@@ -34,13 +34,34 @@ export const getOrderItems = async (userId: string) => {
     const { data, error } = await supabase
       .from("order_items")
       .select("*")
-      .eq("user_id", userId);
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false });
 
     if (error) throw error;
     return data;
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(`결제목록 저장에 실패했습니다: ${error.message}`);
+      throw new Error(`주문 목록 조회에 실패했습니다: ${error.message}`);
+    }
+    throw error;
+  }
+};
+
+//결제정보 - order id로 상세정보 조회
+export const getOrderDetail = async (orderId: string) => {
+  try {
+    const { data, error } = await supabase
+      .from("order_items")
+      .select("*")
+      .eq("order_id", orderId);
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(
+        `주문 상세정보 조회에 실패했습니다. ${error.message}`
+      );
     }
     throw error;
   }
