@@ -5,6 +5,7 @@ import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import Image from "next/image";
 import { useState } from "react";
 import { FaCheck } from "react-icons/fa";
+import WriteReviewModal from "./WriteReviewModal";
 
 interface DetailOrderItemProps {
   item: any;
@@ -86,6 +87,12 @@ const DetailOrderItem = ({ item }: DetailOrderItemProps) => {
           description="구매를 확정하시겠습니까? 구매 확정 후에는 취소나 변경이 불가능합니다."
           cancelText="취소"
           confirmText="구매확정"
+        />
+      )}
+      {isReviewModal && (
+        <WriteReviewModal
+          isOpen={isReviewModal}
+          onClose={() => setIsReviewModal(false)}
         />
       )}
     </li>
