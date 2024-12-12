@@ -53,10 +53,15 @@ export const useDeleteAllOrderItems = () => {
 
 //구매확정
 export const useConfirmOrder = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async (itemId: string) => {
       const data = await confirmOrderItem(itemId);
       return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["orderItems"] });
     },
   });
 };

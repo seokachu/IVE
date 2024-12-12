@@ -22,7 +22,6 @@ interface DetailOrderItemProps {
 }
 
 const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
-  const [isReviewMode, setIsReviewMode] = useState(false);
   const [isConfirmModal, setIsConfirmModal] = useState(false);
   const [isReviewModal, setIsReviewModal] = useState(false);
 
@@ -34,7 +33,6 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
 
   const handleConfirmOrder = () => {
     onConfirm();
-    setIsReviewMode(true);
     toast({
       title: "구매가 확정되었습니다.",
       description: item.product_name,
@@ -47,7 +45,7 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
 
   return (
     <li className="border rounded-lg p-4">
-      {isReviewMode && (
+      {item.is_confirmed && (
         <p className="text-sm text-green-500 flex items-center gap-1 mb-2 border-b py-2">
           <FaCheck />
           <span>구매확정</span>
@@ -83,11 +81,13 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
           </div>
         </div>
         <ActionButton
-          onClick={isReviewMode ? onClickWriteReview : onClickCompleteOrder}
-          variant={isReviewMode ? "primary" : "default"}
+          onClick={
+            item.is_confirmed ? onClickWriteReview : onClickCompleteOrder
+          }
+          variant={item.is_confirmed ? "primary" : "default"}
           className="text-sm py-1 px-3 mt-5 lg:mt-0"
         >
-          {!isReviewMode ? "구매확정" : "리뷰쓰기"}
+          {!item.is_confirmed ? "구매확정" : "리뷰쓰기"}
         </ActionButton>
       </div>
       {isConfirmModal && (
