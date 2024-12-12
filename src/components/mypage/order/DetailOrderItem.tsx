@@ -8,10 +8,20 @@ import { FaCheck } from "react-icons/fa";
 import WriteReviewModal from "./WriteReviewModal";
 
 interface DetailOrderItemProps {
-  item: any;
+  item: {
+    id: string;
+    product_name: string;
+    product_image: string;
+    price: number;
+    color: string;
+    size: string;
+    quantity: number;
+    is_confirmed?: boolean;
+  };
+  onConfirm: () => void;
 }
 
-const DetailOrderItem = ({ item }: DetailOrderItemProps) => {
+const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
   const [isReviewMode, setIsReviewMode] = useState(false);
   const [isConfirmModal, setIsConfirmModal] = useState(false);
   const [isReviewModal, setIsReviewModal] = useState(false);
@@ -23,6 +33,7 @@ const DetailOrderItem = ({ item }: DetailOrderItemProps) => {
   };
 
   const handleConfirmOrder = () => {
+    onConfirm();
     setIsReviewMode(true);
     toast({
       title: "구매가 확정되었습니다.",

@@ -100,3 +100,23 @@ export const deleteAllOrderItems = async (userId: string) => {
     }
   }
 };
+
+//order 구매 확정 업데이트
+export const confirmOrderItem = async (itemId: string) => {
+  try {
+    const { data, error } = await supabase
+      .from("order_items")
+      .update({
+        is_confirmed: true,
+      })
+      .eq("id", itemId)
+      .single();
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`구매 확정에 실패했습니다. ${error.message}`);
+    }
+  }
+};

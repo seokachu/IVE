@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  confirmOrderItem,
   deleteAllOrderItems,
   deleteOrderItems,
   getOrderDetail,
@@ -46,6 +47,16 @@ export const useDeleteAllOrderItems = () => {
     mutationFn: (userId: string) => deleteAllOrderItems(userId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["orderItems"] });
+    },
+  });
+};
+
+//구매확정
+export const useConfirmOrder = () => {
+  return useMutation({
+    mutationFn: async (itemId: string) => {
+      const data = await confirmOrderItem(itemId);
+      return data;
     },
   });
 };

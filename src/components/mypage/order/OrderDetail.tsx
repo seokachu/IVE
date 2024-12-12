@@ -9,11 +9,13 @@ import { sessionState } from "@/store";
 import { usePayment } from "@/hooks/queries/usePayment";
 import PaymentOverview from "./PaymentOverview";
 import type { OrderDetailProps } from "@/types";
+import { useConfirmOrder } from "@/hooks/queries/useOrderItems";
 
 const OrderDetail = ({ orderItems, onBack }: OrderDetailProps) => {
   const session = useRecoilValue(sessionState);
   const { data: customerInfo } = useCustomerInfo(session?.user.id);
   const { data: payment } = usePayment(orderItems[0].order_id);
+  const { mutate: confirmOrder } = useConfirmOrder();
 
   return (
     <div>
@@ -34,12 +36,16 @@ const OrderDetail = ({ orderItems, onBack }: OrderDetailProps) => {
       </div>
       <ul className="space-y-4 pt-5 py-10">
         {orderItems.map((item) => (
-          <DetailOrderItem key={item.id} item={item} />
+          <DetailOrderItem
+            key={item.id}
+            item={item}
+            onConfirm={() => confirmOrder(item.id)}
+          />
         ))}
       </ul>
       <hr />
       <hr />
-      {/* 주문자정보, 배송정보, 결제정보, 결제수단*/}
+      {/* 주문자정보, 배송정보, 결제정보, 결제수단 */}
       <div className="border rounded-md px-4 py-5 mt-10 mb-5">
         <h3 className="font-bold border-b pb-2">주문자 정보</h3>
         <ul className="flex flex-col justify-between gap-2 text-sm pt-4">
