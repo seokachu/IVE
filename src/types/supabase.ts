@@ -245,6 +245,7 @@ export type Database = {
           delivery_info: string | null
           discount_rate: number | null
           id: string
+          is_confirmed: boolean | null
           order_id: string
           price: number
           product_id: string
@@ -263,6 +264,7 @@ export type Database = {
           delivery_info?: string | null
           discount_rate?: number | null
           id?: string
+          is_confirmed?: boolean | null
           order_id: string
           price: number
           product_id: string
@@ -281,6 +283,7 @@ export type Database = {
           delivery_info?: string | null
           discount_rate?: number | null
           id?: string
+          is_confirmed?: boolean | null
           order_id?: string
           price?: number
           product_id?: string

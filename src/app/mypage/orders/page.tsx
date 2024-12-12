@@ -10,14 +10,12 @@ import { sessionState } from "@/store";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import _ from "lodash";
-import OrderDetail from "@/components/mypage/order/OrderDetail";
 import OrderSummary from "@/components/mypage/order/OrderSummary";
 import { getDiscountedPrice } from "@/utils/calculateDiscount";
 
 const OrderListPage = () => {
   const session = useRecoilValue(sessionState);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
   const { mutate: deleteItems } = useDeleteOrderItems();
   const { mutate: deleteAllItems } = useDeleteAllOrderItems();
   const { data: orderItems, isLoading } = useOrderItems(session?.user?.id);
@@ -54,7 +52,6 @@ const OrderListPage = () => {
       orderDate: items[0]?.created_at,
       firstItemName: items[0]?.product_name,
       firstOrderImage: items[0]?.product_image,
-      // disCountRate:
     })
   );
 
@@ -102,7 +99,7 @@ const OrderListPage = () => {
 
   return (
     <div className="px-5 lg:pt-14 pb-28 lg:px-8">
-      {!isEmpty && !selectedOrderId && (
+      {!isEmpty  && (
         <>
           <div className="flex justify-between items-center mt-5 lg:mt-0">
             <h2 className="font-bold text-xl mb-5 hidden lg:block">
@@ -126,21 +123,15 @@ const OrderListPage = () => {
         <div className="flex flex-col gap-3 items-center justify-center w-full h-[500px]">
           <h3>결제한 목록이 없습니다.</h3>
         </div>
-      ) : !selectedOrderId ? (
+      ) : (
         <ul className="space-y-4 mt-5">
           {orderSummaries.map((order) => (
             <OrderSummary
               key={order.orderId}
               order={order}
-              onViewDetail={() => setSelectedOrderId(order.orderId)}
             />
           ))}
         </ul>
-      ) : (
-        <OrderDetail
-          orderItems={groupedOrders[selectedOrderId]}
-          onBack={() => setSelectedOrderId(null)}
-        />
       )}
     </div>
   );

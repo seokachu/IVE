@@ -3,15 +3,22 @@ import ActionButton from "@/components/common/button/ActionButton";
 import { formatPrice } from "@/utils/calculateDiscount";
 import { formatDate } from "@/utils/formatDate";
 import type { OrderSummaryProps } from "@/types";
+import { useRouter } from "next/navigation";
 
-const OrderSummary = ({ order, onViewDetail }: OrderSummaryProps) => {
+const OrderSummary = ({ order }: OrderSummaryProps) => {
+  const { push } = useRouter();
+
+  const onClickDetail = () => {
+    push(`/mypage/orders/${order.orderId}`);
+  };
+
   return (
     <li className="border rounded-sm py-4 px-6 hover:bg-gray-50">
       <div className="py-2 border-b flex gap-2 justify-between items-center text-xs lg:text-sm">
         <h3 className="text-gray-500">주문번호 : {order.orderId}</h3>
         <ActionButton
           variant="default"
-          onClick={onViewDetail}
+          onClick={onClickDetail}
           className="border-0"
         >
           주문상세

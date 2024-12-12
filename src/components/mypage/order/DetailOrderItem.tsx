@@ -6,20 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import WriteReviewModal from "./WriteReviewModal";
-
-interface DetailOrderItemProps {
-  item: {
-    id: string;
-    product_name: string;
-    product_image: string;
-    price: number;
-    color: string;
-    size: string;
-    quantity: number;
-    is_confirmed?: boolean;
-  };
-  onConfirm: () => void;
-}
+import type { DetailOrderItemProps } from "@/types";
 
 const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
   const [isConfirmModal, setIsConfirmModal] = useState(false);

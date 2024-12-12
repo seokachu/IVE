@@ -195,10 +195,20 @@ export interface OrderSummaryProps {
     firstItemName: string;
     firstOrderImage: string;
   };
-  onViewDetail: () => void;
 }
 
 export interface OrderDetailProps {
-  orderItems: any[];
+  orderItems: Tables<"order_items">[];
   onBack: () => void;
+}
+
+export interface OrderDetailPageProps {
+  params: {
+    orderId: string;
+  };
+}
+
+export interface DetailOrderItemProps {
+  item: Tables<"order_items">;
+  onConfirm: () => void;
 }
