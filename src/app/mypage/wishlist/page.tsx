@@ -1,9 +1,10 @@
-const page = () => {
+const WishListPage = () => {
   return (
     <div className="px-5 lg:pt-14 pb-28 lg:px-8">
       <div className="flex justify-between items-center mt-5 lg:mt-0">
         <h2 className="font-bold text-xl mb-5 hidden lg:block">찜 목록</h2>
       </div>
+      <div>준비중</div>
       {/* {!isEmpty ? (
         <AddressList addresses={addresses} />
       ) : (
@@ -16,4 +17,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default WishListPage;
