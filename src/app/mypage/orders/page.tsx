@@ -1,6 +1,5 @@
 "use client";
 import SelectionControl from "@/components/common/select/SelectionControl";
-import OrderListItem from "@/components/mypage/order/OrderListItem";
 import {
   useDeleteAllOrderItems,
   useDeleteOrderItems,
@@ -10,10 +9,14 @@ import { toast } from "@/hooks/use-toast";
 import { sessionState } from "@/store";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
+import _ from "lodash";
+import OrderDetail from "@/components/mypage/order/OrderDetail";
+import OrderSummary from "@/components/mypage/order/OrderSummary";
 
 const OrderListPage = () => {
   const session = useRecoilValue(sessionState);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
   const { mutate: deleteItems } = useDeleteOrderItems();
   const { mutate: deleteAllItems } = useDeleteAllOrderItems();
   const { data: orderItems, isLoading } = useOrderItems(session?.user?.id);
@@ -31,8 +34,24 @@ const OrderListPage = () => {
     }
   };
 
-  const isEmpty = !orderItems || orderItems.length === 0;
   if (isLoading) return <div>로딩중</div>;
+
+  const isEmpty = !orderItems || orderItems.length === 0;
+
+  //주문목록 id별로 그룹화
+  const groupedOrders = _.groupBy(orderItems, "order_id");
+
+  //주문 요약 정보 뽑아내기
+  const orderSummaries = Object.entries(groupedOrders).map(
+    ([orderId, items]) => ({
+      orderId,
+      totalAmount: _.sumBy(items, (item) => item.price * item.quantity),
+      itemCount: items.length,
+      orderDate: items[0]?.created_at,
+      firstItemName: items[0]?.product_name,
+      firstOrderImage: items[0]?.product_image,
+    })
+  );
 
   const handleDeleteSelected = () => {
     if (selectedItems.length === 0) {
@@ -76,8 +95,6 @@ const OrderListPage = () => {
     });
   };
 
-  console.log("orderItems", orderItems);
-
   return (
     <div className="px-5 lg:pt-14 pb-28 lg:px-8">
       <div className="flex justify-between items-center mt-5 lg:mt-0">
@@ -100,11 +117,22 @@ const OrderListPage = () => {
         <div className="flex flex-col gap-3 items-center justify-center w-full h-[500px]">
           <h3>결제한 목록이 없습니다.</h3>
         </div>
+      ) : !selectedOrderId ? (
+        <ul className="space-y-4 mt-5">
+          {orderSummaries.map((order) => (
+            <OrderSummary
+              key={order.orderId}
+              order={order}
+              onViewDetail={() => setSelectedOrderId(order.orderId)}
+            />
+          ))}
+        </ul>
       ) : (
         <ul>
-          {orderItems.map((item) => (
-            <OrderListItem key={item.id} item={item} />
-          ))}
+          <OrderDetail
+            orderItems={groupedOrders[selectedOrderId]}
+            onBack={() => setSelectedOrderId(null)}
+          />
         </ul>
       )}
     </div>
