@@ -22,9 +22,9 @@ const OrderDetail = ({ orderItems, onBack }: OrderDetailProps) => {
           돌아가기
         </ActionButton>
       </div>
-      <div className="flex justify-between border-b text-gray-500 text-xs lg:text-sm">
-        <h3 className="mb-3">주문번호 : {orderItems[0].order_id}</h3>
+      <div className="flex justify-between border-b text-xs lg:text-sm">
         <time>{formatDate(orderItems[0].created_at)}</time>
+        <h3 className="mb-3">주문번호 : {orderItems[0].order_id}</h3>
       </div>
       <ul className="space-y-4 py-5">
         {orderItems.map((item) => (

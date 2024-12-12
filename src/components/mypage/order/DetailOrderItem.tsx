@@ -1,5 +1,6 @@
 import ActionButton from "@/components/common/button/ActionButton";
 import ConfirmModal from "@/components/common/modal/ConfirmModal";
+import { toast } from "@/hooks/use-toast";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import Image from "next/image";
 import { useState } from "react";
@@ -11,19 +12,26 @@ interface DetailOrderItemProps {
 
 const DetailOrderItem = ({ item }: DetailOrderItemProps) => {
   const [isReviewMode, setIsReviewMode] = useState(false);
-  const [isModal, setIsModal] = useState(false);
+  const [isConfirmModal, setIsConfirmModal] = useState(false);
+  const [isReviewModal, setIsReviewModal] = useState(false);
 
   const price = getDiscountedPrice(item);
 
   const onClickCompleteOrder = () => {
-    setIsModal(true);
+    setIsConfirmModal(true);
   };
 
-  const handleWriteReview = () => {
+  const handleConfirmOrder = () => {
     setIsReviewMode(true);
+    toast({
+      title: "구매가 확정되었습니다.",
+      description: item.product_name,
+    });
   };
 
-  const goToWriteReview = () => {};
+  const onClickWriteReview = () => {
+    setIsReviewModal(true);
+  };
 
   return (
     <li className="border rounded-lg p-4">
@@ -63,17 +71,17 @@ const DetailOrderItem = ({ item }: DetailOrderItemProps) => {
           </div>
         </div>
         <ActionButton
-          onClick={onClickCompleteOrder}
+          onClick={isReviewMode ? onClickWriteReview : onClickCompleteOrder}
           variant={isReviewMode ? "primary" : "default"}
           className="text-sm py-1 px-3 mt-5 lg:mt-0"
         >
           {!isReviewMode ? "구매확정" : "리뷰쓰기"}
         </ActionButton>
       </div>
-      {isModal && (
+      {isConfirmModal && (
         <ConfirmModal
-          isOpen={setIsModal}
-          onConfirm={handleWriteReview}
+          isOpen={setIsConfirmModal}
+          onConfirm={handleConfirmOrder}
           title="구매확정"
           description="구매를 확정하시겠습니까? 구매 확정 후에는 취소나 변경이 불가능합니다."
           cancelText="취소"

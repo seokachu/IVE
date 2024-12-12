@@ -13,9 +13,9 @@ const AddressAddButton = () => {
       <ActionButton
         onClick={onClickAddAddress}
         variant="default"
-        className="w-full lg:w-fit flex items-center justify-center gap-1 border py-2 px-5 rounded-md hover:bg-silver-gray"
+        className="text-sm w-full lg:w-fit flex items-center justify-center gap-1 border py-2 px-5 rounded-md hover:bg-silver-gray"
       >
-        <HiPlusSmall size={20} className="translate-y-[1px]" />새 배송지 추가
+        <HiPlusSmall size={20} />새 배송지 추가
       </ActionButton>
     </>
   );

@@ -12,13 +12,12 @@ import { useState } from "react";
 import AddressConfirmModal from "./AddressConfirmModal";
 import AddressEditModal from "./AddressEditModal";
 
-const AddressListItems = ({ item }: AddressListItems) => {
+const AddressListItem = ({ item }: AddressListItems) => {
   const queryClient = useQueryClient();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const { mutate: updateAddress } = useUpdateShippingAddress();
   const { mutate: deleteAddress } = useDeleteShippingAddress();
-  const { mutate: editAddress } = useUpdateShippingAddress();
 
   const onClickDefaultRecipient = () => {
     updateAddress(
@@ -163,4 +162,4 @@ const AddressListItems = ({ item }: AddressListItems) => {
   );
 };
 
-export default AddressListItems;
+export default AddressListItem;

@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
-import AddressListItems from "./AddressListItems";
 import type { AddressListProps } from "@/types";
+import AddressListItem from "./AddressListItem";
 
 const AddressList = ({ addresses }: AddressListProps) => {
   return (
@@ -21,7 +21,7 @@ const AddressList = ({ addresses }: AddressListProps) => {
             }}
             className="mb-5"
           >
-            <AddressListItems item={address} />
+            <AddressListItem item={address} />
           </motion.div>
         ))}
       </motion.ul>
