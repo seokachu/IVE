@@ -185,3 +185,15 @@ export interface Address {
   address_line2: string;
   postal_code: string;
 }
+
+export interface OrderSummaryProps {
+  order: {
+    orderId: string;
+    totalAmount: number;
+    itemCount: number;
+    orderDate: string;
+    firstItemName: string;
+    firstOrderImage: string;
+  };
+  onViewDetail: () => void;
+}

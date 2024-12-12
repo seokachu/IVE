@@ -1,26 +1,25 @@
+import Image from "next/image";
+import { useState } from "react";
 import ActionButton from "@/components/common/button/ActionButton";
 import { formatPrice } from "@/utils/calculateDiscount";
 import { formatDate } from "@/utils/formatDate";
-import Image from "next/image";
-import { useState } from "react";
-
-interface OrderSummaryProps {
-  order: {
-    orderId: string;
-    totalAmount: number;
-    itemCount: number;
-    orderDate: string;
-    firstItemName: string;
-    firstOrderImage: string;
-  };
-  onViewDetail: () => void;
-}
+import type { OrderSummaryProps } from "@/types";
+import ConfirmModal from "@/components/common/modal/ConfirmModal";
 
 const OrderSummary = ({ order, onViewDetail }: OrderSummaryProps) => {
   const [isReviewMode, setIsReviewMode] = useState(false);
+  const [isModal, setIsModal] = useState(false);
+
+  const onClickCompleteOrder = () => {
+    setIsModal(true);
+  };
 
   const handleWriteReview = () => {
     setIsReviewMode(true);
+  };
+
+  const goToWriteReview = () => {
+    
   };
 
   return (
@@ -51,7 +50,7 @@ const OrderSummary = ({ order, onViewDetail }: OrderSummaryProps) => {
           <p className="font-bold my-1">{formatPrice(order.totalAmount)}원</p>
           <div className="flex gap-2 items-baseline">
             <ActionButton
-              onClick={handleWriteReview}
+              onClick={onClickCompleteOrder}
               variant="primary"
               className="text-sm py-1 px-3"
             >
@@ -67,6 +66,16 @@ const OrderSummary = ({ order, onViewDetail }: OrderSummaryProps) => {
           </div>
         </div>
       </div>
+      {isModal && (
+        <ConfirmModal
+          isOpen={setIsModal}
+          onConfirm={handleWriteReview}
+          title="구매확정"
+          description="정말로 구매를 확정하시겠습니까?"
+          cancelText="취소"
+          confirmText="구매확정"
+        />
+      )}
     </li>
   );
 };
