@@ -13,7 +13,6 @@ import _ from "lodash";
 import OrderDetail from "@/components/mypage/order/OrderDetail";
 import OrderSummary from "@/components/mypage/order/OrderSummary";
 import { getDiscountedPrice } from "@/utils/calculateDiscount";
-import PaymentOverview from "@/components/mypage/order/PaymentOverview";
 
 const OrderListPage = () => {
   const session = useRecoilValue(sessionState);
@@ -138,15 +137,10 @@ const OrderListPage = () => {
           ))}
         </ul>
       ) : (
-        <div>
-          <OrderDetail
-            orderItems={groupedOrders[selectedOrderId]}
-            onBack={() => setSelectedOrderId(null)}
-          />
-          {/* <PaymentOverview title="배송 정보" payment={payment} />
-          <PaymentOverview title="결제 정보" payment={payment} />
-          <PaymentOverview title="결제 수단" payment={payment} /> */}
-        </div>
+        <OrderDetail
+          orderItems={groupedOrders[selectedOrderId]}
+          onBack={() => setSelectedOrderId(null)}
+        />
       )}
     </div>
   );

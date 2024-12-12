@@ -6,7 +6,7 @@ const OrderPaymentInfo = ({ item }: PaymentDetailsProps) => {
     <>
       <li className="flex justify-between">
         <span className="text-gray-500">총 주문 금액 :</span>
-        <span>{formatPrice(Number(item.amount))} 원</span>
+        <span>{formatPrice(Number(item?.amount))} 원</span>
       </li>
       <li className="flex justify-between border-b pb-2">
         <span className="text-gray-500">총 배송비 :</span>
@@ -16,7 +16,7 @@ const OrderPaymentInfo = ({ item }: PaymentDetailsProps) => {
       <li className="flex justify-between font-medium">
         <span className="text-gray-500">총 결제 금액 :</span>
         <span className="font-bold text-base">
-          {formatPrice(Number(item.amount))} 원
+          {formatPrice(Number(item?.amount))} 원
         </span>
       </li>
     </>

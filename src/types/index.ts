@@ -197,3 +197,8 @@ export interface OrderSummaryProps {
   };
   onViewDetail: () => void;
 }
+
+export interface OrderDetailProps {
+  orderItems: any[];
+  onBack: () => void;
+}

@@ -1,5 +1,5 @@
 "use client";
-import CartListItems from "./CartListItems";
+import CartListItem from "./CartListItem";
 import { useRecoilState } from "recoil";
 import { cartState, selectedItemState } from "@/store";
 import { useEffect, useState } from "react";
@@ -83,7 +83,7 @@ const CartList = () => {
           />
           <ul>
             {cartItems.map((item) => (
-              <CartListItems key={item.id} item={item} />
+              <CartListItem key={item.id} item={item} />
             ))}
           </ul>
         </>

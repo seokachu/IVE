@@ -9,7 +9,7 @@ import QuantitySelector from "../common/QuantitySelector";
 import { toast } from "@/hooks/use-toast";
 import { useSearchParams } from "next/navigation";
 
-const CartListItems = ({ item }: CartListItemProps) => {
+const CartListItem = ({ item }: CartListItemProps) => {
   const id = useId();
   const searchParams = useSearchParams();
   const selectedParam = searchParams.get("selected");
@@ -151,4 +151,4 @@ const CartListItems = ({ item }: CartListItemProps) => {
   );
 };
 
-export default CartListItems;
+export default CartListItem;
