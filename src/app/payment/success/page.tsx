@@ -140,6 +140,11 @@ const PaymentSuccessPage = () => {
           quantity: item.quantity,
           shipping_type: item.shipping_type ?? "일반배송",
           discount_rate: item.discount_rate ?? 0,
+          review_count: item.review_count ?? 0,
+          color: item.color,
+          size: item.size,
+          delivery_info: item.delivery_info,
+          rating: item.rating,
         }));
 
         // 순차적으로 저장
@@ -185,6 +190,7 @@ const PaymentSuccessPage = () => {
     return <PaymentSuccessLoading />;
   }
 
+  //에러 처리시 장바구니에 담긴 내용 유지 로직 추가해야함.
   if (paymentError || itemsError) {
     return (
       <main className="min-h-[60vh]">

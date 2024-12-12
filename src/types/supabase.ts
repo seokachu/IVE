@@ -240,7 +240,9 @@ export type Database = {
       }
       order_items: {
         Row: {
+          color: string | null
           created_at: string
+          delivery_info: string | null
           discount_rate: number | null
           id: string
           order_id: string
@@ -249,11 +251,16 @@ export type Database = {
           product_image: string | null
           product_name: string
           quantity: number
+          rating: number | null
+          review_count: number | null
           shipping_type: string | null
+          size: string | null
           user_id: string | null
         }
         Insert: {
+          color?: string | null
           created_at?: string
+          delivery_info?: string | null
           discount_rate?: number | null
           id?: string
           order_id: string
@@ -262,11 +269,16 @@ export type Database = {
           product_image?: string | null
           product_name: string
           quantity: number
+          rating?: number | null
+          review_count?: number | null
           shipping_type?: string | null
+          size?: string | null
           user_id?: string | null
         }
         Update: {
+          color?: string | null
           created_at?: string
+          delivery_info?: string | null
           discount_rate?: number | null
           id?: string
           order_id?: string
@@ -275,7 +287,10 @@ export type Database = {
           product_image?: string | null
           product_name?: string
           quantity?: number
+          rating?: number | null
+          review_count?: number | null
           shipping_type?: string | null
+          size?: string | null
           user_id?: string | null
         }
         Relationships: [

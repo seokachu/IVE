@@ -12,6 +12,8 @@ import { useRecoilValue } from "recoil";
 import _ from "lodash";
 import OrderDetail from "@/components/mypage/order/OrderDetail";
 import OrderSummary from "@/components/mypage/order/OrderSummary";
+import { getDiscountedPrice } from "@/utils/calculateDiscount";
+import PaymentOverview from "@/components/mypage/order/PaymentOverview";
 
 const OrderListPage = () => {
   const session = useRecoilValue(sessionState);
@@ -45,15 +47,17 @@ const OrderListPage = () => {
   const orderSummaries = Object.entries(groupedOrders).map(
     ([orderId, items]) => ({
       orderId,
-      totalAmount: _.sumBy(items, (item) => item.price * item.quantity),
+      totalAmount: _.sumBy(
+        items,
+        (item) => getDiscountedPrice(item) * item.quantity
+      ),
       itemCount: _.sumBy(items, "quantity"),
       orderDate: items[0]?.created_at,
       firstItemName: items[0]?.product_name,
       firstOrderImage: items[0]?.product_image,
+      // disCountRate:
     })
   );
-
-  console.log(orderSummaries);
 
   const handleDeleteSelected = () => {
     if (selectedItems.length === 0) {
@@ -139,6 +143,9 @@ const OrderListPage = () => {
             orderItems={groupedOrders[selectedOrderId]}
             onBack={() => setSelectedOrderId(null)}
           />
+          {/* <PaymentOverview title="배송 정보" payment={payment} />
+          <PaymentOverview title="결제 정보" payment={payment} />
+          <PaymentOverview title="결제 수단" payment={payment} /> */}
         </div>
       )}
     </div>
