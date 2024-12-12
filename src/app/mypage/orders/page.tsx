@@ -46,7 +46,7 @@ const OrderListPage = () => {
     ([orderId, items]) => ({
       orderId,
       totalAmount: _.sumBy(items, (item) => item.price * item.quantity),
-      itemCount: items.length,
+      itemCount: _.sumBy(items, "quantity"),
       orderDate: items[0]?.created_at,
       firstItemName: items[0]?.product_name,
       firstOrderImage: items[0]?.product_image,
