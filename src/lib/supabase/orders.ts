@@ -29,12 +29,12 @@ export const saveOrderItems = async (
 };
 
 //결제데이터 불러오기
-export const getOrderItems = async (userId: string) => {
+export const getOrderItems = async (orderId: string) => {
   try {
     const { data, error } = await supabase
       .from("order_items")
       .select("*")
-      .eq("user_id", userId)
+      .eq("user_id", orderId)
       .order("created_at", { ascending: false });
 
     if (error) throw error;
@@ -59,9 +59,7 @@ export const getOrderDetail = async (orderId: string) => {
     return data;
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(
-        `주문 상세정보 조회에 실패했습니다. ${error.message}`
-      );
+      throw new Error(`주문 상세정보 조회에 실패했습니다. ${error.message}`);
     }
     throw error;
   }

@@ -2,15 +2,26 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   deleteAllOrderItems,
   deleteOrderItems,
+  getOrderDetail,
   getOrderItems,
 } from "@/lib/supabase/orders";
 
-//결제목록 가져오기
+//결제 전체 주문 목록 가져오기
 export const useOrderItems = (userId?: string) => {
   return useQuery({
     queryKey: ["orderItems", userId],
     queryFn: () => getOrderItems(userId!),
     enabled: !!userId,
+    staleTime: Infinity,
+  });
+};
+
+//결제목록 특정 주문 상품 불러오기
+export const useOrderItemsByOrderId = (orderId?: string) => {
+  return useQuery({
+    queryKey: ["orderItemsByOrder", orderId],
+    queryFn: () => getOrderDetail(orderId!),
+    enabled: !!orderId,
     staleTime: Infinity,
   });
 };

@@ -53,6 +53,8 @@ const OrderListPage = () => {
     })
   );
 
+  console.log(orderSummaries);
+
   const handleDeleteSelected = () => {
     if (selectedItems.length === 0) {
       toast({
@@ -97,21 +99,25 @@ const OrderListPage = () => {
 
   return (
     <div className="px-5 lg:pt-14 pb-28 lg:px-8">
-      <div className="flex justify-between items-center mt-5 lg:mt-0">
-        <h2 className="font-bold text-xl mb-5 hidden lg:block">결제 목록</h2>
-      </div>
-      {!isEmpty && (
-        <SelectionControl
-          totalItems={orderItems.length}
-          selectedCount={selectedItems.length}
-          onSelectAll={handleSelectAll}
-          onDeleteSelected={handleDeleteSelected}
-          onConfirm={handleConfirmDeleteAll}
-          title="결제목록 비우기"
-          description="결제한 목록이 삭제됩니다. 정말 삭제하시겠습니까?"
-          cancelText="취소"
-          confirmText="삭제"
-        />
+      {!isEmpty && !selectedOrderId && (
+        <>
+          <div className="flex justify-between items-center mt-5 lg:mt-0">
+            <h2 className="font-bold text-xl mb-5 hidden lg:block">
+              결제 목록
+            </h2>
+          </div>
+          <SelectionControl
+            totalItems={orderItems.length}
+            selectedCount={selectedItems.length}
+            onSelectAll={handleSelectAll}
+            onDeleteSelected={handleDeleteSelected}
+            onConfirm={handleConfirmDeleteAll}
+            title="결제목록 비우기"
+            description="결제한 목록이 삭제됩니다. 정말 삭제하시겠습니까?"
+            cancelText="취소"
+            confirmText="삭제"
+          />
+        </>
       )}
       {isEmpty ? (
         <div className="flex flex-col gap-3 items-center justify-center w-full h-[500px]">
@@ -128,12 +134,12 @@ const OrderListPage = () => {
           ))}
         </ul>
       ) : (
-        <ul>
+        <div>
           <OrderDetail
             orderItems={groupedOrders[selectedOrderId]}
             onBack={() => setSelectedOrderId(null)}
           />
-        </ul>
+        </div>
       )}
     </div>
   );

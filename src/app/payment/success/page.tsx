@@ -1,9 +1,9 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { usePayment } from "@/hooks/queries/usePayment";
-import { useOrderItems } from "@/hooks/queries/useOrderItems";
+import { useOrderItemsByOrderId } from "@/hooks/queries/useOrderItems";
 import Error from "@/components/common/error/Error";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { cartState, sessionState } from "@/store";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
@@ -21,6 +21,7 @@ const PaymentSuccessPage = () => {
   const queryClient = useQueryClient();
   const session = useRecoilValue(sessionState);
   const [cartItems, setCartItems] = useRecoilState(cartState);
+  const [isDataSaved, setIsDataSaved] = useState(false);
 
   const orderId = searchParams.get("orderId") as string;
   const paymentKey = searchParams.get("paymentKey");
@@ -41,7 +42,7 @@ const PaymentSuccessPage = () => {
     data: orderItems,
     isLoading: itemsLoading,
     error: itemsError,
-  } = useOrderItems(orderId);
+  } = useOrderItemsByOrderId(isDataSaved ? orderId : undefined);
 
   // 결제 완료 후 orderItems 데이터 갱신
   useEffect(() => {
@@ -58,7 +59,8 @@ const PaymentSuccessPage = () => {
       !address ||
       !session ||
       !cartItems ||
-      payment // 이미 결제 데이터가 있으면 저장하지 않음
+      payment ||
+      isDataSaved
     )
       return;
 
@@ -158,6 +160,7 @@ const PaymentSuccessPage = () => {
         setCartItems(updatedCart);
 
         localStorage.removeItem("checkout_items");
+        setIsDataSaved(true);
       } catch (error) {
         console.log("데이터 저장 중 오류가 발생했습니다.", error);
       }
@@ -175,6 +178,7 @@ const PaymentSuccessPage = () => {
     orderName,
     payment,
     setCartItems,
+    isDataSaved,
   ]);
 
   if (paymentLoading || itemsLoading || !payment) {
