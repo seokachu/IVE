@@ -82,7 +82,10 @@ export const customerInfoSchema = z.object({
 
 export const reviewSchema = z.object({
   rating: z.number().min(1, "별점을 선택해주세요.").max(5),
-  content: z.string().min(10, "최소 10자 이상 입력해주세요."),
+  content: z
+    .string()
+    .min(10, "최소 10자 이상 입력해주세요.")
+    .max(200, "최대 200자 까지 작성할 수 있습니다."),
 });
 
 //타입 지정

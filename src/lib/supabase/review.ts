@@ -96,7 +96,7 @@ export const getOrderItemReview = async (orderId: string) => {
   }
 };
 
-//리뷰 추가하기
+//리뷰 추가
 export const saveOrderItemReview = async ({
   order_id,
   goods_id,
