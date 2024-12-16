@@ -164,6 +164,7 @@ export type Database = {
           goods_id: string | null
           id: string
           name: string | null
+          order_id: string | null
           rating: number | null
           user_id: string | null
         }
@@ -173,6 +174,7 @@ export type Database = {
           goods_id?: string | null
           id?: string
           name?: string | null
+          order_id?: string | null
           rating?: number | null
           user_id?: string | null
         }
@@ -182,6 +184,7 @@ export type Database = {
           goods_id?: string | null
           id?: string
           name?: string | null
+          order_id?: string | null
           rating?: number | null
           user_id?: string | null
         }

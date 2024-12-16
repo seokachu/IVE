@@ -6,11 +6,13 @@ import Image from "next/image";
 import { useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import WriteReviewModal from "./WriteReviewModal";
+import { useOrderItemReview } from "@/hooks/queries/useReviews";
 import type { DetailOrderItemProps } from "@/types";
 
 const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
   const [isConfirmModal, setIsConfirmModal] = useState(false);
   const [isReviewModal, setIsReviewModal] = useState(false);
+  const { data: reviewData } = useOrderItemReview(item.order_id);
 
   const price = getDiscountedPrice(item);
 
@@ -53,11 +55,11 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
           )}
           <div className="flex flex-col justify-center">
             <h3 className="font-bold">{item.product_name}</h3>
-            <div className="text-gray-500 text-sm flex items-center gap-1 mt-1">
+            <div className="text-gray-500 text-sm flex items-center gap-1 mt-1 uppercase">
               <p>색상 : {item.color}</p>&#47;
               <p>사이즈 : {item.size}</p>
               <span className="-translate-y-[1px] text-dark-gray">|</span>
-              <p>수량: {item.quantity}개</p>
+              <p>수량 : {item.quantity}개</p>
             </div>
             <div className="flex gap-2 items-center">
               <s className="text-sm text-dark-gray">
@@ -91,6 +93,7 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
         <WriteReviewModal
           isOpen={isReviewModal}
           onClose={() => setIsReviewModal(false)}
+          reviewData={reviewData}
         />
       )}
     </li>

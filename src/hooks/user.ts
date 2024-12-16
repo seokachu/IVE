@@ -80,12 +80,18 @@ export const customerInfoSchema = z.object({
   email: emailSchema,
 });
 
+export const reviewSchema = z.object({
+  rating: z.number().min(1, "별점을 선택해주세요.").max(5),
+  content: z.string().min(10, "최소 10자 이상 입력해주세요."),
+});
+
 //타입 지정
 export type SignUpType = z.infer<typeof signUpSchema>;
 export type LoginType = z.infer<typeof loginSchema>;
 export type MyPageType = z.infer<typeof myPageSchema>;
 export type AddressType = z.infer<typeof myPageAddressSchema>;
 export type CustomerInfoType = z.infer<typeof customerInfoSchema>;
+export type ReviewType = z.infer<typeof reviewSchema>;
 
 //스키마 내보내기
 export const userSchemas = {

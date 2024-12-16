@@ -4,6 +4,7 @@ const page = () => {
       <div className="flex justify-between items-center mt-5 lg:mt-0">
         <h2 className="font-bold text-xl mb-5 hidden lg:block">내가 쓴 글</h2>
       </div>
+      <div>준비중...</div>
       {/* {!isEmpty ? (
         <AddressList addresses={addresses} />
       ) : (

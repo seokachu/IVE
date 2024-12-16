@@ -79,8 +79,6 @@ export const useUpdateShippingAddress = () => {
       data: ShippingAddressUpdate;
     }) => updateShippingAddress(addressId, data),
     onSuccess: async (updatedData, variables) => {
-      console.log("Mutation succeeded with updated data:", updatedData);
-
       // 즉시 캐시 업데이트
       queryClient.setQueryData<any>(
         ["shippingAddresses", variables.data.user_id],
