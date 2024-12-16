@@ -11,13 +11,17 @@ import { Tables } from "@/types/supabase";
 interface WriteReviewModalProps {
   isOpen: boolean;
   onClose: () => void;
-  reviewData?: Tables<"goods_reviews">;
+  reviewData?: Tables<"goods_reviews"> | null;
+  orderId: string;
+  goodsId: string;
 }
 
 const WriteReviewModal = ({
   isOpen,
   onClose,
   reviewData,
+  orderId,
+  goodsId,
 }: WriteReviewModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -28,8 +32,10 @@ const WriteReviewModal = ({
         </DialogHeader>
         <WriteReviewForm
           mode="create"
-          reviewData={reviewData}
+          reviewData={reviewData || undefined}
           onClose={onClose}
+          orderId={orderId}
+          goodsId={goodsId}
         />
       </DialogContent>
     </Dialog>

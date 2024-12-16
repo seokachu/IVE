@@ -2,6 +2,7 @@ import {
   getGoodsReviews,
   getOrderItemReview,
   saveOrderItemReview,
+  updateOrderItemReview,
 } from "@/lib/supabase/review";
 import { ReviewResponse } from "@/types";
 import { Database } from "@/types/supabase";
@@ -27,8 +28,10 @@ export const useReviews = ({ id, page }: UseReviewsProps) => {
 //단일 리뷰 조회
 export const useOrderItemReview = (orderId: string) => {
   return useQuery({
-    queryKey: ["review"],
-    queryFn: () => getOrderItemReview(orderId),
+    queryKey: ["review", orderId],
+    queryFn: () => {
+      return getOrderItemReview(orderId);
+    },
     enabled: !!orderId,
   });
 };
@@ -38,8 +41,10 @@ export const useAddOrderItemReview = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: saveOrderItemReview,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["review"] });
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["review", variables.order_id],
+      });
     },
   });
 };
@@ -48,10 +53,11 @@ export const useAddOrderItemReview = () => {
 // export const useUpdateOrderItemReview = () => {
 //   const queryClient = useQueryClient();
 //   return useMutation({
-//     mutationFn: ({ order_id, rating }: UpdateOrderItemReview) =>
-//       updateOrderItemReview(order_id!, rating),
-//     onSuccess: () => {
-//       queryClient.invalidateQueries({ queryKey: ["review"] });
+//     mutationFn: updateOrderItemReview,
+//     onSuccess: (_, variables) => {
+//       queryClient.invalidateQueries({
+//         queryKey: ["review", variables.order_id],
+//       });
 //     },
 //   });
 // };

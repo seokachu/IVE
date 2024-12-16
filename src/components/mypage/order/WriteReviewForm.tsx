@@ -20,11 +20,15 @@ interface WriteReviewFormProps {
   mode: "create" | "edit";
   reviewData?: Tables<"goods_reviews">;
   onClose: () => void;
+  orderId: string;
+  goodsId: string;
 }
 
 const WriteReviewForm = ({
   mode,
   reviewData,
+  orderId,
+  goodsId,
   onClose,
 }: WriteReviewFormProps) => {
   const session = useRecoilValue(sessionState);
@@ -58,8 +62,8 @@ const WriteReviewForm = ({
   const handleSubmit = (data: ReviewFormData) => {
     const reviewInput = {
       user_id: session?.user?.id,
-      order_id: reviewData?.order_id,
-      goods_id: reviewData?.goods_id,
+      order_id: orderId,
+      goods_id: goodsId,
       created_at: new Date().toISOString(),
       name: session?.user?.user_metadata?.name || "",
       rating: data.rating,

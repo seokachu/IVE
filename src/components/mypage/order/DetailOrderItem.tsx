@@ -32,6 +32,12 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
     setIsReviewModal(true);
   };
 
+  //구매확정 상태이고 리뷰가 있으면 리뷰수정, 없으면 리뷰쓰기
+  const getButtonText = () => {
+    if (!item.is_confirmed) return "구매확정";
+    return reviewData ? "리뷰수정" : "리뷰쓰기";
+  };
+
   return (
     <li className="border rounded-lg p-4">
       {item.is_confirmed && (
@@ -76,7 +82,7 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
           variant={item.is_confirmed ? "primary" : "default"}
           className="text-sm py-1 px-3 mt-5 lg:mt-0"
         >
-          {!item.is_confirmed ? "구매확정" : "리뷰쓰기"}
+          {getButtonText()}
         </ActionButton>
       </div>
       {isConfirmModal && (
@@ -94,6 +100,8 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
           isOpen={isReviewModal}
           onClose={() => setIsReviewModal(false)}
           reviewData={reviewData}
+          orderId={item.order_id}
+          goodsId={item.product_id}
         />
       )}
     </li>

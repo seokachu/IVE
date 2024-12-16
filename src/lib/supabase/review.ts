@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
-import { Database } from "@/types/supabase";
+import type { Database, Tables } from "@/types/supabase";
 
 type OrderReviewInsert =
   Database["public"]["Tables"]["goods_reviews"]["Insert"];
@@ -75,21 +75,16 @@ export const getOrderItemReview = async (orderId: string) => {
 
     const { data, error } = await supabase
       .from("goods_reviews")
-      .select(
-        `
-        *,
-        user:user_id(
-        name
-        )
-        `
-      )
+      .select("*, user:user(name)")
       .eq("order_id", orderId)
-      .single();
+      .limit(1);
 
     if (error) throw error;
 
+    if (!data || data.length === 0) return null;
+
     return {
-      ...data,
+      ...data[0],
       goods_id: orderItems[0].product_id,
       order_id: orderId,
     };
