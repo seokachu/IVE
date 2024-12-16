@@ -39,9 +39,6 @@ const WriteReviewForm = ({
     },
   });
 
-  console.log("reviewData!!", reviewData);
-  console.log("session", session);
-
   const { isValid, isSubmitting } = form.formState;
   const {
     setValue,
@@ -53,7 +50,9 @@ const WriteReviewForm = ({
   const currentRating = watch("rating");
 
   const handleRatingChange = (rating: number) => {
-    setValue("rating", rating);
+    setValue("rating", rating, {
+      shouldValidate: true,
+    });
   };
 
   const handleSubmit = (data: ReviewFormData) => {
@@ -88,11 +87,16 @@ const WriteReviewForm = ({
               *
             </span>
           </Label>
+          <input type="hidden" {...register("rating")} />
           <InteractiveStars
             size={24}
             rating={currentRating}
             onChange={handleRatingChange}
           />
+
+          {errors.rating && (
+            <p className="text-red text-xs mt-1">{errors.rating.message}</p>
+          )}
         </div>
         <div className="space-y-2">
           <Label htmlFor="content" className="mb-2">
