@@ -35,7 +35,7 @@ export const getOrderItems = async (orderId: string) => {
       .from("order_items")
       .select("*")
       .eq("user_id", orderId)
-      .order("created_at", { ascending: true })
+      .order("created_at", { ascending: false })
       .order("id", { ascending: true });
 
     if (error) throw error;
