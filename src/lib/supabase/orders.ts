@@ -10,7 +10,7 @@ export const saveOrderItems = async (
     product_image: string | null;
     price: number;
     quantity: number;
-    shipping_type: string;
+    shipping_type: boolean;
   }[]
 ) => {
   try {

@@ -26,13 +26,11 @@ export const useReviews = ({ id, page }: UseReviewsProps) => {
 };
 
 //단일 리뷰 조회
-export const useOrderItemReview = (orderId: string) => {
+export const useOrderItemReview = (orderId: string, productId: string) => {
   return useQuery({
-    queryKey: ["review", orderId],
-    queryFn: () => {
-      return getOrderItemReview(orderId);
-    },
-    enabled: !!orderId,
+    queryKey: ["review", orderId, productId],
+    queryFn: () => getOrderItemReview(orderId, productId),
+    enabled: !!orderId && !!productId,
   });
 };
 
@@ -43,7 +41,7 @@ export const useAddOrderItemReview = () => {
     mutationFn: saveOrderItemReview,
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["review", variables.order_id],
+        queryKey: ["review", variables.order_id, variables.goods_id],
       });
     },
   });

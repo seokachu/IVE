@@ -60,34 +60,23 @@ export const getAverageRating = async (goodsId: string) => {
 };
 
 //단일 리뷰 가져오기
-export const getOrderItemReview = async (orderId: string) => {
+export const getOrderItemReview = async (
+  orderId: string,
+  productId: string
+) => {
   try {
-    // product_id 가져오기
-    const { data: orderItems } = await supabase
-      .from("order_items")
-      .select("product_id")
-      .eq("order_id", orderId)
-      .limit(1);
-
-    if (!orderItems || orderItems.length === 0) {
-      return null;
-    }
-
     const { data, error } = await supabase
       .from("goods_reviews")
       .select("*, user:user(name)")
       .eq("order_id", orderId)
+      .eq("goods_id", productId)
       .limit(1);
 
     if (error) throw error;
-
     if (!data || data.length === 0) return null;
+    const result = data[0];
 
-    return {
-      ...data[0],
-      goods_id: orderItems[0].product_id,
-      order_id: orderId,
-    };
+    return result;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`리뷰를 가져오는데 실패했습니다. ${error.message}`);
@@ -122,6 +111,7 @@ export const saveOrderItemReview = async ({
       .single();
 
     if (error) throw error;
+
     return data;
   } catch (error) {
     if (error instanceof Error) {
