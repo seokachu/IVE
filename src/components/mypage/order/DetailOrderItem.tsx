@@ -12,8 +12,10 @@ import type { DetailOrderItemProps } from "@/types";
 const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
   const [isConfirmModal, setIsConfirmModal] = useState(false);
   const [isReviewModal, setIsReviewModal] = useState(false);
-  const { data: reviewData } = useOrderItemReview(item.order_id);
-
+  const { data: reviewData } = useOrderItemReview(
+    item.order_id,
+    item.product_id
+  );
   const price = getDiscountedPrice(item);
 
   const onClickCompleteOrder = () => {

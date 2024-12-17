@@ -42,7 +42,6 @@ export const useDeleteOrderItems = () => {
 //전체삭제 mutation
 export const useDeleteAllOrderItems = () => {
   const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: (userId: string) => deleteAllOrderItems(userId),
     onSuccess: () => {
@@ -56,10 +55,7 @@ export const useConfirmOrder = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (itemId: string) => {
-      const data = await confirmOrderItem(itemId);
-      return data;
-    },
+    mutationFn: async (itemId: string) => confirmOrderItem(itemId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["orderItems"] });
     },

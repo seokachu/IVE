@@ -10,7 +10,7 @@ export const saveOrderItems = async (
     product_image: string | null;
     price: number;
     quantity: number;
-    shipping_type: string;
+    shipping_type: boolean;
   }[]
 ) => {
   try {
@@ -35,7 +35,8 @@ export const getOrderItems = async (orderId: string) => {
       .from("order_items")
       .select("*")
       .eq("user_id", orderId)
-      .order("created_at", { ascending: false });
+      .order("created_at", { ascending: true })
+      .order("id", { ascending: true });
 
     if (error) throw error;
     return data;
