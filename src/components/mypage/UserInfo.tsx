@@ -6,7 +6,7 @@ import Link from "next/link";
 import { MYPAGE_GNB_ARRAY } from "@/utils/constants";
 import { usePathname } from "next/navigation";
 import ActionButton from "../common/button/ActionButton";
-import { useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { updateNickname } from "@/lib/supabase/auth";
 import { toast } from "@/hooks/use-toast";
 import { Input } from "../ui/input";
@@ -18,6 +18,10 @@ const UserInfo = () => {
   const [session, setSession] = useRecoilState(sessionState);
   const pathname = usePathname();
   const [isEditingNickname, setIsEditingNickname] = useState(false);
+  const [src, setSrc] = useState<string | null>(null);
+  const [preview, setPreview] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   //하위 경로 포함 체크 active
   const isActivePath = (path: string, exact: boolean) => {
@@ -96,10 +100,33 @@ const UserInfo = () => {
     clearErrors("nickname");
   };
 
+  //아바타 클릭 시 이미지 변경
+  const handleInputClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    inputRef.current?.click();
+  };
+
+  const handleImgChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSrc(URL.createObjectURL(file));
+      setIsModalOpen(true);
+    }
+  };
+
   return (
     <section>
       <div>
-        <UserAvatar size="xl" />
+        <input
+          onChange={handleImgChange}
+          type="file"
+          accept="image/*"
+          ref={inputRef}
+          className="hidden"
+        />
+        <button onClick={handleInputClick}>
+          <UserAvatar size="xl" />
+        </button>
         <div className="flex justify-between items-baseline mt-5 gap-2">
           {isEditingNickname ? (
             <form onSubmit={handleSubmit(onSubmit)} className="w-full">
