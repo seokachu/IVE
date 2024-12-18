@@ -48,14 +48,27 @@ export const useAddOrderItemReview = () => {
 };
 
 //리뷰 수정
-// export const useUpdateOrderItemReview = () => {
-//   const queryClient = useQueryClient();
-//   return useMutation({
-//     mutationFn: updateOrderItemReview,
-//     onSuccess: (_, variables) => {
-//       queryClient.invalidateQueries({
-//         queryKey: ["review", variables.order_id],
-//       });
-//     },
-//   });
-// };
+export const useUpdateOrderItemReview = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({
+      id,
+      rating,
+      content,
+    }: {
+      id: string;
+      rating: number;
+      content: string;
+    }) => updateOrderItemReview(id, { rating, content }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["reviews"],
+        refetchType: "all",
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["review"],
+        refetchType: "all",
+      });
+    },
+  });
+};

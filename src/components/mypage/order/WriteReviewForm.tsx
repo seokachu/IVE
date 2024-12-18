@@ -1,4 +1,3 @@
-import { Tables } from "@/types/supabase";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { Label } from "@/components/ui/label";
@@ -7,22 +6,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import InteractiveStars from "@/utils/InteractiveStars";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { useAddOrderItemReview } from "@/hooks/queries/useReviews";
+import {
+  useAddOrderItemReview,
+  useUpdateOrderItemReview,
+} from "@/hooks/queries/useReviews";
 import { useRecoilValue } from "recoil";
 import { sessionState } from "@/store";
 import { toast } from "@/hooks/use-toast";
-
-interface ReviewFormData {
-  rating: number;
-  content: string;
-}
-interface WriteReviewFormProps {
-  mode: "create" | "edit";
-  reviewData?: Tables<"goods_reviews">;
-  onClose: () => void;
-  orderId: string;
-  goodsId: string;
-}
+import type { ReviewFormData, WriteReviewFormProps } from "@/types";
 
 const WriteReviewForm = ({
   mode,
@@ -33,7 +24,7 @@ const WriteReviewForm = ({
 }: WriteReviewFormProps) => {
   const session = useRecoilValue(sessionState);
   const { mutate: addOrderItemReview } = useAddOrderItemReview();
-  // const { mutate: updateItemReview } = useAddOrderItemReview();
+  const { mutate: updateItemReview } = useUpdateOrderItemReview();
   const form = useForm<ReviewType>({
     mode: "onChange",
     resolver: zodResolver(reviewSchema),
@@ -60,22 +51,49 @@ const WriteReviewForm = ({
   };
 
   const handleSubmit = (data: ReviewFormData) => {
-    const reviewInput = {
-      user_id: session?.user?.id,
-      order_id: orderId,
-      goods_id: goodsId,
-      created_at: new Date().toISOString(),
-      name: session?.user?.user_metadata?.name || "",
-      rating: data.rating,
-      content: data.content,
-    };
+    //리뷰 추가 mode
+    if (mode === "create") {
+      const reviewInput = {
+        user_id: session?.user?.id,
+        order_id: orderId,
+        goods_id: goodsId,
+        created_at: new Date().toISOString(),
+        name: session?.user?.user_metadata?.name || "",
+        rating: data.rating,
+        content: data.content,
+      };
+      addOrderItemReview(reviewInput);
 
-    addOrderItemReview(reviewInput);
+      toast({
+        title: "리뷰가 등록되었습니다.",
+      });
+    }
+    //리뷰수정 Mode
+    else {
+      //기존 리뷰와 별점이 변경되었는지 체크
+      const isChanged =
+        data.rating !== reviewData!.rating ||
+        data.content !== reviewData!.content;
+
+      if (!isChanged) {
+        toast({
+          title: "변경된 내용이 없습니다.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      updateItemReview({
+        id: reviewData!.id,
+        rating: data.rating,
+        content: data.content,
+      });
+
+      toast({
+        title: "리뷰가 수정되었습니다.",
+      });
+    }
     onClose();
-
-    toast({
-      title: "리뷰가 등록되었습니다.",
-    });
   };
 
   return (
