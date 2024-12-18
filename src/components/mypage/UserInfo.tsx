@@ -1,14 +1,19 @@
 "use client";
 import { sessionState } from "@/store";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import UserAvatar from "../common/UserAvatar";
 import Link from "next/link";
 import { MYPAGE_GNB_ARRAY } from "@/utils/constants";
 import { usePathname } from "next/navigation";
+import ActionButton from "../common/button/ActionButton";
+import { useState } from "react";
 
 const UserInfo = () => {
   const session = useRecoilValue(sessionState);
+  const setSession = useSetRecoilState(sessionState);
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+  const [nickname, setNickname] = useState("");
 
   //하위 경로 포함 체크 active
   const isActivePath = (path: string, exact: boolean) => {
@@ -18,15 +23,31 @@ const UserInfo = () => {
     return pathname.startsWith(path);
   };
 
+  const handleNicknameChange = async () => {};
+
   return (
     <section>
       <div>
         <UserAvatar size="xl" />
         <div className="flex justify-between mt-5">
-          <h2 className="font-bold">{session?.user.user_metadata.name}</h2>
-          <button className="text-sm text-white py-1 px-3 bg-purple rounded-md">
-            수정
-          </button>
+          {isOpen ? (
+            <input
+              type="text"
+              onChange={(e) => setNickname(e.target.value)}
+              value={nickname}
+              className="border rounded px-2 py-1"
+              maxLength={6}
+            />
+          ) : (
+            <h2 className="font-bold">{session?.user.user_metadata.name}</h2>
+          )}
+          <ActionButton
+            onClick={handleNicknameChange}
+            variant="primary"
+            className="text-sm py-1 px-3"
+          >
+            {!isOpen ? "수정" : "수정완료"}
+          </ActionButton>
         </div>
       </div>
       <div className="flex border-y p-5 my-5">

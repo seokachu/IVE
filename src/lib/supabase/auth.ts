@@ -75,3 +75,18 @@ export const signOut = async () => {
   }
   throw error;
 };
+
+//닉네임 수정
+export const updateNickname = async (name: string) => {
+  try {
+    const { data, error } = await supabase.auth.updateUser({
+      data: { name },
+    });
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`닉네임 변경에 실패했습니다. ${error.message}`);
+    }
+  }
+};
