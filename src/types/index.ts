@@ -212,3 +212,16 @@ export interface DetailOrderItemProps {
   item: Tables<"order_items">;
   onConfirm: () => void;
 }
+
+export interface ReviewFormData {
+  rating: number;
+  content: string;
+}
+
+export interface WriteReviewFormProps {
+  mode: "create" | "edit";
+  reviewData?: Tables<"goods_reviews">;
+  onClose: () => void;
+  orderId: string;
+  goodsId: string;
+}

@@ -40,6 +40,11 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
     return reviewData ? "리뷰수정" : "리뷰쓰기";
   };
 
+  //모달 mode
+  const getReviewMode = () => {
+    return reviewData ? "edit" : "create";
+  };
+
   return (
     <li className="border rounded-lg p-4">
       {item.is_confirmed && (
@@ -104,6 +109,7 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
           reviewData={reviewData}
           orderId={item.order_id}
           goodsId={item.product_id}
+          mode={getReviewMode()}
         />
       )}
     </li>

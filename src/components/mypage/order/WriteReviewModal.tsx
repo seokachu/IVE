@@ -14,6 +14,7 @@ interface WriteReviewModalProps {
   reviewData?: Tables<"goods_reviews"> | null;
   orderId: string;
   goodsId: string;
+  mode: "create" | "edit";
 }
 
 const WriteReviewModal = ({
@@ -22,6 +23,7 @@ const WriteReviewModal = ({
   reviewData,
   orderId,
   goodsId,
+  mode,
 }: WriteReviewModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -31,7 +33,7 @@ const WriteReviewModal = ({
           <DialogDescription className="sr-only">리뷰 작성</DialogDescription>
         </DialogHeader>
         <WriteReviewForm
-          mode="create"
+          mode={mode}
           reviewData={reviewData || undefined}
           onClose={onClose}
           orderId={orderId}
