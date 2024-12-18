@@ -1,6 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
 import { Tables } from "@/types/supabase";
-import { QueryClient } from "@tanstack/react-query";
 
 export interface GnbArrayList {
   label: string;
