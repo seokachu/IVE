@@ -1,19 +1,23 @@
 "use client";
 import { sessionState } from "@/store";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import UserAvatar from "../common/UserAvatar";
 import Link from "next/link";
 import { MYPAGE_GNB_ARRAY } from "@/utils/constants";
 import { usePathname } from "next/navigation";
 import ActionButton from "../common/button/ActionButton";
 import { useState } from "react";
+import { updateNickname } from "@/lib/supabase/auth";
+import { toast } from "@/hooks/use-toast";
+import { Input } from "../ui/input";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { NicknameType, userSchemas } from "@/hooks/user";
 
 const UserInfo = () => {
-  const session = useRecoilValue(sessionState);
-  const setSession = useSetRecoilState(sessionState);
+  const [session, setSession] = useRecoilState(sessionState);
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-  const [nickname, setNickname] = useState("");
+  const [isEditingNickname, setIsEditingNickname] = useState(false);
 
   //하위 경로 포함 체크 active
   const isActivePath = (path: string, exact: boolean) => {
@@ -23,31 +27,117 @@ const UserInfo = () => {
     return pathname.startsWith(path);
   };
 
-  const handleNicknameChange = async () => {};
+  const form = useForm<NicknameType>({
+    mode: "onChange",
+    resolver: zodResolver(userSchemas.myPageNicknameSchema),
+    defaultValues: { nickname: session?.user.user_metadata.name || "" },
+  });
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    setError,
+    clearErrors,
+    formState: { errors },
+  } = form;
+
+  const onSubmit = async (data: NicknameType) => {
+    if (data.nickname === session?.user.user_metadata.name) {
+      setError("nickname", {
+        type: "manual",
+        message: "변경된 닉네임이 없습니다.",
+      });
+      return;
+    }
+
+    try {
+      await updateNickname(data.nickname);
+
+      if (session) {
+        setSession({
+          ...session,
+          user: {
+            ...session.user,
+            user_metadata: {
+              ...session.user.user_metadata,
+              name: data.nickname,
+            },
+          },
+        });
+        toast({ title: "닉네임이 변경 되었습니다." });
+      }
+      setIsEditingNickname(false);
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          title: "닉네임 변경에 실패했습니다.",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
+    }
+  };
+
+  //닉네임 변경
+  const handleNicknameChange = () => {
+    if (!isEditingNickname) {
+      setIsEditingNickname(true);
+      setValue("nickname", session?.user.user_metadata.name || "");
+      clearErrors("nickname");
+      return;
+    }
+    handleSubmit(onSubmit)();
+  };
+
+  //취소버튼
+  const handleNicknameCancel = () => {
+    setIsEditingNickname(false);
+    clearErrors("nickname");
+  };
 
   return (
     <section>
       <div>
         <UserAvatar size="xl" />
-        <div className="flex justify-between mt-5">
-          {isOpen ? (
-            <input
-              type="text"
-              onChange={(e) => setNickname(e.target.value)}
-              value={nickname}
-              className="border rounded px-2 py-1"
-              maxLength={6}
-            />
+        <div className="flex justify-between items-baseline mt-5 gap-2">
+          {isEditingNickname ? (
+            <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+              <Input
+                {...register("nickname")}
+                type="text"
+                className="border rounded-md px-2 py-0"
+                maxLength={6}
+              />
+              {errors.nickname && (
+                <p className="text-xs ml-2 mt-1 text-red">
+                  {errors.nickname.message}
+                </p>
+              )}
+            </form>
           ) : (
-            <h2 className="font-bold">{session?.user.user_metadata.name}</h2>
+            <h2 className="font-bold py-1">
+              {session?.user.user_metadata.name}
+            </h2>
           )}
-          <ActionButton
-            onClick={handleNicknameChange}
-            variant="primary"
-            className="text-sm py-1 px-3"
-          >
-            {!isOpen ? "수정" : "수정완료"}
-          </ActionButton>
+          <div className="flex gap-1 whitespace-nowrap">
+            <ActionButton
+              onClick={handleNicknameChange}
+              variant="primary"
+              className="text-sm py-2 px-3"
+            >
+              {!isEditingNickname ? "수정" : "수정완료"}
+            </ActionButton>
+            {isEditingNickname && (
+              <ActionButton
+                onClick={handleNicknameCancel}
+                variant="default"
+                className="text-sm py-2 px-3"
+              >
+                취소
+              </ActionButton>
+            )}
+          </div>
         </div>
       </div>
       <div className="flex border-y p-5 my-5">
@@ -74,7 +164,11 @@ const UserInfo = () => {
           </li>
         ))}
         {/* <li>
-          <button className="text-dark-gray text-sm">회원탈퇴</button>
+          <button
+            className="text-dark-gray text-sm"
+          >
+            회원탈퇴
+          </button>
         </li> */}
       </ul>
     </section>

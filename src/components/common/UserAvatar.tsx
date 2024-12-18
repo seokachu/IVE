@@ -10,7 +10,7 @@ const UserAvatar = ({ size = "md" }: AvatarProps) => {
   const session = useRecoilValue(sessionState);
 
   const sizeStyles = {
-    sm: "w-[30px] h-auto",
+    sm: "w-[30px] h-[30px]",
     md: "w-10 h-10",
     lg: "w-12 h-12",
     xl: "w-16 h-16",
@@ -24,7 +24,7 @@ const UserAvatar = ({ size = "md" }: AvatarProps) => {
         src={avatarUrl}
         alt={session?.user.user_metadata.avatar_url || "유저 프로필"}
       />
-      <AvatarFallback className="text-xs">
+      <AvatarFallback className={`text-xs ${sizeStyles[size]}`}>
         {session?.user.user_metadata.name || "사용자"}
       </AvatarFallback>
     </Avatar>

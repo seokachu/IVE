@@ -79,14 +79,31 @@ export const signOut = async () => {
 //닉네임 수정
 export const updateNickname = async (name: string) => {
   try {
-    const { data, error } = await supabase.auth.updateUser({
-      data: { name },
-    });
-    if (error) throw error;
-    return data;
+    const { data: authData, error: authError } = await supabase.auth.updateUser(
+      {
+        data: { name },
+      }
+    );
+
+    if (authError) throw authError;
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) throw new Error("사용자 정보를 찾을 수 없습니다.");
+
+    const { error: userError } = await supabase
+      .from("user")
+      .update({ name: name })
+      .eq("id", user.id);
+
+    if (userError) throw userError;
+
+    return authData;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`닉네임 변경에 실패했습니다. ${error.message}`);
     }
+    throw error;
   }
 };
