@@ -13,13 +13,16 @@ import { Input } from "../ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NicknameType, userSchemas } from "@/hooks/user";
+import ImageCropper from "../common/ImageCropper";
+import { uploadAvatar } from "@/lib/supabase/storage";
+import { supabase } from "@/lib/supabase/client";
+import { PiUploadSimpleBold } from "react-icons/pi";
 
 const UserInfo = () => {
   const [session, setSession] = useRecoilState(sessionState);
   const pathname = usePathname();
   const [isEditingNickname, setIsEditingNickname] = useState(false);
   const [src, setSrc] = useState<string | null>(null);
-  const [preview, setPreview] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -101,9 +104,11 @@ const UserInfo = () => {
   };
 
   //아바타 클릭 시 이미지 변경
-  const handleInputClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleAvatarClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    inputRef.current?.click();
+    if (!isModalOpen) {
+      inputRef.current?.click();
+    }
   };
 
   const handleImgChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -111,6 +116,33 @@ const UserInfo = () => {
     if (file) {
       setSrc(URL.createObjectURL(file));
       setIsModalOpen(true);
+    }
+  };
+
+  const handleSaveImage = async (blob: Blob) => {
+    try {
+      const avatarUrl = await uploadAvatar(blob);
+      const { error } = await supabase.auth.updateUser({
+        data: { avatar_url: avatarUrl },
+      });
+      if (error) throw error;
+
+      const {
+        data: { session: newSession },
+      } = await supabase.auth.getSession();
+      if (newSession) {
+        setSession(newSession);
+      }
+      setIsModalOpen(false);
+      toast({ title: "프로필 이미지가 변경되었습니다." });
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          title: "이미지 변경에 실패했습니다.",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
     }
   };
 
@@ -124,9 +156,27 @@ const UserInfo = () => {
           ref={inputRef}
           className="hidden"
         />
-        <button onClick={handleInputClick}>
+        <div
+          onClick={handleAvatarClick}
+          className={`cursor-pointer relative ${
+            isModalOpen ? "pointer-events-none" : ""
+          }`}
+        >
           <UserAvatar size="xl" />
-        </button>
+          <ImageCropper
+            imageSrc={src}
+            isOpen={isModalOpen}
+            defaultImage={session?.user.user_metadata.avatar_url}
+            onClose={() => {
+              setIsModalOpen(false);
+              setSrc(null);
+            }}
+            onSave={handleSaveImage}
+          />
+          <div className="absolute top-2/3 left-10 bg-gray-800 bg-opacity-75 p-1 rounded-full m-1">
+            <PiUploadSimpleBold color="white" />
+          </div>
+        </div>
         <div className="flex justify-between items-baseline mt-5 gap-2">
           {isEditingNickname ? (
             <form onSubmit={handleSubmit(onSubmit)} className="w-full">
