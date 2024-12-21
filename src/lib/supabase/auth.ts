@@ -68,12 +68,15 @@ export const signInWithEmail = async (email: string, password: string) => {
 
 //로그아웃
 export const signOut = async () => {
-  const { error } = await supabase.auth.signOut();
-
-  if (error) {
-    throw new Error("로그아웃에 실패했습니다.");
+  try {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
+  } catch (error) {
+    if (error) {
+      throw new Error("로그아웃에 실패했습니다.");
+    }
+    throw error;
   }
-  throw error;
 };
 
 //닉네임 수정

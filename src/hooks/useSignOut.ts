@@ -3,7 +3,7 @@ import { toast } from "./use-toast";
 import { useRouter } from "next/navigation";
 
 const useSignOut = (onSuccess?: () => void) => {
-  const { push } = useRouter();
+  const router = useRouter();
 
   const handleSignOut = async () => {
     try {
@@ -12,7 +12,7 @@ const useSignOut = (onSuccess?: () => void) => {
         title: "로그아웃 되었습니다.",
       });
       onSuccess?.();
-      push("/");
+      router.refresh();
     } catch (error) {
       if (error instanceof Error) {
         toast({
