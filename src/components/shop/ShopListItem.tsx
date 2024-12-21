@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { getAverageRating } from "@/lib/supabase/review";
 import type { ShopListItemProps } from "@/types";
 
-const ShopListItems = ({ item }: ShopListItemProps) => {
+const ShopListItem = ({ item }: ShopListItemProps) => {
   const { push } = useRouter();
   const [averageRating, setAverageRating] = useState(0);
 
@@ -85,4 +85,4 @@ const ShopListItems = ({ item }: ShopListItemProps) => {
   );
 };
 
-export default ShopListItems;
+export default ShopListItem;

@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
-import { Tables } from "@/types/supabase";
+import { Database, Tables } from "@/types/supabase";
 
 export interface GnbArrayList {
   label: string;
@@ -21,22 +21,7 @@ export interface AlbumItemProps {
   album: Tables<"album">;
 }
 
-export interface ShopListItem {
-  color: string | null;
-  created_at: string | null;
-  delivery_info: string | null;
-  description: string | null;
-  discount_rate: number | null;
-  id: string;
-  images: string | null;
-  price: number;
-  rating: number | null;
-  review_count: number | null;
-  shipping_type: string | null;
-  size: string | null;
-  thumbnail: string | null;
-  title: string;
-}
+type ShopListItem = Database["public"]["Tables"]["goods"]["Row"];
 
 export interface CartItem extends Omit<ShopListItem, "quantity"> {
   quantity: number;

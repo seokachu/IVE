@@ -1,9 +1,30 @@
 import { supabase } from "@/lib/supabase/client";
-import type { Database, Tables } from "@/types/supabase";
+import type { Database } from "@/types/supabase";
 
 type OrderReviewInsert =
   Database["public"]["Tables"]["goods_reviews"]["Insert"];
 
+//전체 리뷰 불러오기 (카운트)
+export const getGoodsReviewsCount = async (goodsId: string) => {
+  try {
+    const { data, error } = await supabase
+      .from("goods_reviews")
+      .select("*")
+      .eq("goods_id", goodsId);
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(
+        `전체 리뷰 정보를 가져오는데 실패했습니다. ${error.message}`
+      );
+    }
+    throw error;
+  }
+};
+
+//페이지네이션 전체 리뷰 불러오기
 export const getGoodsReviews = async (goodsId: string, page: number) => {
   const itemsPerPage = 5;
   const from = (page - 1) * itemsPerPage;
@@ -38,7 +59,7 @@ export const getGoodsReviews = async (goodsId: string, page: number) => {
     };
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(`리뷰 정보를 가져오는 데 실패했습니다. ${error.message}`);
+      throw new Error(`리뷰 정보를 가져오는데 실패했습니다. ${error.message}`);
     }
     throw error;
   }
