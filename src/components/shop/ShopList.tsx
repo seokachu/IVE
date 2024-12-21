@@ -4,11 +4,12 @@ import ShopListItems from "./ShopListItems";
 import { useShops } from "@/hooks/queries/useShops";
 import ShopSkeleton from "../common/loading/ShopSkeleton";
 import Error from "../common/error/Error";
-import type { SortProps } from "@/types";
 import { sortItems } from "@/utils/sorting";
+import type { SortProps } from "@/types";
 
 const ShopList = ({ sort }: SortProps) => {
   const { data, error, isLoading } = useShops(sort);
+  console.log(data);
 
   const sortedItems = useMemo(() => {
     return sortItems(data || [], sort);
