@@ -9,6 +9,8 @@ interface AvatarProps {
 const UserAvatar = ({ size = "md" }: AvatarProps) => {
   const session = useRecoilValue(sessionState);
 
+  const avatarUrl = session?.user.user_metadata.avatar_url;
+
   const sizeStyles = {
     sm: "w-[30px] h-[30px]",
     md: "w-10 h-10",
@@ -16,13 +18,12 @@ const UserAvatar = ({ size = "md" }: AvatarProps) => {
     xl: "w-16 h-16",
   };
 
-  const avatarUrl = session?.user.user_metadata.avatar_url;
-
   return (
     <Avatar className={`border ${sizeStyles[size]}`}>
       <AvatarImage
         src={avatarUrl}
         alt={session?.user.user_metadata.avatar_url || "유저 프로필"}
+        key={avatarUrl}
       />
       <AvatarFallback className={`text-xs ${sizeStyles[size]}`}>
         {session?.user.user_metadata.name || "사용자"}

@@ -6,18 +6,25 @@ import Link from "next/link";
 import { MYPAGE_GNB_ARRAY } from "@/utils/constants";
 import { usePathname } from "next/navigation";
 import ActionButton from "../common/button/ActionButton";
-import { useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { updateNickname } from "@/lib/supabase/auth";
 import { toast } from "@/hooks/use-toast";
 import { Input } from "../ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NicknameType, userSchemas } from "@/hooks/user";
+import ImageCropper from "../common/ImageCropper";
+import { uploadAvatar } from "@/lib/supabase/storage";
+import { supabase } from "@/lib/supabase/client";
+import { PiUploadSimpleBold } from "react-icons/pi";
 
 const UserInfo = () => {
   const [session, setSession] = useRecoilState(sessionState);
   const pathname = usePathname();
   const [isEditingNickname, setIsEditingNickname] = useState(false);
+  const [src, setSrc] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   //하위 경로 포함 체크 active
   const isActivePath = (path: string, exact: boolean) => {
@@ -96,10 +103,80 @@ const UserInfo = () => {
     clearErrors("nickname");
   };
 
+  //아바타 클릭 시 이미지 변경
+  const handleAvatarClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    if (!isModalOpen) {
+      inputRef.current?.click();
+    }
+  };
+
+  const handleImgChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSrc(URL.createObjectURL(file));
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleSaveImage = async (blob: Blob) => {
+    try {
+      const avatarUrl = await uploadAvatar(blob);
+      const { error } = await supabase.auth.updateUser({
+        data: { avatar_url: avatarUrl },
+      });
+      if (error) throw error;
+
+      const {
+        data: { session: newSession },
+      } = await supabase.auth.getSession();
+      if (newSession) {
+        setSession(newSession);
+      }
+      setIsModalOpen(false);
+      toast({ title: "프로필 이미지가 변경되었습니다." });
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          title: "이미지 변경에 실패했습니다.",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
+    }
+  };
+
   return (
     <section>
       <div>
-        <UserAvatar size="xl" />
+        <input
+          onChange={handleImgChange}
+          type="file"
+          accept="image/*"
+          ref={inputRef}
+          className="hidden"
+        />
+        <div
+          onClick={handleAvatarClick}
+          className={`cursor-pointer relative ${
+            isModalOpen ? "pointer-events-none" : ""
+          }`}
+        >
+          <UserAvatar size="xl" />
+          <ImageCropper
+            imageSrc={src}
+            isOpen={isModalOpen}
+            defaultImage={session?.user.user_metadata.avatar_url}
+            onClose={() => {
+              setIsModalOpen(false);
+              setSrc(null);
+            }}
+            onSave={handleSaveImage}
+          />
+          <div className="absolute top-2/3 left-10 bg-gray-800 bg-opacity-75 p-1 rounded-full m-1">
+            <PiUploadSimpleBold color="white" />
+          </div>
+        </div>
         <div className="flex justify-between items-baseline mt-5 gap-2">
           {isEditingNickname ? (
             <form onSubmit={handleSubmit(onSubmit)} className="w-full">
