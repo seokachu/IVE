@@ -9,11 +9,12 @@ import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import { useEffect, useState } from "react";
 import { getAverageRating } from "@/lib/supabase/review";
 import type { ShopListItemProps } from "@/types";
+import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
 
 const ShopListItem = ({ item }: ShopListItemProps) => {
   const { push } = useRouter();
   const [averageRating, setAverageRating] = useState(0);
-  // const { data: isWishList } = useWishList();
+  const { isWished, toggleWishList } = useWishListWithLocal(item.id);
 
   useEffect(() => {
     const fetchRating = async () => {
@@ -27,10 +28,6 @@ const ShopListItem = ({ item }: ShopListItemProps) => {
     push(`/shop/${item.id}`);
   };
 
-  const onClickHeart = (e: React.MouseEvent) => {
-    e.stopPropagation();
-  };
-
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
       onClickDetail();
@@ -39,6 +36,13 @@ const ShopListItem = ({ item }: ShopListItemProps) => {
 
   //할인율 적용
   const price = getDiscountedPrice(item);
+
+  //찜하기 버튼
+  const onClickHeart = (e: React.MouseEvent) => {
+    e.stopPropagation(); //상품 클릭 이벤트 전파 방지용
+    toggleWishList();
+    console.log("클릭됨");
+  };
 
   return (
     <>
@@ -62,7 +66,12 @@ const ShopListItem = ({ item }: ShopListItemProps) => {
             className="absolute right-2 bottom-2 text-dark-gray"
             aria-label="찜하기"
           >
-            <GoHeartFill size={30} className="opacity-90" />
+            <GoHeartFill
+              size={30}
+              className={`opacity-90 transition-colors ${
+                isWished ? "text-rose-500" : "text-dark-gray"
+              }`}
+            />
           </button>
         </div>
         <div className="flex flex-col gap-1">

@@ -87,15 +87,13 @@ export const checkedWishLists = async (userId: string, productId: string) => {
         user_id: userId,
         product_id: productId,
       })
-      .single();
+      .maybeSingle();
 
     if (error) throw error;
     return data;
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(
-        `사용자가 찜한 데이터를 불러오는데 실패했습니다. ${error.message}`
-      );
+      throw new Error(`찜 목록을 확인하는데 실패했습니다. ${error.message}`);
     }
     throw error;
   }

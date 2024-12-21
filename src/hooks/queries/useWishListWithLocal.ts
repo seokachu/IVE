@@ -39,7 +39,7 @@ const useWishListWithLocal = (productId: string) => {
         wishlistStorage.removeWishList(productId);
       } else {
         wishlistStorage.addWishList({
-          id: productId,
+          id: crypto.randomUUID(),
           product_id: productId,
           user_id: null,
           created_at: new Date().toISOString(),
