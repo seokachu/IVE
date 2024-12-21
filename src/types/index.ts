@@ -209,3 +209,5 @@ export interface WriteReviewFormProps {
   orderId: string;
   goodsId: string;
 }
+
+export type WishListItem = Database["public"]["Tables"]["wish_lists"]["Row"];

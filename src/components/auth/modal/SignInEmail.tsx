@@ -11,9 +11,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { signInWithEmail } from "@/lib/supabase/auth";
+import { addToWishList } from "@/lib/supabase/wishlist";
+import { wishlistStorage } from "@/utils/wishlistStorage";
+import { useQueryClient } from "@tanstack/react-query";
 
 const SignInEmail = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const queryClient = useQueryClient();
 
   const form = useForm<LoginType>({
     mode: "onChange",
@@ -25,7 +29,29 @@ const SignInEmail = () => {
 
   const handleSubmit = async (data: LoginType) => {
     try {
-      await signInWithEmail(data.email, data.password);
+      const authData = await signInWithEmail(data.email, data.password);
+
+      // 로그인 성공 후 로컬스토리지 찜 목록 동기화
+      if (authData.user) {
+        const localWishlist = wishlistStorage.getWishList();
+
+        if (localWishlist.length > 0) {
+          try {
+            for (const item of localWishlist) {
+              await addToWishList(authData.user.id, item.product_id as string);
+            }
+            localStorage.removeItem("wishlist");
+            queryClient.invalidateQueries({ queryKey: ["wishlist"] });
+          } catch (error) {
+            if (error instanceof Error) {
+              throw new Error(
+                `찜 목록 동기화 중 오류가 발생했습니다. ${error.message}`
+              );
+            }
+            throw error;
+          }
+        }
+      }
     } catch (error) {
       if (error instanceof Error) {
         if (error.message.includes("Invalid login credentials")) {
