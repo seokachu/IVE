@@ -13,6 +13,7 @@ import type { ShopListItemProps } from "@/types";
 const ShopListItem = ({ item }: ShopListItemProps) => {
   const { push } = useRouter();
   const [averageRating, setAverageRating] = useState(0);
+  // const { data: isWishList } = useWishList();
 
   useEffect(() => {
     const fetchRating = async () => {

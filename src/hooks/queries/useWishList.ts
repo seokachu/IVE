@@ -3,7 +3,7 @@ import {
   checkedWishLists,
   getUserWishList,
   removeWishList,
-} from "@/lib/supabase/like";
+} from "@/lib/supabase/wishlist";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 //전체 리스트 조회
