@@ -29,7 +29,7 @@ export const wishlistStorage = {
   //찜하기 취소
   removeWishList: (itemId: string) => {
     const currentWishlist = wishlistStorage.getWishList();
-    const newWishlist = currentWishlist.filter((item) => item.id !== item.id);
+    const newWishlist = currentWishlist.filter((item) => item.id !== itemId);
     localStorage.setItem("wishlist", JSON.stringify(newWishlist));
     return newWishlist;
   },
