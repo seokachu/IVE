@@ -29,7 +29,7 @@ const UserDropdownMenu = () => {
           <Link href="/mypage">마이페이지</Link>
         </DropdownMenuItem>
         <DropdownMenuItem className="text-dark-gray text-xs cursor-pointer">
-          <SignOutButton />
+          <SignOutButton className="w-full text-left" />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
