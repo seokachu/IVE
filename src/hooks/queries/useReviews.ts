@@ -1,22 +1,27 @@
 import {
   getGoodsReviews,
+  getGoodsReviewsCount,
   getOrderItemReview,
   saveOrderItemReview,
   updateOrderItemReview,
 } from "@/lib/supabase/review";
 import { ReviewResponse } from "@/types";
-import { Database } from "@/types/supabase";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-
-type UpdateOrderItemReview =
-  Database["public"]["Tables"]["goods_reviews"]["Update"];
 
 interface UseReviewsProps {
   id: string;
   page: number;
 }
 
-//리뷰 전체 데이터 불러오기
+//리뷰 전체 데이터 불러오기(카운트)
+export const useReviewCount = (id: string) => {
+  return useQuery({
+    queryKey: ["reviewCount", id],
+    queryFn: () => getGoodsReviewsCount(id),
+  });
+};
+
+//리뷰 전체 데이터 페이지네이션
 export const useReviews = ({ id, page }: UseReviewsProps) => {
   return useQuery({
     queryKey: ["reviews", id, page] as const,
