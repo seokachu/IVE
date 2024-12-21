@@ -46,6 +46,7 @@ export function RHFInput({
               <Input
                 {...props}
                 {...field}
+                type={type}
                 value={field.value || ""}
                 error={!!errors[name]}
                 onChange={(e) => {
