@@ -1,5 +1,5 @@
 import PaginationControl from "@/components/common/PaginationControl";
-import ReviewItems from "./ReviewItems";
+import ReviewItem from "./ReviewItem";
 import type { ShopMenuProps } from "@/types";
 import { useReviews } from "@/hooks/queries/useReviews";
 import Error from "@/components/common/error/Error";
@@ -50,7 +50,7 @@ const ReviewTab = ({ id }: ShopMenuProps) => {
             </h2>
             <ul>
               {reviews?.map((item) => (
-                <ReviewItems key={item.id} item={item} />
+                <ReviewItem key={item.id} item={item} />
               ))}
             </ul>
             {totalPages > 1 && (
