@@ -14,43 +14,52 @@ const useWishListWithLocal = (productId: string) => {
 
   const { data: isWished } = useQuery({
     queryKey: ["wishlist", productId],
-    queryFn: () => {
+    queryFn: async () => {
       if (session) {
-        return checkedWishLists(session.user.id, productId);
+        const result = await checkedWishLists(session.user.id, productId);
+        return result;
       } else {
-        return wishlistStorage.isCheckedWishList(productId);
+        const result = wishlistStorage.isCheckedWishList(productId);
+        return result;
       }
     },
     enabled: !!productId,
+    initialData: false,
   });
-
-  //찜하기 토글
   const toggleWishList = async () => {
     if (!productId) return;
+    try {
+      const currentWishState = isWished ?? false;
 
-    if (session) {
-      if (isWished) {
-        await removeWishList(session.user.id, productId);
+      if (session) {
+        if (currentWishState) {
+          await removeWishList(session.user.id, productId);
+        } else {
+          await addToWishList(session.user.id, productId);
+        }
       } else {
-        await addToWishList(session.user.id, productId);
+        if (currentWishState) {
+          wishlistStorage.removeWishList(productId);
+        } else {
+          wishlistStorage.addWishList({
+            id: crypto.randomUUID(),
+            product_id: productId,
+            user_id: null,
+            created_at: new Date().toISOString(),
+          });
+        }
       }
-    } else {
-      if (isWished) {
-        wishlistStorage.removeWishList(productId);
-      } else {
-        wishlistStorage.addWishList({
-          id: crypto.randomUUID(),
-          product_id: productId,
-          user_id: null,
-          created_at: new Date().toISOString(),
-        });
+      await queryClient.invalidateQueries({
+        queryKey: ["wishlist", productId],
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error(`찜하기 토글 중 에러가 발생했습니다. ${error.message}`);
       }
     }
-
-    queryClient.invalidateQueries({ queryKey: ["wishlist", productId] });
   };
 
-  return { isWished, toggleWishList };
+  return { isWished: !!isWished, toggleWishList };
 };
 
 export default useWishListWithLocal;
