@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
-import type { Database, Tables } from "@/types/supabase";
+import type { Database } from "@/types/supabase";
 
 type OrderReviewInsert =
   Database["public"]["Tables"]["goods_reviews"]["Insert"];
