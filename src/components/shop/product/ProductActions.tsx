@@ -10,11 +10,14 @@ import { useSetRecoilState } from "recoil";
 import { cartState } from "@/store";
 import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
 import { GoHeartFill } from "react-icons/go";
+import DirectPaymentButton from "@/components/payment/DirectPaymentButton";
 
 const ProductActions = ({ product, quantity }: ProductActionsProps) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const setCartItems = useSetRecoilState(cartState);
   const { isWished, toggleWishList } = useWishListWithLocal(product.id);
+
+  console.log(product, "product");
 
   const onClickCart = () => {
     try {
@@ -56,11 +59,6 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
     toggleWishList();
   };
 
-  //바로결제 버튼
-  const onClickBuying = () => {
-    //결제 페이지로 넘어가야 함
-  };
-
   return (
     <>
       <ul className="flex items-stretch justify-center gap-3">
@@ -87,13 +85,7 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
           </ActionButton>
         </li>
         <li className="w-2/4">
-          <ActionButton
-            onClick={onClickBuying}
-            variant="primary"
-            className="w-full py-3 text-center"
-          >
-            구매하기
-          </ActionButton>
+          <DirectPaymentButton product={product} quantity={quantity} />
         </li>
       </ul>
       {isDrawerOpen && (

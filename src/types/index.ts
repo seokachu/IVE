@@ -215,3 +215,8 @@ export type WishListItem = Database["public"]["Tables"]["wish_lists"]["Row"];
 export interface UserWishListItemProps {
   item: Tables<"wish_lists">;
 }
+
+export interface DirectPaymentButtonProps {
+  product: ShopListItem;
+  quantity: number;
+}

@@ -138,7 +138,7 @@ const PaymentSuccessPage = () => {
           product_image: item.thumbnail,
           price: item.price,
           quantity: item.quantity,
-          shipping_type: item.shipping_type ?? "일반배송",
+          shipping_type: item.shipping_type ?? "무료배송",
           discount_rate: item.discount_rate ?? 0,
           review_count: item.review_count ?? 0,
           color: item.color,
