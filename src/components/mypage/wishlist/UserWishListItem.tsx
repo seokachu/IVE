@@ -39,9 +39,8 @@ const UserWishListItem = ({ item }: UserWishListItemProps) => {
   if (isLoading) return null;
   if (!isSuccess || !goodsItem) return null;
 
-  const onClickDetail = () => {
-    push(`/shop/${item.product_id}`);
-  };
+  //할인율 적용
+  const price = getDiscountedPrice(goodsItem);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
@@ -49,8 +48,9 @@ const UserWishListItem = ({ item }: UserWishListItemProps) => {
     }
   };
 
-  //할인율 적용
-  const price = getDiscountedPrice(goodsItem);
+  const onClickDetail = () => {
+    push(`/shop/${item.product_id}`);
+  };
 
   //찜하기 취소
   const onClickHeart = (e: React.MouseEvent) => {
@@ -65,7 +65,7 @@ const UserWishListItem = ({ item }: UserWishListItemProps) => {
     <li
       onClick={onClickDetail}
       onKeyDown={handleKeyDown}
-      className="w-[90%] sm:w-[280px] md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.2rem)] border p-4 rounded-lg cursor-pointer hover:shadow-lg group mb-5"
+      className="w-[90%] sm:w-[280px] sm:justify-center md:w-[calc(33.333%-1rem)] lg:w-[calc(33%-1.2rem)] border p-4 rounded-lg cursor-pointer hover:shadow-lg group mb-5"
       role="button"
       tabIndex={0}
     >
@@ -73,7 +73,7 @@ const UserWishListItem = ({ item }: UserWishListItemProps) => {
         <Image
           src={goodsItem.thumbnail || DefaultImage}
           alt="썸네일"
-          className="fill group-hover:scale-110 transition-transform duration-300"
+          className="fill group-hover:scale-110 transition-transform duration-300 w-full"
           width={250}
           height={250}
         />
