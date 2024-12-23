@@ -27,18 +27,13 @@ export const addToWishList = async (userId: string, productId: string) => {
 //찜하기 취소
 export const removeWishList = async (userId: string, productId: string) => {
   try {
-    const { data, error } = await supabase
-      .from("wish_lists")
-      .delete()
-      .match({
-        user_id: userId,
-        product_id: productId,
-      })
-      .select("*")
-      .single();
+    const { error } = await supabase.from("wish_lists").delete().match({
+      user_id: userId,
+      product_id: productId,
+    });
 
     if (error) throw error;
-    return data;
+    return true;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`찜 목록을 취소하는데 실패했습니다. ${error.message}`);
