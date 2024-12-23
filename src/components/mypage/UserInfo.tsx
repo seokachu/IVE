@@ -17,14 +17,18 @@ import ImageCropper from "../common/ImageCropper";
 import { uploadAvatar } from "@/lib/supabase/storage";
 import { supabase } from "@/lib/supabase/client";
 import { PiUploadSimpleBold } from "react-icons/pi";
+import { useWishLists } from "@/hooks/queries/useWishList";
 
 const UserInfo = () => {
   const [session, setSession] = useRecoilState(sessionState);
   const pathname = usePathname();
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const [isEditingNickname, setIsEditingNickname] = useState(false);
   const [src, setSrc] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const { data: userWishList } = useWishLists(session?.user.id);
+
+  const wishlist = userWishList?.length;
 
   //하위 경로 포함 체크 active
   const isActivePath = (path: string, exact: boolean) => {
@@ -223,8 +227,8 @@ const UserInfo = () => {
           <strong>-</strong>
         </div>
         <div className="w-2/4">
-          <p className="text-xs text-[#495057] mb-1">찜</p>
-          <strong>2</strong>
+          <p className="text-xs text-[#090a0a] mb-1">찜</p>
+          <strong>{wishlist}</strong>
         </div>
       </div>
       <ul className="flex lg:flex-col gap-5 border-b lg:border-b-0 pb-5 text-center lg:text-left">

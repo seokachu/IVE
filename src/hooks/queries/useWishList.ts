@@ -7,10 +7,10 @@ import {
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 //전체 리스트 조회
-export const useWishLists = (userId: string) => {
+export const useWishLists = (userId?: string) => {
   return useQuery({
     queryKey: ["wishLists", userId],
-    queryFn: () => getUserWishList(userId),
+    queryFn: () => getUserWishList(userId!),
     enabled: !!userId,
   });
 };

@@ -1,31 +1,46 @@
-"use client";
 import Image from "next/image";
 import DefaultImage from "@/assets/images/default_image.avif";
 import Badge from "@/components/common/Badge";
 import { FaStar } from "react-icons/fa";
-import { GoHeartFill } from "react-icons/go";
 import { useRouter } from "next/navigation";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import { useEffect, useState } from "react";
 import { getAverageRating } from "@/lib/supabase/review";
-import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
-import type { ShopListItemProps } from "@/types";
+import { GoHeartFill } from "react-icons/go";
+import { useShopLists } from "@/hooks/queries/useShops";
+import { useRemoveWishList } from "@/hooks/queries/useWishList";
+import { toast } from "@/hooks/use-toast";
+import { UserWishListItemProps } from "@/types";
 
-const ShopListItem = ({ item }: ShopListItemProps) => {
+const UserWishListItem = ({ item }: UserWishListItemProps) => {
   const { push } = useRouter();
+  const {
+    data: goodsItem,
+    isLoading,
+    isSuccess,
+  } = useShopLists(item.product_id);
   const [averageRating, setAverageRating] = useState(0);
-  const { isWished, toggleWishList } = useWishListWithLocal(item.id);
 
+  //평균 평점 가져오기
   useEffect(() => {
     const fetchRating = async () => {
-      const rating = await getAverageRating(item.id);
+      const rating = await getAverageRating(item.product_id!);
       setAverageRating(rating);
     };
     fetchRating();
-  }, [item.id]);
+  }, [item.product_id]);
+
+  //찜하기 삭제 mutation
+  const { mutate: removeWishList } = useRemoveWishList(
+    item.user_id!,
+    item.product_id!
+  );
+
+  if (isLoading) return null;
+  if (!isSuccess || !goodsItem) return null;
 
   const onClickDetail = () => {
-    push(`/shop/${item.id}`);
+    push(`/shop/${item.product_id}`);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -35,13 +50,15 @@ const ShopListItem = ({ item }: ShopListItemProps) => {
   };
 
   //할인율 적용
-  const price = getDiscountedPrice(item);
+  const price = getDiscountedPrice(goodsItem);
 
-  //찜하기 버튼
+  //찜하기 취소
   const onClickHeart = (e: React.MouseEvent) => {
-    e.stopPropagation(); //상품 클릭 이벤트 전파 방지용
-    toggleWishList();
-    console.log("클릭됨");
+    e.stopPropagation();
+    removeWishList();
+    toast({
+      title: "찜하기가 취소되었습니다. ",
+    });
   };
 
   return (
@@ -54,7 +71,7 @@ const ShopListItem = ({ item }: ShopListItemProps) => {
     >
       <div className="relative w-full h-auto rounded-lg overflow-hidden border">
         <Image
-          src={item.thumbnail || DefaultImage}
+          src={goodsItem.thumbnail || DefaultImage}
           alt="썸네일"
           className="fill group-hover:scale-110 transition-transform duration-300"
           width={250}
@@ -63,25 +80,23 @@ const ShopListItem = ({ item }: ShopListItemProps) => {
         <button
           onClick={onClickHeart}
           className="absolute right-2 bottom-2 text-dark-gray"
-          aria-label="찜하기"
+          aria-label="찜하기 취소"
         >
           <GoHeartFill
             size={30}
-            className={`opacity-90 transition-colors ${
-              isWished ? "text-rose-500" : "text-dark-gray"
-            }`}
+            className="opacity-90 transition-colors text-rose-500"
           />
         </button>
       </div>
       <div className="flex flex-col gap-1">
         <div className="mt-4 mb-1 min-h-[20px]">
-          <Badge item={item} averageRating={averageRating} />
+          <Badge item={goodsItem} averageRating={averageRating} />
         </div>
         <h3 className="text-base overflow-hidden overflow-ellipsis whitespace-nowrap">
-          {item.title}
+          {goodsItem.title}
         </h3>
         <div className="font-bold flex items-center gap-2 text-xl">
-          <span className="text-purple">{item.discount_rate}%</span>
+          <span className="text-purple">{goodsItem.discount_rate}%</span>
           <span>{formatPrice(price)}원</span>
         </div>
         <div className="flex items-center gap-1 text-[#878f91] text-sm">
@@ -93,4 +108,4 @@ const ShopListItem = ({ item }: ShopListItemProps) => {
   );
 };
 
-export default ShopListItem;
+export default UserWishListItem;
