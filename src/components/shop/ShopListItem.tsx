@@ -41,7 +41,6 @@ const ShopListItem = ({ item }: ShopListItemProps) => {
   const onClickHeart = (e: React.MouseEvent) => {
     e.stopPropagation(); //상품 클릭 이벤트 전파 방지용
     toggleWishList();
-    console.log("클릭됨");
   };
 
   return (

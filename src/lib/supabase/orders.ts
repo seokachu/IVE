@@ -1,18 +1,11 @@
+import { Database } from "@/types/supabase";
 import { supabase } from "./client";
 
+type OrderItem = Database["public"]["Tables"]["order_items"]["Row"];
+type OrderItemInput = Omit<OrderItem, "created_at" | "id" | "is_confirmed">;
+
 //결제목록 저장
-export const saveOrderItems = async (
-  orderItems: {
-    order_id: string;
-    user_id: string;
-    product_id: string;
-    product_name: string;
-    product_image: string | null;
-    price: number;
-    quantity: number;
-    shipping_type: boolean;
-  }[]
-) => {
+export const saveOrderItems = async (orderItems: OrderItemInput[]) => {
   try {
     const { data, error } = await supabase
       .from("order_items")
