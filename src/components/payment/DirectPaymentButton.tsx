@@ -1,4 +1,3 @@
-// components/payment/DirectPaymentButton.tsx
 import { loadTossPayments } from "@tosspayments/payment-sdk";
 import { sessionState } from "@/store";
 import { getDiscountedPrice } from "@/utils/calculateDiscount";
@@ -33,7 +32,10 @@ const DirectPaymentButton = ({
       const orderId = randomOrderId;
 
       // 단일 상품 결제 정보 저장(성공 페이지에 넘겨줘야 함)
-      localStorage.setItem("checkout_items", JSON.stringify([product.id]));
+      localStorage.setItem(
+        "checkout_items",
+        JSON.stringify([{ ...product, quantity }])
+      );
 
       const tossPayments = await loadTossPayments(
         process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY!
@@ -60,7 +62,7 @@ const DirectPaymentButton = ({
           description: error.message,
         });
       }
-      console.error(error);
+      throw error;
     }
   };
 

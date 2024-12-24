@@ -15,6 +15,7 @@ import PaymentOverview from "@/components/mypage/order/PaymentOverview";
 import PaymentSuccessHeader from "@/components/payment/success/PaymentSuccessHeader";
 import { saveOrderItems } from "@/lib/supabase/orders";
 import { getPaymentByOrderId, savePayment } from "@/lib/supabase/payment";
+import type { CartItem } from "@/types";
 
 const PaymentSuccessPage = () => {
   const searchParams = useSearchParams();
@@ -66,14 +67,23 @@ const PaymentSuccessPage = () => {
 
     const savePaymentData = async () => {
       try {
+        //장바구니 결제 성공
         const checkoutItems = JSON.parse(
           localStorage.getItem("checkout_items") || "[]"
         );
 
-        // checkout_items를 기반으로 선택된 상품 필터링
-        const selectedCartItems = cartItems.filter((item) =>
-          checkoutItems.includes(item.id)
-        );
+        // 바로구매 버튼과 장바구니 결제 필터링
+        const selectedCartItems: CartItem[] =
+          cartItems.length === 0
+            ? checkoutItems
+            : cartItems.filter((item) =>
+                checkoutItems.some(
+                  (checkItem: string | CartItem) =>
+                    (typeof checkItem === "string"
+                      ? checkItem
+                      : checkItem.id) === item.id
+                )
+              );
 
         const existingPayment = await getPaymentByOrderId(orderId);
         if (existingPayment) {
