@@ -109,6 +109,7 @@ export const RECIPIENT_DELIVERY_OPTIONS = [
   {
     value: "메시지선택(선택사항)",
     title: "-- 메시지 선택 (선택사항) --",
+    disabled: true,
   },
   {
     value: "배송 전에 미리 연락 바랍니다.",
