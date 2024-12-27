@@ -8,12 +8,6 @@ export const sortItems = (items: Tables<"goods">[], sortBy: SortOptionList) => {
   let allItems = items.flat();
   const itemsCopy = [...allItems];
 
-  const getSafeDate = (date: string | null): number => {
-    if (!date) return 0;
-    const parsedDate = new Date(date);
-    return isNaN(parsedDate.getTime()) ? 0 : parsedDate.getTime();
-  };
-
   switch (sortBy) {
     case "price_low_to_high":
     case "price_high_to_low": {
@@ -28,7 +22,11 @@ export const sortItems = (items: Tables<"goods">[], sortBy: SortOptionList) => {
     }
     case "latest":
       return itemsCopy.sort((a, b) => {
-        return getSafeDate(b.created_at) - getSafeDate(a.created_at);
+        if (!a.created_at && !b.created_at) return 0;
+        if (!a.created_at) return 1;
+        if (!b.created_at) return -1;
+
+        return a.created_at < b.created_at ? 1 : -1;
       });
     case "best":
       return itemsCopy.sort((a, b) => {
