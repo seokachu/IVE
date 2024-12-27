@@ -1,12 +1,17 @@
 import { getGoodsShop, getGoodsShopDetail } from "@/lib/supabase/shop";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import type { SortOptionList } from "@/types";
 
 //상품 목록 정렬
 export const useShops = (sortBy: SortOptionList) => {
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: ["shops", sortBy],
-    queryFn: () => getGoodsShop(),
+    queryFn: ({ pageParam = 1 }) => getGoodsShop(pageParam),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage.length === 0) return undefined;
+      return allPages.length + 1;
+    },
   });
 };
 

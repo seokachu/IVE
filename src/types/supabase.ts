@@ -116,7 +116,6 @@ export type Database = {
           id: string
           images: Json | null
           price: number
-          rating: number | null
           review_count: number | null
           shipping_type: string | null
           size: string | null
@@ -132,7 +131,6 @@ export type Database = {
           id?: string
           images?: Json | null
           price: number
-          rating?: number | null
           review_count?: number | null
           shipping_type?: string | null
           size?: string | null
@@ -148,7 +146,6 @@ export type Database = {
           id?: string
           images?: Json | null
           price?: number
-          rating?: number | null
           review_count?: number | null
           shipping_type?: string | null
           size?: string | null

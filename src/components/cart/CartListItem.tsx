@@ -25,7 +25,12 @@ const CartListItem = ({ item }: CartListItemProps) => {
         const parsedSelected = JSON.parse(decodeURIComponent(selectedParam));
         setSelectedItems(parsedSelected);
       } catch (error) {
-        console.error("Failed to parse selected items:", error);
+        if (error instanceof Error) {
+          toast({
+            title: "목록을 가져오는데 실패했습니다.",
+            description: error.message,
+          });
+        }
       }
     }
   }, [selectedParam, setSelectedItems]);
