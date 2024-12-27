@@ -7,7 +7,7 @@ interface UserWishListProps {
 
 const UserWishList = ({ wishlists }: UserWishListProps) => {
   return (
-    <ul className="mt-5 flex flex-wrap lg:justify-between sm:justify-center gap-6">
+    <ul className="mt-5 flex flex-wrap lg:justify-start sm:justify-center lg:gap-8 sm:gap-6">
       {wishlists.map((item) => (
         <UserWishListItem key={item.id} item={item} />
       ))}

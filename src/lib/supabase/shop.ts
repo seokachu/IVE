@@ -1,9 +1,14 @@
 import { supabase } from "@/lib/supabase/client";
 
+const ITEM_PAGE = 12;
+
 //상품 목록
-export const getGoodsShop = async () => {
+export const getGoodsShop = async (page = 1) => {
   try {
-    const { data, error } = await supabase.from("goods").select("*").limit(20);
+    const { data, error } = await supabase
+      .from("goods")
+      .select("*")
+      .range((page - 1) * ITEM_PAGE, page * ITEM_PAGE - 1);
 
     if (error) throw error;
     return data;

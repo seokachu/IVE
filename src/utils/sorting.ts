@@ -3,7 +3,10 @@ import { calculateDiscount } from "./calculateDiscount";
 import { SortOptionList } from "@/types";
 
 export const sortItems = (items: Tables<"goods">[], sortBy: SortOptionList) => {
-  const itemsCopy = [...items];
+  if (!items?.length) return [];
+
+  let allItems = items.flat();
+  const itemsCopy = [...allItems];
 
   const getSafeDate = (date: string | null): number => {
     if (!date) return 0;
