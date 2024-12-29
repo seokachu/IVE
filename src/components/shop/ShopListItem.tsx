@@ -14,12 +14,14 @@ import type { ShopListItemProps } from "@/types";
 const ShopListItem = ({ item }: ShopListItemProps) => {
   const { push } = useRouter();
   const [averageRating, setAverageRating] = useState(0);
+  const [reviewCount, setReviewCount] = useState(0);
   const { isWished, toggleWishList } = useWishListWithLocal(item.id);
 
   useEffect(() => {
     const fetchRating = async () => {
-      const rating = await getAverageRating(item.id);
-      setAverageRating(rating);
+      const { average, count } = await getAverageRating(item.id);
+      setAverageRating(average);
+      setReviewCount(count);
     };
     fetchRating();
   }, [item.id]);
@@ -74,7 +76,10 @@ const ShopListItem = ({ item }: ShopListItemProps) => {
       </div>
       <div className="flex flex-col gap-1">
         <div className="mt-4 mb-1 min-h-[20px]">
-          <Badge item={item} averageRating={averageRating} />
+          <Badge
+            item={{ ...item, review_count: reviewCount }}
+            averageRating={averageRating}
+          />
         </div>
         <h3 className="text-base overflow-hidden overflow-ellipsis whitespace-nowrap">
           {item.title}

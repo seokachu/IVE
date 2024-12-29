@@ -38,8 +38,12 @@ export interface DiscountedPrice {
 
 export type PriceKeys = "price" | "discount_rate";
 
+export interface GoodsIncludeRating extends ShopListItem {
+  rating?: number;
+}
+
 export type BadgeFields = Pick<
-  ShopListItem,
+  GoodsIncludeRating,
   "shipping_type" | "review_count" | "rating" | "id"
 >;
 
