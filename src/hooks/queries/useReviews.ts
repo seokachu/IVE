@@ -1,4 +1,5 @@
 import {
+  getAverageRating,
   getGoodsReviews,
   getGoodsReviewsCount,
   getOrderItemReview,
@@ -18,6 +19,14 @@ export const useReviewCount = (id: string) => {
   return useQuery({
     queryKey: ["reviewCount", id],
     queryFn: () => getGoodsReviewsCount(id),
+  });
+};
+
+//리뷰 평균
+export const useAverageRating = (id: string) => {
+  return useQuery({
+    queryKey: ["averageRating", id],
+    queryFn: () => getAverageRating(id),
   });
 };
 

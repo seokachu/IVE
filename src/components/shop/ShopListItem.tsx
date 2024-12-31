@@ -6,30 +6,17 @@ import { FaStar } from "react-icons/fa";
 import { GoHeartFill } from "react-icons/go";
 import { useRouter } from "next/navigation";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
-import { useEffect, useState } from "react";
-import { getAverageRating } from "@/lib/supabase/review";
 import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
 import type { ShopListItemProps } from "@/types";
-import { useReviewCount } from "@/hooks/queries/useReviews";
+import { useAverageRating, useReviewCount } from "@/hooks/queries/useReviews";
 
 const ShopListItem = ({ item }: ShopListItemProps) => {
   const { push } = useRouter();
-  const [averageRating, setAverageRating] = useState(0);
-  const [reviewCount, setReviewCount] = useState(0);
   const { data: reviewData } = useReviewCount(item.id);
+  const { data: averageRating = 0 } = useAverageRating(item.id);
   const { isWished, toggleWishList } = useWishListWithLocal(item.id);
 
-  useEffect(() => {
-    const fetchRating = async () => {
-      const average = await getAverageRating(item.id);
-      setAverageRating(average);
-    };
-
-    if (reviewData) {
-      setReviewCount(reviewData.length);
-    }
-    fetchRating();
-  }, [item.id, reviewData]);
+  const reviewCount = reviewData?.length || 0;
 
   const onClickDetail = () => {
     push(`/shop/${item.id}`);
