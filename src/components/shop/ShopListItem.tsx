@@ -10,21 +10,26 @@ import { useEffect, useState } from "react";
 import { getAverageRating } from "@/lib/supabase/review";
 import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
 import type { ShopListItemProps } from "@/types";
+import { useReviewCount } from "@/hooks/queries/useReviews";
 
 const ShopListItem = ({ item }: ShopListItemProps) => {
   const { push } = useRouter();
   const [averageRating, setAverageRating] = useState(0);
   const [reviewCount, setReviewCount] = useState(0);
+  const { data: reviewData } = useReviewCount(item.id);
   const { isWished, toggleWishList } = useWishListWithLocal(item.id);
 
   useEffect(() => {
     const fetchRating = async () => {
-      const { average, count } = await getAverageRating(item.id);
+      const average = await getAverageRating(item.id);
       setAverageRating(average);
-      setReviewCount(count);
     };
+
+    if (reviewData) {
+      setReviewCount(reviewData.length);
+    }
     fetchRating();
-  }, [item.id]);
+  }, [item.id, reviewData]);
 
   const onClickDetail = () => {
     push(`/shop/${item.id}`);

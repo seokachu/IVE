@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase/client";
 import type { SortOptionList } from "@/types";
+import { getDiscountedPrice } from "@/utils/calculateDiscount";
 
 const ITEM_PAGE = 12;
 
@@ -9,7 +10,7 @@ export const getGoodsShop = async (
   sortBy: SortOptionList = "best"
 ) => {
   try {
-    let query = supabase.from("goods").select(`
+    const query = supabase.from("goods").select(`
         *,
         goods_reviews(rating)
       `);
@@ -26,7 +27,7 @@ export const getGoodsShop = async (
     }
 
     // 정렬 로직
-    let sortedData = [...(data || [])];
+    const sortedData = [...(data || [])];
 
     switch (sortBy) {
       case "latest":
@@ -36,10 +37,18 @@ export const getGoodsShop = async (
         );
         break;
       case "price_low_to_high":
-        sortedData.sort((a, b) => a.price - b.price);
+        sortedData.sort((a, b) => {
+          const priceA = getDiscountedPrice(a);
+          const priceB = getDiscountedPrice(b);
+          return priceA - priceB;
+        });
         break;
       case "price_high_to_low":
-        sortedData.sort((a, b) => b.price - a.price);
+        sortedData.sort((a, b) => {
+          const priceA = getDiscountedPrice(a);
+          const priceB = getDiscountedPrice(b);
+          return priceB - priceA;
+        });
         break;
       case "best":
         sortedData.sort(
@@ -67,7 +76,6 @@ export const getGoodsShop = async (
     throw error;
   }
 };
-
 //상품 목록 상세정보
 export const getGoodsShopDetail = async (id: string) => {
   try {

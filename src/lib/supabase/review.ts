@@ -74,19 +74,13 @@ export const getAverageRating = async (goodsId: string) => {
   if (error) throw error;
 
   if (!data || data.length === 0) {
-    return {
-      average: 0,
-      count: 0,
-    };
+    return 0;
   }
 
   const average =
     data.reduce((sum, review) => sum + review.rating, 0) / data.length;
 
-  return {
-    average: Number(average.toFixed(1)),
-    count: data.length,
-  };
+  return Number(average.toFixed(1));
 };
 
 //단일 리뷰 가져오기

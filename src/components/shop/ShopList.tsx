@@ -60,7 +60,7 @@ const ShopList = ({ sort }: SortProps) => {
     <>
       <ul className="flex flex-wrap gap-6 sm:justify-center md:justify-start">
         {items.map((el) => (
-          <ShopListItem key={el.title} item={el} />
+          <ShopListItem key={el.id} item={el} />
         ))}
       </ul>
       <div ref={observerRef} className="h-10" />
