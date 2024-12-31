@@ -52,6 +52,7 @@ const ShopListItem = ({ item }: ShopListItemProps) => {
           className="fill group-hover:scale-110 transition-transform duration-300"
           width={250}
           height={250}
+          loading="lazy"
         />
         <button
           onClick={onClickHeart}
