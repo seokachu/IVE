@@ -9,8 +9,8 @@ import { useRecoilValue } from "recoil";
 import { sessionState } from "@/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import { CustomerInfoFormProps } from "@/types";
 import { customerInfoSchema, CustomerInfoType } from "@/hooks/user";
+import type { CustomerInfoFormProps } from "@/types";
 
 const CustomerInfoForm = ({
   initialData,

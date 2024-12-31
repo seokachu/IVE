@@ -122,7 +122,7 @@ export interface AddressListItems {
 }
 
 export interface CustomerInfoFormProps {
-  initialData?: any;
+  initialData?: Tables<"customer_info">;
   defaultValues?: {
     name?: string;
     email?: string;
@@ -223,4 +223,9 @@ export interface UserWishListItemProps {
 export interface DirectPaymentButtonProps {
   product: ShopListItem;
   quantity: number;
+}
+
+export interface UseReviewsProps {
+  id: string;
+  page: number;
 }
