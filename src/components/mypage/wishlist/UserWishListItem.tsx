@@ -4,13 +4,12 @@ import Badge from "@/components/common/Badge";
 import { FaStar } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
-import { useEffect, useState } from "react";
-import { getAverageRating } from "@/lib/supabase/review";
 import { GoHeartFill } from "react-icons/go";
 import { useShopLists } from "@/hooks/queries/useShops";
 import { useRemoveWishList } from "@/hooks/queries/useWishList";
 import { toast } from "@/hooks/use-toast";
 import { UserWishListItemProps } from "@/types";
+import { useAverageRating } from "@/hooks/queries/useReviews";
 
 const UserWishListItem = ({ item }: UserWishListItemProps) => {
   const { push } = useRouter();
@@ -19,16 +18,7 @@ const UserWishListItem = ({ item }: UserWishListItemProps) => {
     isLoading,
     isSuccess,
   } = useShopLists(item.product_id);
-  const [averageRating, setAverageRating] = useState(0);
-
-  //평균 평점 가져오기
-  useEffect(() => {
-    const fetchRating = async () => {
-      const rating = await getAverageRating(item.product_id!);
-      setAverageRating(rating);
-    };
-    fetchRating();
-  }, [item.product_id]);
+  const { data: averageRating = 0 } = useAverageRating(item.product_id!);
 
   //찜하기 삭제 mutation
   const { mutate: removeWishList } = useRemoveWishList(

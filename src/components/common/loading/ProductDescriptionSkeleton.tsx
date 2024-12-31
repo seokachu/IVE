@@ -9,17 +9,17 @@ const ProductDescriptionSkeleton = () => {
         <Skeleton className="h-5 w-2/4 mx-auto" />
       </div>
       <div className="w-full h-auto m-auto relative my-16">
-        <Skeleton className="w-[500px] h-[500px] mx-auto" />
+        <Skeleton className="w-[650px] h-[650px] mx-auto" />
       </div>
       <div>
         <Skeleton className="h-5 w-3/4 mx-auto" />
         <Skeleton className="h-5 w-2/4 mx-auto mt-2" />
       </div>
       <div className="w-full h-auto m-auto relative my-16">
-        <Skeleton className="w-[500px] h-[500px] mx-auto" />
+        <Skeleton className="w-[650px] h-[650px] mx-auto" />
       </div>
       <div className="w-full h-auto m-auto relative my-16">
-        <Skeleton className="w-[500px] h-[500px] mx-auto" />
+        <Skeleton className="w-[650px] h-[650px] mx-auto" />
       </div>
       <div>
         <Skeleton className="h-5 w-3/4 mx-auto" />

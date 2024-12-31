@@ -1,23 +1,27 @@
 import {
+  getAverageRating,
   getGoodsReviews,
   getGoodsReviewsCount,
   getOrderItemReview,
   saveOrderItemReview,
   updateOrderItemReview,
 } from "@/lib/supabase/review";
-import { ReviewResponse } from "@/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-
-interface UseReviewsProps {
-  id: string;
-  page: number;
-}
+import type { ReviewResponse, UseReviewsProps } from "@/types";
 
 //리뷰 전체 데이터 불러오기(카운트)
 export const useReviewCount = (id: string) => {
   return useQuery({
     queryKey: ["reviewCount", id],
     queryFn: () => getGoodsReviewsCount(id),
+  });
+};
+
+//리뷰 평균
+export const useAverageRating = (id: string) => {
+  return useQuery({
+    queryKey: ["averageRating", id],
+    queryFn: () => getAverageRating(id),
   });
 };
 

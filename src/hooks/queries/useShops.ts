@@ -6,7 +6,7 @@ import type { SortOptionList } from "@/types";
 export const useShops = (sortBy: SortOptionList) => {
   return useInfiniteQuery({
     queryKey: ["shops", sortBy],
-    queryFn: ({ pageParam = 1 }) => getGoodsShop(pageParam),
+    queryFn: ({ pageParam = 1 }) => getGoodsShop(pageParam, sortBy),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       if (lastPage.length === 0) return undefined;

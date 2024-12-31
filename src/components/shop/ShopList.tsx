@@ -1,10 +1,9 @@
 "use client";
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import ShopListItem from "./ShopListItem";
 import { useShops } from "@/hooks/queries/useShops";
 import ShopSkeleton from "../common/loading/ShopSkeleton";
 import Error from "../common/error/Error";
-import { sortItems } from "@/utils/sorting";
 import type { SortProps } from "@/types";
 import { ClipLoader } from "react-spinners";
 
@@ -41,11 +40,7 @@ const ShopList = ({ sort }: SortProps) => {
     };
   }, [handleObserver]);
 
-  const sortedItems = useMemo(() => {
-    if (!data?.pages) return [];
-    const allItems = data.pages.flat();
-    return sortItems(allItems, sort);
-  }, [data, sort]);
+  const items = data?.pages.flat() ?? [];
 
   //loading
   if (isLoading) {
@@ -64,8 +59,8 @@ const ShopList = ({ sort }: SortProps) => {
   return (
     <>
       <ul className="flex flex-wrap gap-6 sm:justify-center md:justify-start">
-        {sortedItems.map((el) => (
-          <ShopListItem key={el.title} item={el} />
+        {items.map((el) => (
+          <ShopListItem key={el.id} item={el} />
         ))}
       </ul>
       <div ref={observerRef} className="h-10" />
@@ -74,7 +69,7 @@ const ShopList = ({ sort }: SortProps) => {
           <ClipLoader />
         </div>
       )}
-      {!hasNextPage && sortedItems.length > 0 && (
+      {!hasNextPage && items.length > 0 && (
         <div className="flex justify-center items-center py-4">
           <div className="font-bold text-gray-500">
             더 이상 표시할 상품이 없습니다.

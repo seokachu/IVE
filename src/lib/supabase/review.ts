@@ -73,10 +73,13 @@ export const getAverageRating = async (goodsId: string) => {
     .eq("goods_id", goodsId);
   if (error) throw error;
 
-  if (!data || data.length === 0) return 0;
+  if (!data || data.length === 0) {
+    return 0;
+  }
 
   const average =
     data.reduce((sum, review) => sum + review.rating, 0) / data.length;
+
   return Number(average.toFixed(1));
 };
 

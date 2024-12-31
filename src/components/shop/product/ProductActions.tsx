@@ -17,8 +17,6 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
   const setCartItems = useSetRecoilState(cartState);
   const { isWished, toggleWishList } = useWishListWithLocal(product.id);
 
-  console.log(product, "product");
-
   const onClickCart = () => {
     try {
       //현재 장바구니에 담긴 수량 확인

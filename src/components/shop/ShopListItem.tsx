@@ -6,23 +6,17 @@ import { FaStar } from "react-icons/fa";
 import { GoHeartFill } from "react-icons/go";
 import { useRouter } from "next/navigation";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
-import { useEffect, useState } from "react";
-import { getAverageRating } from "@/lib/supabase/review";
 import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
 import type { ShopListItemProps } from "@/types";
+import { useAverageRating, useReviewCount } from "@/hooks/queries/useReviews";
 
 const ShopListItem = ({ item }: ShopListItemProps) => {
   const { push } = useRouter();
-  const [averageRating, setAverageRating] = useState(0);
+  const { data: reviewData } = useReviewCount(item.id);
+  const { data: averageRating = 0 } = useAverageRating(item.id);
   const { isWished, toggleWishList } = useWishListWithLocal(item.id);
 
-  useEffect(() => {
-    const fetchRating = async () => {
-      const rating = await getAverageRating(item.id);
-      setAverageRating(rating);
-    };
-    fetchRating();
-  }, [item.id]);
+  const reviewCount = reviewData?.length || 0;
 
   const onClickDetail = () => {
     push(`/shop/${item.id}`);
@@ -58,6 +52,7 @@ const ShopListItem = ({ item }: ShopListItemProps) => {
           className="fill group-hover:scale-110 transition-transform duration-300"
           width={250}
           height={250}
+          loading="lazy"
         />
         <button
           onClick={onClickHeart}
@@ -74,7 +69,10 @@ const ShopListItem = ({ item }: ShopListItemProps) => {
       </div>
       <div className="flex flex-col gap-1">
         <div className="mt-4 mb-1 min-h-[20px]">
-          <Badge item={item} averageRating={averageRating} />
+          <Badge
+            item={{ ...item, review_count: reviewCount }}
+            averageRating={averageRating}
+          />
         </div>
         <h3 className="text-base overflow-hidden overflow-ellipsis whitespace-nowrap">
           {item.title}
