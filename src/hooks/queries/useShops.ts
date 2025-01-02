@@ -1,4 +1,8 @@
-import { getGoodsShop, getGoodsShopDetail } from "@/lib/supabase/shop";
+import {
+  getCarouselShop,
+  getGoodsShop,
+  getGoodsShopDetail,
+} from "@/lib/supabase/shop";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import type { SortOptionList } from "@/types";
 
@@ -30,5 +34,13 @@ export const useShop = (id: string) => {
     queryKey: ["shop", id],
     queryFn: () => getGoodsShopDetail(id),
     enabled: !!id,
+  });
+};
+
+//메인페이지 상품목록 불러오기
+export const useShopCarousel = () => {
+  return useQuery({
+    queryKey: ["shopsCarousel"],
+    queryFn: () => getCarouselShop(),
   });
 };
