@@ -7,9 +7,9 @@ import { GoHeartFill } from "react-icons/go";
 import { useRouter } from "next/navigation";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
-import type { ShopListItemProps } from "@/types";
 import { useAverageRating, useReviewCount } from "@/hooks/queries/useReviews";
 import { shopVariantStyles } from "@/utils/styles";
+import type { ShopListItemProps } from "@/types";
 
 const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
   const { push } = useRouter();

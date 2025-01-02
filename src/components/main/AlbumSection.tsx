@@ -4,7 +4,7 @@ const AlbumSection = () => {
   return (
     <section
       id="second-section"
-      className="h-screen w-full relative flex items-center justify-center"
+      className="h-screen bg-pink-300 w-full relative flex items-center justify-center"
     >
       <video
         className="h-screen w-full object-cover absolute"

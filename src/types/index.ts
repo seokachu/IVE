@@ -29,9 +29,13 @@ export interface CartItem extends Omit<ShopListItem, "quantity"> {
 
 export type ItemVariant = "shop" | "carousel";
 
+export interface VariantTypeProps {
+  variant: ItemVariant;
+}
+
 export interface ShopListItemProps {
   item: ShopListItem;
-  variant?: ItemVariant;
+  variant: ItemVariant;
 }
 
 export interface DiscountedPrice {
