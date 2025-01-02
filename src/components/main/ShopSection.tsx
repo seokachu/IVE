@@ -8,7 +8,11 @@ const ShopSection = () => {
         <h2 className="text-2xl font-bold lg:text-4xl text-center mb-12">
           SHOP
         </h2>
-        <Link href="/shop">더보기</Link>
+        <div className="w-full">
+          <Link href="/shop" className="float-right">
+            더보기
+          </Link>
+        </div>
         <ul className="mt-5">
           <ShopListCarousel />
         </ul>
