@@ -53,7 +53,7 @@ export const useDeleteShippingAddress = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ addressId, userId }: DeleteAddressParams) =>
+    mutationFn: ({ addressId }: DeleteAddressParams) =>
       deleteShippingAddress(addressId),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({

@@ -76,6 +76,7 @@ export const getGoodsShop = async (
     throw error;
   }
 };
+
 //상품 목록 상세정보
 export const getGoodsShopDetail = async (id: string) => {
   try {
@@ -87,6 +88,34 @@ export const getGoodsShopDetail = async (id: string) => {
 
     if (error) throw error;
     return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`상품 정보를 불러오는데 실패했습니다. ${error.message}`);
+    }
+    throw error;
+  }
+};
+
+//메인페이지 상품목록 불러오기
+export const getCarouselShop = async () => {
+  try {
+    const query = supabase.from("goods").select(`
+      *,
+      goods_reviews(rating)
+    `);
+
+    const { data, error } = await query;
+    if (error) throw error;
+
+    // best 순으로 정렬, 12개 아이템만 반환
+    const sortedData = [...(data || [])]
+      .sort(
+        (a, b) =>
+          (b.goods_reviews?.length || 0) - (a.goods_reviews?.length || 0)
+      )
+      .slice(0, 12);
+
+    return sortedData;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`상품 정보를 불러오는데 실패했습니다. ${error.message}`);

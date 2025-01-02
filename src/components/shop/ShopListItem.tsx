@@ -7,10 +7,11 @@ import { GoHeartFill } from "react-icons/go";
 import { useRouter } from "next/navigation";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
-import type { ShopListItemProps } from "@/types";
 import { useAverageRating, useReviewCount } from "@/hooks/queries/useReviews";
+import { shopVariantStyles } from "@/utils/styles";
+import type { ShopListItemProps } from "@/types";
 
-const ShopListItem = ({ item }: ShopListItemProps) => {
+const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
   const { push } = useRouter();
   const { data: reviewData } = useReviewCount(item.id);
   const { data: averageRating = 0 } = useAverageRating(item.id);
@@ -41,7 +42,7 @@ const ShopListItem = ({ item }: ShopListItemProps) => {
     <li
       onClick={onClickDetail}
       onKeyDown={handleKeyDown}
-      className="w-[90%] sm:w-[280px] md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.2rem)] border p-4 rounded-lg cursor-pointer hover:shadow-lg group mb-5"
+      className={`${shopVariantStyles[variant]} border p-4 rounded-lg cursor-pointer hover:shadow-lg group mb-5`}
       role="button"
       tabIndex={0}
     >
@@ -49,7 +50,7 @@ const ShopListItem = ({ item }: ShopListItemProps) => {
         <Image
           src={item.thumbnail || DefaultImage}
           alt="썸네일"
-          className="fill group-hover:scale-110 transition-transform duration-300"
+          className="fill group-hover:scale-110 transition-transform duration-300 object-cover w-full"
           width={250}
           height={250}
           loading="lazy"
