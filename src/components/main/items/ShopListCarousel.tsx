@@ -1,4 +1,5 @@
 "use client";
+import ShopSkeleton from "@/components/common/loading/ShopSkeleton";
 import ShopListItem from "@/components/shop/ShopListItem";
 import {
   Carousel,
@@ -10,7 +11,31 @@ import {
 import { useShopCarousel } from "@/hooks/queries/useShops";
 
 const ShopListCarousel = () => {
-  const { data: shopItems } = useShopCarousel();
+  const { data: shopItems, isLoading } = useShopCarousel();
+
+  if (isLoading) {
+    return (
+      <Carousel
+        opts={{
+          align: "start",
+        }}
+        className="w-full max-w-[1280px]"
+      >
+        <CarouselContent className="-ml-4">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <CarouselItem
+              key={index}
+              className="sm:1/2 md:basis-1/3 lg:basis-1/4 lg:mr-10"
+            >
+              <ShopSkeleton variant="carousel" />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+    );
+  }
 
   return (
     <Carousel
@@ -23,9 +48,9 @@ const ShopListCarousel = () => {
         {shopItems?.map((item) => (
           <CarouselItem
             key={item.id}
-            className="md:basis-1/2 lg:basis-1/3 pl-4"
+            className="sm:1/2 md:basis-1/3 lg:basis-1/4 lg:mr-10"
           >
-            <ShopListItem item={item} />
+            <ShopListItem item={item} variant="carousel" />
           </CarouselItem>
         ))}
       </CarouselContent>

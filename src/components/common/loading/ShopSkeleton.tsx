@@ -1,9 +1,17 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import { ItemVariant } from "@/types";
+import { shopVariantStyles } from "@/utils/styles";
 
-const ShopSkeleton = () => {
+interface VariantTypeProps {
+  variant?: ItemVariant;
+}
+
+const ShopSkeleton = ({ variant = "shop" }: VariantTypeProps) => {
   return (
-    <li className="w-[90%] sm:w-[280px] md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.2rem)] border p-4 rounded-lg group mb-5">
-      <div className="relative w-full h-64 rounded-lg border">
+    <li
+      className={`${shopVariantStyles[variant]} border p-4 rounded-lg group mb-5`}
+    >
+      <div className="relative w-full sm:h-96 md:h-60 lg:h-64 rounded-lg border">
         <Skeleton className="w-full h-full" />
       </div>
       <div className="flex flex-col gap-2 mt-4">
