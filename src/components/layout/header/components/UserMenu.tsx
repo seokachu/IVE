@@ -10,7 +10,7 @@ const UserMenu = () => {
   return (
     <nav className="hidden lg:block">
       <ul className="flex gap-4 items-center">
-        <li className={`${!session ? "translate-y-0" : "translate-y-[3px]"} `}>
+        <li className={`${!session ? "translate-y-0" : "translate-y-[2px]"} `}>
           <CartIcon className="left-3" />
         </li>
         <li className="flex">
