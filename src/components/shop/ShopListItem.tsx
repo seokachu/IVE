@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
 import { useAverageRating, useReviewCount } from "@/hooks/queries/useReviews";
-import { shopVariantStyles } from "@/utils/styles";
 import type { ShopListItemProps } from "@/types";
 
 const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
@@ -38,11 +37,16 @@ const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
     toggleWishList();
   };
 
+  const SHOP_STYLES = {
+    shop: "w-[90%] sm:w-[280px] md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.2rem)]",
+    carousel: "w-full",
+  } as const;
+
   return (
     <li
       onClick={onClickDetail}
       onKeyDown={handleKeyDown}
-      className={`${shopVariantStyles[variant]} border p-4 rounded-lg cursor-pointer hover:shadow-lg group mb-5`}
+      className={`${SHOP_STYLES[variant]} border p-4 rounded-lg cursor-pointer hover:shadow-lg group mb-5`}
       role="button"
       tabIndex={0}
     >
