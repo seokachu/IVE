@@ -20,7 +20,6 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
           setTimeout(() => {
             window.location.href = "/login";
           }, 1500);
-          5;
         });
       }
     };

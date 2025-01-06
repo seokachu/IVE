@@ -5,10 +5,13 @@ import getRandomNickname from "../api/nickname";
 //소셜 로그인
 export const oAuthLogin = async (provider: Provider) => {
   try {
+    sessionStorage.setItem("pendingAuth", "true");
+    console.log("Set pendingAuth:", sessionStorage.getItem("pendingAuth"));
+
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${window.location.origin}`,
+        redirectTo: window.location.href,
       },
     });
 
@@ -16,6 +19,7 @@ export const oAuthLogin = async (provider: Provider) => {
     return data;
   } catch (error) {
     if (error instanceof Error) {
+      sessionStorage.removeItem("pendingAuth");
       throw new Error(`로그인에 실패했습니다. ${error.message}`);
     }
     throw error;

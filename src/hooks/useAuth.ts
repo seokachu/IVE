@@ -5,12 +5,14 @@ import { supabase } from "@/lib/supabase/client";
 import { wishlistStorage } from "@/utils/wishlistStorage";
 import { addToWishList, checkedWishLists } from "@/lib/supabase/wishlist";
 import { useRef } from "react";
+import { toast } from "./use-toast";
+import type { Session } from "@supabase/supabase-js";
 
 export const useAuth = () => {
   const setSession = useSetRecoilState(sessionState);
   const isSyncing = useRef(false);
 
-  const syncWishlist = async (session: any) => {
+  const syncWishlist = async (session: Session) => {
     // 이미 동기화 중이면 실행하지 않음
     if (isSyncing.current) return;
     isSyncing.current = true;
@@ -63,12 +65,17 @@ export const useAuth = () => {
       } = supabase.auth.onAuthStateChange(async (_event, session) => {
         setSession(session);
 
-        if (session && _event === "SIGNED_IN") {
+        //세션이 있고 pendingAuth가 있을 때 toast 알림 한번만 표시 할 수 있도록
+        if (session && sessionStorage.getItem("pendingAuth")) {
           axios.defaults.headers.common[
             "Authorization"
           ] = `Bearer ${session.access_token}`;
           await syncWishlist(session);
-        } else {
+          sessionStorage.removeItem("pendingAuth");
+          toast({
+            title: "로그인 되었습니다.",
+          });
+        } else if (!session) {
           delete axios.defaults.headers.common["Authorization"];
         }
       });
