@@ -13,12 +13,14 @@ const MobileUserMenu = () => {
       <ul className="flex items-center justify-center">
         <li className="flex-1 hover:bg-zinc-500">
           <SheetClose asChild>
-            <CartIcon
-              iconSize={28}
-              iconClassName="group-hover:[color:white] m-auto"
-              linkClassName="block border p-7 border-dark-gray group w-full h-[80px] border-r-0"
-              className="left-2/4"
-            />
+            <Link href="/cart">
+              <CartIcon
+                iconSize={28}
+                iconClassName="group-hover:[color:white] m-auto"
+                linkClassName="block border p-7 border-dark-gray group w-full h-[80px] border-r-0"
+                className="left-2/4"
+              />
+            </Link>
           </SheetClose>
         </li>
         <li className="flex-1 hover:bg-zinc-500">

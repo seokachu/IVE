@@ -27,6 +27,7 @@ const useWishListWithLocal = (productId: string) => {
     enabled: !!productId,
     initialData: false,
   });
+
   const toggleWishList = async () => {
     if (!productId) return;
     try {
