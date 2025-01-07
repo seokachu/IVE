@@ -4,7 +4,7 @@ import { useSetRecoilState } from "recoil";
 import { supabase } from "@/lib/supabase/client";
 import { wishlistStorage } from "@/utils/wishlistStorage";
 import { addToWishList, checkedWishLists } from "@/lib/supabase/wishlist";
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import { toast } from "./use-toast";
 import type { Session } from "@supabase/supabase-js";
 
@@ -46,7 +46,7 @@ export const useAuth = () => {
     }
   };
 
-  const initializeAuth = async () => {
+  const initializeAuth = useCallback(async () => {
     try {
       const {
         data: { session },
@@ -87,7 +87,7 @@ export const useAuth = () => {
       }
       setSession(null);
     }
-  };
+  }, [setSession]);
 
   return { initializeAuth };
 };
