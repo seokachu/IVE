@@ -6,7 +6,12 @@ import { useRecoilValue } from "recoil";
 import { toast } from "@/hooks/use-toast";
 import { useAuth } from "./useAuth";
 
-const AuthGuard = ({ children }: { children: React.ReactNode }) => {
+interface AuthGuardProps {
+  children: React.ReactNode;
+  loadingComponent?: React.ReactNode;
+}
+
+const AuthGuard = ({ children, loadingComponent }: AuthGuardProps) => {
   const session = useRecoilValue(sessionState);
   const { initializeAuth } = useAuth();
   const [isInitialized, setIsInitialized] = useState(false);
@@ -34,6 +39,10 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
     };
     setTimeout(showToastAndRedirect, 100);
   }, [session, isInitialized]);
+
+  if (!isInitialized || !session) {
+    return loadingComponent ?? <>{children}</>;
+  }
 
   return <>{children}</>;
 };
