@@ -35,10 +35,6 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
     setTimeout(showToastAndRedirect, 100);
   }, [session, isInitialized]);
 
-  if (!session) {
-    return null;
-  }
-
   return <>{children}</>;
 };
 
