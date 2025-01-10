@@ -5,10 +5,13 @@ import getRandomNickname from "../api/nickname";
 //소셜 로그인
 export const oAuthLogin = async (provider: Provider) => {
   try {
+    sessionStorage.setItem("pendingAuth", "true");
+    console.log("Set pendingAuth:", sessionStorage.getItem("pendingAuth"));
+
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${window.location.origin}`,
+        redirectTo: window.location.href,
       },
     });
 
@@ -16,6 +19,7 @@ export const oAuthLogin = async (provider: Provider) => {
     return data;
   } catch (error) {
     if (error instanceof Error) {
+      sessionStorage.removeItem("pendingAuth");
       throw new Error(`로그인에 실패했습니다. ${error.message}`);
     }
     throw error;
@@ -68,10 +72,45 @@ export const signInWithEmail = async (email: string, password: string) => {
 
 //로그아웃
 export const signOut = async () => {
-  const { error } = await supabase.auth.signOut();
-
-  if (error) {
-    throw new Error("로그아웃에 실패했습니다.");
+  try {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
+  } catch (error) {
+    if (error) {
+      throw new Error("로그아웃에 실패했습니다.");
+    }
+    throw error;
   }
-  throw error;
+};
+
+//닉네임 수정
+export const updateNickname = async (name: string) => {
+  try {
+    const { data: authData, error: authError } = await supabase.auth.updateUser(
+      {
+        data: { name },
+      }
+    );
+
+    if (authError) throw authError;
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) throw new Error("사용자 정보를 찾을 수 없습니다.");
+
+    const { error: userError } = await supabase
+      .from("user")
+      .update({ name: name })
+      .eq("id", user.id);
+
+    if (userError) throw userError;
+
+    return authData;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`닉네임 변경에 실패했습니다. ${error.message}`);
+    }
+    throw error;
+  }
 };

@@ -22,34 +22,42 @@ const DescriptionTab = ({ id }: ShopMenuProps) => {
           src={data.images?.[0] || DefaultImage}
           alt={data.title}
           className="fill m-auto"
-          width={500}
-          height={500}
+          width={650}
+          height={650}
         />
       </div>
-      <div>
-        <p>{data.description?.[1]}</p>
-      </div>
-      <div className="w-full h-auto m-auto relative my-16">
-        <Image
-          src={data.images?.[1] || DefaultImage}
-          alt={data.title}
-          className="fill m-auto"
-          width={500}
-          height={500}
-        />
-      </div>
-      <div className="w-full h-auto m-auto relative my-16">
-        <Image
-          src={data.images?.[2] || DefaultImage}
-          alt={data.title}
-          className="fill m-auto"
-          width={500}
-          height={500}
-        />
-      </div>
-      <div>
-        <p>{data.description?.[2]}</p>
-      </div>
+      {data.description?.[1] && (
+        <div>
+          <p>{data.description?.[1]}</p>
+        </div>
+      )}
+      {data.images?.[1] && (
+        <div className="w-full h-auto m-auto relative my-16">
+          <Image
+            src={data.images[1]}
+            alt={data.title}
+            className="fill m-auto"
+            width={650}
+            height={650}
+          />
+        </div>
+      )}
+      {data.images?.[2] && (
+        <div className="w-full h-auto m-auto relative my-16">
+          <Image
+            src={data.images[2]}
+            alt={data.title}
+            className="fill m-auto"
+            width={650}
+            height={650}
+          />
+        </div>
+      )}
+      {data.description?.[2] && (
+        <div>
+          <p>{data.description[2]}</p>
+        </div>
+      )}
     </div>
   );
 };

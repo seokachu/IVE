@@ -109,6 +109,7 @@ export const RECIPIENT_DELIVERY_OPTIONS = [
   {
     value: "메시지선택(선택사항)",
     title: "-- 메시지 선택 (선택사항) --",
+    disabled: true,
   },
   {
     value: "배송 전에 미리 연락 바랍니다.",
@@ -163,3 +164,8 @@ export const PHONE_OPTIONS = [
     title: "019",
   },
 ];
+
+export const SHOP_STYLES = {
+  shop: "w-[90%] sm:w-[280px] md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.2rem)]",
+  carousel: "w-full",
+} as const;

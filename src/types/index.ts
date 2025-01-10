@@ -1,6 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
-import { Tables } from "@/types/supabase";
-import { QueryClient } from "@tanstack/react-query";
+import { Database, Tables } from "@/types/supabase";
 
 export interface GnbArrayList {
   label: string;
@@ -22,29 +21,21 @@ export interface AlbumItemProps {
   album: Tables<"album">;
 }
 
-export interface ShopListItem {
-  color: string | null;
-  created_at: string | null;
-  delivery_info: string | null;
-  description: string | null;
-  discount_rate: number | null;
-  id: string;
-  images: string | null;
-  price: number;
-  rating: number | null;
-  review_count: number | null;
-  shipping_type: string | null;
-  size: string | null;
-  thumbnail: string | null;
-  title: string;
-}
+type ShopListItem = Database["public"]["Tables"]["goods"]["Row"];
 
 export interface CartItem extends Omit<ShopListItem, "quantity"> {
   quantity: number;
 }
 
+export type ItemVariant = "shop" | "carousel";
+
+export interface VariantTypeProps {
+  variant: ItemVariant;
+}
+
 export interface ShopListItemProps {
   item: ShopListItem;
+  variant: ItemVariant;
 }
 
 export interface DiscountedPrice {
@@ -54,8 +45,12 @@ export interface DiscountedPrice {
 
 export type PriceKeys = "price" | "discount_rate";
 
+export interface GoodsIncludeRating extends ShopListItem {
+  rating?: number;
+}
+
 export type BadgeFields = Pick<
-  ShopListItem,
+  GoodsIncludeRating,
   "shipping_type" | "review_count" | "rating" | "id"
 >;
 
@@ -134,7 +129,7 @@ export interface AddressListItems {
 }
 
 export interface CustomerInfoFormProps {
-  initialData?: any;
+  initialData?: Tables<"customer_info">;
   defaultValues?: {
     name?: string;
     email?: string;
@@ -212,3 +207,49 @@ export interface DetailOrderItemProps {
   item: Tables<"order_items">;
   onConfirm: () => void;
 }
+
+export interface ReviewFormData {
+  rating: number;
+  content: string;
+}
+
+export interface WriteReviewFormProps {
+  mode: "create" | "edit";
+  reviewData?: Tables<"goods_reviews">;
+  onClose: () => void;
+  orderId: string;
+  goodsId: string;
+}
+
+export type WishListItem = Database["public"]["Tables"]["wish_lists"]["Row"];
+
+export interface UserWishListItemProps {
+  item: Tables<"wish_lists">;
+}
+
+export interface DirectPaymentButtonProps {
+  product: ShopListItem;
+  quantity: number;
+}
+
+export interface UseReviewsProps {
+  id: string;
+  page: number;
+}
+
+export interface OrderCustomerInfoItemProps {
+  item: Tables<"customer_info">;
+}
+
+export type ShippingAddressUpdate =
+  Database["public"]["Tables"]["shipping_addresses"]["Update"];
+
+export type ShippingAddress =
+  Database["public"]["Tables"]["shipping_addresses"]["Row"];
+
+export type DeleteAddressParams = {
+  addressId: string;
+  userId: string;
+};
+
+export type PaymentInsert = Database["public"]["Tables"]["payments"]["Insert"];

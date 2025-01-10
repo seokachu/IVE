@@ -12,8 +12,10 @@ import type { DetailOrderItemProps } from "@/types";
 const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
   const [isConfirmModal, setIsConfirmModal] = useState(false);
   const [isReviewModal, setIsReviewModal] = useState(false);
-  const { data: reviewData } = useOrderItemReview(item.order_id);
-
+  const { data: reviewData } = useOrderItemReview(
+    item.order_id,
+    item.product_id
+  );
   const price = getDiscountedPrice(item);
 
   const onClickCompleteOrder = () => {
@@ -36,6 +38,11 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
   const getButtonText = () => {
     if (!item.is_confirmed) return "구매확정";
     return reviewData ? "리뷰수정" : "리뷰쓰기";
+  };
+
+  //모달 mode
+  const getReviewMode = () => {
+    return reviewData ? "edit" : "create";
   };
 
   return (
@@ -102,6 +109,7 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
           reviewData={reviewData}
           orderId={item.order_id}
           goodsId={item.product_id}
+          mode={getReviewMode()}
         />
       )}
     </li>

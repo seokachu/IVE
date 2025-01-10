@@ -1,6 +1,5 @@
 "use client";
 import { cartState } from "@/store";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IoCartOutline } from "react-icons/io5";
 import { useRecoilState } from "recoil";
@@ -31,7 +30,7 @@ const CartIcon = ({
   }, []);
 
   return (
-    <Link href="/cart" className={linkClassName}>
+    <div className={linkClassName}>
       <div className="relative">
         <IoCartOutline
           className={`${iconClassName} cursor-pointer`}
@@ -45,7 +44,7 @@ const CartIcon = ({
           </span>
         )}
       </div>
-    </Link>
+    </div>
   );
 };
 

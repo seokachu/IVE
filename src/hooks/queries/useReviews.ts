@@ -1,22 +1,31 @@
 import {
+  getAverageRating,
   getGoodsReviews,
+  getGoodsReviewsCount,
   getOrderItemReview,
   saveOrderItemReview,
   updateOrderItemReview,
 } from "@/lib/supabase/review";
-import { ReviewResponse } from "@/types";
-import { Database } from "@/types/supabase";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import type { ReviewResponse, UseReviewsProps } from "@/types";
 
-type UpdateOrderItemReview =
-  Database["public"]["Tables"]["goods_reviews"]["Update"];
+//리뷰 전체 데이터 불러오기(카운트)
+export const useReviewCount = (id: string) => {
+  return useQuery({
+    queryKey: ["reviewCount", id],
+    queryFn: () => getGoodsReviewsCount(id),
+  });
+};
 
-interface UseReviewsProps {
-  id: string;
-  page: number;
-}
+//리뷰 평균
+export const useAverageRating = (id: string) => {
+  return useQuery({
+    queryKey: ["averageRating", id],
+    queryFn: () => getAverageRating(id),
+  });
+};
 
-//리뷰 전체 데이터 불러오기
+//리뷰 전체 데이터 페이지네이션
 export const useReviews = ({ id, page }: UseReviewsProps) => {
   return useQuery({
     queryKey: ["reviews", id, page] as const,
@@ -26,13 +35,11 @@ export const useReviews = ({ id, page }: UseReviewsProps) => {
 };
 
 //단일 리뷰 조회
-export const useOrderItemReview = (orderId: string) => {
+export const useOrderItemReview = (orderId: string, productId: string) => {
   return useQuery({
-    queryKey: ["review", orderId],
-    queryFn: () => {
-      return getOrderItemReview(orderId);
-    },
-    enabled: !!orderId,
+    queryKey: ["review", orderId, productId],
+    queryFn: () => getOrderItemReview(orderId, productId),
+    enabled: !!orderId && !!productId,
   });
 };
 
@@ -43,21 +50,34 @@ export const useAddOrderItemReview = () => {
     mutationFn: saveOrderItemReview,
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["review", variables.order_id],
+        queryKey: ["review", variables.order_id, variables.goods_id],
       });
     },
   });
 };
 
 //리뷰 수정
-// export const useUpdateOrderItemReview = () => {
-//   const queryClient = useQueryClient();
-//   return useMutation({
-//     mutationFn: updateOrderItemReview,
-//     onSuccess: (_, variables) => {
-//       queryClient.invalidateQueries({
-//         queryKey: ["review", variables.order_id],
-//       });
-//     },
-//   });
-// };
+export const useUpdateOrderItemReview = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({
+      id,
+      rating,
+      content,
+    }: {
+      id: string;
+      rating: number;
+      content: string;
+    }) => updateOrderItemReview(id, { rating, content }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["reviews"],
+        refetchType: "all",
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["review"],
+        refetchType: "all",
+      });
+    },
+  });
+};

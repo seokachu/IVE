@@ -39,9 +39,6 @@ const SignInContent = () => {
   const handleOAuthLogin = async (provider: OAuthProvider) => {
     try {
       await oAuthLogin(provider);
-      toast({
-        title: "로그인 되었습니다.",
-      });
     } catch (error) {
       if (error instanceof Error) {
         toast({

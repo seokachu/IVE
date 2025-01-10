@@ -55,7 +55,7 @@ const loginSchema = z.object({
   password: passwordSchema,
 });
 
-const myPageSchema = z.object({
+const myPageNicknameSchema = z.object({
   nickname: nicknameSchema,
 });
 
@@ -91,7 +91,7 @@ export const reviewSchema = z.object({
 //타입 지정
 export type SignUpType = z.infer<typeof signUpSchema>;
 export type LoginType = z.infer<typeof loginSchema>;
-export type MyPageType = z.infer<typeof myPageSchema>;
+export type NicknameType = z.infer<typeof myPageNicknameSchema>;
 export type AddressType = z.infer<typeof myPageAddressSchema>;
 export type CustomerInfoType = z.infer<typeof customerInfoSchema>;
 export type ReviewType = z.infer<typeof reviewSchema>;
@@ -100,13 +100,12 @@ export type ReviewType = z.infer<typeof reviewSchema>;
 export const userSchemas = {
   signUpSchema,
   loginSchema,
-  myPageSchema,
+  myPageNicknameSchema,
 };
 
 //default 설정
 export const userDefaultValues = {
   signUpDefaultValues: extractDefaultValues(signUpSchema),
   loginDefaultValues: extractDefaultValues(loginSchema),
-  myPageDefaultValues: extractDefaultValues(myPageSchema),
   myPageAddressValues: extractDefaultValues(myPageAddressSchema),
 };

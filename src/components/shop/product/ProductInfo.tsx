@@ -76,7 +76,7 @@ const ProductInfo = ({ id }: ShopMenuProps) => {
             </li>
             <li className="flex py-3 px-3 border-b">
               <h3 className="w-[100px]">사이즈</h3>
-              <p className="uppercase">{data.size}</p>
+              <p>{data.size}</p>
             </li>
             <li className="flex py-3 px-3 border-b">
               <h3 className="w-[100px]">색상</h3>

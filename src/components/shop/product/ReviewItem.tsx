@@ -1,10 +1,9 @@
-import { FaRegStar } from "react-icons/fa";
 import { formatDate } from "@/utils/formatDate";
 import UserAvatar from "@/components/common/UserAvatar";
 import type { ReviewItemProps } from "@/types";
 import RenderStars from "@/utils/RenderStars";
 
-const ReviewItems = ({ item }: ReviewItemProps) => {
+const ReviewItem = ({ item }: ReviewItemProps) => {
   return (
     <li className="border-b py-6">
       <div className="flex gap-4 justify-between items-center">
@@ -29,4 +28,4 @@ const ReviewItems = ({ item }: ReviewItemProps) => {
   );
 };
 
-export default ReviewItems;
+export default ReviewItem;
