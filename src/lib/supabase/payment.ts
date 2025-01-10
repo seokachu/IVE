@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
+import type { PaymentInsert } from "@/types";
 
 //결제 데이터 불러오기
 export const getPaymentByOrderId = async (orderId: string) => {
@@ -23,7 +24,7 @@ export const getPaymentByOrderId = async (orderId: string) => {
 };
 
 //결제데이터 저장하기
-export const savePayment = async (paymentData: any) => {
+export const savePayment = async (paymentData: PaymentInsert) => {
   try {
     const { data, error } = await supabase
       .from("payments")

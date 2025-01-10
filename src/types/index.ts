@@ -236,3 +236,20 @@ export interface UseReviewsProps {
   id: string;
   page: number;
 }
+
+export interface OrderCustomerInfoItemProps {
+  item: Tables<"customer_info">;
+}
+
+export type ShippingAddressUpdate =
+  Database["public"]["Tables"]["shipping_addresses"]["Update"];
+
+export type ShippingAddress =
+  Database["public"]["Tables"]["shipping_addresses"]["Row"];
+
+export type DeleteAddressParams = {
+  addressId: string;
+  userId: string;
+};
+
+export type PaymentInsert = Database["public"]["Tables"]["payments"]["Insert"];

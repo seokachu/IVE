@@ -7,7 +7,7 @@ import AuthGuard from "@/hooks/AuthGuard";
 import { useAuth } from "@/hooks/useAuth";
 import { useEffect, useState } from "react";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const MyPageLayout = ({ children }: { children: React.ReactNode }) => {
   const [, setIsInitialized] = useState(false);
   const { initializeAuth } = useAuth();
 
@@ -42,4 +42,4 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default layout;
+export default MyPageLayout;
