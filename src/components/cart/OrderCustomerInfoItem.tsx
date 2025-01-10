@@ -1,6 +1,4 @@
-interface OrderCustomerInfoItemProps {
-  item: any;
-}
+import type { OrderCustomerInfoItemProps } from "@/types";
 
 const OrderCustomerInfoItem = ({ item }: OrderCustomerInfoItemProps) => {
   return (

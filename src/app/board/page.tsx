@@ -1,5 +1,5 @@
 import { IoSearch } from "react-icons/io5";
-import PaginationControl from "@/components/common/PaginationControl";
+// import PaginationControl from "@/components/common/PaginationControl";
 import BoardListItems from "@/components/board/BoardListItems";
 import BoardListHeader from "@/components/board/BoardListHeader";
 import { GoPlusCircle } from "react-icons/go";

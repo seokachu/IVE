@@ -1,8 +1,15 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const config = {
   images: {
-    domains: ["i.namu.wiki"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "jzghadoanikvjvczuerw.supabase.co",
+        port: "",
+        pathname: "/storage/v1/object/public/**",
+      },
+    ],
   },
 };
 
-export default nextConfig;
+export default config;

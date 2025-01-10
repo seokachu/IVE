@@ -29,8 +29,8 @@ const SelectMenu = <
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          {options.map((el, index) => (
-            <SelectItem key={el.value} value={el.value} disabled={index === 0}>
+          {options.map((el) => (
+            <SelectItem key={el.value} value={el.value} disabled={el.disabled}>
               {el.title}
             </SelectItem>
           ))}

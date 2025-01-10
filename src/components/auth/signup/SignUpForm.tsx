@@ -14,10 +14,8 @@ import { useEffect, useState } from "react";
 import JSConfetti from "js-confetti";
 import { toast } from "@/hooks/use-toast";
 import { signUpEmail } from "@/lib/supabase/auth";
-import { useRouter } from "next/navigation";
 
 const SignUpForm = () => {
-  const { push } = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordCheck, setShowPasswordCheck] = useState(false);
   const [jsConfetti, setJsConfetti] = useState<JSConfetti | null>(null);
@@ -37,12 +35,11 @@ const SignUpForm = () => {
   const handleSubmit = async (data: SignUpType) => {
     try {
       await signUpEmail(data.email, data.password);
-
       toast({
         title: "회원가입이 완료되었습니다!",
       });
 
-      push("/login");
+      window.location.href = "/login?form=signup";
 
       jsConfetti?.addConfetti({
         confettiColors: ["#ff9f87", "#FFFFFF", "#EB7FEC", "#E72424"],

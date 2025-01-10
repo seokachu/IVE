@@ -116,7 +116,6 @@ export type Database = {
           id: string
           images: Json | null
           price: number
-          rating: number | null
           review_count: number | null
           shipping_type: string | null
           size: string | null
@@ -132,7 +131,6 @@ export type Database = {
           id?: string
           images?: Json | null
           price: number
-          rating?: number | null
           review_count?: number | null
           shipping_type?: string | null
           size?: string | null
@@ -148,7 +146,6 @@ export type Database = {
           id?: string
           images?: Json | null
           price?: number
-          rating?: number | null
           review_count?: number | null
           shipping_type?: string | null
           size?: string | null
@@ -198,42 +195,6 @@ export type Database = {
           },
           {
             foreignKeyName: "goods_reviews_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "user"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      likes: {
-        Row: {
-          created_at: string | null
-          goods_id: string | null
-          id: string
-          user_id: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          goods_id?: string | null
-          id?: string
-          user_id?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          goods_id?: string | null
-          id?: string
-          user_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "likes_goods_id_fkey"
-            columns: ["goods_id"]
-            isOneToOne: false
-            referencedRelation: "goods"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "likes_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "user"
@@ -445,6 +406,42 @@ export type Database = {
           name?: string | null
         }
         Relationships: []
+      }
+      wish_lists: {
+        Row: {
+          created_at: string
+          id: string
+          product_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          product_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          product_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wish_lists_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "goods"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wish_lists_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

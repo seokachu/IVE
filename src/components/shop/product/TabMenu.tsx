@@ -1,8 +1,10 @@
-import { useShop } from "@/hooks/queries/useShops";
+import { useReviewCount } from "@/hooks/queries/useReviews";
 import type { TabMenuProps } from "@/types";
 
 const TabMenu = ({ activeTab, setActiveTab, id }: TabMenuProps) => {
-  const { data } = useShop(id);
+  const { data } = useReviewCount(id);
+
+  const count = data?.length;
 
   return (
     <div className="mb-16">
@@ -30,7 +32,7 @@ const TabMenu = ({ activeTab, setActiveTab, id }: TabMenuProps) => {
               activeTab === "review" ? "font-bold" : ""
             } flex gap-2 justify-center items-center`}
           >
-            리뷰<span>{data?.review_count}</span>
+            리뷰<span>{count}</span>
           </h3>
         </li>
       </ul>

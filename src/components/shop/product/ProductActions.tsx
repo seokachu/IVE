@@ -8,10 +8,14 @@ import { toast } from "@/hooks/use-toast";
 import type { CartItem, ProductActionsProps } from "@/types";
 import { useSetRecoilState } from "recoil";
 import { cartState } from "@/store";
+import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
+import { GoHeartFill } from "react-icons/go";
+import DirectPaymentButton from "@/components/payment/DirectPaymentButton";
 
 const ProductActions = ({ product, quantity }: ProductActionsProps) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const setCartItems = useSetRecoilState(cartState);
+  const { isWished, toggleWishList } = useWishListWithLocal(product.id);
 
   const onClickCart = () => {
     try {
@@ -48,8 +52,9 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
     setIsDrawerOpen(false);
   };
 
-  const onClickBuying = () => {
-    //결제 페이지로 넘어가야 함
+  //찜하기 버튼
+  const onClickHeart = () => {
+    toggleWishList();
   };
 
   return (
@@ -57,10 +62,15 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
       <ul className="flex items-stretch justify-center gap-3">
         <li className="w-1/6">
           <ActionButton
+            onClick={onClickHeart}
             variant="primary"
             className="w-full flex items-center justify-center py-3"
           >
-            <IoIosHeartEmpty size={25} className="text-white" />
+            {isWished ? (
+              <GoHeartFill size={25} className="text-rose-500" />
+            ) : (
+              <IoIosHeartEmpty size={25} className="text-white" />
+            )}
           </ActionButton>
         </li>
         <li className="w-2/4">
@@ -73,13 +83,7 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
           </ActionButton>
         </li>
         <li className="w-2/4">
-          <ActionButton
-            onClick={onClickBuying}
-            variant="primary"
-            className="w-full py-3 text-center"
-          >
-            구매하기
-          </ActionButton>
+          <DirectPaymentButton product={product} quantity={quantity} />
         </li>
       </ul>
       {isDrawerOpen && (

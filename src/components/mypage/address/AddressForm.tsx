@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchAddress from "./SearchAddress";
 import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
@@ -25,6 +25,7 @@ import RequestInfo from "./RequestInfo";
 import DefaultAddressCheckbox from "./DefaultAddressCheckbox";
 import type { AddressChange } from "@/types";
 import { Tables } from "@/types/supabase";
+import { RECIPIENT_DELIVERY_OPTIONS } from "@/utils/constants";
 
 type AddressFormProps = {
   mode?: "create" | "edit";
@@ -48,29 +49,65 @@ const AddressForm = ({
   //첫 배송지 확인
   const isFirstAddress = !addresses || addresses.length === 0;
 
-  // 수정 모드일 때 초기값 설정
+  //수정 모드일 때 초기값 설정
   const getInitialValues = () => {
     if (mode === "edit" && initialData) {
       const [phoneFirst, phoneMiddle, phoneLast] =
         initialData.recipient_phone.split("-");
-      return {
-        recipient: initialData.recipient_name,
-        zonecode: initialData.postal_code,
-        address: initialData.address_line1,
-        detailAddress: initialData.address_line2 || "",
-        phoneFirst,
-        phoneMiddle,
-        phoneLast,
-        request: initialData.request || "",
-        isDefault: initialData.is_default,
-        customRequest: "",
-      };
+
+      const savedRequest = initialData.request || "";
+
+      //직접입력 form 확인
+      if (
+        RECIPIENT_DELIVERY_OPTIONS.some(
+          (option) => option.value === savedRequest
+        )
+      ) {
+        return {
+          recipient: initialData.recipient_name,
+          zonecode: initialData.postal_code,
+          address: initialData.address_line1,
+          detailAddress: initialData.address_line2 || "",
+          phoneFirst,
+          phoneMiddle,
+          phoneLast,
+          request: savedRequest,
+          isDefault: initialData.is_default,
+          customRequest: "",
+        };
+      } else {
+        //직접입력 form 인 경우
+        return {
+          recipient: initialData.recipient_name,
+          zonecode: initialData.postal_code,
+          address: initialData.address_line1,
+          detailAddress: initialData.address_line2 || "",
+          phoneFirst,
+          phoneMiddle,
+          phoneLast,
+          request: "직접 입력",
+          isDefault: initialData.is_default,
+          customRequest: savedRequest,
+        };
+      }
     }
     return {
       ...userDefaultValues.myPageAddressValues,
       isDefault: isFirstAddress,
     };
   };
+
+  useEffect(() => {
+    if (mode === "edit" && initialData) {
+      const savedRequest = initialData.request || "";
+      const isCustom = !RECIPIENT_DELIVERY_OPTIONS.some(
+        (option) => option.value === savedRequest
+      );
+      if (isCustom) {
+        setShowRequested(true);
+      }
+    }
+  }, [mode, initialData]);
 
   const form = useForm<AddressType>({
     mode: "onChange",
@@ -105,12 +142,13 @@ const AddressForm = ({
   };
 
   const handleRequestChange = (value: string) => {
-    if (!value || value === "메시지선택(선택사항)") {
-      form.setValue("request", "");
-      form.setValue("customRequest", "");
-      return;
-    }
-    setShowRequested(value === "직접 입력");
+    const isDefaultOption =
+      value && value !== RECIPIENT_DELIVERY_OPTIONS[0].value;
+    const isCustomInput = value === "직접 입력";
+
+    form.setValue("request", isDefaultOption ? value : "");
+    form.setValue("customRequest", "");
+    setShowRequested(isCustomInput);
   };
 
   //제출 form
