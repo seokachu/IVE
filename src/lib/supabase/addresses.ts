@@ -79,6 +79,9 @@ export const saveShippingAddress = async (
 
     return data;
   } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`배송지를 저장하는데 실패헀습니다. ${error.message}`);
+    }
     throw error;
   }
 };
@@ -111,14 +114,20 @@ export const deleteShippingAddress = async (addressId: string) => {
       });
 
       if (rpcError) {
-        console.error("RPC error:", rpcError);
+        if (rpcError instanceof Error) {
+          throw new Error(
+            `기본배송지를 재설정하는데 실패했습니다. ${rpcError.message}`
+          );
+        }
         throw rpcError;
       }
     }
 
     return true;
   } catch (error) {
-    console.error("Delete shipping address error:", error);
+    if (error instanceof Error) {
+      throw new Error(`배송지를 삭제하는데 실패했습니다. ${error.message}`);
+    }
     throw error;
   }
 };
@@ -129,14 +138,6 @@ export const updateShippingAddress = async (
   addressData: ShippingAddressUpdate
 ) => {
   try {
-    // 업데이트 전 데이터 확인
-    const { data: beforeUpdate } = await supabase
-      .from("shipping_addresses")
-      .select()
-      .eq("id", addressId)
-      .eq("user_id", addressData.user_id)
-      .single();
-
     // 업데이트 실행
     const { error: updateError } = await supabase
       .from("shipping_addresses")
@@ -144,10 +145,15 @@ export const updateShippingAddress = async (
       .eq("id", addressId);
 
     if (updateError) {
+      if (updateError instanceof Error) {
+        throw new Error(
+          `배송지 정보 수정에 실패했습니다. ${updateError.message}`
+        );
+      }
       throw updateError;
     }
 
-    // 업데이트 후 데이터 확인
+    // 업데이트 된 데이터 가져오기
     const { data: afterUpdate } = await supabase
       .from("shipping_addresses")
       .select()
@@ -162,17 +168,19 @@ export const updateShippingAddress = async (
       });
 
       if (rpcError) {
-        console.error("RPC error:", rpcError);
+        if (rpcError instanceof Error) {
+          throw new Error(
+            `기본 배송지 설정에 실패했습니다. ${rpcError.message}`
+          );
+        }
         throw rpcError;
       }
     }
-
-    // 변경 여부 확인
-    const isChanged =
-      JSON.stringify(beforeUpdate) !== JSON.stringify(afterUpdate);
     return afterUpdate;
   } catch (error) {
-    console.error("Update failed:", error);
+    if (error instanceof Error) {
+      throw new Error(`배송지를 수정하는데 실패했습니다. ${error.message}`);
+    }
     throw error;
   }
 };

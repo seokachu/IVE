@@ -1,16 +1,30 @@
 "use client";
 
 import { sessionState } from "@/store";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { toast } from "@/hooks/use-toast";
+import { useAuth } from "./useAuth";
 
-const AuthGuard = ({ children }: { children: React.ReactNode }) => {
+interface AuthGuardProps {
+  children: React.ReactNode;
+  loadingComponent?: React.ReactNode;
+}
+
+const AuthGuard = ({ children, loadingComponent }: AuthGuardProps) => {
   const session = useRecoilValue(sessionState);
+  const { initializeAuth } = useAuth();
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    initializeAuth().then(() => {
+      setIsInitialized(true);
+    });
+  }, [initializeAuth]);
 
   useEffect(() => {
     const showToastAndRedirect = () => {
-      if (!session) {
+      if (isInitialized && !session) {
         Promise.resolve(
           toast({
             title: "로그인 후 이용 가능합니다.",
@@ -20,15 +34,14 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
           setTimeout(() => {
             window.location.href = "/login";
           }, 1500);
-          5;
         });
       }
     };
     setTimeout(showToastAndRedirect, 100);
-  }, [session]);
+  }, [session, isInitialized]);
 
-  if (!session) {
-    return null;
+  if (!isInitialized || !session) {
+    return loadingComponent ?? <>{children}</>;
   }
 
   return <>{children}</>;

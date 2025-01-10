@@ -6,15 +6,11 @@ import {
   updateShippingAddress,
 } from "@/lib/supabase/addresses";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import type { Database } from "@/types/supabase";
-
-type ShippingAddressUpdate =
-  Database["public"]["Tables"]["shipping_addresses"]["Update"];
-
-type DeleteAddressParams = {
-  addressId: string;
-  userId: string;
-};
+import type {
+  DeleteAddressParams,
+  ShippingAddress,
+  ShippingAddressUpdate,
+} from "@/types";
 
 //배송지 목록 조회(여러개)
 export const useShippingAddresses = (userId?: string) => {
@@ -80,11 +76,11 @@ export const useUpdateShippingAddress = () => {
     }) => updateShippingAddress(addressId, data),
     onSuccess: async (updatedData, variables) => {
       // 즉시 캐시 업데이트
-      queryClient.setQueryData<any>(
+      queryClient.setQueryData<ShippingAddress[]>(
         ["shippingAddresses", variables.data.user_id],
-        (old: any) => {
+        (old) => {
           if (!old) return old;
-          return old.map((address: any) =>
+          return old.map((address: ShippingAddress) =>
             address.id === variables.addressId ? updatedData : address
           );
         }
