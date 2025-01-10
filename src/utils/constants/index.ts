@@ -1,5 +1,5 @@
 import AppleMusicIcon from "@/assets/images/apple_music_icon.avif";
-import MelonMusicIcon from "@/assets/images/Melon_music_icon.avif";
+import MelonMusicIcon from "@/assets/images/melon_music_icon.avif";
 import FloMusicIcon from "@/assets/images/flo_music_icon.avif";
 import BugsMusicIcon from "@/assets/images/bugs_music_icon.avif";
 import GenieMusicIcon from "@/assets/images/genie_music_icon.avif";
