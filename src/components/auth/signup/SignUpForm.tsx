@@ -10,13 +10,19 @@ import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import { signUpEmail } from "@/lib/supabase/auth";
+import { useRouter } from "next/navigation";
 
 const SignUpForm = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordCheck, setShowPasswordCheck] = useState(false);
+
+  useEffect(() => {
+    router.prefetch("/login?form=signup");
+  }, [router]);
 
   const form = useForm<SignUpType>({
     mode: "onChange",
@@ -29,10 +35,8 @@ const SignUpForm = () => {
   const handleSubmit = async (data: SignUpType) => {
     try {
       await signUpEmail(data.email, data.password);
-      toast({
-        title: "회원가입이 완료되었습니다!",
-      });
-      window.location.href = "/login?form=signup";
+      localStorage.setItem("loginEffect", "true");
+      router.push("/login?form=signup");
     } catch (error) {
       if (error instanceof Error) {
         toast({
