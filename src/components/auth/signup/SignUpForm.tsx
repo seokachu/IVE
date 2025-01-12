@@ -49,8 +49,11 @@ const SignUpForm = () => {
     } catch (error) {
       if (error instanceof Error) {
         toast({
-          title: error.message,
+          title: "회원가입에 실패했습니다.",
+          description: "이미 등록된 이메일 입니다.",
+          variant: "destructive",
         });
+        throw error.message;
       }
     }
   };
