@@ -1,24 +1,6 @@
 import { getPaymentByOrderId } from "@/lib/supabase/payment";
 import { useQuery } from "@tanstack/react-query";
 
-export interface Payment {
-  id: string;
-  user_id: string;
-  order_id: string;
-  amount: number;
-  order_name: string;
-  payment_method: string;
-  status: string;
-  recipient_name: string;
-  recipient_phone: string;
-  address_line1: string;
-  address_line2: string;
-  postal_code: string;
-  delivery_status: string;
-  created_at: Date;
-  installment_months: number;
-}
-
 export const usePayment = (orderId: string) => {
   return useQuery({
     queryKey: ["payment", orderId],

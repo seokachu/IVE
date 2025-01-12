@@ -39,7 +39,7 @@ const CartSummary = () => {
   const totalDiscountAmount = totalOriginalPrice - totalDiscountedPrice;
 
   return mounted ? (
-    <div className="lg:sticky lg:top-5 flex-1 border rounded-md bg-white shadow-sm p-10 h-fit">
+    <div className="lg:sticky lg:top-5 flex-1 border rounded-md bg-white shadow-sm p-5 lg:p-10 h-fit">
       <OrderPriceSummary
         totalDiscountedPrice={totalDiscountedPrice}
         totalOriginalPrice={totalOriginalPrice}
