@@ -4,10 +4,23 @@ import Image from "next/image";
 import LogoImage from "@/assets/images/logo_pink.svg";
 import { useSearchParams } from "next/navigation";
 import OAuthLogin from "./OAuthLogin";
+import { useEffect, useState } from "react";
+import JSConfetti from "js-confetti";
 
 const SignInContainer = () => {
   const searchParams = useSearchParams();
+  const [jsConfetti, setJsConfetti] = useState<JSConfetti | null>(null);
   const isFormSignup = searchParams.get("form") === "signup";
+
+  useEffect(() => {
+    setJsConfetti(new JSConfetti());
+  }, []);
+
+  jsConfetti?.addConfetti({
+    confettiColors: ["#ff9f87", "#FFFFFF", "#EB7FEC", "#E72424"],
+    confettiRadius: 5,
+    confettiNumber: 300,
+  });
 
   return (
     <section className="max-w-[500px] px-5">

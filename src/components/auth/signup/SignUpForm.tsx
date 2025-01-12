@@ -10,19 +10,13 @@ import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
-import { useEffect, useState } from "react";
-import JSConfetti from "js-confetti";
+import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import { signUpEmail } from "@/lib/supabase/auth";
 
 const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordCheck, setShowPasswordCheck] = useState(false);
-  const [jsConfetti, setJsConfetti] = useState<JSConfetti | null>(null);
-
-  useEffect(() => {
-    setJsConfetti(new JSConfetti());
-  }, []);
 
   const form = useForm<SignUpType>({
     mode: "onChange",
@@ -38,14 +32,7 @@ const SignUpForm = () => {
       toast({
         title: "회원가입이 완료되었습니다!",
       });
-
       window.location.href = "/login?form=signup";
-
-      jsConfetti?.addConfetti({
-        confettiColors: ["#ff9f87", "#FFFFFF", "#EB7FEC", "#E72424"],
-        confettiRadius: 5,
-        confettiNumber: 300,
-      });
     } catch (error) {
       if (error instanceof Error) {
         toast({

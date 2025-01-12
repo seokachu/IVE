@@ -45,10 +45,6 @@ const SignInEmail = () => {
             }
             localStorage.removeItem("wishlist");
             queryClient.invalidateQueries({ queryKey: ["wishlist"] });
-            toast({
-              title: "로그인 되었습니다.",
-            });
-            push("/");
           } catch (error) {
             if (error instanceof Error) {
               throw new Error(
@@ -59,6 +55,10 @@ const SignInEmail = () => {
           }
         }
       }
+      toast({
+        title: "로그인 되었습니다.",
+      });
+      push("/");
     } catch (error) {
       if (error instanceof Error) {
         if (error.message.includes("Invalid login credentials")) {
