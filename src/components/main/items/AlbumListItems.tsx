@@ -32,9 +32,9 @@ const AlbumListItems = ({ album }: AlbumItemProps) => {
   return (
     <li
       key={album.title}
-      className="flex flex-col items-center p-5 lg:flex-row lg:gap-12  lg:p-0"
+      className="flex flex-col items-center p-5 lg:flex-row lg:gap-12 lg:p-0"
     >
-      <div className="relative w-[500px] h-auto lg:shrink-0">
+      <div className="relative w-full sm:max-w-[300px] lg:max-w-[500px] h-auto lg:shrink-0">
         <Image
           src={album.album_image || DefaultImage}
           alt={album.title}
