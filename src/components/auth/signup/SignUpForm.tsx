@@ -11,18 +11,18 @@ import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import JSConfetti from "js-confetti";
 import { toast } from "@/hooks/use-toast";
 import { signUpEmail } from "@/lib/supabase/auth";
+import { useRouter } from "next/navigation";
 
 const SignUpForm = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordCheck, setShowPasswordCheck] = useState(false);
-  const [jsConfetti, setJsConfetti] = useState<JSConfetti | null>(null);
 
   useEffect(() => {
-    setJsConfetti(new JSConfetti());
-  }, []);
+    router.prefetch("/login?form=signup");
+  }, [router]);
 
   const form = useForm<SignUpType>({
     mode: "onChange",
@@ -35,22 +35,16 @@ const SignUpForm = () => {
   const handleSubmit = async (data: SignUpType) => {
     try {
       await signUpEmail(data.email, data.password);
-      toast({
-        title: "회원가입이 완료되었습니다!",
-      });
-
-      window.location.href = "/login?form=signup";
-
-      jsConfetti?.addConfetti({
-        confettiColors: ["#ff9f87", "#FFFFFF", "#EB7FEC", "#E72424"],
-        confettiRadius: 5,
-        confettiNumber: 300,
-      });
+      localStorage.setItem("loginEffect", "true");
+      router.push("/login?form=signup");
     } catch (error) {
       if (error instanceof Error) {
         toast({
-          title: error.message,
+          title: "회원가입에 실패했습니다.",
+          description: "이미 등록된 이메일 입니다.",
+          variant: "destructive",
         });
+        throw error.message;
       }
     }
   };
