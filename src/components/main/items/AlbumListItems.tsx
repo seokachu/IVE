@@ -34,11 +34,11 @@ const AlbumListItems = ({ album }: AlbumItemProps) => {
       key={album.title}
       className="flex flex-col items-center p-5 lg:flex-row lg:gap-12 lg:p-0"
     >
-      <div className="relative w-full sm:max-w-[300px] lg:max-w-[500px] h-auto lg:shrink-0">
+      <div className="relative h-[40vh] sm:max-w-[300px] sm:max-h-[300px] lg:max-w-[500px] lg:shrink-0 aspect-square">
         <Image
           src={album.album_image || DefaultImage}
           alt={album.title}
-          className="fill object-cover"
+          className="fill object-cover w-full h-full"
           width={500}
           height={500}
         />

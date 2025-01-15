@@ -33,13 +33,13 @@ const AlbumList = () => {
         type: "fraction",
       }}
       modules={[EffectCoverflow, Pagination]}
-      className="w-full h-full !pb-[60px]"
+      className="w-full h-full !pb-[80px]"
       spaceBetween={50}
     >
       {albums?.map((album) => (
         <SwiperSlide
           key={album.title}
-          className="bg-cover bg-center lg:!w-max lg:!h-full lg:pr-5"
+          className="bg-cover h-fit bg-center lg:!w-max lg:!h-full lg:pr-5"
         >
           <AlbumListItems album={album} />
         </SwiperSlide>
