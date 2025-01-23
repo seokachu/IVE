@@ -36,6 +36,8 @@ const SignUpForm = () => {
     try {
       await signUpEmail(data.email, data.password);
       localStorage.setItem("loginEffect", "true");
+      document.cookie = "firstSignup=true; path=/; max-age=300";
+
       router.push("/login?form=signup");
     } catch (error) {
       if (error instanceof Error) {

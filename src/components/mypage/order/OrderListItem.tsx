@@ -6,8 +6,6 @@ import type { OrderListItemProps } from "@/types";
 const OrderListItem = ({ item }: OrderListItemProps) => {
   const price = getDiscountedPrice(item);
 
-  console.log(item);
-
   return (
     <li
       key={item.id}
