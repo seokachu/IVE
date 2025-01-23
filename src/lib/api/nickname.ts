@@ -12,6 +12,7 @@ const getRandomNickname = async () => {
     if (error instanceof Error) {
       console.log("Error nickname", error.message);
     }
+    throw error;
   }
 };
 

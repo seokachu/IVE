@@ -6,12 +6,11 @@ import getRandomNickname from "../api/nickname";
 export const oAuthLogin = async (provider: Provider) => {
   try {
     sessionStorage.setItem("pendingAuth", "true");
-    console.log("Set pendingAuth:", sessionStorage.getItem("pendingAuth"));
 
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: window.location.href,
+        redirectTo: `${window.location.origin}`,
       },
     });
 
@@ -60,6 +59,7 @@ export const signInWithEmail = async (email: string, password: string) => {
       email,
       password,
     });
+
     if (error) throw error;
     return data;
   } catch (error) {
