@@ -18,6 +18,7 @@ import { uploadAvatar } from "@/lib/supabase/storage";
 import { supabase } from "@/lib/supabase/client";
 import { PiUploadSimpleBold } from "react-icons/pi";
 import { useWishLists } from "@/hooks/queries/useWishList";
+import { useUpdateUserSession } from "@/hooks/useUpdateUserSession";
 
 const UserInfo = () => {
   const [session, setSession] = useRecoilState(sessionState);
@@ -27,6 +28,7 @@ const UserInfo = () => {
   const [src, setSrc] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: userWishList } = useWishLists(session?.user.id);
+  const { updateUserAndRefresh } = useUpdateUserSession();
 
   const wishlist = userWishList?.length;
 
@@ -64,20 +66,12 @@ const UserInfo = () => {
 
     try {
       await updateNickname(data.nickname);
-
-      if (session) {
-        setSession({
-          ...session,
-          user: {
-            ...session.user,
-            user_metadata: {
-              ...session.user.user_metadata,
-              name: data.nickname,
-            },
-          },
-        });
-        toast({ title: "닉네임이 변경 되었습니다." });
-      }
+      await updateUserAndRefresh({
+        data: {
+          name: data.nickname,
+        },
+      });
+      toast({ title: "닉네임이 변경 되었습니다." });
       setIsEditingNickname(false);
     } catch (error) {
       if (error instanceof Error) {
@@ -126,17 +120,11 @@ const UserInfo = () => {
   const handleSaveImage = async (blob: Blob) => {
     try {
       const avatarUrl = await uploadAvatar(blob);
-      const { error } = await supabase.auth.updateUser({
-        data: { avatar_url: avatarUrl },
+      await updateUserAndRefresh({
+        data: {
+          avatar_url: avatarUrl,
+        },
       });
-      if (error) throw error;
-
-      const {
-        data: { session: newSession },
-      } = await supabase.auth.getSession();
-      if (newSession) {
-        setSession(newSession);
-      }
       setIsModalOpen(false);
       toast({ title: "프로필 이미지가 변경되었습니다." });
     } catch (error) {
