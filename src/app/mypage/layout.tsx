@@ -5,7 +5,7 @@ import MyPageSkeleton from "@/components/common/loading/MyPageSkeleton";
 import UserInfo from "@/components/mypage/UserInfo";
 import AuthGuard from "@/hooks/AuthGuard";
 import { useAuth } from "@/hooks/useAuth";
-import { myPageMetadata } from "@/metadata/mypage/myPageMetadata";
+import { myPageMetadata } from "@/metadata/mypage/myPage_temp";
 import { useEffect, useState } from "react";
 
 export const metadata = myPageMetadata;
