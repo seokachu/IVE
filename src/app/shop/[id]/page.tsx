@@ -1,5 +1,8 @@
 import ProductAccordion from "@/components/shop/product/ProductAccordion";
 import ProductSection from "@/components/shop/product/ProductSection";
+import { shopDetailMetadata } from "@/metadata/shop/shopDetailMetadata";
+
+export const metadata = shopDetailMetadata;
 
 const page = () => {
   return (

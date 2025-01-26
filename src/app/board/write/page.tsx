@@ -1,3 +1,7 @@
+import { boardWriteMetadata } from "@/metadata/board/boardWriteMetadata";
+
+export const metadata = boardWriteMetadata;
+
 const page = () => {
   return (
     <main className="w-full min-h-screen">
