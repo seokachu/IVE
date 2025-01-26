@@ -15,13 +15,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { NicknameType, userSchemas } from "@/hooks/user";
 import ImageCropper from "../common/ImageCropper";
 import { uploadAvatar } from "@/lib/supabase/storage";
-import { supabase } from "@/lib/supabase/client";
 import { PiUploadSimpleBold } from "react-icons/pi";
 import { useWishLists } from "@/hooks/queries/useWishList";
 import { useUpdateUserSession } from "@/hooks/useUpdateUserSession";
 
 const UserInfo = () => {
-  const [session, setSession] = useRecoilState(sessionState);
+  const [session] = useRecoilState(sessionState);
   const pathname = usePathname();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [isEditingNickname, setIsEditingNickname] = useState(false);
