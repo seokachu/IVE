@@ -11,8 +11,7 @@ import SelectionControl from "../common/select/SelectionControl";
 import { useShops } from "@/hooks/queries/useShops";
 
 const CartList = () => {
-  const { fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useShops("latest");
+  const { fetchNextPage, hasNextPage, isFetchingNextPage } = useShops("latest");
   const [mounted, setMounted] = useState(false);
   const [cartItems, setCartItems] = useRecoilState(cartState);
   const [selectedItems, setSelectedItems] = useRecoilState(selectedItemState);
@@ -87,7 +86,7 @@ const CartList = () => {
   };
 
   return (
-    <div className="flex-[2] p-10 border rounded-md bg-white shadow-sm h-fit min-h-[500px]">
+    <div className="flex-[2] p-5 lg:p-10 border rounded-md bg-white shadow-sm h-fit min-h-[500px]">
       <h2 className="font-bold text-xl">장바구니</h2>
       {mounted && cartItems.length > 0 ? (
         <>

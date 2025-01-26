@@ -15,7 +15,11 @@ export const getCustomerInfo = async (userId: string) => {
     if (error) throw error;
     return data;
   } catch (error) {
-    console.error("Error getting customer info:", error);
+    if (error instanceof Error) {
+      throw new Error(
+        `주문자 정보를 가져오는데 실패했습니다. ${error.message}`
+      );
+    }
     throw error;
   }
 };
@@ -34,7 +38,11 @@ export const saveCustomerInfo = async (info: CustomerInfoInsert) => {
     if (error) throw error;
     return data;
   } catch (error) {
-    console.error("Error saving customer info:", error);
+    if (error instanceof Error) {
+      throw new Error(
+        `주문자 정보를 저장하는데 실패했습니다. ${error.message}`
+      );
+    }
     throw error;
   }
 };

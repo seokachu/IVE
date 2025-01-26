@@ -88,11 +88,13 @@ export interface ReviewItemProps {
 
 export interface ReviewItem {
   id: string;
+  user_id: string;
   rating: number;
   content: string;
   created_at: string;
   user: {
     name: string;
+    avatar_url: string | null;
   };
 }
 
@@ -253,3 +255,7 @@ export type DeleteAddressParams = {
 };
 
 export type PaymentInsert = Database["public"]["Tables"]["payments"]["Insert"];
+
+export interface UserWishListProps {
+  wishlists: Tables<"wish_lists">[];
+}

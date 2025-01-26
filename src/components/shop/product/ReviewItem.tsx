@@ -8,7 +8,12 @@ const ReviewItem = ({ item }: ReviewItemProps) => {
     <li className="border-b py-6">
       <div className="flex gap-4 justify-between items-center">
         <div className="flex gap-3">
-          <UserAvatar size="md" />
+          <UserAvatar
+            size="md"
+            userId={item.user_id}
+            avatarUrl={item.user.avatar_url}
+            userName={item.user.name}
+          />
           <div>
             <h3 className="font-bold">{item.user.name}</h3>
             <div className="flex gap-1 items-center justify-center">

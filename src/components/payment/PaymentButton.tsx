@@ -4,16 +4,17 @@ import { loadTossPayments } from "@tosspayments/payment-sdk";
 import { agreementsState, selectedItemState, sessionState } from "@/store";
 import { formatPrice } from "@/utils/calculateDiscount";
 import { toast } from "@/hooks/use-toast";
-import type { PaymentButtonProps } from "@/types";
 import { useCustomerInfo } from "@/hooks/queries/useCustomerInfo";
 import { randomOrderId } from "@/utils/randomOrderName";
+import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
+import type { PaymentButtonProps } from "@/types";
 
 const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
   const session = useRecoilValue(sessionState);
   const agreements = useRecoilValue(agreementsState);
   const selectedItems = useRecoilValue(selectedItemState);
   const { data: customerInfo } = useCustomerInfo(session?.user.id);
-
+  const { data: customerAddress } = useShippingAddress(session?.user.id);
   const orderId = randomOrderId;
 
   const handlePayment = async () => {
@@ -41,6 +42,24 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
         title: "약관 동의가 필요합니다",
         description: "필수 약관에 모두 동의해주세요.",
         variant: "destructive",
+      });
+      return;
+    }
+
+    //주문자 정보가 없을
+    if (!customerInfo) {
+      toast({
+        title: "주문자 정보가 없습니다.",
+        description: "주문자 정보를 입력해 주세요.",
+      });
+      return;
+    }
+
+    //배송정보가 없을 때
+    if (!customerAddress) {
+      toast({
+        title: "배송 정보가 없습니다.",
+        description: "배송지를 추가해 주세요.",
       });
       return;
     }

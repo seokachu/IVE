@@ -27,7 +27,6 @@ export const useAuth = () => {
               session.user.id,
               item.product_id
             );
-
             if (!isAlreadyWished) {
               await addToWishList(session.user.id, item.product_id);
             }
@@ -65,7 +64,6 @@ export const useAuth = () => {
       } = supabase.auth.onAuthStateChange(async (_event, session) => {
         setSession(session);
 
-        //세션이 있고 pendingAuth가 있을 때 toast 알림 한번만 표시 할 수 있도록
         if (session && sessionStorage.getItem("pendingAuth")) {
           axios.defaults.headers.common[
             "Authorization"

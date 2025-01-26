@@ -1,22 +1,22 @@
 import DefaultImage from "@/assets/images/default_image.avif";
 import { cartState, selectedItemState } from "@/store";
-import type { CartListItemProps } from "@/types";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import Image from "next/image";
 import { useEffect, useId } from "react";
 import { useRecoilState } from "recoil";
 import QuantitySelector from "../common/QuantitySelector";
 import { toast } from "@/hooks/use-toast";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import type { CartListItemProps } from "@/types";
 
 const CartListItem = ({ item }: CartListItemProps) => {
   const id = useId();
+  const { push } = useRouter();
   const searchParams = useSearchParams();
   const selectedParam = searchParams.get("selected");
   const price = getDiscountedPrice(item);
   const [selectedItems, setSelectedItems] = useRecoilState(selectedItemState);
   const [cartItems, setCartItems] = useRecoilState(cartState);
-
   const isChecked = selectedItems.includes(item.id);
 
   useEffect(() => {
@@ -97,6 +97,11 @@ const CartListItem = ({ item }: CartListItemProps) => {
     setCartItems(newCartItems);
   };
 
+  const onClickDetailPage = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    push(`/shop/${item.id}`);
+  };
+
   return (
     <li className="px-2 py-4 relative border-b">
       <label htmlFor={`${item.id}-${id}`} className="flex">
@@ -107,7 +112,10 @@ const CartListItem = ({ item }: CartListItemProps) => {
           id={`${item.id}-${id}`}
           className="w-4 h-4 flex-shrink-0"
         />
-        <div className="relative w-[80px] h-[80px] overflow-hidden rounded-md mx-5 flex-shrink-0 border">
+        <div
+          onClick={onClickDetailPage}
+          className="relative w-[80px] h-[80px] overflow-hidden rounded-md mx-5 flex-shrink-0 border cursor-pointer"
+        >
           <Image
             src={item.thumbnail || DefaultImage}
             alt={item.title}
@@ -124,8 +132,9 @@ const CartListItem = ({ item }: CartListItemProps) => {
                 {item.delivery_info}
               </span>
             </h3>
-            <p className="text-gray-500 text-sm flex gap-1 my-1 uppercase">
-              <span>사이즈 : {item.size}</span>&#47;
+            <p className="text-gray-500 text-sm flex flex-col lg:flex-row gap-1 my-1 uppercase">
+              <span>사이즈 : {item.size}</span>
+              <span className="hidden lg:block">&#47;</span>
               <span>색상 : {item.color}</span>
             </p>
             <QuantitySelector
