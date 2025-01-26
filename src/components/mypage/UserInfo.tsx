@@ -150,7 +150,7 @@ const UserInfo = () => {
         />
         <div
           onClick={handleAvatarClick}
-          className={`cursor-pointer relative ${
+          className={`cursor-pointer relative w-fit ${
             isModalOpen ? "pointer-events-none" : ""
           }`}
         >
