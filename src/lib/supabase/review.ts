@@ -41,11 +41,13 @@ export const getGoodsReviews = async (goodsId: string, page: number) => {
     const { data, error } = await supabase
       .from("goods_reviews")
       .select(
-        `*,
-        user:user_id(
-        name
-        )
         `
+      *,
+      user:user_id(
+        name,
+        avatar_url
+      )
+    `
       )
       .eq("goods_id", goodsId)
       .order("created_at", { ascending: false })
@@ -91,7 +93,7 @@ export const getOrderItemReview = async (
   try {
     const { data, error } = await supabase
       .from("goods_reviews")
-      .select("*, user:user(name)")
+      .select("*, user:user(name, avatar_url)")
       .eq("order_id", orderId)
       .eq("goods_id", productId)
       .limit(1);

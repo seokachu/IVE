@@ -1,8 +1,13 @@
 import { supabase } from "./client";
 
 export const uploadAvatar = async (file: Blob) => {
-  const fileExt = "png";
-  const fileName = `avatar-${Date.now()}.${fileExt}`;
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("인증된 사용자가 아닙니다.");
+
+  const fileExt = file.type.split("/")[1];
+  const fileName = `${user.id}/avatar-${Date.now()}.${fileExt}`;
 
   try {
     // 새 이미지 업로드
@@ -10,7 +15,8 @@ export const uploadAvatar = async (file: Blob) => {
       .from("avatars")
       .upload(fileName, file, {
         cacheControl: "0",
-        contentType: "image/png",
+        contentType: file.type,
+        upsert: true,
       });
 
     if (uploadError) {
@@ -20,6 +26,13 @@ export const uploadAvatar = async (file: Blob) => {
     const {
       data: { publicUrl },
     } = supabase.storage.from("avatars").getPublicUrl(fileName);
+
+    const { error: updateError } = await supabase
+      .from("user")
+      .update({ avatar_url: publicUrl })
+      .eq("id", user.id);
+
+    if (updateError) throw updateError;
 
     return publicUrl;
   } catch (error) {
