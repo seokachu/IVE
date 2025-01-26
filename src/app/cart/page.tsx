@@ -1,5 +1,8 @@
 import CartList from "@/components/cart/CartList";
 import CartSummary from "@/components/cart/CartSummary";
+import { cartMetadata } from "@/metadata/cart/cartMetadata";
+
+export const metadata = cartMetadata;
 
 const page = () => {
   return (

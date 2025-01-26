@@ -6,6 +6,9 @@ import { IoHeart } from "react-icons/io5";
 import { RiMessage2Line } from "react-icons/ri";
 import CommentForm from "@/components/board/CommentForm";
 import CommentListItems from "@/components/board/CommentListItems";
+import { boardDetailMetadata } from "@/metadata/board/boardDetailMetadata";
+
+export const metadata = boardDetailMetadata;
 
 const page = () => {
   return (

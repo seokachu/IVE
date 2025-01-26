@@ -1,4 +1,6 @@
-import React from "react";
+import { newsMetadata } from "@/metadata/news/newsMetadata";
+
+export const metadata = newsMetadata;
 
 const page = () => {
   return (

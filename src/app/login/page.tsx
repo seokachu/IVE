@@ -1,4 +1,7 @@
 import SignIn from "@/components/auth/login/SignIn";
+import { loginMetadata } from "@/metadata/login/loginMetadata";
+
+export const metadata = loginMetadata;
 
 const page = () => {
   return (
