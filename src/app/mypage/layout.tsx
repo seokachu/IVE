@@ -7,8 +7,6 @@ import AuthGuard from "@/hooks/AuthGuard";
 import { useAuth } from "@/hooks/useAuth";
 import { useEffect, useState } from "react";
 
-export const metadata = myPageMetadata;
-
 const MyPageLayout = ({ children }: { children: React.ReactNode }) => {
   const [, setIsInitialized] = useState(false);
   const { initializeAuth } = useAuth();
