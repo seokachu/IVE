@@ -12,7 +12,7 @@ const Footer = () => {
           <h1 className="relative w-[80px] h-auto">
             <Image src={LogoImage} alt="logo" className="fill" />
           </h1>
-          <address className="not-italic text-sm">
+          <address className="not-italic sm:text-xs lg:text-sm">
             <ul className="flex text-center gap-[3px] flex-col lg:flex-row lg:gap-3">
               <li className="relative lg:after:absolute lg:after:top-[4px] lg:after:right-[-5.5px] lg:after:block lg:after:w-[1px] lg:after:h-[14px] lg:after:bg-[#333]">
                 회사명 : &#40;주&#41;스타쉽엔터테인먼트
