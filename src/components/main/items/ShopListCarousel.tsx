@@ -48,7 +48,7 @@ const ShopListCarousel = () => {
         {shopItems?.map((item) => (
           <CarouselItem
             key={item.id}
-            className="basis-[65%] sm:basis-[65%] md:basis-[40%] lg:basis-[28%] mr-5"
+            className="basis-[65%] sm:basis-[65%] md:basis-[40%] lg:basis-[28%]"
           >
             <ShopListItem item={item} variant="carousel" />
           </CarouselItem>
