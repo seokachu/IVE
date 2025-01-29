@@ -46,11 +46,11 @@ const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
     <li
       onClick={onClickDetail}
       onKeyDown={handleKeyDown}
-      className={`${SHOP_STYLES[variant]} border p-4 rounded-lg cursor-pointer hover:shadow-lg group mb-5`}
+      className={`${SHOP_STYLES[variant]} md:border p-0 md:p-4 rounded-none md:rounded-lg cursor-pointer md:hover:shadow-lg group mb-7 md:mb-5`}
       role="button"
       tabIndex={0}
     >
-      <div className="relative w-full h-auto rounded-lg overflow-hidden border">
+      <div className="relative w-full h-auto rounded-none md:rounded-lg overflow-hidden aspect-square border">
         <Image
           src={item.thumbnail || DefaultImage}
           alt="썸네일"
@@ -73,7 +73,7 @@ const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
         </button>
       </div>
       <div className="flex flex-col gap-1">
-        <div className="mt-4 mb-1 min-h-[20px]">
+        <div className="mt-2 md:mt-4 mb-1 min-h-[20px]">
           <Badge
             item={{ ...item, review_count: reviewCount }}
             averageRating={averageRating}
