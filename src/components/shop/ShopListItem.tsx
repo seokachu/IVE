@@ -82,9 +82,9 @@ const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
         <h3 className="text-base overflow-hidden overflow-ellipsis whitespace-nowrap">
           {item.title}
         </h3>
-        <div className="font-bold flex items-center gap-2 text-xl">
+        <div className="font-bold flex items-center gap-2 sm:text-lg lg:text-xl">
           <span className="text-purple">{item.discount_rate}%</span>
-          <span>{formatPrice(price)}원</span>
+          <span className="whitespace-nowrap">{formatPrice(price)}원</span>
         </div>
         <div className="flex items-center gap-1 text-[#878f91] text-sm">
           <FaStar />
