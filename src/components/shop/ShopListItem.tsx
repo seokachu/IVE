@@ -38,7 +38,7 @@ const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
   };
 
   const SHOP_STYLES = {
-    shop: "sm:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1rem)]",
+    shop: "sm:w-2/6 md:w-[calc(33.333%-0.9rem)] lg:w-[calc(25%-0.95rem)]",
     carousel: "w-full",
   } as const;
 
@@ -82,7 +82,7 @@ const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
         <h3 className="text-xs lg:text-base overflow-hidden overflow-ellipsis whitespace-nowrap">
           {item.title}
         </h3>
-        <div className="font-bold flex items-start md:items-center gap-2 sm:text-sm lg:text-xl">
+        <div className="font-bold flex items-start md:items-center sm:gap-1 lg:gap-2 sm:text-sm lg:text-xl">
           <span className="text-purple">{item.discount_rate}%</span>
           <span className="whitespace-nowrap">{formatPrice(price)}원</span>
         </div>
