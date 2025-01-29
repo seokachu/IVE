@@ -2,7 +2,7 @@ import MainBoardListItem from "./items/MainBoardListItem";
 
 const BoardSection = () => {
   return (
-    <section className="bg-white w-full h-full">
+    <section className="w-full h-full">
       <div className="max-w-[1280px] flex justify-center align-center flex-col px-5 py-16 m-auto">
         <h2 className="text-2xl font-bold lg:text-4xl text-center mb-14">
           FREE BOARD
