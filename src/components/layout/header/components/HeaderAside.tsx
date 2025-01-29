@@ -33,7 +33,7 @@ const HeaderAside = () => {
         <SheetTrigger>
           <RxHamburgerMenu size={25} />
         </SheetTrigger>
-        <SheetContent className="w-[400px] sm:w-[540px]">
+        <SheetContent className="sm:w-2/3 sm:w-max-w-2/3">
           <SheetHeader>
             <SheetTitle className="p-[20px] relative w-[120px] h-auto">
               <Image src={LogoImage} alt="logo" className="fill" />
