@@ -51,7 +51,7 @@ const SignInContent = () => {
   return (
     <div className="flex flex-col items-center w-full gap-5">
       {!showEmailSignIn ? (
-        <div>
+        <div className="w-full max-w-[380px]">
           <OAuthButton
             onClick={() => handleOAuthLogin("kakao")}
             className="w-full bg-[#fee500] px-20 py-3 rounded-full flex items-center justify-center relative text-sm font-bold mb-3"
@@ -111,7 +111,7 @@ const SignInContent = () => {
           </div>
         </div>
       ) : (
-        <div>
+        <div className="w-full max-w-[380px] py-10">
           <button onClick={toggleEmailSignIn} className="absolute top-5 left-5">
             <IoIosArrowBack
               size={25}
