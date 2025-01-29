@@ -79,10 +79,10 @@ const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
             averageRating={averageRating}
           />
         </div>
-        <h3 className="text-base overflow-hidden overflow-ellipsis whitespace-nowrap">
+        <h3 className="text-xs lg:text-base overflow-hidden overflow-ellipsis whitespace-nowrap">
           {item.title}
         </h3>
-        <div className="font-bold flex items-start md:items-center md:gap-2 flex-col md:flex-row sm:text-lg lg:text-xl mb-1 md:mb-0">
+        <div className="font-bold flex items-start md:items-center gap-2 sm:text-sm lg:text-xl">
           <span className="text-purple">{item.discount_rate}%</span>
           <span className="whitespace-nowrap">{formatPrice(price)}원</span>
         </div>
