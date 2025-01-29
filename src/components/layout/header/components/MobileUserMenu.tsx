@@ -7,48 +7,43 @@ import CartIcon from "./CartIcon";
 
 const MobileUserMenu = () => {
   const session = useRecoilValue(sessionState);
+  const navStyle =
+    "flex-1 hover:bg-zinc-500 h-full w-2/6 block border border-dark-gray";
 
   return (
     <nav>
-      <ul className="flex items-center justify-center">
-        <li className="flex-1 hover:bg-zinc-500">
+      <ul className="flex items-center justify-center w-full h-[80px]">
+        <li
+          className={`${navStyle} border-r-0 flex items-center justify-center`}
+        >
           <SheetClose asChild>
             <Link href="/cart">
               <CartIcon
                 iconSize={28}
                 iconClassName="group-hover:[color:white] m-auto"
-                linkClassName="block border p-7 border-dark-gray group w-full h-[80px] border-r-0"
+                linkClassName=""
                 className="left-2/4"
               />
             </Link>
           </SheetClose>
         </li>
-        <li className="flex-1 hover:bg-zinc-500">
+        <li
+          className={`${navStyle} border-r-0 flex items-center justify-center whitespace-nowrap`}
+        >
           {!session ? (
-            <SignInModal
-              title="로그인"
-              className="block w-full border p-7 border-dark-gray h-[80px] border-r-0 hover:text-white"
-            />
+            <SignInModal title="로그인" />
           ) : (
             <SheetClose asChild>
-              <Link
-                href="/mypage"
-                className="block text-center border h-[80px] p-7 border-dark-gray hover:text-white hover:bg-zinc-500 whitespace-nowrap"
-              >
-                마이페이지
-              </Link>
+              <Link href="/mypage">마이페이지</Link>
             </SheetClose>
           )}
         </li>
         {!session && (
-          <li className="flex-1">
+          <li
+            className={`${navStyle} flex items-center justify-center whitespace-nowrap`}
+          >
             <SheetClose asChild>
-              <Link
-                href="/signup"
-                className="block border p-7 h-[80px] border-dark-gray text-center hover:text-white hover:bg-zinc-500"
-              >
-                회원가입
-              </Link>
+              <Link href="/signup">회원가입</Link>
             </SheetClose>
           </li>
         )}
