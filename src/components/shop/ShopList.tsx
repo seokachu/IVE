@@ -45,7 +45,7 @@ const ShopList = ({ sort }: SortProps) => {
   //loading
   if (isLoading) {
     return (
-      <ul className="flex flex-wrap gap-6 sm:justify-center md:justify-start">
+      <ul className="flex flex-wrap sm:gap-0 md:gap-5 md:justify-start">
         {Array.from({ length: 8 }).map((_, index) => (
           <ShopSkeleton key={index} variant="shop" />
         ))}

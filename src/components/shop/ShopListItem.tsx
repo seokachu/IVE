@@ -9,6 +9,7 @@ import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
 import { useAverageRating, useReviewCount } from "@/hooks/queries/useReviews";
 import type { ShopListItemProps } from "@/types";
+import { SHOP_STYLES } from "@/utils/constants";
 
 const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
   const { push } = useRouter();
@@ -37,20 +38,15 @@ const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
     toggleWishList();
   };
 
-  const SHOP_STYLES = {
-    shop: "w-2/6 md:w-[calc(33.333%-0.9rem)] lg:w-[calc(25%-0.95rem)]",
-    carousel: "w-full sm:border sm:p-4 sm:rounded-lg",
-  } as const;
-
   return (
     <li
       onClick={onClickDetail}
       onKeyDown={handleKeyDown}
-      className={`${SHOP_STYLES[variant]} md:border p-0 md:p-4 rounded-none md:rounded-lg cursor-pointer md:hover:shadow-lg group mb-7 md:mb-5`}
+      className={`${SHOP_STYLES[variant]} md:border p-0 md:p-4 md:rounded-lg cursor-pointer md:hover:shadow-lg group mb-7 md:mb-5`}
       role="button"
       tabIndex={0}
     >
-      <div className="relative w-full h-auto rounded-none md:rounded-lg overflow-hidden aspect-square border">
+      <div className="relative w-full h-auto md:rounded-lg overflow-hidden aspect-square border">
         <Image
           src={item.thumbnail || DefaultImage}
           alt="썸네일"
