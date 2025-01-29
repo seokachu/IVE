@@ -111,7 +111,7 @@ const SignInContent = () => {
           </div>
         </div>
       ) : (
-        <div className="w-full max-w-[380px] py-10">
+        <div className="w-full max-w-[380px] py-5">
           <button onClick={toggleEmailSignIn} className="absolute top-5 left-5">
             <IoIosArrowBack
               size={25}
