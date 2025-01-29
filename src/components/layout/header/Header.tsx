@@ -7,17 +7,19 @@ import Link from "next/link";
 import UserMenu from "./components/UserMenu";
 import HeaderAside from "./components/HeaderAside";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { cn } from "@/utils/utils";
+import { scrollState } from "@/store";
+import { useRecoilState } from "recoil";
 
 const Header = () => {
   const pathname = usePathname();
   const isMainPage = pathname === "/";
-  const [isScrolled, setIsScrolled] = useState(!isMainPage);
+  const [isScrolled, setIsScrolled] = useRecoilState(scrollState);
 
   useEffect(() => {
     setIsScrolled(!isMainPage);
-  }, [pathname, isMainPage]);
+  }, [pathname, isMainPage, setIsScrolled]);
 
   useEffect(() => {
     if (!isMainPage) return;
@@ -38,7 +40,7 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isMainPage]);
+  }, [isMainPage, setIsScrolled]);
 
   //조건문 header logo
   let logoSrc;

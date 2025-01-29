@@ -9,7 +9,7 @@ import GoTopButton from "@/components/common/button/GoTopButton";
 export default function Home() {
   return (
     <main>
-      <div className="relative h-[200vh]">
+      <div className="relative min-h-[100vh]">
         <VisualSection />
         <AlbumSection />
       </div>
