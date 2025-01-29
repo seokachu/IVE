@@ -38,7 +38,7 @@ const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
   };
 
   const SHOP_STYLES = {
-    shop: "w-[90%] sm:w-[280px] md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.2rem)]",
+    shop: "sm:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1rem)]",
     carousel: "w-full",
   } as const;
 
