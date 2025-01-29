@@ -13,17 +13,17 @@ const MobileNavigator = () => {
         {GNB_ARRAY.map((el: GnbArrayList) => (
           <li
             key={el.label}
-            className="data-[state=closed] flex items-center justify-between border-b-[1px] border-dark-gray cursor-pointer hover:bg-zinc-500 hover:text-white"
+            className="data-[state=closed] border-b-[1px] border-dark-gray cursor-pointer hover:bg-zinc-400 hover:text-white"
           >
             <SheetClose asChild>
               <button
                 onClick={() => push(el.path)}
-                className="block w-full h-full py-4 px-4 text-left"
+                className="w-full h-full py-4 px-4 text-left flex items-center justify-between"
               >
-                {el.label}
+                <span>{el.label}</span>
+                <VscChevronRight size={20} />
               </button>
             </SheetClose>
-            <VscChevronRight size={20} className="mr-5" />
           </li>
         ))}
       </ul>
