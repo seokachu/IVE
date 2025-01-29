@@ -7,6 +7,9 @@ const VisualSection = () => {
         autoPlay
         muted
         loop
+        playsInline
+        webkit-playsinline="true"
+        preload="auto"
       />
       <ul className="absolute max-w-[1320px] w-full flex items-center text-center justify-center font-bold lg:justify-start lg:text-left">
         <li className="text-white lg:pl-20">

@@ -61,7 +61,7 @@ const config: Config = {
         },
       },
       backgroundImage: {
-        "main-image": "url('/images/main_bg.avif')",
+        "main-image": "url('/images/main_bg.webp')",
       },
       keyframes: {
         wheels: {

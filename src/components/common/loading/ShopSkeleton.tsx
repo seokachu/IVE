@@ -5,7 +5,7 @@ import { SHOP_STYLES } from "@/utils/constants";
 const ShopSkeleton = ({ variant = "shop" }: VariantTypeProps) => {
   return (
     <li className={`${SHOP_STYLES[variant]} border p-4 rounded-lg group mb-5`}>
-      <div className="relative w-full h-64 rounded-lg border">
+      <div className="relative w-full aspect-square rounded-lg border">
         <Skeleton className="w-full h-full" />
       </div>
       <div className="flex flex-col gap-2 mt-4">

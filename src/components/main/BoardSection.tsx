@@ -1,4 +1,4 @@
-import MainBoardListItems from "./items/MainBoardListItems";
+import MainBoardListItem from "./items/MainBoardListItem";
 
 const BoardSection = () => {
   return (
@@ -9,8 +9,12 @@ const BoardSection = () => {
         </h2>
         <div>{/* <MoreButton /> */}</div>
         <ul className="flex flex-wrap">
-          <MainBoardListItems />
-          <MainBoardListItems />
+          <MainBoardListItem />
+          <MainBoardListItem />
+          <MainBoardListItem />
+          <MainBoardListItem />
+          <MainBoardListItem />
+          <MainBoardListItem />
         </ul>
       </div>
     </section>
