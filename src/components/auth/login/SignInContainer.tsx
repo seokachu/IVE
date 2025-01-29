@@ -16,7 +16,7 @@ const SignInContainer = () => {
   }, []);
 
   return (
-    <section className="max-w-[500px] px-5">
+    <section className="flex flex-col items-center w-[375px] max-w-[375px] px-5">
       {isFormSignup ? <FirstLogin /> : <RegularLogin />}
     </section>
   );

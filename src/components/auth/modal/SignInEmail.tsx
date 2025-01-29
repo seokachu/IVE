@@ -77,7 +77,7 @@ const SignInEmail = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleSubmit)}
-        className="flex flex-col gap-3 sm:w-[275px] md:w-[375px]"
+        className="flex flex-col gap-3 w-full"
       >
         <div className="relative">
           <FaUser className="absolute top-[17px] left-5" />
