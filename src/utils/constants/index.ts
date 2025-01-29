@@ -164,8 +164,3 @@ export const PHONE_OPTIONS = [
     title: "019",
   },
 ];
-
-export const SHOP_STYLES = {
-  shop: "w-2/6 md:w-[calc(33.333%-0.9rem)] lg:w-[calc(25%-0.95rem)]",
-  carousel: "w-full sm:border sm:p-4 sm:rounded-lg",
-} as const;

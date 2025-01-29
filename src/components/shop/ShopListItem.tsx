@@ -9,7 +9,11 @@ import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
 import { useAverageRating, useReviewCount } from "@/hooks/queries/useReviews";
 import type { ShopListItemProps } from "@/types";
-import { SHOP_STYLES } from "@/utils/constants";
+
+const SHOP_STYLES = {
+  shop: "w-2/6 md:w-[calc(33.333%-0.9rem)] lg:w-[calc(25%-0.95rem)]",
+  carousel: "w-full sm:border sm:p-4 sm:rounded-lg",
+} as const;
 
 const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
   const { push } = useRouter();
