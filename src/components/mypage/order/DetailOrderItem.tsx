@@ -94,7 +94,7 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
             item.is_confirmed ? onClickWriteReview : onClickCompleteOrder
           }
           variant={item.is_confirmed ? "primary" : "default"}
-          className="text-sm py-1 px-3 mt-5 lg:mt-0"
+          className="text-sm py-2 px-3 mt-5 lg:mt-0"
         >
           {getButtonText()}
         </ActionButton>
