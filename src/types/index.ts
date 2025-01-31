@@ -259,3 +259,9 @@ export type PaymentInsert = Database["public"]["Tables"]["payments"]["Insert"];
 export interface UserWishListProps {
   wishlists: Tables<"wish_lists">[];
 }
+
+export interface AgreementModalProps {
+  type: "privacy" | "refund" | null;
+  isOpen: boolean;
+  onClose: () => void;
+}
