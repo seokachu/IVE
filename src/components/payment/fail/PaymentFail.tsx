@@ -17,7 +17,6 @@ const PaymentFail = () => {
           `/cart?selected=${encodeURIComponent(JSON.stringify(checkoutItems))}`
         );
       } catch (error) {
-        console.error("Failed to parse checkout items:", error);
         push("/cart"); // 파싱 실패시 장바구니로 이동
       }
     } else {

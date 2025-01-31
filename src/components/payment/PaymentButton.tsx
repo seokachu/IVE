@@ -93,7 +93,6 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
           description: error.message,
         });
       }
-      console.error(error);
     }
   };
 

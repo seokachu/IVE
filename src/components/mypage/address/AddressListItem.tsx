@@ -67,8 +67,7 @@ const AddressListItem = ({ item }: AddressListItems) => {
             title: "배송지가 삭제 되었습니다.",
           });
         },
-        onError: (error) => {
-          console.error("Delete failed:", error);
+        onError: () => {
           toast({
             title: "배송지 삭제에 실패했습니다.",
             description: "다시 시도해 주세요.",
