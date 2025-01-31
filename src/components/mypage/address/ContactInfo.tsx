@@ -17,7 +17,7 @@ const ContactInfo = () => {
             <RHFSelect
               name="phoneFirst"
               options={PHONE_OPTIONS}
-              className="w-full"
+              className="w-full text-base lg:text-sm"
             />
           </div>
           <span className="block translate-y-1/3">-</span>
