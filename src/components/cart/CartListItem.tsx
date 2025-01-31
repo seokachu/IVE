@@ -98,7 +98,7 @@ const CartListItem = ({ item }: CartListItemProps) => {
   };
 
   const onClickDetailPage = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
+    e.preventDefault();
     push(`/shop/${item.id}`);
   };
 
