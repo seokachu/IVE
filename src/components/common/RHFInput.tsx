@@ -41,7 +41,6 @@ export function RHFInput({
                 onChange={(e) => {
                   field.onChange(e.target.checked);
                 }}
-                className="w-4 h-4"
               />
             ) : (
               <Input
