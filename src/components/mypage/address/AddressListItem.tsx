@@ -128,7 +128,7 @@ const AddressListItem = ({ item }: AddressListItems) => {
           </ActionButton>
         </div>
       </div>
-      <div className="flex flex-col lg:flex-row lg:items-center gap-1 text-gray-600">
+      <div className="flex flex-col lg:flex-row lg:items-center gap-1 text-gray-500 text-sm">
         <p className="flex items-center gap-1">
           <span>
             <FiMapPin />
@@ -140,9 +140,9 @@ const AddressListItem = ({ item }: AddressListItems) => {
           <span>{item.address_line2}</span>
         </p>
       </div>
-      <p className="text-gray-600">{item.recipient_phone}</p>
+      <p className="text-gray-500 text-sm">{item.recipient_phone}</p>
       {item.request ? (
-        <p className="text-xs text-gray-500">{item.request}</p>
+        <p className="text-xs text-gray-400">{item.request}</p>
       ) : null}
       {isDeleteModalOpen && (
         <AddressConfirmModal
