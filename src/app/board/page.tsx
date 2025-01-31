@@ -11,7 +11,7 @@ const page = () => {
   return (
     <main className="w-full min-h-screen">
       <section className="max-w-[1320px] m-auto px-5 pt-14 pb-28 lg:px-8">
-        <h2 className="text-2xl font-bold mb-5">자유게시판</h2>
+        <h2 className="text-lg lg:text-xl font-bold mb-5">자유게시판</h2>
         <div className="flex items-center gap-3 justify-center lg:justify-end flex-col lg:flex-row">
           <div className="relative w-full lg:max-w-80">
             <input
