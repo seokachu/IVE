@@ -53,7 +53,7 @@ const OrderListPage = () => {
         </div>
       )}
       {isEmpty ? (
-        <div className="flex flex-col gap-3 items-center justify-center w-full h-[500px]">
+        <div className="flex flex-col gap-3 items-center justify-center w-full h-[250px] lg:h-[500px]">
           <h3>결제한 목록이 없습니다.</h3>
         </div>
       ) : (

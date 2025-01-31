@@ -10,7 +10,7 @@ const MyPageLoading = ({ title }: MyPageLoadingProps) => {
       <div className="flex justify-between items-center mt-5 lg:mt-0">
         <h2 className="font-bold text-xl mb-5 hidden lg:block">{title}</h2>
       </div>
-      <div className="flex flex-col gap-3 items-center justify-center w-full h-[500px]">
+      <div className="flex flex-col gap-3 items-center justify-center w-full h-[250px] lg:h-[500px]">
         <ClipLoader />
       </div>
     </div>
