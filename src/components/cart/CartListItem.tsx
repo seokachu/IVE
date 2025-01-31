@@ -129,16 +129,16 @@ const CartListItem = ({ item }: CartListItemProps) => {
         </div>
         <div className="flex w-full lg:gap-3 lg:flex-row flex-col lg:items-center lg:justify-between">
           <div className="flex-[4] mr-9 flex flex-col justify-between">
-            <h3 className="flex gap-1 lg:items-center flex-col lg:flex-row">
+            <h3 className="flex flex-wrap gap-1 lg:items-center flex-col lg:flex-row">
               <span className="font-bold shrink-0">{item.title}</span>
-              <span className="text-sm text-gray-500 shrink-0">
+              <span className="text-sm lg:text-xs text-gray-500 shrink-0">
                 {item.delivery_info}
               </span>
             </h3>
-            <p className="text-gray-500 text-sm flex flex-col lg:flex-row gap-1 my-1 uppercase">
-              <span>사이즈 : {item.size}</span>
+            <p className="text-gray-500 text-sm flex flex-wrap flex-col lg:flex-row gap-1 my-1 uppercase">
+              <span className="shrink-0">사이즈 : {item.size}</span>
               <span className="hidden lg:block">&#47;</span>
-              <span>색상 : {item.color}</span>
+              <span className="shrink-0">색상 : {item.color}</span>
             </p>
             <QuantitySelector
               className="text-sm text-gray-400 mr-3"
