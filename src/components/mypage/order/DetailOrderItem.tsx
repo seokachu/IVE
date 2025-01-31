@@ -56,11 +56,11 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
       <div className="flex flex-col lg:flex-row lg:justify-between py-2">
         <div className="flex gap-4">
           {item.product_image && (
-            <div className="relative overflow-hidden rounded-md w-[80px] h-[80px]">
+            <div className="relative overflow-hidden border rounded-md w-[80px] h-[80px]">
               <Image
                 src={item.product_image}
                 alt={item.product_name}
-                className="object-cover border"
+                className="object-cover"
                 width={500}
                 height={500}
               />

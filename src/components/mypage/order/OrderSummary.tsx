@@ -26,13 +26,13 @@ const OrderSummary = ({ order }: OrderSummaryProps) => {
       </div>
       <div className="flex justify-between items-center pt-5">
         <div className="flex gap-3 items-center">
-          <div className="relative overflow-hidden rounded-md w-[80px] h-[80px]">
+          <div className="relative border overflow-hidden rounded-md w-[80px] h-[80px]">
             <Image
               src={order.firstOrderImage}
               alt={order.firstItemName}
               width={500}
               height={500}
-              className="object-cover border"
+              className="object-cover"
             />
           </div>
           <div>
