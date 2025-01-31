@@ -1,5 +1,4 @@
 import { Label } from "@/components/ui/label";
-import { RHFInput } from "@/components/common/RHFInput";
 import { FaCheck } from "react-icons/fa";
 
 interface DefaultAddressCheckboxProps {
