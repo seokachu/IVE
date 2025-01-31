@@ -13,7 +13,7 @@ const OrderPriceSummary = ({
 }: OrderPriceSummaryProps) => {
   return (
     <div className="mb-12">
-      <h2 className="font-bold text-xl mb-5">결제 금액</h2>
+      <h2 className="font-bold text-lg lg:text-xl mb-5">결제 금액</h2>
       <div className="border-b pb-3 flex justify-between items-center">
         <p>총 결제 금액</p>
         <p>
