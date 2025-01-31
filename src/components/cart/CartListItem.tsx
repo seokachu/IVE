@@ -14,10 +14,13 @@ const CartListItem = ({ item }: CartListItemProps) => {
   const { push } = useRouter();
   const searchParams = useSearchParams();
   const selectedParam = searchParams.get("selected");
-  const price = getDiscountedPrice(item);
   const [selectedItems, setSelectedItems] = useRecoilState(selectedItemState);
   const [cartItems, setCartItems] = useRecoilState(cartState);
   const isChecked = selectedItems.includes(item.id);
+
+  const discountPrice = getDiscountedPrice(item);
+  const price = item.price * item.quantity;
+  const totalDiscountPrice = discountPrice * item.quantity;
 
   useEffect(() => {
     if (selectedParam) {
@@ -149,9 +152,9 @@ const CartListItem = ({ item }: CartListItemProps) => {
               {item.discount_rate}%
             </span>
             <s className="text-dark-gray text-sm mr-1 lg:mr-0 text-nowrap">
-              {item.price}원
+              {price}원
             </s>
-            <strong>{formatPrice(price)}원</strong>
+            <strong>{formatPrice(totalDiscountPrice)}원</strong>
           </div>
         </div>
       </label>
