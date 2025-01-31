@@ -24,10 +24,10 @@ const OrderDetail = ({ orderItems, onBack }: OrderDetailProps) => {
         <ActionButton
           onClick={onBack}
           variant="default"
-          className="flex items-center gap-1 border-0 text-gray-500"
+          className="flex items-center gap-1 text-xs lg:text-sm py-1 px-3 hover:bg-purple hover:text-white hover:border-purple"
         >
           <FaArrowLeft className="translate-y-[1px]" />
-          뒤로가기
+          돌아가기
         </ActionButton>
       </div>
       <div className="flex justify-between border-b text-xs lg:text-sm">

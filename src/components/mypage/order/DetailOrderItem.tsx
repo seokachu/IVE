@@ -67,18 +67,25 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
             </div>
           )}
           <div className="flex flex-col justify-center">
-            <h3 className="font-bold">{item.product_name}</h3>
-            <div className="text-gray-500 text-sm flex items-center gap-1 mt-1 uppercase">
-              <p>색상 : {item.color}</p>&#47;
+            <h3 className="text-sm lg:text-base font-bold">
+              {item.product_name}
+            </h3>
+            <div className="text-gray-500 text-xs lg:text-sm flex lg:items-center flex-col lg:flex-row gap-[2px] lg:gap-1 mt-1 uppercase">
+              <p>색상 : {item.color}</p>
+              <span className="hidden lg:block">&#47;</span>
               <p>사이즈 : {item.size}</p>
-              <span className="-translate-y-[1px] text-dark-gray">|</span>
+              <span className="hidden lg:block -translate-y-[1px] text-dark-gray">
+                |
+              </span>
               <p>수량 : {item.quantity}개</p>
             </div>
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 items-baseline">
               <s className="text-sm text-dark-gray">
                 {formatPrice(item.price * item.quantity)}
               </s>
-              <strong>{formatPrice(price)}원</strong>
+              <strong className="text-sm lg:text-base">
+                {formatPrice(price)}원
+              </strong>
             </div>
           </div>
         </div>

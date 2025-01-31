@@ -13,9 +13,9 @@ const OrderSummary = ({ order }: OrderSummaryProps) => {
   };
 
   return (
-    <li className="border rounded-sm py-4 px-3 lg:px-6 hover:bg-gray-50">
+    <li className="border rounded-sm py-3 lg:py-4 px-3 lg:px-6 hover:bg-gray-50">
       <div className="py-2 border-b flex gap-2 justify-between items-center text-xs lg:text-sm">
-        <h3 className="text-gray-400">주문번호 : {order.orderId}</h3>
+        <h3 className="text-gray-500">주문번호 : {order.orderId}</h3>
         <ActionButton
           variant="default"
           onClick={onClickDetail}
