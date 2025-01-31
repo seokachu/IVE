@@ -86,7 +86,7 @@ const CartList = () => {
   };
 
   return (
-    <div className="flex-[2] p-5 lg:p-10 border rounded-md bg-white shadow-sm h-fit min-h-[500px]">
+    <div className="flex-[2] p-5 lg:p-10 border rounded-md bg-white shadow-sm h-fit min-h-[570px]">
       <h2 className="font-bold text-lg lg:text-xl">장바구니</h2>
       {mounted && cartItems.length > 0 ? (
         <>

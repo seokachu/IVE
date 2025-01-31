@@ -17,7 +17,7 @@ const OrderPriceSummary = ({
       <div className="border-b pb-3 flex justify-between items-center">
         <p>총 결제 금액</p>
         <p>
-          <strong className="text-xl mr-1 text-purple">
+          <strong className="text-lg lg:text-xl mr-1 text-purple">
             {formatPrice(totalDiscountedPrice)}
           </strong>
           원
