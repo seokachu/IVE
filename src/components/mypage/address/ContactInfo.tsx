@@ -20,7 +20,7 @@ const ContactInfo = () => {
               className="w-full text-base lg:text-sm"
             />
           </div>
-          <span className="block translate-y-1/3">-</span>
+          <span className="block translate-y-1/3">&#45;</span>
           <div className="w-1/3">
             <RHFInput
               type="tel"
@@ -33,7 +33,7 @@ const ContactInfo = () => {
               maxLength={4}
             />
           </div>
-          <span className="block translate-y-1/3">-</span>
+          <span className="block translate-y-1/3">&#45;</span>
           <div className="w-1/3">
             <RHFInput
               type="tel"
