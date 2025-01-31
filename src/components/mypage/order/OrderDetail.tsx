@@ -27,7 +27,7 @@ const OrderDetail = ({ orderItems, onBack }: OrderDetailProps) => {
           className="flex items-center gap-1 border-0 text-gray-500"
         >
           <FaArrowLeft className="translate-y-[1px]" />
-          돌아가기
+          뒤로가기
         </ActionButton>
       </div>
       <div className="flex justify-between border-b text-xs lg:text-sm">
