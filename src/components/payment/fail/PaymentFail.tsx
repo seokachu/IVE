@@ -27,7 +27,7 @@ const PaymentFail = () => {
 
   return (
     <main className="min-h-screen flex items-center justify-center p-4">
-      <div className="max-w-md w-full text-center">
+      <div className="max-w-md w-full text-center sm:-mt-20 md:mt-0">
         <h1 className="text-lg lg:text-2xl font-bold mb-4">
           결제가 실패 되었습니다.
         </h1>
