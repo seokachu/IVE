@@ -22,7 +22,7 @@ const DefaultAddressCheckbox = ({
 
   return (
     <div className="my-5">
-      <Label htmlFor="defaultDelivery" className="flex items-center">
+      <Label htmlFor="defaultDelivery" className="flex items-center flex-wrap">
         <RHFInput
           type="checkbox"
           name="isDefault"
