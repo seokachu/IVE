@@ -6,13 +6,13 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#a0a0a0]">
+    <footer className="bg-[#a0a0a0] relative z-10">
       <div className="max-w-[1320px] m-auto py-9 px-[20px] flex justify-between items-center flex-col gap-5 lg:flex-row">
         <div className="flex gap-5 items-center flex-col lg:flex-row">
           <h1 className="relative w-[80px] h-auto">
             <Image src={LogoImage} alt="logo" className="fill" />
           </h1>
-          <address className="not-italic text-sm">
+          <address className="not-italic sm:text-xs lg:text-sm">
             <ul className="flex text-center gap-[3px] flex-col lg:flex-row lg:gap-3">
               <li className="relative lg:after:absolute lg:after:top-[4px] lg:after:right-[-5.5px] lg:after:block lg:after:w-[1px] lg:after:h-[14px] lg:after:bg-[#333]">
                 회사명 : &#40;주&#41;스타쉽엔터테인먼트

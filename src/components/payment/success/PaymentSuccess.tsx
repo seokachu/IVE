@@ -212,10 +212,10 @@ const PaymentSuccess = () => {
   return (
     <main>
       <section className="px-5 pt-14 pb-28 lg:px-8 min-h-screen flex items-center justify-center">
-        <div className="max-w-[1320px] w-full m-auto flex flex-col gap-5 px-5">
+        <div className="max-w-[1320px] w-full m-auto flex flex-col gap-5">
           <PaymentSuccessHeader order_id={payment.order_id} />
-          <div className="border rounded-lg p-6 mb-8">
-            <h2 className="text-xl mb-8 border-b pb-4">
+          <div className="border rounded-lg px-4 py-5 mb-8">
+            <h2 className="text-base lg:text-xl mb-8 border-b pb-4">
               <strong>
                 <span>주문상품 정보</span>
                 <span className="inline-block -translate-y-[2px] px-2">|</span>

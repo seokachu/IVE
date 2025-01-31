@@ -73,10 +73,10 @@ export const myPageAddressSchema = z.object({
 });
 
 export const customerInfoSchema = z.object({
-  name: z.string().min(1, "이름을 입력해주세요"),
+  name: z.string().min(1, "이름을 입력해주세요."),
   phone: z
     .string()
-    .regex(/^\d{3}-\d{3,4}-\d{4}$/, "올바른 전화번호 형식이 아닙니다"),
+    .regex(/^\d{3}\d{3,4}\d{4}$/, "올바른 전화번호 형식이 아닙니다."),
   email: emailSchema,
 });
 

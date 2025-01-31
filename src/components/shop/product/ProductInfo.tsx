@@ -52,18 +52,22 @@ const ProductInfo = ({ id }: ShopMenuProps) => {
       </div>
       <div className="w-full my-8 lg:w-2/4 lg:my-0">
         <div className="flex items-start justify-between">
-          <h2 className="text-xl font-bold break-all pr-10">{data.title}</h2>
+          <h2 className="text-lg lg:text-xl font-bold break-all pr-10">
+            {data.title}
+          </h2>
           <ShareButton className="mt-[2px]" />
         </div>
         <div className="mb-5">
-          <s className="text-lg text-dark-gray mb-1">
+          <s className="lg:text-lg text-dark-gray mb-1">
             {formatPrice(data.price)}
           </s>
           <div className="flex gap-2 items-center">
-            <strong className="text-xl text-purple">
+            <strong className="text-lg lg:text-xl text-purple">
               {data.discount_rate}%
             </strong>
-            <strong className="text-xl">{formatPrice(price)}원</strong>
+            <strong className="text-lg lg:text-xl">
+              {formatPrice(price)}원
+            </strong>
           </div>
           <ul className="my-5 text-sm">
             <li className="flex py-3 px-3 border-y">
@@ -93,7 +97,9 @@ const ProductInfo = ({ id }: ShopMenuProps) => {
           </ul>
           <div className="justify-end flex gap-3 items-baseline">
             <p className="text-sm">총 상품금액</p>
-            <strong className="text-xl">{formatPrice(totalPrice)}원</strong>
+            <strong className="text-lg lg:text-xl">
+              {formatPrice(totalPrice)}원
+            </strong>
           </div>
         </div>
         <ProductActions product={data} quantity={count} />

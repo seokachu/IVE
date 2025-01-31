@@ -8,12 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { AGREEMENT_CONTENTS } from "@/utils/constants";
-
-interface AgreementModalProps {
-  type: "privacy" | "refund" | null;
-  isOpen: boolean;
-  onClose: () => void;
-}
+import type { AgreementModalProps } from "@/types";
 
 const AgreementModal = ({ type, isOpen, onClose }: AgreementModalProps) => {
   const getModalContent = () => {
@@ -35,7 +30,7 @@ const AgreementModal = ({ type, isOpen, onClose }: AgreementModalProps) => {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-h-[80vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-xl font-bold mb-4">
+          <DialogTitle className="text-lg lg:text-xl font-bold my-4">
             {content.title}
           </DialogTitle>
           <div className="space-y-4 w-full px-5 py-4">

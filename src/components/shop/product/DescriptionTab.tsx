@@ -13,7 +13,7 @@ const DescriptionTab = ({ id }: ShopMenuProps) => {
 
   return (
     <div className="text-center">
-      <h3 className="font-bold text-2xl mb-10">{data.title}</h3>
+      <h3 className="font-bold text-lg mb-10">{data.title}</h3>
       <div className="flex flex-col gap-1">
         <p>{data.description?.[0]}</p>
       </div>

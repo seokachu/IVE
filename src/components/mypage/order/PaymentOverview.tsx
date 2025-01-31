@@ -20,7 +20,7 @@ const PaymentOverview = ({ title, payment }: PaymentOverviewProps) => {
   const SelectedComponent = getComponent(title);
 
   return (
-    <div className="flex-1 border border-gray-200 rounded-lg p-6">
+    <div className="flex-1 border border-gray-200 rounded-lg px-4 py-5">
       <h3 className="font-bold mb-4 border-b pb-2">{title}</h3>
       <ul className="space-y-2 text-sm">
         {SelectedComponent && <SelectedComponent item={payment} />}

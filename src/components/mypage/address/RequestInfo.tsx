@@ -28,7 +28,7 @@ const RequestInfo = ({ request, showRequested }: RequestInfoProps) => {
           className="rounded-sm py-2 px-3 my-2"
         />
       ) : (
-        <p className="text-dark-gray text-sm mt-2 ml-2">
+        <p className="text-gray-400 text-sm mt-2 ml-2">
           공동 현관문 비밀번호가 있다면 &quot;직접 입력&quot; 선택 후 입력해
           주세요.
         </p>

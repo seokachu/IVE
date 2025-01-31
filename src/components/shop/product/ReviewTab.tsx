@@ -45,7 +45,7 @@ const ReviewTab = ({ id }: ShopMenuProps) => {
             </div>
           </div>
           <div>
-            <h2 className="text-xl font-bold mb-2">
+            <h2 className="lg:text-xl font-bold mb-2">
               리뷰 &#40;{totalCount}&#41;
             </h2>
             <ul>
@@ -75,7 +75,7 @@ const ReviewTab = ({ id }: ShopMenuProps) => {
             </div>
           </div>
           <div>
-            <h2 className="text-xl text-center font-bold my-28">
+            <h2 className="lg:text-xl text-center font-bold my-28">
               리뷰가 없습니다.
             </h2>
           </div>

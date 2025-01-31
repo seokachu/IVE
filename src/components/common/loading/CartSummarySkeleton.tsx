@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const CartSummarySkeleton = () => {
   return (
-    <div className="lg:sticky lg:top-5 flex-1 border rounded-md bg-white shadow-sm p-10 h-fit">
+    <div className="lg:sticky lg:top-5 flex-1 border rounded-md bg-white shadow-sm p-5 lg:p-10 h-fit">
       <div className="mb-12">
         <Skeleton className="h-7 w-24 mb-5" />
         <div className="border-b pb-3 flex justify-between items-center">

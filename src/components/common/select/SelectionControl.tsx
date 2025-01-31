@@ -49,14 +49,14 @@ const SelectionControl = ({
       <div className="flex gap-2">
         <ActionButton
           variant="outline"
-          className="px-2 py-1 border rounded-md"
+          className="px-2 py-1 border rounded-md text-xs lg:text-sm"
           onClick={onDeleteSelected}
         >
           선택삭제
         </ActionButton>
         <ActionButton
           variant="primary"
-          className="px-2 py-1 border rounded-md"
+          className="px-2 py-1 border rounded-md text-xs lg:text-sm"
           onClick={handleDeleteAll}
         >
           전체삭제

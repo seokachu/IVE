@@ -13,7 +13,7 @@ const OrderPaymentInfo = ({ item }: PaymentDetailsProps) => {
         {/* 추후 수정필요 */}
         <span>0 원</span>
       </li>
-      <li className="flex justify-between font-medium">
+      <li className="flex justify-between font-medium items-center">
         <span className="text-gray-500">총 결제 금액 :</span>
         <span className="font-bold text-base">
           {formatPrice(Number(item?.amount))} 원

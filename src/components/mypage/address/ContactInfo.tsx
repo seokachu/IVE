@@ -17,26 +17,30 @@ const ContactInfo = () => {
             <RHFSelect
               name="phoneFirst"
               options={PHONE_OPTIONS}
-              className="w-full"
+              className="w-full text-base lg:text-sm"
             />
           </div>
-          <span className="block translate-y-1/3">-</span>
+          <span className="block translate-y-1/3">&#45;</span>
           <div className="w-1/3">
             <RHFInput
-              type="text"
+              type="tel"
               name="phoneMiddle"
               className="rounded-sm py-2 px-3 w-full"
               messageClassName="p-1 pt-1"
+              pattern="[0-9]*"
+              inputMode="numeric"
               id="phone-middle"
               maxLength={4}
             />
           </div>
-          <span className="block translate-y-1/3">-</span>
+          <span className="block translate-y-1/3">&#45;</span>
           <div className="w-1/3">
             <RHFInput
-              type="text"
+              type="tel"
               name="phoneLast"
               id="phone-last"
+              pattern="[0-9]*"
+              inputMode="numeric"
               className="rounded-sm py-2 px-3 w-full"
               messageClassName="p-1 pt-1"
               maxLength={4}

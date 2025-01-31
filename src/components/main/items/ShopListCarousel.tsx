@@ -21,11 +21,11 @@ const ShopListCarousel = () => {
         }}
         className="w-full max-w-[1280px]"
       >
-        <CarouselContent className="-ml-4">
+        <CarouselContent className="px-5">
           {Array.from({ length: 4 }).map((_, index) => (
             <CarouselItem
               key={index}
-              className="sm:1/2 md:basis-1/3 lg:basis-1/4 lg:mr-10"
+              className="basis-[65%] sm:basis-[65%] md:basis-[40%] lg:basis-[28%] mr-5"
             >
               <ShopSkeleton variant="carousel" />
             </CarouselItem>
@@ -44,11 +44,11 @@ const ShopListCarousel = () => {
       }}
       className="w-full max-w-[1280px]"
     >
-      <CarouselContent className="-ml-4">
+      <CarouselContent className="px-5">
         {shopItems?.map((item) => (
           <CarouselItem
             key={item.id}
-            className="sm:1/2 md:basis-1/3 lg:basis-1/4 lg:mr-10"
+            className="basis-[65%] sm:basis-[65%] md:basis-[40%] lg:basis-[28%]"
           >
             <ShopListItem item={item} variant="carousel" />
           </CarouselItem>

@@ -35,15 +35,37 @@ const CustomerInfoForm = ({
 
   const { isValid, isSubmitting } = form.formState;
 
+  //전화번호 포맷팅
+  const formatPhoneNumber = (value: string) => {
+    // 숫자만 추출
+    const numbers = value.replace(/[^0-9]/g, "");
+
+    // 11자리가 넘어가면 잘라내기
+    const trimmed = numbers.slice(0, 11);
+
+    // 형식에 맞게 하이픈 추가
+    if (trimmed.length === 11) {
+      return trimmed.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+    } else if (trimmed.length === 10) {
+      return trimmed.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
+    }
+    return trimmed;
+  };
+
   const onSubmit = (data: CustomerInfoType) => {
     if (!session?.user.id) return;
+
+    const formattedData = {
+      ...data,
+      phone: formatPhoneNumber(data.phone),
+    };
 
     // 기존 데이터와 새로운 데이터 비교
     const isDataChanged =
       initialData &&
-      (initialData.name !== data.name ||
-        initialData.phone !== data.phone ||
-        initialData.email !== data.email);
+      (initialData.name !== formattedData.name ||
+        initialData.phone !== formattedData.phone ||
+        initialData.email !== formattedData.email);
 
     // 데이터가 변경되지 않았으면
     if (initialData && !isDataChanged) {
@@ -57,7 +79,7 @@ const CustomerInfoForm = ({
     saveCustomerInfo(
       {
         user_id: session.user.id,
-        ...data,
+        ...formattedData,
       },
       {
         onSuccess: async () => {
@@ -92,7 +114,7 @@ const CustomerInfoForm = ({
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <ul className="flex flex-col gap-2">
-            <li className="flex items-center">
+            <li className="flex items-baseline">
               <Label htmlFor="name" className="w-[100px] text-gray-400">
                 받는 분
               </Label>
@@ -103,10 +125,11 @@ const CustomerInfoForm = ({
                   placeholder="이름을 입력해 주세요."
                   messageClassName="text-xs py-1 px-3"
                   className="rounded-sm py-0 px-4 w-full"
+                  maxLength={25}
                 />
               </div>
             </li>
-            <li className="flex items-center">
+            <li className="flex items-baseline">
               <Label htmlFor="phone" className="w-[100px] text-gray-400">
                 휴대폰 번호
               </Label>
@@ -114,13 +137,17 @@ const CustomerInfoForm = ({
                 <RHFInput
                   id="phone"
                   name="phone"
-                  placeholder="010-0000-0000"
+                  placeholder="하이픈(-) 없이 입력"
+                  pattern="[0-9]*"
+                  type="tel"
+                  inputMode="numeric"
                   className="rounded-sm py-0 px-4 w-full"
                   messageClassName="text-xs py-1 px-3"
+                  maxLength={11}
                 />
               </div>
             </li>
-            <li className="flex items-center">
+            <li className="flex items-baseline">
               <Label htmlFor="email" className="w-[100px] text-gray-400">
                 이메일 주소
               </Label>

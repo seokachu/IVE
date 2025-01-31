@@ -9,9 +9,6 @@ const getRandomNickname = async () => {
     });
     return data;
   } catch (error) {
-    if (error instanceof Error) {
-      console.log("Error nickname", error.message);
-    }
     throw error;
   }
 };

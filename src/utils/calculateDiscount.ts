@@ -1,11 +1,18 @@
 import { DiscountedPrice, PriceKeys } from "@/types";
 
+//10원 단위 내림 처리
+const roundToNearestTen = (price: number) => {
+  return Math.floor(price / 10) * 10;
+};
+
 //할인율 계산
 export const calculateDiscount = (
   price: number,
   discountRate: number | null
 ) => {
-  return discountRate !== null ? price - price * (discountRate / 100) : price;
+  const discountedPrice =
+    discountRate !== null ? price - price * (discountRate / 100) : price;
+  return roundToNearestTen(discountedPrice);
 };
 
 //가격 포맷팅
