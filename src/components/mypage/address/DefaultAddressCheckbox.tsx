@@ -21,16 +21,16 @@ const DefaultAddressCheckbox = ({
   }
 
   return (
-    <div className="my-5 flex flex-wrap items-center gap-1 w-full">
+    <div className="my-5 flex flex-wrap items-center gap-1">
       <Label
         htmlFor="defaultDelivery"
-        className="text-sm flex items-center gap-1 h-4"
+        className="text-sm flex items-center gap-1"
       >
         <RHFInput
           type="checkbox"
           name="isDefault"
           id="defaultDelivery"
-          className="w-4 h-4"
+          className="w-4 h-4 min-w-[1rem] min-h-[1rem] max-w-[1rem] max-h-[1rem]"
         />
         기본 배송지로 저장
       </Label>
