@@ -46,7 +46,7 @@ const OrderListPage = () => {
   );
 
   return (
-    <div className="px-5 lg:pt-14 pb-28 lg:px-8">
+    <div className="px-5 lg:pt-14 pb-28 lg:pl-8 lg:pr-5">
       {!isEmpty && (
         <div className="flex justify-between items-center mt-5 lg:mt-0">
           <h2 className="font-bold text-xl mb-5 hidden lg:block">결제 목록</h2>

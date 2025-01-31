@@ -20,7 +20,7 @@ const AddressManagementPage = () => {
   const isEmpty = !addresses || addresses.length === 0;
 
   return (
-    <div className="px-5 lg:pt-14 pb-28 lg:px-8">
+    <div className="px-5 lg:pt-14 pb-28 lg:pl-8 lg:pr-5">
       <div className="flex justify-between items-center mt-5 lg:mt-0">
         <h2 className="font-bold text-xl mb-5 hidden lg:block">배송지 관리</h2>
         {!isEmpty && <AddressAddButton />}

@@ -9,7 +9,7 @@ const UserWishList = ({ wishlists }: UserWishListProps) => {
           <h3>찜 목록이 없습니다.</h3>
         </div>
       ) : (
-        <ul className="mt-5 flex flex-wrap lg:justify-start sm:justify-center lg:gap-8 sm:gap-6">
+        <ul className="mt-5 flex flex-wrap justify-start md:gap-5">
           {wishlists.map((item) => (
             <UserWishListItem key={item.id} item={item} />
           ))}
