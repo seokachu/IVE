@@ -16,7 +16,7 @@ const PaymentFail = () => {
         push(
           `/cart?selected=${encodeURIComponent(JSON.stringify(checkoutItems))}`
         );
-      } catch (_error) {
+      } catch {
         push("/cart"); // 파싱 실패시 장바구니로 이동
       }
     } else {
