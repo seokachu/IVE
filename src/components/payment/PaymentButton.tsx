@@ -73,7 +73,7 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
       );
 
       await tossPayments.requestPayment("카드", {
-        amount,
+        amount: 10000,
         orderId: orderId,
         orderName,
         customerName: customerInfo.name,
