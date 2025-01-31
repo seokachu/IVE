@@ -1,8 +1,8 @@
-import { IoSearch } from "react-icons/io5";
+// import { IoSearch } from "react-icons/io5";
 // import PaginationControl from "@/components/common/PaginationControl";
-import BoardListItems from "@/components/board/BoardListItems";
-import BoardListHeader from "@/components/board/BoardListHeader";
-import { GoPlusCircle } from "react-icons/go";
+// import BoardListItems from "@/components/board/BoardListItems";
+// import BoardListHeader from "@/components/board/BoardListHeader";
+// import { GoPlusCircle } from "react-icons/go";
 import { boardMetadata } from "@/metadata/board/boardMetadata";
 
 export const metadata = boardMetadata;
