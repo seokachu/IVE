@@ -11,7 +11,7 @@ import { useAverageRating, useReviewCount } from "@/hooks/queries/useReviews";
 import type { ShopListItemProps } from "@/types";
 
 const SHOP_STYLES = {
-  shop: "w-2/6 md:w-[calc(33.333%-0.9rem)] lg:w-[calc(25%-0.95rem)]",
+  shop: "w-2/6 md:w-[calc(33.333%-0.9rem)] lg:w-[calc(25%-0.95rem)]  mb-7 md:mb-5",
   carousel: "w-full sm:border sm:p-4 sm:rounded-lg",
 } as const;
 
@@ -46,7 +46,7 @@ const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
     <li
       onClick={onClickDetail}
       onKeyDown={handleKeyDown}
-      className={`${SHOP_STYLES[variant]} md:border p-0 md:p-4 md:rounded-lg cursor-pointer md:hover:shadow-lg group mb-7 md:mb-5`}
+      className={`${SHOP_STYLES[variant]} md:border p-0 md:p-4 md:rounded-lg cursor-pointer md:hover:shadow-lg group`}
       role="button"
       tabIndex={0}
     >
