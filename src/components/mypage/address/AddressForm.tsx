@@ -178,7 +178,6 @@ const AddressForm = ({
             push("/mypage/address");
           },
           onError: (error) => {
-            console.error("Update failed:", error);
             toast({
               title: "배송지 수정에 실패했습니다.",
               description:

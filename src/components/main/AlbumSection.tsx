@@ -12,10 +12,13 @@ const AlbumSection = () => {
         autoPlay
         muted
         loop
+        playsInline
+        webkit-playsinline="true"
+        preload="auto"
       />
       <div className="min-h-screen relative py-20 w-full flex justify-center items-center flex-col lg:gap-[80px] lg:justify-start text-white">
-        <h2 className="text-2xl font-bold lg:text-4xl">ALBUM</h2>
-        <ul className="px-5 w-full">
+        <h2 className="text-2xl font-bold lg:text-4xl mb-5">ALBUM</h2>
+        <ul className="px-5 w-full min-h-[500px]">
           <AlbumList />
         </ul>
       </div>

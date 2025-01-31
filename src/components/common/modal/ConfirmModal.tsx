@@ -35,7 +35,7 @@ const ConfirmModal = ({
     <Dialog open={true} onOpenChange={() => isOpen(false)}>
       <DialogContent className="sm:max-w-[425px] py-10">
         <DialogHeader>
-          <DialogTitle className="mb-1">{title}</DialogTitle>
+          <DialogTitle className="mb-3">{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         <DialogFooter className="sm:w-full sm:justify-center mt-3">

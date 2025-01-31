@@ -10,6 +10,11 @@ import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
 import { useAverageRating, useReviewCount } from "@/hooks/queries/useReviews";
 import type { ShopListItemProps } from "@/types";
 
+const SHOP_STYLES = {
+  shop: "w-2/6 md:w-[calc(33.333%-0.9rem)] lg:w-[calc(25%-0.95rem)]  mb-7 md:mb-5",
+  carousel: "w-full sm:border sm:p-4 sm:rounded-lg",
+} as const;
+
 const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
   const { push } = useRouter();
   const { data: reviewData } = useReviewCount(item.id);
@@ -37,20 +42,15 @@ const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
     toggleWishList();
   };
 
-  const SHOP_STYLES = {
-    shop: "w-[90%] sm:w-[280px] md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.2rem)]",
-    carousel: "w-full",
-  } as const;
-
   return (
     <li
       onClick={onClickDetail}
       onKeyDown={handleKeyDown}
-      className={`${SHOP_STYLES[variant]} border p-4 rounded-lg cursor-pointer hover:shadow-lg group mb-5`}
+      className={`${SHOP_STYLES[variant]} md:border p-0 md:p-4 md:rounded-lg cursor-pointer md:hover:shadow-lg group`}
       role="button"
       tabIndex={0}
     >
-      <div className="relative w-full h-auto rounded-lg overflow-hidden border">
+      <div className="relative w-full h-auto md:rounded-lg overflow-hidden aspect-square border">
         <Image
           src={item.thumbnail || DefaultImage}
           alt="썸네일"
@@ -73,20 +73,20 @@ const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
         </button>
       </div>
       <div className="flex flex-col gap-1">
-        <div className="mt-4 mb-1 min-h-[20px]">
+        <div className="mt-2 md:mt-4 mb-1 min-h-[20px]">
           <Badge
             item={{ ...item, review_count: reviewCount }}
             averageRating={averageRating}
           />
         </div>
-        <h3 className="text-base overflow-hidden overflow-ellipsis whitespace-nowrap">
+        <h3 className="text-xs lg:text-base overflow-hidden overflow-ellipsis whitespace-nowrap">
           {item.title}
         </h3>
-        <div className="font-bold flex items-center gap-2 text-xl">
+        <div className="font-bold flex items-start md:items-center gap-1 lg:gap-2 text-sm lg:text-xl">
           <span className="text-purple">{item.discount_rate}%</span>
-          <span>{formatPrice(price)}원</span>
+          <span className="whitespace-nowrap">{formatPrice(price)}원</span>
         </div>
-        <div className="flex items-center gap-1 text-[#878f91] text-sm">
+        <div className="flex items-center gap-1 text-[#878f91] text-xs lg:text-sm">
           <FaStar />
           <span>{averageRating}</span>
         </div>

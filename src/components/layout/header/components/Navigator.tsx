@@ -15,7 +15,7 @@ const Navigator = () => {
               href={el.path}
               className={`${
                 pathname === el.path ? "font-bold" : "font-normal"
-              }`}
+              } hover:font-bold`}
             >
               {el.label}
             </Link>

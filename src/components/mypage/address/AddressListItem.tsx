@@ -67,8 +67,7 @@ const AddressListItem = ({ item }: AddressListItems) => {
             title: "배송지가 삭제 되었습니다.",
           });
         },
-        onError: (error) => {
-          console.error("Delete failed:", error);
+        onError: () => {
           toast({
             title: "배송지 삭제에 실패했습니다.",
             description: "다시 시도해 주세요.",
@@ -91,7 +90,7 @@ const AddressListItem = ({ item }: AddressListItems) => {
             item.is_default ? "pointer-events-none" : ""
           }`}
         >
-          <h3>{item.recipient_name}</h3>
+          <h3 className="text-base">{item.recipient_name}</h3>
           {item.is_default ? (
             <ActionButton
               variant="primary"
@@ -128,7 +127,7 @@ const AddressListItem = ({ item }: AddressListItems) => {
           </ActionButton>
         </div>
       </div>
-      <div className="flex flex-col lg:flex-row lg:items-center gap-1 text-gray-600">
+      <div className="flex flex-col lg:flex-row lg:items-center gap-1 text-gray-500 text-sm">
         <p className="flex items-center gap-1">
           <span>
             <FiMapPin />
@@ -140,9 +139,9 @@ const AddressListItem = ({ item }: AddressListItems) => {
           <span>{item.address_line2}</span>
         </p>
       </div>
-      <p className="text-gray-600">{item.recipient_phone}</p>
+      <p className="text-gray-500 text-sm">{item.recipient_phone}</p>
       {item.request ? (
-        <p className="text-xs text-gray-500">{item.request}</p>
+        <p className="text-xs text-gray-400">{item.request}</p>
       ) : null}
       {isDeleteModalOpen && (
         <AddressConfirmModal

@@ -34,7 +34,7 @@ const AddressLocation = ({
             onClick={searchAddress}
             type="button"
             variant="primary"
-            className="w-1/5 text-sm h-[40px]"
+            className="w-2/6 text-sm h-[40px]"
           >
             주소 검색
           </ActionButton>

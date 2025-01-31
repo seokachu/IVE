@@ -31,3 +31,8 @@ export const selectedItemState = atom<CartItem["id"][]>({
   key: "selectedItemsState",
   default: [],
 });
+
+export const scrollState = atom({
+  key: "scrollState",
+  default: false,
+});

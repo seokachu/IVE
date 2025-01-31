@@ -16,8 +16,7 @@ const PaymentFail = () => {
         push(
           `/cart?selected=${encodeURIComponent(JSON.stringify(checkoutItems))}`
         );
-      } catch (error) {
-        console.error("Failed to parse checkout items:", error);
+      } catch {
         push("/cart"); // 파싱 실패시 장바구니로 이동
       }
     } else {
@@ -27,9 +26,11 @@ const PaymentFail = () => {
 
   return (
     <main className="min-h-screen flex items-center justify-center p-4">
-      <div className="max-w-md w-full text-center">
-        <h1 className="text-2xl font-bold mb-4">결제를 실패했습니다.</h1>
-        <p className="text-gray-600 mb-6">에러 사유 : {message}</p>
+      <div className="max-w-md w-full text-center sm:-mt-20 md:mt-0">
+        <h1 className="text-lg lg:text-2xl font-bold mb-4">
+          결제가 실패 되었습니다.
+        </h1>
+        <p className="text-gray-600 mb-6">에러 사유 : {message}&#46;</p>
         <div className="flex gap-4 justify-center">
           <ActionButton
             onClick={onClickGoToCart}

@@ -45,7 +45,7 @@ const ShopList = ({ sort }: SortProps) => {
   //loading
   if (isLoading) {
     return (
-      <ul className="flex flex-wrap gap-6 sm:justify-center md:justify-start">
+      <ul className="flex flex-wrap sm:gap-0 md:gap-5 md:justify-start">
         {Array.from({ length: 8 }).map((_, index) => (
           <ShopSkeleton key={index} variant="shop" />
         ))}
@@ -58,7 +58,7 @@ const ShopList = ({ sort }: SortProps) => {
 
   return (
     <>
-      <ul className="flex flex-wrap gap-6 sm:justify-center md:justify-start">
+      <ul className="flex flex-wrap sm:gap-0 md:gap-5 md:justify-start">
         {items.map((el) => (
           <ShopListItem key={el.id} item={el} variant="shop" />
         ))}
@@ -71,7 +71,7 @@ const ShopList = ({ sort }: SortProps) => {
       )}
       {!hasNextPage && items.length > 0 && (
         <div className="flex justify-center items-center py-4">
-          <div className="font-bold text-gray-500">
+          <div className="text-xs lg:text-base font-bold text-gray-500">
             더 이상 표시할 상품이 없습니다.
           </div>
         </div>

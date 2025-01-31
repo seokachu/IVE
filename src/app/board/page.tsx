@@ -1,8 +1,8 @@
-import { IoSearch } from "react-icons/io5";
+// import { IoSearch } from "react-icons/io5";
 // import PaginationControl from "@/components/common/PaginationControl";
-import BoardListItems from "@/components/board/BoardListItems";
-import BoardListHeader from "@/components/board/BoardListHeader";
-import { GoPlusCircle } from "react-icons/go";
+// import BoardListItems from "@/components/board/BoardListItems";
+// import BoardListHeader from "@/components/board/BoardListHeader";
+// import { GoPlusCircle } from "react-icons/go";
 import { boardMetadata } from "@/metadata/board/boardMetadata";
 
 export const metadata = boardMetadata;
@@ -11,8 +11,8 @@ const page = () => {
   return (
     <main className="w-full min-h-screen">
       <section className="max-w-[1320px] m-auto px-5 pt-14 pb-28 lg:px-8">
-        <h2 className="text-2xl font-bold mb-5">자유게시판</h2>
-        <div className="flex items-center gap-3 justify-center lg:justify-end flex-col lg:flex-row">
+        <h2 className="text-lg lg:text-xl font-bold mb-5">자유게시판</h2>
+        {/* <div className="flex items-center gap-3 justify-center lg:justify-end flex-col lg:flex-row">
           <div className="relative w-full lg:max-w-80">
             <input
               type="text"
@@ -31,8 +31,9 @@ const page = () => {
           <ul>
             <BoardListItems />
           </ul>
-        </div>
+        </div> */}
         {/* <PaginationControl /> */}
+        <div>자유게시판은 현재 준비중 입니다.</div>
       </section>
     </main>
   );
