@@ -2,9 +2,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const ProductInfoSkeleton = () => {
   return (
-    <div className="flex flex-col lg:flex-row gap-8 justify-center lg:justify-between items-center">
+    <div className="flex flex-col lg:flex-row lg:gap-20 justify-center lg:justify-between items-center">
       <div className="overflow-hidden relative h-auto lg:w-2/4 w-full flex items-center justify-center">
-        <Skeleton className="w-[500px] h-[500px]" />
+        <Skeleton className="w-full aspect-square" />
       </div>
       <div className="w-full my-8 lg:w-2/4 lg:my-0">
         <div className="flex items-start justify-between">
