@@ -26,7 +26,7 @@ const DefaultAddressCheckbox = ({
         type="checkbox"
         name="isDefault"
         id="defaultDelivery"
-        className="w-4 h-4 translate-y-[1px]"
+        className="w-4 h-4"
       />
       <Label htmlFor="defaultDelivery" className="text-sm">
         기본 배송지로 저장

@@ -39,16 +39,18 @@ const ProductInfo = ({ id }: ShopMenuProps) => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 justify-center lg:justify-between items-center">
-      <div className="overflow-hidden relative h-auto lg:w-2/4 w-full flex items-center justify-center">
-        <Image
-          src={data.thumbnail || DefaultImage}
-          alt={data.title}
-          className="fill m-auto border object-cover"
-          width={500}
-          height={500}
-          priority
-        />
+    <div className="flex flex-col lg:flex-row lg:gap-20 justify-center lg:justify-between items-center">
+      <div className="aspect-square overflow-hidden relative h-auto lg:w-2/4 w-full flex items-center justify-center">
+        <div className="border w-full">
+          <Image
+            src={data.thumbnail || DefaultImage}
+            alt={data.title}
+            className="fill w-full m-auto object-cover"
+            width={500}
+            height={500}
+            priority
+          />
+        </div>
       </div>
       <div className="w-full my-8 lg:w-2/4 lg:my-0">
         <div className="flex items-start justify-between">
@@ -57,18 +59,16 @@ const ProductInfo = ({ id }: ShopMenuProps) => {
           </h2>
           <ShareButton className="mt-[2px]" />
         </div>
+        <s className="lg:text-lg text-dark-gray mb-1">
+          {formatPrice(data.price)}
+        </s>
+        <div className="flex gap-2 items-center">
+          <strong className="text-lg lg:text-xl text-purple">
+            {data.discount_rate}%
+          </strong>
+          <strong className="text-lg lg:text-xl">{formatPrice(price)}원</strong>
+        </div>
         <div className="mb-5">
-          <s className="lg:text-lg text-dark-gray mb-1">
-            {formatPrice(data.price)}
-          </s>
-          <div className="flex gap-2 items-center">
-            <strong className="text-lg lg:text-xl text-purple">
-              {data.discount_rate}%
-            </strong>
-            <strong className="text-lg lg:text-xl">
-              {formatPrice(price)}원
-            </strong>
-          </div>
           <ul className="my-5 text-sm">
             <li className="flex py-3 px-3 border-y">
               <h3 className="w-[100px]">배송 정보</h3>

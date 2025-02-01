@@ -1,6 +1,5 @@
 "use client";
 import ActionButton from "@/components/common/button/ActionButton";
-import { IoIosHeartEmpty } from "react-icons/io";
 import { useState } from "react";
 import AddToCartDrawer from "./AddToCartDrawer";
 import { cartStorage } from "@/utils/cartStorage";
@@ -10,6 +9,7 @@ import { useSetRecoilState } from "recoil";
 import { cartState } from "@/store";
 import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
 import { GoHeartFill } from "react-icons/go";
+import { GoHeart } from "react-icons/go";
 import DirectPaymentButton from "@/components/payment/DirectPaymentButton";
 
 const ProductActions = ({ product, quantity }: ProductActionsProps) => {
@@ -59,17 +59,17 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
 
   return (
     <>
-      <ul className="flex items-stretch justify-center gap-3">
-        <li className="w-1/6">
+      <ul className="flex items-stretch justify-center gap-1 lg:gap-2">
+        <li className="w-1/5">
           <ActionButton
             onClick={onClickHeart}
             variant="primary"
-            className="w-full flex items-center justify-center py-3"
+            className="w-full flex items-center justify-center h-full"
           >
             {isWished ? (
               <GoHeartFill size={25} className="text-rose-500" />
             ) : (
-              <IoIosHeartEmpty size={25} className="text-white" />
+              <GoHeart size={25} className="text-white" />
             )}
           </ActionButton>
         </li>

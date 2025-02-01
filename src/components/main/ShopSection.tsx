@@ -9,7 +9,7 @@ const ShopSection = () => {
           SHOP
         </h2>
         <div className="w-full">
-          <Link href="/shop" className="float-right">
+          <Link href="/shop" className="float-right hover:text-purple">
             더보기
           </Link>
         </div>
