@@ -57,7 +57,7 @@ const WriteReviewForm = ({
         user_id: session?.user?.id,
         order_id: orderId,
         goods_id: goodsId,
-        created_at: new Date().toISOString(),
+        created_at: new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString(),
         name: session?.user?.user_metadata?.name || "",
         rating: data.rating,
         content: data.content,
