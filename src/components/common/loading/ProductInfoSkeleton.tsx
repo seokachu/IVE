@@ -42,8 +42,8 @@ const ProductInfoSkeleton = () => {
             <Skeleton className="h-7 w-40" />
           </div>
         </div>
-        <div className="flex items-stretch justify-center gap-3">
-          <Skeleton className="w-1/6 h-12" />
+        <div className="flex items-stretch justify-center gap-1 lg:gap-2">
+          <Skeleton className="w-1/5 h-12" />
           <Skeleton className="w-2/4 h-12" />
           <Skeleton className="w-2/4 h-12" />
         </div>
