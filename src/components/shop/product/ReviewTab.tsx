@@ -4,12 +4,13 @@ import type { ShopMenuProps } from "@/types";
 import { useReviews } from "@/hooks/queries/useReviews";
 import Error from "@/components/common/error/Error";
 import RenderStars from "@/utils/RenderStars";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { PAGINATION } from "@/utils/constants";
 import ReviewTabSkeleton from "@/components/common/loading/ReviewTabSkeleton";
 
 const ReviewTab = ({ id }: ShopMenuProps) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const reviewsRef = useRef<HTMLDivElement>(null);
   const { data, isLoading, isError } = useReviews({ id, page: currentPage });
 
   if (isLoading) return <ReviewTabSkeleton />;
@@ -29,13 +30,17 @@ const ReviewTab = ({ id }: ShopMenuProps) => {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+    reviewsRef.current?.scrollIntoView();
   };
 
   return (
     <>
       {totalCount > 0 ? (
         <>
-          <div className="flex justify-center items-center mb-10">
+          <div
+            className="flex justify-center items-center mb-10"
+            ref={reviewsRef}
+          >
             <div className="flex gap-1 mr-5">
               <RenderStars rating={roundedRating} size={25} />
             </div>
