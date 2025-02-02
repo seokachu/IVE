@@ -143,7 +143,12 @@ const AddressForm = ({
     );
     const isCustomInput = value === "직접 입력";
 
-    form.setValue("request", value);
+    //직접 입력인 경우
+    if (isCustomInput) {
+      form.setValue("request", "");
+    } else {
+      form.setValue("request", value);
+    }
 
     if (isDefaultOption || value === RECIPIENT_DELIVERY_OPTIONS[0].value) {
       form.setValue("customRequest", "");
