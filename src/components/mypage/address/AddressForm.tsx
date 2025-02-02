@@ -49,6 +49,28 @@ const AddressForm = ({
         initialData.recipient_phone.split("-");
       const savedRequest = initialData.request || "";
 
+      //저장한 요청사항이 기본 옵션 중에 있는지 확인
+      const isDefaultOption = RECIPIENT_DELIVERY_OPTIONS.some(
+        (option) =>
+          option.value === savedRequest && option.value !== "직접 입력"
+      );
+
+      // 직접 입력했지만 내용이 비어있거나 공백만 있는 경우
+      if (savedRequest === "직접 입력" || !savedRequest) {
+        return {
+          recipient: initialData.recipient_name,
+          zonecode: initialData.postal_code,
+          address: initialData.address_line1,
+          detailAddress: initialData.address_line2 || "",
+          phoneFirst,
+          phoneMiddle,
+          phoneLast,
+          request: RECIPIENT_DELIVERY_OPTIONS[0].value,
+          customRequest: "",
+          isDefault: initialData.is_default,
+        };
+      }
+
       return {
         recipient: initialData.recipient_name,
         zonecode: initialData.postal_code,
@@ -57,8 +79,8 @@ const AddressForm = ({
         phoneFirst,
         phoneMiddle,
         phoneLast,
-        request: savedRequest,
-        customRequest: "",
+        request: isDefaultOption ? savedRequest : "직접 입력",
+        customRequest: isDefaultOption ? "" : savedRequest,
         isDefault: initialData.is_default,
       };
     }
@@ -121,18 +143,10 @@ const AddressForm = ({
     );
     const isCustomInput = value === "직접 입력";
 
-    form.setValue("request", value, {
-      // shouldValidate: true,
-      // shouldDirty: true,
-      // shouldTouch: true,
-    });
+    form.setValue("request", value);
 
     if (isDefaultOption || value === RECIPIENT_DELIVERY_OPTIONS[0].value) {
-      form.setValue("customRequest", "", {
-        // shouldValidate: true,
-        // shouldDirty: true,
-        // shouldTouch: true,
-      });
+      form.setValue("customRequest", "");
     }
 
     setShowRequested(isCustomInput);
