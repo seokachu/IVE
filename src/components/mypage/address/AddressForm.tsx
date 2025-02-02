@@ -47,43 +47,22 @@ const AddressForm = ({
     if (mode === "edit" && initialData) {
       const [phoneFirst, phoneMiddle, phoneLast] =
         initialData.recipient_phone.split("-");
-
       const savedRequest = initialData.request || "";
 
-      //직접입력 form 확인
-      if (
-        RECIPIENT_DELIVERY_OPTIONS.some(
-          (option) => option.value === savedRequest
-        )
-      ) {
-        return {
-          recipient: initialData.recipient_name,
-          zonecode: initialData.postal_code,
-          address: initialData.address_line1,
-          detailAddress: initialData.address_line2 || "",
-          phoneFirst,
-          phoneMiddle,
-          phoneLast,
-          request: savedRequest,
-          isDefault: initialData.is_default,
-          customRequest: "",
-        };
-      } else {
-        //직접입력 form 인 경우
-        return {
-          recipient: initialData.recipient_name,
-          zonecode: initialData.postal_code,
-          address: initialData.address_line1,
-          detailAddress: initialData.address_line2 || "",
-          phoneFirst,
-          phoneMiddle,
-          phoneLast,
-          request: "직접 입력",
-          isDefault: initialData.is_default,
-          customRequest: savedRequest,
-        };
-      }
+      return {
+        recipient: initialData.recipient_name,
+        zonecode: initialData.postal_code,
+        address: initialData.address_line1,
+        detailAddress: initialData.address_line2 || "",
+        phoneFirst,
+        phoneMiddle,
+        phoneLast,
+        request: savedRequest,
+        customRequest: "",
+        isDefault: initialData.is_default,
+      };
     }
+
     return {
       ...userDefaultValues.myPageAddressValues,
       isDefault: isFirstAddress,
@@ -92,13 +71,15 @@ const AddressForm = ({
 
   useEffect(() => {
     if (mode === "edit" && initialData) {
-      const savedRequest = initialData.request || "";
-      const isCustom = !RECIPIENT_DELIVERY_OPTIONS.some(
-        (option) => option.value === savedRequest
+      const savedRequest = initialData.request?.trim() || "";
+      const isCustom = Boolean(
+        savedRequest &&
+          !RECIPIENT_DELIVERY_OPTIONS.some(
+            (option) =>
+              option.value === savedRequest && option.value !== "직접 입력"
+          )
       );
-      if (isCustom) {
-        setShowRequested(true);
-      }
+      setShowRequested(isCustom);
     }
   }, [mode, initialData]);
 
@@ -135,16 +116,28 @@ const AddressForm = ({
   };
 
   const handleRequestChange = (value: string) => {
-    const isDefaultOption =
-      value && value !== RECIPIENT_DELIVERY_OPTIONS[0].value;
+    const isDefaultOption = RECIPIENT_DELIVERY_OPTIONS.some(
+      (option) => option.value === value && value !== "직접 입력"
+    );
     const isCustomInput = value === "직접 입력";
 
-    form.setValue("request", isDefaultOption ? value : "");
-    form.setValue("customRequest", "");
+    form.setValue("request", value, {
+      // shouldValidate: true,
+      // shouldDirty: true,
+      // shouldTouch: true,
+    });
+
+    if (isDefaultOption || value === RECIPIENT_DELIVERY_OPTIONS[0].value) {
+      form.setValue("customRequest", "", {
+        // shouldValidate: true,
+        // shouldDirty: true,
+        // shouldTouch: true,
+      });
+    }
+
     setShowRequested(isCustomInput);
   };
 
-  //제출 form
   const handleSubmit = (data: AddressType) => {
     const baseAddressData = {
       user_id: session!.user.id,
@@ -158,7 +151,7 @@ const AddressForm = ({
     };
 
     if (mode === "edit" && initialData) {
-      // 수정 시에는 created_at 제외
+      //수정 시 created_at 제외
       updateAddress(
         {
           addressId: initialData.id,
@@ -182,7 +175,7 @@ const AddressForm = ({
         }
       );
     } else {
-      // 새로 추가할 때만 created_at 포함
+      //배송정보 추가 시 created_at 포함
       addShippingAddress(
         {
           ...baseAddressData,
