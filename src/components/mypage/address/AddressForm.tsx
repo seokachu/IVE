@@ -31,6 +31,11 @@ const AddressForm = ({
   initialData,
   onClose,
 }: AddressFormProps) => {
+  //직접입력 OPTION
+  const DIRECT_INPUT_OPTION =
+    RECIPIENT_DELIVERY_OPTIONS.find((option) => option.value === "직접 입력")
+      ?.value || "직접 입력";
+
   const { push } = useRouter();
   const session = useRecoilValue(sessionState);
   const [isAddress, setIsAddress] = useState(false);
@@ -52,11 +57,11 @@ const AddressForm = ({
       //저장한 요청사항이 기본 옵션 중에 있는지 확인
       const isDefaultOption = RECIPIENT_DELIVERY_OPTIONS.some(
         (option) =>
-          option.value === savedRequest && option.value !== "직접 입력"
+          option.value === savedRequest && option.value !== DIRECT_INPUT_OPTION
       );
 
       // 직접 입력했지만 내용이 비어있거나 공백만 있는 경우
-      if (savedRequest === "직접 입력" || !savedRequest) {
+      if (savedRequest === DIRECT_INPUT_OPTION || !savedRequest) {
         return {
           recipient: initialData.recipient_name,
           zonecode: initialData.postal_code,
@@ -79,7 +84,7 @@ const AddressForm = ({
         phoneFirst,
         phoneMiddle,
         phoneLast,
-        request: isDefaultOption ? savedRequest : "직접 입력",
+        request: isDefaultOption ? savedRequest : DIRECT_INPUT_OPTION,
         customRequest: isDefaultOption ? "" : savedRequest,
         isDefault: initialData.is_default,
       };
@@ -98,7 +103,8 @@ const AddressForm = ({
         savedRequest &&
           !RECIPIENT_DELIVERY_OPTIONS.some(
             (option) =>
-              option.value === savedRequest && option.value !== "직접 입력"
+              option.value === savedRequest &&
+              option.value !== DIRECT_INPUT_OPTION
           )
       );
       setShowRequested(isCustom);
@@ -139,9 +145,9 @@ const AddressForm = ({
 
   const handleRequestChange = (value: string) => {
     const isDefaultOption = RECIPIENT_DELIVERY_OPTIONS.some(
-      (option) => option.value === value && value !== "직접 입력"
+      (option) => option.value === value && value !== DIRECT_INPUT_OPTION
     );
-    const isCustomInput = value === "직접 입력";
+    const isCustomInput = value === DIRECT_INPUT_OPTION;
 
     //직접 입력인 경우
     if (isCustomInput) {
