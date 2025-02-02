@@ -37,6 +37,9 @@ const passwordCheckSchema = z
   .min(1, { message: "비밀번호를 한번 더 입력해주세요." });
 
 const phoneCheckSchema = z.string().regex(/^\d{3,4}$/, "숫자만 입력해 주세요.");
+const phoneCheckLastSchema = z
+  .string()
+  .regex(/^\d{4}$/, "숫자만 입력해 주세요.");
 
 //스키마 object
 const signUpSchema = z
@@ -66,7 +69,7 @@ export const myPageAddressSchema = z.object({
   detailAddress: z.string().optional(),
   phoneFirst: z.string().default("010"),
   phoneMiddle: phoneCheckSchema,
-  phoneLast: phoneCheckSchema,
+  phoneLast: phoneCheckLastSchema,
   request: z.string(),
   customRequest: z.string().optional(),
   isDefault: z.boolean().default(true),

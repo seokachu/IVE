@@ -23,15 +23,8 @@ import AddressLocation from "./AddressLocation";
 import ContactInfo from "./ContactInfo";
 import RequestInfo from "./RequestInfo";
 import DefaultAddressCheckbox from "./DefaultAddressCheckbox";
-import type { AddressChange } from "@/types";
-import { Tables } from "@/types/supabase";
+import type { AddressChange, AddressFormProps } from "@/types";
 import { RECIPIENT_DELIVERY_OPTIONS } from "@/utils/constants";
-
-type AddressFormProps = {
-  mode?: "create" | "edit";
-  initialData?: Tables<"shipping_addresses">;
-  onClose?: () => void;
-};
 
 const AddressForm = ({
   mode = "create",

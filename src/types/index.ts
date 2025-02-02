@@ -265,3 +265,9 @@ export interface AgreementModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+export type AddressFormProps = {
+  mode?: "create" | "edit";
+  initialData?: Tables<"shipping_addresses">;
+  onClose?: () => void;
+};
