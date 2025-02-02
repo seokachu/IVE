@@ -7,6 +7,7 @@ import { randomOrderId } from "@/utils/randomOrderName";
 import { useRecoilValue } from "recoil";
 import ActionButton from "../common/button/ActionButton";
 import type { DirectPaymentButtonProps } from "@/types";
+import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
 
 const DirectPaymentButton = ({
   product,
@@ -14,6 +15,7 @@ const DirectPaymentButton = ({
 }: DirectPaymentButtonProps) => {
   const session = useRecoilValue(sessionState);
   const { data: customerInfo } = useCustomerInfo(session?.user.id);
+  const { data: userAddress } = useShippingAddress(session?.user.id);
 
   const handleDirectPayment = async () => {
     //로그인 체크
@@ -21,6 +23,19 @@ const DirectPaymentButton = ({
       toast({
         title: "로그인이 필요합니다.",
         description: "로그인 후 결제할 수 있습니다.",
+      });
+      return;
+    }
+
+    //주문자 정보, 배송 정보 체크
+    const missingInfo = [];
+    if (!customerInfo) missingInfo.push("주문자 정보");
+    if (!userAddress) missingInfo.push("배송 정보");
+
+    if (missingInfo.length > 0) {
+      toast({
+        title: `${missingInfo.join("와 ")}가 없습니다.`,
+        description: `${missingInfo.join("와 ")}를 입력해 주세요.`,
       });
       return;
     }

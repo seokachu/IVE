@@ -41,6 +41,7 @@ const AlbumListItems = ({ album }: AlbumItemProps) => {
           className="fill object-cover w-full h-full"
           width={500}
           height={500}
+          priority={true}
         />
       </div>
       <div className="w-full">

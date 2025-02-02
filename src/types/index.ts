@@ -265,3 +265,26 @@ export interface AgreementModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+export type AddressFormProps = {
+  mode?: "create" | "edit";
+  initialData?: Tables<"shipping_addresses">;
+  onClose?: () => void;
+};
+
+export interface UseAddressFormProps {
+  mode: "create" | "edit";
+  initialData?: Tables<"shipping_addresses">;
+  isFirstAddress: boolean;
+}
+
+export interface AddressData {
+  user_id: string;
+  recipient_name: string;
+  recipient_phone: string;
+  postal_code: string;
+  address_line1: string;
+  address_line2: string;
+  request: string;
+  is_default: boolean;
+}

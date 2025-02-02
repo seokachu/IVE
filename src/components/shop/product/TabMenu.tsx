@@ -7,7 +7,7 @@ const TabMenu = ({ activeTab, setActiveTab, id }: TabMenuProps) => {
   const count = data?.length;
 
   return (
-    <div className="mb-16">
+    <div className="mb-16 sticky top-0 bg-white z-10">
       <ul className="flex justify-between items-center text-center cursor-pointer">
         <li
           onClick={() => setActiveTab("description")}
