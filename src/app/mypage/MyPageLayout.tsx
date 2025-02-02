@@ -1,5 +1,6 @@
 "use client";
 
+import GoTopButton from "@/components/common/button/GoTopButton";
 import MyPageLoading from "@/components/common/loading/MyPageLoading";
 import MyPageSkeleton from "@/components/common/loading/MyPageSkeleton";
 import UserInfo from "@/components/mypage/UserInfo";
@@ -37,6 +38,7 @@ const MyPageLayout = ({ children }: { children: React.ReactNode }) => {
           </aside>
           <section className="w-full lg:w-[70%]">{children}</section>
         </div>
+        <GoTopButton />
       </main>
     </AuthGuard>
   );
