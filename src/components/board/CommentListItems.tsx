@@ -6,7 +6,7 @@ const CommentListItems = () => {
   return (
     <li className="py-5">
       <div className="flex gap-2 items-center">
-        <h3 className="relative w-[40px] h-auto overflow-hidden rounded-full">
+        <h3 className="relative w-[40px] h-auto overflow-hidden rounded-full border">
           <Image src={TestImage} alt="test" className="fill" />
         </h3>
         <div>

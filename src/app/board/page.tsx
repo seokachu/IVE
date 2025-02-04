@@ -4,6 +4,7 @@ import BoardListItems from "@/components/board/BoardListItems";
 import BoardListHeader from "@/components/board/BoardListHeader";
 import { GoPlusCircle } from "react-icons/go";
 import { boardMetadata } from "@/metadata/board/boardMetadata";
+import { Input } from "@/components/ui/input";
 
 export const metadata = boardMetadata;
 
@@ -14,7 +15,7 @@ const page = () => {
         <h2 className="text-lg lg:text-xl font-bold mb-5">자유게시판</h2>
         <div className="flex items-center gap-3 justify-center lg:justify-end flex-col lg:flex-row">
           <div className="relative w-full lg:max-w-80">
-            <input
+            <Input
               type="text"
               placeholder="검색어를 입력하세요."
               className="pl-10 pr-4 py-2 border rounded-md w-full"
@@ -29,6 +30,15 @@ const page = () => {
         <div className="mt-10 min-h-auto shadow rounded-md overflow-hidden">
           <BoardListHeader />
           <ul>
+            <BoardListItems />
+            <BoardListItems />
+            <BoardListItems />
+            <BoardListItems />
+            <BoardListItems />
+            <BoardListItems />
+            <BoardListItems />
+            <BoardListItems />
+            <BoardListItems />
             <BoardListItems />
           </ul>
         </div>

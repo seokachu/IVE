@@ -4,9 +4,6 @@ import Image from "next/image";
 const CommentForm = () => {
   return (
     <div className="flex items-center mb-5">
-      <h3 className="relative w-[40px] h-auto overflow-hidden rounded-full mr-3 shrink-0">
-        <Image src={TestImage} alt="test" className="fill" />
-      </h3>
       <textarea
         className="border-b w-full"
         placeholder="댓글을 입력해 주세요."
