@@ -24,9 +24,10 @@ const page = () => {
             <Link href="/board">목록</Link>
           </div>
         </div>
-        <div className="flex gap-1 text-xs lg:text-sm">
-          <span>수정</span>
-          <span>삭제</span>
+        <div className="flex justify-end gap-1 text-xs lg:text-sm py-3">
+          <span className="mr-2">조회 1</span>
+          <button>수정</button>
+          <button>삭제</button>
         </div>
         <p className="pt-5 pb-14">
           내용은 없어요 아이브 앨범 깎아주세요 너무 비싸요 돈이 없어요 내용은
