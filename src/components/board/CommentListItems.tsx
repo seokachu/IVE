@@ -1,6 +1,7 @@
 import TestImage from "@/assets/images/default_image.avif";
 import Image from "next/image";
-import { IoHeart } from "react-icons/io5";
+import { AiOutlineLike } from "react-icons/ai";
+import ActionButton from "../common/button/ActionButton";
 
 const CommentListItems = () => {
   return (
@@ -21,10 +22,12 @@ const CommentListItems = () => {
       </div>
       <div className="flex items-center gap-4 pl-12 mt-1">
         <p className="flex items-center gap-1">
-          <IoHeart size={15} />
+          <AiOutlineLike size={15} />
           <span>0</span>
         </p>
-        <button>답변</button>
+        <ActionButton variant="default" className="border-none">
+          답변
+        </ActionButton>
       </div>
     </li>
   );

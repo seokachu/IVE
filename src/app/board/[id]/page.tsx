@@ -7,6 +7,7 @@ import { AiFillLike } from "react-icons/ai";
 import CommentForm from "@/components/board/CommentForm";
 import CommentListItems from "@/components/board/CommentListItems";
 import { boardDetailMetadata } from "@/metadata/board/boardDetailMetadata";
+import ActionButton from "@/components/common/button/ActionButton";
 
 export const metadata = boardDetailMetadata;
 
@@ -23,11 +24,23 @@ const page = () => {
           <div className="flex flex-col ml-auto justify-end">
             <div className="flex gap-3 text-sm items-center">
               <ShareButton />
-              <Link href="/board">목록</Link>
+              <Link href="/board" className="hover:text-purple">
+                목록
+              </Link>
             </div>
-            <div className="flex justify-end gap-1 text-sm pt-3">
-              <button className="text-gray-500">수정</button>
-              <button className="text-gray-500">삭제</button>
+            <div className="flex justify-end items-center gap-1 text-sm pt-3">
+              <ActionButton
+                variant="default"
+                className="border-none text-gray-500 mr-1"
+              >
+                수정
+              </ActionButton>
+              <ActionButton
+                variant="default"
+                className="border-none text-gray-500"
+              >
+                삭제
+              </ActionButton>
             </div>
           </div>
         </div>
@@ -48,7 +61,7 @@ const page = () => {
           깎아주세요 너무 비싸요 돈이 없어요 깎아주세요 너무 비싸요 돈이 없어요
         </p>
         <div className="flex items-center justify-center mb-5">
-          <button className="flex items-center gap-1 border rounded-lg py-3 px-3">
+          <button className="flex items-center gap-1 border rounded-lg py-3 px-3  hover:bg-silver-gray">
             <AiOutlineLike size={20} />
             <AiFillLike size={20} />
             <span>3</span>

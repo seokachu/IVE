@@ -5,6 +5,7 @@ import BoardListHeader from "@/components/board/BoardListHeader";
 import { GoPlusCircle } from "react-icons/go";
 import { boardMetadata } from "@/metadata/board/boardMetadata";
 import { Input } from "@/components/ui/input";
+import ActionButton from "@/components/common/button/ActionButton";
 
 export const metadata = boardMetadata;
 
@@ -22,10 +23,13 @@ const page = () => {
             />
             <IoSearch className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           </div>
-          <button className="flex items-center justify-center gap-2 bg-purple text-white px-4 py-2 rounded-lg w-full lg:w-28">
-            <GoPlusCircle className="w-5 h-5" />
-            글쓰기
-          </button>
+          <ActionButton
+            variant="primary"
+            className="flex items-center justify-center border-1 lg:border-2 gap-2 px-4 py-2 w-full lg:w-28 text-base lg:text-sm"
+          >
+            <GoPlusCircle className="w-5 h-5 translate-y-[1px]" />
+            <span>글쓰기</span>
+          </ActionButton>
         </div>
         <div className="mt-10 min-h-auto shadow rounded-md overflow-hidden">
           <BoardListHeader />

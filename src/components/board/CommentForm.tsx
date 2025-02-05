@@ -9,7 +9,7 @@ const CommentForm = () => {
         className={cn(
           "border-0 border-b w-full rounded-none py-4 resize-none h-14 min-h-0",
           "focus-visible:ring-0 focus-visible:ring-offset-0",
-          "focus-visible:border-b-2 focus-visible:border-purple-500"
+          "focus-visible:border-b-1 focus-visible:border-ring"
         )}
         placeholder="댓글을 입력해 주세요."
       />
