@@ -1,6 +1,3 @@
-import TestImage from "@/assets/images/default_image.avif";
-import Image from "next/image";
-
 const CommentForm = () => {
   return (
     <div className="flex items-center mb-5">
