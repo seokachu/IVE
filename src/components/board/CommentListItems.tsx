@@ -21,10 +21,13 @@ const CommentListItems = () => {
         </div>
       </div>
       <div className="flex items-center gap-4 pl-12 mt-1">
-        <p className="flex items-center gap-1">
+        <ActionButton
+          variant="default"
+          className="border-none flex items-center gap-1 hover:text-purple"
+        >
           <AiOutlineLike size={15} />
           <span>0</span>
-        </p>
+        </ActionButton>
         <ActionButton variant="default" className="border-none">
           답변
         </ActionButton>

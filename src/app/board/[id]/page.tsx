@@ -61,11 +61,14 @@ const page = () => {
           깎아주세요 너무 비싸요 돈이 없어요 깎아주세요 너무 비싸요 돈이 없어요
         </p>
         <div className="flex items-center justify-center mb-5">
-          <button className="flex items-center gap-1 border rounded-lg py-3 px-3  hover:bg-silver-gray">
+          <ActionButton
+            variant="default"
+            className="flex items-center gap-1 py-3 px-3 hover:bg-silver-gray"
+          >
             <AiOutlineLike size={20} />
             <AiFillLike size={20} />
             <span>3</span>
-          </button>
+          </ActionButton>
         </div>
         <div className="flex bg-gray-100 rounded-md py-3 px-2 lg:px-5">
           <div className="flex gap-2 items-center">
