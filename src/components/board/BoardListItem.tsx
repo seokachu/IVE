@@ -1,8 +1,7 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 
-const BoardListItems = () => {
+const BoardListItem = () => {
   const { push } = useRouter();
   const onClickBoardDetail = () => {
     push("/board/1");
@@ -27,4 +26,4 @@ const BoardListItems = () => {
   );
 };
 
-export default BoardListItems;
+export default BoardListItem;
