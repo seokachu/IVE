@@ -13,21 +13,23 @@ export const metadata = boardDetailMetadata;
 const page = () => {
   return (
     <main className="w-full min-h-screen">
-      <section className="max-w-[1320px] m-auto px-5 pt-14 pb-28 lg:px-8">
+      <section className="max-w-[1320px] m-auto px-5 pb-28 lg:px-8">
         <div className="flex border-b py-5 items-center">
           <div>
             <h2 className="text-lg font-bold">아이브 앨범 너무 비싸요</h2>
-            <time className="text-dark-gray text-sm">2024.04.04</time>
+            <time className="text-gray-500 text-sm">2024.04.04</time>
+            <span className="ml-2 text-sm text-gray-500">조회 1</span>
           </div>
-          <div className="flex gap-3 ml-auto text-sm items-center">
-            <ShareButton />
-            <Link href="/board">목록</Link>
+          <div className="flex flex-col ml-auto justify-end">
+            <div className="flex gap-3 text-sm items-center">
+              <ShareButton />
+              <Link href="/board">목록</Link>
+            </div>
+            <div className="flex justify-end gap-1 text-sm pt-3">
+              <button className="text-gray-500">수정</button>
+              <button className="text-gray-500">삭제</button>
+            </div>
           </div>
-        </div>
-        <div className="flex justify-end gap-1 text-xs lg:text-sm py-3">
-          <span className="mr-2">조회 1</span>
-          <button>수정</button>
-          <button>삭제</button>
         </div>
         <p className="pt-5 pb-14">
           내용은 없어요 아이브 앨범 깎아주세요 너무 비싸요 돈이 없어요 내용은
@@ -61,7 +63,7 @@ const page = () => {
           </div>
         </div>
         <div className="flex gap-4 mt-5 border-t pt-5 pb-5">
-          <p className="font-bold text-lg">댓글 1개</p>
+          <p className="font-bold">댓글 1개</p>
         </div>
         <CommentForm />
         <ul className="text-sm">
