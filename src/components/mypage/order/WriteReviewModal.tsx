@@ -27,7 +27,7 @@ const WriteReviewModal = ({
 }: WriteReviewModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[600px] h-[80vh] py-16">
+      <DialogContent className="max-w-xl max-h-[calc(100vh-4rem)] overflow-y-auto py-16">
         <DialogHeader>
           <DialogTitle>리뷰 작성</DialogTitle>
           <DialogDescription className="sr-only">리뷰 작성</DialogDescription>

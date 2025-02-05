@@ -1,12 +1,13 @@
 import TestImage from "@/assets/images/default_image.avif";
 import Image from "next/image";
-import { IoHeart } from "react-icons/io5";
+import { AiOutlineLike } from "react-icons/ai";
+import ActionButton from "../common/button/ActionButton";
 
 const CommentListItems = () => {
   return (
     <li className="py-5">
       <div className="flex gap-2 items-center">
-        <h3 className="relative w-[40px] h-auto overflow-hidden rounded-full">
+        <h3 className="relative w-[40px] h-auto overflow-hidden rounded-full border">
           <Image src={TestImage} alt="test" className="fill" />
         </h3>
         <div>
@@ -20,11 +21,16 @@ const CommentListItems = () => {
         </div>
       </div>
       <div className="flex items-center gap-4 pl-12 mt-1">
-        <p className="flex items-center gap-1">
-          <IoHeart size={15} />
+        <ActionButton
+          variant="default"
+          className="border-none flex items-center gap-1 hover:text-purple"
+        >
+          <AiOutlineLike size={15} />
           <span>0</span>
-        </p>
-        <button>답변</button>
+        </ActionButton>
+        <ActionButton variant="default" className="border-none">
+          답변
+        </ActionButton>
       </div>
     </li>
   );
