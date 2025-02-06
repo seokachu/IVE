@@ -91,6 +91,11 @@ export const reviewSchema = z.object({
     .max(200, "최대 200자 까지 작성할 수 있습니다."),
 });
 
+export const boardWriteSchema = z.object({
+  title: z.string().min(1, "제목을 입력해 주세요."),
+  contents: z.string().min(1, "내용을 입력해 주세요."),
+});
+
 //타입 지정
 export type SignUpType = z.infer<typeof signUpSchema>;
 export type LoginType = z.infer<typeof loginSchema>;
@@ -98,6 +103,7 @@ export type NicknameType = z.infer<typeof myPageNicknameSchema>;
 export type AddressType = z.infer<typeof myPageAddressSchema>;
 export type CustomerInfoType = z.infer<typeof customerInfoSchema>;
 export type ReviewType = z.infer<typeof reviewSchema>;
+export type BoardWriteType = z.infer<typeof boardWriteSchema>;
 
 //스키마 내보내기
 export const userSchemas = {
@@ -106,9 +112,17 @@ export const userSchemas = {
   myPageNicknameSchema,
 };
 
+export const boardSchemas = {
+  boardWriteSchema,
+};
+
 //default 설정
 export const userDefaultValues = {
   signUpDefaultValues: extractDefaultValues(signUpSchema),
   loginDefaultValues: extractDefaultValues(loginSchema),
   myPageAddressValues: extractDefaultValues(myPageAddressSchema),
+};
+
+export const boardDefaultValues = {
+  boardWriteDefaultValues: extractDefaultValues(boardWriteSchema),
 };
