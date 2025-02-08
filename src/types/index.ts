@@ -294,3 +294,8 @@ export type UpdateBoardParams = {
   title: string;
   content: string;
 };
+
+export type UpdateCommentParams = {
+  commentId: number;
+  content: string;
+};
