@@ -120,7 +120,7 @@ export type Database = {
           content: string | null
           created_at: string
           id: number
-          parent_id: number
+          parent_id: number | null
           user_id: string | null
         }
         Insert: {
@@ -128,7 +128,7 @@ export type Database = {
           content?: string | null
           created_at?: string
           id?: number
-          parent_id: number
+          parent_id?: number | null
           user_id?: string | null
         }
         Update: {
@@ -136,7 +136,7 @@ export type Database = {
           content?: string | null
           created_at?: string
           id?: number
-          parent_id?: number
+          parent_id?: number | null
           user_id?: string | null
         }
         Relationships: [

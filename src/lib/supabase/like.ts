@@ -25,7 +25,7 @@ export const addBoardLike = async (boardId: number, userId: string) => {
 //자유게시판 좋아요 삭제
 export const removeBoardLike = async (boardId: number, userId: string) => {
   try {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("board_likes")
       .delete()
       .eq("board_id", boardId)
