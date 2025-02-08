@@ -288,3 +288,9 @@ export interface AddressData {
   request: string;
   is_default: boolean;
 }
+
+export type UpdateBoardParams = {
+  boardId: number;
+  title: string;
+  content: string;
+};
