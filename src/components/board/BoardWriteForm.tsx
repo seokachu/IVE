@@ -1,6 +1,5 @@
 "use client";
 import dynamic from "next/dynamic";
-import { Label } from "@radix-ui/react-label";
 import "react-quill/dist/quill.snow.css";
 import { toast } from "@/hooks/use-toast";
 import { RHFInput } from "../common/RHFInput";
@@ -72,7 +71,6 @@ const BoardWriteForm = () => {
             </span>
           )}
         </div>
-
         <Button
           type="submit"
           disabled={!isValid || isSubmitting}
