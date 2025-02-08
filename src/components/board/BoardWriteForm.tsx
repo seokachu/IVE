@@ -49,29 +49,30 @@ const BoardWriteForm = () => {
   return (
     <Form {...form}>
       <form className="w-full" onSubmit={form.handleSubmit(onClickSubmit)}>
-        <div className="mb-5">
-          <Label>
-            <span className="">제목</span>
+        <div className="mb-5 flex items-center w-full">
+          <div className="flex-1">
             <RHFInput
               type="text"
               name="title"
               messageClassName="text-xs py-1 px-3"
               placeholder="제목을 입력해 주세요."
-              className="rounded-sm"
+              className="py-1 rounded-sm w-full"
             />
-          </Label>
+          </div>
         </div>
-        <div>
-          <Label>
-            내용
-            <ReactQuill onChange={onChangeContents} value={watch("contents")} />
-          </Label>
+        <div className="overflow-hidden">
+          <ReactQuill
+            onChange={onChangeContents}
+            value={watch("contents")}
+            className={errors.contents && "quill-error"}
+          />
           {errors.contents && (
             <span className="text-destructive text-xs px-3">
               {errors.contents.message}
             </span>
           )}
         </div>
+
         <Button
           type="submit"
           disabled={!isValid || isSubmitting}
