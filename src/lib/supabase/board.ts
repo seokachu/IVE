@@ -12,11 +12,12 @@ export const getBoardListByPage = async ({ page = 1 }) => {
       .from("board")
       .select(
         `*,
-        user:user_id
-        (
+        user:user_id (
           nickname,
           avatar_url
-        )
+        ),
+        likes:board_likes(count),
+        user_has_liked:board_likes!inner(user_id)
         `
       )
       .range((page - 1) * BOARD_PAGE, page * BOARD_PAGE - 1)
@@ -45,11 +46,14 @@ export const getBoardDetail = async (boardId: number) => {
           user:user_id (
             nickname,
             avatar_url
-          )
+          ),
+          likes:board_likes(count),
+          user_has_liked:board_likes!inner(user_id)
         `
       )
       .eq("id", boardId)
       .single();
+
     if (error) throw error;
     return data;
   } catch (error) {
