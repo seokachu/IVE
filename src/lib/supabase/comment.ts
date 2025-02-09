@@ -12,7 +12,7 @@ export const getCommentsByBoardId = async (boardId: number) => {
         `
       *,
       user:user_id (
-        nickname,
+        name,
         avatar_url
       ),
       likes:comment_likes(count)
@@ -41,7 +41,7 @@ export const getRepliesByCommentId = async (commentId: number) => {
         `
       *,
       user:user_id (
-        nickname,
+        name,
         avatar_url
       ),
       likes:comment_likes(count)
@@ -77,7 +77,7 @@ export const createComment = async ({
         `
         *,
         user:user_id (
-          nickname,
+          name,
           avatar_url
         )
         `
@@ -108,7 +108,7 @@ export const updateComment = async (
         `
         *,
         user:user_id (
-          nickname,
+          name,
           avatar_url
         )
         `

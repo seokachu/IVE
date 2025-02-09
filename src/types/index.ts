@@ -299,3 +299,16 @@ export type UpdateCommentParams = {
   commentId: number;
   content: string;
 };
+
+export interface BoardWithRelations extends Tables<"board"> {
+  board_comments: {
+    count: number;
+  };
+  user: {
+    name: string;
+  };
+}
+
+export interface BoardListItemProps {
+  item: BoardWithRelations;
+}

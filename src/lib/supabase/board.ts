@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
+import type { BoardWithRelations } from "@/types";
 import type { Database } from "@/types/supabase";
 
 type BoardInsert = Database["public"]["Tables"]["board"]["Insert"];
@@ -6,19 +7,18 @@ type BoardInsert = Database["public"]["Tables"]["board"]["Insert"];
 const BOARD_PAGE = 10;
 
 //게시글 목록 가져오기
-export const getBoardListByPage = async ({ page = 1 }) => {
+export const getBoardListByPage = async ({
+  page = 1,
+}): Promise<BoardWithRelations[]> => {
   try {
     const { data, error } = await supabase
       .from("board")
       .select(
-        `*,
-        user:user_id (
-          nickname,
-          avatar_url
-        ),
-        likes:board_likes(count),
-        user_has_liked:board_likes!inner(user_id)
         `
+        *,
+        board_comments(count),
+        user!inner(name)
+      `
       )
       .range((page - 1) * BOARD_PAGE, page * BOARD_PAGE - 1)
       .order("created_at", { ascending: false });
@@ -44,7 +44,7 @@ export const getBoardDetail = async (boardId: number) => {
         `
           *,
           user:user_id (
-            nickname,
+            name,
             avatar_url
           ),
           likes:board_likes(count),
@@ -84,7 +84,7 @@ export const createBoard = async ({
         `
           *,
           user:user_id (
-            nickname,
+            name,
             avatar_url
           )
         `
@@ -116,7 +116,7 @@ export const updateBoard = async (
         `
           *,
           user:user_id(
-            nickname,
+            name,
             avatar_url
           )
         `
