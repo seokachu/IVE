@@ -17,7 +17,9 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
       <p className="w-[10%] text-gray-500">{item.id}</p>
       <div className="w-[50%] lg:w-[40%] text-left flex gap-1">
         <p className="text-left max-w-[80%] truncate">{item.title}</p>
-        <p className="text-blue-500">[{item.board_comments.count || 0}]</p>
+        <p className="text-blue-500">
+          &#91;{item.board_comments.count || 0}&#93;
+        </p>
       </div>
       <h3 className="w-[20%] text-left shrink-0">{item.user.name}</h3>
       <time className="w-[20%] text-gray-500">

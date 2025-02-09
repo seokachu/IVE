@@ -306,6 +306,7 @@ export interface BoardWithRelations extends Tables<"board"> {
   };
   user: {
     name: string;
+    avatar_url: string;
   };
 }
 
@@ -330,4 +331,20 @@ export interface BoardDetailPageParams {
 
 export interface BoardDetailContainerProps {
   boardId: number;
+}
+
+export interface BoardDetailProps {
+  item: BoardWithRelations;
+}
+
+export interface Comment extends Tables<"board_comments"> {
+  user: {
+    name: string;
+    avatar_url: string;
+  };
+}
+
+export interface CommentListItemProps {
+  boardId: number;
+  item: Comment;
 }

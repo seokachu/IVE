@@ -2,8 +2,8 @@
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import { toast } from "@/hooks/use-toast";
-import { RHFInput } from "../common/RHFInput";
-import { Form } from "../ui/form";
+import { RHFInput } from "@/components/common/RHFInput";
+import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -11,7 +11,7 @@ import {
   boardWriteSchema,
   BoardWriteType,
 } from "@/hooks/user";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import "@/styles/quill.css";
 
 const ReactQuill = dynamic(async () => await import("react-quill"), {

@@ -1,20 +1,15 @@
-const BoardDetailContent = () => {
+import type { BoardDetailProps } from "@/types";
+import "react-quill/dist/quill.snow.css";
+import "@/styles/quill.css";
+
+const BoardDetailContent = ({ item }: BoardDetailProps) => {
   return (
-    <p className="pt-5 pb-14">
-      내용은 없어요 아이브 앨범 깎아주세요 너무 비싸요 돈이 없어요 내용은 없어요
-      아이브 앨범 깎아주세요 너무 비싸요 돈이 없어요 내용은 없어요 아이브 앨범
-      깎아주세요 너무 비싸요 돈이 없어요 내용은 없어요 아이브 앨범 깎아주세요
-      너무 비싸요 돈이 없어요 내용은 없어요 아이브 앨범 깎아주세요 너무 비싸요
-      돈이 없어요 내용은 없어요 아이브 앨범 깎아주세요 너무 비싸요 돈이 없어요
-      내용은 없어요 아이브 앨범 깎아주세요 너무 비싸요 돈이 없어요 내용은 없어요
-      아이브 앨범 깎아주세요 너무 비싸요 돈이 없어요 내용은 없어요 아이브 앨범
-      깎아주세요 너무 비싸요 돈이 없어요 내용은 없어요 아이브 앨범 깎아주세요
-      너무 비싸요 돈이 없어요 깎아주세요 너무 비싸요 돈이 없어요 깎아주세요 너무
-      비싸요 돈이 없어요 깎아주세요 너무 비싸요 돈이 없어요 깎아주세요 너무
-      비싸요 돈이 없어요 깎아주세요 너무 비싸요 돈이 없어요 깎아주세요 너무
-      비싸요 돈이 없어요 깎아주세요 너무 비싸요 돈이 없어요 깎아주세요 너무
-      비싸요 돈이 없어요 깎아주세요 너무 비싸요 돈이 없어요
-    </p>
+    <div className="pt-5 pb-14">
+      <div
+        className="ql-editor p-0"
+        dangerouslySetInnerHTML={{ __html: item?.content ?? "" }}
+      />
+    </div>
   );
 };
 

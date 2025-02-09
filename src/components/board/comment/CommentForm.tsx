@@ -1,6 +1,6 @@
+import ActionButton from "@/components/common/button/ActionButton";
+import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/utils/utils";
-import { Textarea } from "../ui/textarea";
-import ActionButton from "../common/button/ActionButton";
 
 const CommentForm = () => {
   return (

@@ -1,14 +1,21 @@
 import Image from "next/image";
-import TestImage from "@/assets/images/default_image.avif";
+import DefaultImage from "@/assets/images/default_image.avif";
+import type { BoardDetailProps } from "@/types";
 
-const BoardDetailUserInfo = () => {
+const BoardDetailUserInfo = ({ item }: BoardDetailProps) => {
   return (
     <div className="flex bg-gray-100 rounded-md py-3 px-2 lg:px-5">
       <div className="flex gap-2 items-center">
-        <h3 className="relative w-[40px] h-auto overflow-hidden rounded-full">
-          <Image src={TestImage} alt="test" className="fill" />
+        <h3 className="relative w-[40px] h-auto overflow-hidden border rounded-full">
+          <Image
+            src={item?.user?.avatar_url || DefaultImage}
+            alt={item?.user?.name || "유저닉네임"}
+            className="fill"
+            width={500}
+            height={500}
+          />
         </h3>
-        <h2>익명의아이브</h2>
+        <h2>{item?.user?.name}</h2>
       </div>
     </div>
   );

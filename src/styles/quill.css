@@ -12,6 +12,10 @@
   border-radius: 0 0 4px 4px;
 }
 
+.ql-editor {
+  padding: 0;
+}
+
 /*------------- error -----------*/
 .quill-error .ql-toolbar.ql-snow {
   border: 1px solid red;

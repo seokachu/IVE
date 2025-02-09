@@ -1,5 +1,5 @@
+import BoardWriteForm from "@/components/board/write/BoardWriteForm";
 import { boardWriteMetadata } from "@/metadata/board/boardWriteMetadata";
-import BoardWriteForm from "@/components/board/BoardWriteForm";
 
 export const metadata = boardWriteMetadata;
 

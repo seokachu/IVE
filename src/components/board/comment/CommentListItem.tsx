@@ -1,24 +1,48 @@
-import TestImage from "@/assets/images/default_image.avif";
+import DefaultImage from "@/assets/images/default_image.avif";
 import Image from "next/image";
 import { AiOutlineLike } from "react-icons/ai";
-import ActionButton from "../../common/button/ActionButton";
+import ActionButton from "@/components/common/button/ActionButton";
+import type { CommentListItemProps } from "@/types";
+// import {
+//   useDeleteComment,
+//   useEditComment,
+//   useRepliesCommentList,
+// } from "@/hooks/queries/useComment";
+import { formatDate } from "@/utils/formatDate";
+import BoardActionButton from "../BoardActionButton";
 
-const CommentListItem = () => {
+const CommentListItem = ({ item, boardId }: CommentListItemProps) => {
+  // const { mutate: deleteComment } = useDeleteComment(boardId, item.id);
+  // const { mutate: editComment } = useEditComment(boardId);
+  // const { data: replies } = useRepliesCommentList(item.id);
+
+  console.log(boardId);
+
+  console.log(item);
   return (
     <li className="py-5">
-      <div className="flex gap-2 items-center">
-        <h3 className="relative w-[40px] h-auto overflow-hidden rounded-full border">
-          <Image src={TestImage} alt="test" className="fill" />
-        </h3>
-        <div>
-          <div className="flex gap-2">
-            <h2>익명의아이브</h2>
-            <time className="text-dark-gray">2024.04.04</time>
+      <div className="flex justify-between items-start">
+        <div className="flex gap-2 items-center mr-auto">
+          <h3 className="relative w-[40px] h-auto overflow-hidden rounded-full border">
+            <Image
+              src={item?.user?.avatar_url || DefaultImage}
+              alt={item?.user?.name}
+              className="fill"
+              width={500}
+              height={500}
+            />
+          </h3>
+          <div>
+            <div className="flex gap-2">
+              <h2>{item?.user?.name}</h2>
+              <time className="text-dark-gray">
+                {formatDate(item?.created_at)}
+              </time>
+            </div>
+            <p className="text-sm">{item.content}</p>
           </div>
-          <p className="text-sm">
-            뭐 거진 대부분 돈이 없죠 돈이 없어서 문제예요 흑흑...
-          </p>
         </div>
+        <BoardActionButton />
       </div>
       <div className="flex items-center gap-4 pl-12 mt-1">
         <ActionButton
