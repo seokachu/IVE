@@ -22,8 +22,8 @@ const CommentListItem = ({ item, boardId }: CommentListItemProps) => {
   return (
     <li className="py-5">
       <div className="flex justify-between items-start">
-        <div className="flex gap-2 items-center mr-auto">
-          <h3 className="relative w-[40px] h-auto overflow-hidden rounded-full border">
+        <div className="flex gap-2 items-start mr-auto">
+          <h3 className="relative w-[40px] h-auto overflow-hidden rounded-full border shrink-0">
             <Image
               src={item?.user?.avatar_url || DefaultImage}
               alt={item?.user?.name}
@@ -39,7 +39,7 @@ const CommentListItem = ({ item, boardId }: CommentListItemProps) => {
                 {formatDate(item?.created_at)}
               </time>
             </div>
-            <p className="text-sm">{item.content}</p>
+            <p className="text-sm pr-3 py-1">{item.content}</p>
           </div>
         </div>
         <BoardActionButton />
