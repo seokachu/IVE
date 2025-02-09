@@ -1,5 +1,5 @@
 import { boardDetailMetadata } from "@/metadata/board/boardDetailMetadata";
-import BoardDetailContainer from "@/components/board/BoardDetailContainer";
+import BoardDetailContainer from "@/components/board/detail/BoardDetailContainer";
 import { BoardDetailPageParams } from "@/types";
 
 export const metadata = boardDetailMetadata;

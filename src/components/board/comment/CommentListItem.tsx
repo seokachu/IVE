@@ -1,7 +1,7 @@
 import TestImage from "@/assets/images/default_image.avif";
 import Image from "next/image";
 import { AiOutlineLike } from "react-icons/ai";
-import ActionButton from "../common/button/ActionButton";
+import ActionButton from "../../common/button/ActionButton";
 
 const CommentListItem = () => {
   return (

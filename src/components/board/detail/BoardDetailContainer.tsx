@@ -4,12 +4,12 @@ import Link from "next/link";
 import { useBoardDetail } from "@/hooks/queries/useBoard";
 import type { BoardDetailContainerProps } from "@/types";
 import BoardDetailUserInfo from "./BoardDetailUserInfo";
-import CommentSection from "./CommentSection";
-import BoardLikeButton from "./BoardLikeButton";
-import BoardActionButton from "./BoardActionButton";
+import CommentSection from "../comment/CommentSection";
+import BoardLikeButton from "../BoardLikeButton";
+import BoardActionButton from "../BoardActionButton";
 import BoardDetailHeader from "./BoardDetailHeader";
 import BoardDetailContent from "./BoardDetailContent";
-import CommentCount from "./CommentCount";
+import CommentCount from "../comment/CommentCount";
 
 const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
   const { data: board } = useBoardDetail(boardId);

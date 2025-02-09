@@ -1,4 +1,4 @@
-import CommentListItem from "@/components/board/CommentListItem";
+import CommentListItem from "@/components/board/comment/CommentListItem";
 
 const CommentList = () => {
   return (
