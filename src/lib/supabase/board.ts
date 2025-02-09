@@ -48,8 +48,7 @@ export const getBoardDetail = async (boardId: number) => {
             name,
             avatar_url
           ),
-          likes:board_likes(count),
-          user_has_liked:board_likes!inner(user_id)
+          board_comments(count)
         `
       )
       .eq("id", boardId)

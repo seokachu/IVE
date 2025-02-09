@@ -321,3 +321,13 @@ export interface BoardListProps {
       }
     | undefined;
 }
+
+export interface BoardDetailPageParams {
+  params: {
+    id: string;
+  };
+}
+
+export interface BoardDetailContainerProps {
+  boardId: number;
+}

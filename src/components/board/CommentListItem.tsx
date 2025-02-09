@@ -3,7 +3,7 @@ import Image from "next/image";
 import { AiOutlineLike } from "react-icons/ai";
 import ActionButton from "../common/button/ActionButton";
 
-const CommentListItems = () => {
+const CommentListItem = () => {
   return (
     <li className="py-5">
       <div className="flex gap-2 items-center">
@@ -36,4 +36,4 @@ const CommentListItems = () => {
   );
 };
 
-export default CommentListItems;
+export default CommentListItem;

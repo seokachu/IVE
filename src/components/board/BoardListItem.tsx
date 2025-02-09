@@ -1,4 +1,3 @@
-"use client";
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/utils/formatDate";
 import type { BoardListItemProps } from "@/types";
