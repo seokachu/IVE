@@ -5,7 +5,7 @@ const BoardActionButton = () => {
     <>
       <ActionButton
         variant="default"
-        className="border-none text-gray-500 mr-1"
+        className="border-none text-gray-500 mr-2"
       >
         수정
       </ActionButton>
