@@ -10,6 +10,7 @@ import { BOARD_PAGE } from "@/lib/supabase/board";
 import { useState } from "react";
 import PaginationControl from "@/components/common/PaginationControl";
 import Error from "../common/error/Error";
+import BoardSkeleton from "../common/loading/BoardSkeleton";
 
 const BoardContainer = () => {
   const { push } = useRouter();
@@ -18,7 +19,7 @@ const BoardContainer = () => {
 
   const totalPages = Math.ceil((boardList?.count || 0) / BOARD_PAGE);
 
-  if (isLoading) return null;
+  if (isLoading) return <BoardSkeleton />;
   if (isError) return <Error />;
 
   const handlePageChange = (page: number) => {
