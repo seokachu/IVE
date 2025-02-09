@@ -17,7 +17,7 @@ const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
     <>
       <div className="flex border-b py-5 items-center">
         <BoardDetailHeader item={board} />
-        <div className="flex flex-col ml-auto justify-end">
+        <div className="flex flex-col ml-auto justify-end shrink-0">
           <div className="flex gap-3 text-sm items-center">
             <ShareButton />
             <Link href="/board" className="hover:text-purple">

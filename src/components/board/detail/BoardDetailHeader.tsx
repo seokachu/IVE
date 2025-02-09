@@ -4,7 +4,9 @@ import { formatDate } from "@/utils/formatDate";
 const BoardDetailHeader = ({ item }: BoardDetailProps) => {
   return (
     <div>
-      <h2 className="text-base lg:text-lg font-bold">{item?.title}</h2>
+      <h2 className="text-base lg:text-lg font-bold break-all pr-5">
+        {item?.title}
+      </h2>
       <time className="text-gray-500 text-xs lg:text-sm">
         {formatDate(item?.created_at)}
       </time>
