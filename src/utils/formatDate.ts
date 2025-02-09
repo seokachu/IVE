@@ -1,11 +1,19 @@
-export const formatDate = (dateString: string) => {
+type DateFormat = "dot" | "dash" | "slash";
+
+export const formatDate = (dateString: string, format: DateFormat = "dot") => {
   const date = new Date(dateString);
 
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
 
-  return `${year}.${month}.${day}`;
+  const separators = {
+    dot: ".",
+    dash: "-",
+    slash: "/",
+  };
+
+  return `${year}${separators[format]}${month}${separators[format]}${day}`;
 };
 
 export const formatPaymentDate = (dateString: string) => {

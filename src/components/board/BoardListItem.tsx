@@ -22,7 +22,7 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
       </div>
       <h3 className="w-[20%] text-left shrink-0">{item.user.name}</h3>
       <time className="w-[20%] text-gray-500">
-        {formatDate(item.created_at)}
+        {formatDate(item.created_at, "dash")}
       </time>
       <p className="w-[10%] text-gray-500 hidden lg:block">{item.views || 0}</p>
     </li>
