@@ -5,10 +5,25 @@ import BoardListHeader from "@/components/board/BoardListHeader";
 import { GoPlusCircle } from "react-icons/go";
 import BoardList from "./BoardList";
 import { useRouter } from "next/navigation";
-// import PaginationControl from "../common/PaginationControl";
+import { useBoards } from "@/hooks/queries/useBoard";
+import { BOARD_PAGE } from "@/lib/supabase/board";
+import { useState } from "react";
+import PaginationControl from "@/components/common/PaginationControl";
+import Error from "../common/error/Error";
 
 const BoardContainer = () => {
   const { push } = useRouter();
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data: boardList, isLoading, isError } = useBoards(currentPage);
+
+  const totalPages = Math.ceil((boardList?.count || 0) / BOARD_PAGE);
+
+  if (isLoading) return null;
+  if (isError) return <Error />;
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   const onClickBoardWrite = () => {
     push("board/write");
@@ -40,9 +55,16 @@ const BoardContainer = () => {
       </div>
       <div className="mt-10 min-h-auto shadow rounded-md overflow-hidden">
         <BoardListHeader />
-        <BoardList />
+        <BoardList boards={boardList} />
       </div>
-      {/* <PaginationControl /> */}
+      {totalPages > 1 && (
+        <PaginationControl
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          maxDisplayPages={5}
+        />
+      )}
     </>
   );
 };

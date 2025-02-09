@@ -4,27 +4,28 @@ import type { Database } from "@/types/supabase";
 
 type BoardInsert = Database["public"]["Tables"]["board"]["Insert"];
 
-const BOARD_PAGE = 10;
+export const BOARD_PAGE = 10;
 
 //게시글 목록 가져오기
 export const getBoardListByPage = async ({
   page = 1,
-}): Promise<BoardWithRelations[]> => {
+}): Promise<{ data: BoardWithRelations[]; count: number }> => {
   try {
-    const { data, error } = await supabase
+    const { data, error, count } = await supabase
       .from("board")
       .select(
         `
         *,
         board_comments(count),
         user!inner(name)
-      `
+      `,
+        { count: "exact" }
       )
       .range((page - 1) * BOARD_PAGE, page * BOARD_PAGE - 1)
       .order("created_at", { ascending: false });
 
     if (error) throw error;
-    return data;
+    return { data: data || [], count: count || 0 };
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(

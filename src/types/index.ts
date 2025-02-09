@@ -312,3 +312,12 @@ export interface BoardWithRelations extends Tables<"board"> {
 export interface BoardListItemProps {
   item: BoardWithRelations;
 }
+
+export interface BoardListProps {
+  boards:
+    | {
+        data: BoardWithRelations[];
+        count: number;
+      }
+    | undefined;
+}

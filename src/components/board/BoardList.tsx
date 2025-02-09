@@ -1,15 +1,10 @@
-import { useBoards } from "@/hooks/queries/useBoard";
 import BoardListItem from "./BoardListItem";
+import type { BoardListProps } from "@/types";
 
-const BoardList = () => {
-  const { data: boardList, isLoading, isError } = useBoards();
-
-  if (isLoading) return null;
-  if (isError) return null;
-
+const BoardList = ({ boards }: BoardListProps) => {
   return (
     <ul>
-      {boardList?.map((item) => (
+      {boards?.data?.map((item) => (
         <BoardListItem key={item.id} item={item} />
       ))}
     </ul>
