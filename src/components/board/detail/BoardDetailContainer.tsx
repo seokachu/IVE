@@ -25,7 +25,7 @@ const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
             </Link>
           </div>
           {/* 로그인 한 유저중 자신이 글 쓴 사람만 버튼 보이게 */}
-          <div className="flex justify-end items-center gap-1 text-xs lg:text-sm pt-3">
+          <div className="flex justify-end items-center gap-1 text-sm pt-3">
             <BoardActionButton />
           </div>
         </div>
