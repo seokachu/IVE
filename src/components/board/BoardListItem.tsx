@@ -15,7 +15,7 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
       className="text-center flex text-sm lg:text-base py-3 border-b hover:bg-gray-50 cursor-pointer"
     >
       <p className="w-[10%] text-gray-500">{item.id}</p>
-      <div className="w-[50%] lg:w-[40%] text-left flex gap-1">
+      <div className="w-[50%] lg:w-[40%] text-left flex gap-1 px-5">
         <p className="text-left max-w-[80%] truncate">{item.title}</p>
         <p className="text-blue-500">
           &#91;{item.board_comments.count || 0}&#93;

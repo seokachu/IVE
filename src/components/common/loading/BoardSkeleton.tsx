@@ -14,7 +14,7 @@ const BoardSkeleton = () => {
         </div>
       </div>
       <div className="mt-10 min-h-auto shadow rounded-md overflow-hidden">
-        <ul className="flex text-center py-3 bg-gray-100 text-sm border-dark-gray lg:text-base">
+        <ul className="flex px-1 text-center py-3 bg-gray-100 text-sm border-dark-gray lg:text-base">
           <li className="w-[10%]">번호</li>
           <li className="w-[50%] lg:w-[40%]">제목</li>
           <li className="w-[20%] text-left">작성자</li>
