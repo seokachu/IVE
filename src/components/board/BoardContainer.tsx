@@ -32,7 +32,7 @@ const BoardContainer = () => {
 
   return (
     <>
-      <div className="lg:flex justify-between items-center">
+      <div className="lg:flex justify-between items-center px-5 lg:px-0">
         <h2 className="text-lg lg:text-xl font-bold mb-5 lg:mb-0">
           자유게시판
         </h2>
@@ -54,7 +54,7 @@ const BoardContainer = () => {
           </ActionButton>
         </div>
       </div>
-      <div className="mt-10 min-h-auto shadow rounded-md overflow-hidden">
+      <div className="mt-5 lg:mt-10 min-h-auto lg:shadow rounded-md overflow-hidden">
         <BoardListHeader />
         <BoardList boards={boardList} />
       </div>
