@@ -347,3 +347,8 @@ export interface CommentListItemProps {
   boardId: number;
   item: Comment;
 }
+
+export interface BoardsResponse {
+  data: BoardWithRelations[];
+  count: number;
+}

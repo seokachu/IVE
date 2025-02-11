@@ -1,12 +1,20 @@
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/utils/formatDate";
-import type { BoardListItemProps } from "@/types";
 import ActionButton from "../common/button/ActionButton";
+import { useIncrementViewCount } from "@/hooks/queries/useBoard";
+import { hasViewedPost, markPostAsViewed } from "@/utils/viewCount";
+import type { BoardListItemProps } from "@/types";
 
 const BoardListItem = ({ item }: BoardListItemProps) => {
   const { push } = useRouter();
 
+  const incrementViewCount = useIncrementViewCount();
+
   const onClickBoardDetail = () => {
+    if (!hasViewedPost(item.id)) {
+      incrementViewCount.mutate(item.id);
+      markPostAsViewed(item.id);
+    }
     push(`/board/${item.id}`);
   };
 

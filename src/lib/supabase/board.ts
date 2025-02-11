@@ -148,3 +148,20 @@ export const deleteBoard = async (boardId: number) => {
     throw error;
   }
 };
+
+//자유게시판 조회 count
+export const incrementViewCount = async (boardId: number) => {
+  try {
+    const { data, error } = await supabase.rpc("increment_view_count", {
+      row_id: boardId,
+    });
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`조회수 증가에 실패했습니다. ${error.message}`);
+    }
+    throw error;
+  }
+};
