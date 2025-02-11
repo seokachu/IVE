@@ -12,6 +12,10 @@
   border-radius: 0 0 4px 4px;
 }
 
+.ql-container.ql-snow > .ql-editor {
+  padding: 12px 15px;
+}
+
 .ql-editor {
   padding: 0;
   overflow-y: visible;

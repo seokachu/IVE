@@ -13,12 +13,20 @@ import {
 } from "@/hooks/user";
 import { Button } from "@/components/ui/button";
 import "@/styles/quill.css";
+import { useAddBoard } from "@/hooks/queries/useBoard";
+import { useRouter } from "next/navigation";
+import { useRecoilValue } from "recoil";
+import { sessionState } from "@/store";
 
 const ReactQuill = dynamic(async () => await import("react-quill"), {
   ssr: false,
 });
 
 const BoardWriteForm = () => {
+  const session = useRecoilValue(sessionState);
+  const { push } = useRouter();
+  const { mutate: addBoardList } = useAddBoard();
+
   const form = useForm<BoardWriteType>({
     mode: "onChange",
     resolver: zodResolver(boardWriteSchema),
@@ -37,11 +45,27 @@ const BoardWriteForm = () => {
     trigger("contents");
   };
 
-  const onClickSubmit = (data: BoardWriteType) => {
-    console.log(data);
-    toast({
-      title: "게시글 등록이 완료되었습니다.",
-    });
+  const onClickSubmit = async (data: BoardWriteType) => {
+    try {
+      await addBoardList({
+        user_id: session?.user?.id,
+        title: data.title,
+        content: data.contents,
+      });
+      toast({
+        title: "게시글 등록이 완료되었습니다.",
+      });
+      push("/board");
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          title: "게시글 등록에 실패했습니다.",
+          description: error.message,
+          variant: "destructive",
+        });
+        throw error.message;
+      }
+    }
   };
 
   return (

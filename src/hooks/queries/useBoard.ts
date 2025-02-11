@@ -72,7 +72,7 @@ export const useDeleteBoard = () => {
   });
 };
 
-//게시글 조회
+//게시글 리스트 조회수 count
 export const useIncrementViewCount = () => {
   const queryClient = useQueryClient();
 
