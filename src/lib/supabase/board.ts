@@ -18,7 +18,11 @@ export const getBoardListByPage = async ({
         *,
         board_comments(count),
         board_likes(count),
-        user!inner(name)
+        user!inner(
+            id,
+            name,
+            avatar_url
+          )
       `,
         { count: "exact" }
       )

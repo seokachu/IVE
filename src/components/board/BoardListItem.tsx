@@ -4,6 +4,7 @@ import ActionButton from "../common/button/ActionButton";
 import { useIncrementViewCount } from "@/hooks/queries/useBoard";
 import { hasViewedPost, markPostAsViewed } from "@/utils/viewCount";
 import type { BoardListItemProps } from "@/types";
+import UserAvatar from "../common/UserAvatar";
 
 const BoardListItem = ({ item }: BoardListItemProps) => {
   const { push } = useRouter();
@@ -25,7 +26,7 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
         className="cursor-pointer first:border-t lg:first:border-t-0"
       >
         {/* Desktop */}
-        <div className="hidden lg:flex text-center py-3 border-b hover:bg-gray-50">
+        <div className="hidden lg:flex text-center py-3 border-b hover:bg-gray-50 items-center">
           <p className="w-[10%] text-gray-500">{item.id}</p>
           <div className="w-[40%] text-left flex gap-1">
             <p className="text-left max-w-[80%] truncate">{item.title}</p>
@@ -33,7 +34,17 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
               &#91;{item.board_comments[0]?.count || 0}&#93;
             </p>
           </div>
-          <h3 className="w-[15%] text-left pl-3">{item.user.name}</h3>
+          <h3 className="w-[15%] text-left pl-3 flex items-center gap-1">
+            {item.user.avatar_url && (
+              <UserAvatar
+                size="xs"
+                userId={item?.user_id}
+                userName={item.user.name}
+                avatarUrl={item.user.avatar_url}
+              />
+            )}
+            <span>{item.user.name}</span>
+          </h3>
           <time className="w-[15%] text-gray-500">
             {formatDate(item.created_at, "dash")}
           </time>
@@ -47,8 +58,18 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
           <div className="flex items-center justify-between gap-5">
             <div className="flex flex-col gap-2 flex-1 min-w-0">
               <p className="w-full truncate text-left">{item.title}</p>
-              <div className="text-gray-500 text-xs flex gap-2">
-                <h3 className="shrink-0">{item.user.name}</h3>
+              <div className="text-gray-500 text-xs flex gap-2 items-center">
+                <h3 className="shrink-0 flex items-center gap-[2px]">
+                  {item.user.avatar_url && (
+                    <UserAvatar
+                      userId={item?.user_id}
+                      userName={item.user.name}
+                      avatarUrl={item.user.avatar_url}
+                      className="w-[20px] h-[20px]"
+                    />
+                  )}
+                  <span>{item.user.name}</span>
+                </h3>
                 <p className="shrink-0">조회 {item.views || 0}</p>
                 <p className="shrink-0">
                   추천 {item.board_likes[0]?.count || 0}

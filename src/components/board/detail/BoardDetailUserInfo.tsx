@@ -1,18 +1,16 @@
-import Image from "next/image";
-import DefaultImage from "@/assets/images/default_image.avif";
+import UserAvatar from "@/components/common/UserAvatar";
 import type { BoardDetailProps } from "@/types";
 
 const BoardDetailUserInfo = ({ item }: BoardDetailProps) => {
   return (
     <div className="flex bg-gray-100 rounded-md py-3 px-2 lg:px-5">
       <div className="flex gap-2 items-center">
-        <h3 className="relative w-[40px] h-auto overflow-hidden border rounded-full">
-          <Image
-            src={item?.user?.avatar_url || DefaultImage}
-            alt={item?.user?.name || "유저닉네임"}
-            className="fill"
-            width={500}
-            height={500}
+        <h3 className="relative w-[40px] h-auto overflow-hidden border rounded-full bg-white">
+          <UserAvatar
+            size="md"
+            userId={item.user_id}
+            avatarUrl={item.user.avatar_url}
+            userName={item.user.name}
           />
         </h3>
         <h2 className="text-sm">{item?.user?.name}</h2>
