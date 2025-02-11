@@ -18,8 +18,10 @@ const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
   const { data: board, isLoading, isError } = useBoardDetail(boardId);
 
   //스켈레톤 추가해야함
-  if (isLoading) return null;
+  if (isLoading) return <div>로딩중......</div>;
   if (isError) return <Error />;
+
+  const isAuthor = session?.user?.id === board?.user_id;
 
   return (
     <>
@@ -32,8 +34,7 @@ const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
               목록
             </Link>
           </div>
-          {/* 자신이 글쓴사람 */}
-          {session && (
+          {isAuthor && (
             <div className="flex justify-end items-center gap-1 text-sm pt-3">
               <BoardActionButton />
             </div>
