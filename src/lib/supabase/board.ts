@@ -17,6 +17,7 @@ export const getBoardListByPage = async ({
         `
         *,
         board_comments(count),
+        board_likes(count),
         user!inner(name)
       `,
         { count: "exact" }
@@ -48,7 +49,8 @@ export const getBoardDetail = async (boardId: number) => {
             name,
             avatar_url
           ),
-          board_comments(count)
+          board_comments(count),
+          board_likes(count)
         `
       )
       .eq("id", boardId)

@@ -13,6 +13,9 @@ const BoardDetailHeader = ({ item }: BoardDetailProps) => {
       <span className="ml-2 text-xs lg:text-sm text-gray-500">
         조회 {item?.views || 0}
       </span>
+      <span className="ml-2 text-xs lg:text-sm text-gray-500">
+        추천 {item?.board_likes[0]?.count || 0}
+      </span>
     </div>
   );
 };

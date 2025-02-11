@@ -190,6 +190,13 @@ export type Database = {
             referencedRelation: "board"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "board_likes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user"
+            referencedColumns: ["id"]
+          },
         ]
       }
       cart: {

@@ -33,7 +33,6 @@ const BoardWriteForm = () => {
   } = form;
 
   const onChangeContents = (value: string) => {
-    console.log("나는 에디터야!", value);
     setValue("contents", value === "<p><br></p>" ? "" : value);
     trigger("contents");
   };

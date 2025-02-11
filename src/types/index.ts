@@ -301,9 +301,8 @@ export type UpdateCommentParams = {
 };
 
 export interface BoardWithRelations extends Tables<"board"> {
-  board_comments: {
-    count: number;
-  };
+  board_comments: [{ count: number }];
+  board_likes: [{ count: number }];
   user: {
     name: string;
     avatar_url: string;

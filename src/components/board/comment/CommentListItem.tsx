@@ -17,8 +17,8 @@ const CommentListItem = ({ item, boardId }: CommentListItemProps) => {
   // const { data: replies } = useRepliesCommentList(item.id);
 
   console.log(boardId);
-
   console.log(item);
+
   return (
     <li className="py-5">
       <div className="flex gap-2 items-start">
@@ -39,6 +39,7 @@ const CommentListItem = ({ item, boardId }: CommentListItemProps) => {
                 {formatDate(item?.created_at)}
               </time>
             </div>
+            {/* 자신이 글쓴 내용만 버튼 보이게 */}
             <BoardActionButton />
           </div>
           <p className="text-sm py-2">{item.content}</p>

@@ -22,7 +22,7 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
           <div className="w-[40%] text-left flex gap-1">
             <p className="text-left max-w-[80%] truncate">{item.title}</p>
             <p className="text-blue-500">
-              &#91;{item.board_comments.count || 0}&#93;
+              &#91;{item.board_comments[0]?.count || 0}&#93;
             </p>
           </div>
           <h3 className="w-[15%] text-left pl-3">{item.user.name}</h3>
@@ -30,7 +30,9 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
             {formatDate(item.created_at, "dash")}
           </time>
           <p className="w-[10%] text-gray-500">{item.views || 0}</p>
-          <p className="w-[10%] text-gray-500">0</p>
+          <p className="w-[10%] text-gray-500">
+            {item.board_likes[0]?.count || 0}
+          </p>
         </div>
         {/* Mobile */}
         <div className="lg:hidden text-center py-3 px-5 border-b hover:bg-gray-50">
@@ -40,7 +42,9 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
               <div className="text-gray-500 text-xs flex gap-2">
                 <h3 className="shrink-0">{item.user.name}</h3>
                 <p className="shrink-0">조회 {item.views || 0}</p>
-                <p className="shrink-0">추천 0</p>
+                <p className="shrink-0">
+                  추천 {item.board_likes[0]?.count || 0}
+                </p>
                 <time className="shrink-0">
                   {formatDate(item.created_at, "dash")}
                 </time>
@@ -51,7 +55,7 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
               className="px-3 py-2 flex flex-col items-center gap-1 bg-white group"
             >
               <strong className="font-bold">
-                {item.board_comments.count || 0}
+                {item.board_comments[0]?.count || 0}
               </strong>
               <span className="text-xs text-gray-500 group-hover:text-purple">
                 댓글
