@@ -11,7 +11,7 @@ const BoardLikeButton = ({ item }: BoardDetailProps) => {
   const session = useRecoilValue(sessionState);
   const userId = session?.user?.id;
 
-  // 좋아요 상태 query
+  //좋아요 상태 query
   const { data: isLiked } = useLikeStatus(item.id, userId);
   const { mutate: toggleLike, isPending } = useToggleLike(item.id, userId);
 
@@ -40,7 +40,9 @@ const BoardLikeButton = ({ item }: BoardDetailProps) => {
     <div className="flex items-center justify-center mb-5">
       <ActionButton
         variant="default"
-        className="flex items-center gap-1 py-3 px-3 hover:bg-silver-gray"
+        className={`flex items-center gap-1 py-3 px-3 hover:bg-silver-gray ${
+          isLiked ? "bg-silver-gray" : ""
+        } `}
         onClick={handleToggleLikeClick}
         disabled={isPending}
       >

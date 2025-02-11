@@ -4,7 +4,7 @@ import { supabase } from "@/lib/supabase/client";
 export const getLikeStatus = async (boardId: number, userId?: string) => {
   try {
     if (!userId) return false;
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from("board_likes")
       .select("id")
       .eq("board_id", boardId)
@@ -12,7 +12,7 @@ export const getLikeStatus = async (boardId: number, userId?: string) => {
       .maybeSingle();
 
     if (error) throw error;
-    return false;
+    return !!data;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`좋아요 수를 가져오는데 실패했습니다. ${error.message}`);
