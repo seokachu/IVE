@@ -1,10 +1,10 @@
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/utils/formatDate";
-import ActionButton from "../common/button/ActionButton";
+import ActionButton from "@/components/common/button/ActionButton";
 import { useIncrementViewCount } from "@/hooks/queries/useBoard";
 import { hasViewedPost, markPostAsViewed } from "@/utils/viewCount";
+import UserAvatar from "@/components/common/UserAvatar";
 import type { BoardListItemProps } from "@/types";
-import UserAvatar from "../common/UserAvatar";
 
 const BoardListItem = ({ item }: BoardListItemProps) => {
   const { push } = useRouter();

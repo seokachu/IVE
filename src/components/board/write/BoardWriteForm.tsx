@@ -47,10 +47,12 @@ const BoardWriteForm = () => {
 
   const onClickSubmit = async (data: BoardWriteType) => {
     try {
+      const sanitizedContent = data.contents.trim();
+
       await addBoardList({
         user_id: session?.user?.id,
         title: data.title,
-        content: data.contents,
+        content: sanitizedContent,
       });
       toast({
         title: "게시글 등록이 완료되었습니다.",
@@ -90,6 +92,7 @@ const BoardWriteForm = () => {
             onChange={onChangeContents}
             value={watch("contents")}
             className={errors.contents && "quill-error"}
+            placeholder="내용을 입력해 주세요."
           />
           {errors.contents && (
             <span className="text-destructive text-xs px-3">

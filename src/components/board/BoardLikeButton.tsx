@@ -4,8 +4,8 @@ import { AiFillLike } from "react-icons/ai";
 import { sessionState } from "@/store";
 import { useRecoilValue } from "recoil";
 import { toast } from "@/hooks/use-toast";
-import type { BoardDetailProps } from "@/types";
 import { useLikeStatus, useToggleLike } from "@/hooks/queries/useLike";
+import type { BoardDetailProps } from "@/types";
 
 const BoardLikeButton = ({ item }: BoardDetailProps) => {
   const session = useRecoilValue(sessionState);
