@@ -8,17 +8,18 @@ import BoardLikeButton from "../BoardLikeButton";
 import BoardActionButton from "../BoardActionButton";
 import BoardDetailHeader from "./BoardDetailHeader";
 import BoardDetailContent from "./BoardDetailContent";
-import type { BoardDetailContainerProps } from "@/types";
 import Error from "@/components/common/error/Error";
 import { sessionState } from "@/store";
 import { useRecoilValue } from "recoil";
+import BoardDetailSkeleton from "@/components/common/loading/BoardDetailSkeleton";
+import type { BoardDetailContainerProps } from "@/types";
 
 const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
   const session = useRecoilValue(sessionState);
   const { data: board, isLoading, isError } = useBoardDetail(boardId);
 
-  //스켈레톤 추가해야함
-  if (isLoading) return <div>로딩중......</div>;
+  // const isLoading = true;
+  if (isLoading) return <BoardDetailSkeleton />;
   if (isError) return <Error />;
 
   const isAuthor = session?.user?.id === board?.user_id;
