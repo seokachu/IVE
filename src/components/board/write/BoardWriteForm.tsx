@@ -60,7 +60,10 @@ const BoardWriteForm = () => {
       if (error instanceof Error) {
         toast({
           title: "게시글 등록에 실패했습니다.",
-          description: error.message,
+          description:
+            error instanceof Error
+              ? error.message
+              : "알 수 없는 오류가 발생했습니다.",
           variant: "destructive",
         });
         throw error.message;

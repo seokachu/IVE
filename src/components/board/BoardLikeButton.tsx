@@ -4,7 +4,6 @@ import { AiFillLike } from "react-icons/ai";
 import { sessionState } from "@/store";
 import { useRecoilValue } from "recoil";
 import { toast } from "@/hooks/use-toast";
-import { useLikeStatus, useToggleLike } from "@/hooks/queries/useLike";
 import type { BoardDetailProps } from "@/types";
 
 const BoardLikeButton = ({ item }: BoardDetailProps) => {
@@ -12,8 +11,8 @@ const BoardLikeButton = ({ item }: BoardDetailProps) => {
   const userId = session?.user?.id;
 
   //좋아요 상태 query
-  const { data: isLiked } = useLikeStatus(item.id, userId);
-  const { mutate: toggleLike, isPending } = useToggleLike(item.id, userId);
+  // const { data: isLiked } = useLikeStatus(item.id, userId);
+  // const { mutate: toggleLike, isPending } = useToggleLike(item.id, userId);
 
   const handleToggleLikeClick = () => {
     if (!session) {
@@ -25,20 +24,20 @@ const BoardLikeButton = ({ item }: BoardDetailProps) => {
       return;
     }
 
-    toggleLike(undefined, {
-      onSuccess: (newStatus) => {
-        toast({
-          title: newStatus
-            ? "좋아요를 눌렀습니다."
-            : "좋아요가 취소되었습니다.",
-        });
-      },
-    });
+    // toggleLike(undefined, {
+    //   onSuccess: (newStatus) => {
+    //     toast({
+    //       title: newStatus
+    //         ? "좋아요를 눌렀습니다."
+    //         : "좋아요가 취소되었습니다.",
+    //     });
+    //   },
+    // });
   };
 
   return (
     <div className="flex items-center justify-center mb-5">
-      <ActionButton
+      {/* <ActionButton
         variant="default"
         className={`flex items-center gap-1 py-3 px-3 hover:bg-silver-gray ${
           isLiked ? "bg-silver-gray" : ""
@@ -48,7 +47,7 @@ const BoardLikeButton = ({ item }: BoardDetailProps) => {
       >
         {!isLiked ? <AiOutlineLike size={20} /> : <AiFillLike size={20} />}
         <span>{item?.board_likes[0]?.count || 0}</span>
-      </ActionButton>
+      </ActionButton> */}
     </div>
   );
 };
