@@ -17,9 +17,11 @@ import { useAddBoard } from "@/hooks/queries/useBoard";
 import { useRouter } from "next/navigation";
 import { useRecoilValue } from "recoil";
 import { sessionState } from "@/store";
+import BoardWriteSkeleton from "@/components/common/loading/BoardWriteSkeleton";
 
 const ReactQuill = dynamic(async () => await import("react-quill"), {
   ssr: false,
+  loading: () => <BoardWriteSkeleton />,
 });
 
 const BoardWriteForm = () => {
