@@ -1,6 +1,6 @@
 "use client";
 import { sessionState } from "@/store";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import UserAvatar from "../common/UserAvatar";
 import Link from "next/link";
 import { MYPAGE_GNB_ARRAY } from "@/utils/constants";
@@ -20,7 +20,7 @@ import { useWishLists } from "@/hooks/queries/useWishList";
 import { useUpdateUserSession } from "@/hooks/useUpdateUserSession";
 
 const UserInfo = () => {
-  const [session] = useRecoilState(sessionState);
+  const session = useRecoilValue(sessionState);
   const pathname = usePathname();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [isEditingNickname, setIsEditingNickname] = useState(false);

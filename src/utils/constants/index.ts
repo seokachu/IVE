@@ -51,8 +51,14 @@ export const BADGE_TYPES = {
 } as const;
 
 export const PAGINATION = {
-  ITEMS_PER_PAGE: 5,
-  MAX_DISPLAY_PAGES: 5,
+  REVIEW: {
+    ITEMS_PER_PAGE: 5,
+    MAX_DISPLAY_PAGES: 3,
+  },
+  BOARD: {
+    ITEMS_PER_PAGE: 10,
+    MAX_DISPLAY_PAGES: 3,
+  },
 } as const;
 
 //주문 약관 동의 내용

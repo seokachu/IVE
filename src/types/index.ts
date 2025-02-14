@@ -288,3 +288,67 @@ export interface AddressData {
   request: string;
   is_default: boolean;
 }
+
+export type UpdateBoardParams = {
+  boardId: number;
+  title: string;
+  content: string;
+};
+
+export type UpdateCommentParams = {
+  commentId: number;
+  content: string;
+};
+
+export interface BoardWithRelations extends Tables<"board"> {
+  board_comments: [{ count: number }];
+  board_likes: [{ count: number }];
+  user: {
+    name: string;
+    avatar_url: string;
+  };
+}
+
+export interface BoardListItemProps {
+  item: BoardWithRelations;
+}
+
+export interface BoardListProps {
+  boards:
+    | {
+        data: BoardWithRelations[];
+        count: number;
+      }
+    | undefined;
+}
+
+export interface BoardDetailPageParams {
+  params: {
+    id: string;
+  };
+}
+
+export interface BoardDetailContainerProps {
+  boardId: number;
+}
+
+export interface BoardDetailProps {
+  item: BoardWithRelations;
+}
+
+export interface Comment extends Tables<"board_comments"> {
+  user: {
+    name: string;
+    avatar_url: string;
+  };
+}
+
+export interface CommentListItemProps {
+  boardId: number;
+  item: Comment;
+}
+
+export interface BoardsResponse {
+  data: BoardWithRelations[];
+  count: number;
+}

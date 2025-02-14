@@ -3,10 +3,11 @@ import { useRecoilValue } from "recoil";
 import { sessionState } from "@/store";
 
 interface AvatarProps {
-  userId?: string;
+  userId?: string | null;
   avatarUrl?: string | null;
-  userName?: string;
-  size?: "sm" | "md" | "lg" | "xl";
+  userName?: string | null;
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  className?: string;
 }
 
 const UserAvatar = ({
@@ -14,6 +15,7 @@ const UserAvatar = ({
   avatarUrl,
   userName,
   size = "md",
+  className,
 }: AvatarProps) => {
   const session = useRecoilValue(sessionState);
 
@@ -27,13 +29,14 @@ const UserAvatar = ({
   const getUserName = () => {
     if (!userId) return session?.user.user_metadata.name;
     if (session?.user.id === userId) return session?.user.user_metadata.name;
-    return userName;
+    return userName || undefined;
   };
 
   const imageUrl = getUserImage();
   const displayName = getUserName();
 
   const sizeStyles = {
+    xs: "w-[25px] h-[25px]",
     sm: "w-[30px] h-[30px]",
     md: "w-10 h-10",
     lg: "w-12 h-12",
@@ -41,7 +44,7 @@ const UserAvatar = ({
   };
 
   return (
-    <Avatar className={`border ${sizeStyles[size]}`}>
+    <Avatar className={`border ${sizeStyles[size]} ${className || ""}`}>
       <AvatarImage
         src={imageUrl}
         alt={displayName || "유저 프로필"}

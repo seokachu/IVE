@@ -79,6 +79,194 @@ export type Database = {
         }
         Relationships: []
       }
+      board: {
+        Row: {
+          content: string | null
+          created_at: string
+          id: number
+          title: string | null
+          user_id: string | null
+          views: number | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          id?: number
+          title?: string | null
+          user_id?: string | null
+          views?: number | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          id?: number
+          title?: string | null
+          user_id?: string | null
+          views?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "board_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      board_comments: {
+        Row: {
+          board_id: number | null
+          content: string | null
+          created_at: string
+          id: number
+          parent_id: number | null
+          user_id: string | null
+        }
+        Insert: {
+          board_id?: number | null
+          content?: string | null
+          created_at?: string
+          id?: number
+          parent_id?: number | null
+          user_id?: string | null
+        }
+        Update: {
+          board_id?: number | null
+          content?: string | null
+          created_at?: string
+          id?: number
+          parent_id?: number | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "board_comments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_board"
+            columns: ["board_id"]
+            isOneToOne: false
+            referencedRelation: "board"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_parent_comment"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "board_comments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      board_likes: {
+        Row: {
+          board_id: number | null
+          created_at: string | null
+          id: number
+          user_id: string | null
+        }
+        Insert: {
+          board_id?: number | null
+          created_at?: string | null
+          id?: number
+          user_id?: string | null
+        }
+        Update: {
+          board_id?: number | null
+          created_at?: string | null
+          id?: number
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "board_likes_board_id_fkey"
+            columns: ["board_id"]
+            isOneToOne: false
+            referencedRelation: "board"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "board_likes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cart: {
+        Row: {
+          created_at: string
+          id: string
+          product_id: string | null
+          quantity: number | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          product_id?: string | null
+          quantity?: number | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          product_id?: string | null
+          quantity?: number | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cart_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "goods"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cart_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      comment_likes: {
+        Row: {
+          comment_id: number | null
+          created_at: string | null
+          id: number
+          user_id: string | null
+        }
+        Insert: {
+          comment_id?: number | null
+          created_at?: string | null
+          id?: number
+          user_id?: string | null
+        }
+        Update: {
+          comment_id?: number | null
+          created_at?: string | null
+          id?: number
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comment_likes_comment_id_fkey"
+            columns: ["comment_id"]
+            isOneToOne: false
+            referencedRelation: "board_comments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       customer_info: {
         Row: {
           created_at: string
