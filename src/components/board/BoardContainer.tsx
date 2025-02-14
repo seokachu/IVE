@@ -6,18 +6,20 @@ import { GoPlusCircle } from "react-icons/go";
 import BoardList from "./BoardList";
 import { useRouter } from "next/navigation";
 import { useBoards } from "@/hooks/queries/useBoard";
-import { BOARD_PAGE } from "@/lib/supabase/board";
 import { useState } from "react";
 import PaginationControl from "@/components/common/PaginationControl";
 import Error from "../common/error/Error";
 import BoardSkeleton from "../common/loading/BoardSkeleton";
+import { PAGINATION } from "@/utils/constants";
 
 const BoardContainer = () => {
   const { push } = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const { data: boardList, isLoading, isError } = useBoards(currentPage);
 
-  const totalPages = Math.ceil((boardList?.count || 0) / BOARD_PAGE);
+  const totalPages = Math.ceil(
+    (boardList?.count || 0) / PAGINATION.BOARD.ITEMS_PER_PAGE
+  );
 
   if (isLoading) return <BoardSkeleton />;
   if (isError) return <Error />;
@@ -63,7 +65,7 @@ const BoardContainer = () => {
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={handlePageChange}
-          maxDisplayPages={5}
+          maxDisplayPages={PAGINATION.BOARD.MAX_DISPLAY_PAGES}
         />
       )}
     </>

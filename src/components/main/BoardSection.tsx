@@ -1,3 +1,4 @@
+import Link from "next/link";
 import MainBoardListItem from "./items/MainBoardListItem";
 
 const BoardSection = () => {
@@ -7,7 +8,11 @@ const BoardSection = () => {
         <h2 className="text-2xl font-bold lg:text-4xl text-center mb-14">
           FREE BOARD
         </h2>
-        <div>{/* <MoreButton /> */}</div>
+        <div className="w-full">
+          <Link href="/board" className="float-right hover:text-purple">
+            더보기
+          </Link>
+        </div>
         <ul className="flex flex-wrap">
           <MainBoardListItem />
           <MainBoardListItem />

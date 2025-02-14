@@ -1,10 +1,9 @@
 import { supabase } from "@/lib/supabase/client";
 import type { BoardWithRelations } from "@/types";
+import { PAGINATION } from "@/utils/constants";
 import type { Database } from "@/types/supabase";
 
 type BoardInsert = Database["public"]["Tables"]["board"]["Insert"];
-
-export const BOARD_PAGE = 10;
 
 //게시글 목록 가져오기
 export const getBoardListByPage = async ({
@@ -26,7 +25,10 @@ export const getBoardListByPage = async ({
       `,
         { count: "exact" }
       )
-      .range((page - 1) * BOARD_PAGE, page * BOARD_PAGE - 1)
+      .range(
+        (page - 1) * PAGINATION.BOARD.ITEMS_PER_PAGE,
+        page * PAGINATION.BOARD.ITEMS_PER_PAGE - 1
+      )
       .order("created_at", { ascending: false });
 
     if (error) throw error;
