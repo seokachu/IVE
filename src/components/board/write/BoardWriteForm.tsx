@@ -65,14 +65,14 @@ const BoardWriteForm = (props: BoardWriteFormProps) => {
     if (isEditMode(props) && boardData) {
       reset({
         title: boardData.title,
-        contents: boardData.content,
+        content: boardData.content,
       });
     }
   }, [boardData, props, reset]);
 
-  const onChangeContents = (value: string) => {
-    setValue("contents", value === "<p><br></p>" ? "" : value);
-    trigger("contents");
+  const onChangeContent = (value: string) => {
+    setValue("content", value === "<p><br></p>" ? "" : value);
+    trigger("content");
   };
 
   const onClickSubmit = async (data: BoardWriteType) => {
@@ -87,7 +87,7 @@ const BoardWriteForm = (props: BoardWriteFormProps) => {
         return;
       }
 
-      const sanitizedContent = data.contents.trim();
+      const sanitizedContent = data.content.trim();
 
       if (props.mode === "create") {
         await addBoardList({
@@ -143,14 +143,14 @@ const BoardWriteForm = (props: BoardWriteFormProps) => {
         </div>
         <div className="overflow-hidden">
           <ReactQuill
-            onChange={onChangeContents}
-            value={watch("contents")}
-            className={errors.contents && "quill-error"}
+            onChange={onChangeContent}
+            value={watch("content")}
+            className={errors.content && "quill-error"}
             placeholder="내용을 입력해 주세요."
           />
-          {errors.contents && (
+          {errors.content && (
             <span className="text-destructive text-xs px-3">
-              {errors.contents.message}
+              {errors.content.message}
             </span>
           )}
         </div>

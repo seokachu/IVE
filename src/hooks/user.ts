@@ -41,6 +41,8 @@ const phoneCheckLastSchema = z
   .string()
   .regex(/^\d{4}$/, "숫자만 입력해 주세요.");
 
+const contentCheckSchema = z.string().min(1, "내용을 입력해 주세요.").trim();
+
 //스키마 object
 const signUpSchema = z
   .object({
@@ -93,7 +95,11 @@ export const reviewSchema = z.object({
 
 export const boardWriteSchema = z.object({
   title: z.string().min(1, "제목을 입력해 주세요."),
-  contents: z.string().min(1, "내용을 입력해 주세요."),
+  content: contentCheckSchema,
+});
+
+export const boardCommentSchema = z.object({
+  content: contentCheckSchema,
 });
 
 //타입 지정
@@ -104,6 +110,7 @@ export type AddressType = z.infer<typeof myPageAddressSchema>;
 export type CustomerInfoType = z.infer<typeof customerInfoSchema>;
 export type ReviewType = z.infer<typeof reviewSchema>;
 export type BoardWriteType = z.infer<typeof boardWriteSchema>;
+export type BoardCommentType = z.infer<typeof boardCommentSchema>;
 
 //스키마 내보내기
 export const userSchemas = {
@@ -114,6 +121,7 @@ export const userSchemas = {
 
 export const boardSchemas = {
   boardWriteSchema,
+  boardCommentSchema,
 };
 
 //default 설정
@@ -125,4 +133,5 @@ export const userDefaultValues = {
 
 export const boardDefaultValues = {
   boardWriteDefaultValues: extractDefaultValues(boardWriteSchema),
+  boardCommentDefaultValues: extractDefaultValues(boardCommentSchema),
 };

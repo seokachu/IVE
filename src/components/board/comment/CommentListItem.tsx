@@ -2,26 +2,26 @@ import DefaultImage from "@/assets/images/default_image.avif";
 import Image from "next/image";
 import { AiOutlineLike } from "react-icons/ai";
 import ActionButton from "@/components/common/button/ActionButton";
-import type { CommentListItemProps } from "@/types";
-// import {
-//   useDeleteComment,
-//   useEditComment,
-//   useRepliesCommentList,
-// } from "@/hooks/queries/useComment";
+import {
+  useDeleteComment,
+  useEditComment,
+  useRepliesCommentList,
+} from "@/hooks/queries/useComment";
 import { formatDate } from "@/utils/formatDate";
-// import BoardActionButton from "../BoardActionButton";
-// import { useRecoilValue } from "recoil";
-// import { sessionState } from "@/store";
+import BoardActionButton from "../BoardActionButton";
+import { useRecoilValue } from "recoil";
+import { sessionState } from "@/store";
+import type { CommentListItemProps } from "@/types";
 
 const CommentListItem = ({ item, boardId }: CommentListItemProps) => {
-  // const session = useRecoilValue(sessionState);
-  // const { mutate: deleteComment } = useDeleteComment(boardId, item.id);
-  // const { mutate: editComment } = useEditComment(boardId);
-  // const { data: replies } = useRepliesCommentList(item.id);
+  const session = useRecoilValue(sessionState);
+  const { mutate: deleteComment } = useDeleteComment(boardId, item.id);
+  const { mutate: editComment } = useEditComment(boardId);
+  const { data: replies } = useRepliesCommentList(item.id);
 
   console.log(boardId);
 
-  // const isAuthor = session?.user?.id === item?.user_id;
+  const isAuthor = session?.user?.id === item?.user_id;
 
   return (
     <li className="py-5">
