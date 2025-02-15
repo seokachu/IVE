@@ -9,19 +9,19 @@ import type { CommentListItemProps } from "@/types";
 //   useRepliesCommentList,
 // } from "@/hooks/queries/useComment";
 import { formatDate } from "@/utils/formatDate";
-import BoardActionButton from "../BoardActionButton";
-import { useRecoilValue } from "recoil";
-import { sessionState } from "@/store";
+// import BoardActionButton from "../BoardActionButton";
+// import { useRecoilValue } from "recoil";
+// import { sessionState } from "@/store";
 
 const CommentListItem = ({ item, boardId }: CommentListItemProps) => {
-  const session = useRecoilValue(sessionState);
+  // const session = useRecoilValue(sessionState);
   // const { mutate: deleteComment } = useDeleteComment(boardId, item.id);
   // const { mutate: editComment } = useEditComment(boardId);
   // const { data: replies } = useRepliesCommentList(item.id);
 
   console.log(boardId);
 
-  const isAuthor = session?.user?.id === item?.user_id;
+  // const isAuthor = session?.user?.id === item?.user_id;
 
   return (
     <li className="py-5">
@@ -43,7 +43,7 @@ const CommentListItem = ({ item, boardId }: CommentListItemProps) => {
                 {formatDate(item?.created_at)}
               </time>
             </div>
-            {isAuthor && <BoardActionButton />}
+            {/* {isAuthor && <BoardActionButton />} */}
           </div>
           <p className="text-sm py-2">{item?.content}</p>
           <div className="flex items-center gap-4">

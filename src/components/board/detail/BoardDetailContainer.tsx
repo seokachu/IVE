@@ -1,7 +1,7 @@
 "use client";
 import ShareButton from "@/components/common/button/ShareButton";
 import Link from "next/link";
-import { useBoardDetail } from "@/hooks/queries/useBoard";
+import { useBoardDetail, useDeleteBoard } from "@/hooks/queries/useBoard";
 import BoardDetailUserInfo from "./BoardDetailUserInfo";
 import CommentSection from "../comment/CommentSection";
 import BoardLikeButton from "../BoardLikeButton";
@@ -12,17 +12,34 @@ import Error from "@/components/common/error/Error";
 import { sessionState } from "@/store";
 import { useRecoilValue } from "recoil";
 import BoardDetailSkeleton from "@/components/common/loading/BoardDetailSkeleton";
+import { useRouter } from "next/navigation";
+import { toast } from "@/hooks/use-toast";
 import type { BoardDetailContainerProps } from "@/types";
 
 const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
+  const { push } = useRouter();
   const session = useRecoilValue(sessionState);
   const { data: board, isLoading, isError } = useBoardDetail(boardId);
+  const { mutate: deleteBoard } = useDeleteBoard(board?.id);
 
-  // const isLoading = true;
   if (isLoading) return <BoardDetailSkeleton />;
   if (isError) return <Error />;
 
   const isAuthor = session?.user?.id === board?.user_id;
+
+  //삭제 Btn
+  const onClickDelete = () => {
+    deleteBoard();
+    push("/board");
+    toast({
+      title: "게시글이 삭제 되었습니다.",
+    });
+  };
+
+  //수정 Btn
+  const onClickEdit = () => {
+    push(`/board/edit/${board.id}`);
+  };
 
   return (
     <>
@@ -37,7 +54,10 @@ const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
           </div>
           {isAuthor && (
             <div className="flex justify-end items-center gap-1 text-sm pt-3">
-              <BoardActionButton />
+              <BoardActionButton
+                onEdit={onClickEdit}
+                onDelete={onClickDelete}
+              />
             </div>
           )}
         </div>

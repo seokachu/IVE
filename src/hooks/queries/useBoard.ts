@@ -18,10 +18,11 @@ export const useBoards = (page: number = 1) => {
 };
 
 //게시글 상세 페이지
-export const useBoardDetail = (boardId: number) => {
+export const useBoardDetail = (boardId: number | undefined) => {
   return useQuery({
     queryKey: ["board", boardId],
-    queryFn: () => getBoardDetail(boardId),
+    queryFn: () => getBoardDetail(boardId as number),
+    enabled: !!boardId,
     staleTime: 0,
   });
 };
@@ -59,11 +60,11 @@ export const useUpdateBoard = () => {
 };
 
 //게시글 삭제
-export const useDeleteBoard = () => {
+export const useDeleteBoard = (boardId: number) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: deleteBoard,
+    mutationFn: () => deleteBoard(boardId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["boards"],
