@@ -59,11 +59,11 @@ export const useUpdateBoard = () => {
 };
 
 //게시글 삭제
-export const useDeleteBoard = () => {
+export const useDeleteBoard = (boardId: number) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: deleteBoard,
+    mutationFn: () => deleteBoard(boardId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["boards"],
