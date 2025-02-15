@@ -18,10 +18,11 @@ export const useBoards = (page: number = 1) => {
 };
 
 //게시글 상세 페이지
-export const useBoardDetail = (boardId: number) => {
+export const useBoardDetail = (boardId: number | undefined) => {
   return useQuery({
     queryKey: ["board", boardId],
-    queryFn: () => getBoardDetail(boardId),
+    queryFn: () => getBoardDetail(boardId as number),
+    enabled: !!boardId,
     staleTime: 0,
   });
 };

@@ -1,11 +1,7 @@
 "use client";
 import ShareButton from "@/components/common/button/ShareButton";
 import Link from "next/link";
-import {
-  useBoardDetail,
-  useDeleteBoard,
-  useUpdateBoard,
-} from "@/hooks/queries/useBoard";
+import { useBoardDetail, useDeleteBoard } from "@/hooks/queries/useBoard";
 import BoardDetailUserInfo from "./BoardDetailUserInfo";
 import CommentSection from "../comment/CommentSection";
 import BoardLikeButton from "../BoardLikeButton";
@@ -25,7 +21,6 @@ const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
   const session = useRecoilValue(sessionState);
   const { data: board, isLoading, isError } = useBoardDetail(boardId);
   const { mutate: deleteBoard } = useDeleteBoard(board?.id);
-  const { mutate: editBoard } = useUpdateBoard();
 
   if (isLoading) return <BoardDetailSkeleton />;
   if (isError) return <Error />;
@@ -42,7 +37,9 @@ const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
   };
 
   //수정 Btn
-  const onClickEdit = () => {};
+  const onClickEdit = () => {
+    push(`/board/edit/${board.id}`);
+  };
 
   return (
     <>

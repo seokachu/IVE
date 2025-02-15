@@ -10,9 +10,9 @@ import ContactInfo from "./ContactInfo";
 import RequestInfo from "./RequestInfo";
 import DefaultAddressCheckbox from "./DefaultAddressCheckbox";
 import { useAddressForm } from "@/hooks/useAddressForm";
-import type { AddressFormProps } from "@/types";
 import { useAddressAPI } from "@/hooks/useAddressAPI";
 import { SubmitButton } from "./SubmitButton";
+import type { AddressFormProps } from "@/types";
 
 const AddressForm = ({
   mode = "create",

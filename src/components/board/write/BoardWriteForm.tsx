@@ -13,21 +13,39 @@ import {
 } from "@/hooks/user";
 import { Button } from "@/components/ui/button";
 import "@/styles/quill.css";
-import { useAddBoard } from "@/hooks/queries/useBoard";
+import {
+  useAddBoard,
+  useBoardDetail,
+  useUpdateBoard,
+} from "@/hooks/queries/useBoard";
 import { useRouter } from "next/navigation";
 import { useRecoilValue } from "recoil";
 import { sessionState } from "@/store";
 import BoardWriteSkeleton from "@/components/common/loading/BoardWriteSkeleton";
+import { useEffect } from "react";
+import type { BoardWriteFormProps, EditBoardWriteFormProps } from "@/types";
 
 const ReactQuill = dynamic(async () => await import("react-quill"), {
   ssr: false,
   loading: () => <BoardWriteSkeleton />,
 });
 
-const BoardWriteForm = () => {
+const BoardWriteForm = (props: BoardWriteFormProps) => {
   const session = useRecoilValue(sessionState);
   const { push } = useRouter();
   const { mutate: addBoardList } = useAddBoard();
+  const { mutate: editBoard } = useUpdateBoard();
+
+  //수정 Mode 게시글 데이터 불러오기
+  const isEditMode = (
+    props: BoardWriteFormProps
+  ): props is EditBoardWriteFormProps => {
+    return props.mode === "edit";
+  };
+
+  const { data: boardData } = useBoardDetail(
+    props.mode === "edit" ? props.boardId : undefined
+  );
 
   const form = useForm<BoardWriteType>({
     mode: "onChange",
@@ -39,8 +57,18 @@ const BoardWriteForm = () => {
     setValue,
     trigger,
     watch,
-    formState: { errors, isValid, isSubmitting },
+    reset,
+    formState: { errors, isValid, isSubmitting, isDirty },
   } = form;
+
+  useEffect(() => {
+    if (isEditMode(props) && boardData) {
+      reset({
+        title: boardData.title,
+        contents: boardData.content,
+      });
+    }
+  }, [boardData, props, reset]);
 
   const onChangeContents = (value: string) => {
     setValue("contents", value === "<p><br></p>" ? "" : value);
@@ -49,17 +77,41 @@ const BoardWriteForm = () => {
 
   const onClickSubmit = async (data: BoardWriteType) => {
     try {
+      //이전 내용 저장 validation
+      if (props.mode === "edit" && !isDirty) {
+        toast({
+          title: "수정된 내용이 없습니다.",
+          description: "이전 내용으로 저장됩니다.",
+        });
+        push(`/board/${props.boardId}`);
+        return;
+      }
+
       const sanitizedContent = data.contents.trim();
 
-      await addBoardList({
-        user_id: session?.user?.id,
-        title: data.title,
-        content: sanitizedContent,
-      });
-      toast({
-        title: "게시글 등록이 완료되었습니다.",
-      });
-      push("/board");
+      if (props.mode === "create") {
+        await addBoardList({
+          user_id: session?.user?.id,
+          title: data.title,
+          content: sanitizedContent,
+        });
+        toast({
+          title: "게시글 등록이 완료되었습니다.",
+        });
+        push("/board");
+      }
+
+      if (props.mode === "edit") {
+        editBoard({
+          boardId: props.boardId,
+          title: data.title,
+          content: sanitizedContent,
+        });
+        toast({
+          title: "게시글 수정이 완료되었습니다.",
+        });
+        push(`/board/${props.boardId}`);
+      }
     } catch (error) {
       if (error instanceof Error) {
         toast({
@@ -107,7 +159,11 @@ const BoardWriteForm = () => {
           disabled={!isValid || isSubmitting}
           className="w-full py-2 mt-5"
         >
-          {isSubmitting ? "등록 중..." : "등록하기"}
+          {isSubmitting
+            ? "등록 중..."
+            : props.mode === "create"
+            ? "등록하기"
+            : "수정하기"}
         </Button>
       </form>
     </Form>

@@ -352,3 +352,21 @@ export interface BoardsResponse {
   data: BoardWithRelations[];
   count: number;
 }
+
+export interface EditPageParams {
+  params: {
+    id: string;
+  };
+}
+export interface CreateBoardWriteFormProps {
+  mode: "create";
+}
+
+export interface EditBoardWriteFormProps {
+  mode: "edit";
+  boardId: number;
+}
+
+export type BoardWriteFormProps =
+  | CreateBoardWriteFormProps
+  | EditBoardWriteFormProps;
