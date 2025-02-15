@@ -4,6 +4,7 @@ import { Database, Tables } from "@/types/supabase";
 export interface GnbArrayList {
   label: string;
   path: string;
+  exact: boolean;
 }
 
 export interface SignInProps {
