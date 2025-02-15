@@ -8,6 +8,7 @@ import { useRecoilValue } from "recoil";
 import ActionButton from "../common/button/ActionButton";
 import type { DirectPaymentButtonProps } from "@/types";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
+import useAuthGuard from "@/hooks/useAuthGuard";
 
 const DirectPaymentButton = ({
   product,
@@ -16,16 +17,14 @@ const DirectPaymentButton = ({
   const session = useRecoilValue(sessionState);
   const { data: customerInfo } = useCustomerInfo(session?.user.id);
   const { data: userAddress } = useShippingAddress(session?.user.id);
+  const { checkAuth } = useAuthGuard({
+    title: "로그인이 필요합니다.",
+    description: "로그인 후 결제할 수 있습니다.",
+  });
 
   const handleDirectPayment = async () => {
     //로그인 체크
-    if (!session) {
-      toast({
-        title: "로그인이 필요합니다.",
-        description: "로그인 후 결제할 수 있습니다.",
-      });
-      return;
-    }
+    if (!checkAuth()) return;
 
     //주문자 정보, 배송 정보 체크
     const missingInfo = [];
