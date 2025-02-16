@@ -11,14 +11,10 @@ import PaginationControl from "@/components/common/PaginationControl";
 import Error from "../common/error/Error";
 import BoardSkeleton from "../common/loading/BoardSkeleton";
 import { PAGINATION } from "@/utils/constants";
-import { useRecoilValue } from "recoil";
-import { sessionState } from "@/store";
-import { toast } from "@/hooks/use-toast";
 import useAuthGuard from "@/hooks/useAuthGuard";
 
 const BoardContainer = () => {
   const { push } = useRouter();
-  const session = useRecoilValue(sessionState);
   const [currentPage, setCurrentPage] = useState(1);
   const { data: boardList, isLoading, isError } = useBoards(currentPage);
   const { checkAuth } = useAuthGuard();

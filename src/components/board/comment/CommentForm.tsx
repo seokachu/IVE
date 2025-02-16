@@ -15,8 +15,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useRecoilValue } from "recoil";
+import React from "react";
 
-const CommentForm = () => {
+type CommentFormMode = "create" | "edit";
+interface CommentFormProps {
+  mode: CommentFormMode;
+}
+
+const CommentForm = ({ mode = "create" }: CommentFormProps) => {
   const { id } = useParams();
   const session = useRecoilValue(sessionState);
   const { checkAuth } = useAuthGuard();
@@ -30,18 +36,26 @@ const CommentForm = () => {
 
   const {
     reset,
+    trigger,
+    getValues,
     formState: { errors, isSubmitting },
   } = form;
 
-  const onClickComment = async (data: BoardCommentType) => {
-    console.log(data);
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     if (!checkAuth()) return;
+
+    const content = getValues("content");
+    const isValid = await trigger();
+
+    if (!isValid) return;
 
     try {
       await addComment({
         board_id: Number(id),
         user_id: session?.user.id,
-        content: data.content,
+        content,
       });
       toast({
         title: "댓글 작성에 성공했습니다.",
@@ -64,7 +78,7 @@ const CommentForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onClickComment)} className="mb-5">
+      <form onSubmit={onSubmit} className="mb-5">
         <div className="flex items-center">
           <Textarea
             className={cn(
