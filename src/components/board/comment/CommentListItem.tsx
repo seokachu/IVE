@@ -73,7 +73,13 @@ const CommentListItem = ({ item, boardId }: CommentListItemProps) => {
           </div>
           {isEditing ? (
             <div className="my-3">
-              <CommentForm mode="edit" />
+              <CommentForm
+                mode="edit"
+                type="comment"
+                initialContent={item.content}
+                commentId={item.id}
+                onSuccess={() => setIsEditing(false)}
+              />
             </div>
           ) : (
             <>
@@ -96,7 +102,13 @@ const CommentListItem = ({ item, boardId }: CommentListItemProps) => {
                   </ActionButton>
                 </div>
                 <div className="mt-2">
-                  {showReplyForm && <CommentForm mode="create" />}
+                  {showReplyForm && (
+                    <CommentForm
+                      mode="create"
+                      type="reply"
+                      parentId={boardId}
+                    />
+                  )}
                 </div>
               </div>
             </>

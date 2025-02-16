@@ -371,3 +371,17 @@ export interface EditBoardWriteFormProps {
 export type BoardWriteFormProps =
   | CreateBoardWriteFormProps
   | EditBoardWriteFormProps;
+
+export type CommentMode = "create" | "edit";
+
+export type CommentType = "comment" | "reply";
+
+export interface CommentFormProps {
+  mode: CommentMode;
+  type: CommentType;
+  parentId?: number;
+  initialContent?: string | null;
+  commentId?: number;
+  onSuccess?: () => void;
+  onCancel?: () => void;
+}

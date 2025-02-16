@@ -4,7 +4,7 @@ import CommentList from "./CommentList";
 const CommentSection = () => {
   return (
     <>
-      <CommentForm mode="create" />
+      <CommentForm mode="create" type="comment" />
       <CommentList />
     </>
   );
