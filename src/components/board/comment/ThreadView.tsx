@@ -28,7 +28,7 @@ const ThreadView = ({
         <div className="flex items-center">
           <Textarea
             className={cn(
-              "border-0 border-b w-full rounded-none py-4 resize-none h-14 min-h-0",
+              "border-0 border-b w-full rounded-none py-3 resize-none min-h-[40px]",
               "focus-visible:ring-0 focus-visible:ring-offset-0",
               "focus-visible:border-b-1 focus-visible:border-ring"
             )}

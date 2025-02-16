@@ -83,7 +83,9 @@ const CommentListItem = ({ item, boardId }: CommentListItemProps) => {
             </div>
           ) : (
             <>
-              <p className="text-sm py-2">{item?.content}</p>
+              <p className="text-sm py-2 whitespace-pre-wrap">
+                {item?.content}
+              </p>
               <div>
                 <div className="flex items-center gap-4">
                   <ActionButton
