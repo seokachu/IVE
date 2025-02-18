@@ -36,7 +36,7 @@ const CommentForm = ({
     },
   });
 
-  const { reset, trigger, getValues } = form;
+  const { reset, trigger, getValues, clearErrors } = form;
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,9 +44,11 @@ const CommentForm = ({
     if (!checkAuth()) return;
 
     const content = getValues("content");
-    const isValid = await trigger();
 
-    if (!isValid) return;
+    if (!content?.trim()) {
+      const isValid = await trigger();
+      if (!isValid) return;
+    }
 
     try {
       if (mode === "create") {
@@ -87,6 +89,13 @@ const CommentForm = ({
     }
   };
 
+  const handleContentChange = () => {
+    const content = getValues("content");
+    if (content?.trim()) {
+      clearErrors("content");
+    }
+  };
+
   const getPlaceholder = () => {
     if (mode === "edit") {
       return type === "comment"
@@ -104,6 +113,7 @@ const CommentForm = ({
       onSubmit={onSubmit}
       placeholder={getPlaceholder()}
       submitButtonLabel={mode === "edit" ? "수정완료" : "등록"}
+      onContentChange={handleContentChange}
     />
   );
 };

@@ -10,6 +10,7 @@ interface ThreadViewProps {
   onSubmit: (e: React.FormEvent) => void;
   placeholder: string;
   submitButtonLabel: string;
+  onContentChange?: () => void;
 }
 
 const ThreadView = ({
@@ -17,6 +18,7 @@ const ThreadView = ({
   form,
   placeholder,
   submitButtonLabel,
+  onContentChange,
 }: ThreadViewProps) => {
   const {
     formState: { errors, isSubmitting },
@@ -28,12 +30,14 @@ const ThreadView = ({
         <div className="flex items-center">
           <Textarea
             className={cn(
-              "border-0 border-b w-full rounded-none py-3 resize-none min-h-[40px]",
+              "border-0 border-b w-full rounded-none py-3 resize-none min-h-0 h-14",
               "focus-visible:ring-0 focus-visible:ring-offset-0",
               "focus-visible:border-b-1 focus-visible:border-ring"
             )}
             placeholder={placeholder}
-            {...form.register("content")}
+            {...form.register("content", {
+              onChange: onContentChange,
+            })}
           />
           <ActionButton
             type="submit"
