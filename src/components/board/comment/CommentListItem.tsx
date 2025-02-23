@@ -1,6 +1,7 @@
 import DefaultImage from "@/assets/images/default_image.avif";
 import Image from "next/image";
 import { AiOutlineLike } from "react-icons/ai";
+import { AiFillLike } from "react-icons/ai";
 import ActionButton from "@/components/common/button/ActionButton";
 import {
   useDeleteComment,
@@ -14,8 +15,13 @@ import { useRouter } from "next/navigation";
 import { toast } from "@/hooks/use-toast";
 import { useState } from "react";
 import CommentForm from "./CommentForm";
-import type { CommentListItemProps } from "@/types";
 import { PiArrowBendDownRightBold } from "react-icons/pi";
+import useAuthGuard from "@/hooks/useAuthGuard";
+import {
+  useCommentLikeStatus,
+  useToggleCommentLike,
+} from "@/hooks/queries/useLike";
+import type { CommentListItemProps } from "@/types";
 
 const CommentListItem = ({
   item,
@@ -26,15 +32,26 @@ const CommentListItem = ({
   const { push } = useRouter();
   const session = useRecoilValue(sessionState);
   const [showReplyForm, setShowReplyForm] = useState(false);
+  const { checkAuth } = useAuthGuard();
   const { mutate: deleteComment } = useDeleteComment(
     boardId,
     item.id,
     item.parent_id
   );
   const { data: replies } = useRepliesCommentList(item.id);
+  const { data: isCommentLiked } = useCommentLikeStatus(
+    item.id,
+    session?.user?.id
+  );
+  const { mutate: toggleCommentLike, isPending } = useToggleCommentLike(
+    item.id,
+    session?.user?.id
+  );
 
   const isAuthor = session?.user?.id === item?.user_id;
   const isEditing = activeEditId === item.id;
+
+  console.log(item);
 
   const onClickDelete = () => {
     deleteComment();
@@ -54,7 +71,21 @@ const CommentListItem = ({
   };
 
   const onClickReplies = () => {
+    if (!checkAuth()) return;
     setShowReplyForm((prev) => !prev);
+  };
+
+  const handleCommentLikeToggle = () => {
+    if (!checkAuth()) return;
+    toggleCommentLike(undefined, {
+      onSuccess: (newStatus) => {
+        toast({
+          title: newStatus
+            ? "좋아요를 눌렀습니다."
+            : "좋아요가 취소되었습니다.",
+        });
+      },
+    });
   };
 
   return (
@@ -105,11 +136,19 @@ const CommentListItem = ({
                   {!item.parent_id && (
                     <>
                       <ActionButton
+                        onClick={handleCommentLikeToggle}
+                        disabled={isPending}
                         variant="default"
-                        className="border-none flex items-center gap-1 hover:text-purple"
+                        className={`border-none flex items-center gap-[2px] hover:text-purple ${
+                          isCommentLiked ? "text-purple" : ""
+                        }`}
                       >
-                        <AiOutlineLike size={15} />
-                        <span>0</span>
+                        {!isCommentLiked ? (
+                          <AiOutlineLike size={15} />
+                        ) : (
+                          <AiFillLike size={15} />
+                        )}
+                        <span>{item?.likes[0]?.count || 0}</span>
                       </ActionButton>
                       <ActionButton
                         onClick={onClickReplies}

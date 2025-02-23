@@ -342,6 +342,7 @@ export interface Comment extends Tables<"board_comments"> {
     name: string;
     avatar_url: string;
   };
+  likes: { count: number }[];
 }
 
 export interface CommentListItemProps {
