@@ -6,6 +6,14 @@ import { usePathname } from "next/navigation";
 const Navigator = () => {
   const pathname = usePathname();
 
+  //하위 경로 포함 체크 active
+  const isActivePath = (path: string, exact: boolean) => {
+    if (exact) {
+      return pathname === path;
+    }
+    return pathname.startsWith(path);
+  };
+
   return (
     <nav>
       <ul className="hidden lg:flex lg:gap-10 lg:items-center">
@@ -13,9 +21,9 @@ const Navigator = () => {
           <li key={el.label}>
             <Link
               href={el.path}
-              className={`${
-                pathname === el.path ? "font-bold" : "font-normal"
-              } hover:font-bold`}
+              className={`hover:font-bold ${
+                isActivePath(el.path, el.exact) ? "font-bold" : ""
+              }`}
             >
               {el.label}
             </Link>

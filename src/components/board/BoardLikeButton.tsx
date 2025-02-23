@@ -6,6 +6,7 @@ import { useRecoilValue } from "recoil";
 import { toast } from "@/hooks/use-toast";
 import { useLikeStatus, useToggleLike } from "@/hooks/queries/useLike";
 import type { BoardDetailProps } from "@/types";
+import useAuthGuard from "@/hooks/useAuthGuard";
 
 const BoardLikeButton = ({ item }: BoardDetailProps) => {
   const session = useRecoilValue(sessionState);
@@ -14,16 +15,10 @@ const BoardLikeButton = ({ item }: BoardDetailProps) => {
   //좋아요 상태 query
   const { data: isLiked } = useLikeStatus(item.id, userId);
   const { mutate: toggleLike, isPending } = useToggleLike(item.id, userId);
+  const { checkAuth } = useAuthGuard();
 
   const handleToggleLikeClick = () => {
-    if (!session) {
-      toast({
-        title: "로그인이 필요합니다.",
-        description: "로그인 페이지로 이동하여 로그인 해주세요.",
-        variant: "destructive",
-      });
-      return;
-    }
+    if (!checkAuth()) return;
 
     toggleLike(undefined, {
       onSuccess: (newStatus) => {

@@ -4,13 +4,13 @@ import { useState } from "react";
 import AddToCartDrawer from "./AddToCartDrawer";
 import { cartStorage } from "@/utils/cartStorage";
 import { toast } from "@/hooks/use-toast";
-import type { CartItem, ProductActionsProps } from "@/types";
 import { useSetRecoilState } from "recoil";
 import { cartState } from "@/store";
 import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
 import { GoHeartFill } from "react-icons/go";
 import { GoHeart } from "react-icons/go";
 import DirectPaymentButton from "@/components/payment/DirectPaymentButton";
+import type { CartItem, ProductActionsProps } from "@/types";
 
 const ProductActions = ({ product, quantity }: ProductActionsProps) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

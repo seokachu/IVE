@@ -57,6 +57,7 @@ const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
               <BoardActionButton
                 onEdit={onClickEdit}
                 onDelete={onClickDelete}
+                mode="default"
               />
             </div>
           )}

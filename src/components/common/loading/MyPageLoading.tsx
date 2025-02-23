@@ -1,7 +1,7 @@
 import { ClipLoader } from "react-spinners";
 
 interface MyPageLoadingProps {
-  title: string;
+  title?: string;
 }
 
 const MyPageLoading = ({ title }: MyPageLoadingProps) => {

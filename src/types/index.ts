@@ -4,6 +4,7 @@ import { Database, Tables } from "@/types/supabase";
 export interface GnbArrayList {
   label: string;
   path: string;
+  exact: boolean;
 }
 
 export interface SignInProps {
@@ -341,11 +342,14 @@ export interface Comment extends Tables<"board_comments"> {
     name: string;
     avatar_url: string;
   };
+  likes: { count: number }[];
 }
 
 export interface CommentListItemProps {
   boardId: number;
   item: Comment;
+  activeEditId: number | null;
+  handleEditChange: (id: number | null) => void;
 }
 
 export interface BoardsResponse {
@@ -370,3 +374,17 @@ export interface EditBoardWriteFormProps {
 export type BoardWriteFormProps =
   | CreateBoardWriteFormProps
   | EditBoardWriteFormProps;
+
+export type CommentMode = "create" | "edit";
+
+export type CommentType = "comment" | "reply";
+
+export interface CommentFormProps {
+  mode: CommentMode;
+  type: CommentType;
+  parentId?: number;
+  initialContent?: string | null;
+  commentId?: number;
+  onSuccess?: () => void;
+  onCancel?: () => void;
+}

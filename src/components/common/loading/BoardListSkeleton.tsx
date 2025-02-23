@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const BoardListSkeleton = () => {
   return (
-    <li className="py-3 px-1 border-b first:border-t lg:first:border-t-0">
+    <li className="py-3 px-1 border-b first:border-t lg:first:border-t-0 lg:h-[50px]">
       {/* Desktop */}
       <div className="hidden lg:flex">
         <div className="w-[10%] flex justify-center">
