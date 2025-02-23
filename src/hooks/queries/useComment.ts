@@ -29,22 +29,46 @@ export const useAddComment = (boardId: number) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: createComment,
-    onSuccess: () => {
+    onSuccess: (newComment) => {
+      if (newComment.parent_id) {
+        queryClient.invalidateQueries({
+          queryKey: ["repliesComment", newComment.parent_id],
+        });
+      }
+
       queryClient.invalidateQueries({
         queryKey: ["comments", boardId],
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ["board", boardId],
       });
     },
   });
 };
 
 //댓글 삭제
-export const useDeleteComment = (boardId: number, commentId: number) => {
+export const useDeleteComment = (
+  boardId: number,
+  commentId: number,
+  parentId?: number | null
+) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => deleteComment(commentId),
     onSuccess: () => {
+      if (parentId) {
+        queryClient.invalidateQueries({
+          queryKey: ["repliesComment", parentId],
+        });
+      }
+
       queryClient.invalidateQueries({
         queryKey: ["comments", boardId],
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ["board", boardId],
       });
     },
   });
@@ -57,6 +81,9 @@ export const useEditComment = (boardId: number) => {
     mutationFn: ({ commentId, content }: UpdateCommentParams) =>
       updateComment(commentId, { content }),
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["repliesComment"],
+      });
       queryClient.invalidateQueries({
         queryKey: ["comments", boardId],
       });

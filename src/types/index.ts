@@ -347,6 +347,8 @@ export interface Comment extends Tables<"board_comments"> {
 export interface CommentListItemProps {
   boardId: number;
   item: Comment;
+  activeEditId: number | null;
+  handleEditChange: (id: number | null) => void;
 }
 
 export interface BoardsResponse {

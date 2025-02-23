@@ -20,6 +20,7 @@ const CommentForm = ({
   initialContent,
   commentId,
   onSuccess,
+  parentId,
 }: CommentFormProps) => {
   const { id: boardId } = useParams();
   const session = useRecoilValue(sessionState);
@@ -56,8 +57,12 @@ const CommentForm = ({
           board_id: Number(boardId),
           user_id: session?.user.id,
           content,
+          parent_id: type === "reply" ? parentId : null,
         });
         reset();
+        if (type === "reply") {
+          onSuccess?.();
+        }
       }
       if (mode === "edit" && commentId) {
         await editComment({
@@ -112,7 +117,7 @@ const CommentForm = ({
       form={form}
       onSubmit={onSubmit}
       placeholder={getPlaceholder()}
-      submitButtonLabel={mode === "edit" ? "수정완료" : "등록"}
+      submitButtonLabel="등록"
       onContentChange={handleContentChange}
     />
   );
