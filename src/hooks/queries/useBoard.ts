@@ -3,11 +3,21 @@ import {
   deleteBoard,
   getBoardDetail,
   getBoardListByPage,
+  getMainRecentBoards,
+  getMyBoards,
   incrementViewCount,
   updateBoard,
 } from "@/lib/supabase/board";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { BoardsResponse, UpdateBoardParams } from "@/types";
+
+//메인페이지 게시글 목록 불러오기
+export const useMainRecentBoards = () => {
+  return useQuery({
+    queryKey: ["mainRecentBoards"],
+    queryFn: getMainRecentBoards,
+  });
+};
 
 //게시글 목록
 export const useBoards = (page: number = 1) => {
@@ -111,5 +121,14 @@ export const useIncrementViewCount = () => {
       queryClient.invalidateQueries({ queryKey: ["boards"] });
       queryClient.invalidateQueries({ queryKey: ["board", boardId] });
     },
+  });
+};
+
+//마이페이지 게시글 목록 조회
+export const useMyBoards = (userId?: string) => {
+  return useQuery({
+    queryKey: ["myBoards", userId],
+    queryFn: () => getMyBoards(userId!),
+    enabled: !!userId,
   });
 };

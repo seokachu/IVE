@@ -388,3 +388,33 @@ export interface CommentFormProps {
   onSuccess?: () => void;
   onCancel?: () => void;
 }
+
+export interface BoardWithComment extends Tables<"board"> {
+  user: {
+    id: string;
+    name: string;
+  };
+  board_comments: { count: number }[];
+}
+
+export interface MainBoardListItemProps {
+  item: BoardWithComment;
+}
+
+export interface MyPageBoards extends Tables<"board"> {
+  user: {
+    id: string;
+    name: string;
+    avatar_url: string;
+  };
+  board_comments: { count: number }[];
+  board_likes: { count: number }[];
+}
+
+export interface PostListProps {
+  posts?: MyPageBoards[];
+}
+
+export interface PostListItemProps {
+  item: MyPageBoards;
+}

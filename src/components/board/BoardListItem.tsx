@@ -19,6 +19,19 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
     push(`/board/${item.id}`);
   };
 
+  const stopPropagation = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
+  const onClickCommentDetail = () => {
+    if (!hasViewedPost(item.id)) {
+      incrementViewCount.mutate(item.id);
+      markPostAsViewed(item.id);
+    }
+
+    push(`/board/${item.id}#comments`);
+  };
+
   return (
     <li
       onClick={onClickBoardDetail}
@@ -37,7 +50,7 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
           {item.user.avatar_url && (
             <UserAvatar
               size="xs"
-              userId={item?.user_id}
+              userId={item.user_id}
               userName={item.user.name}
               avatarUrl={item.user.avatar_url}
             />
@@ -61,7 +74,7 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
               <h3 className="shrink-0 flex items-center gap-[2px]">
                 {item.user.avatar_url && (
                   <UserAvatar
-                    userId={item?.user_id}
+                    userId={item.user_id}
                     userName={item.user.name}
                     avatarUrl={item.user.avatar_url}
                     className="w-[20px] h-[20px]"
@@ -76,17 +89,20 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
               </time>
             </div>
           </div>
-          <ActionButton
-            variant="default"
-            className="px-3 py-2 flex flex-col items-center gap-1 bg-white group"
-          >
-            <strong className="font-bold">
-              {item.board_comments[0]?.count || 0}
-            </strong>
-            <span className="text-xs text-gray-500 group-hover:text-purple">
-              댓글
-            </span>
-          </ActionButton>
+          <div onClick={stopPropagation}>
+            <ActionButton
+              onClick={onClickCommentDetail}
+              variant="default"
+              className="px-3 py-2 flex flex-col items-center gap-1 bg-white group"
+            >
+              <strong className="font-bold">
+                {item.board_comments[0]?.count || 0}
+              </strong>
+              <span className="text-xs text-gray-500 group-hover:text-purple">
+                댓글
+              </span>
+            </ActionButton>
+          </div>
         </div>
       </div>
     </li>

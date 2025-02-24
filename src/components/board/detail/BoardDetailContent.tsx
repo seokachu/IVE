@@ -4,7 +4,7 @@ import "@/styles/quill.css";
 
 const BoardDetailContent = ({ item }: BoardDetailProps) => {
   return (
-    <div className="pt-5 pb-1">
+    <div className="py-5">
       <div
         className="ql-editor ql-snow"
         dangerouslySetInnerHTML={{ __html: item?.content ?? "" }}

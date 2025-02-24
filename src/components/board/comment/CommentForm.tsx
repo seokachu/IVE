@@ -52,6 +52,25 @@ const CommentForm = ({
     }
 
     try {
+      if (mode === "edit" && commentId) {
+        //내용이 이전과 동일한지 체크
+        if (content === initialContent) {
+          toast({
+            title: "수정된 내용이 없습니다.",
+            description: "이전 내용으로 저장됩니다.",
+          });
+          onSuccess?.();
+          return;
+        }
+
+        await editComment({
+          commentId: commentId,
+          content,
+        });
+        reset();
+        onSuccess?.();
+      }
+
       if (mode === "create") {
         await addComment({
           board_id: Number(boardId),
@@ -60,17 +79,10 @@ const CommentForm = ({
           parent_id: type === "reply" ? parentId : null,
         });
         reset();
+
         if (type === "reply") {
           onSuccess?.();
         }
-      }
-      if (mode === "edit" && commentId) {
-        await editComment({
-          commentId: commentId,
-          content,
-        });
-        reset();
-        onSuccess?.();
       }
 
       const actionText = mode === "create" ? "작성" : "수정";
