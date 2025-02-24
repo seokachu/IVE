@@ -1,20 +1,34 @@
-const page = () => {
+"use client";
+import Error from "@/components/common/error/Error";
+import PostListSkeleton from "@/components/common/loading/PostListSkeleton";
+import PostList from "@/components/mypage/posts/PostList";
+import { useMyBoards } from "@/hooks/queries/useBoard";
+import { sessionState } from "@/store";
+import { useRecoilValue } from "recoil";
+
+const PostPage = () => {
+  const session = useRecoilValue(sessionState);
+  const { data, isLoading, isError } = useMyBoards(session?.user?.id);
+
+  if (isLoading) return <PostListSkeleton />;
+  if (isError) return <Error />;
+
+  const isEmpty = data?.length === 0;
+
   return (
     <div className="px-5 lg:pt-14 pb-28 lg:px-8">
       <div className="flex justify-between items-center mt-5 lg:mt-0">
         <h2 className="font-bold text-xl mb-5 hidden lg:block">내가 쓴 글</h2>
       </div>
-      <div>준비중...</div>
-      {/* {!isEmpty ? (
-        <AddressList addresses={addresses} />
+      {!isEmpty ? (
+        <PostList posts={data} />
       ) : (
         <div className="flex flex-col gap-3 items-center justify-center w-full h-[500px]">
-          <h3>배송지가 없습니다.</h3>
-          <AddressAddButton />
+          <h3>작성한 게시글이 없습니다.</h3>
         </div>
-      )} */}
+      )}
     </div>
   );
 };
 
-export default page;
+export default PostPage;

@@ -201,3 +201,36 @@ export const incrementViewCount = async (boardId: number) => {
     throw error;
   }
 };
+
+//마이페이지 게시글 목록 조회
+export const getMyBoards = async (userId: string) => {
+  try {
+    const { data, error } = await supabase
+      .from("board")
+      .select(
+        `
+          *,
+          board_comments(count),
+          board_likes(count),
+          user!inner(
+            id,
+            name,
+            avatar_url
+          )
+        `
+      )
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(
+        `내가 쓴 게시글 목록을 가져오는데 실패했습니다. ${error.message}`
+      );
+    }
+    throw error;
+  }
+};

@@ -50,7 +50,7 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
           {item.user.avatar_url && (
             <UserAvatar
               size="xs"
-              userId={item?.user_id}
+              userId={item.user_id}
               userName={item.user.name}
               avatarUrl={item.user.avatar_url}
             />
@@ -74,7 +74,7 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
               <h3 className="shrink-0 flex items-center gap-[2px]">
                 {item.user.avatar_url && (
                   <UserAvatar
-                    userId={item?.user_id}
+                    userId={item.user_id}
                     userName={item.user.name}
                     avatarUrl={item.user.avatar_url}
                     className="w-[20px] h-[20px]"

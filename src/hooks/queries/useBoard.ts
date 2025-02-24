@@ -4,6 +4,7 @@ import {
   getBoardDetail,
   getBoardListByPage,
   getMainRecentBoards,
+  getMyBoards,
   incrementViewCount,
   updateBoard,
 } from "@/lib/supabase/board";
@@ -120,5 +121,14 @@ export const useIncrementViewCount = () => {
       queryClient.invalidateQueries({ queryKey: ["boards"] });
       queryClient.invalidateQueries({ queryKey: ["board", boardId] });
     },
+  });
+};
+
+//마이페이지 게시글 목록 조회
+export const useMyBoards = (userId?: string) => {
+  return useQuery({
+    queryKey: ["myBoards", userId],
+    queryFn: () => getMyBoards(userId!),
+    enabled: !!userId,
   });
 };
