@@ -24,7 +24,7 @@ export const getMainRecentBoards = async () => {
       .limit(6);
 
     if (error) throw error;
-    return { data: data || [] };
+    return data;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(
