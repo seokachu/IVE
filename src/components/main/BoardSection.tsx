@@ -1,5 +1,5 @@
 import Link from "next/link";
-import MainBoardListItem from "./items/MainBoardListItem";
+import MainBoardList from "./MainBoardList";
 
 const BoardSection = () => {
   return (
@@ -13,14 +13,7 @@ const BoardSection = () => {
             더보기
           </Link>
         </div>
-        <ul className="flex flex-wrap">
-          <MainBoardListItem />
-          <MainBoardListItem />
-          <MainBoardListItem />
-          <MainBoardListItem />
-          <MainBoardListItem />
-          <MainBoardListItem />
-        </ul>
+        <MainBoardList />
       </div>
     </section>
   );

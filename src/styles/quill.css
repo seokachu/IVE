@@ -24,6 +24,11 @@
   min-height: 300px;
 }
 
+.ql-editor img {
+  max-width: 500px;
+  height: auto;
+}
+
 /*------------- error -------------*/
 .quill-error .ql-toolbar.ql-snow {
   border: 1px solid red;

@@ -388,3 +388,15 @@ export interface CommentFormProps {
   onSuccess?: () => void;
   onCancel?: () => void;
 }
+
+export interface BoardWithComment extends Tables<"board"> {
+  user: {
+    id: string;
+    name: string;
+  };
+  board_comments: { count: number }[];
+}
+
+export interface MainBoardListItemProps {
+  item: BoardWithComment;
+}

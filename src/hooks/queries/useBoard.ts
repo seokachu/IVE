@@ -3,11 +3,20 @@ import {
   deleteBoard,
   getBoardDetail,
   getBoardListByPage,
+  getMainRecentBoards,
   incrementViewCount,
   updateBoard,
 } from "@/lib/supabase/board";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { BoardsResponse, UpdateBoardParams } from "@/types";
+
+//메인페이지 게시글 목록 불러오기
+export const useMainRecentBoards = () => {
+  return useQuery({
+    queryKey: ["mainRecentBoards"],
+    queryFn: getMainRecentBoards,
+  });
+};
 
 //게시글 목록
 export const useBoards = (page: number = 1) => {

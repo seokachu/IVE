@@ -5,6 +5,36 @@ import type { Database } from "@/types/supabase";
 
 type BoardInsert = Database["public"]["Tables"]["board"]["Insert"];
 
+//메인페이지 게시글 목록 가져오기
+export const getMainRecentBoards = async () => {
+  try {
+    const { data, error } = await supabase
+      .from("board")
+      .select(
+        `
+      *,
+      user!inner(
+          id,
+          name
+        ),
+      board_comments(count)
+      `
+      )
+      .order("created_at", { ascending: false })
+      .limit(6);
+
+    if (error) throw error;
+    return { data: data || [] };
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(
+        `메인페이지 게시글 목록을 가져오는데 실패했습니다. ${error.message}`
+      );
+    }
+    throw error;
+  }
+};
+
 //게시글 목록 가져오기
 export const getBoardListByPage = async ({
   page = 1,

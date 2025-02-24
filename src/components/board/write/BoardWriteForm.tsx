@@ -36,6 +36,14 @@ const BoardWriteForm = (props: BoardWriteFormProps) => {
   const { mutate: addBoardList } = useAddBoard();
   const { mutate: editBoard } = useUpdateBoard();
 
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, 3, false] }],
+      ["bold", "italic", "underline"],
+      ["image"],
+    ],
+  };
+
   //수정 Mode 게시글 데이터 불러오기
   const isEditMode = (
     props: BoardWriteFormProps
@@ -149,6 +157,7 @@ const BoardWriteForm = (props: BoardWriteFormProps) => {
         <div className="overflow-hidden">
           <ReactQuill
             onChange={onChangeContent}
+            modules={modules}
             value={watch("content")}
             className={errors.content && "quill-error"}
             placeholder="내용을 입력해 주세요."
