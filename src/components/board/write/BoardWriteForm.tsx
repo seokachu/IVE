@@ -58,7 +58,7 @@ const BoardWriteForm = (props: BoardWriteFormProps) => {
     trigger,
     watch,
     reset,
-    formState: { errors, isValid, isSubmitting, isDirty },
+    formState: { errors, isValid, isSubmitting },
   } = form;
 
   useEffect(() => {
@@ -77,14 +77,19 @@ const BoardWriteForm = (props: BoardWriteFormProps) => {
 
   const onClickSubmit = async (data: BoardWriteType) => {
     try {
-      //이전 내용 저장 validation
-      if (props.mode === "edit" && !isDirty) {
-        toast({
-          title: "수정된 내용이 없습니다.",
-          description: "이전 내용으로 저장됩니다.",
-        });
-        push(`/board/${props.boardId}`);
-        return;
+      //이전 내용과 비교
+      if (props.mode === "edit" && boardData) {
+        const isContentSame = data.content === boardData.content;
+        const isTitleSame = data.title === boardData.title;
+
+        if (isContentSame && isTitleSame) {
+          toast({
+            title: "수정된 내용이 없습니다.",
+            description: "이전 내용으로 저장됩니다.",
+          });
+          push(`/board/${props.boardId}`);
+          return;
+        }
       }
 
       const sanitizedContent = data.content.trim();

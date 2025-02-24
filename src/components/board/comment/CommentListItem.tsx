@@ -11,7 +11,6 @@ import { formatDate } from "@/utils/formatDate";
 import BoardActionButton from "../BoardActionButton";
 import { useRecoilValue } from "recoil";
 import { sessionState } from "@/store";
-import { useRouter } from "next/navigation";
 import { toast } from "@/hooks/use-toast";
 import { useState } from "react";
 import CommentForm from "./CommentForm";
@@ -29,7 +28,6 @@ const CommentListItem = ({
   activeEditId,
   handleEditChange,
 }: CommentListItemProps) => {
-  const { push } = useRouter();
   const session = useRecoilValue(sessionState);
   const [showReplyForm, setShowReplyForm] = useState(false);
   const { checkAuth } = useAuthGuard();
@@ -51,11 +49,8 @@ const CommentListItem = ({
   const isAuthor = session?.user?.id === item?.user_id;
   const isEditing = activeEditId === item.id;
 
-  console.log(item);
-
   const onClickDelete = () => {
     deleteComment();
-    push(`/board/${boardId}`);
     toast({
       title: "댓글이 삭제 되었습니다.",
     });
@@ -120,7 +115,7 @@ const CommentListItem = ({
             <div className="my-3">
               <CommentForm
                 mode="edit"
-                type="comment"
+                type={item.parent_id ? "reply" : "comment"}
                 initialContent={item.content}
                 commentId={item.id}
                 onSuccess={() => handleEditChange(null)}
