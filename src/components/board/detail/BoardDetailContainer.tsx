@@ -14,13 +14,23 @@ import { useRecoilValue } from "recoil";
 import BoardDetailSkeleton from "@/components/common/loading/BoardDetailSkeleton";
 import { useRouter } from "next/navigation";
 import { toast } from "@/hooks/use-toast";
+import { useEffect, useRef } from "react";
 import type { BoardDetailContainerProps } from "@/types";
 
 const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
+  const commentsRef = useRef<HTMLDivElement>(null);
   const { push } = useRouter();
   const session = useRecoilValue(sessionState);
   const { data: board, isLoading, isError } = useBoardDetail(boardId);
   const { mutate: deleteBoard } = useDeleteBoard(board?.id);
+
+  useEffect(() => {
+    if (window.location.hash === "#comments") {
+      setTimeout(() => {
+        commentsRef.current?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  }, [board]);
 
   if (isLoading) return <BoardDetailSkeleton />;
   if (isError) return <Error />;
@@ -66,7 +76,11 @@ const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
       <BoardDetailContent item={board} />
       <BoardLikeButton item={board} />
       <BoardDetailUserInfo item={board} />
-      <div className="flex gap-4 mt-5 border-t pt-5 pb-5">
+      <div
+        ref={commentsRef}
+        className="flex gap-4 mt-5 border-t pt-5 pb-5"
+        id="comments"
+      >
         <p className="font-bold">
           댓글 {board?.board_comments[0]?.count || 0}개
         </p>
