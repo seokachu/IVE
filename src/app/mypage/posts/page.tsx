@@ -1,6 +1,6 @@
 "use client";
 import Error from "@/components/common/error/Error";
-import PostListSkeleton from "@/components/common/loading/PostListSkeleton";
+import MyPageLoading from "@/components/common/loading/MyPageLoading";
 import PostList from "@/components/mypage/posts/PostList";
 import { useMyBoards } from "@/hooks/queries/useBoard";
 import { sessionState } from "@/store";
@@ -10,7 +10,7 @@ const PostPage = () => {
   const session = useRecoilValue(sessionState);
   const { data, isLoading, isError } = useMyBoards(session?.user?.id);
 
-  if (isLoading) return <PostListSkeleton />;
+  if (isLoading) return <MyPageLoading title="내가 쓴 글" />;
   if (isError) return <Error />;
 
   const isEmpty = data?.length === 0;
