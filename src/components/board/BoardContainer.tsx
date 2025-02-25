@@ -8,8 +8,8 @@ import { useRouter } from "next/navigation";
 import { useBoards } from "@/hooks/queries/useBoard";
 import { useState } from "react";
 import PaginationControl from "@/components/common/PaginationControl";
-import Error from "../common/error/Error";
-import BoardSkeleton from "../common/loading/BoardSkeleton";
+import Error from "@/components/common/error/Error";
+import BoardSkeleton from "@/components/common/loading/BoardSkeleton";
 import { PAGINATION } from "@/utils/constants";
 import useAuthGuard from "@/hooks/useAuthGuard";
 
