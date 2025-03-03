@@ -38,23 +38,28 @@ export const getMainRecentBoards = async () => {
 //게시글 목록 가져오기
 export const getBoardListByPage = async ({
   page = 1,
+  search,
+}: {
+  page?: number;
+  search?: string;
 }): Promise<{ data: BoardWithRelations[]; count: number }> => {
   try {
-    const { data, error, count } = await supabase
-      .from("board")
-      .select(
-        `
+    let query = supabase.from("board").select(
+      `
         *,
         board_comments(count),
         board_likes(count),
-        user!inner(
-            id,
-            name,
-            avatar_url
-          )
+        user!inner(id, name, avatar_url)
       `,
-        { count: "exact" }
-      )
+      { count: "exact" }
+    );
+
+    // 검색어가 있으면 제목 필터링
+    if (search && search.trim() !== "") {
+      query = query.ilike("title", `%${search}%`);
+    }
+
+    const { data, error, count } = await query
       .range(
         (page - 1) * PAGINATION.BOARD.ITEMS_PER_PAGE,
         page * PAGINATION.BOARD.ITEMS_PER_PAGE - 1

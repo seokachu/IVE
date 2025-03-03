@@ -6,33 +6,70 @@ import { GoPlusCircle } from "react-icons/go";
 import BoardList from "./BoardList";
 import { useRouter } from "next/navigation";
 import { useBoards } from "@/hooks/queries/useBoard";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PaginationControl from "@/components/common/PaginationControl";
 import Error from "@/components/common/error/Error";
 import BoardSkeleton from "@/components/common/loading/BoardSkeleton";
 import { PAGINATION } from "@/utils/constants";
 import useAuthGuard from "@/hooks/useAuthGuard";
+import SearchLoading from "../common/loading/SearchLoading";
+import { TbMoodEmpty } from "react-icons/tb";
 
 const BoardContainer = () => {
   const { push } = useRouter();
+  const isFirstLoad = useRef(true);
+  const [searchKeyWord, setSearchKeyWord] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const { data: boardList, isLoading, isError } = useBoards(currentPage);
+  const {
+    data: boardList,
+    isLoading,
+    isError,
+  } = useBoards(currentPage, searchKeyWord);
   const { checkAuth } = useAuthGuard();
+
+  useEffect(() => {
+    if (!isLoading) {
+      isFirstLoad.current = false;
+    }
+  }, [isLoading]);
 
   const totalPages = Math.ceil(
     (boardList?.count || 0) / PAGINATION.BOARD.ITEMS_PER_PAGE
   );
 
-  if (isLoading) return <BoardSkeleton />;
+  if (isLoading && isFirstLoad.current) return <BoardSkeleton />;
   if (isError) return <Error />;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
+  const handleSearch = (value: string) => {
+    setSearchKeyWord(value);
+    setCurrentPage(1);
+  };
+
   const onClickBoardWrite = () => {
     if (!checkAuth()) return;
     push("board/write");
+  };
+
+  //검색 내용 보여주는 함수
+  const renderBoardContent = () => {
+    //검색 중 일때
+    if (isLoading && !isFirstLoad.current) {
+      return <SearchLoading />;
+    }
+    //검색 결과가 없을 때
+    if (boardList && boardList.data.length === 0) {
+      return (
+        <div className="flex items-center justify-center min-h-[500px] flex-col gap-3">
+          <TbMoodEmpty className="w-8 h-8 lg:w-10 lg:h-10" />
+          <h2 className="text-xs lg:text-sm">검색 결과가 없습니다.</h2>
+        </div>
+      );
+    }
+    return <BoardList boards={boardList} />;
   };
 
   return (
@@ -44,6 +81,7 @@ const BoardContainer = () => {
         <div className="flex items-center justify-end gap-3 flex-col lg:flex-row lg:w-2/3">
           <div className="relative w-full lg:max-w-80">
             <Search
+              onSearch={handleSearch}
               className="pl-10 pr-4 py-2 border rounded-md"
               placeholder="검색어를 입력하세요."
               iconClassName="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
@@ -59,9 +97,16 @@ const BoardContainer = () => {
           </ActionButton>
         </div>
       </div>
-      <div className="mt-5 lg:mt-10 min-h-auto lg:shadow rounded-md overflow-hidden">
+      <div
+        className={`mt-5 lg:mt-10 min-h-auto rounded-md overflow-hidden ${
+          (isLoading && !isFirstLoad.current) ||
+          (boardList && boardList.data.length === 0)
+            ? ""
+            : "lg:shadow"
+        }`}
+      >
         <BoardListHeader />
-        <BoardList boards={boardList} />
+        {renderBoardContent()}
       </div>
       {totalPages > 1 && (
         <PaginationControl
