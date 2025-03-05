@@ -11,7 +11,7 @@ const VisualSection = () => {
     <section className="h-[100vh] lg:h-screen w-full relative bg-main-image bg-cover bg-center flex items-center justify-center">
       <video
         className={cn(
-          "h-screen w-full object-cover fixed top-0 left-0",
+          "h-[100vh] lg:h-screen w-full object-cover fixed top-0 left-0",
           isScrolled ? "hidden" : "block"
         )}
         src="https://res.cloudinary.com/dknj7kdek/video/upload/v1729614511/%E1%84%89%E1%85%B5%E1%84%8F%E1%85%AF%E1%86%AB%E1%84%89%E1%85%B3_01_iaa8xa.mp4"
