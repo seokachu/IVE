@@ -25,7 +25,7 @@ const MyPageLayout = ({ children }: { children: React.ReactNode }) => {
               <MyPageSkeleton />
             </aside>
             <section className="w-full lg:w-[70%]">
-              <MyPageLoading title="" />
+              <MyPageLoading />
             </section>
           </div>
         </main>

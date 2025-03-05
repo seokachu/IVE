@@ -4,6 +4,7 @@ import { Database, Tables } from "@/types/supabase";
 export interface GnbArrayList {
   label: string;
   path: string;
+  exact: boolean;
 }
 
 export interface SignInProps {
@@ -287,4 +288,135 @@ export interface AddressData {
   address_line2: string;
   request: string;
   is_default: boolean;
+}
+
+export type UpdateBoardParams = {
+  boardId: number;
+  title: string;
+  content: string;
+};
+
+export type UpdateCommentParams = {
+  commentId: number;
+  content: string;
+};
+
+export interface BoardWithRelations extends Tables<"board"> {
+  board_comments: [{ count: number }];
+  board_likes: [{ count: number }];
+  user: {
+    name: string;
+    avatar_url: string;
+  };
+}
+
+export interface BoardListItemProps {
+  item: BoardWithRelations;
+  keyword?: string;
+}
+
+export interface BoardListProps {
+  boards:
+    | {
+        data: BoardWithRelations[];
+        count: number;
+      }
+    | undefined;
+  keyword?: string;
+}
+
+export interface BoardDetailPageParams {
+  params: {
+    id: string;
+  };
+}
+
+export interface BoardDetailContainerProps {
+  boardId: number;
+}
+
+export interface BoardDetailProps {
+  item: BoardWithRelations;
+}
+
+export interface Comment extends Tables<"board_comments"> {
+  user: {
+    name: string;
+    avatar_url: string;
+  };
+  likes: { count: number }[];
+}
+
+export interface CommentListItemProps {
+  boardId: number;
+  item: Comment;
+  activeEditId: number | null;
+  handleEditChange: (id: number | null) => void;
+}
+
+export interface BoardsResponse {
+  data: BoardWithRelations[];
+  count: number;
+}
+
+export interface EditPageParams {
+  params: {
+    id: string;
+  };
+}
+export interface CreateBoardWriteFormProps {
+  mode: "create";
+}
+
+export interface EditBoardWriteFormProps {
+  mode: "edit";
+  boardId: number;
+}
+
+export type BoardWriteFormProps =
+  | CreateBoardWriteFormProps
+  | EditBoardWriteFormProps;
+
+export type CommentMode = "create" | "edit";
+
+export type CommentType = "comment" | "reply";
+
+export interface CommentFormProps {
+  mode: CommentMode;
+  type: CommentType;
+  parentId?: number;
+  initialContent?: string | null;
+  commentId?: number;
+  onSuccess?: () => void;
+  onCancel?: () => void;
+}
+
+export interface BoardWithComment extends Tables<"board"> {
+  user: {
+    id: string;
+    name: string;
+  };
+  board_comments: { count: number }[];
+}
+
+export interface MainBoardListItemProps {
+  item: BoardWithComment;
+}
+
+export interface MyPageBoards extends Tables<"board"> {
+  user: {
+    id: string;
+    name: string;
+    avatar_url: string;
+  };
+  board_comments: { count: number }[];
+  board_likes: { count: number }[];
+}
+
+export interface PostListProps {
+  posts?: MyPageBoards[];
+}
+
+export interface PostListItemProps {
+  item: MyPageBoards;
 }

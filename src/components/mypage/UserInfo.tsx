@@ -1,6 +1,6 @@
 "use client";
 import { sessionState } from "@/store";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import UserAvatar from "../common/UserAvatar";
 import Link from "next/link";
 import { MYPAGE_GNB_ARRAY } from "@/utils/constants";
@@ -18,18 +18,21 @@ import { uploadAvatar } from "@/lib/supabase/storage";
 import { PiUploadSimpleBold } from "react-icons/pi";
 import { useWishLists } from "@/hooks/queries/useWishList";
 import { useUpdateUserSession } from "@/hooks/useUpdateUserSession";
+import { useMyBoards } from "@/hooks/queries/useBoard";
 
 const UserInfo = () => {
-  const [session] = useRecoilState(sessionState);
+  const session = useRecoilValue(sessionState);
   const pathname = usePathname();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [isEditingNickname, setIsEditingNickname] = useState(false);
   const [src, setSrc] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: userWishList } = useWishLists(session?.user.id);
+  const { data: userBoardList } = useMyBoards(session?.user.id);
   const { updateUserAndRefresh } = useUpdateUserSession();
 
   const wishlist = userWishList?.length;
+  const myBoardList = userBoardList?.length;
 
   //하위 경로 포함 체크 active
   const isActivePath = (path: string, exact: boolean) => {
@@ -211,10 +214,10 @@ const UserInfo = () => {
       <div className="flex border-y p-5 my-5">
         <div className="w-2/4">
           <p className="text-xs text-[#495057] mb-1">글 작성수</p>
-          <strong>-</strong>
+          <strong>{myBoardList}</strong>
         </div>
         <div className="w-2/4">
-          <p className="text-xs text-[#090a0a] mb-1">찜</p>
+          <p className="text-xs text-[#495057] mb-1">찜</p>
           <strong>{wishlist}</strong>
         </div>
       </div>

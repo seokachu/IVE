@@ -18,7 +18,7 @@ const ReviewTab = ({ id }: ShopMenuProps) => {
 
   const reviews = data?.reviews || [];
   const totalCount = data?.totalCount || 0;
-  const totalPages = Math.ceil(totalCount / PAGINATION.ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(totalCount / PAGINATION.REVIEW.ITEMS_PER_PAGE);
 
   // 평균 별점 계산
   const averageRating = reviews.length
@@ -63,7 +63,7 @@ const ReviewTab = ({ id }: ShopMenuProps) => {
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={handlePageChange}
-                maxDisplayPages={PAGINATION.MAX_DISPLAY_PAGES}
+                maxDisplayPages={PAGINATION.REVIEW.MAX_DISPLAY_PAGES}
               />
             )}
           </div>

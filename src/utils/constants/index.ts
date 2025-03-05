@@ -7,9 +7,9 @@ import type { SortOption, SortOptionList } from "@/types";
 
 //header gnb list
 export const GNB_ARRAY = [
-  { label: "소식", path: "/news" },
-  { label: "굿즈샵", path: "/shop" },
-  { label: "자유게시판", path: "/board" },
+  { label: "소식", path: "/news", exact: false },
+  { label: "굿즈샵", path: "/shop", exact: false },
+  { label: "자유게시판", path: "/board", exact: false },
 ];
 
 //main album music icon list
@@ -51,8 +51,14 @@ export const BADGE_TYPES = {
 } as const;
 
 export const PAGINATION = {
-  ITEMS_PER_PAGE: 5,
-  MAX_DISPLAY_PAGES: 5,
+  REVIEW: {
+    ITEMS_PER_PAGE: 5,
+    MAX_DISPLAY_PAGES: 3,
+  },
+  BOARD: {
+    ITEMS_PER_PAGE: 10,
+    MAX_DISPLAY_PAGES: 3,
+  },
 } as const;
 
 //주문 약관 동의 내용

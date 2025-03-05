@@ -31,6 +31,13 @@ export async function middleware(request: NextRequest) {
       }
     }
 
+    //회원가입 페이지
+    if (request.nextUrl.pathname === "/signup") {
+      if (session.data.session) {
+        return NextResponse.redirect(new URL("/", request.url));
+      }
+    }
+
     // 로그인 페이지
     if (request.nextUrl.pathname === "/login") {
       if (session.data.session) {
@@ -54,5 +61,11 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/mypage/:path*", "/login", "/payment/success", "/payment/fail"],
+  matcher: [
+    "/mypage/:path*",
+    "/login",
+    "/signup",
+    "/payment/success",
+    "/payment/fail",
+  ],
 };

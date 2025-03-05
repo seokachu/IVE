@@ -1,4 +1,5 @@
-import MainBoardListItem from "./items/MainBoardListItem";
+import Link from "next/link";
+import MainBoardList from "./MainBoardList";
 
 const BoardSection = () => {
   return (
@@ -7,15 +8,12 @@ const BoardSection = () => {
         <h2 className="text-2xl font-bold lg:text-4xl text-center mb-14">
           FREE BOARD
         </h2>
-        <div>{/* <MoreButton /> */}</div>
-        <ul className="flex flex-wrap">
-          <MainBoardListItem />
-          <MainBoardListItem />
-          <MainBoardListItem />
-          <MainBoardListItem />
-          <MainBoardListItem />
-          <MainBoardListItem />
-        </ul>
+        <div className="w-full">
+          <Link href="/board" className="float-right hover:text-purple">
+            더보기
+          </Link>
+        </div>
+        <MainBoardList />
       </div>
     </section>
   );
