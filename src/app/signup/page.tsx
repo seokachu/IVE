@@ -8,7 +8,7 @@ export const metadata = signUpMetadata;
 
 const SignUp = () => {
   return (
-    <main className="w-full h-screen flex items-center justify-center">
+    <main className="w-full h-screen flex items-center justify-center -mt-[70px] lg:mt-0">
       <section className="max-w-[500px] px-5">
         <div className="flex justify-center items-center flex-col gap-3 mb-12">
           <h2 className="relative w-[100px] h-auto">
