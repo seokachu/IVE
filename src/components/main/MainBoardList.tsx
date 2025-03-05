@@ -21,7 +21,7 @@ const MainBoardList = () => {
 
   return (
     <ul className="flex flex-wrap">
-      {boards?.data.map((item) => (
+      {boards?.map((item) => (
         <MainBoardListItem key={item.id} item={item} />
       ))}
     </ul>

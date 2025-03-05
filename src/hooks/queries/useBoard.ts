@@ -20,10 +20,11 @@ export const useMainRecentBoards = () => {
 };
 
 //게시글 목록
-export const useBoards = (page: number = 1) => {
+export const useBoards = (page: number = 1, search?: string) => {
   return useQuery({
-    queryKey: ["boards", page],
-    queryFn: () => getBoardListByPage({ page }),
+    queryKey: ["boards", page, search],
+    queryFn: () => getBoardListByPage({ page, search }),
+    staleTime: 60 * 1000,
   });
 };
 
