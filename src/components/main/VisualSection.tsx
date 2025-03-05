@@ -8,7 +8,7 @@ const VisualSection = () => {
   const textStyle = "text-shadow:_1px_3px_5px_rgb(0_0_0_/_0.3)] lg:text-xl";
 
   return (
-    <section className="h-screen w-full relative bg-main-image bg-cover bg-center flex items-center justify-center">
+    <section className="h-[100vh] lg:h-screen w-full relative bg-main-image bg-cover bg-center flex items-center justify-center">
       <video
         className={cn(
           "h-screen w-full object-cover fixed top-0 left-0",
