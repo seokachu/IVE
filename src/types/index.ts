@@ -312,6 +312,7 @@ export interface BoardWithRelations extends Tables<"board"> {
 
 export interface BoardListItemProps {
   item: BoardWithRelations;
+  keyword?: string;
 }
 
 export interface BoardListProps {
@@ -321,6 +322,7 @@ export interface BoardListProps {
         count: number;
       }
     | undefined;
+  keyword?: string;
 }
 
 export interface BoardDetailPageParams {

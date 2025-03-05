@@ -69,7 +69,7 @@ const BoardContainer = () => {
         </div>
       );
     }
-    return <BoardList boards={boardList} />;
+    return <BoardList boards={boardList} keyword={searchKeyWord} />;
   };
 
   return (

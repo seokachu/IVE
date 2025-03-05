@@ -6,7 +6,7 @@ import { hasViewedPost, markPostAsViewed } from "@/utils/viewCount";
 import UserAvatar from "@/components/common/UserAvatar";
 import type { BoardListItemProps } from "@/types";
 
-const BoardListItem = ({ item }: BoardListItemProps) => {
+const BoardListItem = ({ item, keyword }: BoardListItemProps) => {
   const { push } = useRouter();
 
   const incrementViewCount = useIncrementViewCount();
@@ -32,6 +32,29 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
     push(`/board/${item.id}#comments`);
   };
 
+  //검색어 하이라이트 처리
+  const highlightKeyword = (title: string | null, keyword: string) => {
+    if (!title || !keyword || keyword === "") return title;
+
+    const escapeRegExp = (text: string) => {
+      return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    };
+
+    const regex = new RegExp(`(${escapeRegExp(keyword)})`, "gi");
+    const word = title.split(regex);
+
+    return word.map((text, index) => {
+      if (text.toLowerCase() === keyword.toLowerCase()) {
+        return (
+          <span key={index} className="bg-yellow-200">
+            {text}
+          </span>
+        );
+      }
+      return text;
+    });
+  };
+
   return (
     <li
       onClick={onClickBoardDetail}
@@ -41,7 +64,9 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
       <div className="hidden lg:flex text-center py-3 hover:bg-gray-50 items-center">
         <p className="w-[10%] text-gray-500">{item.id}</p>
         <div className="w-[40%] text-left flex gap-1">
-          <p className="text-left max-w-[80%] truncate">{item.title}</p>
+          <p className="text-left max-w-[80%] truncate">
+            {highlightKeyword(item.title, keyword || "")}
+          </p>
           <p className="text-blue-500">
             &#91;{item.board_comments[0]?.count || 0}&#93;
           </p>
@@ -69,7 +94,9 @@ const BoardListItem = ({ item }: BoardListItemProps) => {
       <div className="lg:hidden text-center py-3 px-5 hover:bg-gray-50">
         <div className="flex items-center justify-between gap-5">
           <div className="flex flex-col gap-2 flex-1 min-w-0">
-            <p className="w-full truncate text-left">{item.title}</p>
+            <p className="w-full truncate text-left">
+              {highlightKeyword(item.title, keyword || "")}
+            </p>
             <div className="text-gray-500 text-xs flex gap-2 items-center">
               <h3 className="shrink-0 flex items-center gap-[2px]">
                 {item.user.avatar_url && (
