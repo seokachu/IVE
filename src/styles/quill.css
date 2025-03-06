@@ -30,6 +30,11 @@
 }
 
 @media (max-width: 768px) {
+  .ql-editor {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
   .ql-editor img {
     max-width: 100%;
   }
