@@ -1,10 +1,5 @@
 import { NEWS_CATEGORY_ARRAY } from "@/utils/constants";
-import { Dispatch, SetStateAction } from "react";
-
-interface NewsCategoryFilterProps {
-  selectedCategory: string;
-  setSelectedCategory: Dispatch<SetStateAction<string>>;
-}
+import type { NewsCategoryFilterProps } from "@/types";
 
 const NewsCategoryFilter = ({
   selectedCategory,

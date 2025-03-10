@@ -10,7 +10,6 @@ const LatestNewsSection = () => {
   const [selectedCategory, setSelectedCategory] = useState(
     NEWS_CATEGORY_ARRAY[0].category
   );
-
   return (
     <section
       className="max-w-[1280px] flex justify-center align-center flex-col px-5 py-32 m-auto"
@@ -26,7 +25,7 @@ const LatestNewsSection = () => {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
-      <NewsGallery />
+      <NewsGallery selectedCategory={selectedCategory} />
       <div className="text-center">
         <ActionButton
           variant="primary"

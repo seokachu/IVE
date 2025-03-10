@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, Dispatch, SetStateAction } from "react";
 import { Database, Tables } from "@/types/supabase";
 
 export interface GnbArrayList {
@@ -419,4 +419,9 @@ export interface PostListProps {
 
 export interface PostListItemProps {
   item: MyPageBoards;
+}
+
+export interface NewsCategoryFilterProps {
+  selectedCategory: string;
+  setSelectedCategory: Dispatch<SetStateAction<string>>;
 }
