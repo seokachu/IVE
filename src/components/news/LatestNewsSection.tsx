@@ -12,7 +12,10 @@ const LatestNewsSection = () => {
   );
 
   return (
-    <section className="max-w-[1280px] flex justify-center align-center flex-col px-5 py-32 m-auto">
+    <section
+      className="max-w-[1280px] flex justify-center align-center flex-col px-5 py-32 m-auto"
+      id="news_section"
+    >
       <h2 className="text-2xl font-bold lg:text-4xl mb-6 text-center">
         Latest News
       </h2>
