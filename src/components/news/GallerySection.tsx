@@ -4,13 +4,13 @@ import GalleryPhotoList from "./GalleryPhotoList";
 
 const GallerySection = () => {
   return (
-    <section className="max-w-[1280px] flex justify-center align-center flex-col px-5 py-32 m-auto">
+    <section className="max-w-[1280px] flex justify-center align-center flex-col px-5 pt-32 pb-40 m-auto">
       <h2 className="text-2xl font-bold lg:text-4xl mb-6 text-center">
         Gallery
       </h2>
       <h3 className="text-center text-gray-600">특별한 순간을 담은 갤러리</h3>
       <GalleryPhotoList />
-      <div className="mt-16 text-center">
+      <div className="text-center">
         <ActionButton
           variant="primary"
           className="inline-flex justify-center items-center gap-1 px-8 py-4 !rounded-full"

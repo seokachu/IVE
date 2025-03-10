@@ -1,9 +1,16 @@
+"use client";
+import { useState } from "react";
 import ActionButton from "../common/button/ActionButton";
 import NewsCategoryFilter from "./NewsCategoryFilter";
 import NewsGallery from "./NewsGallery";
 import { FaArrowDown } from "react-icons/fa6";
+import { NEWS_CATEGORY_ARRAY } from "@/utils/constants";
 
 const LatestNewsSection = () => {
+  const [selectedCategory, setSelectedCategory] = useState(
+    NEWS_CATEGORY_ARRAY[0].category
+  );
+
   return (
     <section className="max-w-[1280px] flex justify-center align-center flex-col px-5 py-32 m-auto">
       <h2 className="text-2xl font-bold lg:text-4xl mb-6 text-center">
@@ -12,7 +19,10 @@ const LatestNewsSection = () => {
       <h3 className="text-center text-gray-600 mb-12">
         아이브의 새로운 소식을 가장 먼저 만나보세요
       </h3>
-      <NewsCategoryFilter />
+      <NewsCategoryFilter
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
       <NewsGallery />
       <div className="text-center">
         <ActionButton

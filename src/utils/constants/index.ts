@@ -170,3 +170,12 @@ export const PHONE_OPTIONS = [
     title: "019",
   },
 ];
+
+//news category list
+export const NEWS_CATEGORY_ARRAY = [
+  { category: "전체" },
+  { category: "음악" },
+  { category: "방송" },
+  { category: "행사" },
+  { category: "화보" },
+];
