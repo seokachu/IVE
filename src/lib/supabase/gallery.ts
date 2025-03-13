@@ -1,11 +1,14 @@
 import { supabase } from "@/lib/supabase/client";
+import { GALLERY_DEFAULT_LIMIT } from "@/utils/constants";
 
-export const getGallery = async () => {
+//데이터 불러오기 (6개)
+export const getGallery = async (limit = GALLERY_DEFAULT_LIMIT) => {
   try {
     const { data, error } = await supabase
       .from("gallery")
       .select("*")
-      .order("created_at", { ascending: false });
+      .order("created_at", { ascending: false })
+      .limit(limit);
 
     if (error) throw error;
     return data || [];

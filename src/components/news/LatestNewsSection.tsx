@@ -22,7 +22,7 @@ const LatestNewsSection = () => {
   if (isLoading) return <LatestNewsSkeleton />;
   if (isError) return <Error />;
 
-  //news item 클릭 핸들러
+  //news item click handler
   const handleNewsClick = (newsItem: NewsItem) => {
     setSelectedNews(newsItem);
     setModalOpen(true);

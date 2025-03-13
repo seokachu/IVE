@@ -449,3 +449,13 @@ export interface LatestNewsDetailProps {
 export interface GalleryPhotoDetailProps {
   item: Tables<"gallery">;
 }
+
+export interface GalleryPhotoListProps {
+  gallery: Tables<"gallery">[];
+  onClick: (galleryItem: GalleryItem) => void;
+}
+
+export interface GalleryPhotoListItemProps {
+  item: Tables<"gallery">;
+  onClick: () => void;
+}

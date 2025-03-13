@@ -1,18 +1,15 @@
 import GalleryPhotoListItem from "./GalleryPhotoListItem";
+import type { GalleryPhotoListProps } from "@/types";
 
-interface GalleryPhotoListProps {
-  gallery: {
-    id: string;
-    image_url: string;
-    created_at: string;
-  }[];
-}
-
-const GalleryPhotoList = ({ gallery }: GalleryPhotoListProps) => {
+const GalleryPhotoList = ({ gallery, onClick }: GalleryPhotoListProps) => {
   return (
     <ul className="my-16 flex flex-wrap gap-8">
       {gallery.map((item) => (
-        <GalleryPhotoListItem key={item.id} item={item} />
+        <GalleryPhotoListItem
+          key={item.id}
+          item={item}
+          onClick={() => onClick(item)}
+        />
       ))}
     </ul>
   );

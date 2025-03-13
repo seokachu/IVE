@@ -180,6 +180,8 @@ export const NEWS_CATEGORY_ARRAY = [
   { category: "화보" },
 ];
 
-//소식 페이지 페이지 불러오기 5개 제한
-export const DEFAULT_LIMIT = 5;
+//소식 페이지 latest news section 데이터 불러오기 5개 제한
+export const LATEST_DEFAULT_LIMIT = 5;
 
+//소식 페이지 gallery section 데이터 불러오기 6개 제한
+export const GALLERY_DEFAULT_LIMIT = 6;

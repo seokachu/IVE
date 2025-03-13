@@ -4,15 +4,28 @@ import { FaArrowDown } from "react-icons/fa6";
 import GalleryPhotoList from "./GalleryPhotoList";
 import { useGallery } from "@/hooks/queries/useGallery";
 import Error from "../common/error/Error";
+import { useState } from "react";
+import ContentDetailModal from "./ContentDetailModal";
+import type { GalleryItem } from "@/types";
 
 const GallerySection = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedGallery, setSelectedGallery] = useState<GalleryItem | null>(
+    null
+  );
   const { data: gallery, isLoading, isError } = useGallery();
 
+  //스켈레톤 필요
   if (isLoading) return null;
   if (isError) return <Error />;
   if (!gallery || gallery.length === 0) return null;
 
-  console.log(gallery);
+  //gallery list click handler
+  const handleGalleryClick = (galleryItem: GalleryItem) => {
+    setSelectedGallery(galleryItem);
+    setModalOpen(true);
+  };
+
   return (
     <section
       className="max-w-[1280px] flex justify-center align-center flex-col px-5 pt-32 pb-40 m-auto"
@@ -22,7 +35,7 @@ const GallerySection = () => {
         Gallery
       </h2>
       <h3 className="text-center text-gray-600">특별한 순간을 담은 갤러리</h3>
-      <GalleryPhotoList gallery={gallery} />
+      <GalleryPhotoList gallery={gallery} onClick={handleGalleryClick} />
       <div className="text-center">
         <ActionButton
           variant="primary"
@@ -32,6 +45,14 @@ const GallerySection = () => {
           <FaArrowDown className="animate-arrow" />
         </ActionButton>
       </div>
+      {modalOpen && (
+        <ContentDetailModal
+          isOpen={modalOpen}
+          onOpenChange={() => setModalOpen(false)}
+          contentType="gallery"
+          content={selectedGallery}
+        />
+      )}
     </section>
   );
 };

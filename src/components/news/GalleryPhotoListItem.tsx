@@ -1,20 +1,14 @@
 import Image from "next/image";
 import DefaultImage from "@/assets/images/default_image.avif";
 import { FaSearchPlus } from "react-icons/fa";
+import type { GalleryPhotoListItemProps } from "@/types";
 
-interface GalleryPhotoListItemProps {
-  item: {
-    id: string;
-    image_url: string;
-    created_at: string;
-  };
-}
-
-const GalleryPhotoListItem = ({ item }: GalleryPhotoListItemProps) => {
-  console.log(item);
-
+const GalleryPhotoListItem = ({ item, onClick }: GalleryPhotoListItemProps) => {
   return (
-    <li className="cursor-pointer relative overflow-hidden border rounded-md group text-white w-full md:w-[calc(50%-1rem)] lg:w-[calc(33%-1.2rem)]">
+    <li
+      onClick={onClick}
+      className="cursor-pointer relative overflow-hidden border rounded-md group text-white w-full md:w-[calc(50%-1rem)] lg:w-[calc(33%-1.2rem)]"
+    >
       <div className="aspect-square">
         <Image
           src={item.image_url || DefaultImage}
