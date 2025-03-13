@@ -14,7 +14,7 @@ const NewsCategoryFilter = ({
         {NEWS_CATEGORY_ARRAY.map((el) => (
           <li
             key={el.category}
-            className={`px-6 py-2 rounded-full whitespace-nowrap text-sm ${
+            className={`px-6 py-2 rounded-full whitespace-nowrap text-xs lg:text-sm ${
               selectedCategory === el.category ? "bg-white" : ""
             }`}
           >
