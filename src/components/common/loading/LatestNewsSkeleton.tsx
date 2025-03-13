@@ -11,19 +11,12 @@ const LatestNewsSkeleton = () => {
       <div className="mb-10">
         <Skeleton className="aspect-[16/9]" />
       </div>
-      <div className="flex flex-wrap gap-10">
-        <div className="w-[calc(50%-1.25rem)]">
-          <Skeleton className="aspect-[16/9] w-full" />
-        </div>
-        <div className="w-[calc(50%-1.25rem)]">
-          <Skeleton className="aspect-[16/9] w-full" />
-        </div>
-        <div className="w-[calc(50%-1.25rem)]">
-          <Skeleton className="aspect-[16/9] w-full" />
-        </div>
-        <div className="w-[calc(50%-1.25rem)]">
-          <Skeleton className="aspect-[16/9] w-full" />
-        </div>
+      <div className="flex flex-wrap gap-8 w-full">
+        {Array.from({ length: 4 }).map((_, index) => (
+          <div key={index} className="w-full lg:w-[calc(50%-1rem)]">
+            <Skeleton className="aspect-[16/9] w-full" />
+          </div>
+        ))}
       </div>
     </section>
   );
