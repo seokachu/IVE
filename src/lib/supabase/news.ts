@@ -1,13 +1,11 @@
 import { supabase } from "@/lib/supabase/client";
 import { DEFAULT_LIMIT } from "@/utils/constants";
-import type { Database } from "@/types/supabase";
-
-type GalleryItem = Database["public"]["Tables"]["news_gallery"]["Row"];
+import type { NewsItem } from "@/types";
 
 //news 데이터 가져오기
 export const getNewsGallery = async (
   limit = DEFAULT_LIMIT
-): Promise<GalleryItem[]> => {
+): Promise<NewsItem[]> => {
   try {
     const { data, error } = await supabase
       .from("news_gallery")

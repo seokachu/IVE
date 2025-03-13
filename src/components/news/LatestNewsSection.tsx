@@ -5,11 +5,27 @@ import NewsCategoryFilter from "./NewsCategoryFilter";
 import NewsGallery from "./NewsGallery";
 import { FaArrowDown } from "react-icons/fa6";
 import { NEWS_CATEGORY_ARRAY } from "@/utils/constants";
+import { useNewsGallery } from "@/hooks/queries/useNews";
+import Error from "../common/error/Error";
+import ContentDetailModal from "./ContentDetailModal";
+import type { NewsItem } from "@/types";
 
 const LatestNewsSection = () => {
-  const [selectedCategory, setSelectedCategory] = useState(
-    NEWS_CATEGORY_ARRAY[0].category
-  );
+  const [selectedCategory, setSelectedCategory] = useState(NEWS_CATEGORY_ARRAY[0].category);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
+  const { data: newsItems = [], isLoading, isError } = useNewsGallery();
+
+  //스켈레톤 필요
+  if (isLoading) return null;
+  if (isError) return <Error />;
+
+  //news item 클릭 핸들러
+  const handleNewsClick = (newsItem: NewsItem) => {
+    setSelectedNews(newsItem);
+    setModalOpen(true);
+  };
+
   return (
     <section
       className="max-w-[1280px] flex justify-center align-center flex-col px-5 py-32 m-auto"
@@ -25,7 +41,11 @@ const LatestNewsSection = () => {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
-      <NewsGallery selectedCategory={selectedCategory} />
+      <NewsGallery
+        selectedCategory={selectedCategory}
+        newsItems={newsItems}
+        onClick={handleNewsClick}
+      />
       <div className="text-center">
         <ActionButton
           variant="primary"
@@ -35,6 +55,14 @@ const LatestNewsSection = () => {
           <FaArrowDown className="animate-arrow" />
         </ActionButton>
       </div>
+      {modalOpen && (
+        <ContentDetailModal
+          isOpen={modalOpen}
+          onOpenChange={() => setModalOpen(false)}
+          contentType="news"
+          content={selectedNews}
+        />
+      )}
     </section>
   );
 };

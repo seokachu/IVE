@@ -426,12 +426,27 @@ export interface NewsCategoryFilterProps {
   setSelectedCategory: Dispatch<SetStateAction<string>>;
 }
 
+export type NewsItem = Database["public"]["Tables"]["news_gallery"]["Row"];
+export type GalleryItem = Database["public"]["Tables"]["gallery"]["Row"];
+
 export interface NewsGalleryProps {
   selectedCategory: string;
+  newsItems: Tables<"news_gallery">[];
+  onClick: (newsItem: NewsItem) => void;
 }
 
 export interface NewsGalleryItemProps {
+  selectedCategory: string;
   item: Tables<"news_gallery">;
   index: number;
   totalItems: number;
+  onClick: () => void;
+}
+
+export interface LatestNewsDetailProps {
+  item: Tables<"news_gallery">;
+}
+
+export interface GalleryPhotoDetailProps {
+  item: Tables<"gallery">;
 }

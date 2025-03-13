@@ -1,15 +1,24 @@
 import DefaultImage from "@/assets/images/default_image.avif";
 import Image from "next/image";
-import type { NewsGalleryItemProps } from "@/types";
 import { formatDate } from "@/utils/formatDate";
+import type { NewsGalleryItemProps } from "@/types";
 
-const NewsGalleryItem = ({ item, index, totalItems }: NewsGalleryItemProps) => {
+const NewsGalleryItem = ({
+  selectedCategory,
+  item,
+  index,
+  totalItems,
+  onClick,
+}: NewsGalleryItemProps) => {
   const isOddCount = totalItems % 2 === 1;
   const itemWidth =
     isOddCount && index === 0 ? "lg:!w-full" : "lg:w-[calc(50%-1rem)]";
 
+  console.log(selectedCategory);
+
   return (
     <li
+      onClick={onClick}
       className={`cursor-pointer relative overflow-hidden border rounded-md group text-white w-full ${itemWidth}`}
     >
       <div className="aspect-[16/9]">
