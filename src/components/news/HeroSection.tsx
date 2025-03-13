@@ -6,7 +6,7 @@ const HeroSection = () => {
   return (
     <section className="relative h-[100dvh] lg:h-screen flex flex-col gap-2 items-center justify-center bg-main-image bg-cover bg-center bg-no-repeat">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-0" />
-      <div className="z-10 relative">
+      <div className="z-10 relative mx-auto px-4 w-full">
         <div className="mb-10 flex flex-col gap-5 items-center justify-center">
           <h1
             className={`text-white font-bold text-3xl lg:text-6xl ${textStyle}`}

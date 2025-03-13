@@ -10,18 +10,18 @@ const ScrollToSectionButton = () => {
   };
 
   return (
-    <div className="flex items-center gap-5 flex-col lg:flex-row">
+    <div className="flex justify-center items-center gap-5 flex-col lg:flex-row">
       <ActionButton
         onClick={() => scrollToSection("news_section")}
         variant="primary"
-        className="px-8 py-4 !rounded-full font-bold"
+        className="px-8 py-4 !rounded-full font-bold w-full lg:w-max"
       >
         Latest News
       </ActionButton>
       <ActionButton
         onClick={() => scrollToSection("gallery_section")}
         variant="default"
-        className="px-8 py-4 !rounded-full bg-white font-bold"
+        className="px-8 py-4 !rounded-full bg-white font-bold w-full lg:w-max"
       >
         View Gallery
       </ActionButton>
