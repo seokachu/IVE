@@ -8,8 +8,8 @@ import { NEWS_CATEGORY_ARRAY } from "@/utils/constants";
 import { useNewsGallery } from "@/hooks/queries/useNews";
 import Error from "../common/error/Error";
 import ContentDetailModal from "./ContentDetailModal";
-import type { NewsItem } from "@/types";
 import LatestNewsSkeleton from "../common/loading/LatestNewsSkeleton";
+import type { NewsItem } from "@/types";
 
 const LatestNewsSection = () => {
   const [selectedCategory, setSelectedCategory] = useState(

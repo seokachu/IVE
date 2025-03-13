@@ -4,7 +4,6 @@ import { formatDate } from "@/utils/formatDate";
 import type { NewsGalleryItemProps } from "@/types";
 
 const NewsGalleryItem = ({
-  selectedCategory,
   item,
   index,
   totalItems,
@@ -13,8 +12,6 @@ const NewsGalleryItem = ({
   const isOddCount = totalItems % 2 === 1;
   const itemWidth =
     isOddCount && index === 0 ? "lg:!w-full" : "lg:w-[calc(50%-1rem)]";
-
-  console.log(selectedCategory);
 
   return (
     <li

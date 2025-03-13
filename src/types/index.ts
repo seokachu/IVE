@@ -436,7 +436,6 @@ export interface NewsGalleryProps {
 }
 
 export interface NewsGalleryItemProps {
-  selectedCategory: string;
   item: Tables<"news_gallery">;
   index: number;
   totalItems: number;
