@@ -1,18 +1,7 @@
 import DefaultImage from "@/assets/images/default_image.avif";
 import Image from "next/image";
-
-interface NewsGalleryItemProps {
-  item: {
-    id: number;
-    title: string;
-    category: string;
-    date: string;
-    content: string;
-    image_url: string;
-  };
-  index: number;
-  totalItems: number;
-}
+import type { NewsGalleryItemProps } from "@/types";
+import { formatDate } from "@/utils/formatDate";
 
 const NewsGalleryItem = ({ item, index, totalItems }: NewsGalleryItemProps) => {
   const isOddCount = totalItems % 2 === 1;
@@ -37,7 +26,9 @@ const NewsGalleryItem = ({ item, index, totalItems }: NewsGalleryItemProps) => {
             <span className="px-3 py-1 rounded-2xl bg-white/20 backdrop-blur-sm">
               {item.category}
             </span>
-            <time className="opacity-75">{item.date}</time>
+            <time className="opacity-75">
+              {formatDate(item.created_at, "dash")}
+            </time>
           </div>
           <div className="p-3 pt-0 text-white">
             <h3 className="text-xl font-bold mb-2 group-hover:text-purple transition-colors">

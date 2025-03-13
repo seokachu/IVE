@@ -179,3 +179,7 @@ export const NEWS_CATEGORY_ARRAY = [
   { category: "행사" },
   { category: "화보" },
 ];
+
+//소식 페이지 페이지 불러오기 5개 제한
+export const DEFAULT_LIMIT = 5;
+

@@ -425,3 +425,13 @@ export interface NewsCategoryFilterProps {
   selectedCategory: string;
   setSelectedCategory: Dispatch<SetStateAction<string>>;
 }
+
+export interface NewsGalleryProps {
+  selectedCategory: string;
+}
+
+export interface NewsGalleryItemProps {
+  item: Tables<"news_gallery">;
+  index: number;
+  totalItems: number;
+}

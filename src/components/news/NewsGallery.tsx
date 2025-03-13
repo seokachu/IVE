@@ -1,9 +1,6 @@
 import { useNewsGallery } from "@/hooks/queries/useNews";
 import NewsGalleryItem from "./NewsGalleryItem";
-
-interface NewsGalleryProps {
-  selectedCategory: string;
-}
+import type { NewsGalleryProps } from "@/types";
 
 const NewsGallery = ({ selectedCategory }: NewsGalleryProps) => {
   console.log(selectedCategory);

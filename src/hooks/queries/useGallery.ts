@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export const useGallery = () => {
   return useQuery({
-    queryKey: ["Gallery"],
+    queryKey: ["gallery"],
     queryFn: getGallery,
   });
 };
