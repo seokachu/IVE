@@ -1,13 +1,24 @@
 import Image from "next/image";
+import DefaultImage from "@/assets/images/default_image.avif";
 import { FaSearchPlus } from "react-icons/fa";
 
-const GalleryPhotoListItem = () => {
+interface GalleryPhotoListItemProps {
+  item: {
+    id: string;
+    image_url: string;
+    created_at: string;
+  };
+}
+
+const GalleryPhotoListItem = ({ item }: GalleryPhotoListItemProps) => {
+  console.log(item);
+
   return (
     <li className="cursor-pointer relative overflow-hidden border rounded-md group text-white w-full md:w-[calc(50%-1rem)] lg:w-[calc(33%-1.2rem)]">
       <div className="aspect-square">
         <Image
-          src="https://jzghadoanikvjvczuerw.supabase.co/storage/v1/object/public/goods/1-ep/album.webp"
-          alt="test"
+          src={item.image_url || DefaultImage}
+          alt={`image gallery-${item.id}번째 입니다.`}
           className="absolute w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           width={500}
           height={500}

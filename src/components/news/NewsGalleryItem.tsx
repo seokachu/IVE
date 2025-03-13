@@ -1,4 +1,4 @@
-// import DefaultImage from "@/assets/images/default_image.avif";
+import DefaultImage from "@/assets/images/default_image.avif";
 import Image from "next/image";
 
 interface NewsGalleryItemProps {
@@ -8,6 +8,7 @@ interface NewsGalleryItemProps {
     category: string;
     date: string;
     content: string;
+    image_url: string;
   };
   index: number;
   totalItems: number;
@@ -20,11 +21,11 @@ const NewsGalleryItem = ({ item, index, totalItems }: NewsGalleryItemProps) => {
 
   return (
     <li
-      className={`relative overflow-hidden border rounded-md group text-white w-full ${itemWidth}`}
+      className={`cursor-pointer relative overflow-hidden border rounded-md group text-white w-full ${itemWidth}`}
     >
       <div className="aspect-[16/9]">
         <Image
-          src="https://jzghadoanikvjvczuerw.supabase.co/storage/v1/object/public/goods/1-ep/album.webp"
+          src={item.image_url || DefaultImage}
           alt="test"
           className="absolute w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           width={500}

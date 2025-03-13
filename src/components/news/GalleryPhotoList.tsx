@@ -1,13 +1,19 @@
 import GalleryPhotoListItem from "./GalleryPhotoListItem";
 
-const GalleryPhotoList = () => {
+interface GalleryPhotoListProps {
+  gallery: {
+    id: string;
+    image_url: string;
+    created_at: string;
+  }[];
+}
+
+const GalleryPhotoList = ({ gallery }: GalleryPhotoListProps) => {
   return (
     <ul className="my-16 flex flex-wrap gap-8">
-      <GalleryPhotoListItem />
-      <GalleryPhotoListItem />
-      <GalleryPhotoListItem />
-      <GalleryPhotoListItem />
-      <GalleryPhotoListItem />
+      {gallery.map((item) => (
+        <GalleryPhotoListItem key={item.id} item={item} />
+      ))}
     </ul>
   );
 };
