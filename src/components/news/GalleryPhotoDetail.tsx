@@ -11,7 +11,7 @@ const GalleryPhotoDetail = ({ item }: GalleryPhotoDetailProps) => {
           alt={`이미지 갤러리 리스트-${item.id}번째 사진 입니다.`}
           width={1000}
           height={1000}
-          className="object-contain"
+          className="max-w-full max-h-[80vh] object-contain"
         />
       </div>
     </article>

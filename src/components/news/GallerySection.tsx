@@ -6,6 +6,7 @@ import { useGallery } from "@/hooks/queries/useGallery";
 import Error from "../common/error/Error";
 import { useState } from "react";
 import ContentDetailModal from "./ContentDetailModal";
+import GalleryPhotoSkeleton from "../common/loading/GalleryPhotoSkeleton";
 import type { GalleryItem } from "@/types";
 
 const GallerySection = () => {
@@ -15,8 +16,7 @@ const GallerySection = () => {
   );
   const { data: gallery, isLoading, isError } = useGallery();
 
-  //스켈레톤 필요
-  if (isLoading) return null;
+  if (isLoading) return <GalleryPhotoSkeleton />;
   if (isError) return <Error />;
   if (!gallery || gallery.length === 0) return null;
 

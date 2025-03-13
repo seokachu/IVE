@@ -24,12 +24,22 @@ const ContentDetailModal = ({
 }: ContentDetailModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="p-0 max-w-[95%] lg:max-w-[50%] min-h-[90dvh] lg:min-h-[80dvh] max-h-[90dvh] lg:max-h-[80dvh] overflow-hidden">
+      <DialogContent
+        className={`p-0 max-w-[95%] lg:max-w-[50%] overflow-hidden ${
+          contentType === "news"
+            ? "min-h-[90dvh] lg:min-h-[80dvh] max-h-[90dvh] lg:max-h-[80dvh]"
+            : "h-auto"
+        }`}
+      >
         <DialogHeader>
           <DialogTitle className="sr-only">
             {contentType === "news" ? "최신 소식 뉴스" : "사진 갤러리"}
           </DialogTitle>
-          <DialogDescription className="!m-0 max-h-[80dvh] overflow-y-auto">
+          <DialogDescription
+            className={`!m-0 ${
+              contentType === "news" ? "max-h-[80dvh] overflow-y-auto" : ""
+            }`}
+          >
             {contentType === "news" ? (
               <LatestNewsDetail item={content as NewsItem} />
             ) : (
