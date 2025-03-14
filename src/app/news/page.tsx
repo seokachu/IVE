@@ -1,12 +1,19 @@
 import { newsMetadata } from "@/metadata/news/newsMetadata";
+import HeroSection from "@/components/news/HeroSection";
+import GoTopButton from "@/components/common/button/GoTopButton";
+import LatestNewsSection from "@/components/news/LatestNewsSection";
+import GallerySection from "@/components/news/GallerySection";
 
 export const metadata = newsMetadata;
 
 const page = () => {
   return (
-    <div className="flex items-center justify-center h-screen">
-      <h1 className="font-bold text-2xl">준비 중 입니다!</h1>
-    </div>
+    <main>
+      <HeroSection />
+      <LatestNewsSection />
+      <GallerySection />
+      <GoTopButton />
+    </main>
   );
 };
 

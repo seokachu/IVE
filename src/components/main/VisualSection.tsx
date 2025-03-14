@@ -5,10 +5,10 @@ import { cn } from "@/utils/utils";
 
 const VisualSection = () => {
   const isScrolled = useRecoilValue(scrollState);
-  const textStyle = "text-shadow:_1px_3px_5px_rgb(0_0_0_/_0.3)] lg:text-xl";
+  const textStyle = "[text-shadow:_1px_3px_5px_rgb(0_0_0_/_0.3)] lg:text-xl";
 
   return (
-    <section className="h-[100dvh] lg:h-screen w-full relative bg-main-image bg-cover bg-center flex items-center justify-center">
+    <section className="h-[100dvh] lg:h-screen w-full relative bg-main-image bg-cover bg-center bg-no-repeat flex items-center justify-center">
       <video
         className={cn(
           "h-[100dvh] lg:h-screen w-full object-cover fixed top-0 left-0",
