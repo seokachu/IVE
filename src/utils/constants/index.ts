@@ -170,3 +170,18 @@ export const PHONE_OPTIONS = [
     title: "019",
   },
 ];
+
+//news category list
+export const NEWS_CATEGORY_ARRAY = [
+  { category: "전체" },
+  { category: "음악" },
+  { category: "방송" },
+  { category: "행사" },
+  { category: "화보" },
+];
+
+//소식 페이지 latest news section 데이터 불러오기 5개 제한
+export const LATEST_DEFAULT_LIMIT = 5;
+
+//소식 페이지 gallery section 데이터 불러오기 6개 제한
+export const GALLERY_DEFAULT_LIMIT = 6;

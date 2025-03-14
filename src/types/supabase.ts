@@ -294,6 +294,24 @@ export type Database = {
         }
         Relationships: []
       }
+      gallery: {
+        Row: {
+          created_at: string
+          id: number
+          image_url: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          image_url: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          image_url?: string
+        }
+        Relationships: []
+      }
       goods: {
         Row: {
           color: string | null
@@ -389,6 +407,36 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      news_gallery: {
+        Row: {
+          category: string
+          content: string
+          created_at: string
+          id: number
+          image_url: string
+          source: string
+          title: string
+        }
+        Insert: {
+          category: string
+          content: string
+          created_at?: string
+          id?: number
+          image_url: string
+          source: string
+          title: string
+        }
+        Update: {
+          category?: string
+          content?: string
+          created_at?: string
+          id?: number
+          image_url?: string
+          source?: string
+          title?: string
+        }
+        Relationships: []
       }
       order_items: {
         Row: {
@@ -636,6 +684,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      increment_view_count: {
+        Args: {
+          row_id: number
+        }
+        Returns: Json
+      }
       set_default_address: {
         Args: {
           p_address_id: string
