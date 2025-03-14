@@ -39,23 +39,25 @@ const LatestNewsSection = () => {
       <h3 className="text-center text-gray-600 mb-12">
         아이브의 새로운 소식을 가장 먼저 만나보세요
       </h3>
-      <NewsCategoryFilter
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
-      <NewsGallery
-        selectedCategory={selectedCategory}
-        newsItems={newsItems}
-        onClick={handleNewsClick}
-      />
-      <div className="text-center">
-        <ActionButton
-          variant="primary"
-          className="inline-flex justify-center items-center gap-1 px-8 py-4 !rounded-full"
-        >
-          <span>더 많은 소식 보기</span>
-          <FaArrowDown className="animate-arrow" />
-        </ActionButton>
+      <div>
+        <NewsCategoryFilter
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
+        <NewsGallery
+          selectedCategory={selectedCategory}
+          newsItems={newsItems}
+          onClick={handleNewsClick}
+        />
+        <div className="text-center sticky bottom-10">
+          <ActionButton
+            variant="primary"
+            className="inline-flex justify-center items-center gap-1 px-8 py-4 !rounded-full text-sm lg:text-base"
+          >
+            <span>더 많은 소식 보기</span>
+            <FaArrowDown className="animate-arrow" />
+          </ActionButton>
+        </div>
       </div>
       {modalOpen && (
         <ContentDetailModal

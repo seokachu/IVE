@@ -35,15 +35,17 @@ const GallerySection = () => {
         Gallery
       </h2>
       <h3 className="text-center text-gray-600">특별한 순간을 담은 갤러리</h3>
-      <GalleryPhotoList gallery={gallery} onClick={handleGalleryClick} />
-      <div className="text-center">
-        <ActionButton
-          variant="primary"
-          className="inline-flex justify-center items-center gap-1 px-8 py-4 !rounded-full"
-        >
-          <span>더 많은 사진 보기</span>
-          <FaArrowDown className="animate-arrow" />
-        </ActionButton>
+      <div className="mt-16">
+        <GalleryPhotoList gallery={gallery} onClick={handleGalleryClick} />
+        <div className="text-center sticky bottom-10">
+          <ActionButton
+            variant="primary"
+            className="inline-flex justify-center items-center gap-1 px-8 py-4 !rounded-full text-sm lg:text-base"
+          >
+            <span>더 많은 사진 보기</span>
+            <FaArrowDown className="animate-arrow" />
+          </ActionButton>
+        </div>
       </div>
       {modalOpen && (
         <ContentDetailModal

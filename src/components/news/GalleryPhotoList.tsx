@@ -3,7 +3,7 @@ import type { GalleryPhotoListProps } from "@/types";
 
 const GalleryPhotoList = ({ gallery, onClick }: GalleryPhotoListProps) => {
   return (
-    <ul className="my-16 flex flex-wrap gap-8">
+    <ul className="mb-16 flex flex-wrap gap-8">
       {gallery.map((item) => (
         <GalleryPhotoListItem
           key={item.id}

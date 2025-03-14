@@ -14,14 +14,14 @@ const ScrollToSectionButton = () => {
       <ActionButton
         onClick={() => scrollToSection("news_section")}
         variant="primary"
-        className="px-8 py-4 !rounded-full font-bold w-full lg:w-max"
+        className="px-8 py-4 !rounded-full font-bold w-full md:w-[400px] lg:w-max"
       >
         Latest News
       </ActionButton>
       <ActionButton
         onClick={() => scrollToSection("gallery_section")}
         variant="default"
-        className="px-8 py-4 !rounded-full bg-white font-bold w-full lg:w-max"
+        className="px-8 py-4 !rounded-full bg-white font-bold w-full md:w-[400px] lg:w-max"
       >
         View Gallery
       </ActionButton>
