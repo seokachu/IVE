@@ -8,7 +8,7 @@ import { formatDate } from "@/utils/formatDate";
 const LatestNewsDetail = ({ item }: LatestNewsDetailProps) => {
   console.log(item);
   return (
-    <article className="text-left">
+    <div className="text-left">
       <div className="w-full h-80">
         <Image
           src={item.image_url || DefaultImage}
@@ -37,7 +37,7 @@ const LatestNewsDetail = ({ item }: LatestNewsDetailProps) => {
         </div>
         <p className="mb-6 text-gray-700 leading-relaxed">{item.content}</p>
       </div>
-    </article>
+    </div>
   );
 };
 

@@ -4,7 +4,7 @@ import type { GalleryPhotoDetailProps } from "@/types";
 
 const GalleryPhotoDetail = ({ item }: GalleryPhotoDetailProps) => {
   return (
-    <article>
+    <div>
       <div className="w-full">
         <Image
           src={item.image_url || DefaultImage}
@@ -14,7 +14,7 @@ const GalleryPhotoDetail = ({ item }: GalleryPhotoDetailProps) => {
           className="max-w-full max-h-[80vh] object-contain"
         />
       </div>
-    </article>
+    </div>
   );
 };
 

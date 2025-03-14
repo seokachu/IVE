@@ -10,7 +10,7 @@ const NewsCategoryFilter = ({
       aria-label="IVE 뉴스 카테고리"
       className="flex justify-center items-center"
     >
-      <ul className="flex items-center justify-center gap-2 p-1 bg-gray-100 rounded-full text-gray-600 flex-wrap">
+      <ul className="flex items-center gap-2 p-1 bg-gray-100 rounded-full text-gray-600 overflow-x-auto scrollbar-hide">
         {NEWS_CATEGORY_ARRAY.map((el) => (
           <li
             key={el.category}
