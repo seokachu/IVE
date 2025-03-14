@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 //기본 5개 뉴스 가져오기
 export const useNewsGallery = (limit = LATEST_DEFAULT_LIMIT) => {
   return useQuery({
-    queryKey: ["newsGallery"],
+    queryKey: ["newsGallery", limit],
     queryFn: () => getNewsGallery(limit),
   });
 };

@@ -4,7 +4,7 @@ import ActionButton from "../common/button/ActionButton";
 import NewsCategoryFilter from "./NewsCategoryFilter";
 import NewsGallery from "./NewsGallery";
 import { FaArrowDown } from "react-icons/fa6";
-import { NEWS_CATEGORY_ARRAY } from "@/utils/constants";
+import { LATEST_DEFAULT_LIMIT, NEWS_CATEGORY_ARRAY } from "@/utils/constants";
 import { useNewsGallery } from "@/hooks/queries/useNews";
 import Error from "../common/error/Error";
 import ContentDetailModal from "./ContentDetailModal";
@@ -16,8 +16,13 @@ const LatestNewsSection = () => {
     NEWS_CATEGORY_ARRAY[0].category
   );
   const [modalOpen, setModalOpen] = useState(false);
+  const [itemLimit, setItemLimit] = useState(LATEST_DEFAULT_LIMIT);
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
-  const { data: newsItems = [], isLoading, isError } = useNewsGallery();
+  const {
+    data: newsItems = [],
+    isLoading,
+    isError,
+  } = useNewsGallery(itemLimit);
 
   if (isLoading) return <LatestNewsSkeleton />;
   if (isError) return <Error />;
@@ -26,6 +31,11 @@ const LatestNewsSection = () => {
   const handleNewsClick = (newsItem: NewsItem) => {
     setSelectedNews(newsItem);
     setModalOpen(true);
+  };
+
+  //더 많은 소식 보기 button
+  const handleLoadMore = () => {
+    setItemLimit((prev) => prev + LATEST_DEFAULT_LIMIT);
   };
 
   return (
@@ -50,13 +60,16 @@ const LatestNewsSection = () => {
           onClick={handleNewsClick}
         />
         <div className="text-center sticky bottom-10">
-          <ActionButton
-            variant="primary"
-            className="inline-flex justify-center items-center gap-1 px-8 py-4 !rounded-full text-sm lg:text-base"
-          >
-            <span>더 많은 소식 보기</span>
-            <FaArrowDown className="animate-arrow" />
-          </ActionButton>
+          {newsItems.length >= itemLimit && (
+            <ActionButton
+              onClick={handleLoadMore}
+              variant="primary"
+              className="inline-flex justify-center items-center gap-1 px-8 py-4 !rounded-full text-sm lg:text-base"
+            >
+              <span>더 많은 소식 보기</span>
+              <FaArrowDown className="animate-arrow" />
+            </ActionButton>
+          )}
         </div>
       </div>
       {modalOpen && (
