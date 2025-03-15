@@ -1,11 +1,8 @@
 "use client";
-import ShareButton from "@/components/common/button/ShareButton";
-import Link from "next/link";
 import { useBoardDetail, useDeleteBoard } from "@/hooks/queries/useBoard";
 import BoardDetailUserInfo from "./BoardDetailUserInfo";
 import CommentSection from "../comment/CommentSection";
 import BoardLikeButton from "../BoardLikeButton";
-import BoardActionButton from "../BoardActionButton";
 import BoardDetailHeader from "./BoardDetailHeader";
 import BoardDetailContent from "./BoardDetailContent";
 import Error from "@/components/common/error/Error";
@@ -53,25 +50,13 @@ const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
 
   return (
     <>
-      <div className="flex border-b py-5 items-center">
-        <BoardDetailHeader item={board} />
-        <div className="flex flex-col ml-auto justify-end shrink-0">
-          <div className="flex gap-3 text-sm items-center">
-            <ShareButton />
-            <Link href="/board" className="hover:text-purple">
-              목록
-            </Link>
-          </div>
-          {isAuthor && (
-            <div className="flex justify-end items-center gap-1 text-sm pt-3">
-              <BoardActionButton
-                onEdit={onClickEdit}
-                onDelete={onClickDelete}
-                mode="default"
-              />
-            </div>
-          )}
-        </div>
+      <div className="flex border-b py-5 items-start justify-between">
+        <BoardDetailHeader
+          item={board}
+          isAuthor={isAuthor}
+          onClickDelete={onClickDelete}
+          onClickEdit={onClickEdit}
+        />
       </div>
       <BoardDetailContent item={board} />
       <BoardLikeButton item={board} />
