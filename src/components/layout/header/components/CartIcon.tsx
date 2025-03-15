@@ -20,10 +20,7 @@ const CartIcon = ({
   const [mounted, setMounted] = useState(false);
   const [cartItems] = useRecoilState(cartState);
 
-  const totalQuantity = cartItems.reduce(
-    (sum, item) => sum + (item.quantity || 0),
-    0
-  );
+  const uniqueItemsCount = cartItems.length;
 
   useEffect(() => {
     setMounted(true);
@@ -36,11 +33,11 @@ const CartIcon = ({
           className={`${iconClassName} cursor-pointer`}
           size={iconSize}
         />
-        {mounted && totalQuantity > 0 && (
+        {mounted && uniqueItemsCount > 0 && (
           <span
             className={`${className} absolute bottom-3 rounded-full bg-rose-500 text-xs text-white w-5 h-5 flex items-center justify-center`}
           >
-            {totalQuantity}
+            {uniqueItemsCount}
           </span>
         )}
       </div>
