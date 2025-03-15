@@ -339,6 +339,13 @@ export interface BoardDetailProps {
   item: BoardWithRelations;
 }
 
+export interface BoardDetailHeaderProps {
+  item: BoardWithRelations;
+  isAuthor: boolean;
+  onClickDelete: () => void;
+  onClickEdit: () => void;
+}
+
 export interface Comment extends Tables<"board_comments"> {
   user: {
     name: string;
