@@ -5,6 +5,7 @@ import _ from "lodash";
 import OrderDetail from "@/components/mypage/order/OrderDetail";
 import { useRecoilValue } from "recoil";
 import { sessionState } from "@/store";
+import MyPageLoading from "@/components/common/loading/MyPageLoading";
 import type { OrderDetailPageProps } from "@/types";
 
 const OrderDetailPage = ({ params: { orderId } }: OrderDetailPageProps) => {
@@ -12,7 +13,7 @@ const OrderDetailPage = ({ params: { orderId } }: OrderDetailPageProps) => {
   const session = useRecoilValue(sessionState);
   const { data: orderItems, isLoading } = useOrderItems(session?.user?.id);
 
-  if (isLoading) return <div>로딩중</div>;
+  if (isLoading) return <MyPageLoading />;
 
   const groupedOrders = _.groupBy(orderItems, "order_id");
   const currentOrderItems = groupedOrders[orderId];
