@@ -60,12 +60,15 @@ const BoardContainer = () => {
     if (isLoading && !isFirstLoad.current) {
       return <SearchLoading />;
     }
-    //검색 결과가 없을 때
+
+    // 데이터가 없거나 검색 결과가 없을 때
     if (boardList && boardList.data.length === 0) {
       return (
         <div className="flex items-center justify-center min-h-[500px] flex-col gap-3">
           <TbMoodEmpty className="w-8 h-8 lg:w-10 lg:h-10" />
-          <h2 className="text-xs lg:text-sm">검색 결과가 없습니다.</h2>
+          <h2 className="text-xs lg:text-sm">
+            {searchKeyWord ? "검색 결과가 없습니다." : "게시글이 없습니다."}
+          </h2>
         </div>
       );
     }
