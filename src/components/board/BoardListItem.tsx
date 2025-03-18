@@ -67,7 +67,10 @@ const BoardListItem = ({ item, keyword }: BoardListItemProps) => {
           <p className="text-left max-w-[80%] truncate">
             {highlightKeyword(item.title, keyword || "")}
           </p>
-          <p className="text-blue-500">
+          <p
+            className="text-blue-500"
+            aria-label={`댓글 ${item.board_comments[0]?.count || 0}개`}
+          >
             &#91;{item.board_comments[0]?.count || 0}&#93;
           </p>
         </div>

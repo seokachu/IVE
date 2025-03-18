@@ -59,8 +59,8 @@ const ShopList = ({ sort }: SortProps) => {
   return (
     <>
       <ul className="flex flex-wrap sm:gap-0 md:gap-5 md:justify-start">
-        {items.map((el) => (
-          <ShopListItem key={el.id} item={el} variant="shop" />
+        {items.map((el, index) => (
+          <ShopListItem key={el.id} item={el} variant="shop" index={index} />
         ))}
       </ul>
       <div ref={observerRef} className="h-10" />

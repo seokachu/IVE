@@ -30,12 +30,20 @@ const Footer = () => {
         <div>
           <ul className="flex gap-4">
             <li>
-              <Link href="https://github.com/seokachu/IVE" target="_blank">
+              <Link
+                href="https://github.com/seokachu/IVE"
+                target="_blank"
+                aria-label="깃허브 링크 새창으로 열기"
+              >
                 <FaGithub size={25} />
               </Link>
             </li>
             <li>
-              <Link href="https://seokachu.tistory.com" target="_blank">
+              <Link
+                href="https://seokachu.tistory.com"
+                target="_blank"
+                aria-label="블로그 링크 새창으로 열기"
+              >
                 <FaBlog size={25} />
               </Link>
             </li>

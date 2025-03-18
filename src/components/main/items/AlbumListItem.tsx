@@ -5,7 +5,7 @@ import { MUSIC_ICONS } from "@/utils/constants";
 import DefaultImage from "@/assets/images/default_image.avif";
 import type { AlbumItemProps } from "@/types";
 
-const AlbumListItems = ({ album }: AlbumItemProps) => {
+const AlbumListItem = ({ album }: AlbumItemProps) => {
   const musicLinks = MUSIC_ICONS.map((el) => {
     const link = (() => {
       switch (el.label.toLowerCase()) {
@@ -30,7 +30,7 @@ const AlbumListItems = ({ album }: AlbumItemProps) => {
   });
 
   return (
-    <li
+    <div
       key={album.title}
       className="flex flex-col items-center p-5 lg:flex-row lg:gap-12 lg:p-0"
     >
@@ -86,8 +86,8 @@ const AlbumListItems = ({ album }: AlbumItemProps) => {
             ))}
         </ul>
       </div>
-    </li>
+    </div>
   );
 };
 
-export default AlbumListItems;
+export default AlbumListItem;

@@ -33,7 +33,7 @@ const MainBoardListItem = ({ item }: MainBoardListItemProps) => {
           <h3 className="font-bold text-base lg:text-xl overflow-hidden text-ellipsis whitespace-nowrap">
             {item.title}
           </h3>
-          <div className="flex gap-3 text-dark-gray text-sm">
+          <div className="flex gap-3 text-gray-400 text-sm">
             <p className="relative after:content-['•'] after:absolute after:left-[calc(100%+4px)] after:top-2/4 after:-translate-y-2/4">
               {item.user.name}
             </p>

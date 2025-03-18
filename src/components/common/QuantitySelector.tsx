@@ -26,6 +26,7 @@ const QuantitySelector = ({
               ? "opacity-50 cursor-not-allowed"
               : "hover:text-purple"
           }`}
+          aria-label="수량 감소"
         >
           <CiSquareMinus size={25} />
         </button>
@@ -33,6 +34,7 @@ const QuantitySelector = ({
         <button
           onClick={increase}
           className={`${quantity >= 5 ? "opacity-50 " : "hover:text-purple"}`}
+          aria-label="수량 증가"
         >
           <CiSquarePlus size={25} />
         </button>

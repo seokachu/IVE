@@ -10,8 +10,8 @@ const UserWishList = ({ wishlists }: UserWishListProps) => {
         </div>
       ) : (
         <ul className="mt-5 flex flex-wrap justify-start md:gap-5">
-          {wishlists.map((item) => (
-            <UserWishListItem key={item.id} item={item} />
+          {wishlists.map((item, index) => (
+            <UserWishListItem key={item.id} item={item} index={index} />
           ))}
         </ul>
       )}

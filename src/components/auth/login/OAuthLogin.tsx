@@ -28,6 +28,7 @@ const OAuthLogin = () => {
           icon={IoChatbubble}
           size={20}
           iconStyle="m-auto"
+          aria-label="카카오로 로그인하기 버튼"
         />
       </li>
       <li>
@@ -37,6 +38,7 @@ const OAuthLogin = () => {
           icon={FcGoogle}
           size={30}
           iconStyle="m-auto"
+          aria-label="구글로 로그인하기 버튼"
         />
       </li>
       <li>
@@ -46,6 +48,7 @@ const OAuthLogin = () => {
           icon={FaGithub}
           size={38}
           iconStyle="translate-y-[2px]"
+          aria-label="깃허브로 로그인하기 버튼"
         />
       </li>
     </ul>

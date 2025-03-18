@@ -1,6 +1,7 @@
 import { RHFInput } from "@/components/common/RHFInput";
 import { RHFSelect } from "@/components/common/select/RHFSelect";
 import { PHONE_OPTIONS } from "@/utils/constants";
+import { Label } from "@radix-ui/react-label";
 
 const ContactInfo = () => {
   return (
@@ -18,33 +19,38 @@ const ContactInfo = () => {
               name="phoneFirst"
               options={PHONE_OPTIONS}
               className="w-full text-base lg:text-sm"
+              aria-label="휴대폰 앞자리 선택"
             />
           </div>
           <span className="block translate-y-1/3">&#45;</span>
           <div className="w-1/3">
-            <RHFInput
-              type="tel"
-              name="phoneMiddle"
-              className="rounded-sm py-2 px-3 w-full"
-              messageClassName="p-1 pt-1"
-              pattern="[0-9]*"
-              inputMode="numeric"
-              id="phone-middle"
-              maxLength={4}
-            />
+            <Label htmlFor="phone-middle">
+              <RHFInput
+                type="tel"
+                name="phoneMiddle"
+                className="rounded-sm py-2 px-3 w-full"
+                messageClassName="p-1 pt-1"
+                pattern="[0-9]*"
+                inputMode="numeric"
+                id="phone-middle"
+                maxLength={4}
+              />
+            </Label>
           </div>
           <span className="block translate-y-1/3">&#45;</span>
           <div className="w-1/3">
-            <RHFInput
-              type="tel"
-              name="phoneLast"
-              id="phone-last"
-              pattern="[0-9]*"
-              inputMode="numeric"
-              className="rounded-sm py-2 px-3 w-full"
-              messageClassName="p-1 pt-1"
-              maxLength={4}
-            />
+            <Label htmlFor="phone-last">
+              <RHFInput
+                type="tel"
+                name="phoneLast"
+                id="phone-last"
+                pattern="[0-9]*"
+                inputMode="numeric"
+                className="rounded-sm py-2 px-3 w-full"
+                messageClassName="p-1 pt-1"
+                maxLength={4}
+              />
+            </Label>
           </div>
         </div>
       </fieldset>

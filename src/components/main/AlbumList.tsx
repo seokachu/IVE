@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "@/styles/swiper.css";
-import AlbumListItems from "./items/AlbumListItems";
+import AlbumListItem from "./items/AlbumListItem";
 import { useAlbums } from "@/hooks/queries/useAlbum";
 import AlbumListLoading from "../common/loading/AlbumListLoading";
 import Error from "../common/error/Error";
@@ -35,13 +35,15 @@ const AlbumList = () => {
       modules={[EffectCoverflow, Pagination]}
       className="w-full h-full !pb-[80px]"
       spaceBetween={50}
+      wrapperTag="ul"
     >
       {albums?.map((album) => (
         <SwiperSlide
           key={album.title}
+          tag="li"
           className="bg-cover h-fit bg-center lg:!w-max lg:!h-full lg:pr-5"
         >
-          <AlbumListItems album={album} />
+          <AlbumListItem album={album} />
         </SwiperSlide>
       ))}
     </Swiper>

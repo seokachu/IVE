@@ -11,7 +11,7 @@ import { toast } from "@/hooks/use-toast";
 import { UserWishListItemProps } from "@/types";
 import { useAverageRating } from "@/hooks/queries/useReviews";
 
-const UserWishListItem = ({ item }: UserWishListItemProps) => {
+const UserWishListItem = ({ item, index }: UserWishListItemProps) => {
   const { push } = useRouter();
   const {
     data: goodsItem,
@@ -56,16 +56,18 @@ const UserWishListItem = ({ item }: UserWishListItemProps) => {
       onClick={onClickDetail}
       onKeyDown={handleKeyDown}
       className="w-2/6 md:w-[calc(33.333%-0.9rem)] md:border p-0 md:p-4 md:rounded-lg cursor-pointer md:hover:shadow-lg group mb-7 md:mb-5"
-      role="button"
       tabIndex={0}
+      aria-label={`상품: ${goodsItem.title}, 가격: ${goodsItem.price}원, 할인율: ${goodsItem.discount_rate}%`}
     >
       <div className="relative w-full h-auto md:rounded-lg overflow-hidden aspect-square border">
         <Image
           src={goodsItem.thumbnail || DefaultImage}
-          alt="썸네일"
+          alt={goodsItem.title || "상품 썸네일 이미지"}
           className="fill group-hover:scale-110 transition-transform duration-300 w-full"
           width={250}
           height={250}
+          loading={index < 6 ? "eager" : "lazy"}
+          priority={index < 6}
         />
         <button
           onClick={onClickHeart}

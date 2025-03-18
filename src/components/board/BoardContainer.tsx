@@ -107,6 +107,7 @@ const BoardContainer = () => {
             onClick={onClickBoardWrite}
             variant="primary"
             className="flex items-center justify-center border-1 lg:border-2 gap-2 px-4 py-2 w-full lg:w-28 text-base lg:text-sm"
+            aria-label="글쓰기"
           >
             <GoPlusCircle className="w-5 h-5 translate-y-[1px]" />
             <span>글쓰기</span>

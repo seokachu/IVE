@@ -7,7 +7,7 @@ const AddressList = ({ addresses }: AddressListProps) => {
     <AnimatePresence initial={false}>
       <motion.ul layout className="mt-5">
         {addresses.map((address) => (
-          <motion.div
+          <motion.li
             key={address.id}
             layout
             initial={{ opacity: 0, y: 20 }}
@@ -22,7 +22,7 @@ const AddressList = ({ addresses }: AddressListProps) => {
             className="mb-5"
           >
             <AddressListItem item={address} />
-          </motion.div>
+          </motion.li>
         ))}
       </motion.ul>
     </AnimatePresence>
