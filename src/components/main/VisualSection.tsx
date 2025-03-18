@@ -21,14 +21,16 @@ const VisualSection = () => {
         playsInline
         webkit-playsinline="true"
         preload="auto"
+        aria-hidden="true"
+        role="presentation"
       />
       <ul className="absolute max-w-[1320px] w-full flex items-center text-center justify-center font-bold lg:justify-start lg:text-left">
         <li className="text-white lg:pl-20">
-          <h1 className="[text-shadow:_1px_3px_5px_rgb(0_0_0_/_0.3)] text-3xl mb-5 tracking-wide lg:text-6xl">
+          <h1 className="lg:[text-shadow:_1px_3px_5px_rgb(0_0_0_/_0.3)] text-3xl mb-5 tracking-wide lg:text-6xl">
             DIVE INTO IVE
           </h1>
-          <p className={`${textStyle}`}>내 가수 정보를 한눈에!</p>
-          <p className={`${textStyle}`}>
+          <p className={`lg:${textStyle}`}>내 가수 정보를 한눈에!</p>
+          <p className={`lg:${textStyle}`}>
             나의 최애 가수에게 응원의 한마디를 남겨보세요.
           </p>
         </li>
