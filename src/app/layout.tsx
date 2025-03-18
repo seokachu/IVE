@@ -34,6 +34,8 @@ export default function RootLayout({
           href="https://jzghadoanikvjvczuerw.supabase.co"
         />
         <link rel="preconnect" href="https://supabase.co" />
+        <link rel="preconnect" href="https://kakaocdn.net" />
+        <link rel="preconnect" href="https://img1.kakaocdn.net" />
       </head>
       <body className={`${notoSansKr.className} w-screen overflow-x-hidden`}>
         <ThemeProvider

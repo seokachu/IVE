@@ -229,6 +229,7 @@ export type WishListItem = Database["public"]["Tables"]["wish_lists"]["Row"];
 
 export interface UserWishListItemProps {
   item: Tables<"wish_lists">;
+  index: number;
 }
 
 export interface DirectPaymentButtonProps {

@@ -26,7 +26,11 @@ const SelectMenu = <
     <Select value={value} onValueChange={onChange}>
       <SelectTrigger
         className={className}
-        aria-label={`${options[0]?.title || "옵션"} 선택하기`}
+        aria-label={
+          value
+            ? `${value} 선택하기`
+            : `${options[0]?.title || "옵션"} 선택하기`
+        }
       >
         <SelectValue placeholder={options[0]?.title} />
       </SelectTrigger>
