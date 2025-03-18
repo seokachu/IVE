@@ -1,6 +1,7 @@
 import { IoSearch } from "react-icons/io5";
 import { Input } from "@/components/ui/input";
-import _ from "lodash";
+import debounce from "lodash/debounce";
+
 import { ChangeEvent, useEffect, useState, useRef } from "react";
 
 interface SearchProps {
@@ -19,7 +20,7 @@ const Search = ({
   const [value, setValue] = useState("");
 
   const debouncedSearch = useRef(
-    _.debounce((searchValue: string) => {
+    debounce((searchValue: string) => {
       const trimmedValue = searchValue.trim();
       onSearch(trimmedValue);
     }, 500)

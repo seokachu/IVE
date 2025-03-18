@@ -32,7 +32,7 @@ const HeaderAside = () => {
     <div className="lg:hidden">
       <Sheet>
         <SheetTrigger>
-          <RxHamburgerMenu size={25} />
+          <RxHamburgerMenu size={25} aria-label="메뉴 리스트 클릭하기" />
         </SheetTrigger>
         <SheetContent className="sm:w-2/3 sm:w-max-w-2/3">
           <SheetHeader>

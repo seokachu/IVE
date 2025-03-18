@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { cn } from "@/utils/utils";
 import { scrollState } from "@/store";
 import { useRecoilState } from "recoil";
+import { throttle } from "lodash";
 
 const Header = () => {
   const pathname = usePathname();
@@ -24,7 +25,7 @@ const Header = () => {
   useEffect(() => {
     if (!isMainPage) return;
 
-    const handleScroll = () => {
+    const handleScroll = throttle(() => {
       const secondSection = document.getElementById("second-section");
       if (secondSection) {
         const sectionTop = secondSection.getBoundingClientRect().top;
@@ -34,26 +35,21 @@ const Header = () => {
           setIsScrolled(false);
         }
       }
-    };
+    }, 100);
 
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      handleScroll.cancel();
     };
   }, [isMainPage, setIsScrolled]);
 
-  //조건문 header logo
-  let logoSrc;
-
-  if (isMainPage) {
-    if (isScrolled) {
-      logoSrc = SubLogoImage;
-    } else {
-      logoSrc = LogoImage;
-    }
-  } else {
-    logoSrc = SubLogoImage;
-  }
+  // 조건문 header logo
+  const logoSrc = isMainPage
+    ? isScrolled
+      ? SubLogoImage
+      : LogoImage
+    : SubLogoImage;
 
   return (
     <header

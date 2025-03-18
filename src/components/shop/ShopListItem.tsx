@@ -15,7 +15,11 @@ const SHOP_STYLES = {
   carousel: "w-full sm:border sm:p-4 sm:rounded-lg",
 } as const;
 
-const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
+const ShopListItem = ({
+  item,
+  variant = "shop",
+  index = 0,
+}: ShopListItemProps) => {
   const { push } = useRouter();
   const { data: reviewData } = useReviewCount(item.id);
   const { data: averageRating = 0 } = useAverageRating(item.id);
@@ -47,17 +51,18 @@ const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
       onClick={onClickDetail}
       onKeyDown={handleKeyDown}
       className={`${SHOP_STYLES[variant]} md:border p-0 md:p-4 md:rounded-lg cursor-pointer md:hover:shadow-lg group`}
-      role="button"
       tabIndex={0}
+      aria-label={`상품: ${item.title}, 가격: ${item.price}원, 할인율: ${item.discount_rate}%`}
     >
       <div className="relative w-full h-auto md:rounded-lg overflow-hidden aspect-square border">
         <Image
           src={item.thumbnail || DefaultImage}
-          alt="썸네일"
+          alt={item.title || "상품 썸네일 이미지"}
           className="fill group-hover:scale-110 transition-transform duration-300 object-cover w-full"
           width={250}
           height={250}
-          loading="lazy"
+          loading={variant === "shop" && index < 6 ? "eager" : "lazy"}
+          priority={variant === "shop" && index < 6}
         />
         <button
           onClick={onClickHeart}

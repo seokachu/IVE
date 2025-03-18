@@ -196,6 +196,7 @@ const UserInfo = () => {
               onClick={handleNicknameChange}
               variant="primary"
               className="text-sm py-2 px-3"
+              aria-label={!isEditingNickname ? "수정 버튼" : "수정완료 버튼"}
             >
               {!isEditingNickname ? "수정" : "수정완료"}
             </ActionButton>

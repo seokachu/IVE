@@ -12,13 +12,14 @@ const RequestInfo = ({ request, showRequested }: RequestInfoProps) => {
   return (
     <div>
       <Label htmlFor="request" className="block mb-2">
-        요청사항 / 정보
+        요청사항 &#47; 정보
       </Label>
       <RHFSelect
         name="request"
         options={RECIPIENT_DELIVERY_OPTIONS}
         className="w-full"
         onChange={request}
+        aria-label="요청사항 선택"
       />
       {showRequested ? (
         <RHFInput

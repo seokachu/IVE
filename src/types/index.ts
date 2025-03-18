@@ -37,6 +37,7 @@ export interface VariantTypeProps {
 export interface ShopListItemProps {
   item: ShopListItem;
   variant: ItemVariant;
+  index?: number;
 }
 
 export interface DiscountedPrice {
@@ -228,6 +229,7 @@ export type WishListItem = Database["public"]["Tables"]["wish_lists"]["Row"];
 
 export interface UserWishListItemProps {
   item: Tables<"wish_lists">;
+  index: number;
 }
 
 export interface DirectPaymentButtonProps {

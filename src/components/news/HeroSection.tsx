@@ -9,11 +9,11 @@ const HeroSection = () => {
       <div className="z-10 relative mx-auto px-4 w-full">
         <div className="mb-10 flex flex-col gap-5 items-center justify-center">
           <h1
-            className={`text-white font-bold text-3xl lg:text-6xl ${textStyle}`}
+            className={`text-white font-bold text-3xl lg:text-6xl lg:${textStyle}`}
           >
             IVE
           </h1>
-          <h2 className={`text-white text-xl lg:text-2xl ${textStyle}`}>
+          <h2 className={`text-white text-xl lg:text-2xl lg:${textStyle}`}>
             아이브와 함께하는 특별한 순간
           </h2>
         </div>

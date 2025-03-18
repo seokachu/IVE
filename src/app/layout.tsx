@@ -28,6 +28,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
+      <head>
+        <link
+          rel="preconnect"
+          href="https://jzghadoanikvjvczuerw.supabase.co"
+        />
+        <link rel="preconnect" href="https://supabase.co" />
+        <link rel="preconnect" href="https://kakaocdn.net" />
+        <link rel="preconnect" href="https://img1.kakaocdn.net" />
+      </head>
       <body className={`${notoSansKr.className} w-screen overflow-x-hidden`}>
         <ThemeProvider
           attribute="class"
