@@ -9,7 +9,7 @@ const LatestNewsDetail = ({ item }: LatestNewsDetailProps) => {
   console.log(item);
   return (
     <div className="text-left">
-      <div className="w-full h-80">
+      <div className="w-full h-[432px]">
         <Image
           src={item.image_url || DefaultImage}
           alt={item.title}

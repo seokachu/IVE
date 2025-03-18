@@ -25,7 +25,7 @@ const VisualSection = () => {
       <ul className="absolute max-w-[1320px] w-full flex items-center text-center justify-center font-bold lg:justify-start lg:text-left">
         <li className="text-white lg:pl-20">
           <h1 className="[text-shadow:_1px_3px_5px_rgb(0_0_0_/_0.3)] text-3xl mb-5 tracking-wide lg:text-6xl">
-            IVE INTO DIVE
+            DIVE INTO IVE
           </h1>
           <p className={`${textStyle}`}>내 가수 정보를 한눈에!</p>
           <p className={`${textStyle}`}>

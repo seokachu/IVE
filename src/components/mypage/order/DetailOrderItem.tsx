@@ -7,9 +7,11 @@ import { useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import WriteReviewModal from "./WriteReviewModal";
 import { useOrderItemReview } from "@/hooks/queries/useReviews";
+import { useRouter } from "next/navigation";
 import type { DetailOrderItemProps } from "@/types";
 
 const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
+  const { push } = useRouter();
   const [isConfirmModal, setIsConfirmModal] = useState(false);
   const [isReviewModal, setIsReviewModal] = useState(false);
   const { data: reviewData } = useOrderItemReview(
@@ -45,6 +47,10 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
     return reviewData ? "edit" : "create";
   };
 
+  const onClickDetail = () => {
+    push(`/shop/${item.product_id}`);
+  };
+
   return (
     <li className="border rounded-lg p-4">
       {item.is_confirmed && (
@@ -54,7 +60,7 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
         </p>
       )}
       <div className="flex flex-col lg:flex-row lg:justify-between py-2">
-        <div className="flex gap-4">
+        <div onClick={onClickDetail} className="cursor-pointer flex gap-4">
           {item.product_image && (
             <div className="relative overflow-hidden border rounded-md w-[80px] h-[80px]">
               <Image
