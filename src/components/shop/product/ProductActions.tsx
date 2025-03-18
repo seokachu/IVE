@@ -65,6 +65,7 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
             onClick={onClickHeart}
             variant="primary"
             className="w-full flex items-center justify-center h-full"
+            aria-label="찜하기"
           >
             {isWished ? (
               <GoHeartFill size={25} className="text-rose-500" />

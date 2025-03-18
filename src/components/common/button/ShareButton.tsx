@@ -22,7 +22,7 @@ const ShareButton = ({ className }: classNameProps) => {
   };
 
   return (
-    <button onClick={onClickShare} className={className}>
+    <button onClick={onClickShare} className={className} aria-label="현재 페이지 공유하기">
       <IoMdShare size={25} />
     </button>
   );
