@@ -4,8 +4,8 @@
 }
 
 .ql-container {
-  min-height: 300px;
-  height: 300px;
+  min-height: 500px;
+  height: 500px;
 }
 
 .ql-container.ql-snow {
@@ -25,8 +25,12 @@
 }
 
 .ql-editor img {
-  max-width: 500px;
+  max-width: 1200px;
   height: auto;
+}
+
+.ql-editor.ql-snow.board-view {
+  overflow: visible;
 }
 
 @media (max-width: 768px) {
