@@ -29,18 +29,25 @@
   height: auto;
 }
 
+.ql-editor > * {
+  margin: 1em 0;
+}
+
 .ql-editor.ql-snow.board-view {
   overflow: visible;
+}
+
+@media (max-width: 1200px) {
+  .ql-editor img {
+    max-width: 100%;
+    width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
   .ql-editor {
     font-size: 1rem;
     line-height: 1.5rem;
-  }
-
-  .ql-editor img {
-    max-width: 100%;
   }
 }
 

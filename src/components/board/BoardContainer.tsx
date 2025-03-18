@@ -4,7 +4,7 @@ import Search from "@/components/common/search/Search";
 import BoardListHeader from "@/components/board/BoardListHeader";
 import { GoPlusCircle } from "react-icons/go";
 import BoardList from "./BoardList";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useBoards } from "@/hooks/queries/useBoard";
 import { useEffect, useRef, useState } from "react";
 import PaginationControl from "@/components/common/PaginationControl";
@@ -17,9 +17,14 @@ import { TbMoodEmpty } from "react-icons/tb";
 
 const BoardContainer = () => {
   const { push } = useRouter();
+  const searchParams = useSearchParams();
   const isFirstLoad = useRef(true);
-  const [searchKeyWord, setSearchKeyWord] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [searchKeyWord, setSearchKeyWord] = useState(
+    searchParams.get("search") || ""
+  );
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(searchParams.get("page") || "1", 10)
+  );
   const {
     data: boardList,
     isLoading,
@@ -42,6 +47,14 @@ const BoardContainer = () => {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", page.toString());
+
+    if (searchKeyWord) {
+      params.set("search", searchKeyWord);
+    }
+
+    push(`/board?${params.toString()}`);
   };
 
   const handleSearch = (value: string) => {
