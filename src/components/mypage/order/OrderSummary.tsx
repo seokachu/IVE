@@ -24,8 +24,11 @@ const OrderSummary = ({ order }: OrderSummaryProps) => {
           주문상세
         </ActionButton>
       </div>
-      <div className="flex justify-between items-center pt-5">
-        <div className="flex gap-3 items-center">
+      <div
+        onClick={onClickDetail}
+        className="flex justify-between items-center pt-5"
+      >
+        <div className="cursor-pointer flex gap-3 items-center">
           <div className="relative border overflow-hidden rounded-md w-[80px] h-[80px]">
             <Image
               src={order.firstOrderImage}

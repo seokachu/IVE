@@ -6,7 +6,7 @@ const BoardDetailContent = ({ item }: BoardDetailProps) => {
   return (
     <div className="py-5">
       <div
-        className="ql-editor ql-snow"
+        className="ql-editor ql-snow board-view"
         dangerouslySetInnerHTML={{ __html: item?.content ?? "" }}
       />
     </div>
