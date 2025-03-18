@@ -37,6 +37,7 @@ export interface VariantTypeProps {
 export interface ShopListItemProps {
   item: ShopListItem;
   variant: ItemVariant;
+  index?: number;
 }
 
 export interface DiscountedPrice {

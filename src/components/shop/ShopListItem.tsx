@@ -15,7 +15,11 @@ const SHOP_STYLES = {
   carousel: "w-full sm:border sm:p-4 sm:rounded-lg",
 } as const;
 
-const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
+const ShopListItem = ({
+  item,
+  variant = "shop",
+  index = 0,
+}: ShopListItemProps) => {
   const { push } = useRouter();
   const { data: reviewData } = useReviewCount(item.id);
   const { data: averageRating = 0 } = useAverageRating(item.id);
@@ -52,11 +56,12 @@ const ShopListItem = ({ item, variant = "shop" }: ShopListItemProps) => {
       <div className="relative w-full h-auto md:rounded-lg overflow-hidden aspect-square border">
         <Image
           src={item.thumbnail || DefaultImage}
-          alt="썸네일"
+          alt={item.title || "상품 썸네일 이미지"}
           className="fill group-hover:scale-110 transition-transform duration-300 object-cover w-full"
           width={250}
           height={250}
-          loading="lazy"
+          loading={variant === "shop" && index < 6 ? "eager" : "lazy"}
+          priority={variant === "shop" && index < 6}
         />
         <button
           onClick={onClickHeart}
