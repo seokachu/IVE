@@ -1,4 +1,4 @@
-import { Database } from "@/types/supabase";
+import { Database, Tables } from "@/types/supabase";
 
 export type OrderItem = Database["public"]["Tables"]["order_items"]["Row"];
 export type OrderItemInput = Omit<
@@ -27,4 +27,17 @@ export interface TossPaymentErrorResponse {
   status: string;
   approvedAt: string;
   paymentKey: string;
+}
+
+export interface PaymentSuccessViewProps {
+  orderItems: Tables<"order_items">[];
+  payment: Tables<"payments">;
+}
+
+export interface PaymentSuccessHeaderProps {
+  orderId: string | null;
+}
+
+export interface OrderItemsListProps {
+  orderItems: Tables<"order_items">[];
 }

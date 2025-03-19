@@ -120,10 +120,6 @@ export interface PaymentButtonProps {
   orderName: string;
 }
 
-export interface OrderListItemProps {
-  item: Tables<"order_items">;
-}
-
 export interface PaymentDetailsProps {
   item: Tables<"payments">;
 }

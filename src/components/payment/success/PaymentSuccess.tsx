@@ -8,18 +8,15 @@ import { cartState, sessionState } from "@/store";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
 import { useQueryClient } from "@tanstack/react-query";
 import PaymentSuccessLoading from "@/components/common/loading/PaymentSuccessLoading";
-import OrderListItem from "@/components/mypage/order/OrderListItem";
-import PaymentOverview from "@/components/mypage/order/PaymentOverview";
-import PaymentSuccessHeader from "@/components/payment/success/PaymentSuccessHeader";
 import { getPaymentByOrderId } from "@/lib/supabase/payment";
 import { useSearchParams } from "next/navigation";
-import type { Tables } from "@/types/supabase";
 import {
   confirmTossPayment,
   savePaymentData,
   cartListItemsToOrderItems,
   createPaymentData,
 } from "@/lib/api/payment";
+import PaymentSuccessView from "./PaymentSuccessView";
 
 const PaymentSuccess = () => {
   const searchParams = useSearchParams();
@@ -171,32 +168,7 @@ const PaymentSuccess = () => {
 
   return (
     <main>
-      <section className="px-5 pt-14 pb-28 lg:px-8 min-h-screen flex items-center justify-center">
-        <div className="max-w-[1320px] w-full m-auto flex flex-col gap-5">
-          <PaymentSuccessHeader order_id={payment.order_id} />
-          <div className="border rounded-lg px-4 py-5 mb-8">
-            <h2 className="text-base lg:text-xl mb-8 border-b pb-4">
-              <strong>
-                <span>주문상품 정보</span>
-                <span className="inline-block -translate-y-[2px] px-2">|</span>
-                <span>총 {orderItems?.length}개</span>
-              </strong>
-            </h2>
-            {orderItems && orderItems.length > 0 && (
-              <ul className="flex flex-col w-full">
-                {orderItems.map((item: Tables<"order_items">) => (
-                  <OrderListItem key={item.id} item={item} />
-                ))}
-              </ul>
-            )}
-          </div>
-          <div className="flex flex-col lg:flex-row gap-6">
-            <PaymentOverview title="배송 정보" payment={payment} />
-            <PaymentOverview title="결제 정보" payment={payment} />
-            <PaymentOverview title="결제 수단" payment={payment} />
-          </div>
-        </div>
-      </section>
+      <PaymentSuccessView orderItems={orderItems || []} payment={payment} />
     </main>
   );
 };

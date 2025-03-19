@@ -1,7 +1,7 @@
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import Image from "next/image";
 import DefaultImage from "@/assets/images/default_image.avif";
-import type { OrderListItemProps } from "@/types";
+import type { OrderListItemProps } from "@/types/mypage";
 
 const OrderListItem = ({ item }: OrderListItemProps) => {
   const price = getDiscountedPrice(item);

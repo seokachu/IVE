@@ -1,11 +1,8 @@
 import ActionButton from "@/components/common/button/ActionButton";
 import { useRouter } from "next/navigation";
+import type { PaymentSuccessHeaderProps } from "@/types/payment";
 
-interface PaymentSuccessHeaderProps {
-  order_id: string;
-}
-
-const PaymentSuccessHeader = ({ order_id }: PaymentSuccessHeaderProps) => {
+const PaymentSuccessHeader = ({ orderId }: PaymentSuccessHeaderProps) => {
   const { push } = useRouter();
 
   const onClickGoOrders = () => {
@@ -19,7 +16,7 @@ const PaymentSuccessHeader = ({ order_id }: PaymentSuccessHeaderProps) => {
   return (
     <div className="flex flex-col gap-4 items-center mb-10">
       <h2 className="font-bold text-lg lg:text-xl">주문이 완료되었습니다.</h2>
-      <h3 className="text-gray-500">주문번호 : {order_id}</h3>
+      <h3 className="text-gray-500">주문번호 : {orderId}</h3>
       <div className="flex gap-3">
         <ActionButton
           onClick={onClickGoOrders}
