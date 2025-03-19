@@ -11,11 +11,15 @@ import PaymentSuccessLoading from "@/components/common/loading/PaymentSuccessLoa
 import OrderListItem from "@/components/mypage/order/OrderListItem";
 import PaymentOverview from "@/components/mypage/order/PaymentOverview";
 import PaymentSuccessHeader from "@/components/payment/success/PaymentSuccessHeader";
-import { saveOrderItems } from "@/lib/supabase/orders";
-import { getPaymentByOrderId, savePayment } from "@/lib/supabase/payment";
+import { getPaymentByOrderId } from "@/lib/supabase/payment";
 import { useSearchParams } from "next/navigation";
 import type { Tables } from "@/types/supabase";
-import type { CartItem } from "@/types";
+import {
+  confirmTossPayment,
+  savePaymentData,
+  cartListItemsToOrderItems,
+  createPaymentData,
+} from "@/lib/api/payment";
 
 const PaymentSuccess = () => {
   const searchParams = useSearchParams();
@@ -65,26 +69,14 @@ const PaymentSuccess = () => {
     )
       return;
 
-    const savePaymentData = async () => {
+    const processPayment = async () => {
       try {
         //장바구니 결제 성공
         const checkoutItems = JSON.parse(
           localStorage.getItem("checkout_items") || "[]"
         );
 
-        // 바로구매 버튼과 장바구니 결제 필터링
-        const selectedCartItems: CartItem[] =
-          cartItems.length === 0
-            ? checkoutItems
-            : cartItems.filter((item) =>
-                checkoutItems.some(
-                  (checkItem: string | CartItem) =>
-                    (typeof checkItem === "string"
-                      ? checkItem
-                      : checkItem.id) === item.id
-                )
-              );
-
+        //이미 처리된 결제인지 확인
         const existingPayment = await getPaymentByOrderId(orderId);
         if (existingPayment) {
           await queryClient.invalidateQueries({
@@ -93,73 +85,41 @@ const PaymentSuccess = () => {
           return;
         }
 
-        const response = await fetch(
-          `https://api.tosspayments.com/v1/payments/confirm`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Basic ${btoa(
-                `${process.env.NEXT_PUBLIC_TOSS_SECRET_KEY}:`
-              )}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              paymentKey,
-              orderId,
-              amount: Number(amount),
-            }),
-          }
+        //TOSS API 불러오기
+        const paymentInfo = await confirmTossPayment(
+          paymentKey,
+          orderId,
+          Number(amount)
         );
 
-        const paymentInfo = await response.json();
-
-        if (!response.ok || paymentInfo.status !== "DONE") {
+        if (paymentInfo.status !== "DONE") {
           // 실패시 fail 페이지로 리다이렉트
           window.location.href = `/payment/fail?message=${encodeURIComponent(
-            paymentInfo.message
+            paymentInfo.message || "결제 처리 중 오류가 발생했습니다."
           )}`;
           return;
         }
 
-        const paymentData = {
-          user_id: session.user.id,
-          order_id: orderId,
-          amount: amount.toString(),
-          order_name: orderName,
-          payment_method: paymentInfo.easyPay
-            ? `${paymentInfo.easyPay.provider} 간편결제`
-            : paymentInfo.method || "카드",
-          status: "결제 완료",
-          installment_months: paymentInfo.card?.installmentPlanMonths || 0,
-          recipient_name: address.recipient_name,
-          recipient_phone: address.recipient_phone,
-          address_line1: address.address_line1,
-          address_line2: address.address_line2,
-          postal_code: address.postal_code,
-          delivery_status: "배송전",
-          created_at: paymentInfo.approvedAt,
-        };
+        //결제 데이터 생성
+        const paymentData = createPaymentData(
+          paymentInfo,
+          session.user.id,
+          orderId,
+          amount,
+          orderName,
+          address
+        );
 
-        const orderItemsData = selectedCartItems.map((item) => ({
-          user_id: session.user.id,
-          order_id: orderId,
-          product_id: item.id,
-          product_name: item.title,
-          product_image: item.thumbnail,
-          price: Number(item.price),
-          quantity: item.quantity,
-          shipping_type: item.shipping_type ?? "무료배송",
-          discount_rate: item.discount_rate ?? 0,
-          review_count: item.review_count ?? 0,
-          color: item.color,
-          size: item.size,
-          delivery_info: item.delivery_info,
-          rating: null,
-        }));
+        //주문 상품 데이터
+        const orderItemsData = cartListItemsToOrderItems(
+          cartItems,
+          checkoutItems,
+          session.user.id,
+          orderId
+        );
 
-        // 순차적으로 저장
-        await savePayment(paymentData);
-        await saveOrderItems(orderItemsData);
+        //데이터 저장
+        await savePaymentData(paymentData, orderItemsData);
 
         // 데이터 갱신
         await queryClient.invalidateQueries({ queryKey: ["payment", orderId] });
@@ -181,7 +141,7 @@ const PaymentSuccess = () => {
       }
     };
 
-    savePaymentData();
+    processPayment();
   }, [
     orderId,
     paymentKey,

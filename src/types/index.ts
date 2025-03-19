@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes, Dispatch, SetStateAction } from "react";
 import { Database, Tables } from "@/types/supabase";
+import { ShopListItem } from "./shop";
 
 export interface GnbArrayList {
   label: string;
@@ -20,24 +21,6 @@ export type OAuthProvider = "google" | "github" | "kakao";
 
 export interface AlbumItemProps {
   album: Tables<"album">;
-}
-
-type ShopListItem = Database["public"]["Tables"]["goods"]["Row"];
-
-export interface CartItem extends Omit<ShopListItem, "quantity"> {
-  quantity: number;
-}
-
-export type ItemVariant = "shop" | "carousel";
-
-export interface VariantTypeProps {
-  variant: ItemVariant;
-}
-
-export interface ShopListItemProps {
-  item: ShopListItem;
-  variant: ItemVariant;
-  index?: number;
 }
 
 export interface DiscountedPrice {
@@ -103,15 +86,6 @@ export interface ReviewItem {
 export interface ReviewResponse {
   reviews: ReviewItem[];
   totalCount: number;
-}
-
-export interface ProductActionsProps {
-  product: ShopListItem;
-  quantity: number;
-}
-
-export interface CartListItemProps {
-  item: CartItem;
 }
 
 //장바구니 약관동의 page checkbox

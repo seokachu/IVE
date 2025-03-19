@@ -7,7 +7,7 @@ import { useRecoilState } from "recoil";
 import QuantitySelector from "../common/QuantitySelector";
 import { toast } from "@/hooks/use-toast";
 import { useRouter, useSearchParams } from "next/navigation";
-import type { CartListItemProps } from "@/types";
+import { CartListItemProps } from "@/types/cart";
 
 const CartListItem = ({ item }: CartListItemProps) => {
   const id = useId();

@@ -1,33 +1,15 @@
 import axios from "axios";
 import { saveOrderItems } from "@/lib/supabase/orders";
 import { savePayment } from "@/lib/supabase/payment";
-import type { CartItem } from "@/types";
-import type { Database, Tables } from "@/types/supabase";
+import type {
+  OrderItemInput,
+  TossPaymentErrorResponse,
+  TossPaymentResponse,
+} from "@/types/payment";
+import type { Tables } from "@/types/supabase";
+import type { CartItem } from "@/types/cart";
 
 const PAYMENT_URL = process.env.NEXT_PUBLIC_PAYMENT_CONFIRM_URL!;
-
-interface TossPaymentResponse {
-  status: string;
-  approvedAt: string;
-  paymentKey: string;
-  method?: string;
-  card?: {
-    installmentPlanMonths: number;
-  };
-  easyPay?: {
-    provider: string;
-  };
-}
-
-type OrderItemData = Database["public"]["Tables"]["order_items"]["Row"];
-
-export interface TossPaymentErrorResponse {
-  code: string;
-  message: string;
-  status: string;
-  approvedAt: string;
-  paymentKey: string;
-}
 
 //Toss Payments API
 export const confirmTossPayment = async (
@@ -64,9 +46,8 @@ export const confirmTossPayment = async (
 
 //결제정보, 주문상품 정보 저장
 export const savePaymentData = async (
-  paymentInfo: TossPaymentResponse,
   paymentData: Partial<Tables<"payments">>,
-  orderItemsData: OrderItemData[]
+  orderItemsData: OrderItemInput[]
 ): Promise<void> => {
   try {
     // 순차적으로 저장
