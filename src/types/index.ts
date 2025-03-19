@@ -165,6 +165,7 @@ export interface PaymentConfirmParams {
   amount: number;
 }
 
+//수정중
 export interface PaymentInfo {
   status: string;
   easyPay?: {
