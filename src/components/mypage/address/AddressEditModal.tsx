@@ -1,24 +1,8 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
-import AddressForm from "./AddressForm";
-import type { Tables } from "@/types/supabase";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import AddressForm from './AddressForm';
+import type { AddressEditModalProps } from '@/types/mypage';
 
-interface AddressEditModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  addressData: Tables<"shipping_addresses">;
-}
-
-const AddressEditModal = ({
-  isOpen,
-  onClose,
-  addressData,
-}: AddressEditModalProps) => {
+const AddressEditModal = ({ isOpen, onClose, addressData }: AddressEditModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-[800px] h-[80vh] overflow-y-auto py-16">
@@ -27,11 +11,7 @@ const AddressEditModal = ({
           <DialogDescription className="sr-only">배송지 수정</DialogDescription>
         </DialogHeader>
         <div className="flex items-center justify-center w-full">
-          <AddressForm
-            mode="edit"
-            initialData={addressData}
-            onClose={onClose}
-          />
+          <AddressForm mode="edit" initialData={addressData} onClose={onClose} />
         </div>
       </DialogContent>
     </Dialog>

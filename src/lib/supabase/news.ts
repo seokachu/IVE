@@ -1,6 +1,6 @@
 import { supabase } from '@/lib/supabase/client';
 import { LATEST_DEFAULT_LIMIT } from '@/utils/constants';
-import type { NewsItem } from '@/types/news';
+import type { NewsItem } from '@/types';
 
 //news 데이터 가져오기
 export const getNewsGallery = async (limit = LATEST_DEFAULT_LIMIT): Promise<NewsItem[]> => {

@@ -1,5 +1,5 @@
-import UserWishListItem from "./UserWishListItem";
-import { UserWishListProps } from "@/types";
+import UserWishListItem from './UserWishListItem';
+import type { UserWishListProps } from '@/types/mypage';
 
 const UserWishList = ({ wishlists }: UserWishListProps) => {
   return (

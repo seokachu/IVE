@@ -9,7 +9,8 @@ import {
 import GalleryPhotoDetail from './GalleryPhotoDetail';
 import LatestNewsDetail from './LatestNewsDetail';
 import { X } from 'lucide-react';
-import type { ContentDetailModalProps, GalleryItem, NewsItem } from '@/types/news';
+import type { GalleryItem, NewsItem } from '@/types';
+import type { ContentDetailModalProps } from '@/types/news';
 
 const ContentDetailModal = ({ isOpen, onOpenChange, content, contentType = 'news' }: ContentDetailModalProps) => {
   return (

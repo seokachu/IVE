@@ -9,7 +9,7 @@ import { useNewsGallery } from '@/hooks/queries/useNews';
 import Error from '../common/error/Error';
 import ContentDetailModal from './ContentDetailModal';
 import LatestNewsSkeleton from '../common/loading/LatestNewsSkeleton';
-import type { NewsItem } from '@/types/news';
+import type { NewsItem } from '@/types';
 
 const LatestNewsSection = () => {
   const [selectedCategory, setSelectedCategory] = useState(NEWS_CATEGORY_ARRAY[0].category);

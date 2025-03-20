@@ -1,8 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
-import type { Database, Tables } from '../supabase';
-
-export type NewsItem = Database['public']['Tables']['news_gallery']['Row'];
-export type GalleryItem = Database['public']['Tables']['gallery']['Row'];
+import type { Tables } from '../supabase';
+import type { GalleryItem, NewsItem } from '@/types/index';
 
 export interface NewsGalleryProps {
   selectedCategory: string;

@@ -1,5 +1,5 @@
-import { PaymentDetailsProps } from "@/types";
-import { formatPrice } from "@/utils/calculateDiscount";
+import { formatPrice } from '@/utils/calculateDiscount';
+import type { PaymentDetailsProps } from '@/types/mypage';
 
 const OrderPaymentInfo = ({ item }: PaymentDetailsProps) => {
   return (
@@ -15,9 +15,7 @@ const OrderPaymentInfo = ({ item }: PaymentDetailsProps) => {
       </li>
       <li className="flex justify-between font-medium items-center">
         <span className="text-gray-500">총 결제 금액 :</span>
-        <span className="font-bold text-base">
-          {formatPrice(Number(item?.amount))} 원
-        </span>
+        <span className="font-bold text-base">{formatPrice(Number(item?.amount))} 원</span>
       </li>
     </>
   );

@@ -1,5 +1,5 @@
-import BoardListItem from "./BoardListItem";
-import type { BoardListProps } from "@/types";
+import BoardListItem from './BoardListItem';
+import type { BoardListProps } from '@/types/board';
 
 const BoardList = ({ boards, keyword }: BoardListProps) => {
   return (

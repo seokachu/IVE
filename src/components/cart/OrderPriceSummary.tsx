@@ -1,10 +1,5 @@
-import { formatPrice } from "@/utils/calculateDiscount";
-
-interface OrderPriceSummaryProps {
-  totalDiscountedPrice: number;
-  totalOriginalPrice: number;
-  totalDiscountAmount: number;
-}
+import { formatPrice } from '@/utils/calculateDiscount';
+import type { OrderPriceSummaryProps } from '@/types/cart';
 
 const OrderPriceSummary = ({
   totalDiscountedPrice,
@@ -17,10 +12,7 @@ const OrderPriceSummary = ({
       <div className="border-b pb-3 flex justify-between items-center">
         <p>총 결제 금액</p>
         <p>
-          <strong className="text-lg lg:text-xl mr-1 text-purple">
-            {formatPrice(totalDiscountedPrice)}
-          </strong>
-          원
+          <strong className="text-lg lg:text-xl mr-1 text-purple">{formatPrice(totalDiscountedPrice)}</strong>원
         </p>
       </div>
       <div className="pt-5">
@@ -30,9 +22,7 @@ const OrderPriceSummary = ({
         </p>
         <p className="flex justify-between items-center">
           총 할인 금액
-          <span className="text-dark-orange">
-            -{formatPrice(totalDiscountAmount)}원
-          </span>
+          <span className="text-dark-orange">-{formatPrice(totalDiscountAmount)}원</span>
         </p>
       </div>
     </div>

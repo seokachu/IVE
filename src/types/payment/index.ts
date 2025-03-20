@@ -1,6 +1,6 @@
-import { Database, Tables } from '@/types/supabase';
+import type { Tables } from '@/types/supabase';
+import type { OrderItem } from '@/types/index';
 
-export type OrderItem = Database['public']['Tables']['order_items']['Row'];
 export type OrderItemInput = Omit<OrderItem, 'created_at' | 'id' | 'is_confirmed'>;
 
 export interface TossPaymentResponse {
@@ -50,4 +50,9 @@ export interface UsePaymentConfirmationProps {
 
 export interface UseCartCleanupParams {
   isPaymentComplete: boolean;
+}
+
+export interface PaymentButtonProps {
+  amount: number;
+  orderName: string;
 }

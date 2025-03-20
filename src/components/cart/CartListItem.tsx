@@ -1,19 +1,19 @@
-import DefaultImage from "@/assets/images/default_image.avif";
-import { cartState, selectedItemState } from "@/store";
-import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
-import Image from "next/image";
-import { useEffect, useId } from "react";
-import { useRecoilState } from "recoil";
-import QuantitySelector from "../common/QuantitySelector";
-import { toast } from "@/hooks/use-toast";
-import { useRouter, useSearchParams } from "next/navigation";
-import { CartListItemProps } from "@/types/cart";
+import DefaultImage from '@/assets/images/default_image.avif';
+import { cartState, selectedItemState } from '@/store';
+import { formatPrice, getDiscountedPrice } from '@/utils/calculateDiscount';
+import Image from 'next/image';
+import { useEffect, useId } from 'react';
+import { useRecoilState } from 'recoil';
+import QuantitySelector from '../common/QuantitySelector';
+import { toast } from '@/hooks/use-toast';
+import { useRouter, useSearchParams } from 'next/navigation';
+import type { CartListItemProps } from '@/types/cart';
 
 const CartListItem = ({ item }: CartListItemProps) => {
   const id = useId();
   const { push } = useRouter();
   const searchParams = useSearchParams();
-  const selectedParam = searchParams.get("selected");
+  const selectedParam = searchParams.get('selected');
   const [selectedItems, setSelectedItems] = useRecoilState(selectedItemState);
   const [cartItems, setCartItems] = useRecoilState(cartState);
   const isChecked = selectedItems.includes(item.id);
@@ -30,7 +30,7 @@ const CartListItem = ({ item }: CartListItemProps) => {
       } catch (error) {
         if (error instanceof Error) {
           toast({
-            title: "목록을 가져오는데 실패했습니다.",
+            title: '목록을 가져오는데 실패했습니다.',
             description: error.message,
           });
         }
@@ -49,12 +49,10 @@ const CartListItem = ({ item }: CartListItemProps) => {
   //개별 삭제
   const handleDeleteItem = () => {
     // 삭제할 아이템을 제외한 새로운 장바구니 목록 생성
-    const newCartItems = cartItems.filter(
-      (cartItem) => cartItem.id !== item.id
-    );
+    const newCartItems = cartItems.filter((cartItem) => cartItem.id !== item.id);
 
     // 로컬스토리지와 장바구니 상태 동기화
-    localStorage.setItem("shopping_cart", JSON.stringify(newCartItems));
+    localStorage.setItem('shopping_cart', JSON.stringify(newCartItems));
     setCartItems(newCartItems);
 
     // 체크된 상태에서 삭제된 경우 체크 목록에서도 제거
@@ -66,7 +64,7 @@ const CartListItem = ({ item }: CartListItemProps) => {
   const handleIncrease = () => {
     if (item.quantity >= 5) {
       toast({
-        title: "최대 5개 까지 구매 가능합니다.",
+        title: '최대 5개 까지 구매 가능합니다.',
       });
       return;
     }
@@ -81,7 +79,7 @@ const CartListItem = ({ item }: CartListItemProps) => {
       return cartItem;
     });
 
-    localStorage.setItem("shopping_cart", JSON.stringify(newCartItems));
+    localStorage.setItem('shopping_cart', JSON.stringify(newCartItems));
     setCartItems(newCartItems);
   };
 
@@ -96,7 +94,7 @@ const CartListItem = ({ item }: CartListItemProps) => {
       return cartItem;
     });
 
-    localStorage.setItem("shopping_cart", JSON.stringify(newCartItems));
+    localStorage.setItem('shopping_cart', JSON.stringify(newCartItems));
     setCartItems(newCartItems);
   };
 
@@ -131,9 +129,7 @@ const CartListItem = ({ item }: CartListItemProps) => {
           <div className="flex-[4] mr-9 flex flex-col justify-between">
             <h3 className="flex flex-wrap gap-1 lg:items-center flex-col lg:flex-row">
               <span className="font-bold shrink-0">{item.title}</span>
-              <span className="text-sm lg:text-xs text-gray-500 shrink-0">
-                {item.delivery_info}
-              </span>
+              <span className="text-sm lg:text-xs text-gray-500 shrink-0">{item.delivery_info}</span>
             </h3>
             <p className="text-gray-500 text-sm flex flex-wrap flex-col lg:flex-row gap-1 my-1 uppercase">
               <span className="shrink-0">사이즈 : {item.size}</span>
@@ -148,20 +144,13 @@ const CartListItem = ({ item }: CartListItemProps) => {
             />
           </div>
           <div className="lg:text-right flex-1">
-            <span className="mr-1 text-purple font-bold">
-              {item.discount_rate}%
-            </span>
-            <s className="text-dark-gray text-sm mr-1 lg:mr-0 text-nowrap">
-              {price}원
-            </s>
+            <span className="mr-1 text-purple font-bold">{item.discount_rate}%</span>
+            <s className="text-dark-gray text-sm mr-1 lg:mr-0 text-nowrap">{price}원</s>
             <strong>{formatPrice(totalDiscountPrice)}원</strong>
           </div>
         </div>
       </label>
-      <button
-        onClick={handleDeleteItem}
-        className="absolute right-2 top-[10px] hover:text-purple"
-      >
+      <button onClick={handleDeleteItem} className="absolute right-2 top-[10px] hover:text-purple">
         &times;
       </button>
     </li>

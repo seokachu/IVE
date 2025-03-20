@@ -8,7 +8,7 @@ import { useState } from 'react';
 import ContentDetailModal from './ContentDetailModal';
 import GalleryPhotoSkeleton from '../common/loading/GalleryPhotoSkeleton';
 import { GALLERY_DEFAULT_LIMIT } from '@/utils/constants';
-import type { GalleryItem } from '@/types/news';
+import type { GalleryItem } from '@/types';
 
 const GallerySection = () => {
   const [modalOpen, setModalOpen] = useState(false);
