@@ -1,21 +1,19 @@
-"use client";
-import ActionButton from "../common/button/ActionButton";
-import { FaArrowDown } from "react-icons/fa6";
-import GalleryPhotoList from "./GalleryPhotoList";
-import { useGallery } from "@/hooks/queries/useGallery";
-import Error from "../common/error/Error";
-import { useState } from "react";
-import ContentDetailModal from "./ContentDetailModal";
-import GalleryPhotoSkeleton from "../common/loading/GalleryPhotoSkeleton";
-import type { GalleryItem } from "@/types";
-import { GALLERY_DEFAULT_LIMIT } from "@/utils/constants";
+'use client';
+import ActionButton from '../common/button/ActionButton';
+import { FaArrowDown } from 'react-icons/fa6';
+import GalleryPhotoList from './GalleryPhotoList';
+import { useGallery } from '@/hooks/queries/useGallery';
+import Error from '../common/error/Error';
+import { useState } from 'react';
+import ContentDetailModal from './ContentDetailModal';
+import GalleryPhotoSkeleton from '../common/loading/GalleryPhotoSkeleton';
+import { GALLERY_DEFAULT_LIMIT } from '@/utils/constants';
+import type { GalleryItem } from '@/types/news';
 
 const GallerySection = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [itemLimit, setItemLimit] = useState(GALLERY_DEFAULT_LIMIT);
-  const [selectedGallery, setSelectedGallery] = useState<GalleryItem | null>(
-    null
-  );
+  const [selectedGallery, setSelectedGallery] = useState<GalleryItem | null>(null);
   const { data: gallery, isLoading, isError } = useGallery(itemLimit);
 
   if (isLoading) return <GalleryPhotoSkeleton />;
@@ -38,9 +36,7 @@ const GallerySection = () => {
       className="max-w-[1280px] flex justify-center align-center flex-col px-5 pt-32 pb-40 m-auto"
       id="gallery_section"
     >
-      <h2 className="text-2xl font-bold lg:text-4xl mb-6 text-center">
-        Gallery
-      </h2>
+      <h2 className="text-2xl font-bold lg:text-4xl mb-6 text-center">Gallery</h2>
       <h3 className="text-center text-gray-600">특별한 순간을 담은 갤러리</h3>
       <div className="mt-16">
         <GalleryPhotoList gallery={gallery} onClick={handleGalleryClick} />

@@ -1,6 +1,6 @@
-import { ButtonHTMLAttributes, Dispatch, SetStateAction } from "react";
-import { Database, Tables } from "@/types/supabase";
-import { ShopListItem } from "./shop";
+import { ButtonHTMLAttributes } from 'react';
+import { Database, Tables } from '@/types/supabase';
+import { ShopListItem } from './shop';
 
 export interface GnbArrayList {
   label: string;
@@ -10,17 +10,17 @@ export interface GnbArrayList {
 
 export interface SignInProps {
   title?: string;
-  className?: ButtonHTMLAttributes<HTMLButtonElement>["className"];
+  className?: ButtonHTMLAttributes<HTMLButtonElement>['className'];
 }
 
 export interface classNameProps {
-  className?: ButtonHTMLAttributes<HTMLButtonElement>["className"];
+  className?: ButtonHTMLAttributes<HTMLButtonElement>['className'];
 }
 
-export type OAuthProvider = "google" | "github" | "kakao";
+export type OAuthProvider = 'google' | 'github' | 'kakao';
 
 export interface AlbumItemProps {
-  album: Tables<"album">;
+  album: Tables<'album'>;
 }
 
 export interface DiscountedPrice {
@@ -28,27 +28,20 @@ export interface DiscountedPrice {
   discount_rate?: number | null;
 }
 
-export type PriceKeys = "price" | "discount_rate";
+export type PriceKeys = 'price' | 'discount_rate';
 
 export interface GoodsIncludeRating extends ShopListItem {
   rating?: number;
 }
 
-export type BadgeFields = Pick<
-  GoodsIncludeRating,
-  "shipping_type" | "review_count" | "rating" | "id"
->;
+export type BadgeFields = Pick<GoodsIncludeRating, 'shipping_type' | 'review_count' | 'rating' | 'id'>;
 
 export interface BadgeItemProps {
   item: BadgeFields;
   averageRating: number;
 }
 
-export type SortOptionList =
-  | "best"
-  | "latest"
-  | "price_low_to_high"
-  | "price_high_to_low";
+export type SortOptionList = 'best' | 'latest' | 'price_low_to_high' | 'price_high_to_low';
 
 export interface SortOption {
   column: string;
@@ -60,12 +53,12 @@ export interface SortProps {
 }
 
 export interface TabMenuProps {
-  activeTab: "description" | "review";
-  setActiveTab: (tab: "description" | "review") => void;
+  activeTab: 'description' | 'review';
+  setActiveTab: (tab: 'description' | 'review') => void;
   id: string;
 }
 
-export type ShopMenuProps = Pick<ShopListItem, "id">;
+export type ShopMenuProps = Pick<ShopListItem, 'id'>;
 
 export interface ReviewItemProps {
   item: ReviewItem;
@@ -89,8 +82,8 @@ export interface ReviewResponse {
 }
 
 //장바구니 약관동의 page checkbox
-export type AgreementType = "main" | "privacy" | "refund";
-export type ModalType = "privacy" | "refund" | null;
+export type AgreementType = 'main' | 'privacy' | 'refund';
+export type ModalType = 'privacy' | 'refund' | null;
 
 //마이페이지 배송지정보 form
 export interface AddressChange {
@@ -99,15 +92,15 @@ export interface AddressChange {
 }
 
 export interface AddressListProps {
-  addresses: Tables<"shipping_addresses">[];
+  addresses: Tables<'shipping_addresses'>[];
 }
 
 export interface AddressListItems {
-  item: Tables<"shipping_addresses">;
+  item: Tables<'shipping_addresses'>;
 }
 
 export interface CustomerInfoFormProps {
-  initialData?: Tables<"customer_info">;
+  initialData?: Tables<'customer_info'>;
   defaultValues?: {
     name?: string;
     email?: string;
@@ -121,12 +114,12 @@ export interface PaymentButtonProps {
 }
 
 export interface PaymentDetailsProps {
-  item: Tables<"payments">;
+  item: Tables<'payments'>;
 }
 
 export interface PaymentOverviewProps {
   title: string;
-  payment: Tables<"payments">;
+  payment: Tables<'payments'>;
 }
 
 export interface PaymentConfirmParams {
@@ -168,7 +161,7 @@ export interface OrderSummaryProps {
 }
 
 export interface OrderDetailProps {
-  orderItems: Tables<"order_items">[];
+  orderItems: Tables<'order_items'>[];
   onBack: () => void;
 }
 
@@ -179,7 +172,7 @@ export interface OrderDetailPageProps {
 }
 
 export interface DetailOrderItemProps {
-  item: Tables<"order_items">;
+  item: Tables<'order_items'>;
   onConfirm: () => void;
 }
 
@@ -189,23 +182,18 @@ export interface ReviewFormData {
 }
 
 export interface WriteReviewFormProps {
-  mode: "create" | "edit";
-  reviewData?: Tables<"goods_reviews">;
+  mode: 'create' | 'edit';
+  reviewData?: Tables<'goods_reviews'>;
   onClose: () => void;
   orderId: string;
   goodsId: string;
 }
 
-export type WishListItem = Database["public"]["Tables"]["wish_lists"]["Row"];
+export type WishListItem = Database['public']['Tables']['wish_lists']['Row'];
 
 export interface UserWishListItemProps {
-  item: Tables<"wish_lists">;
+  item: Tables<'wish_lists'>;
   index: number;
-}
-
-export interface DirectPaymentButtonProps {
-  product: ShopListItem;
-  quantity: number;
 }
 
 export interface UseReviewsProps {
@@ -214,41 +202,39 @@ export interface UseReviewsProps {
 }
 
 export interface OrderCustomerInfoItemProps {
-  item: Tables<"customer_info">;
+  item: Tables<'customer_info'>;
 }
 
-export type ShippingAddressUpdate =
-  Database["public"]["Tables"]["shipping_addresses"]["Update"];
+export type ShippingAddressUpdate = Database['public']['Tables']['shipping_addresses']['Update'];
 
-export type ShippingAddress =
-  Database["public"]["Tables"]["shipping_addresses"]["Row"];
+export type ShippingAddress = Database['public']['Tables']['shipping_addresses']['Row'];
 
 export type DeleteAddressParams = {
   addressId: string;
   userId: string;
 };
 
-export type PaymentInsert = Database["public"]["Tables"]["payments"]["Insert"];
+export type PaymentInsert = Database['public']['Tables']['payments']['Insert'];
 
 export interface UserWishListProps {
-  wishlists: Tables<"wish_lists">[];
+  wishlists: Tables<'wish_lists'>[];
 }
 
 export interface AgreementModalProps {
-  type: "privacy" | "refund" | null;
+  type: 'privacy' | 'refund' | null;
   isOpen: boolean;
   onClose: () => void;
 }
 
 export type AddressFormProps = {
-  mode?: "create" | "edit";
-  initialData?: Tables<"shipping_addresses">;
+  mode?: 'create' | 'edit';
+  initialData?: Tables<'shipping_addresses'>;
   onClose?: () => void;
 };
 
 export interface UseAddressFormProps {
-  mode: "create" | "edit";
-  initialData?: Tables<"shipping_addresses">;
+  mode: 'create' | 'edit';
+  initialData?: Tables<'shipping_addresses'>;
   isFirstAddress: boolean;
 }
 
@@ -274,7 +260,7 @@ export type UpdateCommentParams = {
   content: string;
 };
 
-export interface BoardWithRelations extends Tables<"board"> {
+export interface BoardWithRelations extends Tables<'board'> {
   board_comments: [{ count: number }];
   board_likes: [{ count: number }];
   user: {
@@ -319,7 +305,7 @@ export interface BoardDetailHeaderProps {
   onClickEdit: () => void;
 }
 
-export interface Comment extends Tables<"board_comments"> {
+export interface Comment extends Tables<'board_comments'> {
   user: {
     name: string;
     avatar_url: string;
@@ -345,21 +331,19 @@ export interface EditPageParams {
   };
 }
 export interface CreateBoardWriteFormProps {
-  mode: "create";
+  mode: 'create';
 }
 
 export interface EditBoardWriteFormProps {
-  mode: "edit";
+  mode: 'edit';
   boardId: number;
 }
 
-export type BoardWriteFormProps =
-  | CreateBoardWriteFormProps
-  | EditBoardWriteFormProps;
+export type BoardWriteFormProps = CreateBoardWriteFormProps | EditBoardWriteFormProps;
 
-export type CommentMode = "create" | "edit";
+export type CommentMode = 'create' | 'edit';
 
-export type CommentType = "comment" | "reply";
+export type CommentType = 'comment' | 'reply';
 
 export interface CommentFormProps {
   mode: CommentMode;
@@ -371,7 +355,7 @@ export interface CommentFormProps {
   onCancel?: () => void;
 }
 
-export interface BoardWithComment extends Tables<"board"> {
+export interface BoardWithComment extends Tables<'board'> {
   user: {
     id: string;
     name: string;
@@ -383,7 +367,7 @@ export interface MainBoardListItemProps {
   item: BoardWithComment;
 }
 
-export interface MyPageBoards extends Tables<"board"> {
+export interface MyPageBoards extends Tables<'board'> {
   user: {
     id: string;
     name: string;
@@ -399,43 +383,4 @@ export interface PostListProps {
 
 export interface PostListItemProps {
   item: MyPageBoards;
-}
-
-export interface NewsCategoryFilterProps {
-  selectedCategory: string;
-  setSelectedCategory: Dispatch<SetStateAction<string>>;
-}
-
-export type NewsItem = Database["public"]["Tables"]["news_gallery"]["Row"];
-export type GalleryItem = Database["public"]["Tables"]["gallery"]["Row"];
-
-export interface NewsGalleryProps {
-  selectedCategory: string;
-  newsItems: Tables<"news_gallery">[];
-  onClick: (newsItem: NewsItem) => void;
-}
-
-export interface NewsGalleryItemProps {
-  item: Tables<"news_gallery">;
-  index: number;
-  totalItems: number;
-  onClick: () => void;
-}
-
-export interface LatestNewsDetailProps {
-  item: Tables<"news_gallery">;
-}
-
-export interface GalleryPhotoDetailProps {
-  item: Tables<"gallery">;
-}
-
-export interface GalleryPhotoListProps {
-  gallery: Tables<"gallery">[];
-  onClick: (galleryItem: GalleryItem) => void;
-}
-
-export interface GalleryPhotoListItemProps {
-  item: Tables<"gallery">;
-  onClick: () => void;
 }

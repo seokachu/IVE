@@ -1,7 +1,7 @@
-import { Database } from "../supabase";
+import { Database } from '../supabase';
 
-export type ItemVariant = "shop" | "carousel";
-export type ShopListItem = Database["public"]["Tables"]["goods"]["Row"];
+export type ItemVariant = 'shop' | 'carousel';
+export type ShopListItem = Database['public']['Tables']['goods']['Row'];
 
 export interface ShopListItemProps {
   item: ShopListItem;
@@ -14,6 +14,11 @@ export interface VariantTypeProps {
 }
 
 export interface ProductActionsProps {
+  product: ShopListItem;
+  quantity: number;
+}
+
+export interface DirectPaymentButtonProps {
   product: ShopListItem;
   quantity: number;
 }

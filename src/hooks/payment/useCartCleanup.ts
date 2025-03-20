@@ -3,10 +3,7 @@
 import { useRecoilState } from 'recoil';
 import { cartState } from '@/store';
 import type { CartItem } from '@/types/cart';
-
-interface UseCartCleanupParams {
-  isPaymentComplete: boolean;
-}
+import type { UseCartCleanupParams } from '@/types/payment';
 
 export const useCartCleanup = ({ isPaymentComplete }: UseCartCleanupParams) => {
   const [cartItems, setCartItems] = useRecoilState(cartState);

@@ -47,3 +47,7 @@ export interface UsePaymentConfirmationProps {
   address?: Tables<'shipping_addresses'>;
   payment?: Tables<'payments'>;
 }
+
+export interface UseCartCleanupParams {
+  isPaymentComplete: boolean;
+}
