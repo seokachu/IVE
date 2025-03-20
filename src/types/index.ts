@@ -19,10 +19,6 @@ export interface classNameProps {
 
 export type OAuthProvider = 'google' | 'github' | 'kakao';
 
-export interface AlbumItemProps {
-  album: Tables<'album'>;
-}
-
 export interface DiscountedPrice {
   price: number;
   discount_rate?: number | null;
@@ -353,18 +349,6 @@ export interface CommentFormProps {
   commentId?: number;
   onSuccess?: () => void;
   onCancel?: () => void;
-}
-
-export interface BoardWithComment extends Tables<'board'> {
-  user: {
-    id: string;
-    name: string;
-  };
-  board_comments: { count: number }[];
-}
-
-export interface MainBoardListItemProps {
-  item: BoardWithComment;
 }
 
 export interface MyPageBoards extends Tables<'board'> {

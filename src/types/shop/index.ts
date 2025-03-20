@@ -22,3 +22,4 @@ export interface DirectPaymentButtonProps {
   product: ShopListItem;
   quantity: number;
 }
+
