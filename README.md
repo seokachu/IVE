@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 프로젝트명
+> IVE로 DIVE
+> 
+[![배포 링크]: (바로가기)](https://ive-three.vercel.app)
 
-## Getting Started
+## 📌 프로젝트 소개
+이 프로젝트는 아이브(IVE) 관련 정보를 제공하는 웹사이트로, 최신 소식, 갤러리, 자유게시판, 굿즈를 결제할 수 있도록 제공합니다.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ 화면 구성 및 주요 기능
+<details>
+<summary>메인페이지</summary>
+  <ul>
+    <li>최신 뉴스 조회 및 카테고리별 필터링</li>
+    <li>갤러리 사진 조회</li>
+    <li>더 많은 콘텐츠 로드 (페이지네이션)</li>
+    <li>모달을 통한 상세 내용 조회</li>
+  </ul>
+</details>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<details>
+<summary>소식페이지</summary>
+  <ul>
+    <li>최신 뉴스 조회 및 카테고리별 필터링</li>
+    <li>갤러리 사진 조회</li>
+    <li>더 많은 콘텐츠 로드 (페이지네이션)</li>
+    <li>모달을 통한 상세 내용 조회</li>
+  </ul>
+</details>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+<details>
+<summary>굿즈샵 페이지</summary>
+  <ul>
+    <li>굿즈샵 리스트 카테고리별 정렬 기능</li>
+    <li>스크롤 위치에 따른 자동 컨텐츠 로딩 (무한스크롤)</li>
+    <li>찜하기, 바로 구매하기 버튼</li>
+    <li>공유하기 버튼</li>
+    <li>상품 수량 선택 기능</li>
+    <li>상세정보, 리뷰 탭</li>
+    <li>리뷰 탭 클릭 시 유저 리뷰 데이터 불러오기, 별점 평균</li>
+    <li>자주 묻는 질문 아코디언</li>
+  </ul>
+</details>
 
-## Learn More
+<details>
+<summary>자유게시판 페이지</summary>
+  <ul>
+    <li>게시판 데이터 불러오기</li>
+    <li>검색어 입력 시 디바운싱, 검색 결과 하이라이트 표시</li>
+    <li>글쓰기 기능 react-quill 라이브러리</li>
+    <li>더 많은 콘텐츠 로드 (페이지네이션)</li>
+    <li>공유하기 버튼</li>
+    <li>좋아요, 댓글, 대댓글 기능</li>
+    <li>게시판, 댓글, 대댓글 수정 & 삭제 기능</li>
+  </ul>
+</details>
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<details>
+<summary>장바구니 페이지</summary>
+  <ul>
+    <li>장바구니 데이터 불러오기 및 체크박스로 아이템 선택 기능</li>
+   <li>선택삭제, 전체삭제 기능으로 장바구니 아이템 관리</li>
+    <li>상품별 삭제 기능 및 전체삭제 클릭 시 확인 모달</li>
+    <li>상품 금액 및 할인 금액 계산 표시</li>
+    <li>장바구니가 비어있을 때 '쇼핑하기' 버튼을 통한 UX 개선</li>
+    <li>주문자 정보, 배송지 정보 변경 기능</li>
+    <li>개인정보 수집 및 이용 동의 모달 (상세 약관 내용 포함)</li>
+    <li>결제 금액 실시간 계산 (총 결제 금액, 상품 금액, 할인 금액)</li>
+    <li>결제하기 버튼</li>
+  </ul>
+</details>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<details>
+<summary>마이 페이지</summary>
+  <ul>
+    <li>아바타 이미지 변경 - 프로필 이미지 편집(react-avatar-editor 라이브러리)</li>
+    <li>닉네임 변경 기능</li>
+    <li>찜 목록, 결제 목록, 내가 쓴 글, 배송지 관리 데이터 불러오기</li>
+    <li>결제목록 주문상세 페이지, 구매확정 클릭 시 리뷰 작성 기능</li>
+    <li>새 배송지 추가 버튼, 배송지 수정 & 삭제, 기본배송지로 설정 기능</li>
+  </ul>
+</details>
 
-## Deploy on Vercel
+<details>
+<summary>로그인,회원가입 페이지</summary>
+  <ul>
+    <li>게시판 데이터 불러오기</li>
+    <li>검색어 입력 시 디바운싱, 검색 결과 하이라이트 표시</li>
+    <li>글쓰기 기능 react-quill 라이브러리</li>
+    <li>더 많은 콘텐츠 로드 (페이지네이션)</li>
+    <li>공유하기 버튼</li>
+    <li>좋아요, 댓글, 대댓글 기능</li>
+    <li>게시판, 댓글, 대댓글 수정 & 삭제 기능</li>
+  </ul>
+</details>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<details>
+<summary>결제 페이지</summary>
+  <ul>
+    <li>게시판 데이터 불러오기</li>
+    <li>검색어 입력 시 디바운싱, 검색 결과 하이라이트 표시</li>
+    <li>글쓰기 기능 react-quill 라이브러리</li>
+    <li>더 많은 콘텐츠 로드 (페이지네이션)</li>
+    <li>공유하기 버튼</li>
+    <li>좋아요, 댓글, 대댓글 기능</li>
+    <li>게시판, 댓글, 대댓글 수정 & 삭제 기능</li>
+  </ul>
+</details>
