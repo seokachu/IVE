@@ -1,10 +1,7 @@
-import { Database, Tables } from "@/types/supabase";
+import { Database, Tables } from '@/types/supabase';
 
-export type OrderItem = Database["public"]["Tables"]["order_items"]["Row"];
-export type OrderItemInput = Omit<
-  OrderItem,
-  "created_at" | "id" | "is_confirmed"
->;
+export type OrderItem = Database['public']['Tables']['order_items']['Row'];
+export type OrderItemInput = Omit<OrderItem, 'created_at' | 'id' | 'is_confirmed'>;
 
 export interface TossPaymentResponse {
   status: string;
@@ -30,8 +27,8 @@ export interface TossPaymentErrorResponse {
 }
 
 export interface PaymentSuccessViewProps {
-  orderItems: Tables<"order_items">[];
-  payment: Tables<"payments">;
+  orderItems: Tables<'order_items'>[];
+  payment: Tables<'payments'>;
 }
 
 export interface PaymentSuccessHeaderProps {
@@ -39,5 +36,14 @@ export interface PaymentSuccessHeaderProps {
 }
 
 export interface OrderItemsListProps {
-  orderItems: Tables<"order_items">[];
+  orderItems: Tables<'order_items'>[];
+}
+
+export interface UsePaymentConfirmationProps {
+  orderId: string | null;
+  paymentKey: string | null;
+  amount: string | null;
+  orderName: string | null;
+  address?: Tables<'shipping_addresses'>;
+  payment?: Tables<'payments'>;
 }
