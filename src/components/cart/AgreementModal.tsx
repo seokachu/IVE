@@ -5,21 +5,21 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { AGREEMENT_CONTENTS } from "@/utils/constants";
-import type { AgreementModalProps } from "@/types";
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { AGREEMENT_CONTENTS } from '@/utils/constants';
+import type { AgreementModalProps } from '@/types/cart';
 
 const AgreementModal = ({ type, isOpen, onClose }: AgreementModalProps) => {
   const getModalContent = () => {
     switch (type) {
-      case "privacy":
+      case 'privacy':
         return AGREEMENT_CONTENTS.PRIVACY;
-      case "refund":
+      case 'refund':
         return AGREEMENT_CONTENTS.REFUND;
       default:
         return {
-          title: "",
+          title: '',
           description: [],
         };
     }
@@ -30,9 +30,7 @@ const AgreementModal = ({ type, isOpen, onClose }: AgreementModalProps) => {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-h-[80vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-lg lg:text-xl font-bold my-4">
-            {content.title}
-          </DialogTitle>
+          <DialogTitle className="text-lg lg:text-xl font-bold my-4">{content.title}</DialogTitle>
           <div className="space-y-4 w-full px-5 py-4">
             {content.description.map((item, index) => (
               <DialogDescription key={index} className="space-y-2 text-left">

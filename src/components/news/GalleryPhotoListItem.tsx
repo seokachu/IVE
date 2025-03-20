@@ -1,7 +1,7 @@
-import Image from "next/image";
-import DefaultImage from "@/assets/images/default_image.avif";
-import { FaSearchPlus } from "react-icons/fa";
-import type { GalleryPhotoListItemProps } from "@/types";
+import Image from 'next/image';
+import DefaultImage from '@/assets/images/default_image.avif';
+import { FaSearchPlus } from 'react-icons/fa';
+import type { GalleryPhotoListItemProps } from '@/types/news';
 
 const GalleryPhotoListItem = ({ item, onClick }: GalleryPhotoListItemProps) => {
   return (

@@ -1,9 +1,9 @@
-import Image from "next/image";
-import DefaultImage from "@/assets/images/default_image.avif";
-import { useShop } from "@/hooks/queries/useShops";
-import type { ShopMenuProps } from "@/types";
-import Error from "@/components/common/error/Error";
-import ProductDescriptionSkeleton from "@/components/common/loading/ProductDescriptionSkeleton";
+import Image from 'next/image';
+import DefaultImage from '@/assets/images/default_image.avif';
+import { useShop } from '@/hooks/queries/useShops';
+import Error from '@/components/common/error/Error';
+import ProductDescriptionSkeleton from '@/components/common/loading/ProductDescriptionSkeleton';
+import type { ShopMenuProps } from '@/types/shop';
 
 const DescriptionTab = ({ id }: ShopMenuProps) => {
   const { data, isLoading, isError } = useShop(id);
@@ -33,24 +33,12 @@ const DescriptionTab = ({ id }: ShopMenuProps) => {
       )}
       {data.images?.[1] && (
         <div className="w-full h-auto m-auto relative my-16">
-          <Image
-            src={data.images[1]}
-            alt={data.title}
-            className="fill m-auto"
-            width={650}
-            height={650}
-          />
+          <Image src={data.images[1]} alt={data.title} className="fill m-auto" width={650} height={650} />
         </div>
       )}
       {data.images?.[2] && (
         <div className="w-full h-auto m-auto relative my-16">
-          <Image
-            src={data.images[2]}
-            alt={data.title}
-            className="fill m-auto"
-            width={650}
-            height={650}
-          />
+          <Image src={data.images[2]} alt={data.title} className="fill m-auto" width={650} height={650} />
         </div>
       )}
       {data.description?.[2] && (

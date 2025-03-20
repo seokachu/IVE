@@ -1,14 +1,9 @@
-import { RHFInput } from "@/components/common/RHFInput";
-import { Label } from "@/components/ui/label";
-import { FaCheck } from "react-icons/fa";
+import { RHFInput } from '@/components/common/RHFInput';
+import { Label } from '@/components/ui/label';
+import { FaCheck } from 'react-icons/fa';
+import type { DefaultAddressCheckboxProps } from '@/types/mypage';
 
-interface DefaultAddressCheckboxProps {
-  isDefaultAddress?: boolean;
-}
-
-const DefaultAddressCheckbox = ({
-  isDefaultAddress,
-}: DefaultAddressCheckboxProps) => {
+const DefaultAddressCheckbox = ({ isDefaultAddress }: DefaultAddressCheckboxProps) => {
   if (isDefaultAddress) {
     return (
       <div className="my-5">
@@ -31,9 +26,7 @@ const DefaultAddressCheckbox = ({
       <Label htmlFor="defaultDelivery" className="text-sm">
         기본 배송지로 저장
       </Label>
-      <span className="text-gray-500 text-xs">
-        &#40;첫 배송지는 자동으로 기본 배송지로 저장됩니다.&#41;
-      </span>
+      <span className="text-gray-500 text-xs">&#40;첫 배송지는 자동으로 기본 배송지로 저장됩니다.&#41;</span>
     </div>
   );
 };

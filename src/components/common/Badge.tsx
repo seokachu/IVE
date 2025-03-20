@@ -1,6 +1,11 @@
-import type { BadgeItemProps } from "@/types";
-import { calculateBadge } from "@/utils/calculateBadge";
-import { BADGE_TYPES } from "@/utils/constants";
+import { BADGE_TYPES } from '@/utils/constants';
+import { calculateBadge } from '@/utils/calculateBadge';
+import type { BadgeFields } from '@/utils/calculateBadge';
+
+export interface BadgeItemProps {
+  item: BadgeFields;
+  averageRating: number;
+}
 
 // badge color 설정
 const getBadgeColor = (badge: string) => {
@@ -21,12 +26,7 @@ const Badge = ({ item, averageRating }: BadgeItemProps) => {
   return (
     <div className="flex items-center gap-1">
       {badges.map((badge) => (
-        <span
-          key={badge}
-          className={`text-xs px-2 py-1 rounded-md text-white ${getBadgeColor(
-            badge
-          )}`}
-        >
+        <span key={badge} className={`text-xs px-2 py-1 rounded-md text-white ${getBadgeColor(badge)}`}>
           {badge}
         </span>
       ))}

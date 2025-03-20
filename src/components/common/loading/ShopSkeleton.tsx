@@ -1,5 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import type { VariantTypeProps } from "@/types";
+import type { VariantTypeProps } from "@/types/shop";
 
 const SHOP_STYLES = {
   shop: "w-2/6 md:w-[calc(33.333%-0.9rem)] lg:w-[calc(25%-0.95rem)]",

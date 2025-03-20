@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -6,19 +6,10 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
+import type { AddressConfirmModalProps } from '@/types/mypage';
 
-interface AddressConfirmModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onDelete: () => void;
-}
-
-const AddressConfirmModal = ({
-  isOpen,
-  onClose,
-  onDelete,
-}: AddressConfirmModalProps) => {
+const AddressConfirmModal = ({ isOpen, onClose, onDelete }: AddressConfirmModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">

@@ -1,8 +1,5 @@
-import { Database } from "@/types/supabase";
 import { supabase } from "./client";
-
-type OrderItem = Database["public"]["Tables"]["order_items"]["Row"];
-type OrderItemInput = Omit<OrderItem, "created_at" | "id" | "is_confirmed">;
+import type { OrderItemInput } from "@/types/payment";
 
 //결제목록 저장
 export const saveOrderItems = async (orderItems: OrderItemInput[]) => {

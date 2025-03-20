@@ -1,21 +1,14 @@
-"use client";
-import { useCallback, useEffect, useRef } from "react";
-import ShopListItem from "./ShopListItem";
-import { useShops } from "@/hooks/queries/useShops";
-import ShopSkeleton from "../common/loading/ShopSkeleton";
-import Error from "../common/error/Error";
-import type { SortProps } from "@/types";
-import { ClipLoader } from "react-spinners";
+'use client';
+import { useCallback, useEffect, useRef } from 'react';
+import ShopListItem from './ShopListItem';
+import { useShops } from '@/hooks/queries/useShops';
+import ShopSkeleton from '../common/loading/ShopSkeleton';
+import Error from '../common/error/Error';
+import { ClipLoader } from 'react-spinners';
+import type { SortProps } from '@/types/shop';
 
 const ShopList = ({ sort }: SortProps) => {
-  const {
-    data,
-    error,
-    isLoading,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useShops(sort);
+  const { data, error, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useShops(sort);
   const observerRef = useRef<HTMLDivElement>(null);
 
   const handleObserver = useCallback(
@@ -71,9 +64,7 @@ const ShopList = ({ sort }: SortProps) => {
       )}
       {!hasNextPage && items.length > 0 && (
         <div className="flex justify-center items-center py-4">
-          <div className="text-xs lg:text-base font-bold text-gray-500">
-            더 이상 표시할 상품이 없습니다.
-          </div>
+          <div className="text-xs lg:text-base font-bold text-gray-500">더 이상 표시할 상품이 없습니다.</div>
         </div>
       )}
     </>

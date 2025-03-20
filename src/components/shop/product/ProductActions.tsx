@@ -10,7 +10,8 @@ import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
 import { GoHeartFill } from "react-icons/go";
 import { GoHeart } from "react-icons/go";
 import DirectPaymentButton from "@/components/payment/DirectPaymentButton";
-import type { CartItem, ProductActionsProps } from "@/types";
+import type { ProductActionsProps } from "@/types/shop";
+import type { CartItem } from "@/types/cart";
 
 const ProductActions = ({ product, quantity }: ProductActionsProps) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

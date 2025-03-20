@@ -4,18 +4,14 @@ import {
   getShippingAddresses,
   saveShippingAddress,
   updateShippingAddress,
-} from "@/lib/supabase/addresses";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import type {
-  DeleteAddressParams,
-  ShippingAddress,
-  ShippingAddressUpdate,
-} from "@/types";
+} from '@/lib/supabase/addresses';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import type { DeleteAddressParams, ShippingAddress, ShippingAddressUpdate } from '@/types';
 
 //배송지 목록 조회(여러개)
 export const useShippingAddresses = (userId?: string) => {
   return useQuery({
-    queryKey: ["shippingAddresses", userId],
+    queryKey: ['shippingAddresses', userId],
     queryFn: () => getShippingAddresses(userId!),
     enabled: !!userId,
   });
@@ -24,7 +20,7 @@ export const useShippingAddresses = (userId?: string) => {
 //기본 목록 배송지 조회
 export const useShippingAddress = (userId?: string) => {
   return useQuery({
-    queryKey: ["shippingAddress", userId],
+    queryKey: ['shippingAddress', userId],
     queryFn: () => getShippingAddress(userId!),
     enabled: !!userId,
   });
@@ -38,7 +34,7 @@ export const useAddShippingAddress = () => {
     mutationFn: saveShippingAddress,
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["shippingAddresses", variables.user_id],
+        queryKey: ['shippingAddresses', variables.user_id],
       });
     },
   });
@@ -49,14 +45,13 @@ export const useDeleteShippingAddress = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ addressId }: DeleteAddressParams) =>
-      deleteShippingAddress(addressId),
+    mutationFn: ({ addressId }: DeleteAddressParams) => deleteShippingAddress(addressId),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["shippingAddresses", variables.userId],
+        queryKey: ['shippingAddresses', variables.userId],
       });
       queryClient.invalidateQueries({
-        queryKey: ["shippingAddress", variables.userId],
+        queryKey: ['shippingAddress', variables.userId],
       });
     },
   });
@@ -67,32 +62,22 @@ export const useUpdateShippingAddress = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({
-      addressId,
-      data,
-    }: {
-      addressId: string;
-      data: ShippingAddressUpdate;
-    }) => updateShippingAddress(addressId, data),
+    mutationFn: ({ addressId, data }: { addressId: string; data: ShippingAddressUpdate }) =>
+      updateShippingAddress(addressId, data),
     onSuccess: async (updatedData, variables) => {
       // 즉시 캐시 업데이트
-      queryClient.setQueryData<ShippingAddress[]>(
-        ["shippingAddresses", variables.data.user_id],
-        (old) => {
-          if (!old) return old;
-          return old.map((address: ShippingAddress) =>
-            address.id === variables.addressId ? updatedData : address
-          );
-        }
-      );
+      queryClient.setQueryData<ShippingAddress[]>(['shippingAddresses', variables.data.user_id], (old) => {
+        if (!old) return old;
+        return old.map((address: ShippingAddress) => (address.id === variables.addressId ? updatedData : address));
+      });
 
       // 쿼리 무효화
       await queryClient.invalidateQueries({
-        queryKey: ["shippingAddresses", variables.data.user_id],
+        queryKey: ['shippingAddresses', variables.data.user_id],
       });
 
       await queryClient.invalidateQueries({
-        queryKey: ["shippingAddress", variables.data.user_id],
+        queryKey: ['shippingAddress', variables.data.user_id],
       });
     },
   });

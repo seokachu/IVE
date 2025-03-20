@@ -1,22 +1,17 @@
-"use client";
-import SelectMenu from "@/components/common/select/SelectMenu";
-import ShopList from "@/components/shop/ShopList";
-import type { SortOptionList } from "@/types";
-import { PRODUCT_SORT_OPTIONS } from "@/utils/constants";
-import { useState } from "react";
+'use client';
+import { useState } from 'react';
+import SelectMenu from '@/components/common/select/SelectMenu';
+import ShopList from '@/components/shop/ShopList';
+import { PRODUCT_SORT_OPTIONS } from '@/utils/constants';
+import type { SortOptionList } from '@/types/shop';
 
 const ShopContainer = () => {
-  const [sort, setSort] = useState<SortOptionList>("best");
+  const [sort, setSort] = useState<SortOptionList>('best');
 
   //Type Guard 함수
   const handleSortChange = (value: string) => {
     const isSortOption = (value: string): value is SortOptionList => {
-      return [
-        "best",
-        "latest",
-        "price_low_to_high",
-        "price_high_to_low",
-      ].includes(value);
+      return ['best', 'latest', 'price_low_to_high', 'price_high_to_low'].includes(value);
     };
 
     if (isSortOption(value)) {

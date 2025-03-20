@@ -1,15 +1,15 @@
-import Image from "next/image";
-import DefaultImage from "@/assets/images/default_image.avif";
-import ProductActions from "./ProductActions";
-import ShareButton from "@/components/common/button/ShareButton";
-import { useShop } from "@/hooks/queries/useShops";
-import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
-import Error from "@/components/common/error/Error";
-import type { ShopMenuProps } from "@/types";
-import ProductInfoSkeleton from "@/components/common/loading/ProductInfoSkeleton";
-import QuantitySelector from "@/components/common/QuantitySelector";
-import { toast } from "@/hooks/use-toast";
-import { useState } from "react";
+import Image from 'next/image';
+import DefaultImage from '@/assets/images/default_image.avif';
+import ProductActions from './ProductActions';
+import ShareButton from '@/components/common/button/ShareButton';
+import { useShop } from '@/hooks/queries/useShops';
+import { formatPrice, getDiscountedPrice } from '@/utils/calculateDiscount';
+import Error from '@/components/common/error/Error';
+import ProductInfoSkeleton from '@/components/common/loading/ProductInfoSkeleton';
+import QuantitySelector from '@/components/common/QuantitySelector';
+import { toast } from '@/hooks/use-toast';
+import { useState } from 'react';
+import type { ShopMenuProps } from '@/types/shop';
 
 const ProductInfo = ({ id }: ShopMenuProps) => {
   const [count, setCount] = useState(1);
@@ -25,7 +25,7 @@ const ProductInfo = ({ id }: ShopMenuProps) => {
   const handleIncrease = () => {
     if (count >= 5) {
       toast({
-        title: "최대 5개 까지 구매 가능합니다.",
+        title: '최대 5개 까지 구매 가능합니다.',
       });
       return;
     }
@@ -54,18 +54,12 @@ const ProductInfo = ({ id }: ShopMenuProps) => {
       </div>
       <div className="w-full my-8 lg:w-2/4 lg:my-0">
         <div className="flex items-start justify-between">
-          <h2 className="text-lg lg:text-xl font-bold break-all pr-10">
-            {data.title}
-          </h2>
+          <h2 className="text-lg lg:text-xl font-bold break-all pr-10">{data.title}</h2>
           <ShareButton className="mt-[2px]" />
         </div>
-        <s className="lg:text-lg text-dark-gray mb-1">
-          {formatPrice(data.price)}
-        </s>
+        <s className="lg:text-lg text-dark-gray mb-1">{formatPrice(data.price)}</s>
         <div className="flex gap-2 items-center">
-          <strong className="text-lg lg:text-xl text-purple">
-            {data.discount_rate}%
-          </strong>
+          <strong className="text-lg lg:text-xl text-purple">{data.discount_rate}%</strong>
           <strong className="text-lg lg:text-xl">{formatPrice(price)}원</strong>
         </div>
         <div className="mb-5">
@@ -97,9 +91,7 @@ const ProductInfo = ({ id }: ShopMenuProps) => {
           </ul>
           <div className="justify-end flex gap-3 items-baseline">
             <p className="text-sm">총 상품금액</p>
-            <strong className="text-lg lg:text-xl">
-              {formatPrice(totalPrice)}원
-            </strong>
+            <strong className="text-lg lg:text-xl">{formatPrice(totalPrice)}원</strong>
           </div>
         </div>
         <ProductActions product={data} quantity={count} />
