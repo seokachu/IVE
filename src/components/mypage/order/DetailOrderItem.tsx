@@ -1,23 +1,20 @@
-import ActionButton from "@/components/common/button/ActionButton";
-import ConfirmModal from "@/components/common/modal/ConfirmModal";
-import { toast } from "@/hooks/use-toast";
-import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
-import Image from "next/image";
-import { useState } from "react";
-import { FaCheck } from "react-icons/fa";
-import WriteReviewModal from "./WriteReviewModal";
-import { useOrderItemReview } from "@/hooks/queries/useReviews";
-import { useRouter } from "next/navigation";
-import type { DetailOrderItemProps } from "@/types";
+import ActionButton from '@/components/common/button/ActionButton';
+import ConfirmModal from '@/components/common/modal/ConfirmModal';
+import { toast } from '@/hooks/use-toast';
+import { formatPrice, getDiscountedPrice } from '@/utils/calculateDiscount';
+import Image from 'next/image';
+import { useState } from 'react';
+import { FaCheck } from 'react-icons/fa';
+import WriteReviewModal from './WriteReviewModal';
+import { useOrderItemReview } from '@/hooks/queries/useReviews';
+import { useRouter } from 'next/navigation';
+import type { DetailOrderItemProps } from '@/types/mypage';
 
 const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
   const { push } = useRouter();
   const [isConfirmModal, setIsConfirmModal] = useState(false);
   const [isReviewModal, setIsReviewModal] = useState(false);
-  const { data: reviewData } = useOrderItemReview(
-    item.order_id,
-    item.product_id
-  );
+  const { data: reviewData } = useOrderItemReview(item.order_id, item.product_id);
   const price = getDiscountedPrice(item);
 
   const onClickCompleteOrder = () => {
@@ -27,7 +24,7 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
   const handleConfirmOrder = () => {
     onConfirm();
     toast({
-      title: "구매가 확정되었습니다.",
+      title: '구매가 확정되었습니다.',
       description: item.product_name,
     });
   };
@@ -38,13 +35,13 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
 
   //구매확정 상태이고 리뷰가 있으면 리뷰수정, 없으면 리뷰쓰기
   const getButtonText = () => {
-    if (!item.is_confirmed) return "구매확정";
-    return reviewData ? "리뷰수정" : "리뷰쓰기";
+    if (!item.is_confirmed) return '구매확정';
+    return reviewData ? '리뷰수정' : '리뷰쓰기';
   };
 
   //모달 mode
   const getReviewMode = () => {
-    return reviewData ? "edit" : "create";
+    return reviewData ? 'edit' : 'create';
   };
 
   const onClickDetail = () => {
@@ -73,33 +70,23 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
             </div>
           )}
           <div className="flex flex-col justify-center">
-            <h3 className="text-sm lg:text-base font-bold">
-              {item.product_name}
-            </h3>
+            <h3 className="text-sm lg:text-base font-bold">{item.product_name}</h3>
             <div className="text-gray-500 text-xs lg:text-sm flex lg:items-center flex-col lg:flex-row gap-[2px] lg:gap-1 mt-1 uppercase">
               <p>색상 : {item.color}</p>
               <span className="hidden lg:block">&#47;</span>
               <p>사이즈 : {item.size}</p>
-              <span className="hidden lg:block -translate-y-[1px] text-dark-gray">
-                |
-              </span>
+              <span className="hidden lg:block -translate-y-[1px] text-dark-gray">|</span>
               <p>수량 : {item.quantity}개</p>
             </div>
             <div className="flex gap-2 items-baseline">
-              <s className="text-sm text-dark-gray">
-                {formatPrice(item.price * item.quantity)}
-              </s>
-              <strong className="text-sm lg:text-base">
-                {formatPrice(price)}원
-              </strong>
+              <s className="text-sm text-dark-gray">{formatPrice(item.price * item.quantity)}</s>
+              <strong className="text-sm lg:text-base">{formatPrice(price)}원</strong>
             </div>
           </div>
         </div>
         <ActionButton
-          onClick={
-            item.is_confirmed ? onClickWriteReview : onClickCompleteOrder
-          }
-          variant={item.is_confirmed ? "primary" : "default"}
+          onClick={item.is_confirmed ? onClickWriteReview : onClickCompleteOrder}
+          variant={item.is_confirmed ? 'primary' : 'default'}
           className="text-sm py-2 px-3 mt-5 lg:mt-0"
         >
           {getButtonText()}

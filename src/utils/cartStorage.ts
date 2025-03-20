@@ -1,4 +1,4 @@
-import type { CartItem } from "@/types";
+import type { CartItem } from "@/types/cart";
 
 export const cartStorage = {
   getCart: (): CartItem[] => {

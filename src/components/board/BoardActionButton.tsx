@@ -1,19 +1,9 @@
-import ActionButton from "@/components/common/button/ActionButton";
-import ConfirmModal from "@/components/common/modal/ConfirmModal";
-import { useState } from "react";
+import { useState } from 'react';
+import ActionButton from '@/components/common/button/ActionButton';
+import ConfirmModal from '@/components/common/modal/ConfirmModal';
+import type { BoardActionButtonProps } from '@/types/board';
 
-type ButtonMode = "default" | "edit";
-interface BoardActionButtonProps {
-  mode: ButtonMode;
-  onEdit: () => void;
-  onDelete: () => void;
-}
-
-const BoardActionButton = ({
-  onEdit,
-  onDelete,
-  mode = "default",
-}: BoardActionButtonProps) => {
+const BoardActionButton = ({ onEdit, onDelete, mode = 'default' }: BoardActionButtonProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClickDelete = () => {
@@ -22,20 +12,12 @@ const BoardActionButton = ({
 
   return (
     <>
-      {mode === "default" ? (
+      {mode === 'default' ? (
         <div className="shrink-0">
-          <ActionButton
-            onClick={onEdit}
-            variant="default"
-            className="border-none text-gray-500 mr-2"
-          >
+          <ActionButton onClick={onEdit} variant="default" className="border-none text-gray-500 mr-2">
             수정
           </ActionButton>
-          <ActionButton
-            onClick={handleClickDelete}
-            variant="default"
-            className="border-none text-gray-500"
-          >
+          <ActionButton onClick={handleClickDelete} variant="default" className="border-none text-gray-500">
             삭제
           </ActionButton>
           {isModalOpen && (
@@ -51,11 +33,7 @@ const BoardActionButton = ({
         </div>
       ) : (
         <div className="shrink-0">
-          <ActionButton
-            onClick={onEdit}
-            variant="default"
-            className="border-none text-gray-500 mr-2"
-          >
+          <ActionButton onClick={onEdit} variant="default" className="border-none text-gray-500 mr-2">
             취소
           </ActionButton>
         </div>

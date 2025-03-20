@@ -1,30 +1,8 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
-import WriteReviewForm from "./WriteReviewForm";
-import { Tables } from "@/types/supabase";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import WriteReviewForm from './WriteReviewForm';
+import type { WriteReviewModalProps } from '@/types/mypage';
 
-interface WriteReviewModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  reviewData?: Tables<"goods_reviews"> | null;
-  orderId: string;
-  goodsId: string;
-  mode: "create" | "edit";
-}
-
-const WriteReviewModal = ({
-  isOpen,
-  onClose,
-  reviewData,
-  orderId,
-  goodsId,
-  mode,
-}: WriteReviewModalProps) => {
+const WriteReviewModal = ({ isOpen, onClose, reviewData, orderId, goodsId, mode }: WriteReviewModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-xl max-h-[calc(100vh-4rem)] overflow-y-auto py-16">

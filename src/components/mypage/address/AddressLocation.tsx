@@ -1,23 +1,14 @@
-import ActionButton from "@/components/common/button/ActionButton";
-import { RHFInput } from "@/components/common/RHFInput";
+import ActionButton from '@/components/common/button/ActionButton';
+import { RHFInput } from '@/components/common/RHFInput';
+import type { AddressLocationProps } from '@/types/mypage';
 
-interface AddressLocationProps {
-  searchAddress: () => void;
-  detailAddress: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-const AddressLocation = ({
-  searchAddress,
-  detailAddress,
-}: AddressLocationProps) => {
+const AddressLocation = ({ searchAddress, detailAddress }: AddressLocationProps) => {
   return (
     <div className="mb-10">
       <fieldset>
         <legend className="block mb-2 text-sm">
           배송지 주소
-          <span className="translate-y-[3px] inline-block text-red ml-1">
-            *
-          </span>
+          <span className="translate-y-[3px] inline-block text-red ml-1">*</span>
         </legend>
         <div className="flex gap-2 justify-between mb-2">
           <div className="w-full">
@@ -30,12 +21,7 @@ const AddressLocation = ({
               readOnly
             />
           </div>
-          <ActionButton
-            onClick={searchAddress}
-            type="button"
-            variant="primary"
-            className="w-2/6 text-sm h-[40px]"
-          >
+          <ActionButton onClick={searchAddress} type="button" variant="primary" className="w-2/6 text-sm h-[40px]">
             주소 검색
           </ActionButton>
         </div>

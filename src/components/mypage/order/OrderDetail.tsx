@@ -1,15 +1,15 @@
-import ActionButton from "@/components/common/button/ActionButton";
-import { FaArrowLeft } from "react-icons/fa";
-import DetailOrderItem from "./DetailOrderItem";
-import { formatDate } from "@/utils/formatDate";
-import OrderCustomerInfoItem from "@/components/cart/OrderCustomerInfoItem";
-import { useRecoilValue } from "recoil";
-import { useCustomerInfo } from "@/hooks/queries/useCustomerInfo";
-import { sessionState } from "@/store";
-import { usePayment } from "@/hooks/queries/usePayment";
-import PaymentOverview from "./PaymentOverview";
-import type { OrderDetailProps } from "@/types";
-import { useConfirmOrder } from "@/hooks/queries/useOrderItems";
+import ActionButton from '@/components/common/button/ActionButton';
+import { FaArrowLeft } from 'react-icons/fa';
+import DetailOrderItem from './DetailOrderItem';
+import { formatDate } from '@/utils/formatDate';
+import OrderCustomerInfoItem from '@/components/cart/OrderCustomerInfoItem';
+import { useRecoilValue } from 'recoil';
+import { useCustomerInfo } from '@/hooks/queries/useCustomerInfo';
+import { sessionState } from '@/store';
+import { usePayment } from '@/hooks/queries/usePayment';
+import PaymentOverview from './PaymentOverview';
+import { useConfirmOrder } from '@/hooks/queries/useOrderItems';
+import type { OrderDetailProps } from '@/types/mypage';
 
 const OrderDetail = ({ orderItems, onBack }: OrderDetailProps) => {
   const session = useRecoilValue(sessionState);
@@ -36,11 +36,7 @@ const OrderDetail = ({ orderItems, onBack }: OrderDetailProps) => {
       </div>
       <ul className="space-y-4 pt-5 py-10">
         {orderItems.map((item) => (
-          <DetailOrderItem
-            key={item.id}
-            item={item}
-            onConfirm={() => confirmOrder(item.id)}
-          />
+          <DetailOrderItem key={item.id} item={item} onConfirm={() => confirmOrder(item.id)} />
         ))}
       </ul>
       <hr />

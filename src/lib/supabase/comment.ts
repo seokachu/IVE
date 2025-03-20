@@ -1,13 +1,11 @@
-import { supabase } from "@/lib/supabase/client";
-import type { Database } from "@/types/supabase";
-
-type CommentInsert = Database["public"]["Tables"]["board_comments"]["Insert"];
+import { supabase } from '@/lib/supabase/client';
+import type { CommentInsert } from '@/types';
 
 //댓글 목록 가져오기
 export const getCommentsByBoardId = async (boardId: number) => {
   try {
     const { data, error } = await supabase
-      .from("board_comments")
+      .from('board_comments')
       .select(
         `
       *,
@@ -18,9 +16,9 @@ export const getCommentsByBoardId = async (boardId: number) => {
       likes:comment_likes(count)
       `
       )
-      .eq("board_id", boardId)
-      .is("parent_id", null)
-      .order("created_at", { ascending: true });
+      .eq('board_id', boardId)
+      .is('parent_id', null)
+      .order('created_at', { ascending: true });
 
     if (error) throw error;
     return data;
@@ -36,7 +34,7 @@ export const getCommentsByBoardId = async (boardId: number) => {
 export const getRepliesByCommentId = async (commentId: number) => {
   try {
     const { data, error } = await supabase
-      .from("board_comments")
+      .from('board_comments')
       .select(
         `
       *,
@@ -47,16 +45,14 @@ export const getRepliesByCommentId = async (commentId: number) => {
       likes:comment_likes(count)
       `
       )
-      .eq("parent_id", commentId)
-      .order("created_at", { ascending: true });
+      .eq('parent_id', commentId)
+      .order('created_at', { ascending: true });
 
     if (error) throw error;
     return data;
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(
-        `대댓글 목록을 가져오는데 실패했습니다. ${error.message}`
-      );
+      throw new Error(`대댓글 목록을 가져오는데 실패했습니다. ${error.message}`);
     }
     throw error;
   }
@@ -68,10 +64,10 @@ export const createComment = async ({
   user_id,
   content,
   parent_id = null,
-}: Omit<CommentInsert, "created_at">) => {
+}: Omit<CommentInsert, 'created_at'>) => {
   try {
     const { data, error } = await supabase
-      .from("board_comments")
+      .from('board_comments')
       .insert({ board_id, user_id, content, parent_id })
       .select(
         `
@@ -95,15 +91,12 @@ export const createComment = async ({
 };
 
 //댓글 수정
-export const updateComment = async (
-  commentId: number,
-  { content }: Pick<CommentInsert, "content">
-) => {
+export const updateComment = async (commentId: number, { content }: Pick<CommentInsert, 'content'>) => {
   try {
     const { data, error } = await supabase
-      .from("board_comments")
+      .from('board_comments')
       .update({ content })
-      .eq("id", commentId)
+      .eq('id', commentId)
       .select(
         `
         *,
@@ -128,10 +121,7 @@ export const updateComment = async (
 //댓글 삭제
 export const deleteComment = async (commentId: number) => {
   try {
-    const { error } = await supabase
-      .from("board_comments")
-      .delete()
-      .eq("id", commentId);
+    const { error } = await supabase.from('board_comments').delete().eq('id', commentId);
 
     if (error) throw error;
     return true;

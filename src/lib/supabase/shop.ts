@@ -1,16 +1,13 @@
-import { supabase } from "@/lib/supabase/client";
-import type { SortOptionList } from "@/types";
-import { getDiscountedPrice } from "@/utils/calculateDiscount";
+import { supabase } from '@/lib/supabase/client';
+import { getDiscountedPrice } from '@/utils/calculateDiscount';
+import type { SortOptionList } from '@/types/shop';
 
 const ITEM_PAGE = 12;
 
 //상품 목록
-export const getGoodsShop = async (
-  page = 1,
-  sortBy: SortOptionList = "best"
-) => {
+export const getGoodsShop = async (page = 1, sortBy: SortOptionList = 'best') => {
   try {
-    const query = supabase.from("goods").select(`
+    const query = supabase.from('goods').select(`
         *,
         goods_reviews(rating)
       `);
@@ -19,9 +16,7 @@ export const getGoodsShop = async (
 
     if (error) {
       if (error instanceof Error) {
-        throw new Error(
-          `리뷰 목록을 불러오는데 실패했습니다. ${error.message}`
-        );
+        throw new Error(`리뷰 목록을 불러오는데 실패했습니다. ${error.message}`);
       }
       throw error;
     }
@@ -30,37 +25,28 @@ export const getGoodsShop = async (
     const sortedData = [...(data || [])];
 
     switch (sortBy) {
-      case "latest":
-        sortedData.sort(
-          (a, b) =>
-            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-        );
+      case 'latest':
+        sortedData.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
         break;
-      case "price_low_to_high":
+      case 'price_low_to_high':
         sortedData.sort((a, b) => {
           const priceA = getDiscountedPrice(a);
           const priceB = getDiscountedPrice(b);
           return priceA - priceB;
         });
         break;
-      case "price_high_to_low":
+      case 'price_high_to_low':
         sortedData.sort((a, b) => {
           const priceA = getDiscountedPrice(a);
           const priceB = getDiscountedPrice(b);
           return priceB - priceA;
         });
         break;
-      case "best":
-        sortedData.sort(
-          (a, b) =>
-            (b.goods_reviews?.length || 0) - (a.goods_reviews?.length || 0)
-        );
+      case 'best':
+        sortedData.sort((a, b) => (b.goods_reviews?.length || 0) - (a.goods_reviews?.length || 0));
         break;
       default:
-        sortedData.sort(
-          (a, b) =>
-            (b.goods_reviews?.length || 0) - (a.goods_reviews?.length || 0)
-        );
+        sortedData.sort((a, b) => (b.goods_reviews?.length || 0) - (a.goods_reviews?.length || 0));
     }
 
     // 페이지네이션 적용
@@ -80,11 +66,7 @@ export const getGoodsShop = async (
 //상품 목록 상세정보
 export const getGoodsShopDetail = async (id: string) => {
   try {
-    const { data, error } = await supabase
-      .from("goods")
-      .select("*")
-      .eq("id", id)
-      .single();
+    const { data, error } = await supabase.from('goods').select('*').eq('id', id).single();
 
     if (error) throw error;
     return data;
@@ -99,7 +81,7 @@ export const getGoodsShopDetail = async (id: string) => {
 //메인페이지 상품목록 불러오기
 export const getCarouselShop = async () => {
   try {
-    const query = supabase.from("goods").select(`
+    const query = supabase.from('goods').select(`
       *,
       goods_reviews(rating)
     `);
@@ -109,10 +91,7 @@ export const getCarouselShop = async () => {
 
     // best 순으로 정렬, 12개 아이템만 반환
     const sortedData = [...(data || [])]
-      .sort(
-        (a, b) =>
-          (b.goods_reviews?.length || 0) - (a.goods_reviews?.length || 0)
-      )
+      .sort((a, b) => (b.goods_reviews?.length || 0) - (a.goods_reviews?.length || 0))
       .slice(0, 12);
 
     return sortedData;

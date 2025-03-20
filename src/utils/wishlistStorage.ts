@@ -1,5 +1,5 @@
-import { addToWishList } from "@/lib/supabase/wishlist";
-import type { WishListItem } from "@/types";
+import { addToWishList } from '@/lib/supabase/wishlist';
+import type { WishListItem } from '@/types';
 
 export const wishlistStorage = {
   //찜하기 목록 로그인 시 동기화하기
@@ -10,7 +10,7 @@ export const wishlistStorage = {
       for (const item of localWishlist) {
         await addToWishList(userId, item.product_id as string);
       }
-      localStorage.removeItem("wishlist");
+      localStorage.removeItem('wishlist');
       return true;
     } catch (error) {
       if (error instanceof Error) {
@@ -22,8 +22,8 @@ export const wishlistStorage = {
 
   //찜 목록 불러오기
   getWishList: (): WishListItem[] => {
-    if (typeof window === "undefined") return [];
-    const wishlist = localStorage.getItem("wishlist");
+    if (typeof window === 'undefined') return [];
+    const wishlist = localStorage.getItem('wishlist');
     return wishlist ? JSON.parse(wishlist) : [];
   },
 
@@ -46,7 +46,7 @@ export const wishlistStorage = {
           created_at: new Date().toISOString(),
         },
       ];
-      localStorage.setItem("wishlist", JSON.stringify(newWishlist));
+      localStorage.setItem('wishlist', JSON.stringify(newWishlist));
       return newWishlist;
     }
     return currentWishlist;
@@ -55,10 +55,8 @@ export const wishlistStorage = {
   //찜하기 취소
   removeWishList: (productId: string) => {
     const currentWishlist = wishlistStorage.getWishList();
-    const newWishlist = currentWishlist.filter(
-      (item) => item.product_id !== productId
-    );
-    localStorage.setItem("wishlist", JSON.stringify(newWishlist));
+    const newWishlist = currentWishlist.filter((item) => item.product_id !== productId);
+    localStorage.setItem('wishlist', JSON.stringify(newWishlist));
     return newWishlist;
   },
 };

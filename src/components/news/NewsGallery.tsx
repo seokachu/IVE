@@ -1,12 +1,8 @@
-import { NEWS_CATEGORY_ARRAY } from "@/utils/constants";
-import NewsGalleryItem from "./NewsGalleryItem";
-import type { NewsGalleryProps } from "@/types";
+import { NEWS_CATEGORY_ARRAY } from '@/utils/constants';
+import NewsGalleryItem from './NewsGalleryItem';
+import type { NewsGalleryProps } from '@/types/news';
 
-const NewsGallery = ({
-  selectedCategory,
-  newsItems,
-  onClick,
-}: NewsGalleryProps) => {
+const NewsGallery = ({ selectedCategory, newsItems, onClick }: NewsGalleryProps) => {
   //선택된 카테고리 필터링
   const filteredItems =
     selectedCategory === NEWS_CATEGORY_ARRAY[0].category

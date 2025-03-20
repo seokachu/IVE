@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 import { Session } from "@supabase/supabase-js";
 import { cartStorage } from "@/utils/cartStorage";
-import type { CartItem } from "@/types";
+import { CartItem } from "@/types/cart";
 
 export const sessionState = atom<Session | null>({
   key: "sessionState",

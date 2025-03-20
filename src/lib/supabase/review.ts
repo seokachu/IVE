@@ -1,24 +1,16 @@
-import { supabase } from "@/lib/supabase/client";
-import type { Database } from "@/types/supabase";
-
-type OrderReviewInsert =
-  Database["public"]["Tables"]["goods_reviews"]["Insert"];
+import { supabase } from '@/lib/supabase/client';
+import type { OrderReviewInsert } from '@/types';
 
 //전체 리뷰 불러오기 (카운트)
 export const getGoodsReviewsCount = async (goodsId: string) => {
   try {
-    const { data, error } = await supabase
-      .from("goods_reviews")
-      .select("*")
-      .eq("goods_id", goodsId);
+    const { data, error } = await supabase.from('goods_reviews').select('*').eq('goods_id', goodsId);
 
     if (error) throw error;
     return data;
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(
-        `전체 리뷰 정보를 가져오는데 실패했습니다. ${error.message}`
-      );
+      throw new Error(`전체 리뷰 정보를 가져오는데 실패했습니다. ${error.message}`);
     }
     throw error;
   }
@@ -33,13 +25,13 @@ export const getGoodsReviews = async (goodsId: string, page: number) => {
   try {
     //전체 개수 가져오기
     const { count } = await supabase
-      .from("goods_reviews")
-      .select("*", { count: "exact", head: true })
-      .eq("goods_id", goodsId);
+      .from('goods_reviews')
+      .select('*', { count: 'exact', head: true })
+      .eq('goods_id', goodsId);
 
     //페이지 데이터 가져오기
     const { data, error } = await supabase
-      .from("goods_reviews")
+      .from('goods_reviews')
       .select(
         `
       *,
@@ -49,8 +41,8 @@ export const getGoodsReviews = async (goodsId: string, page: number) => {
       )
     `
       )
-      .eq("goods_id", goodsId)
-      .order("created_at", { ascending: false })
+      .eq('goods_id', goodsId)
+      .order('created_at', { ascending: false })
       .range(from, to);
 
     if (error) throw error;
@@ -69,33 +61,26 @@ export const getGoodsReviews = async (goodsId: string, page: number) => {
 
 //리뷰 평균
 export const getAverageRating = async (goodsId: string) => {
-  const { data, error } = await supabase
-    .from("goods_reviews")
-    .select("rating")
-    .eq("goods_id", goodsId);
+  const { data, error } = await supabase.from('goods_reviews').select('rating').eq('goods_id', goodsId);
   if (error) throw error;
 
   if (!data || data.length === 0) {
     return 0;
   }
 
-  const average =
-    data.reduce((sum, review) => sum + review.rating, 0) / data.length;
+  const average = data.reduce((sum, review) => sum + review.rating, 0) / data.length;
 
   return Number(average.toFixed(1));
 };
 
 //단일 리뷰 가져오기
-export const getOrderItemReview = async (
-  orderId: string,
-  productId: string
-) => {
+export const getOrderItemReview = async (orderId: string, productId: string) => {
   try {
     const { data, error } = await supabase
-      .from("goods_reviews")
-      .select("*, user:user(name, avatar_url)")
-      .eq("order_id", orderId)
-      .eq("goods_id", productId)
+      .from('goods_reviews')
+      .select('*, user:user(name, avatar_url)')
+      .eq('order_id', orderId)
+      .eq('goods_id', productId)
       .limit(1);
 
     if (error) throw error;
@@ -123,7 +108,7 @@ export const saveOrderItemReview = async ({
 }: OrderReviewInsert) => {
   try {
     const { data, error } = await supabase
-      .from("goods_reviews")
+      .from('goods_reviews')
       .insert({
         order_id,
         goods_id,
@@ -150,16 +135,16 @@ export const saveOrderItemReview = async ({
 //리뷰 수정
 export const updateOrderItemReview = async (
   reviewId: string,
-  { rating, content }: Pick<OrderReviewInsert, "rating" | "content">
+  { rating, content }: Pick<OrderReviewInsert, 'rating' | 'content'>
 ) => {
   try {
     const { data, error } = await supabase
-      .from("goods_reviews")
+      .from('goods_reviews')
       .update({
         rating,
         content,
       })
-      .eq("id", reviewId)
+      .eq('id', reviewId)
       .select()
       .single();
 
