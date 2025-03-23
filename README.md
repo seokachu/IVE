@@ -34,34 +34,27 @@
     <th>Prettier</th>
   </tr>
   <tr>
-    <td>
-      <div>
+    <td align="center">
         <img src="https://github.com/user-attachments/assets/0e7ba33c-456b-491b-a815-afac91a22ae3" alt="next js icon" width="45" height="45" />
-      </div>
     </td>
-    <td><div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/ts-icon.svg" alt="icon" width="65" height="65" /></div></td>
-    <td>
-      <div>
-        &nbsp;
-        <img src="https://github.com/user-attachments/assets/6e168931-ee0d-4e90-8710-050dad01942f" alt="supabase icon" width="50" height="50" />
-      </div>
+    <td align="center">
+      <img src="https://techstack-generator.vercel.app/ts-icon.svg" alt="icon" width="65" height="65" />
     </td>
-    <td>
-      <div>
-         <img src="https://github.com/user-attachments/assets/1b0fb313-98c1-4790-9eb3-0e266cd926d8" alt="recoil icon" width="50" height="50" />
-      </div>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/6e168931-ee0d-4e90-8710-050dad01942f" alt="supabase icon" width="50" height="50" />
     </td>
-    <td>
-      <div>
-        &nbsp;&nbsp; 
-         <img src="https://github.com/user-attachments/assets/55af3049-b93f-4cf1-a6ab-d57a95022743" alt="shadcn ui icon" width="45" height="45" />
-      </div>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/1b0fb313-98c1-4790-9eb3-0e266cd926d8" alt="recoil icon" width="50" height="50" />
     </td>
-    <td>
-      &nbsp; &nbsp; &nbsp;
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/55af3049-b93f-4cf1-a6ab-d57a95022743" alt="shadcn ui icon" width="45" height="45" />
+    </td>
+    <td align="center">
       <img src="https://github.com/user-attachments/assets/b79abc72-27c9-4621-937b-1c768a760f2c" width="45" height="45" alt="Toss Payment icon"/>
     </td>
-    <td><div style="display: flex; align-items: flex-start;">&nbsp;<img src="https://techstack-generator.vercel.app/prettier-icon.svg" alt="icon" width="65" height="65" /></div></td>
+    <td align="center">
+      <img src="https://techstack-generator.vercel.app/prettier-icon.svg" alt="icon" width="65" height="65" />
+    </td>
   </tr>
 </table>
 
@@ -74,23 +67,19 @@
     <th>React Daum Postcode</th>
   </tr>
   <tr>
-    <td>
-      &nbsp; &nbsp; &nbsp; &nbsp;
+    <td align="center">
       <img src="https://github.com/user-attachments/assets/03bee6fc-6160-46f5-9a6f-832648438d75" width="45" height="45" alt="React Hook Form icon"/>
     </td>
-    <td> 
+    <td align="center"> 
       <img src="https://github.com/user-attachments/assets/8ccd376d-57e0-4a8e-9ddb-21ae8b8f4d3c" width="45" height="45" alt="Swiper icon"/>
     </td>
-     <td>
-       &nbsp; &nbsp;
+     <td align="center">
       <img src="https://github.com/user-attachments/assets/39220fa5-1a49-4303-986f-d143f0104830" width="50" height="50" alt="React Icons icon"/>
     </td>
-    <td>
-      &nbsp; &nbsp; &nbsp;
+    <td align="center">
       <img src="https://github.com/user-attachments/assets/3f1d7331-2260-4392-bf10-4efe1a74fa68" width="45" height="45" alt="React Spinners icon"/>
     </td>
-    <td>
-      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <td align="center">
       <img src="https://github.com/user-attachments/assets/3e37e861-3256-4092-99e0-7d2f7accf651" width="45" height="45" alt=""/>
     </td>
   </tr>
@@ -103,18 +92,14 @@
     <th>Lodash</th>
   </tr>
   <tr>
-    <td>
-      &nbsp;
+    <td align="center">
       <img src="https://github.com/user-attachments/assets/7bba8da4-14e4-4489-b2ac-40eb24218da8" width="50" height="50" alt=""/>
     </td>
-    <td>
-      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+     <td align="center">
       <img src="https://github.com/user-attachments/assets/a90b7205-b187-4c62-91f4-8bcc1a9b77e9" width="45" height="45" alt=""/>
     </td>
-    <td>
-      &nbsp;
+    <td align="center">
       <img src="https://github.com/user-attachments/assets/df5b1157-ccfa-4ad4-a5ed-c0cdc2cb2493" width="45" height="45" alt=""/>
-         &nbsp;
     </td>
   </tr>
 </table>
@@ -122,22 +107,86 @@
 <br>
 <br>
 
-
-
-
 ## ✨ 화면 구성 및 주요 기능
 <details>
 <summary>메인페이지</summary>
+  <br>
+  <table>
+     <tr>
+      <th align="center">PC</th>
+      <th align="center" colspan="2">Mobile</th>
+    </tr>
+    <tr>
+      <td valign="top">
+        <img src="https://github.com/user-attachments/assets/4b18024f-5e03-4869-b0df-20cbf93cc221" alt="" />
+      </td>
+      <td valign="top">
+        <img src="https://github.com/user-attachments/assets/152bbc64-dca3-4a08-9baf-dc29cf6bfe12" alt=""/>
+      </td>
+      <td valign="top">
+        <img src="https://github.com/user-attachments/assets/f9b4ff68-0e73-477c-9893-684d47898c0c" alt=""/>
+        <img src="https://github.com/user-attachments/assets/2348be01-fd76-47e7-b1bd-1003248a91e4" alt=""/>
+      </td>
+    </tr>
+  </table>
   <ul>
-    <li>최신 뉴스 조회 및 카테고리별 필터링</li>
-    <li>갤러리 사진 조회</li>
-    <li>더 많은 콘텐츠 로드 (페이지네이션)</li>
-    <li>모달을 통한 상세 내용 조회</li>
+    <li>header 스크롤 시 색상 바뀜</li>
+    <li>swiper 라이브러리로 앨범 섹션 스크롤</li>
+    <li>자유게시판 최신순 내용 미리보기</li>
+    <li>굿즈샵 인기순 내용 미리보기</li>
+    <li>모바일 진입 시 햄버거메뉴 사이드바 변경</li>
   </ul>
 </details>
 
 <details>
+<summary>로그인,회원가입 페이지</summary>
+   <table>
+   <tr>
+     <th align="center">PC</th>
+     <th align="center">Mobile</th>
+   </tr> 
+    <tr>
+      <td valign="top">
+         <img src="https://github.com/user-attachments/assets/a86e080c-c069-4d59-aed5-397507f1d743" alt=""/>
+      </td>
+      <td valign="top">
+          <img src="https://github.com/user-attachments/assets/36b396de-617a-4122-b7ef-be3d9f06b751" alt=""/>
+      </td>
+    </tr>
+  </table>
+  <ul>
+    <li>게시판 데이터 불러오기</li>
+    <li>검색어 입력 시 디바운싱, 검색 결과 하이라이트 표시</li>
+    <li>글쓰기 기능 react-quill 라이브러리</li>
+    <li>더 많은 콘텐츠 로드 (페이지네이션)</li>
+    <li>공유하기 버튼</li>
+    <li>좋아요, 댓글, 대댓글 기능</li>
+    <li>게시판, 댓글, 대댓글 수정 & 삭제 기능</li>
+  </ul>
+</details>
+
+
+<details>
 <summary>소식페이지</summary>
+ <table>
+   <tr>
+     <th align="center">PC</th>
+     <th align="center">Mobile</th>
+   </tr> 
+    <tr>
+      <td valign="top">
+         <img src="https://github.com/user-attachments/assets/a86e080c-c069-4d59-aed5-397507f1d743" alt=""/>
+      </td>
+      <td valign="top">
+          <img src="https://github.com/user-attachments/assets/36b396de-617a-4122-b7ef-be3d9f06b751" alt=""/>
+        <br>
+           <img src="https://github.com/user-attachments/assets/27882d45-03f7-4b31-bae6-3bafd3a7850d" alt=""/>
+        <br>
+          <img src="https://github.com/user-attachments/assets/1ba5ceee-cc61-44e1-8246-4d4c539f3556" alt=""/>
+      </td>
+    </tr>
+  </table>
+
   <ul>
     <li>최신 뉴스 조회 및 카테고리별 필터링</li>
     <li>갤러리 사진 조회</li>
@@ -148,6 +197,20 @@
 
 <details>
 <summary>굿즈샵 페이지</summary>
+  <table>
+   <tr>
+     <th align="center">PC</th>
+     <th align="center">Mobile</th>
+   </tr> 
+    <tr>
+      <td valign="top">
+        
+      </td>
+      <td valign="top">
+        
+      </td>
+    </tr>
+  </table>
   <ul>
     <li>굿즈샵 리스트 카테고리별 정렬 기능</li>
     <li>스크롤 위치에 따른 자동 컨텐츠 로딩 (무한스크롤)</li>
@@ -162,6 +225,20 @@
 
 <details>
 <summary>자유게시판 페이지</summary>
+   <table>
+   <tr>
+     <th align="center">PC</th>
+     <th align="center">Mobile</th>
+   </tr> 
+    <tr>
+      <td valign="top">
+        
+      </td>
+      <td valign="top">
+        
+      </td>
+    </tr>
+  </table>
   <ul>
     <li>게시판 데이터 불러오기</li>
     <li>검색어 입력 시 디바운싱, 검색 결과 하이라이트 표시</li>
@@ -176,6 +253,20 @@
 
 <details>
 <summary>장바구니 페이지</summary>
+   <table>
+   <tr>
+     <th align="center">PC</th>
+     <th align="center">Mobile</th>
+   </tr> 
+    <tr>
+      <td valign="top">
+        
+      </td>
+      <td valign="top">
+        
+      </td>
+    </tr>
+  </table>
   <ul>
     <li>장바구니 데이터 불러오기 및 체크박스로 아이템 선택 기능</li>
    <li>선택삭제, 전체삭제 기능으로 장바구니 아이템 관리</li>
@@ -191,6 +282,20 @@
 
 <details>
 <summary>마이 페이지</summary>
+   <table>
+   <tr>
+     <th align="center">PC</th>
+     <th align="center">Mobile</th>
+   </tr> 
+    <tr>
+      <td valign="top">
+        
+      </td>
+      <td valign="top">
+        
+      </td>
+    </tr>
+  </table>
   <ul>
     <li>아바타 이미지 변경 - 프로필 이미지 편집(react-avatar-editor 라이브러리)</li>
     <li>닉네임 변경 기능</li>
@@ -201,20 +306,21 @@
 </details>
 
 <details>
-<summary>로그인,회원가입 페이지</summary>
-  <ul>
-    <li>게시판 데이터 불러오기</li>
-    <li>검색어 입력 시 디바운싱, 검색 결과 하이라이트 표시</li>
-    <li>글쓰기 기능 react-quill 라이브러리</li>
-    <li>더 많은 콘텐츠 로드 (페이지네이션)</li>
-    <li>공유하기 버튼</li>
-    <li>좋아요, 댓글, 대댓글 기능</li>
-    <li>게시판, 댓글, 대댓글 수정 & 삭제 기능</li>
-  </ul>
-</details>
-
-<details>
 <summary>결제 페이지</summary>
+   <table>
+   <tr>
+     <th align="center">PC</th>
+     <th align="center">Mobile</th>
+   </tr> 
+    <tr>
+      <td valign="top">
+        
+      </td>
+      <td valign="top">
+        
+      </td>
+    </tr>
+  </table>
   <ul>
     <li>게시판 데이터 불러오기</li>
     <li>검색어 입력 시 디바운싱, 검색 결과 하이라이트 표시</li>
