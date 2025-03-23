@@ -2,7 +2,7 @@
 
 <br/>
 
-배포 도메인 : [배포 링크 이동하기](https://ive-three.vercel.app)
+배포 주소 : [배포 링크 이동하기](https://ive-three.vercel.app)
 
 <br>
 
@@ -36,7 +36,7 @@
   <tr>
     <td>
       <div>
-        <img src="https://github.com/user-attachments/assets/0e7ba33c-456b-491b-a815-afac91a22ae3" alt="next js icon" width="48" height="48" />
+        <img src="https://github.com/user-attachments/assets/0e7ba33c-456b-491b-a815-afac91a22ae3" alt="next js icon" width="45" height="45" />
       </div>
     </td>
     <td><div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/ts-icon.svg" alt="icon" width="65" height="65" /></div></td>
@@ -53,15 +53,15 @@
     </td>
     <td>
       <div>
-        &nbsp;
-         <img src="https://github.com/user-attachments/assets/55af3049-b93f-4cf1-a6ab-d57a95022743" alt="shadcn ui icon" width="50" height="50" />
+        &nbsp;&nbsp; 
+         <img src="https://github.com/user-attachments/assets/55af3049-b93f-4cf1-a6ab-d57a95022743" alt="shadcn ui icon" width="45" height="45" />
       </div>
     </td>
     <td>
       &nbsp; &nbsp; &nbsp;
-      <img src="https://github.com/user-attachments/assets/b79abc72-27c9-4621-937b-1c768a760f2c" width="50" height="50" alt="Toss Payment icon"/>
+      <img src="https://github.com/user-attachments/assets/b79abc72-27c9-4621-937b-1c768a760f2c" width="45" height="45" alt="Toss Payment icon"/>
     </td>
-    <td><div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/prettier-icon.svg" alt="icon" width="65" height="65" /></div></td>
+    <td><div style="display: flex; align-items: flex-start;">&nbsp;<img src="https://techstack-generator.vercel.app/prettier-icon.svg" alt="icon" width="65" height="65" /></div></td>
   </tr>
 </table>
 
@@ -76,19 +76,22 @@
   <tr>
     <td>
       &nbsp; &nbsp; &nbsp; &nbsp;
-      <img src="https://github.com/user-attachments/assets/03bee6fc-6160-46f5-9a6f-832648438d75" width="50" height="50" alt="React Hook Form icon"/>
+      <img src="https://github.com/user-attachments/assets/03bee6fc-6160-46f5-9a6f-832648438d75" width="45" height="45" alt="React Hook Form icon"/>
     </td>
     <td> 
-      <img src="https://github.com/user-attachments/assets/8ccd376d-57e0-4a8e-9ddb-21ae8b8f4d3c" width="50" height="50" alt="Swiper icon"/>
+      <img src="https://github.com/user-attachments/assets/8ccd376d-57e0-4a8e-9ddb-21ae8b8f4d3c" width="45" height="45" alt="Swiper icon"/>
     </td>
      <td>
+       &nbsp; &nbsp;
       <img src="https://github.com/user-attachments/assets/39220fa5-1a49-4303-986f-d143f0104830" width="50" height="50" alt="React Icons icon"/>
     </td>
     <td>
-      <img src="https://github.com/user-attachments/assets/3f1d7331-2260-4392-bf10-4efe1a74fa68" width="50" height="50" alt="React Spinners icon"/>
+      &nbsp; &nbsp; &nbsp;
+      <img src="https://github.com/user-attachments/assets/3f1d7331-2260-4392-bf10-4efe1a74fa68" width="45" height="45" alt="React Spinners icon"/>
     </td>
     <td>
-      <img src="https://github.com/user-attachments/assets/3e37e861-3256-4092-99e0-7d2f7accf651" width="50" height="50" alt=""/>
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <img src="https://github.com/user-attachments/assets/3e37e861-3256-4092-99e0-7d2f7accf651" width="45" height="45" alt=""/>
     </td>
   </tr>
 </table>
@@ -101,13 +104,17 @@
   </tr>
   <tr>
     <td>
+      &nbsp;
       <img src="https://github.com/user-attachments/assets/7bba8da4-14e4-4489-b2ac-40eb24218da8" width="50" height="50" alt=""/>
     </td>
     <td>
-      <img src="https://github.com/user-attachments/assets/a90b7205-b187-4c62-91f4-8bcc1a9b77e9" width="50" height="50" alt=""/>
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <img src="https://github.com/user-attachments/assets/a90b7205-b187-4c62-91f4-8bcc1a9b77e9" width="45" height="45" alt=""/>
     </td>
     <td>
-      <img src="https://github.com/user-attachments/assets/df5b1157-ccfa-4ad4-a5ed-c0cdc2cb2493" width="50" height="50" alt=""/>
+      &nbsp;
+      <img src="https://github.com/user-attachments/assets/df5b1157-ccfa-4ad4-a5ed-c0cdc2cb2493" width="45" height="45" alt=""/>
+         &nbsp;
     </td>
   </tr>
 </table>
