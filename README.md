@@ -222,7 +222,8 @@
      <td align="center">자유게시판<br>- 메인</td>
      <td valign="top" width="70%">
        <img src="https://github.com/user-attachments/assets/096f2bcc-dc1b-4719-921c-101dc4999323" alt=""/>
-     </td>  
+       <img src="https://github.com/user-attachments/assets/096f2bcc-dc1b-4719-921c-101dc4999323" alt=""/>
+     </td>
    </tr>
    <tr>
      <td align="center">자유게시판<br>- 글쓰기 페이지</td>
@@ -244,6 +245,7 @@
       <ul>
         <li>게시판 데이터 불러오기 (리스트 10개씩 페이지네이션)</li>
         <li>검색어 입력 시 디바운싱과 하이라이트 표시 기능</li>
+        <li>모바일 댓글버튼 클릭 시 댓글로 스크롤 할 수 있게 이동</li>
       </ul>
     </li>
     <br>
