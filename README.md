@@ -221,20 +221,20 @@
    <tr>
      <td align="center">자유게시판<br>- 메인</td>
      <td valign="top" width="70%">
-       <img src="https://github.com/user-attachments/assets/096f2bcc-dc1b-4719-921c-101dc4999323" alt=""/>
-       <img src="https://github.com/user-attachments/assets/096f2bcc-dc1b-4719-921c-101dc4999323" alt=""/>
+       <img src="https://github.com/user-attachments/assets/c423bc33-333e-4c7c-a430-a36b42fa6abb" alt=""/>
+       <img src="https://github.com/user-attachments/assets/e3cc78f0-1722-4b69-83fa-2b9bd2157446" alt=""/>
      </td>
    </tr>
    <tr>
      <td align="center">자유게시판<br>- 글쓰기 페이지</td>
      <td valign="top" width="70%">
-       <img src="" alt=""/>
+       <img src="https://github.com/user-attachments/assets/81919716-7891-4fd2-a6d2-5378852621cb" alt=""/>
      </td>  
    </tr>
    <tr>
-     <td align="center">자유게시판<br>- 디테일 페이지</td>
+     <td align="center">자유게시판<br>- 디테일 페이지</td>
      <td valign="top" width="70%">
-       <img src="" alt=""/>
+       <img src="https://github.com/user-attachments/assets/cff95a6d-cfe4-4e18-8e0f-718d744dadc9" alt=""/>
      </td>  
    </tr>
   </table>
