@@ -14,7 +14,7 @@ import type { BoardsResponse, UpdateBoardParams } from '@/types/board';
 //메인페이지 게시글 목록 불러오기
 export const useMainRecentBoards = () => {
   return useQuery({
-    queryKey: ['mainRecentBoards'],
+    queryKey: ['boards'],
     queryFn: getMainRecentBoards,
   });
 };
@@ -31,7 +31,7 @@ export const useBoards = (page: number = 1, search?: string) => {
 //게시글 상세 페이지
 export const useBoardDetail = (boardId: number | undefined) => {
   return useQuery({
-    queryKey: ['board', boardId],
+    queryKey: ['boards', boardId],
     queryFn: () => getBoardDetail(boardId as number),
     enabled: !!boardId,
     staleTime: 0,
@@ -60,7 +60,7 @@ export const useUpdateBoard = () => {
     mutationFn: ({ boardId, title, content }: UpdateBoardParams) => updateBoard(boardId, { title, content }),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ['board', variables.boardId],
+        queryKey: ['boards', variables.boardId],
       });
       queryClient.invalidateQueries({
         queryKey: ['boards'],
@@ -113,9 +113,8 @@ export const useIncrementViewCount = () => {
         queryClient.setQueryData(['boards'], context.previousData);
       }
     },
-    onSuccess: (_data, boardId) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['boards'] });
-      queryClient.invalidateQueries({ queryKey: ['board', boardId] });
     },
   });
 };
@@ -123,7 +122,7 @@ export const useIncrementViewCount = () => {
 //마이페이지 게시글 목록 조회
 export const useMyBoards = (userId?: string) => {
   return useQuery({
-    queryKey: ['myBoards', userId],
+    queryKey: ['boards', userId],
     queryFn: () => getMyBoards(userId!),
     enabled: !!userId,
   });
