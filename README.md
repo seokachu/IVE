@@ -220,20 +220,20 @@
    <table>
    <tr>
      <td align="center">자유게시판<br>- 메인</td>
-     <td valign="top" width="70%">
+     <td valign="top" width="80%">
        <img src="https://github.com/user-attachments/assets/c423bc33-333e-4c7c-a430-a36b42fa6abb" alt=""/>
        <img src="https://github.com/user-attachments/assets/e3cc78f0-1722-4b69-83fa-2b9bd2157446" alt=""/>
      </td>
    </tr>
    <tr>
      <td align="center">자유게시판<br>- 글쓰기 페이지</td>
-     <td valign="top" width="70%">
+     <td valign="top" width="80%">
        <img src="https://github.com/user-attachments/assets/81919716-7891-4fd2-a6d2-5378852621cb" alt=""/>
      </td>  
    </tr>
    <tr>
      <td align="center">자유게시판<br>- 디테일 페이지</td>
-     <td valign="top" width="70%">
+     <td valign="top" width="80%">
        <img src="https://github.com/user-attachments/assets/cff95a6d-cfe4-4e18-8e0f-718d744dadc9" alt=""/>
      </td>  
    </tr>
@@ -271,18 +271,12 @@
 <summary>장바구니 페이지</summary>
   <br>
    <table>
-   <tr>
-     <th align="center">PC</th>
-     <th align="center">Mobile</th>
-   </tr> 
-    <tr>
-      <td valign="top">
-        
-      </td>
-      <td valign="top">
-        
-      </td>
-    </tr>
+     <tr>
+       <td valign="top" width="80%">
+         <img src="https://github.com/user-attachments/assets/80205a66-8d13-4b39-9043-86ff5d3445dc" alt=""/>
+         <img src="https://github.com/user-attachments/assets/dd6488ac-99fd-46f5-9435-1a009e274068" alt=""/>   
+       </td>  
+     </tr>
   </table>
   <ul>
     <li>장바구니 데이터 불러오기 및 체크박스로 아이템 선택 기능</li>
@@ -299,19 +293,41 @@
 
 <details>
 <summary>마이 페이지</summary>
+  <br>
    <table>
-   <tr>
-     <th align="center">PC</th>
-     <th align="center">Mobile</th>
-   </tr> 
-    <tr>
-      <td valign="top">
-        
-      </td>
-      <td valign="top">
-        
-      </td>
-    </tr>
+     <tr>
+        <td align="center">마이페이지<br>- 아바타, 닉네임 수정</td>
+        <td valign="top" width="80%">
+         <img src="https://github.com/user-attachments/assets/c4ab8057-926c-43d5-af15-a613be32cbea" alt=""/>
+       </td>  
+     </tr>
+     <tr>
+        <td align="center">마이페이지<br>- 찜 목록 리스트</td>
+        <td valign="top" width="80%">
+         <img src="https://github.com/user-attachments/assets/7394ccb1-3384-4f1c-a6af-99b2bba4df11" alt=""/>
+       </td>  
+     </tr>
+     <tr>
+        <td align="center">마이페이지<br>- 결제 목록</td>
+        <td valign="top" width="80%">
+         <img src="https://github.com/user-attachments/assets/6d773195-582c-4a0a-8332-9ed16525cb71" alt=""/>
+        </td>  
+     </tr>
+     <tr>
+        <td align="center">마이페이지<br>- 내가 쓴 글</td>
+        <td valign="top" width="80%">
+         <img src="https://github.com/user-attachments/assets/5f669838-9433-4a45-9ead-b5798471ebbc" alt=""/>
+        </td>  
+     </tr>
+     <tr>
+        <td align="center">마이페이지<br>- 배송지 관리</td>
+        <td valign="top" width="80%">
+         <img src="https://github.com/user-attachments/assets/c6765b4b-3bc7-4dc8-bd72-9d3a6b417847" alt=""/>
+
+
+        </td>  
+     </tr>
+    
   </table>
   <ul>
     <li>아바타 이미지 변경 - 프로필 이미지 편집(react-avatar-editor 라이브러리)</li>
@@ -339,7 +355,7 @@
     </tr>
   </table>
   <ul>
-    <li>게시판 데이터 불러오기</li>
+    <li></li>
     
   </ul>
 </details>
