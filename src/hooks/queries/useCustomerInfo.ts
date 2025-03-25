@@ -1,9 +1,9 @@
-import { getCustomerInfo, saveCustomerInfo } from "@/lib/supabase/customer";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getCustomerInfo, saveCustomerInfo } from '@/lib/supabase/customer';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const useCustomerInfo = (userId?: string) => {
   return useQuery({
-    queryKey: ["customerInfo", userId],
+    queryKey: ['customer', userId],
     queryFn: () => getCustomerInfo(userId!),
     enabled: !!userId,
   });
@@ -16,7 +16,7 @@ export const useSaveCustomerInfo = () => {
     mutationFn: saveCustomerInfo,
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["customerInfo", variables.user_id],
+        queryKey: ['customer', variables.user_id],
       });
     },
   });

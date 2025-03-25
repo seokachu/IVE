@@ -6,7 +6,6 @@ import { formatDate } from '@/utils/formatDate';
 import type { LatestNewsDetailProps } from '@/types/news';
 
 const LatestNewsDetail = ({ item }: LatestNewsDetailProps) => {
-  console.log(item);
   return (
     <div className="text-left">
       <div className="w-full h-[432px]">
