@@ -21,7 +21,6 @@
 <br>
 <br>
 
-
 ## ✏️ 기술 스택
 <table>
   <tr>
@@ -114,79 +113,61 @@
   <table>
      <tr>
       <th align="center">PC</th>
-      <th align="center" colspan="2">Mobile</th>
+      <th align="center">Mobile</th>
     </tr>
     <tr>
-      <td valign="top">
+      <td valign="top" width="50%;">
         <img src="https://github.com/user-attachments/assets/4b18024f-5e03-4869-b0df-20cbf93cc221" alt="" />
       </td>
       <td valign="top">
-        <img src="https://github.com/user-attachments/assets/152bbc64-dca3-4a08-9baf-dc29cf6bfe12" alt=""/>
-      </td>
-      <td valign="top">
-        <img src="https://github.com/user-attachments/assets/f9b4ff68-0e73-477c-9893-684d47898c0c" alt=""/>
-        <img src="https://github.com/user-attachments/assets/2348be01-fd76-47e7-b1bd-1003248a91e4" alt=""/>
+        <img src="https://github.com/user-attachments/assets/bb6fee32-53f4-4f27-a96b-c039af8878a5" alt="" />
       </td>
     </tr>
   </table>
   <ul>
-    <li>header 스크롤 시 색상 바뀜</li>
-    <li>swiper 라이브러리로 앨범 섹션 스크롤</li>
-    <li>자유게시판 최신순 내용 미리보기</li>
-    <li>굿즈샵 인기순 내용 미리보기</li>
-    <li>모바일 진입 시 햄버거메뉴 사이드바 변경</li>
+    <li>스크롤 시 특정 섹션(ALBUM)부터 헤더 배경 색상 변경</li>
+    <li>앨범 섹션 - Swiper 라이브러리로 가로 스크롤 구현</li>
+    <li>자유게시판 최신 글 미리보기 제공</li>
+    <li>굿즈샵 인기 상품 미리보기 제공</li>
+    <li>모바일에서 햄버거 메뉴 클릭 시 사이드바 형태로 변경</li>
   </ul>
 </details>
 
 <details>
 <summary>로그인,회원가입 페이지</summary>
+  <br>
    <table>
    <tr>
-     <th align="center">PC</th>
-     <th align="center">Mobile</th>
+     <th align="center">로그인 페이지</th>
+     <th align="center">회원가입 페이지</th>
    </tr> 
     <tr>
-      <td valign="top">
-         <img src="https://github.com/user-attachments/assets/a86e080c-c069-4d59-aed5-397507f1d743" alt=""/>
+      <td valign="top" width="50%;">
+         <img src="https://github.com/user-attachments/assets/ce09089a-267f-47bb-9336-4e65fcf6d68e" alt=""/>
+         <img src="https://github.com/user-attachments/assets/0c1aadee-a1f0-4a63-97e2-bc3c470cc361" alt=""/>
       </td>
-      <td valign="top">
-          <img src="https://github.com/user-attachments/assets/36b396de-617a-4122-b7ef-be3d9f06b751" alt=""/>
+      <td>
+         <img src="https://github.com/user-attachments/assets/f433fe28-347e-4e1a-b2bf-b64b0221f1cb" alt=""/>
       </td>
     </tr>
   </table>
   <ul>
-    <li>게시판 데이터 불러오기</li>
-    <li>검색어 입력 시 디바운싱, 검색 결과 하이라이트 표시</li>
-    <li>글쓰기 기능 react-quill 라이브러리</li>
-    <li>더 많은 콘텐츠 로드 (페이지네이션)</li>
-    <li>공유하기 버튼</li>
-    <li>좋아요, 댓글, 대댓글 기능</li>
-    <li>게시판, 댓글, 대댓글 수정 & 삭제 기능</li>
+    <li>로그인 팝업(모달 형태의 로그인 페이지 제공)</li>
+    <li>기존 회원을 위한 일반 로그인 페이지</li>
+    <li>회원가입 후 첫 로그인 시 폭죽 효과 및 축하 메시지 표시</li>
   </ul>
 </details>
 
-
 <details>
 <summary>소식페이지</summary>
+<br>
  <table>
-   <tr>
-     <th align="center">PC</th>
-     <th align="center">Mobile</th>
-   </tr> 
     <tr>
       <td valign="top">
-         <img src="https://github.com/user-attachments/assets/a86e080c-c069-4d59-aed5-397507f1d743" alt=""/>
-      </td>
-      <td valign="top">
-          <img src="https://github.com/user-attachments/assets/36b396de-617a-4122-b7ef-be3d9f06b751" alt=""/>
-        <br>
-           <img src="https://github.com/user-attachments/assets/27882d45-03f7-4b31-bae6-3bafd3a7850d" alt=""/>
-        <br>
-          <img src="https://github.com/user-attachments/assets/1ba5ceee-cc61-44e1-8246-4d4c539f3556" alt=""/>
+         <img src="https://github.com/user-attachments/assets/9db11f54-4afb-4c2c-bd21-6885896f9a39" alt=""/>
       </td>
     </tr>
   </table>
-
   <ul>
     <li>최신 뉴스 조회 및 카테고리별 필터링</li>
     <li>갤러리 사진 조회</li>
@@ -197,62 +178,96 @@
 
 <details>
 <summary>굿즈샵 페이지</summary>
+  <br>
   <table>
    <tr>
-     <th align="center">PC</th>
-     <th align="center">Mobile</th>
+     <th align="center">굿즈샵 - 메인</th>
+     <th align="center">굿즈샵 - 디테일 페이지</th>
    </tr> 
     <tr>
-      <td valign="top">
-        
-      </td>
-      <td valign="top">
-        
-      </td>
+     <td valign="top" width="50%">
+       <img src="https://github.com/user-attachments/assets/096f2bcc-dc1b-4719-921c-101dc4999323" alt=""/>
+     </td>  
+     <td valign="top">
+       <img src="https://github.com/user-attachments/assets/572054fa-0842-4e41-bcd7-01c03f6d86f3" alt=""/>
+     </td>
     </tr>
   </table>
   <ul>
-    <li>굿즈샵 리스트 카테고리별 정렬 기능</li>
-    <li>스크롤 위치에 따른 자동 컨텐츠 로딩 (무한스크롤)</li>
-    <li>찜하기, 바로 구매하기 버튼</li>
-    <li>공유하기 버튼</li>
-    <li>상품 수량 선택 기능</li>
-    <li>상세정보, 리뷰 탭</li>
-    <li>리뷰 탭 클릭 시 유저 리뷰 데이터 불러오기, 별점 평균</li>
-    <li>자주 묻는 질문 아코디언</li>
+    <li>
+      굿즈샵 페이지
+      <ul>
+        <li>카테고리별 정렬과 무한스크롤을 통해 콘텐츠를 자동으로 로딩</li>
+        <li>비회원 찜하기 기능, 로그인 시 로컬스토리지에 저장된 찜과 연동</li>
+      </ul>
+    </li>
+    <br>
+    <li>
+      굿즈샵 디테일 페이지
+      <ul>
+        <li>공유하기 버튼 (링크 복사 기능)</li>
+        <li>상품 수량 선택 (최대 5개, 초과 시 토스트 알림)</li>
+        <li>상세정보와 리뷰 탭 (상세정보 기본, 별점 평균과 5개씩 나누어 보여주는 페이지네이션)</li>
+        <li>자주 묻는 질문(FAQ)은 아코디언 형식으로 표시</li>
+      </ul>
+    </li>
   </ul>
 </details>
 
 <details>
 <summary>자유게시판 페이지</summary>
+  <br>
    <table>
    <tr>
-     <th align="center">PC</th>
-     <th align="center">Mobile</th>
-   </tr> 
-    <tr>
-      <td valign="top">
-        
-      </td>
-      <td valign="top">
-        
-      </td>
-    </tr>
+     <td align="center">자유게시판<br>- 메인</td>
+     <td valign="top" width="70%">
+       <img src="https://github.com/user-attachments/assets/096f2bcc-dc1b-4719-921c-101dc4999323" alt=""/>
+     </td>  
+   </tr>
+   <tr>
+     <td align="center">자유게시판<br>- 글쓰기 페이지</td>
+     <td valign="top" width="70%">
+       <img src="" alt=""/>
+     </td>  
+   </tr>
+   <tr>
+     <td align="center">자유게시판<br>- 디테일 페이지</td>
+     <td valign="top" width="70%">
+       <img src="" alt=""/>
+     </td>  
+   </tr>
   </table>
+
   <ul>
-    <li>게시판 데이터 불러오기</li>
-    <li>검색어 입력 시 디바운싱, 검색 결과 하이라이트 표시</li>
-    <li>글쓰기 기능 react-quill 라이브러리</li>
-    <li>더 많은 콘텐츠 로드 (페이지네이션)</li>
-    <li>공유하기 버튼</li>
-    <li>좋아요, 댓글, 대댓글 기능</li>
-    <li>게시판, 댓글, 대댓글 수정 & 삭제 기능</li>
+    <li>
+      자유게시판 - 메인페이지
+      <ul>
+        <li>게시판 데이터 불러오기 (리스트 10개씩 페이지네이션)</li>
+        <li>검색어 입력 시 디바운싱과 하이라이트 표시 기능</li>
+      </ul>
+    </li>
+    <br>
+    <li>
+      자유게시판 - 글쓰기 페이지
+      <ul>
+        <li>React-quill 라이브러리 사용</li>
+      </ul>
+    </li>
+    <br>
+    <li>
+      자유게시판 - 디테일 페이지
+      <ul>
+        <li>공유하기 버튼 (링크 복사 기능)</li>
+        <li>좋아요, 댓글, 대댓글 기능</li>
+        <li>게시글 수정/삭제, 댓글&대댓글 수정/삭제 기능</li>
+      </ul>
+    </li>
   </ul>
 </details>
 
-
 <details>
 <summary>장바구니 페이지</summary>
+  <br>
    <table>
    <tr>
      <th align="center">PC</th>
@@ -323,12 +338,7 @@
   </table>
   <ul>
     <li>게시판 데이터 불러오기</li>
-    <li>검색어 입력 시 디바운싱, 검색 결과 하이라이트 표시</li>
-    <li>글쓰기 기능 react-quill 라이브러리</li>
-    <li>더 많은 콘텐츠 로드 (페이지네이션)</li>
-    <li>공유하기 버튼</li>
-    <li>좋아요, 댓글, 대댓글 기능</li>
-    <li>게시판, 댓글, 대댓글 수정 & 삭제 기능</li>
+    
   </ul>
 </details>
 
