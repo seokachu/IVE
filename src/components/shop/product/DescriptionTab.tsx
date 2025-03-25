@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import DefaultImage from '@/assets/images/default_image.avif';
-import { useShop } from '@/hooks/queries/useShops';
+import { useShopDetail } from '@/hooks/queries/useShops';
 import Error from '@/components/common/error/Error';
 import ProductDescriptionSkeleton from '@/components/common/loading/ProductDescriptionSkeleton';
 import type { ShopMenuProps } from '@/types/shop';
 
 const DescriptionTab = ({ id }: ShopMenuProps) => {
-  const { data, isLoading, isError } = useShop(id);
+  const { data, isLoading, isError } = useShopDetail(id);
 
   if (isLoading) return <ProductDescriptionSkeleton />;
   if (isError) return <Error />;

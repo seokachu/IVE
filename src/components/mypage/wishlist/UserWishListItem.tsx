@@ -5,7 +5,7 @@ import { FaStar } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import { formatPrice, getDiscountedPrice } from '@/utils/calculateDiscount';
 import { GoHeartFill } from 'react-icons/go';
-import { useShopLists } from '@/hooks/queries/useShops';
+import { useWishListItem } from '@/hooks/queries/useShops';
 import { useRemoveWishList } from '@/hooks/queries/useWishList';
 import { toast } from '@/hooks/use-toast';
 import { useAverageRating } from '@/hooks/queries/useReviews';
@@ -13,7 +13,7 @@ import type { UserWishListItemProps } from '@/types/mypage';
 
 const UserWishListItem = ({ item, index }: UserWishListItemProps) => {
   const { push } = useRouter();
-  const { data: goodsItem, isLoading, isSuccess } = useShopLists(item.product_id);
+  const { data: goodsItem, isLoading, isSuccess } = useWishListItem(item.product_id);
   const { data: averageRating = 0 } = useAverageRating(item.product_id!);
 
   //찜하기 삭제 mutation

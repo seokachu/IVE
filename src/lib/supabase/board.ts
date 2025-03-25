@@ -15,7 +15,7 @@ export const getMainRecentBoards = async () => {
           id,
           name
         ),
-      board_comments(count)
+      board_comments!board_comments_board_id_fkey(count)
       `
       )
       .order('created_at', { ascending: false })
@@ -43,7 +43,7 @@ export const getBoardListByPage = async ({
     let query = supabase.from('board').select(
       `
         *,
-        board_comments(count),
+        board_comments!board_comments_board_id_fkey(count),
         board_likes(count),
         user!inner(id, name, avatar_url)
       `,
@@ -81,7 +81,7 @@ export const getBoardDetail = async (boardId: number) => {
             name,
             avatar_url
           ),
-          board_comments(count),
+          board_comments!board_comments_board_id_fkey(count),
           board_likes(count)
         `
       )
@@ -197,7 +197,7 @@ export const getMyBoards = async (userId: string) => {
       .select(
         `
           *,
-          board_comments(count),
+          board_comments!board_comments_board_id_fkey(count),
           board_likes(count),
           user!inner(
             id,

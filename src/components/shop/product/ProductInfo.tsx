@@ -2,7 +2,7 @@ import Image from 'next/image';
 import DefaultImage from '@/assets/images/default_image.avif';
 import ProductActions from './ProductActions';
 import ShareButton from '@/components/common/button/ShareButton';
-import { useShop } from '@/hooks/queries/useShops';
+import { useShopDetail } from '@/hooks/queries/useShops';
 import { formatPrice, getDiscountedPrice } from '@/utils/calculateDiscount';
 import Error from '@/components/common/error/Error';
 import ProductInfoSkeleton from '@/components/common/loading/ProductInfoSkeleton';
@@ -14,7 +14,7 @@ import type { ShopMenuProps } from '@/types/shop';
 const ProductInfo = ({ id }: ShopMenuProps) => {
   const [count, setCount] = useState(1);
 
-  const { data, isLoading, isError } = useShop(id);
+  const { data, isLoading, isError } = useShopDetail(id);
 
   if (isLoading) return <ProductInfoSkeleton />;
   if (isError) return <Error />;

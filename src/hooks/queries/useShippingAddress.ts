@@ -11,7 +11,7 @@ import type { DeleteAddressParams, ShippingAddress, ShippingAddressUpdate } from
 //배송지 목록 조회(여러개)
 export const useShippingAddresses = (userId?: string) => {
   return useQuery({
-    queryKey: ['shippingAddresses', userId],
+    queryKey: ['addresses', 'list', userId],
     queryFn: () => getShippingAddresses(userId!),
     enabled: !!userId,
   });
@@ -20,7 +20,7 @@ export const useShippingAddresses = (userId?: string) => {
 //기본 목록 배송지 조회
 export const useShippingAddress = (userId?: string) => {
   return useQuery({
-    queryKey: ['shippingAddress', userId],
+    queryKey: ['addresses', 'default', userId],
     queryFn: () => getShippingAddress(userId!),
     enabled: !!userId,
   });
@@ -32,9 +32,9 @@ export const useAddShippingAddress = () => {
 
   return useMutation({
     mutationFn: saveShippingAddress,
-    onSuccess: (_, variables) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['shippingAddresses', variables.user_id],
+        queryKey: ['addresses'],
       });
     },
   });
@@ -46,12 +46,9 @@ export const useDeleteShippingAddress = () => {
 
   return useMutation({
     mutationFn: ({ addressId }: DeleteAddressParams) => deleteShippingAddress(addressId),
-    onSuccess: (_, variables) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['shippingAddresses', variables.userId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ['shippingAddress', variables.userId],
+        queryKey: ['addresses'],
       });
     },
   });
@@ -66,18 +63,13 @@ export const useUpdateShippingAddress = () => {
       updateShippingAddress(addressId, data),
     onSuccess: async (updatedData, variables) => {
       // 즉시 캐시 업데이트
-      queryClient.setQueryData<ShippingAddress[]>(['shippingAddresses', variables.data.user_id], (old) => {
+      queryClient.setQueryData<ShippingAddress[]>(['addresses', 'list', variables.data.user_id], (old) => {
         if (!old) return old;
         return old.map((address: ShippingAddress) => (address.id === variables.addressId ? updatedData : address));
       });
 
-      // 쿼리 무효화
       await queryClient.invalidateQueries({
-        queryKey: ['shippingAddresses', variables.data.user_id],
-      });
-
-      await queryClient.invalidateQueries({
-        queryKey: ['shippingAddress', variables.data.user_id],
+        queryKey: ['addresses'],
       });
     },
   });
