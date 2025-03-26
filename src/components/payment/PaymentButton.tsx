@@ -23,6 +23,8 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
   });
 
   const handlePayment = async () => {
+    console.log('결제 버튼 클릭됨');
+
     //로그인 체크
     if (!checkAuth()) return;
 
@@ -65,9 +67,23 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
 
     //결제 처리
     try {
+      console.log('결제 처리 시작, 선택된 아이템:', selectedItems);
       localStorage.setItem('checkout_items', JSON.stringify(selectedItems));
 
+      console.log('토스페이먼츠 SDK 로드 시도');
       const tossPayments = await loadTossPayments(process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY!);
+      console.log('토스페이먼츠 SDK 로드 성공');
+
+      console.log('결제 요청 파라미터:', {
+        amount,
+        orderId: orderId,
+        orderName,
+        customerName: customerInfo.name,
+        successUrl: `${
+          window.location.origin
+        }/payment/success?orderId=${orderId}&amount=${amount}&orderName=${encodeURIComponent(orderName)}`,
+        failUrl: `${window.location.origin}/payment/fail`,
+      });
 
       await tossPayments.requestPayment('카드', {
         amount,
@@ -79,7 +95,10 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
         }/payment/success?orderId=${orderId}&amount=${amount}&orderName=${encodeURIComponent(orderName)}`,
         failUrl: `${window.location.origin}/payment/fail`,
       });
+
+      console.log('결제 요청 성공');
     } catch (error) {
+      console.error('결제 요청 중 오류 발생:', error);
       localStorage.removeItem('checkout_items');
 
       if (error instanceof Error) {
