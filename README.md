@@ -342,7 +342,7 @@
    <table>
      <tr>
         <td valign="top">
-          <img src="" alt=""/>
+          <img src="https://github.com/user-attachments/assets/4a536b0e-1100-4bbb-8ee7-2b410f3c4d9a" alt=""/>
         </td>
      </tr>
   </table>
