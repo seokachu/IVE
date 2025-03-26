@@ -23,6 +23,7 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
   });
 
   const handlePayment = async () => {
+    alert('결제 버튼 클릭됨');
     console.log('결제 버튼 클릭됨');
 
     //로그인 체크
