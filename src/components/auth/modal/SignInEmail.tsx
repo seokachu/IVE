@@ -16,8 +16,9 @@ import { wishlistStorage } from '@/utils/wishlistStorage';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
+import type { SignInEmailProps } from '@/types';
 
-const SignInEmail = () => {
+const SignInEmail = ({ redirectPath = '/' }: SignInEmailProps) => {
   const { push } = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const queryClient = useQueryClient();
@@ -56,7 +57,9 @@ const SignInEmail = () => {
       toast({
         title: '로그인 되었습니다.',
       });
-      push('/');
+      if (redirectPath) {
+        push(redirectPath);
+      }
     } catch (error) {
       if (error instanceof Error) {
         if (error.message.includes('Invalid login credentials')) {

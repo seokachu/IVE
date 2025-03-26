@@ -1,7 +1,7 @@
-import Image from "next/image";
-import LogoImage from "@/assets/images/logo_pink.svg";
-import OAuthLogin from "./OAuthLogin";
-import SignInEmail from "@/components/auth/modal/SignInEmail";
+import Image from 'next/image';
+import LogoImage from '@/assets/images/logo_pink.svg';
+import OAuthLogin from './OAuthLogin';
+import SignInEmail from '@/components/auth/modal/SignInEmail';
 
 const RegularLogin = () => {
   return (
@@ -12,7 +12,7 @@ const RegularLogin = () => {
         </h2>
         <h3 className="text-xl font-bold mb-1">로그인</h3>
       </div>
-      <SignInEmail />
+      <SignInEmail redirectPath="/" />
       <div className="my-5 w-full">
         <p className="relative text-dark-gray text-center text-xs before:absolute before:w-20 before:md:w-32 before:h-[1px] before:left-0 before:bg-silver-gray before:top-2/4 before:-translate-y-2/4 after:absolute after:w-20 after:md:w-32 after:h-[1px] after:right-0 after:bg-silver-gray after:top-2/4 after:-translate-y-2/4">
           또는

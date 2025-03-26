@@ -30,6 +30,10 @@ export interface SignInProps {
   className?: ButtonHTMLAttributes<HTMLButtonElement>['className'];
 }
 
+export interface SignInEmailProps {
+  redirectPath?: string | null;
+}
+
 export interface AddressData {
   user_id: string;
   recipient_name: string;

@@ -1,17 +1,17 @@
-"use client";
-import { IoChatbubble } from "react-icons/io5";
-import { MdOutlineEmail } from "react-icons/md";
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
-import Link from "next/link";
-import { useState } from "react";
-import SignInEmail from "./SignInEmail";
-import { IoIosArrowBack } from "react-icons/io";
-import { DialogClose } from "@/components/ui/dialog";
-import { oAuthLogin } from "@/lib/supabase/auth";
-import { useToast } from "@/hooks/use-toast";
-import { OAuthProvider } from "@/types";
-import OAuthButton from "@/components/common/button/OAuthButton";
+'use client';
+import { IoChatbubble } from 'react-icons/io5';
+import { MdOutlineEmail } from 'react-icons/md';
+import { FcGoogle } from 'react-icons/fc';
+import { FaGithub } from 'react-icons/fa';
+import Link from 'next/link';
+import { useState } from 'react';
+import SignInEmail from './SignInEmail';
+import { IoIosArrowBack } from 'react-icons/io';
+import { DialogClose } from '@/components/ui/dialog';
+import { oAuthLogin } from '@/lib/supabase/auth';
+import { useToast } from '@/hooks/use-toast';
+import { OAuthProvider } from '@/types';
+import OAuthButton from '@/components/common/button/OAuthButton';
 
 const SignInContent = () => {
   const [showEmailSignIn, setShowEmailSignIn] = useState(false);
@@ -23,15 +23,13 @@ const SignInContent = () => {
 
   const onClickSignUp = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const sheetElement = document.querySelector(
-      '[role="dialog"][data-state="open"].fixed'
-    );
+    const sheetElement = document.querySelector('[role="dialog"][data-state="open"].fixed');
     if (sheetElement) {
-      const closeButton = sheetElement.querySelector("button.absolute");
+      const closeButton = sheetElement.querySelector('button.absolute');
       (closeButton as HTMLButtonElement)?.click();
     }
     setTimeout(() => {
-      window.location.href = "/signup";
+      window.location.href = '/signup';
     }, 100);
   };
 
@@ -53,7 +51,7 @@ const SignInContent = () => {
       {!showEmailSignIn ? (
         <div className="w-full max-w-[380px]">
           <OAuthButton
-            onClick={() => handleOAuthLogin("kakao")}
+            onClick={() => handleOAuthLogin('kakao')}
             className="w-full bg-[#fee500] px-20 py-3 rounded-full flex items-center justify-center relative text-sm font-bold mb-3"
             text="카카오로 3초 만에 시작하기"
             icon={IoChatbubble}
@@ -64,10 +62,7 @@ const SignInContent = () => {
             onClick={toggleEmailSignIn}
             className="w-full border border-1 border-dark-gray px-20 py-3 rounded-full flex items-center justify-center relative text-sm font-bold"
           >
-            <MdOutlineEmail
-              className="absolute left-5 top-2/4 -translate-y-2/4"
-              size={20}
-            />
+            <MdOutlineEmail className="absolute left-5 top-2/4 -translate-y-2/4" size={20} />
             이메일로 로그인
           </button>
           <div className="my-5">
@@ -77,7 +72,7 @@ const SignInContent = () => {
             <ul className="flex gap-5 items-center justify-center mt-3">
               <li>
                 <OAuthButton
-                  onClick={() => handleOAuthLogin("google")}
+                  onClick={() => handleOAuthLogin('google')}
                   className="rounded-full border p-1 w-10 h-10"
                   icon={FcGoogle}
                   size={30}
@@ -86,7 +81,7 @@ const SignInContent = () => {
               </li>
               <li>
                 <OAuthButton
-                  onClick={() => handleOAuthLogin("github")}
+                  onClick={() => handleOAuthLogin('github')}
                   className="w-10 h-10"
                   icon={FaGithub}
                   size={38}
@@ -99,11 +94,7 @@ const SignInContent = () => {
             <p className="text-dark-gray text-xs">
               아직 계정이 없으신가요?
               <DialogClose asChild>
-                <Link
-                  href="/signup"
-                  className="text-font-color ml-1"
-                  onClick={onClickSignUp}
-                >
+                <Link href="/signup" className="text-font-color ml-1" onClick={onClickSignUp}>
                   회원가입하기
                 </Link>
               </DialogClose>
@@ -113,12 +104,9 @@ const SignInContent = () => {
       ) : (
         <div className="w-full max-w-[380px] py-5">
           <button onClick={toggleEmailSignIn} className="absolute top-5 left-5">
-            <IoIosArrowBack
-              size={25}
-              className="text-[#5e5e5e] hover:text-font-color"
-            />
+            <IoIosArrowBack size={25} className="text-[#5e5e5e] hover:text-font-color" />
           </button>
-          <SignInEmail />
+          <SignInEmail redirectPath={null} />
         </div>
       )}
     </div>
