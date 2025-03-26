@@ -43,20 +43,13 @@ const HeaderAside = () => {
                 </Link>
               </SheetClose>
             </SheetTitle>
-            <SheetDescription className="sr-only">
-              Navigation Menu
-            </SheetDescription>
+            <SheetDescription className="sr-only">Navigation Menu</SheetDescription>
             {session && (
               <div className="px-5 py-5">
                 <div className="flex items-center gap-2">
                   <UserAvatar size="md" />
-                  <h2 className="font-bold">
-                    {session?.user.user_metadata.name}
-                  </h2>
-                  <SignOutButton
-                    className="text-sm text-dark-gray ml-auto"
-                    onSuccess={onSignOutSuccess}
-                  />
+                  <h2 className="font-bold">{session?.user.user_metadata.name}</h2>
+                  <SignOutButton className="text-sm text-dark-gray ml-auto" onSuccess={onSignOutSuccess} />
                 </div>
               </div>
             )}

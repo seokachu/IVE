@@ -1,17 +1,17 @@
-'use client';
-import { IoChatbubble } from 'react-icons/io5';
-import { MdOutlineEmail } from 'react-icons/md';
-import { FcGoogle } from 'react-icons/fc';
-import { FaGithub } from 'react-icons/fa';
-import Link from 'next/link';
-import { useState } from 'react';
-import SignInEmail from './SignInEmail';
-import { IoIosArrowBack } from 'react-icons/io';
-import { DialogClose } from '@/components/ui/dialog';
-import { oAuthLogin } from '@/lib/supabase/auth';
-import { useToast } from '@/hooks/use-toast';
-import { OAuthProvider } from '@/types';
-import OAuthButton from '@/components/common/button/OAuthButton';
+"use client";
+import { IoChatbubble } from "react-icons/io5";
+import { MdOutlineEmail } from "react-icons/md";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
+import Link from "next/link";
+import { useState } from "react";
+import SignInEmail from "./SignInEmail";
+import { IoIosArrowBack } from "react-icons/io";
+import { DialogClose } from "@/components/ui/dialog";
+import { oAuthLogin } from "@/lib/supabase/auth";
+import { useToast } from "@/hooks/use-toast";
+import { OAuthProvider } from "@/types";
+import OAuthButton from "@/components/common/button/OAuthButton";
 
 const SignInContent = () => {
   const [showEmailSignIn, setShowEmailSignIn] = useState(false);
@@ -25,11 +25,11 @@ const SignInContent = () => {
     e.preventDefault();
     const sheetElement = document.querySelector('[role="dialog"][data-state="open"].fixed');
     if (sheetElement) {
-      const closeButton = sheetElement.querySelector('button.absolute');
+      const closeButton = sheetElement.querySelector("button.absolute");
       (closeButton as HTMLButtonElement)?.click();
     }
     setTimeout(() => {
-      window.location.href = '/signup';
+      window.location.href = "/signup";
     }, 100);
   };
 
@@ -51,7 +51,7 @@ const SignInContent = () => {
       {!showEmailSignIn ? (
         <div className="w-full max-w-[380px]">
           <OAuthButton
-            onClick={() => handleOAuthLogin('kakao')}
+            onClick={() => handleOAuthLogin("kakao")}
             className="w-full bg-[#fee500] px-20 py-3 rounded-full flex items-center justify-center relative text-sm font-bold mb-3"
             text="카카오로 3초 만에 시작하기"
             icon={IoChatbubble}
@@ -72,7 +72,7 @@ const SignInContent = () => {
             <ul className="flex gap-5 items-center justify-center mt-3">
               <li>
                 <OAuthButton
-                  onClick={() => handleOAuthLogin('google')}
+                  onClick={() => handleOAuthLogin("google")}
                   className="rounded-full border p-1 w-10 h-10"
                   icon={FcGoogle}
                   size={30}
@@ -81,7 +81,7 @@ const SignInContent = () => {
               </li>
               <li>
                 <OAuthButton
-                  onClick={() => handleOAuthLogin('github')}
+                  onClick={() => handleOAuthLogin("github")}
                   className="w-10 h-10"
                   icon={FaGithub}
                   size={38}

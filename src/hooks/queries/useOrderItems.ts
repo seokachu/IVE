@@ -1,16 +1,16 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   confirmOrderItem,
   deleteAllOrderItems,
   deleteOrderItems,
   getOrderDetail,
   getOrderItems,
-} from '@/lib/supabase/orders';
+} from "@/lib/supabase/orders";
 
 //결제 전체 주문 목록 가져오기
 export const useOrderItems = (userId?: string) => {
   return useQuery({
-    queryKey: ['orders', 'items', userId],
+    queryKey: ["orders", "items", userId],
     queryFn: () => getOrderItems(userId!),
     enabled: !!userId,
     staleTime: Infinity,
@@ -20,7 +20,7 @@ export const useOrderItems = (userId?: string) => {
 //결제목록 특정 주문 상품 불러오기
 export const useOrderItemsByOrderId = (orderId?: string) => {
   return useQuery({
-    queryKey: ['orders', 'detail', orderId],
+    queryKey: ["orders", "detail", orderId],
     queryFn: () => getOrderDetail(orderId!),
     enabled: !!orderId,
     staleTime: Infinity,
@@ -34,7 +34,7 @@ export const useDeleteOrderItems = () => {
   return useMutation({
     mutationFn: (itemIds: string[]) => deleteOrderItems(itemIds),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['orders'] });
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
   });
 };
@@ -45,7 +45,7 @@ export const useDeleteAllOrderItems = () => {
   return useMutation({
     mutationFn: (userId: string) => deleteAllOrderItems(userId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['orders'] });
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
   });
 };
@@ -57,7 +57,7 @@ export const useConfirmOrder = () => {
   return useMutation({
     mutationFn: async (itemId: string) => confirmOrderItem(itemId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['orders'] });
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
   });
 };

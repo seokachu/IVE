@@ -6,8 +6,7 @@
   gap: 8px;
 }
 
-.swiper-pagination.swiper-pagination-fraction.swiper-pagination-horizontal
-  span {
+.swiper-pagination.swiper-pagination-fraction.swiper-pagination-horizontal span {
   font-size: 20px;
   display: block;
 }

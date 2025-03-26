@@ -16,9 +16,7 @@ const UserMenu = () => {
             <CartIcon className="left-3" />
           </Link>
         </li>
-        <li className="flex">
-          {!session ? <SignInModal /> : <UserDropdownMenu />}
-        </li>
+        <li className="flex">{!session ? <SignInModal /> : <UserDropdownMenu />}</li>
       </ul>
     </nav>
   );

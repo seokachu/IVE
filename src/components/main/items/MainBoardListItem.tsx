@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import { BiCommentDots } from 'react-icons/bi';
-import DefaultImage from '@/assets/images/default_image.avif';
-import { extractFirstImage } from '@/utils/extractImage';
-import { useRouter } from 'next/navigation';
-import type { MainBoardListItemProps } from '@/types/main';
+import Image from "next/image";
+import { BiCommentDots } from "react-icons/bi";
+import DefaultImage from "@/assets/images/default_image.avif";
+import { extractFirstImage } from "@/utils/extractImage";
+import { useRouter } from "next/navigation";
+import type { MainBoardListItemProps } from "@/types/main";
 
 const MainBoardListItem = ({ item }: MainBoardListItemProps) => {
   const { push } = useRouter();
@@ -23,7 +23,7 @@ const MainBoardListItem = ({ item }: MainBoardListItemProps) => {
         <div className="border overflow-hidden rounded-lg">
           <Image
             src={imageSrc}
-            alt={item.title || '게시글 이미지'}
+            alt={item.title || "게시글 이미지"}
             className="object-cover w-[70px] h-[70px] lg:w-[100px] lg:h-[100px]"
             width={500}
             height={500}

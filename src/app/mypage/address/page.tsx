@@ -8,11 +8,7 @@ import MyPageLoading from "@/components/common/loading/MyPageLoading";
 
 const AddressManagementPage = () => {
   const session = useRecoilValue(sessionState);
-  const {
-    data: addresses,
-    isLoading,
-    isSuccess,
-  } = useShippingAddresses(session?.user?.id);
+  const { data: addresses, isLoading, isSuccess } = useShippingAddresses(session?.user?.id);
 
   if (isLoading || !isSuccess) return <MyPageLoading title="배송지 관리" />;
 

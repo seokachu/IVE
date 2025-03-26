@@ -1,4 +1,4 @@
-type PriceKeys = 'price' | 'discount_rate';
+type PriceKeys = "price" | "discount_rate";
 
 interface DiscountedPrice {
   price: number;
@@ -18,14 +18,14 @@ export const calculateDiscount = (price: number, discountRate: number | null) =>
 
 //가격 포맷팅
 export const formatPrice = (price: number) => {
-  return new Intl.NumberFormat('ko-KR').format(price);
+  return new Intl.NumberFormat("ko-KR").format(price);
 };
 
 // 할인가격 계산
 export const getDiscountedPrice = (
   item: DiscountedPrice,
-  priceKey: PriceKeys = 'price',
-  discountKey: PriceKeys = 'discount_rate'
+  priceKey: PriceKeys = "price",
+  discountKey: PriceKeys = "discount_rate",
 ) => {
   const price = item[priceKey] as number;
   const discountRate = item[discountKey] ?? 0;

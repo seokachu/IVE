@@ -1,8 +1,8 @@
-import { RHFInput } from '@/components/common/RHFInput';
-import { RHFSelect } from '@/components/common/select/RHFSelect';
-import { Label } from '@/components/ui/label';
-import { RECIPIENT_DELIVERY_OPTIONS } from '@/utils/constants';
-import type { RequestInfoProps } from '@/types/mypage';
+import { RHFInput } from "@/components/common/RHFInput";
+import { RHFSelect } from "@/components/common/select/RHFSelect";
+import { Label } from "@/components/ui/label";
+import { RECIPIENT_DELIVERY_OPTIONS } from "@/utils/constants";
+import type { RequestInfoProps } from "@/types/mypage";
 
 const RequestInfo = ({ request, showRequested }: RequestInfoProps) => {
   return (

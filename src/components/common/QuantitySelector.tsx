@@ -8,12 +8,7 @@ interface QuantitySelectorProps {
   decrease: () => void;
 }
 
-const QuantitySelector = ({
-  className,
-  quantity,
-  increase,
-  decrease,
-}: QuantitySelectorProps) => {
+const QuantitySelector = ({ className, quantity, increase, decrease }: QuantitySelectorProps) => {
   return (
     <div className="flex items-center text-sm">
       <h3 className={className}>수량</h3>
@@ -21,11 +16,7 @@ const QuantitySelector = ({
         <button
           onClick={decrease}
           disabled={quantity === 1}
-          className={`${
-            quantity === 1
-              ? "opacity-50 cursor-not-allowed"
-              : "hover:text-purple"
-          }`}
+          className={`${quantity === 1 ? "opacity-50 cursor-not-allowed" : "hover:text-purple"}`}
           aria-label="수량 감소"
         >
           <CiSquareMinus size={25} />

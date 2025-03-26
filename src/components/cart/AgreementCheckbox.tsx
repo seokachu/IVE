@@ -1,5 +1,5 @@
-import { IoIosArrowForward } from 'react-icons/io';
-import type { AgreementCheckboxProps } from '@/types/cart';
+import { IoIosArrowForward } from "react-icons/io";
+import type { AgreementCheckboxProps } from "@/types/cart";
 
 const AgreementCheckbox = ({ modalType, onChange, checked, labelText }: AgreementCheckboxProps) => {
   return (

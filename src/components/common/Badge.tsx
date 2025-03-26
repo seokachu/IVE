@@ -1,6 +1,6 @@
-import { BADGE_TYPES } from '@/utils/constants';
-import { calculateBadge } from '@/utils/calculateBadge';
-import type { BadgeFields } from '@/utils/calculateBadge';
+import { BADGE_TYPES } from "@/utils/constants";
+import { calculateBadge } from "@/utils/calculateBadge";
+import type { BadgeFields } from "@/utils/calculateBadge";
 
 export interface BadgeItemProps {
   item: BadgeFields;

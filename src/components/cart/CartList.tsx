@@ -32,7 +32,7 @@ const CartList = () => {
         }
       });
     },
-    [fetchNextPage, hasNextPage, isFetchingNextPage]
+    [fetchNextPage, hasNextPage, isFetchingNextPage],
   );
 
   useEffect(() => {
@@ -67,9 +67,7 @@ const CartList = () => {
       });
       return;
     }
-    const newCartItems = cartItems.filter(
-      (item) => !selectedItems.includes(item.id)
-    );
+    const newCartItems = cartItems.filter((item) => !selectedItems.includes(item.id));
     localStorage.setItem("shopping_cart", JSON.stringify(newCartItems));
     setCartItems(newCartItems);
     setSelectedItems([]);
@@ -111,9 +109,7 @@ const CartList = () => {
         <div className="flex items-center justify-center min-h-[500px]">
           <div className="flex items-center justify-center flex-col gap-2">
             <h3>장바구니가 비어있습니다.</h3>
-            <p className="text-gray-500 text-sm mb-5">
-              원하는 상품을 담아보세요!
-            </p>
+            <p className="text-gray-500 text-sm mb-5">원하는 상품을 담아보세요!</p>
             <Link
               href="/shop"
               className="border text-sm py-2 px-5 rounded-md border-purple text-purple hover:text-white hover:bg-purple transition-all ease-out duration-300"

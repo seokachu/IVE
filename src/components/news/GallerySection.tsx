@@ -1,14 +1,14 @@
-'use client';
-import ActionButton from '../common/button/ActionButton';
-import { FaArrowDown } from 'react-icons/fa6';
-import GalleryPhotoList from './GalleryPhotoList';
-import { useGallery } from '@/hooks/queries/useGallery';
-import Error from '../common/error/Error';
-import { useState } from 'react';
-import ContentDetailModal from './ContentDetailModal';
-import GalleryPhotoSkeleton from '../common/loading/GalleryPhotoSkeleton';
-import { GALLERY_DEFAULT_LIMIT } from '@/utils/constants';
-import type { GalleryItem } from '@/types';
+"use client";
+import ActionButton from "../common/button/ActionButton";
+import { FaArrowDown } from "react-icons/fa6";
+import GalleryPhotoList from "./GalleryPhotoList";
+import { useGallery } from "@/hooks/queries/useGallery";
+import Error from "../common/error/Error";
+import { useState } from "react";
+import ContentDetailModal from "./ContentDetailModal";
+import GalleryPhotoSkeleton from "../common/loading/GalleryPhotoSkeleton";
+import { GALLERY_DEFAULT_LIMIT } from "@/utils/constants";
+import type { GalleryItem } from "@/types";
 
 const GallerySection = () => {
   const [modalOpen, setModalOpen] = useState(false);

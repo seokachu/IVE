@@ -9,6 +9,8 @@ import type { OAuthProvider } from "@/types";
 const OAuthLogin = () => {
   const handleOAuthLogin = async (provider: OAuthProvider) => {
     try {
+      //현재페이지 저장
+      sessionStorage.setItem("redirectUrl", window.location.pathname + window.location.search);
       await oAuthLogin(provider);
     } catch (error) {
       if (error instanceof Error) {

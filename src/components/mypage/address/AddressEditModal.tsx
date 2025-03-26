@@ -1,6 +1,6 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import AddressForm from './AddressForm';
-import type { AddressEditModalProps } from '@/types/mypage';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import AddressForm from "./AddressForm";
+import type { AddressEditModalProps } from "@/types/mypage";
 
 const AddressEditModal = ({ isOpen, onClose, addressData }: AddressEditModalProps) => {
   return (

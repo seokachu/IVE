@@ -1,15 +1,15 @@
-'use client';
-import { useState } from 'react';
-import ActionButton from '../common/button/ActionButton';
-import NewsCategoryFilter from './NewsCategoryFilter';
-import NewsGallery from './NewsGallery';
-import { FaArrowDown } from 'react-icons/fa6';
-import { LATEST_DEFAULT_LIMIT, NEWS_CATEGORY_ARRAY } from '@/utils/constants';
-import { useNewsGallery } from '@/hooks/queries/useNews';
-import Error from '../common/error/Error';
-import ContentDetailModal from './ContentDetailModal';
-import LatestNewsSkeleton from '../common/loading/LatestNewsSkeleton';
-import type { NewsItem } from '@/types';
+"use client";
+import { useState } from "react";
+import ActionButton from "../common/button/ActionButton";
+import NewsCategoryFilter from "./NewsCategoryFilter";
+import NewsGallery from "./NewsGallery";
+import { FaArrowDown } from "react-icons/fa6";
+import { LATEST_DEFAULT_LIMIT, NEWS_CATEGORY_ARRAY } from "@/utils/constants";
+import { useNewsGallery } from "@/hooks/queries/useNews";
+import Error from "../common/error/Error";
+import ContentDetailModal from "./ContentDetailModal";
+import LatestNewsSkeleton from "../common/loading/LatestNewsSkeleton";
+import type { NewsItem } from "@/types";
 
 const LatestNewsSection = () => {
   const [selectedCategory, setSelectedCategory] = useState(NEWS_CATEGORY_ARRAY[0].category);

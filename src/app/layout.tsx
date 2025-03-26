@@ -14,9 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "IVE-DIVE",
     description: "IVE 팬페이지 입니다.",
-    images: [
-      "https://res.cloudinary.com/dknj7kdek/image/upload/v1737888335/og_nb8ueg.png",
-    ],
+    images: ["https://res.cloudinary.com/dknj7kdek/image/upload/v1737888335/og_nb8ueg.png"],
     type: "website",
   },
 };
@@ -29,21 +27,13 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <head>
-        <link
-          rel="preconnect"
-          href="https://jzghadoanikvjvczuerw.supabase.co"
-        />
+        <link rel="preconnect" href="https://jzghadoanikvjvczuerw.supabase.co" />
         <link rel="preconnect" href="https://supabase.co" />
         <link rel="preconnect" href="https://kakaocdn.net" />
         <link rel="preconnect" href="https://img1.kakaocdn.net" />
       </head>
       <body className={`${notoSansKr.className} w-screen overflow-x-hidden`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <RecoilProvider>
             <QueryProvider>
               <Header />

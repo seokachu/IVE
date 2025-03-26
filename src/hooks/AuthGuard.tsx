@@ -29,7 +29,7 @@ const AuthGuard = ({ children, loadingComponent }: AuthGuardProps) => {
           toast({
             title: "로그인 후 이용 가능합니다.",
             duration: 2000,
-          })
+          }),
         ).then(() => {
           setTimeout(() => {
             window.location.href = "/login";

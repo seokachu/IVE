@@ -10,10 +10,7 @@ const VisualSection = () => {
   return (
     <section className="h-[100dvh] lg:h-screen w-full relative bg-main-image bg-cover bg-center bg-no-repeat flex items-center justify-center">
       <video
-        className={cn(
-          "h-[100dvh] lg:h-screen w-full object-cover fixed top-0 left-0",
-          isScrolled ? "hidden" : "block"
-        )}
+        className={cn("h-[100dvh] lg:h-screen w-full object-cover fixed top-0 left-0", isScrolled ? "hidden" : "block")}
         src="https://res.cloudinary.com/dknj7kdek/video/upload/v1729614511/%E1%84%89%E1%85%B5%E1%84%8F%E1%85%AF%E1%86%AB%E1%84%89%E1%85%B3_01_iaa8xa.mp4"
         autoPlay
         muted
@@ -30,9 +27,7 @@ const VisualSection = () => {
             DIVE INTO IVE
           </h1>
           <p className={`lg:${textStyle}`}>내 가수 정보를 한눈에!</p>
-          <p className={`lg:${textStyle}`}>
-            나의 최애 가수에게 응원의 한마디를 남겨보세요.
-          </p>
+          <p className={`lg:${textStyle}`}>나의 최애 가수에게 응원의 한마디를 남겨보세요.</p>
         </li>
       </ul>
       <div className="border-2 border-white w-8 h-11 absolute bottom-8 left-2/4 -translate-x-2/4 rounded-[32px]">

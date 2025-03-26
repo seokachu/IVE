@@ -1,14 +1,14 @@
-import ActionButton from '@/components/common/button/ActionButton';
-import ConfirmModal from '@/components/common/modal/ConfirmModal';
-import { toast } from '@/hooks/use-toast';
-import { formatPrice, getDiscountedPrice } from '@/utils/calculateDiscount';
-import Image from 'next/image';
-import { useState } from 'react';
-import { FaCheck } from 'react-icons/fa';
-import WriteReviewModal from './WriteReviewModal';
-import { useOrderItemReview } from '@/hooks/queries/useReviews';
-import { useRouter } from 'next/navigation';
-import type { DetailOrderItemProps } from '@/types/mypage';
+import ActionButton from "@/components/common/button/ActionButton";
+import ConfirmModal from "@/components/common/modal/ConfirmModal";
+import { toast } from "@/hooks/use-toast";
+import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
+import Image from "next/image";
+import { useState } from "react";
+import { FaCheck } from "react-icons/fa";
+import WriteReviewModal from "./WriteReviewModal";
+import { useOrderItemReview } from "@/hooks/queries/useReviews";
+import { useRouter } from "next/navigation";
+import type { DetailOrderItemProps } from "@/types/mypage";
 
 const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
   const { push } = useRouter();
@@ -24,7 +24,7 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
   const handleConfirmOrder = () => {
     onConfirm();
     toast({
-      title: '구매가 확정되었습니다.',
+      title: "구매가 확정되었습니다.",
       description: item.product_name,
     });
   };
@@ -35,13 +35,13 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
 
   //구매확정 상태이고 리뷰가 있으면 리뷰수정, 없으면 리뷰쓰기
   const getButtonText = () => {
-    if (!item.is_confirmed) return '구매확정';
-    return reviewData ? '리뷰수정' : '리뷰쓰기';
+    if (!item.is_confirmed) return "구매확정";
+    return reviewData ? "리뷰수정" : "리뷰쓰기";
   };
 
   //모달 mode
   const getReviewMode = () => {
-    return reviewData ? 'edit' : 'create';
+    return reviewData ? "edit" : "create";
   };
 
   const onClickDetail = () => {
@@ -86,7 +86,7 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
         </div>
         <ActionButton
           onClick={item.is_confirmed ? onClickWriteReview : onClickCompleteOrder}
-          variant={item.is_confirmed ? 'primary' : 'default'}
+          variant={item.is_confirmed ? "primary" : "default"}
           className="text-sm py-2 px-3 mt-5 lg:mt-0"
         >
           {getButtonText()}

@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import ActionButton from '@/components/common/button/ActionButton';
-import { formatPrice } from '@/utils/calculateDiscount';
-import { formatDate } from '@/utils/formatDate';
-import { useRouter } from 'next/navigation';
-import type { OrderSummaryProps } from '@/types/mypage';
+import Image from "next/image";
+import ActionButton from "@/components/common/button/ActionButton";
+import { formatPrice } from "@/utils/calculateDiscount";
+import { formatDate } from "@/utils/formatDate";
+import { useRouter } from "next/navigation";
+import type { OrderSummaryProps } from "@/types/mypage";
 
 const OrderSummary = ({ order }: OrderSummaryProps) => {
   const { push } = useRouter();
@@ -34,7 +34,7 @@ const OrderSummary = ({ order }: OrderSummaryProps) => {
           <div>
             <h3 className="text-sm lg:text-base font-bold my-1">
               {order.firstItemName}
-              {order.itemCount > 1 ? ` 외 ${order.itemCount - 1}건` : ''}
+              {order.itemCount > 1 ? ` 외 ${order.itemCount - 1}건` : ""}
             </h3>
             <p className="text-xs lg:text-sm text-gray-500">총 수량 : {order.itemCount}</p>
           </div>

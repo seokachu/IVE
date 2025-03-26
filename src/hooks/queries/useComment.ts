@@ -4,14 +4,14 @@ import {
   getCommentsByBoardId,
   getRepliesByCommentId,
   updateComment,
-} from '@/lib/supabase/comment';
-import type { UpdateCommentParams } from '@/types';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+} from "@/lib/supabase/comment";
+import type { UpdateCommentParams } from "@/types";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 //댓글 리스트 가져오기
 export const useCommentLists = (boardId: number) => {
   return useQuery({
-    queryKey: ['comments', boardId],
+    queryKey: ["comments", boardId],
     queryFn: () => getCommentsByBoardId(boardId),
   });
 };
@@ -19,7 +19,7 @@ export const useCommentLists = (boardId: number) => {
 //대댓글 리스트 가져오기
 export const useRepliesCommentList = (commentId: number) => {
   return useQuery({
-    queryKey: ['comments', 'replies', commentId],
+    queryKey: ["comments", "replies", commentId],
     queryFn: () => getRepliesByCommentId(commentId),
   });
 };
@@ -32,15 +32,15 @@ export const useAddComment = (boardId: number) => {
     onSuccess: (newComment) => {
       if (newComment.parent_id) {
         queryClient.invalidateQueries({
-          queryKey: ['comments', 'replies', newComment.parent_id],
+          queryKey: ["comments", "replies", newComment.parent_id],
         });
       }
       queryClient.invalidateQueries({
-        queryKey: ['comments', boardId],
+        queryKey: ["comments", boardId],
       });
 
       queryClient.invalidateQueries({
-        queryKey: ['boards', boardId],
+        queryKey: ["boards", boardId],
       });
     },
   });
@@ -54,16 +54,16 @@ export const useDeleteComment = (boardId: number, commentId: number, parentId?: 
     onSuccess: () => {
       if (parentId) {
         queryClient.invalidateQueries({
-          queryKey: ['comments', 'replies', parentId],
+          queryKey: ["comments", "replies", parentId],
         });
       }
-      
+
       queryClient.invalidateQueries({
-        queryKey: ['comments', boardId],
+        queryKey: ["comments", boardId],
       });
 
       queryClient.invalidateQueries({
-        queryKey: ['boards', boardId],
+        queryKey: ["boards", boardId],
       });
     },
   });
@@ -76,10 +76,10 @@ export const useEditComment = (boardId: number) => {
     mutationFn: ({ commentId, content }: UpdateCommentParams) => updateComment(commentId, { content }),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['comments', 'replies'],
+        queryKey: ["comments", "replies"],
       });
       queryClient.invalidateQueries({
-        queryKey: ['comments', boardId],
+        queryKey: ["comments", boardId],
       });
     },
   });

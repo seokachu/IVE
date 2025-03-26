@@ -1,8 +1,8 @@
-import Link from 'next/link';
-import { formatDate } from '@/utils/formatDate';
-import BoardActionButton from '../BoardActionButton';
-import ShareButton from '@/components/common/button/ShareButton';
-import type { BoardDetailHeaderProps } from '@/types/board';
+import Link from "next/link";
+import { formatDate } from "@/utils/formatDate";
+import BoardActionButton from "../BoardActionButton";
+import ShareButton from "@/components/common/button/ShareButton";
+import type { BoardDetailHeaderProps } from "@/types/board";
 
 const BoardDetailHeader = ({ item, isAuthor, onClickDelete, onClickEdit }: BoardDetailHeaderProps) => {
   return (

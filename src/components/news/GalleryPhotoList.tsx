@@ -1,5 +1,5 @@
-import GalleryPhotoListItem from './GalleryPhotoListItem';
-import type { GalleryPhotoListProps } from '@/types/news';
+import GalleryPhotoListItem from "./GalleryPhotoListItem";
+import type { GalleryPhotoListProps } from "@/types/news";
 
 const GalleryPhotoList = ({ gallery, onClick }: GalleryPhotoListProps) => {
   return (

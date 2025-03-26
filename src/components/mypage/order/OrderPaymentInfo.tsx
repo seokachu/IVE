@@ -1,5 +1,5 @@
-import { formatPrice } from '@/utils/calculateDiscount';
-import type { PaymentDetailsProps } from '@/types/mypage';
+import { formatPrice } from "@/utils/calculateDiscount";
+import type { PaymentDetailsProps } from "@/types/mypage";
 
 const OrderPaymentInfo = ({ item }: PaymentDetailsProps) => {
   return (

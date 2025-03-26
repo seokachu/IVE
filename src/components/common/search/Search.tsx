@@ -11,19 +11,14 @@ interface SearchProps {
   onSearch: (value: string) => void;
 }
 
-const Search = ({
-  className,
-  placeholder,
-  iconClassName,
-  onSearch,
-}: SearchProps) => {
+const Search = ({ className, placeholder, iconClassName, onSearch }: SearchProps) => {
   const [value, setValue] = useState("");
 
   const debouncedSearch = useRef(
     debounce((searchValue: string) => {
       const trimmedValue = searchValue.trim();
       onSearch(trimmedValue);
-    }, 500)
+    }, 500),
   ).current;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,13 +36,7 @@ const Search = ({
 
   return (
     <div className="relative flex items-center">
-      <Input
-        type="text"
-        placeholder={placeholder}
-        className={className}
-        onChange={handleChange}
-        value={value}
-      />
+      <Input type="text" placeholder={placeholder} className={className} onChange={handleChange} value={value} />
       <IoSearch className={iconClassName} />
     </div>
   );

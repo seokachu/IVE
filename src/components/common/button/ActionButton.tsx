@@ -7,14 +7,7 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset";
 }
 
-const ActionButton = ({
-  variant,
-  children,
-  onClick,
-  className,
-  type = "button",
-  disabled = false,
-}: ButtonProps) => {
+const ActionButton = ({ variant, children, onClick, className, type = "button", disabled = false }: ButtonProps) => {
   const baseStyles = "cursor-pointer rounded-md";
   const variantStyles = {
     primary: "bg-purple border border-purple text-white hover:opacity-90",

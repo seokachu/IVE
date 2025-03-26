@@ -1,30 +1,30 @@
-import { useEffect, useState } from 'react';
-import JSConfetti from 'js-confetti';
-import { toast } from '@/hooks/use-toast';
-import SignInEmail from '@/components/auth/modal/SignInEmail';
-import Image from 'next/image';
-import LogoImage from '@/assets/images/logo_pink.svg';
+import { useEffect, useState } from "react";
+import JSConfetti from "js-confetti";
+import { toast } from "@/hooks/use-toast";
+import SignInEmail from "@/components/auth/modal/SignInEmail";
+import Image from "next/image";
+import LogoImage from "@/assets/images/logo_pink.svg";
 
 const FirstLogin = () => {
   const [jsConfetti, setJsConfetti] = useState<JSConfetti | null>(null);
 
   useEffect(() => {
-    const hasFirstLoginEffect = localStorage.getItem('loginEffect');
-    if (hasFirstLoginEffect === 'true') {
+    const hasFirstLoginEffect = localStorage.getItem("loginEffect");
+    if (hasFirstLoginEffect === "true") {
       const jsConfettiInstance = new JSConfetti();
       setJsConfetti(jsConfettiInstance);
 
       toast({
-        title: '회원가입이 완료되었습니다!',
+        title: "회원가입이 완료되었습니다!",
       });
-      localStorage.setItem('loginEffect', 'false');
+      localStorage.setItem("loginEffect", "false");
     }
   }, []);
 
   useEffect(() => {
     if (jsConfetti) {
       jsConfetti?.addConfetti({
-        confettiColors: ['#ff9f87', '#FFFFFF', '#EB7FEC', '#E72424'],
+        confettiColors: ["#ff9f87", "#FFFFFF", "#EB7FEC", "#E72424"],
         confettiRadius: 5,
         confettiNumber: 300,
       });

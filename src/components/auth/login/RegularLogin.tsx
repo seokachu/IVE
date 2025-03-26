@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import LogoImage from '@/assets/images/logo_pink.svg';
-import OAuthLogin from './OAuthLogin';
-import SignInEmail from '@/components/auth/modal/SignInEmail';
+import Image from "next/image";
+import LogoImage from "@/assets/images/logo_pink.svg";
+import OAuthLogin from "./OAuthLogin";
+import SignInEmail from "@/components/auth/modal/SignInEmail";
 
 const RegularLogin = () => {
   return (

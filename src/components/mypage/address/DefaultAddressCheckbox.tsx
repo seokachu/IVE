@@ -1,7 +1,7 @@
-import { RHFInput } from '@/components/common/RHFInput';
-import { Label } from '@/components/ui/label';
-import { FaCheck } from 'react-icons/fa';
-import type { DefaultAddressCheckboxProps } from '@/types/mypage';
+import { RHFInput } from "@/components/common/RHFInput";
+import { Label } from "@/components/ui/label";
+import { FaCheck } from "react-icons/fa";
+import type { DefaultAddressCheckboxProps } from "@/types/mypage";
 
 const DefaultAddressCheckbox = ({ isDefaultAddress }: DefaultAddressCheckboxProps) => {
   if (isDefaultAddress) {

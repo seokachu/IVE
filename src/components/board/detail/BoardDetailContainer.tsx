@@ -1,18 +1,18 @@
-'use client';
-import { useBoardDetail, useDeleteBoard } from '@/hooks/queries/useBoard';
-import BoardDetailUserInfo from './BoardDetailUserInfo';
-import CommentSection from '../comment/CommentSection';
-import BoardLikeButton from '../BoardLikeButton';
-import BoardDetailHeader from './BoardDetailHeader';
-import BoardDetailContent from './BoardDetailContent';
-import Error from '@/components/common/error/Error';
-import { sessionState } from '@/store';
-import { useRecoilValue } from 'recoil';
-import BoardDetailSkeleton from '@/components/common/loading/BoardDetailSkeleton';
-import { useRouter } from 'next/navigation';
-import { toast } from '@/hooks/use-toast';
-import { useEffect, useRef } from 'react';
-import type { BoardDetailContainerProps } from '@/types/board';
+"use client";
+import { useBoardDetail, useDeleteBoard } from "@/hooks/queries/useBoard";
+import BoardDetailUserInfo from "./BoardDetailUserInfo";
+import CommentSection from "../comment/CommentSection";
+import BoardLikeButton from "../BoardLikeButton";
+import BoardDetailHeader from "./BoardDetailHeader";
+import BoardDetailContent from "./BoardDetailContent";
+import Error from "@/components/common/error/Error";
+import { sessionState } from "@/store";
+import { useRecoilValue } from "recoil";
+import BoardDetailSkeleton from "@/components/common/loading/BoardDetailSkeleton";
+import { useRouter } from "next/navigation";
+import { toast } from "@/hooks/use-toast";
+import { useEffect, useRef } from "react";
+import type { BoardDetailContainerProps } from "@/types/board";
 
 const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
   const commentsRef = useRef<HTMLDivElement>(null);
@@ -22,9 +22,9 @@ const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
   const { mutate: deleteBoard } = useDeleteBoard(board?.id);
 
   useEffect(() => {
-    if (window.location.hash === '#comments') {
+    if (window.location.hash === "#comments") {
       setTimeout(() => {
-        commentsRef.current?.scrollIntoView({ behavior: 'smooth' });
+        commentsRef.current?.scrollIntoView({ behavior: "smooth" });
       }, 100);
     }
   }, [board]);
@@ -37,9 +37,9 @@ const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
   //삭제 Btn
   const onClickDelete = () => {
     deleteBoard();
-    push('/board');
+    push("/board");
     toast({
-      title: '게시글이 삭제 되었습니다.',
+      title: "게시글이 삭제 되었습니다.",
     });
   };
 

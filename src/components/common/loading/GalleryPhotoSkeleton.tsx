@@ -9,10 +9,7 @@ const GalleryPhotoSkeleton = () => {
       </div>
       <div className="flex flex-wrap gap-8 w-full">
         {Array.from({ length: 6 }).map((_, index) => (
-          <div
-            key={index}
-            className="w-full sm:w-full md:w-[calc(50%-1rem)] lg:w-[calc(33%-1.2rem)]"
-          >
+          <div key={index} className="w-full sm:w-full md:w-[calc(50%-1rem)] lg:w-[calc(33%-1.2rem)]">
             <Skeleton className="aspect-square w-full" />
           </div>
         ))}

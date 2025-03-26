@@ -1,8 +1,8 @@
-import type { ShopListItem } from '@/types/index';
+import type { ShopListItem } from "@/types/index";
 
-export type SortOptionList = 'best' | 'latest' | 'price_low_to_high' | 'price_high_to_low';
-export type ItemVariant = 'shop' | 'carousel';
-export type ShopMenuProps = Pick<ShopListItem, 'id'>;
+export type SortOptionList = "best" | "latest" | "price_low_to_high" | "price_high_to_low";
+export type ItemVariant = "shop" | "carousel";
+export type ShopMenuProps = Pick<ShopListItem, "id">;
 
 export interface SortOption {
   column: string;
@@ -14,8 +14,8 @@ export interface SortProps {
 }
 
 export interface TabMenuProps {
-  activeTab: 'description' | 'review';
-  setActiveTab: (tab: 'description' | 'review') => void;
+  activeTab: "description" | "review";
+  setActiveTab: (tab: "description" | "review") => void;
   id: string;
 }
 

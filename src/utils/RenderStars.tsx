@@ -8,11 +8,7 @@ interface RenderStarsProps {
 const RenderStars = ({ rating, size }: RenderStarsProps) => {
   return Array.from({ length: 5 }).map((_, index) => (
     <span key={index}>
-      {index < rating ? (
-        <FaStar size={size} color="#FACC15" />
-      ) : (
-        <FaRegStar size={size} color="#FACC15" />
-      )}
+      {index < rating ? <FaStar size={size} color="#FACC15" /> : <FaRegStar size={size} color="#FACC15" />}
     </span>
   ));
 };

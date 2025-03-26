@@ -1,13 +1,13 @@
-import { Tables } from '@/types/supabase';
-import ActionButton from '../../common/button/ActionButton';
-import { FiMapPin } from 'react-icons/fi';
-import { useDeleteShippingAddress, useUpdateShippingAddress } from '@/hooks/queries/useShippingAddress';
-import { toast } from '@/hooks/use-toast';
-import { useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
-import AddressConfirmModal from './AddressConfirmModal';
-import AddressEditModal from './AddressEditModal';
-import type { AddressListItems } from '@/types/mypage';
+import { Tables } from "@/types/supabase";
+import ActionButton from "../../common/button/ActionButton";
+import { FiMapPin } from "react-icons/fi";
+import { useDeleteShippingAddress, useUpdateShippingAddress } from "@/hooks/queries/useShippingAddress";
+import { toast } from "@/hooks/use-toast";
+import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import AddressConfirmModal from "./AddressConfirmModal";
+import AddressEditModal from "./AddressEditModal";
+import type { AddressListItems } from "@/types/mypage";
 
 const AddressListItem = ({ item }: AddressListItems) => {
   const queryClient = useQueryClient();
@@ -22,7 +22,7 @@ const AddressListItem = ({ item }: AddressListItems) => {
       {
         onSuccess: () => {
           // 즉시 캐시 업데이트(낙관적 업데이트)
-          queryClient.setQueryData<Tables<'shipping_addresses'>[]>(['shippingAddresses', item.user_id], (oldData) => {
+          queryClient.setQueryData<Tables<"shipping_addresses">[]>(["shippingAddresses", item.user_id], (oldData) => {
             if (!oldData) return oldData;
             return oldData.map((address) => ({
               ...address,
@@ -31,17 +31,17 @@ const AddressListItem = ({ item }: AddressListItems) => {
           });
 
           toast({
-            title: '기본 배송지가 변경 되었습니다.',
+            title: "기본 배송지가 변경 되었습니다.",
             description: ``,
           });
         },
         onError: () => {
           toast({
-            title: '기본 배송지 설정에 실패했습니다.',
-            description: '다시 시도해주세요.',
+            title: "기본 배송지 설정에 실패했습니다.",
+            description: "다시 시도해주세요.",
           });
         },
-      }
+      },
     );
   };
 
@@ -58,16 +58,16 @@ const AddressListItem = ({ item }: AddressListItems) => {
         onSuccess: () => {
           setIsDeleteModalOpen(false);
           toast({
-            title: '배송지가 삭제 되었습니다.',
+            title: "배송지가 삭제 되었습니다.",
           });
         },
         onError: () => {
           toast({
-            title: '배송지 삭제에 실패했습니다.',
-            description: '다시 시도해 주세요.',
+            title: "배송지 삭제에 실패했습니다.",
+            description: "다시 시도해 주세요.",
           });
         },
-      }
+      },
     );
   };
 
@@ -79,7 +79,7 @@ const AddressListItem = ({ item }: AddressListItems) => {
   return (
     <div className="bg-gray-50 rounded-lg p-4 lg:p-7 shadow-sm flex flex-col gap-2">
       <div className="flex justify-between items-center">
-        <div className={`flex gap-2 items-stretch ${item.is_default ? 'pointer-events-none' : ''}`}>
+        <div className={`flex gap-2 items-stretch ${item.is_default ? "pointer-events-none" : ""}`}>
           <h3 className="text-base">{item.recipient_name}</h3>
           {item.is_default ? (
             <ActionButton variant="primary" className="text-xs rounded-sm px-1 cursor-auto" disabled>

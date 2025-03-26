@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
-import { sessionState, cartState } from '@/store';
-import { useQueryClient } from '@tanstack/react-query';
-import { getPaymentByOrderId } from '@/lib/supabase/payment';
-import { confirmTossPayment, savePaymentData, cartListItemsToOrderItems, createPaymentData } from '@/lib/api/payment';
-import useCartCleanup from './useCartCleanup';
-import type { UsePaymentConfirmationProps } from '@/types/payment';
-import type { CartItem } from '@/types/cart';
+import { useState, useEffect } from "react";
+import { useRecoilValue } from "recoil";
+import { sessionState, cartState } from "@/store";
+import { useQueryClient } from "@tanstack/react-query";
+import { getPaymentByOrderId } from "@/lib/supabase/payment";
+import { confirmTossPayment, savePaymentData, cartListItemsToOrderItems, createPaymentData } from "@/lib/api/payment";
+import useCartCleanup from "./useCartCleanup";
+import type { UsePaymentConfirmationProps } from "@/types/payment";
+import type { CartItem } from "@/types/cart";
 
 export const usePaymentConfirmation = ({
   orderId,
@@ -45,14 +45,14 @@ export const usePaymentConfirmation = ({
         const existingPayment = await getPaymentByOrderId(orderId);
         if (existingPayment) {
           await queryClient.invalidateQueries({
-            queryKey: ['payments', orderId],
+            queryKey: ["payments", orderId],
           });
           await queryClient.invalidateQueries({
-            queryKey: ['orders', 'detail', orderId],
+            queryKey: ["orders", "detail", orderId],
           });
 
           //처리된 아이템 저장 (장바구니 정리)
-          const completedItemIds = checkoutItems.map((item) => (typeof item === 'string' ? item : item.id));
+          const completedItemIds = checkoutItems.map((item) => (typeof item === "string" ? item : item.id));
           setCheckoutItemsProcessed(completedItemIds);
           return;
         }
@@ -60,11 +60,11 @@ export const usePaymentConfirmation = ({
         //TOSS API 불러오기
         const paymentInfo = await confirmTossPayment(paymentKey, orderId, Number(amount));
 
-        if (paymentInfo.status !== 'DONE') {
+        if (paymentInfo.status !== "DONE") {
           //실패시 fail 페이지로 리다이렉트, Error 상태 저장
-          setError(paymentInfo.message || '결제 처리 중 오류가 발생했습니다.');
+          setError(paymentInfo.message || "결제 처리 중 오류가 발생했습니다.");
           window.location.href = `/payment/fail?message=${encodeURIComponent(
-            paymentInfo.message || '결제 처리 중 오류가 발생했습니다.'
+            paymentInfo.message || "결제 처리 중 오류가 발생했습니다.",
           )}`;
           return;
         }
@@ -73,13 +73,13 @@ export const usePaymentConfirmation = ({
         const paymentData = createPaymentData(paymentInfo, session.user.id, orderId, amount, orderName, address);
 
         //체크아웃 아이템 ID 목록
-        const checkoutItemIds = checkoutItems.map((item) => (typeof item === 'string' ? item : item.id));
+        const checkoutItemIds = checkoutItems.map((item) => (typeof item === "string" ? item : item.id));
 
         //전체 장바구니에서 체크아웃 아이템과 일치하는 항목 필터링
         const filteredCartItems = allCartItems.filter((cartItem) => checkoutItemIds.includes(cartItem.id));
 
         //직접결제 버튼 처리
-        const directCartItems = checkoutItems.filter((item): item is CartItem => typeof item !== 'string');
+        const directCartItems = checkoutItems.filter((item): item is CartItem => typeof item !== "string");
 
         //장바구니 아이템과 직접 결제 아이템 결합
         const combinedCartItems = filteredCartItems.length > 0 ? filteredCartItems : directCartItems;
@@ -88,17 +88,19 @@ export const usePaymentConfirmation = ({
         const orderItemsData = cartListItemsToOrderItems(combinedCartItems, checkoutItems, session.user.id, orderId);
         await savePaymentData(paymentData, orderItemsData);
 
-        await queryClient.invalidateQueries({ queryKey: ['payments', orderId] });
         await queryClient.invalidateQueries({
-          queryKey: ['orders', 'detail', orderId],
+          queryKey: ["payments", orderId],
+        });
+        await queryClient.invalidateQueries({
+          queryKey: ["orders", "detail", orderId],
         });
 
         //결제성공 후 처리된 아이템 저장 (장바구니 정리)
         const completedItemIds = checkoutItemIds;
         setCheckoutItemsProcessed(completedItemIds);
       } catch (error) {
-        console.error('결제 처리 중 오류가 발생했습니다.', error);
-        const errorMessage = error instanceof Error ? error.message : '결제 처리 중 오류가 발생했습니다.';
+        console.error("결제 처리 중 오류가 발생했습니다.", error);
+        const errorMessage = error instanceof Error ? error.message : "결제 처리 중 오류가 발생했습니다.";
         setError(errorMessage);
       } finally {
         setIsProcessing(false);

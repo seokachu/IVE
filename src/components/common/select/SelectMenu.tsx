@@ -1,11 +1,4 @@
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface SelectMenuProps<T> {
   options: T[];
@@ -14,9 +7,7 @@ interface SelectMenuProps<T> {
   className?: string;
 }
 
-const SelectMenu = <
-  T extends { value: string; title: string; disabled?: boolean }
->({
+const SelectMenu = <T extends { value: string; title: string; disabled?: boolean }>({
   options,
   value,
   onChange,
@@ -26,11 +17,7 @@ const SelectMenu = <
     <Select value={value} onValueChange={onChange}>
       <SelectTrigger
         className={className}
-        aria-label={
-          value
-            ? `${value} 선택하기`
-            : `${options[0]?.title || "옵션"} 선택하기`
-        }
+        aria-label={value ? `${value} 선택하기` : `${options[0]?.title || "옵션"} 선택하기`}
       >
         <SelectValue placeholder={options[0]?.title} />
       </SelectTrigger>

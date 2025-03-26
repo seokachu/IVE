@@ -1,17 +1,17 @@
-import { supabase } from './client';
+import { supabase } from "./client";
 
 //찜하기 추가
 export const addToWishList = async (userId: string, productId: string) => {
   try {
     const { data, error } = await supabase
-      .from('wish_lists')
+      .from("wish_lists")
       .insert([
         {
           user_id: userId,
           product_id: productId,
         },
       ])
-      .select('*')
+      .select("*")
       .single();
 
     if (error) throw error;
@@ -27,7 +27,7 @@ export const addToWishList = async (userId: string, productId: string) => {
 //찜하기 취소
 export const removeWishList = async (userId: string, productId: string) => {
   try {
-    const { error } = await supabase.from('wish_lists').delete().match({
+    const { error } = await supabase.from("wish_lists").delete().match({
       user_id: userId,
       product_id: productId,
     });
@@ -46,7 +46,7 @@ export const removeWishList = async (userId: string, productId: string) => {
 export const getUserWishList = async (userId: string) => {
   try {
     const { data, error } = await supabase
-      .from('wish_lists')
+      .from("wish_lists")
       .select(
         `*,
         goods:product_id(
@@ -56,10 +56,10 @@ export const getUserWishList = async (userId: string) => {
           price,
           discount_rate
         )
-        `
+        `,
       )
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false });
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false });
 
     if (error) throw error;
     return data;
@@ -75,8 +75,8 @@ export const getUserWishList = async (userId: string) => {
 export const checkedWishLists = async (userId: string, productId: string) => {
   try {
     const { data, error } = await supabase
-      .from('wish_lists')
-      .select('*')
+      .from("wish_lists")
+      .select("*")
       .match({
         user_id: userId,
         product_id: productId,
