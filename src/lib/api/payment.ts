@@ -5,8 +5,6 @@ import type { OrderItemInput, TossPaymentErrorResponse, TossPaymentResponse } fr
 import type { Tables } from '@/types/supabase';
 import type { CartItem } from '@/types/cart';
 
-const PAYMENT_URL = process.env.NEXT_PUBLIC_PAYMENT_CONFIRM_URL!;
-
 //Toss Payments API
 export const confirmTossPayment = async (
   paymentKey: string,
@@ -14,20 +12,11 @@ export const confirmTossPayment = async (
   amount: number
 ): Promise<TossPaymentResponse> => {
   try {
-    const { data } = await axios.post(
-      PAYMENT_URL,
-      {
-        paymentKey,
-        orderId,
-        amount,
-      },
-      {
-        headers: {
-          Authorization: `Basic ${btoa(`${process.env.NEXT_PUBLIC_TOSS_SECRET_KEY}:`)}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const { data } = await axios.post('/api/payments/confirm', {
+      paymentKey,
+      orderId,
+      amount,
+    });
 
     return data;
   } catch (error) {
