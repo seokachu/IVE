@@ -45,10 +45,10 @@ export const usePaymentConfirmation = ({
         const existingPayment = await getPaymentByOrderId(orderId);
         if (existingPayment) {
           await queryClient.invalidateQueries({
-            queryKey: ['payment', orderId],
+            queryKey: ['payments', orderId],
           });
           await queryClient.invalidateQueries({
-            queryKey: ['orderItems', orderId],
+            queryKey: ['orders', 'detail', orderId],
           });
 
           //처리된 아이템 저장 (장바구니 정리)
@@ -88,9 +88,9 @@ export const usePaymentConfirmation = ({
         const orderItemsData = cartListItemsToOrderItems(combinedCartItems, checkoutItems, session.user.id, orderId);
         await savePaymentData(paymentData, orderItemsData);
 
-        await queryClient.invalidateQueries({ queryKey: ['payment', orderId] });
+        await queryClient.invalidateQueries({ queryKey: ['payments', orderId] });
         await queryClient.invalidateQueries({
-          queryKey: ['orderItems', orderId],
+          queryKey: ['orders', 'detail', orderId],
         });
 
         //결제성공 후 처리된 아이템 저장 (장바구니 정리)

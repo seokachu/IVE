@@ -52,7 +52,7 @@ const PaymentSuccess = () => {
   //결제 완료 후 orderItems 데이터 갱신
   useEffect(() => {
     if (payment) {
-      queryClient.invalidateQueries({ queryKey: ['orderItems', orderId] });
+      queryClient.invalidateQueries({ queryKey: ['orders', 'detail', orderId] });
     }
   }, [payment, orderId, queryClient]);
 

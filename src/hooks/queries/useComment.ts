@@ -57,6 +57,7 @@ export const useDeleteComment = (boardId: number, commentId: number, parentId?: 
           queryKey: ['comments', 'replies', parentId],
         });
       }
+      
       queryClient.invalidateQueries({
         queryKey: ['comments', boardId],
       });
