@@ -23,11 +23,13 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
   });
 
   const handlePayment = async () => {
-    alert('결제 버튼 클릭됨');
-    console.log('결제 버튼 클릭됨');
+    localStorage.setItem('payment_debug', 'Button clicked');
 
-    //로그인 체크
-    if (!checkAuth()) return;
+    // 로그인 체크
+    if (!checkAuth()) {
+      localStorage.setItem('payment_debug', 'Auth check failed');
+      return;
+    }
 
     //결제할 금액이 없을때
     if (amount === 0) {
@@ -69,6 +71,7 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
     //결제 처리
     try {
       console.log('결제 처리 시작, 선택된 아이템:', selectedItems);
+      localStorage.setItem('payment_debug', 'Payment processing started');
       localStorage.setItem('checkout_items', JSON.stringify(selectedItems));
 
       console.log('토스페이먼츠 SDK 로드 시도');
@@ -100,6 +103,7 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
       console.log('결제 요청 성공');
     } catch (error) {
       console.error('결제 요청 중 오류 발생:', error);
+      localStorage.setItem('payment_debug', 'Error: ' + (error instanceof Error ? error.message : 'Unknown'));
       localStorage.removeItem('checkout_items');
 
       if (error instanceof Error) {

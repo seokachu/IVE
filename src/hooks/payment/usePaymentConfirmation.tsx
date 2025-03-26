@@ -63,9 +63,9 @@ export const usePaymentConfirmation = ({
         if (paymentInfo.status !== 'DONE') {
           //실패시 fail 페이지로 리다이렉트, Error 상태 저장
           setError(paymentInfo.message || '결제 처리 중 오류가 발생했습니다.');
-          window.location.href = `/payment/fail?message=${encodeURIComponent(
-            paymentInfo.message || '결제 처리 중 오류가 발생했습니다.'
-          )}`;
+          // window.location.href = `/payment/fail?message=${encodeURIComponent(
+          //   paymentInfo.message || '결제 처리 중 오류가 발생했습니다.'
+          // )}`;
           return;
         }
 
