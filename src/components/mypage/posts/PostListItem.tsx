@@ -1,8 +1,8 @@
-import ActionButton from '@/components/common/button/ActionButton';
-import UserAvatar from '@/components/common/UserAvatar';
-import { formatDate } from '@/utils/formatDate';
-import { useRouter } from 'next/navigation';
-import type { PostListItemProps } from '@/types/mypage';
+import ActionButton from "@/components/common/button/ActionButton";
+import UserAvatar from "@/components/common/UserAvatar";
+import { formatDate } from "@/utils/formatDate";
+import { useRouter } from "next/navigation";
+import type { PostListItemProps } from "@/types/mypage";
 
 const PostListItem = ({ item }: PostListItemProps) => {
   const { push } = useRouter();
@@ -39,7 +39,7 @@ const PostListItem = ({ item }: PostListItemProps) => {
             </h3>
             <p className="shrink-0">조회 {item.views}</p>
             <p className="shrink-0">추천 {item.board_likes[0]?.count || 0}</p>
-            <time className="shrink-0">{formatDate(item.created_at, 'dash')}</time>
+            <time className="shrink-0">{formatDate(item.created_at, "dash")}</time>
           </div>
         </div>
         <div onClick={stopPropagation}>

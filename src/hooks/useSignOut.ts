@@ -21,7 +21,7 @@ const useSignOut = (onSuccess?: () => void) => {
       localStorage.removeItem("wishlist");
       localStorage.removeItem("shopping_cart");
 
-      queryClient.invalidateQueries({ queryKey: ["wishlist"] });
+      queryClient.invalidateQueries({ queryKey: ["wishlists"] });
       resetCart();
 
       onSuccess?.();

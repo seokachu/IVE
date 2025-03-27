@@ -7,11 +7,7 @@ interface InteractiveStarProps {
   onChange: (rating: number) => void;
 }
 
-const InteractiveStars = ({
-  rating,
-  size = 24,
-  onChange,
-}: InteractiveStarProps) => {
+const InteractiveStars = ({ rating, size = 24, onChange }: InteractiveStarProps) => {
   const [hoverRating, setHoverRating] = useState(0);
   return (
     <div className="flex">

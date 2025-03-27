@@ -14,9 +14,7 @@ export const getGallery = async (limit = GALLERY_DEFAULT_LIMIT) => {
     return data || [];
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(
-        `갤러리 목록을 가져오는데 실패했습니다. ${error.message}`
-      );
+      throw new Error(`갤러리 목록을 가져오는데 실패했습니다. ${error.message}`);
     }
     throw error;
   }

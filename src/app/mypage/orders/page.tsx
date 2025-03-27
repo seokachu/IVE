@@ -1,11 +1,11 @@
-'use client';
-import { useOrderItems } from '@/hooks/queries/useOrderItems';
-import { sessionState } from '@/store';
-import { useRecoilValue } from 'recoil';
-import _ from 'lodash';
-import OrderSummary from '@/components/mypage/order/OrderSummary';
-import { getDiscountedPrice } from '@/utils/calculateDiscount';
-import MyPageLoading from '@/components/common/loading/MyPageLoading';
+"use client";
+import { useOrderItems } from "@/hooks/queries/useOrderItems";
+import { sessionState } from "@/store";
+import { useRecoilValue } from "recoil";
+import _ from "lodash";
+import OrderSummary from "@/components/mypage/order/OrderSummary";
+import { getDiscountedPrice } from "@/utils/calculateDiscount";
+import MyPageLoading from "@/components/common/loading/MyPageLoading";
 
 const OrderListPage = () => {
   const session = useRecoilValue(sessionState);
@@ -18,13 +18,13 @@ const OrderListPage = () => {
   const isEmpty = !orderItems || orderItems.length === 0;
 
   //주문목록 id별로 그룹화
-  const groupedOrders = _.groupBy(orderItems, 'order_id');
+  const groupedOrders = _.groupBy(orderItems, "order_id");
 
   //주문 요약 정보 뽑아내기
   const orderSummaries = Object.entries(groupedOrders).map(([orderId, items]) => ({
     orderId,
     totalAmount: _.sumBy(items, (item) => getDiscountedPrice(item) * item.quantity),
-    itemCount: _.sumBy(items, 'quantity'),
+    itemCount: _.sumBy(items, "quantity"),
     orderDate: items[0]?.created_at,
     firstItemName: items[0]?.product_name,
     firstOrderImage: items[0]?.product_image,

@@ -20,9 +20,7 @@ const CartSummary = () => {
   }, []);
 
   //선택된 아이템을 필터링
-  const selectedCartItems = cartItems.filter((item) =>
-    selectedItems.includes(item.id)
-  );
+  const selectedCartItems = cartItems.filter((item) => selectedItems.includes(item.id));
 
   //총 상품 금액
   const totalOriginalPrice = selectedCartItems.reduce((sum, item) => {
@@ -50,9 +48,7 @@ const CartSummary = () => {
       <OrderAgreements />
       <PaymentButton
         amount={totalDiscountedPrice}
-        orderName={`${selectedCartItems[0]?.title} 외 ${
-          selectedCartItems.length - 1
-        }건`}
+        orderName={`${selectedCartItems[0]?.title} 외 ${selectedCartItems.length - 1}건`}
       />
     </div>
   ) : (

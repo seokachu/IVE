@@ -19,17 +19,9 @@ const BoardContainer = () => {
   const { push } = useRouter();
   const searchParams = useSearchParams();
   const isFirstLoad = useRef(true);
-  const [searchKeyWord, setSearchKeyWord] = useState(
-    searchParams.get("search") || ""
-  );
-  const [currentPage, setCurrentPage] = useState(
-    parseInt(searchParams.get("page") || "1", 10)
-  );
-  const {
-    data: boardList,
-    isLoading,
-    isError,
-  } = useBoards(currentPage, searchKeyWord);
+  const [searchKeyWord, setSearchKeyWord] = useState(searchParams.get("search") || "");
+  const [currentPage, setCurrentPage] = useState(parseInt(searchParams.get("page") || "1", 10));
+  const { data: boardList, isLoading, isError } = useBoards(currentPage, searchKeyWord);
   const { checkAuth } = useAuthGuard();
 
   useEffect(() => {
@@ -38,9 +30,7 @@ const BoardContainer = () => {
     }
   }, [isLoading]);
 
-  const totalPages = Math.ceil(
-    (boardList?.count || 0) / PAGINATION.BOARD.ITEMS_PER_PAGE
-  );
+  const totalPages = Math.ceil((boardList?.count || 0) / PAGINATION.BOARD.ITEMS_PER_PAGE);
 
   if (isLoading && isFirstLoad.current) return <BoardSkeleton />;
   if (isError) return <Error />;
@@ -79,9 +69,7 @@ const BoardContainer = () => {
       return (
         <div className="flex items-center justify-center min-h-[500px] flex-col gap-3">
           <TbMoodEmpty className="w-8 h-8 lg:w-10 lg:h-10" />
-          <h2 className="text-xs lg:text-sm">
-            {searchKeyWord ? "검색 결과가 없습니다." : "게시글이 없습니다."}
-          </h2>
+          <h2 className="text-xs lg:text-sm">{searchKeyWord ? "검색 결과가 없습니다." : "게시글이 없습니다."}</h2>
         </div>
       );
     }
@@ -91,9 +79,7 @@ const BoardContainer = () => {
   return (
     <>
       <div className="lg:flex justify-between items-center px-5 lg:px-0">
-        <h2 className="text-lg lg:text-xl font-bold mb-5 lg:mb-0">
-          자유게시판
-        </h2>
+        <h2 className="text-lg lg:text-xl font-bold mb-5 lg:mb-0">자유게시판</h2>
         <div className="flex items-center justify-end gap-3 flex-col lg:flex-row lg:w-2/3">
           <div className="relative w-full lg:max-w-80">
             <Search
@@ -116,10 +102,7 @@ const BoardContainer = () => {
       </div>
       <div
         className={`mt-5 lg:mt-10 min-h-auto rounded-md overflow-hidden ${
-          (isLoading && !isFirstLoad.current) ||
-          (boardList && boardList.data.length === 0)
-            ? ""
-            : "lg:shadow"
+          (isLoading && !isFirstLoad.current) || (boardList && boardList.data.length === 0) ? "" : "lg:shadow"
         }`}
       >
         <BoardListHeader />

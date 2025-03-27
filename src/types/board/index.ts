@@ -1,13 +1,13 @@
-import { BoardCommentType } from '@/hooks/user';
-import { UseFormReturn } from 'react-hook-form';
-import type { Tables } from '../supabase';
+import { BoardCommentType } from "@/hooks/user";
+import { UseFormReturn } from "react-hook-form";
+import type { Tables } from "../supabase";
 
-export type CommentMode = 'create' | 'edit';
-export type CommentType = 'comment' | 'reply';
+export type CommentMode = "create" | "edit";
+export type CommentType = "comment" | "reply";
 export type BoardWriteFormProps = CreateBoardWriteFormProps | EditBoardWriteFormProps;
-export type ButtonMode = 'default' | 'edit';
+export type ButtonMode = "default" | "edit";
 
-export interface BoardWithComment extends Tables<'board'> {
+export interface BoardWithComment extends Tables<"board"> {
   user: {
     id: string;
     name: string;
@@ -15,7 +15,7 @@ export interface BoardWithComment extends Tables<'board'> {
   board_comments: { count: number }[];
 }
 
-export interface BoardWithRelations extends Tables<'board'> {
+export interface BoardWithRelations extends Tables<"board"> {
   board_comments: [{ count: number }];
   board_likes: [{ count: number }];
   user: {
@@ -60,7 +60,7 @@ export interface BoardDetailHeaderProps {
   onClickEdit: () => void;
 }
 
-export interface Comment extends Tables<'board_comments'> {
+export interface Comment extends Tables<"board_comments"> {
   user: {
     name: string;
     avatar_url: string;
@@ -86,11 +86,11 @@ export interface EditPageParams {
   };
 }
 export interface CreateBoardWriteFormProps {
-  mode: 'create';
+  mode: "create";
 }
 
 export interface EditBoardWriteFormProps {
-  mode: 'edit';
+  mode: "edit";
   boardId: number;
 }
 

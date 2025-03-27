@@ -1,15 +1,15 @@
-import Image from 'next/image';
-import DefaultImage from '@/assets/images/default_image.avif';
-import Badge from '@/components/common/Badge';
-import { FaStar } from 'react-icons/fa';
-import { useRouter } from 'next/navigation';
-import { formatPrice, getDiscountedPrice } from '@/utils/calculateDiscount';
-import { GoHeartFill } from 'react-icons/go';
-import { useWishListItem } from '@/hooks/queries/useShops';
-import { useRemoveWishList } from '@/hooks/queries/useWishList';
-import { toast } from '@/hooks/use-toast';
-import { useAverageRating } from '@/hooks/queries/useReviews';
-import type { UserWishListItemProps } from '@/types/mypage';
+import Image from "next/image";
+import DefaultImage from "@/assets/images/default_image.avif";
+import Badge from "@/components/common/Badge";
+import { FaStar } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
+import { GoHeartFill } from "react-icons/go";
+import { useWishListItem } from "@/hooks/queries/useShops";
+import { useRemoveWishList } from "@/hooks/queries/useWishList";
+import { toast } from "@/hooks/use-toast";
+import { useAverageRating } from "@/hooks/queries/useReviews";
+import type { UserWishListItemProps } from "@/types/mypage";
 
 const UserWishListItem = ({ item, index }: UserWishListItemProps) => {
   const { push } = useRouter();
@@ -26,7 +26,7 @@ const UserWishListItem = ({ item, index }: UserWishListItemProps) => {
   const price = getDiscountedPrice(goodsItem);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === "Enter" || e.key === " ") {
       onClickDetail();
     }
   };
@@ -40,7 +40,7 @@ const UserWishListItem = ({ item, index }: UserWishListItemProps) => {
     e.stopPropagation();
     removeWishList();
     toast({
-      title: '찜하기가 취소되었습니다.',
+      title: "찜하기가 취소되었습니다.",
     });
   };
 
@@ -55,11 +55,11 @@ const UserWishListItem = ({ item, index }: UserWishListItemProps) => {
       <div className="relative w-full h-auto md:rounded-lg overflow-hidden aspect-square border">
         <Image
           src={goodsItem.thumbnail || DefaultImage}
-          alt={goodsItem.title || '상품 썸네일 이미지'}
+          alt={goodsItem.title || "상품 썸네일 이미지"}
           className="fill group-hover:scale-110 transition-transform duration-300 w-full"
           width={250}
           height={250}
-          loading={index < 6 ? 'eager' : 'lazy'}
+          loading={index < 6 ? "eager" : "lazy"}
           priority={index < 6}
         />
         <button onClick={onClickHeart} className="absolute right-2 bottom-2 text-dark-gray" aria-label="찜하기 취소">

@@ -21,9 +21,7 @@ const UserDropdownMenu = () => {
         <UserAvatar size="sm" />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>
-          {session?.user.user_metadata?.name}
-        </DropdownMenuLabel>
+        <DropdownMenuLabel>{session?.user.user_metadata?.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild className="cursor-pointer">
           <Link href="/mypage">마이페이지</Link>

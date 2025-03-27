@@ -8,9 +8,7 @@ const SHOP_STYLES = {
 
 const ShopSkeleton = ({ variant = "shop" }: VariantTypeProps) => {
   return (
-    <li
-      className={`${SHOP_STYLES[variant]} md:border p-0 md:p-4 md:rounded-lg group mb-7 md:mb-5`}
-    >
+    <li className={`${SHOP_STYLES[variant]} md:border p-0 md:p-4 md:rounded-lg group mb-7 md:mb-5`}>
       <div className="relative w-full aspect-square md:rounded-lg border">
         <Skeleton className="w-full h-full" />
       </div>

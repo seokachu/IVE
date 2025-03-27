@@ -1,4 +1,4 @@
-import type { OrderCustomerInfoItemProps } from '@/types/cart';
+import type { OrderCustomerInfoItemProps } from "@/types/cart";
 
 const OrderCustomerInfoItem = ({ item }: OrderCustomerInfoItemProps) => {
   return (

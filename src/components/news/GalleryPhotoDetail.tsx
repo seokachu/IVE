@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import DefaultImage from '@/assets/images/default_image.avif';
-import type { GalleryPhotoDetailProps } from '@/types/news';
+import Image from "next/image";
+import DefaultImage from "@/assets/images/default_image.avif";
+import type { GalleryPhotoDetailProps } from "@/types/news";
 
 const GalleryPhotoDetail = ({ item }: GalleryPhotoDetailProps) => {
   return (

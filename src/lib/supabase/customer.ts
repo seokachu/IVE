@@ -1,9 +1,9 @@
-import { supabase } from './client';
-import type { CustomerInfoInsert } from '@/types';
+import { supabase } from "./client";
+import type { CustomerInfoInsert } from "@/types";
 
 export const getCustomerInfo = async (userId: string) => {
   try {
-    const { data, error } = await supabase.from('customer_info').select('*').eq('user_id', userId).maybeSingle();
+    const { data, error } = await supabase.from("customer_info").select("*").eq("user_id", userId).maybeSingle();
 
     if (error) throw error;
     return data;
@@ -18,9 +18,9 @@ export const getCustomerInfo = async (userId: string) => {
 export const saveCustomerInfo = async (info: CustomerInfoInsert) => {
   try {
     const { data, error } = await supabase
-      .from('customer_info')
+      .from("customer_info")
       .upsert(info, {
-        onConflict: 'user_id',
+        onConflict: "user_id",
         ignoreDuplicates: false, // 중복을 무시하지 않고 업데이트
       })
       .select()

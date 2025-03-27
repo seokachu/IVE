@@ -1,26 +1,26 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { LuMusic4 } from 'react-icons/lu';
-import { MUSIC_ICONS } from '@/utils/constants';
-import DefaultImage from '@/assets/images/default_image.avif';
-import type { AlbumItemProps } from '@/types/main';
+import Image from "next/image";
+import Link from "next/link";
+import { LuMusic4 } from "react-icons/lu";
+import { MUSIC_ICONS } from "@/utils/constants";
+import DefaultImage from "@/assets/images/default_image.avif";
+import type { AlbumItemProps } from "@/types/main";
 
 const AlbumListItem = ({ album }: AlbumItemProps) => {
   const musicLinks = MUSIC_ICONS.map((el) => {
     const link = (() => {
       switch (el.label.toLowerCase()) {
-        case 'apple':
+        case "apple":
           return album.apple_link;
-        case 'melon':
+        case "melon":
           return album.melon_link;
-        case 'flo':
+        case "flo":
           return album.flo_link;
-        case 'bugs':
+        case "bugs":
           return album.bugs_link;
-        case 'genie':
+        case "genie":
           return album.genie_link;
         default:
-          return '#';
+          return "#";
       }
     })();
     return {
@@ -63,7 +63,7 @@ const AlbumListItem = ({ album }: AlbumItemProps) => {
         </h3>
         <ul className="flex items-center justify-center gap-3">
           {musicLinks
-            .filter((item) => item.link && item.link !== '#')
+            .filter((item) => item.link && item.link !== "#")
             .map((item) => (
               <li key={item.label}>
                 <Link href={String(item.link)} target="_blank" className="size-10 block">

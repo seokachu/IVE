@@ -10,9 +10,7 @@ const page = () => {
       <ProductSection />
       <section className="w-full">
         <div>
-          <h2 className="text-lg lg:text-xl font-bold mb-5">
-            자주 묻는 질문 FAQ
-          </h2>
+          <h2 className="text-lg lg:text-xl font-bold mb-5">자주 묻는 질문 FAQ</h2>
           <ProductAccordion />
         </div>
       </section>

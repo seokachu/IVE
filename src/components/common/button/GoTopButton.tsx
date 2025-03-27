@@ -37,10 +37,7 @@ const GoTopButton = () => {
           aria-label="최상단으로 이동"
           className="absolute right-3 bottom-3 lg:right-5 lg:bottom-14 hover:opacity-80 transition-opacity z-[999]"
         >
-          <FaArrowCircleUp
-            size={40}
-            className="bg-white rounded-full text-purple"
-          />
+          <FaArrowCircleUp size={40} className="bg-white rounded-full text-purple" />
         </button>
       </div>
     </div>

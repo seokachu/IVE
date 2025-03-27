@@ -5,9 +5,7 @@ const BoardSkeleton = () => {
   return (
     <>
       <div className="lg:flex justify-between items-center px-5 lg:px-0">
-        <h2 className="text-lg lg:text-xl font-bold mb-5 lg:mb-0">
-          자유게시판
-        </h2>
+        <h2 className="text-lg lg:text-xl font-bold mb-5 lg:mb-0">자유게시판</h2>
         <div className="flex items-center justify-end gap-3 flex-col lg:flex-row lg:w-2/3">
           <Skeleton className="w-full lg:w-80 h-10" />
           <Skeleton className="w-full lg:w-28 h-10" />

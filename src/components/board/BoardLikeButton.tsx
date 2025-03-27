@@ -1,12 +1,12 @@
-import ActionButton from '@/components/common/button/ActionButton';
-import { AiOutlineLike } from 'react-icons/ai';
-import { AiFillLike } from 'react-icons/ai';
-import { sessionState } from '@/store';
-import { useRecoilValue } from 'recoil';
-import { toast } from '@/hooks/use-toast';
-import { useLikeStatus, useToggleLike } from '@/hooks/queries/useLike';
-import useAuthGuard from '@/hooks/useAuthGuard';
-import type { BoardDetailProps } from '@/types/board';
+import ActionButton from "@/components/common/button/ActionButton";
+import { AiOutlineLike } from "react-icons/ai";
+import { AiFillLike } from "react-icons/ai";
+import { sessionState } from "@/store";
+import { useRecoilValue } from "recoil";
+import { toast } from "@/hooks/use-toast";
+import { useLikeStatus, useToggleLike } from "@/hooks/queries/useLike";
+import useAuthGuard from "@/hooks/useAuthGuard";
+import type { BoardDetailProps } from "@/types/board";
 
 const BoardLikeButton = ({ item }: BoardDetailProps) => {
   const session = useRecoilValue(sessionState);
@@ -23,7 +23,7 @@ const BoardLikeButton = ({ item }: BoardDetailProps) => {
     toggleLike(undefined, {
       onSuccess: (newStatus) => {
         toast({
-          title: newStatus ? '좋아요를 눌렀습니다.' : '좋아요가 취소되었습니다.',
+          title: newStatus ? "좋아요를 눌렀습니다." : "좋아요가 취소되었습니다.",
         });
       },
     });
@@ -33,7 +33,7 @@ const BoardLikeButton = ({ item }: BoardDetailProps) => {
     <div className="flex items-center justify-center mb-5">
       <ActionButton
         variant="default"
-        className={`flex items-center gap-1 py-3 px-3 hover:bg-silver-gray ${isLiked ? 'bg-silver-gray' : ''} `}
+        className={`flex items-center gap-1 py-3 px-3 hover:bg-silver-gray ${isLiked ? "bg-silver-gray" : ""} `}
         onClick={handleToggleLikeClick}
         disabled={isPending}
       >

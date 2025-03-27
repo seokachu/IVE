@@ -1,10 +1,10 @@
-import { addToWishList, checkedWishLists, getUserWishList, removeWishList } from '@/lib/supabase/wishlist';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { addToWishList, checkedWishLists, getUserWishList, removeWishList } from "@/lib/supabase/wishlist";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 //전체 리스트 조회
 export const useWishLists = (userId?: string) => {
   return useQuery({
-    queryKey: ['wishlists', 'user', userId],
+    queryKey: ["wishlists", "user", userId],
     queryFn: () => getUserWishList(userId!),
     enabled: !!userId,
   });
@@ -13,7 +13,7 @@ export const useWishLists = (userId?: string) => {
 //특정 상품 찜 여부 확인
 export const useCheckedWishLists = (userId: string, productId: string) => {
   return useQuery({
-    queryKey: ['wishlists', 'check', userId, productId],
+    queryKey: ["wishlists", "check", userId, productId],
     queryFn: () => checkedWishLists(userId, productId),
     enabled: !!userId && !!productId,
   });
@@ -26,9 +26,11 @@ export const useAddWishList = (userId: string, productId: string) => {
   return useMutation({
     mutationFn: () => addToWishList(userId, productId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['wishlists', 'user', userId] });
       queryClient.invalidateQueries({
-        queryKey: ['wishlists', 'check', userId, productId],
+        queryKey: ["wishlists", "user", userId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["wishlists", "check", userId, productId],
       });
     },
   });
@@ -41,11 +43,12 @@ export const useRemoveWishList = (userId: string, productId: string) => {
   return useMutation({
     mutationFn: () => removeWishList(userId, productId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['wishlists', 'user', userId] });
       queryClient.invalidateQueries({
-        queryKey: ['wishlists', 'check', userId, productId],
+        queryKey: ["wishlists", "user", userId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["wishlists", "check", userId, productId],
       });
     },
   });
 };
-

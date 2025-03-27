@@ -15,12 +15,7 @@ interface PaginationControlProps {
   maxDisplayPages: number;
 }
 
-const PaginationControl = ({
-  currentPage,
-  totalPages,
-  onPageChange,
-  maxDisplayPages,
-}: PaginationControlProps) => {
+const PaginationControl = ({ currentPage, totalPages, onPageChange, maxDisplayPages }: PaginationControlProps) => {
   const getPageNumbers = () => {
     let startPage: number;
     let endPage: number;
@@ -48,10 +43,7 @@ const PaginationControl = ({
       }
     }
 
-    return Array.from(
-      { length: endPage - startPage + 1 },
-      (_, i) => startPage + i
-    );
+    return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
   };
 
   const pages = getPageNumbers();
@@ -134,9 +126,7 @@ const PaginationControl = ({
               e.preventDefault();
               if (currentPage < totalPages) onPageChange(currentPage + 1);
             }}
-            className={
-              currentPage >= totalPages ? "pointer-events-none opacity-50" : ""
-            }
+            className={currentPage >= totalPages ? "pointer-events-none opacity-50" : ""}
           />
         </PaginationItem>
       </PaginationContent>

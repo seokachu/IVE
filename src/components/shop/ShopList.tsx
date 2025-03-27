@@ -1,11 +1,11 @@
-'use client';
-import { useCallback, useEffect, useRef } from 'react';
-import ShopListItem from './ShopListItem';
-import { useShops } from '@/hooks/queries/useShops';
-import ShopSkeleton from '../common/loading/ShopSkeleton';
-import Error from '../common/error/Error';
-import { ClipLoader } from 'react-spinners';
-import type { SortProps } from '@/types/shop';
+"use client";
+import { useCallback, useEffect, useRef } from "react";
+import ShopListItem from "./ShopListItem";
+import { useShops } from "@/hooks/queries/useShops";
+import ShopSkeleton from "../common/loading/ShopSkeleton";
+import Error from "../common/error/Error";
+import { ClipLoader } from "react-spinners";
+import type { SortProps } from "@/types/shop";
 
 const ShopList = ({ sort }: SortProps) => {
   const { data, error, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useShops(sort);
@@ -18,7 +18,7 @@ const ShopList = ({ sort }: SortProps) => {
         fetchNextPage();
       }
     },
-    [fetchNextPage, hasNextPage, isFetchingNextPage]
+    [fetchNextPage, hasNextPage, isFetchingNextPage],
   );
 
   useEffect(() => {

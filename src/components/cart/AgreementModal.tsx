@@ -5,21 +5,21 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { AGREEMENT_CONTENTS } from '@/utils/constants';
-import type { AgreementModalProps } from '@/types/cart';
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { AGREEMENT_CONTENTS } from "@/utils/constants";
+import type { AgreementModalProps } from "@/types/cart";
 
 const AgreementModal = ({ type, isOpen, onClose }: AgreementModalProps) => {
   const getModalContent = () => {
     switch (type) {
-      case 'privacy':
+      case "privacy":
         return AGREEMENT_CONTENTS.PRIVACY;
-      case 'refund':
+      case "refund":
         return AGREEMENT_CONTENTS.REFUND;
       default:
         return {
-          title: '',
+          title: "",
           description: [],
         };
     }

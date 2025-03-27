@@ -1,11 +1,11 @@
-import type { Tables } from '../supabase';
-import type { ShopListItem } from '@/types/index';
+import type { Tables } from "../supabase";
+import type { ShopListItem } from "@/types/index";
 
 //약관동의 checkbox
-export type AgreementType = 'main' | 'privacy' | 'refund';
-export type ModalType = 'privacy' | 'refund' | null;
+export type AgreementType = "main" | "privacy" | "refund";
+export type ModalType = "privacy" | "refund" | null;
 
-export interface CartItem extends Omit<ShopListItem, 'quantity'> {
+export interface CartItem extends Omit<ShopListItem, "quantity"> {
   quantity: number;
 }
 
@@ -20,11 +20,11 @@ export interface OrderPriceSummaryProps {
 }
 
 export interface OrderCustomerInfoItemProps {
-  item: Tables<'customer_info'>;
+  item: Tables<"customer_info">;
 }
 
 export interface CustomerInfoFormProps {
-  initialData?: Tables<'customer_info'>;
+  initialData?: Tables<"customer_info">;
   defaultValues?: {
     name?: string;
     email?: string;
@@ -45,7 +45,7 @@ export interface AgreementCheckboxProps {
 }
 
 export interface AgreementModalProps {
-  type: 'privacy' | 'refund' | null;
+  type: "privacy" | "refund" | null;
   isOpen: boolean;
   onClose: () => void;
 }

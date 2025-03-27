@@ -1,7 +1,7 @@
-import { boardDetailMetadata } from '@/metadata/board/boardDetailMetadata';
-import BoardDetailContainer from '@/components/board/detail/BoardDetailContainer';
-import GoTopButton from '@/components/common/button/GoTopButton';
-import type { BoardDetailPageParams } from '@/types/board';
+import { boardDetailMetadata } from "@/metadata/board/boardDetailMetadata";
+import BoardDetailContainer from "@/components/board/detail/BoardDetailContainer";
+import GoTopButton from "@/components/common/button/GoTopButton";
+import type { BoardDetailPageParams } from "@/types/board";
 
 export const metadata = boardDetailMetadata;
 

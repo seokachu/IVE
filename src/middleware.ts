@@ -43,10 +43,7 @@ export async function middleware(request: NextRequest) {
       if (session.data.session) {
         return NextResponse.redirect(new URL("/", request.url));
       }
-      if (
-        request.nextUrl.searchParams.get("form") === "signup" &&
-        !request.cookies.get("firstSignup")
-      ) {
+      if (request.nextUrl.searchParams.get("form") === "signup" && !request.cookies.get("firstSignup")) {
         return NextResponse.redirect(new URL("/login", request.url));
       }
     }
@@ -61,11 +58,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/mypage/:path*",
-    "/login",
-    "/signup",
-    "/payment/success",
-    "/payment/fail",
-  ],
+  matcher: ["/mypage/:path*", "/login", "/signup", "/payment/success", "/payment/fail"],
 };

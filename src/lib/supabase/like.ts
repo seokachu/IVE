@@ -33,16 +33,10 @@ export const toggleBoardLike = async (boardId: number, userId: string) => {
       .maybeSingle();
 
     if (existingLike) {
-      await supabase
-        .from("board_likes")
-        .delete()
-        .eq("board_id", boardId)
-        .eq("user_id", userId);
+      await supabase.from("board_likes").delete().eq("board_id", boardId).eq("user_id", userId);
       return false; //취소
     } else {
-      await supabase
-        .from("board_likes")
-        .insert([{ board_id: boardId, user_id: userId }]);
+      await supabase.from("board_likes").insert([{ board_id: boardId, user_id: userId }]);
       return true; //추가
     }
   } catch (error) {
@@ -54,10 +48,7 @@ export const toggleBoardLike = async (boardId: number, userId: string) => {
 };
 
 //댓글 Like
-export const getCommentLikeStatus = async (
-  commentId: number,
-  userId?: string
-) => {
+export const getCommentLikeStatus = async (commentId: number, userId?: string) => {
   try {
     if (!userId) return false;
     const { data, error } = await supabase
@@ -71,9 +62,7 @@ export const getCommentLikeStatus = async (
     return !!data;
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(
-        `댓글 좋아요 수를 가져오는데 실패했습니다. ${error.message}`
-      );
+      throw new Error(`댓글 좋아요 수를 가져오는데 실패했습니다. ${error.message}`);
     }
     throw error;
   }
@@ -90,16 +79,10 @@ export const toggleCommentLike = async (commentId: number, userId: string) => {
       .maybeSingle();
 
     if (existingLike) {
-      await supabase
-        .from("comment_likes")
-        .delete()
-        .eq("comment_id", commentId)
-        .eq("user_id", userId);
+      await supabase.from("comment_likes").delete().eq("comment_id", commentId).eq("user_id", userId);
       return false;
     } else {
-      await supabase
-        .from("comment_likes")
-        .insert([{ comment_id: commentId, user_id: userId }]);
+      await supabase.from("comment_likes").insert([{ comment_id: commentId, user_id: userId }]);
       return true;
     }
   } catch (error) {

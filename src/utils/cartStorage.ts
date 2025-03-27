@@ -16,9 +16,7 @@ export const cartStorage = {
 
   addItem: (item: CartItem) => {
     const currentCart = cartStorage.getCart();
-    const existingItem = currentCart.find(
-      (cartItem) => cartItem.id === item.id
-    );
+    const existingItem = currentCart.find((cartItem) => cartItem.id === item.id);
 
     //현재 장바구니에 담긴 수량 + 새로 담을 수량이 5개를 초과하는지 체크
     const currentQuantity = existingItem?.quantity || 0;
@@ -31,9 +29,7 @@ export const cartStorage = {
     let newCart;
     if (existingItem) {
       newCart = currentCart.map((cartItem) =>
-        cartItem.id === item.id
-          ? { ...cartItem, quantity: newTotalQuantity }
-          : cartItem
+        cartItem.id === item.id ? { ...cartItem, quantity: newTotalQuantity } : cartItem,
       );
     } else {
       newCart = [...currentCart, item];

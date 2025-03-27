@@ -1,27 +1,27 @@
-import { Form } from '@/components/ui/form';
-import { useForm } from 'react-hook-form';
-import { Label } from '@/components/ui/label';
-import { reviewSchema, type ReviewType } from '@/hooks/user';
-import { zodResolver } from '@hookform/resolvers/zod';
-import InteractiveStars from '@/utils/InteractiveStars';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
-import { useAddOrderItemReview, useUpdateOrderItemReview } from '@/hooks/queries/useReviews';
-import { useRecoilValue } from 'recoil';
-import { sessionState } from '@/store';
-import { toast } from '@/hooks/use-toast';
-import type { ReviewFormData, WriteReviewFormProps } from '@/types/mypage';
+import { Form } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { Label } from "@/components/ui/label";
+import { reviewSchema, type ReviewType } from "@/hooks/user";
+import { zodResolver } from "@hookform/resolvers/zod";
+import InteractiveStars from "@/utils/InteractiveStars";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { useAddOrderItemReview, useUpdateOrderItemReview } from "@/hooks/queries/useReviews";
+import { useRecoilValue } from "recoil";
+import { sessionState } from "@/store";
+import { toast } from "@/hooks/use-toast";
+import type { ReviewFormData, WriteReviewFormProps } from "@/types/mypage";
 
 const WriteReviewForm = ({ mode, reviewData, orderId, goodsId, onClose }: WriteReviewFormProps) => {
   const session = useRecoilValue(sessionState);
   const { mutate: addOrderItemReview } = useAddOrderItemReview();
   const { mutate: updateItemReview } = useUpdateOrderItemReview();
   const form = useForm<ReviewType>({
-    mode: 'onChange',
+    mode: "onChange",
     resolver: zodResolver(reviewSchema),
     defaultValues: {
-      rating: mode === 'edit' ? reviewData?.rating || 0 : 0,
-      content: mode === 'edit' ? reviewData?.content || '' : '',
+      rating: mode === "edit" ? reviewData?.rating || 0 : 0,
+      content: mode === "edit" ? reviewData?.content || "" : "",
     },
   });
 
@@ -33,30 +33,30 @@ const WriteReviewForm = ({ mode, reviewData, orderId, goodsId, onClose }: WriteR
     formState: { errors },
   } = form;
 
-  const currentRating = watch('rating');
+  const currentRating = watch("rating");
 
   const handleRatingChange = (rating: number) => {
-    setValue('rating', rating, {
+    setValue("rating", rating, {
       shouldValidate: true,
     });
   };
 
   const handleSubmit = (data: ReviewFormData) => {
     //리뷰 추가 mode
-    if (mode === 'create') {
+    if (mode === "create") {
       const reviewInput = {
         user_id: session?.user?.id,
         order_id: orderId,
         goods_id: goodsId,
         created_at: new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString(),
-        name: session?.user?.user_metadata?.name || '',
+        name: session?.user?.user_metadata?.name || "",
         rating: data.rating,
         content: data.content,
       };
       addOrderItemReview(reviewInput);
 
       toast({
-        title: '리뷰가 등록되었습니다.',
+        title: "리뷰가 등록되었습니다.",
       });
     }
     //리뷰수정 Mode
@@ -66,8 +66,8 @@ const WriteReviewForm = ({ mode, reviewData, orderId, goodsId, onClose }: WriteR
 
       if (!isChanged) {
         toast({
-          title: '변경된 내용이 없습니다.',
-          variant: 'destructive',
+          title: "변경된 내용이 없습니다.",
+          variant: "destructive",
         });
         return;
       }
@@ -79,7 +79,7 @@ const WriteReviewForm = ({ mode, reviewData, orderId, goodsId, onClose }: WriteR
       });
 
       toast({
-        title: '리뷰가 수정되었습니다.',
+        title: "리뷰가 수정되었습니다.",
       });
     }
     onClose();
@@ -93,7 +93,7 @@ const WriteReviewForm = ({ mode, reviewData, orderId, goodsId, onClose }: WriteR
             별점
             <span className="translate-y-[3px] inline-block text-red ml-1">*</span>
           </Label>
-          <input type="hidden" {...register('rating')} />
+          <input type="hidden" {...register("rating")} />
           <InteractiveStars size={24} rating={currentRating} onChange={handleRatingChange} />
           {errors.rating && <p className="text-red text-xs mt-1">{errors.rating.message}</p>}
         </div>
@@ -103,7 +103,7 @@ const WriteReviewForm = ({ mode, reviewData, orderId, goodsId, onClose }: WriteR
             <span className="translate-y-[3px] inline-block text-red ml-1">*</span>
           </Label>
           <Textarea
-            {...register('content')}
+            {...register("content")}
             className="w-full min-h-[250px]"
             placeholder="리뷰 내용을 입력해주세요. (최소 10자)"
             maxLength={200}
@@ -111,7 +111,7 @@ const WriteReviewForm = ({ mode, reviewData, orderId, goodsId, onClose }: WriteR
           {errors.content && <p className="text-red text-xs mt-1">{errors.content.message}</p>}
         </div>
         <Button disabled={!isValid || isSubmitting} type="submit" className="py-2 w-full mt-5 text-sm">
-          {isSubmitting ? '처리 중...' : mode === 'create' ? '리뷰 작성' : '리뷰 수정'}
+          {isSubmitting ? "처리 중..." : mode === "create" ? "리뷰 작성" : "리뷰 수정"}
         </Button>
       </form>
     </Form>

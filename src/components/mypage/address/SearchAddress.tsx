@@ -1,4 +1,4 @@
-import DaumPostcodeEmbed, { Address } from 'react-daum-postcode';
+import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
 interface SearchAddressProps {
   onClose: () => void;
   onAddressChange: (data: { zonecode: string; fullAddress: string }) => void;
@@ -7,17 +7,17 @@ interface SearchAddressProps {
 const SearchAddress = ({ onClose, onAddressChange }: SearchAddressProps) => {
   const handleComplete = (data: Address) => {
     let fullAddress = data.address;
-    let extraAddress = '';
+    let extraAddress = "";
     const zonecode = data.zonecode;
 
-    if (data.addressType === 'R') {
-      if (data.bname !== '') {
+    if (data.addressType === "R") {
+      if (data.bname !== "") {
         extraAddress += data.bname;
       }
-      if (data.buildingName !== '') {
-        extraAddress += extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
+      if (data.buildingName !== "") {
+        extraAddress += extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
       }
-      fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
+      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
 
     onAddressChange({ zonecode, fullAddress });

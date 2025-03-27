@@ -23,10 +23,7 @@ export const useAuth = () => {
       if (localWishlist.length > 0) {
         for (const item of localWishlist) {
           if (item.product_id) {
-            const isAlreadyWished = await checkedWishLists(
-              session.user.id,
-              item.product_id
-            );
+            const isAlreadyWished = await checkedWishLists(session.user.id, item.product_id);
             if (!isAlreadyWished) {
               await addToWishList(session.user.id, item.product_id);
             }
@@ -36,9 +33,7 @@ export const useAuth = () => {
       }
     } catch (error) {
       if (error instanceof Error) {
-        throw new Error(
-          `찜 목록 동기화 중 에러가 발생했습니다. ${error.message}`
-        );
+        throw new Error(`찜 목록 동기화 중 에러가 발생했습니다. ${error.message}`);
       }
     } finally {
       isSyncing.current = false;
@@ -53,9 +48,7 @@ export const useAuth = () => {
       setSession(session);
 
       if (session) {
-        axios.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${session.access_token}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${session.access_token}`;
         await syncWishlist(session);
       }
 
@@ -65,9 +58,7 @@ export const useAuth = () => {
         setSession(session);
 
         if (session && sessionStorage.getItem("pendingAuth")) {
-          axios.defaults.headers.common[
-            "Authorization"
-          ] = `Bearer ${session.access_token}`;
+          axios.defaults.headers.common["Authorization"] = `Bearer ${session.access_token}`;
           await syncWishlist(session);
           sessionStorage.removeItem("pendingAuth");
           toast({

@@ -7,11 +7,7 @@ import { useRecoilValue } from "recoil";
 
 const WishListPage = () => {
   const session = useRecoilValue(sessionState);
-  const {
-    data: wishlists,
-    isLoading,
-    isSuccess,
-  } = useWishLists(session?.user.id);
+  const { data: wishlists, isLoading, isSuccess } = useWishLists(session?.user.id);
 
   if (isLoading || !isSuccess) return <MyPageLoading title="찜 목록" />;
 

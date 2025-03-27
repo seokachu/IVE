@@ -1,10 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+import { FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import SelectMenu from "./SelectMenu";
 
 interface RHFSelectProps<T> {

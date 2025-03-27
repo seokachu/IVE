@@ -1,7 +1,7 @@
-import { formatDate } from '@/utils/formatDate';
-import UserAvatar from '@/components/common/UserAvatar';
-import RenderStars from '@/utils/RenderStars';
-import type { ReviewItemProps } from '@/types/shop';
+import { formatDate } from "@/utils/formatDate";
+import UserAvatar from "@/components/common/UserAvatar";
+import RenderStars from "@/utils/RenderStars";
+import type { ReviewItemProps } from "@/types/shop";
 
 const ReviewItem = ({ item }: ReviewItemProps) => {
   return (

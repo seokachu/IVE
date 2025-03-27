@@ -5,9 +5,7 @@ import { sessionState } from "@/store";
 export const useUpdateUserSession = () => {
   const [, setSession] = useRecoilState(sessionState);
 
-  const updateUserAndRefresh = async (updateData: {
-    data: { [key: string]: string };
-  }) => {
+  const updateUserAndRefresh = async (updateData: { data: { [key: string]: string } }) => {
     const { error } = await supabase.auth.updateUser(updateData);
     if (error) throw error;
 

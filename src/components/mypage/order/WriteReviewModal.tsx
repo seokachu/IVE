@@ -1,6 +1,6 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import WriteReviewForm from './WriteReviewForm';
-import type { WriteReviewModalProps } from '@/types/mypage';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import WriteReviewForm from "./WriteReviewForm";
+import type { WriteReviewModalProps } from "@/types/mypage";
 
 const WriteReviewModal = ({ isOpen, onClose, reviewData, orderId, goodsId, mode }: WriteReviewModalProps) => {
   return (
