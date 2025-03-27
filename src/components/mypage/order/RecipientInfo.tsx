@@ -1,4 +1,4 @@
-import type { PaymentDetailsProps } from '@/types/mypage';
+import type { PaymentDetailsProps } from "@/types/mypage";
 
 const RecipientInfo = ({ item }: PaymentDetailsProps) => {
   return (

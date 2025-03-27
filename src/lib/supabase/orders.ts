@@ -4,9 +4,7 @@ import type { OrderItemInput } from "@/types/payment";
 //결제목록 저장
 export const saveOrderItems = async (orderItems: OrderItemInput[]) => {
   try {
-    const { data, error } = await supabase
-      .from("order_items")
-      .insert(orderItems);
+    const { data, error } = await supabase.from("order_items").insert(orderItems);
 
     if (error) throw error;
     return data;
@@ -41,10 +39,7 @@ export const getOrderItems = async (orderId: string) => {
 //결제정보 - order id로 상세정보 조회
 export const getOrderDetail = async (orderId: string) => {
   try {
-    const { data, error } = await supabase
-      .from("order_items")
-      .select("*")
-      .eq("order_id", orderId);
+    const { data, error } = await supabase.from("order_items").select("*").eq("order_id", orderId);
 
     if (error) throw error;
     return data;
@@ -59,10 +54,7 @@ export const getOrderDetail = async (orderId: string) => {
 //결제목록 삭제
 export const deleteOrderItems = async (itemIds: string[]) => {
   try {
-    const { data, error } = await supabase
-      .from("order_items")
-      .delete()
-      .in("id", itemIds);
+    const { data, error } = await supabase.from("order_items").delete().in("id", itemIds);
 
     if (error) throw error;
     return data;
@@ -76,18 +68,13 @@ export const deleteOrderItems = async (itemIds: string[]) => {
 //결제목록 주문 전체 삭제
 export const deleteAllOrderItems = async (userId: string) => {
   try {
-    const { data, error } = await supabase
-      .from("order_items")
-      .delete()
-      .eq("user_id", userId);
+    const { data, error } = await supabase.from("order_items").delete().eq("user_id", userId);
 
     if (error) throw error;
     return data;
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(
-        `결제목록을 전체 삭제하는데 실패했습니다.${error.message}`
-      );
+      throw new Error(`결제목록을 전체 삭제하는데 실패했습니다.${error.message}`);
     }
   }
 };

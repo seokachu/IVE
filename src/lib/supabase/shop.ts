@@ -1,13 +1,13 @@
-import { supabase } from '@/lib/supabase/client';
-import { getDiscountedPrice } from '@/utils/calculateDiscount';
-import type { SortOptionList } from '@/types/shop';
+import { supabase } from "@/lib/supabase/client";
+import { getDiscountedPrice } from "@/utils/calculateDiscount";
+import type { SortOptionList } from "@/types/shop";
 
 const ITEM_PAGE = 12;
 
 //상품 목록
-export const getGoodsShop = async (page = 1, sortBy: SortOptionList = 'best') => {
+export const getGoodsShop = async (page = 1, sortBy: SortOptionList = "best") => {
   try {
-    const query = supabase.from('goods').select(`
+    const query = supabase.from("goods").select(`
         *,
         goods_reviews(rating)
       `);
@@ -25,24 +25,24 @@ export const getGoodsShop = async (page = 1, sortBy: SortOptionList = 'best') =>
     const sortedData = [...(data || [])];
 
     switch (sortBy) {
-      case 'latest':
+      case "latest":
         sortedData.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
         break;
-      case 'price_low_to_high':
+      case "price_low_to_high":
         sortedData.sort((a, b) => {
           const priceA = getDiscountedPrice(a);
           const priceB = getDiscountedPrice(b);
           return priceA - priceB;
         });
         break;
-      case 'price_high_to_low':
+      case "price_high_to_low":
         sortedData.sort((a, b) => {
           const priceA = getDiscountedPrice(a);
           const priceB = getDiscountedPrice(b);
           return priceB - priceA;
         });
         break;
-      case 'best':
+      case "best":
         sortedData.sort((a, b) => (b.goods_reviews?.length || 0) - (a.goods_reviews?.length || 0));
         break;
       default:
@@ -66,7 +66,7 @@ export const getGoodsShop = async (page = 1, sortBy: SortOptionList = 'best') =>
 //상품 목록 상세정보
 export const getGoodsShopDetail = async (id: string) => {
   try {
-    const { data, error } = await supabase.from('goods').select('*').eq('id', id).single();
+    const { data, error } = await supabase.from("goods").select("*").eq("id", id).single();
 
     if (error) throw error;
     return data;
@@ -81,7 +81,7 @@ export const getGoodsShopDetail = async (id: string) => {
 //메인페이지 상품목록 불러오기
 export const getCarouselShop = async () => {
   try {
-    const query = supabase.from('goods').select(`
+    const query = supabase.from("goods").select(`
       *,
       goods_reviews(rating)
     `);

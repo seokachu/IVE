@@ -1,7 +1,7 @@
-import type { Tables } from '@/types/supabase';
-import type { OrderItem } from '@/types/index';
+import type { Tables } from "@/types/supabase";
+import type { OrderItem } from "@/types/index";
 
-export type OrderItemInput = Omit<OrderItem, 'created_at' | 'id' | 'is_confirmed'>;
+export type OrderItemInput = Omit<OrderItem, "created_at" | "id" | "is_confirmed">;
 
 export interface TossPaymentResponse {
   status: string;
@@ -27,8 +27,8 @@ export interface TossPaymentErrorResponse {
 }
 
 export interface PaymentSuccessViewProps {
-  orderItems: Tables<'order_items'>[];
-  payment: Tables<'payments'>;
+  orderItems: Tables<"order_items">[];
+  payment: Tables<"payments">;
 }
 
 export interface PaymentSuccessHeaderProps {
@@ -36,7 +36,7 @@ export interface PaymentSuccessHeaderProps {
 }
 
 export interface OrderItemsListProps {
-  orderItems: Tables<'order_items'>[];
+  orderItems: Tables<"order_items">[];
 }
 
 export interface UsePaymentConfirmationProps {
@@ -44,8 +44,8 @@ export interface UsePaymentConfirmationProps {
   paymentKey: string | null;
   amount: string | null;
   orderName: string | null;
-  address?: Tables<'shipping_addresses'>;
-  payment?: Tables<'payments'>;
+  address?: Tables<"shipping_addresses">;
+  payment?: Tables<"payments">;
 }
 
 export interface UseCartCleanupParams {

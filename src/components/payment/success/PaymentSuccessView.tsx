@@ -3,10 +3,7 @@ import OrderItemsList from "./OrderItemsList";
 import PaymentSuccessHeader from "./PaymentSuccessHeader";
 import type { PaymentSuccessViewProps } from "@/types/payment";
 
-const PaymentSuccessView = ({
-  orderItems,
-  payment,
-}: PaymentSuccessViewProps) => {
+const PaymentSuccessView = ({ orderItems, payment }: PaymentSuccessViewProps) => {
   return (
     <section className="px-5 pt-14 pb-28 lg:px-8 min-h-screen flex items-center justify-center">
       <div className="max-w-[1320px] w-full m-auto flex flex-col gap-5">

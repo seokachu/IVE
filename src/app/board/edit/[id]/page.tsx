@@ -1,6 +1,6 @@
-import BoardWriteForm from '@/components/board/write/BoardWriteForm';
-import { boardEditMetadata } from '@/metadata/board/boardEditMetadata';
-import type { EditPageParams } from '@/types/board';
+import BoardWriteForm from "@/components/board/write/BoardWriteForm";
+import { boardEditMetadata } from "@/metadata/board/boardEditMetadata";
+import type { EditPageParams } from "@/types/board";
 
 export const metadata = boardEditMetadata;
 

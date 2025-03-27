@@ -45,24 +45,20 @@ const Header = () => {
   }, [isMainPage, setIsScrolled]);
 
   // 조건문 header logo
-  const logoSrc = isMainPage
-    ? isScrolled
-      ? SubLogoImage
-      : LogoImage
-    : SubLogoImage;
+  const logoSrc = isMainPage ? (isScrolled ? SubLogoImage : LogoImage) : SubLogoImage;
 
   return (
     <header
       className={cn(
         isMainPage ? "fixed" : "relative",
         "right-0 top-0 left-0 z-20 w-screen overflow-x-hidden h-[75px] flex items-center",
-        isScrolled && "bg-white text-black shadow-sm"
+        isScrolled && "bg-white text-black shadow-sm",
       )}
     >
       <div
         className={cn(
           "flex w-full p-[20px] justify-between items-center max-w-[1320px] m-auto relative text-white",
-          isScrolled && "text-font-color"
+          isScrolled && "text-font-color",
         )}
       >
         <HeaderAside />

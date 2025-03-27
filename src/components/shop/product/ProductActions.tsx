@@ -76,11 +76,7 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
           </ActionButton>
         </li>
         <li className="w-2/4">
-          <ActionButton
-            onClick={onClickCart}
-            variant="outline"
-            className="w-full py-3 text-center"
-          >
+          <ActionButton onClick={onClickCart} variant="outline" className="w-full py-3 text-center">
             장바구니
           </ActionButton>
         </li>
@@ -88,9 +84,7 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
           <DirectPaymentButton product={product} quantity={quantity} />
         </li>
       </ul>
-      {isDrawerOpen && (
-        <AddToCartDrawer isOpen={isDrawerOpen} onClose={onClickCloseDrawer} />
-      )}
+      {isDrawerOpen && <AddToCartDrawer isOpen={isDrawerOpen} onClose={onClickCloseDrawer} />}
     </>
   );
 };

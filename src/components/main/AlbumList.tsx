@@ -38,11 +38,7 @@ const AlbumList = () => {
       wrapperTag="ul"
     >
       {albums?.map((album) => (
-        <SwiperSlide
-          key={album.title}
-          tag="li"
-          className="bg-cover h-fit bg-center lg:!w-max lg:!h-full lg:pr-5"
-        >
+        <SwiperSlide key={album.title} tag="li" className="bg-cover h-fit bg-center lg:!w-max lg:!h-full lg:pr-5">
           <AlbumListItem album={album} />
         </SwiperSlide>
       ))}

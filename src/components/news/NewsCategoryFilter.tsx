@@ -1,5 +1,5 @@
-import { NEWS_CATEGORY_ARRAY } from '@/utils/constants';
-import type { NewsCategoryFilterProps } from '@/types/news';
+import { NEWS_CATEGORY_ARRAY } from "@/utils/constants";
+import type { NewsCategoryFilterProps } from "@/types/news";
 
 const NewsCategoryFilter = ({ selectedCategory, setSelectedCategory }: NewsCategoryFilterProps) => {
   return (
@@ -9,12 +9,12 @@ const NewsCategoryFilter = ({ selectedCategory, setSelectedCategory }: NewsCateg
           <li
             key={el.category}
             className={`px-6 py-2 rounded-full whitespace-nowrap text-xs lg:text-sm ${
-              selectedCategory === el.category ? 'bg-white' : ''
+              selectedCategory === el.category ? "bg-white" : ""
             }`}
           >
             <button
               onClick={() => setSelectedCategory(el.category)}
-              className={`hover:text-font-color ${selectedCategory === el.category ? 'text-purple' : ''}`}
+              className={`hover:text-font-color ${selectedCategory === el.category ? "text-purple" : ""}`}
             >
               {el.category}
             </button>

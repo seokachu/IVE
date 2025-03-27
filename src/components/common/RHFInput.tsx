@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+import { FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useFormContext } from "react-hook-form";
 
@@ -14,12 +9,7 @@ interface RHFInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   messageClassName?: string;
 }
 
-export function RHFInput({
-  name,
-  messageClassName,
-  type = "text",
-  ...props
-}: RHFInputProps) {
+export function RHFInput({ name, messageClassName, type = "text", ...props }: RHFInputProps) {
   const {
     control,
     formState: { errors },

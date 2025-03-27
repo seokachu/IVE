@@ -1,9 +1,6 @@
 import { useRouter } from "next/navigation";
 import { toast } from "@/hooks/use-toast";
-import {
-  useAddShippingAddress,
-  useUpdateShippingAddress,
-} from "@/hooks/queries/useShippingAddress";
+import { useAddShippingAddress, useUpdateShippingAddress } from "@/hooks/queries/useShippingAddress";
 import type { AddressData } from "@/types";
 
 export const useAddressAPI = () => {
@@ -25,21 +22,14 @@ export const useAddressAPI = () => {
         onError: (error) => {
           toast({
             title: "배송지 저장에 실패했습니다.",
-            description:
-              error instanceof Error
-                ? error.message
-                : "알 수 없는 오류가 발생했습니다.",
+            description: error instanceof Error ? error.message : "알 수 없는 오류가 발생했습니다.",
           });
         },
-      }
+      },
     );
   };
 
-  const updateAddressData = (
-    addressId: string,
-    data: AddressData,
-    onClose?: () => void
-  ) => {
+  const updateAddressData = (addressId: string, data: AddressData, onClose?: () => void) => {
     updateAddress(
       {
         addressId,
@@ -54,13 +44,10 @@ export const useAddressAPI = () => {
         onError: (error) => {
           toast({
             title: "배송지 수정에 실패했습니다.",
-            description:
-              error instanceof Error
-                ? error.message
-                : "알 수 없는 오류가 발생했습니다.",
+            description: error instanceof Error ? error.message : "알 수 없는 오류가 발생했습니다.",
           });
         },
-      }
+      },
     );
   };
 

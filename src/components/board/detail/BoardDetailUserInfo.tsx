@@ -1,5 +1,5 @@
-import UserAvatar from '@/components/common/UserAvatar';
-import type { BoardDetailProps } from '@/types/board';
+import UserAvatar from "@/components/common/UserAvatar";
+import type { BoardDetailProps } from "@/types/board";
 
 const BoardDetailUserInfo = ({ item }: BoardDetailProps) => {
   return (

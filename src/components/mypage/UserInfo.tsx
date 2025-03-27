@@ -143,18 +143,10 @@ const UserInfo = () => {
   return (
     <section>
       <div>
-        <input
-          onChange={handleImgChange}
-          type="file"
-          accept="image/*"
-          ref={inputRef}
-          className="hidden"
-        />
+        <input onChange={handleImgChange} type="file" accept="image/*" ref={inputRef} className="hidden" />
         <div
           onClick={handleAvatarClick}
-          className={`cursor-pointer relative w-fit ${
-            isModalOpen ? "pointer-events-none" : ""
-          }`}
+          className={`cursor-pointer relative w-fit ${isModalOpen ? "pointer-events-none" : ""}`}
         >
           <UserAvatar size="xl" />
           <ImageCropper
@@ -174,22 +166,11 @@ const UserInfo = () => {
         <div className="flex justify-between items-baseline mt-5 gap-2">
           {isEditingNickname ? (
             <form onSubmit={handleSubmit(onSubmit)} className="w-full">
-              <Input
-                {...register("nickname")}
-                type="text"
-                className="border rounded-md px-2 py-0"
-                maxLength={6}
-              />
-              {errors.nickname && (
-                <p className="text-xs ml-2 mt-1 text-red">
-                  {errors.nickname.message}
-                </p>
-              )}
+              <Input {...register("nickname")} type="text" className="border rounded-md px-2 py-0" maxLength={6} />
+              {errors.nickname && <p className="text-xs ml-2 mt-1 text-red">{errors.nickname.message}</p>}
             </form>
           ) : (
-            <h2 className="font-bold py-1">
-              {session?.user.user_metadata.name}
-            </h2>
+            <h2 className="font-bold py-1">{session?.user.user_metadata.name}</h2>
           )}
           <div className="flex gap-1 whitespace-nowrap">
             <ActionButton
@@ -201,11 +182,7 @@ const UserInfo = () => {
               {!isEditingNickname ? "수정" : "수정완료"}
             </ActionButton>
             {isEditingNickname && (
-              <ActionButton
-                onClick={handleNicknameCancel}
-                variant="default"
-                className="text-sm py-2 px-3"
-              >
+              <ActionButton onClick={handleNicknameCancel} variant="default" className="text-sm py-2 px-3">
                 취소
               </ActionButton>
             )}
@@ -225,12 +202,7 @@ const UserInfo = () => {
       <ul className="flex lg:flex-col gap-5 border-b lg:border-b-0 pb-5 text-center lg:text-left">
         {MYPAGE_GNB_ARRAY.map((el, index) => (
           <li key={index}>
-            <Link
-              href={el.path}
-              className={`hover:font-bold ${
-                isActivePath(el.path, el.exact) ? "font-bold" : ""
-              }`}
-            >
+            <Link href={el.path} className={`hover:font-bold ${isActivePath(el.path, el.exact) ? "font-bold" : ""}`}>
               {el.label}
             </Link>
           </li>

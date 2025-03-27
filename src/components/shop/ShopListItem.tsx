@@ -15,11 +15,7 @@ const SHOP_STYLES = {
   carousel: "w-full sm:border sm:p-4 sm:rounded-lg",
 } as const;
 
-const ShopListItem = ({
-  item,
-  variant = "shop",
-  index = 0,
-}: ShopListItemProps) => {
+const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) => {
   const { push } = useRouter();
   const { data: reviewData } = useReviewCount(item.id);
   const { data: averageRating = 0 } = useAverageRating(item.id);
@@ -64,29 +60,18 @@ const ShopListItem = ({
           loading={variant === "shop" && index < 6 ? "eager" : "lazy"}
           priority={variant === "shop" && index < 6}
         />
-        <button
-          onClick={onClickHeart}
-          className="absolute right-2 bottom-2 text-dark-gray"
-          aria-label="찜하기"
-        >
+        <button onClick={onClickHeart} className="absolute right-2 bottom-2 text-dark-gray" aria-label="찜하기">
           <GoHeartFill
             size={30}
-            className={`opacity-90 transition-colors ${
-              isWished ? "text-rose-500" : "text-dark-gray"
-            }`}
+            className={`opacity-90 transition-colors ${isWished ? "text-rose-500" : "text-dark-gray"}`}
           />
         </button>
       </div>
       <div className="flex flex-col gap-1">
         <div className="mt-2 md:mt-4 mb-1 min-h-[20px]">
-          <Badge
-            item={{ ...item, review_count: reviewCount }}
-            averageRating={averageRating}
-          />
+          <Badge item={{ ...item, review_count: reviewCount }} averageRating={averageRating} />
         </div>
-        <h3 className="text-xs lg:text-base overflow-hidden overflow-ellipsis whitespace-nowrap">
-          {item.title}
-        </h3>
+        <h3 className="text-xs lg:text-base overflow-hidden overflow-ellipsis whitespace-nowrap">{item.title}</h3>
         <div className="font-bold flex items-start md:items-center gap-1 lg:gap-2 text-sm lg:text-xl">
           <span className="text-purple">{item.discount_rate}%</span>
           <span className="whitespace-nowrap">{formatPrice(price)}원</span>

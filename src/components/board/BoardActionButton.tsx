@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import ActionButton from '@/components/common/button/ActionButton';
-import ConfirmModal from '@/components/common/modal/ConfirmModal';
-import type { BoardActionButtonProps } from '@/types/board';
+import { useState } from "react";
+import ActionButton from "@/components/common/button/ActionButton";
+import ConfirmModal from "@/components/common/modal/ConfirmModal";
+import type { BoardActionButtonProps } from "@/types/board";
 
-const BoardActionButton = ({ onEdit, onDelete, mode = 'default' }: BoardActionButtonProps) => {
+const BoardActionButton = ({ onEdit, onDelete, mode = "default" }: BoardActionButtonProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClickDelete = () => {
@@ -12,7 +12,7 @@ const BoardActionButton = ({ onEdit, onDelete, mode = 'default' }: BoardActionBu
 
   return (
     <>
-      {mode === 'default' ? (
+      {mode === "default" ? (
         <div className="shrink-0">
           <ActionButton onClick={onEdit} variant="default" className="border-none text-gray-500 mr-2">
             수정

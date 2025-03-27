@@ -1,16 +1,16 @@
-import { useForm } from 'react-hook-form';
-import { Form } from '@/components/ui/form';
-import { Button } from '@/components/ui/button';
-import { RHFInput } from '@/components/common/RHFInput';
-import { Label } from '@/components/ui/label';
-import { toast } from '@/hooks/use-toast';
-import { useSaveCustomerInfo } from '@/hooks/queries/useCustomerInfo';
-import { useRecoilValue } from 'recoil';
-import { sessionState } from '@/store';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useQueryClient } from '@tanstack/react-query';
-import { customerInfoSchema, CustomerInfoType } from '@/hooks/user';
-import type { CustomerInfoFormProps } from '@/types/cart';
+import { useForm } from "react-hook-form";
+import { Form } from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { RHFInput } from "@/components/common/RHFInput";
+import { Label } from "@/components/ui/label";
+import { toast } from "@/hooks/use-toast";
+import { useSaveCustomerInfo } from "@/hooks/queries/useCustomerInfo";
+import { useRecoilValue } from "recoil";
+import { sessionState } from "@/store";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
+import { customerInfoSchema, CustomerInfoType } from "@/hooks/user";
+import type { CustomerInfoFormProps } from "@/types/cart";
 
 const CustomerInfoForm = ({ initialData, defaultValues, onSuccess }: CustomerInfoFormProps) => {
   const session = useRecoilValue(sessionState);
@@ -18,13 +18,13 @@ const CustomerInfoForm = ({ initialData, defaultValues, onSuccess }: CustomerInf
   const queryClient = useQueryClient();
 
   const customerInfo = {
-    name: initialData?.name || defaultValues?.name || '',
-    phone: initialData?.phone || '',
-    email: initialData?.email || defaultValues?.email || '',
+    name: initialData?.name || defaultValues?.name || "",
+    phone: initialData?.phone || "",
+    email: initialData?.email || defaultValues?.email || "",
   };
 
   const form = useForm<CustomerInfoType>({
-    mode: 'onChange',
+    mode: "onChange",
     resolver: zodResolver(customerInfoSchema),
     defaultValues: customerInfo,
   });
@@ -34,16 +34,16 @@ const CustomerInfoForm = ({ initialData, defaultValues, onSuccess }: CustomerInf
   //전화번호 포맷팅
   const formatPhoneNumber = (value: string) => {
     // 숫자만 추출
-    const numbers = value.replace(/[^0-9]/g, '');
+    const numbers = value.replace(/[^0-9]/g, "");
 
     // 11자리가 넘어가면 잘라내기
     const trimmed = numbers.slice(0, 11);
 
     // 형식에 맞게 하이픈 추가
     if (trimmed.length === 11) {
-      return trimmed.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+      return trimmed.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
     } else if (trimmed.length === 10) {
-      return trimmed.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+      return trimmed.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
     }
     return trimmed;
   };
@@ -66,7 +66,7 @@ const CustomerInfoForm = ({ initialData, defaultValues, onSuccess }: CustomerInf
     // 데이터가 변경되지 않았으면
     if (initialData && !isDataChanged) {
       toast({
-        title: '변경된 내용이 없습니다.',
+        title: "변경된 내용이 없습니다.",
       });
       onSuccess();
       return;
@@ -80,22 +80,22 @@ const CustomerInfoForm = ({ initialData, defaultValues, onSuccess }: CustomerInf
       {
         onSuccess: async () => {
           await queryClient.refetchQueries({
-            queryKey: ['customerInfo', session.user.id],
+            queryKey: ["customerInfo", session.user.id],
           });
 
           toast({
-            title: '주문자 정보가 저장되었습니다.',
+            title: "주문자 정보가 저장되었습니다.",
           });
           onSuccess();
         },
         onError: (error) => {
           toast({
-            title: '저장에 실패했습니다.',
-            description: error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.',
-            variant: 'destructive',
+            title: "저장에 실패했습니다.",
+            description: error instanceof Error ? error.message : "알 수 없는 오류가 발생했습니다.",
+            variant: "destructive",
           });
         },
-      }
+      },
     );
   };
 
@@ -157,7 +157,7 @@ const CustomerInfoForm = ({ initialData, defaultValues, onSuccess }: CustomerInf
           </ul>
           <div className="flex gap-2 pt-1">
             <Button type="submit" className="flex-1 py-2 text-xs" disabled={!isValid || isSubmitting}>
-              {isSubmitting ? '저장 중...' : '저장하기'}
+              {isSubmitting ? "저장 중..." : "저장하기"}
             </Button>
             <Button type="button" variant="outline" onClick={() => onSuccess()} className="flex-1 py-2 text-xs">
               취소

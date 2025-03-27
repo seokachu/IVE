@@ -54,10 +54,7 @@ const SignUpForm = () => {
   return (
     <>
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(handleSubmit)}
-          className="flex flex-col gap-3 sm:w-full md:w-[400px]"
-        >
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-3 sm:w-full md:w-[400px]">
           <div className="relative">
             <FaUser className="absolute top-[17px] left-5" />
             <RHFInput
@@ -79,10 +76,7 @@ const SignUpForm = () => {
               autoComplete="new-password"
               className="pl-11"
             />
-            <span
-              className="absolute right-4 top-[14px] cursor-pointer"
-              onClick={() => setShowPassword(!showPassword)}
-            >
+            <span className="absolute right-4 top-[14px] cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? (
                 <AiOutlineEye size={24} color="#ccc" />
               ) : (

@@ -1,15 +1,15 @@
-import Image from 'next/image';
-import DefaultImage from '@/assets/images/default_image.avif';
-import ProductActions from './ProductActions';
-import ShareButton from '@/components/common/button/ShareButton';
-import { useShopDetail } from '@/hooks/queries/useShops';
-import { formatPrice, getDiscountedPrice } from '@/utils/calculateDiscount';
-import Error from '@/components/common/error/Error';
-import ProductInfoSkeleton from '@/components/common/loading/ProductInfoSkeleton';
-import QuantitySelector from '@/components/common/QuantitySelector';
-import { toast } from '@/hooks/use-toast';
-import { useState } from 'react';
-import type { ShopMenuProps } from '@/types/shop';
+import Image from "next/image";
+import DefaultImage from "@/assets/images/default_image.avif";
+import ProductActions from "./ProductActions";
+import ShareButton from "@/components/common/button/ShareButton";
+import { useShopDetail } from "@/hooks/queries/useShops";
+import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
+import Error from "@/components/common/error/Error";
+import ProductInfoSkeleton from "@/components/common/loading/ProductInfoSkeleton";
+import QuantitySelector from "@/components/common/QuantitySelector";
+import { toast } from "@/hooks/use-toast";
+import { useState } from "react";
+import type { ShopMenuProps } from "@/types/shop";
 
 const ProductInfo = ({ id }: ShopMenuProps) => {
   const [count, setCount] = useState(1);
@@ -25,7 +25,7 @@ const ProductInfo = ({ id }: ShopMenuProps) => {
   const handleIncrease = () => {
     if (count >= 5) {
       toast({
-        title: '최대 5개 까지 구매 가능합니다.',
+        title: "최대 5개 까지 구매 가능합니다.",
       });
       return;
     }

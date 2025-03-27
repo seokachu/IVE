@@ -1,4 +1,4 @@
-import type { EmptyStateMessageProps } from '@/types/cart';
+import type { EmptyStateMessageProps } from "@/types/cart";
 
 const EmptyStateMessage = ({ title, message }: EmptyStateMessageProps) => {
   return (

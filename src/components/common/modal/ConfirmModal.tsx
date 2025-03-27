@@ -5,8 +5,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import ActionButton from '../button/ActionButton';
+} from "@/components/ui/dialog";
+import ActionButton from "../button/ActionButton";
 
 interface ConfirmModalProps {
   isOpen: (value: boolean) => void;

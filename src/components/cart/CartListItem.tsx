@@ -1,19 +1,19 @@
-import DefaultImage from '@/assets/images/default_image.avif';
-import { cartState, selectedItemState } from '@/store';
-import { formatPrice, getDiscountedPrice } from '@/utils/calculateDiscount';
-import Image from 'next/image';
-import { useEffect, useId } from 'react';
-import { useRecoilState } from 'recoil';
-import QuantitySelector from '../common/QuantitySelector';
-import { toast } from '@/hooks/use-toast';
-import { useRouter, useSearchParams } from 'next/navigation';
-import type { CartListItemProps } from '@/types/cart';
+import DefaultImage from "@/assets/images/default_image.avif";
+import { cartState, selectedItemState } from "@/store";
+import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
+import Image from "next/image";
+import { useEffect, useId } from "react";
+import { useRecoilState } from "recoil";
+import QuantitySelector from "../common/QuantitySelector";
+import { toast } from "@/hooks/use-toast";
+import { useRouter, useSearchParams } from "next/navigation";
+import type { CartListItemProps } from "@/types/cart";
 
 const CartListItem = ({ item }: CartListItemProps) => {
   const id = useId();
   const { push } = useRouter();
   const searchParams = useSearchParams();
-  const selectedParam = searchParams.get('selected');
+  const selectedParam = searchParams.get("selected");
   const [selectedItems, setSelectedItems] = useRecoilState(selectedItemState);
   const [cartItems, setCartItems] = useRecoilState(cartState);
   const isChecked = selectedItems.includes(item.id);
@@ -30,7 +30,7 @@ const CartListItem = ({ item }: CartListItemProps) => {
       } catch (error) {
         if (error instanceof Error) {
           toast({
-            title: '목록을 가져오는데 실패했습니다.',
+            title: "목록을 가져오는데 실패했습니다.",
             description: error.message,
           });
         }
@@ -52,7 +52,7 @@ const CartListItem = ({ item }: CartListItemProps) => {
     const newCartItems = cartItems.filter((cartItem) => cartItem.id !== item.id);
 
     // 로컬스토리지와 장바구니 상태 동기화
-    localStorage.setItem('shopping_cart', JSON.stringify(newCartItems));
+    localStorage.setItem("shopping_cart", JSON.stringify(newCartItems));
     setCartItems(newCartItems);
 
     // 체크된 상태에서 삭제된 경우 체크 목록에서도 제거
@@ -64,7 +64,7 @@ const CartListItem = ({ item }: CartListItemProps) => {
   const handleIncrease = () => {
     if (item.quantity >= 5) {
       toast({
-        title: '최대 5개 까지 구매 가능합니다.',
+        title: "최대 5개 까지 구매 가능합니다.",
       });
       return;
     }
@@ -79,7 +79,7 @@ const CartListItem = ({ item }: CartListItemProps) => {
       return cartItem;
     });
 
-    localStorage.setItem('shopping_cart', JSON.stringify(newCartItems));
+    localStorage.setItem("shopping_cart", JSON.stringify(newCartItems));
     setCartItems(newCartItems);
   };
 
@@ -94,7 +94,7 @@ const CartListItem = ({ item }: CartListItemProps) => {
       return cartItem;
     });
 
-    localStorage.setItem('shopping_cart', JSON.stringify(newCartItems));
+    localStorage.setItem("shopping_cart", JSON.stringify(newCartItems));
     setCartItems(newCartItems);
   };
 

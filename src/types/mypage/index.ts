@@ -1,19 +1,19 @@
-import type { Tables } from '../supabase';
+import type { Tables } from "../supabase";
 
 export interface OrderListItemProps {
-  item: Tables<'order_items'>;
+  item: Tables<"order_items">;
 }
 
 export interface PaymentDetailsProps {
-  item: Tables<'payments'>;
+  item: Tables<"payments">;
 }
 
 export interface UserWishListProps {
-  wishlists: Tables<'wish_lists'>[];
+  wishlists: Tables<"wish_lists">[];
 }
 
 export interface UserWishListItemProps {
-  item: Tables<'wish_lists'>;
+  item: Tables<"wish_lists">;
   index: number;
 }
 
@@ -35,22 +35,22 @@ export interface OrderDetailPageProps {
 }
 
 export interface OrderDetailProps {
-  orderItems: Tables<'order_items'>[];
+  orderItems: Tables<"order_items">[];
   onBack: () => void;
 }
 
 export interface DetailOrderItemProps {
-  item: Tables<'order_items'>;
+  item: Tables<"order_items">;
   onConfirm: () => void;
 }
 
 export interface WriteReviewModalProps {
   isOpen: boolean;
   onClose: () => void;
-  reviewData?: Tables<'goods_reviews'> | null;
+  reviewData?: Tables<"goods_reviews"> | null;
   orderId: string;
   goodsId: string;
-  mode: 'create' | 'edit';
+  mode: "create" | "edit";
 }
 
 export interface ReviewFormData {
@@ -59,14 +59,14 @@ export interface ReviewFormData {
 }
 
 export interface WriteReviewFormProps {
-  mode: 'create' | 'edit';
-  reviewData?: Tables<'goods_reviews'>;
+  mode: "create" | "edit";
+  reviewData?: Tables<"goods_reviews">;
   onClose: () => void;
   orderId: string;
   goodsId: string;
 }
 
-export interface MyPageBoards extends Tables<'board'> {
+export interface MyPageBoards extends Tables<"board"> {
   user: {
     id: string;
     name: string;
@@ -78,7 +78,7 @@ export interface MyPageBoards extends Tables<'board'> {
 
 export interface PaymentOverviewProps {
   title: string;
-  payment: Tables<'payments'>;
+  payment: Tables<"payments">;
 }
 
 export interface PostListItemProps {
@@ -90,11 +90,11 @@ export interface PostListProps {
 }
 
 export interface AddressListProps {
-  addresses: Tables<'shipping_addresses'>[];
+  addresses: Tables<"shipping_addresses">[];
 }
 
 export interface AddressListItems {
-  item: Tables<'shipping_addresses'>;
+  item: Tables<"shipping_addresses">;
 }
 
 export interface AddressConfirmModalProps {
@@ -106,12 +106,12 @@ export interface AddressConfirmModalProps {
 export interface AddressEditModalProps {
   isOpen: boolean;
   onClose: () => void;
-  addressData: Tables<'shipping_addresses'>;
+  addressData: Tables<"shipping_addresses">;
 }
 
 export type AddressFormProps = {
-  mode?: 'create' | 'edit';
-  initialData?: Tables<'shipping_addresses'>;
+  mode?: "create" | "edit";
+  initialData?: Tables<"shipping_addresses">;
   onClose?: () => void;
 };
 
@@ -130,8 +130,8 @@ export interface DefaultAddressCheckboxProps {
 }
 
 export interface UseAddressFormProps {
-  mode: 'create' | 'edit';
-  initialData?: Tables<'shipping_addresses'>;
+  mode: "create" | "edit";
+  initialData?: Tables<"shipping_addresses">;
   isFirstAddress: boolean;
 }
 

@@ -1,12 +1,12 @@
-import PaginationControl from '@/components/common/PaginationControl';
-import ReviewItem from './ReviewItem';
-import { useReviews } from '@/hooks/queries/useReviews';
-import Error from '@/components/common/error/Error';
-import RenderStars from '@/utils/RenderStars';
-import { useRef, useState } from 'react';
-import { PAGINATION } from '@/utils/constants';
-import ReviewTabSkeleton from '@/components/common/loading/ReviewTabSkeleton';
-import type { ShopMenuProps } from '@/types/shop';
+import PaginationControl from "@/components/common/PaginationControl";
+import ReviewItem from "./ReviewItem";
+import { useReviews } from "@/hooks/queries/useReviews";
+import Error from "@/components/common/error/Error";
+import RenderStars from "@/utils/RenderStars";
+import { useRef, useState } from "react";
+import { PAGINATION } from "@/utils/constants";
+import ReviewTabSkeleton from "@/components/common/loading/ReviewTabSkeleton";
+import type { ShopMenuProps } from "@/types/shop";
 
 const ReviewTab = ({ id }: ShopMenuProps) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -46,11 +46,7 @@ const ReviewTab = ({ id }: ShopMenuProps) => {
           </div>
           <div>
             <h2 className="lg:text-xl font-bold mb-2">리뷰 &#40;{totalCount}&#41;</h2>
-            <ul>
-              {reviews?.map((item) => (
-                <ReviewItem key={item.id} item={item} />
-              ))}
-            </ul>
+            <ul>{reviews?.map((item) => <ReviewItem key={item.id} item={item} />)}</ul>
             {totalPages > 1 && (
               <PaginationControl
                 currentPage={currentPage}

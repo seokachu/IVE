@@ -25,11 +25,7 @@ const PaymentSuccessHeader = ({ orderId }: PaymentSuccessHeaderProps) => {
         >
           주문상세 보기
         </ActionButton>
-        <ActionButton
-          onClick={onClickGoCart}
-          variant="primary"
-          className="px-6 py-2 text-sm"
-        >
+        <ActionButton onClick={onClickGoCart} variant="primary" className="px-6 py-2 text-sm">
           쇼핑 계속하기
         </ActionButton>
       </div>

@@ -1,8 +1,8 @@
-import type { BoardWithComment } from '../board';
-import type { Tables } from '../supabase';
+import type { BoardWithComment } from "../board";
+import type { Tables } from "../supabase";
 
 export interface AlbumItemProps {
-  album: Tables<'album'>;
+  album: Tables<"album">;
 }
 
 export interface MainBoardListItemProps {

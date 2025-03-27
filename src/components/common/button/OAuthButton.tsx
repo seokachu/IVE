@@ -9,14 +9,7 @@ interface OAuthButtonProps {
   iconStyle?: string;
 }
 
-const OAuthButton = ({
-  icon: Icon,
-  text,
-  size = 20,
-  className,
-  onClick,
-  iconStyle,
-}: OAuthButtonProps) => {
+const OAuthButton = ({ icon: Icon, text, size = 20, className, onClick, iconStyle }: OAuthButtonProps) => {
   return (
     <button onClick={onClick} className={className}>
       <Icon size={size} className={iconStyle} />

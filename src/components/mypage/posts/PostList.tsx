@@ -1,5 +1,5 @@
-import PostListItem from './PostListItem';
-import type { PostListProps } from '@/types/mypage';
+import PostListItem from "./PostListItem";
+import type { PostListProps } from "@/types/mypage";
 
 const PostList = ({ posts = [] }: PostListProps) => {
   return (

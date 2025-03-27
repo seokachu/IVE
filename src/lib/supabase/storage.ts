@@ -11,13 +11,11 @@ export const uploadAvatar = async (file: Blob) => {
 
   try {
     // 새 이미지 업로드
-    const { error: uploadError } = await supabase.storage
-      .from("avatars")
-      .upload(fileName, file, {
-        cacheControl: "0",
-        contentType: file.type,
-        upsert: true,
-      });
+    const { error: uploadError } = await supabase.storage.from("avatars").upload(fileName, file, {
+      cacheControl: "0",
+      contentType: file.type,
+      upsert: true,
+    });
 
     if (uploadError) {
       throw new Error("이미지 업로드에 실패했습니다.");
@@ -27,10 +25,7 @@ export const uploadAvatar = async (file: Blob) => {
       data: { publicUrl },
     } = supabase.storage.from("avatars").getPublicUrl(fileName);
 
-    const { error: updateError } = await supabase
-      .from("user")
-      .update({ avatar_url: publicUrl })
-      .eq("id", user.id);
+    const { error: updateError } = await supabase.from("user").update({ avatar_url: publicUrl }).eq("id", user.id);
 
     if (updateError) throw updateError;
 

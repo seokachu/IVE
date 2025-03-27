@@ -1,23 +1,23 @@
-import type { Database } from '@/types/supabase';
-import { ButtonHTMLAttributes } from 'react';
+import type { Database } from "@/types/supabase";
+import { ButtonHTMLAttributes } from "react";
 
 //supabase type
-export type NewsItem = Database['public']['Tables']['news_gallery']['Row'];
-export type GalleryItem = Database['public']['Tables']['gallery']['Row'];
-export type OrderItem = Database['public']['Tables']['order_items']['Row'];
-export type ShopListItem = Database['public']['Tables']['goods']['Row'];
-export type ShippingAddress = Database['public']['Tables']['shipping_addresses']['Row'];
-export type ShippingAddressUpdate = Database['public']['Tables']['shipping_addresses']['Update'];
-export type ShippingAddressInsert = Database['public']['Tables']['shipping_addresses']['Insert'];
-export type PaymentInsert = Database['public']['Tables']['payments']['Insert'];
-export type BoardInsert = Database['public']['Tables']['board']['Insert'];
-export type CommentInsert = Database['public']['Tables']['board_comments']['Insert'];
-export type OrderReviewInsert = Database['public']['Tables']['goods_reviews']['Insert'];
-export type CustomerInfoInsert = Database['public']['Tables']['customer_info']['Insert'];
-export type WishListItem = Database['public']['Tables']['wish_lists']['Row'];
+export type NewsItem = Database["public"]["Tables"]["news_gallery"]["Row"];
+export type GalleryItem = Database["public"]["Tables"]["gallery"]["Row"];
+export type OrderItem = Database["public"]["Tables"]["order_items"]["Row"];
+export type ShopListItem = Database["public"]["Tables"]["goods"]["Row"];
+export type ShippingAddress = Database["public"]["Tables"]["shipping_addresses"]["Row"];
+export type ShippingAddressUpdate = Database["public"]["Tables"]["shipping_addresses"]["Update"];
+export type ShippingAddressInsert = Database["public"]["Tables"]["shipping_addresses"]["Insert"];
+export type PaymentInsert = Database["public"]["Tables"]["payments"]["Insert"];
+export type BoardInsert = Database["public"]["Tables"]["board"]["Insert"];
+export type CommentInsert = Database["public"]["Tables"]["board_comments"]["Insert"];
+export type OrderReviewInsert = Database["public"]["Tables"]["goods_reviews"]["Insert"];
+export type CustomerInfoInsert = Database["public"]["Tables"]["customer_info"]["Insert"];
+export type WishListItem = Database["public"]["Tables"]["wish_lists"]["Row"];
 
 //type
-export type OAuthProvider = 'google' | 'github' | 'kakao';
+export type OAuthProvider = "google" | "github" | "kakao";
 
 export interface GnbArrayList {
   label: string;
@@ -27,7 +27,11 @@ export interface GnbArrayList {
 
 export interface SignInProps {
   title?: string;
-  className?: ButtonHTMLAttributes<HTMLButtonElement>['className'];
+  className?: ButtonHTMLAttributes<HTMLButtonElement>["className"];
+}
+
+export interface SignInEmailProps {
+  redirectPath?: string | null;
 }
 
 export interface AddressData {

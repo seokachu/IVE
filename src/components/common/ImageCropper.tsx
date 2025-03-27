@@ -1,12 +1,6 @@
 import React, { useState, useRef } from "react";
 import AvatarEditor from "react-avatar-editor";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 interface ImageCropperProps {
@@ -17,21 +11,13 @@ interface ImageCropperProps {
   defaultImage: string;
 }
 
-const ImageCropper = ({
-  imageSrc,
-  isOpen,
-  onClose,
-  onSave,
-  defaultImage,
-}: ImageCropperProps) => {
+const ImageCropper = ({ imageSrc, isOpen, onClose, onSave, defaultImage }: ImageCropperProps) => {
   const [scale, setScale] = useState(1);
   const editorRef = useRef<AvatarEditor | null>(null);
 
   const handleSave = () => {
     if (editorRef.current) {
-      const canvas = (
-        editorRef.current as AvatarEditor
-      ).getImageScaledToCanvas();
+      const canvas = (editorRef.current as AvatarEditor).getImageScaledToCanvas();
       canvas.toBlob((blob: Blob | null) => {
         if (blob) {
           onSave(blob);
@@ -46,9 +32,7 @@ const ImageCropper = ({
       <DialogContent className="sm:max-w-md py-10">
         <DialogHeader>
           <DialogTitle className="mb-2">프로필 이미지 편집</DialogTitle>
-          <DialogDescription>
-            이미지를 원하는 크기로 조정하세요.
-          </DialogDescription>
+          <DialogDescription>이미지를 원하는 크기로 조정하세요.</DialogDescription>
         </DialogHeader>
         <div className="flex flex-col items-center gap-4">
           <AvatarEditor

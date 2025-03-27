@@ -23,9 +23,7 @@ const SignInContent = () => {
 
   const onClickSignUp = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const sheetElement = document.querySelector(
-      '[role="dialog"][data-state="open"].fixed'
-    );
+    const sheetElement = document.querySelector('[role="dialog"][data-state="open"].fixed');
     if (sheetElement) {
       const closeButton = sheetElement.querySelector("button.absolute");
       (closeButton as HTMLButtonElement)?.click();
@@ -64,10 +62,7 @@ const SignInContent = () => {
             onClick={toggleEmailSignIn}
             className="w-full border border-1 border-dark-gray px-20 py-3 rounded-full flex items-center justify-center relative text-sm font-bold"
           >
-            <MdOutlineEmail
-              className="absolute left-5 top-2/4 -translate-y-2/4"
-              size={20}
-            />
+            <MdOutlineEmail className="absolute left-5 top-2/4 -translate-y-2/4" size={20} />
             이메일로 로그인
           </button>
           <div className="my-5">
@@ -99,11 +94,7 @@ const SignInContent = () => {
             <p className="text-dark-gray text-xs">
               아직 계정이 없으신가요?
               <DialogClose asChild>
-                <Link
-                  href="/signup"
-                  className="text-font-color ml-1"
-                  onClick={onClickSignUp}
-                >
+                <Link href="/signup" className="text-font-color ml-1" onClick={onClickSignUp}>
                   회원가입하기
                 </Link>
               </DialogClose>
@@ -113,12 +104,9 @@ const SignInContent = () => {
       ) : (
         <div className="w-full max-w-[380px] py-5">
           <button onClick={toggleEmailSignIn} className="absolute top-5 left-5">
-            <IoIosArrowBack
-              size={25}
-              className="text-[#5e5e5e] hover:text-font-color"
-            />
+            <IoIosArrowBack size={25} className="text-[#5e5e5e] hover:text-font-color" />
           </button>
-          <SignInEmail />
+          <SignInEmail redirectPath={null} />
         </div>
       )}
     </div>

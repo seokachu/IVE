@@ -5,8 +5,7 @@ const AddressRecipient = () => {
   return (
     <div className="mb-10">
       <Label htmlFor="recipient-name" className="block mb-2">
-        받는 분
-        <span className="translate-y-[3px] inline-block text-red ml-1">*</span>
+        받는 분<span className="translate-y-[3px] inline-block text-red ml-1">*</span>
       </Label>
       <RHFInput
         type="text"

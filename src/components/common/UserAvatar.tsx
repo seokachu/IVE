@@ -10,19 +10,12 @@ interface AvatarProps {
   className?: string;
 }
 
-const UserAvatar = ({
-  userId,
-  avatarUrl,
-  userName,
-  size = "md",
-  className,
-}: AvatarProps) => {
+const UserAvatar = ({ userId, avatarUrl, userName, size = "md", className }: AvatarProps) => {
   const session = useRecoilValue(sessionState);
 
   const getUserImage = () => {
     if (!userId) return session?.user.user_metadata.avatar_url;
-    if (session?.user.id === userId)
-      return session?.user.user_metadata.avatar_url;
+    if (session?.user.id === userId) return session?.user.user_metadata.avatar_url;
     return avatarUrl || undefined;
   };
 
@@ -45,14 +38,8 @@ const UserAvatar = ({
 
   return (
     <Avatar className={`border ${sizeStyles[size]} ${className || ""}`}>
-      <AvatarImage
-        src={imageUrl}
-        alt={displayName || "유저 프로필"}
-        key={avatarUrl}
-      />
-      <AvatarFallback className={`text-xs ${sizeStyles[size]}`}>
-        {displayName || "유저 프로필"}
-      </AvatarFallback>
+      <AvatarImage src={imageUrl} alt={displayName || "유저 프로필"} key={avatarUrl} />
+      <AvatarFallback className={`text-xs ${sizeStyles[size]}`}>{displayName || "유저 프로필"}</AvatarFallback>
     </Avatar>
   );
 };

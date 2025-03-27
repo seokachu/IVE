@@ -37,12 +37,10 @@ const FirstLogin = () => {
         <h2 className="relative w-[100px] h-auto my-5">
           <Image src={LogoImage} alt="logo image" className="fill" />
         </h2>
-        <h3 className="text-xl font-bold mb-1">
-          회원이 되신 것을 축하드립니다!
-        </h3>
+        <h3 className="text-xl font-bold mb-1">회원이 되신 것을 축하드립니다!</h3>
         <p>함께 응원하고, 소중한 순간들을 나눠보세요.</p>
       </div>
-      <SignInEmail />
+      <SignInEmail redirectPath="/" />
     </>
   );
 };

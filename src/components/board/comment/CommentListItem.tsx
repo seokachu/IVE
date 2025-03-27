@@ -1,20 +1,20 @@
-import Image from 'next/image';
-import DefaultImage from '@/assets/images/default_image.avif';
-import { AiOutlineLike } from 'react-icons/ai';
-import { AiFillLike } from 'react-icons/ai';
-import ActionButton from '@/components/common/button/ActionButton';
-import { useDeleteComment, useRepliesCommentList } from '@/hooks/queries/useComment';
-import { formatDate } from '@/utils/formatDate';
-import BoardActionButton from '../BoardActionButton';
-import { useRecoilValue } from 'recoil';
-import { sessionState } from '@/store';
-import { toast } from '@/hooks/use-toast';
-import { useState } from 'react';
-import CommentForm from './CommentForm';
-import { PiArrowBendDownRightBold } from 'react-icons/pi';
-import useAuthGuard from '@/hooks/useAuthGuard';
-import { useCommentLikeStatus, useToggleCommentLike } from '@/hooks/queries/useLike';
-import type { CommentListItemProps } from '@/types/board';
+import Image from "next/image";
+import DefaultImage from "@/assets/images/default_image.avif";
+import { AiOutlineLike } from "react-icons/ai";
+import { AiFillLike } from "react-icons/ai";
+import ActionButton from "@/components/common/button/ActionButton";
+import { useDeleteComment, useRepliesCommentList } from "@/hooks/queries/useComment";
+import { formatDate } from "@/utils/formatDate";
+import BoardActionButton from "../BoardActionButton";
+import { useRecoilValue } from "recoil";
+import { sessionState } from "@/store";
+import { toast } from "@/hooks/use-toast";
+import { useState } from "react";
+import CommentForm from "./CommentForm";
+import { PiArrowBendDownRightBold } from "react-icons/pi";
+import useAuthGuard from "@/hooks/useAuthGuard";
+import { useCommentLikeStatus, useToggleCommentLike } from "@/hooks/queries/useLike";
+import type { CommentListItemProps } from "@/types/board";
 
 const CommentListItem = ({ item, boardId, activeEditId, handleEditChange }: CommentListItemProps) => {
   const session = useRecoilValue(sessionState);
@@ -31,7 +31,7 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange }: Comm
   const onClickDelete = () => {
     deleteComment();
     toast({
-      title: '댓글이 삭제 되었습니다.',
+      title: "댓글이 삭제 되었습니다.",
     });
   };
 
@@ -54,7 +54,7 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange }: Comm
     toggleCommentLike(undefined, {
       onSuccess: (newStatus) => {
         toast({
-          title: newStatus ? '좋아요를 눌렀습니다.' : '좋아요가 취소되었습니다.',
+          title: newStatus ? "좋아요를 눌렀습니다." : "좋아요가 취소되었습니다.",
         });
       },
     });
@@ -79,14 +79,14 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange }: Comm
               <time className="text-dark-gray">{formatDate(item?.created_at)}</time>
             </div>
             {isAuthor && (
-              <BoardActionButton onDelete={onClickDelete} onEdit={onClickEdit} mode={isEditing ? 'edit' : 'default'} />
+              <BoardActionButton onDelete={onClickDelete} onEdit={onClickEdit} mode={isEditing ? "edit" : "default"} />
             )}
           </div>
           {isEditing ? (
             <div className="my-3">
               <CommentForm
                 mode="edit"
-                type={item.parent_id ? 'reply' : 'comment'}
+                type={item.parent_id ? "reply" : "comment"}
                 initialContent={item.content}
                 commentId={item.id}
                 onSuccess={() => handleEditChange(null)}
@@ -104,14 +104,14 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange }: Comm
                         disabled={isPending}
                         variant="default"
                         className={`border-none flex items-center gap-[2px] hover:text-purple ${
-                          isCommentLiked ? 'text-purple' : ''
+                          isCommentLiked ? "text-purple" : ""
                         }`}
                       >
                         {!isCommentLiked ? <AiOutlineLike size={15} /> : <AiFillLike size={15} />}
                         <span>{item?.likes[0]?.count || 0}</span>
                       </ActionButton>
                       <ActionButton onClick={onClickReplies} variant="default" className="border-none">
-                        {!showReplyForm ? '답변' : '닫기'}
+                        {!showReplyForm ? "답변" : "닫기"}
                       </ActionButton>
                     </>
                   )}

@@ -9,9 +9,7 @@ const ContactInfo = () => {
       <fieldset>
         <legend className="block mb-2 text-sm">
           휴대폰 번호
-          <span className="translate-y-[3px] inline-block text-red ml-1">
-            *
-          </span>
+          <span className="translate-y-[3px] inline-block text-red ml-1">*</span>
         </legend>
         <div className="flex gap-3 items-start">
           <div className="w-1/3">

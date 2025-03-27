@@ -1,5 +1,5 @@
-import { formatPrice } from '@/utils/calculateDiscount';
-import type { OrderPriceSummaryProps } from '@/types/cart';
+import { formatPrice } from "@/utils/calculateDiscount";
+import type { OrderPriceSummaryProps } from "@/types/cart";
 
 const OrderPriceSummary = ({
   totalDiscountedPrice,

@@ -1,6 +1,6 @@
-import ActionButton from '@/components/common/button/ActionButton';
-import { RHFInput } from '@/components/common/RHFInput';
-import type { AddressLocationProps } from '@/types/mypage';
+import ActionButton from "@/components/common/button/ActionButton";
+import { RHFInput } from "@/components/common/RHFInput";
+import type { AddressLocationProps } from "@/types/mypage";
 
 const AddressLocation = ({ searchAddress, detailAddress }: AddressLocationProps) => {
   return (

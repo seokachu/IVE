@@ -27,24 +27,15 @@ const AddToCartDrawer = ({ isOpen, onClose }: CartDrawerProps) => {
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>장바구니에 상품이 담겼습니다.</DrawerTitle>
-          <DrawerDescription className="sr-only">
-            장바구니 영역
-          </DrawerDescription>
+          <DrawerDescription className="sr-only">장바구니 영역</DrawerDescription>
         </DrawerHeader>
         <DrawerFooter className="flex flex-row pb-10">
-          <ActionButton
-            variant="outline"
-            onClick={onClickCart}
-            className="w-full lg:w-2/4 py-3 text-center"
-          >
+          <ActionButton variant="outline" onClick={onClickCart} className="w-full lg:w-2/4 py-3 text-center">
             장바구니 보기
           </ActionButton>
           <div className="w-full lg:w-2/4">
             <DrawerClose asChild>
-              <ActionButton
-                variant="primary"
-                className="w-full py-3 text-center"
-              >
+              <ActionButton variant="primary" className="w-full py-3 text-center">
                 계속 쇼핑하기
               </ActionButton>
             </DrawerClose>

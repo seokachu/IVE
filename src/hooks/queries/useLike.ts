@@ -1,10 +1,10 @@
-import { getCommentLikeStatus, getLikeStatus, toggleBoardLike, toggleCommentLike } from '@/lib/supabase/like';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { getCommentLikeStatus, getLikeStatus, toggleBoardLike, toggleCommentLike } from "@/lib/supabase/like";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 //자유게시판 좋아요 상태 조회
 export const useLikeStatus = (boardId: number, userId?: string) => {
   return useQuery({
-    queryKey: ['boards', 'like', boardId, userId],
+    queryKey: ["boards", "like", boardId, userId],
     queryFn: () => getLikeStatus(boardId, userId),
     enabled: !!userId,
     staleTime: 0,
@@ -18,7 +18,7 @@ export const useToggleLike = (boardId: number, userId?: string) => {
     mutationFn: () => toggleBoardLike(boardId, userId!),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['boards'],
+        queryKey: ["boards"],
       });
     },
   });
@@ -27,7 +27,7 @@ export const useToggleLike = (boardId: number, userId?: string) => {
 //자유게시판 댓글 좋아요 상태 조회
 export const useCommentLikeStatus = (commentId: number, userId?: string) => {
   return useQuery({
-    queryKey: ['comments', 'like', commentId, userId],
+    queryKey: ["comments", "like", commentId, userId],
     queryFn: () => getCommentLikeStatus(commentId, userId),
     enabled: !!userId,
     staleTime: 0,
@@ -41,7 +41,7 @@ export const useToggleCommentLike = (commentId: number, userId?: string) => {
     mutationFn: () => toggleCommentLike(commentId, userId!),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['comments'],
+        queryKey: ["comments"],
       });
     },
   });
