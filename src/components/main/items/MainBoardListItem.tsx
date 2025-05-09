@@ -25,8 +25,8 @@ const MainBoardListItem = ({ item }: MainBoardListItemProps) => {
             src={imageSrc}
             alt={item.title || "게시글 이미지"}
             className="object-cover w-[70px] h-[70px] lg:w-[100px] lg:h-[100px]"
-            width={500}
-            height={500}
+            width={100}
+            height={100}
           />
         </div>
         <div className="flex flex-col gap-2 w-2/3">
@@ -39,7 +39,9 @@ const MainBoardListItem = ({ item }: MainBoardListItemProps) => {
             </p>
             <div className="flex gap-1 items-center translate-y-[2px]">
               <BiCommentDots size={20} />
-              <p className="-translate-y-[2px]">{item.board_comments[0]?.count || 0}</p>
+              <p className="-translate-y-[2px]">
+                {item.board_comments[0]?.count || 0}
+              </p>
             </div>
           </div>
         </div>

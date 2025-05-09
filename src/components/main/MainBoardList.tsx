@@ -19,7 +19,13 @@ const MainBoardList = () => {
 
   if (isError) return <Error />;
 
-  return <ul className="flex flex-wrap">{boards?.map((item) => <MainBoardListItem key={item.id} item={item} />)}</ul>;
+  return (
+    <ul className="flex flex-wrap">
+      {boards?.map((item) => (
+        <MainBoardListItem key={item.id} item={item} />
+      ))}
+    </ul>
+  );
 };
 
 export default MainBoardList;
