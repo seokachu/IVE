@@ -16,6 +16,7 @@ export const useMainRecentBoards = () => {
   return useQuery({
     queryKey: ["boards"],
     queryFn: getMainRecentBoards,
+    staleTime: 60 * 1000,
   });
 };
 
@@ -34,7 +35,6 @@ export const useBoardDetail = (boardId: number | undefined) => {
     queryKey: ["boards", boardId],
     queryFn: () => getBoardDetail(boardId as number),
     enabled: !!boardId,
-    staleTime: 0,
   });
 };
 
@@ -125,5 +125,6 @@ export const useMyBoards = (userId?: string) => {
     queryKey: ["boards", userId],
     queryFn: () => getMyBoards(userId!),
     enabled: !!userId,
+    staleTime: 60 * 1000,
   });
 };

@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -12,8 +13,13 @@ import Error from "../common/error/Error";
 
 const AlbumList = () => {
   const { data: albums, isLoading, isError } = useAlbums();
+  const [isSwiperReady, setIsSwiperReady] = useState(false);
 
-  if (isLoading) return <AlbumListLoading />;
+  useEffect(() => {
+    setIsSwiperReady(true);
+  }, []);
+
+  if (isLoading || !isSwiperReady) return <AlbumListLoading />;
   if (isError) return <Error />;
 
   return (
