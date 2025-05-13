@@ -1,6 +1,9 @@
-import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
 import { getAlbums } from "@/lib/supabase/album";
-import { getCarouselShop } from "@/lib/supabase/shop";
 import AlbumSection from "@/components/main/AlbumSection";
 import VisualSection from "@/components/main/VisualSection";
 import BoardSection from "@/components/main/BoardSection";
@@ -14,16 +17,10 @@ export default async function Home() {
   const queryClient = new QueryClient();
 
   //데이터 prefetch
-  await Promise.all([
-    queryClient.prefetchQuery({
-      queryKey: ["albums"],
-      queryFn: getAlbums,
-    }),
-    queryClient.prefetchQuery({
-      queryKey: ["shops", "carousel"],
-      queryFn: getCarouselShop,
-    }),
-  ]);
+  await queryClient.prefetchQuery({
+    queryKey: ["albums"],
+    queryFn: getAlbums,
+  });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
