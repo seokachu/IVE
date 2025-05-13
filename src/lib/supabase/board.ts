@@ -2,22 +2,14 @@ import { supabase } from "@/lib/supabase/client";
 import { PAGINATION } from "@/utils/constants";
 import type { BoardInsert } from "@/types";
 import type { BoardWithRelations } from "@/types/board";
+import { extractFirstImage } from "@/utils/extractImage";
 
 //메인페이지 게시글 목록 가져오기
 export const getMainRecentBoards = async () => {
   try {
     const { data, error } = await supabase
-      .from("board")
-      .select(
-        `
-      *,
-      user!inner(
-          id,
-          name
-        ),
-      board_comments!board_comments_board_id_fkey(count)
-      `,
-      )
+      .from("board_with_meta")
+      .select("*")
       .order("created_at", { ascending: false })
       .limit(6);
 
@@ -25,7 +17,9 @@ export const getMainRecentBoards = async () => {
     return data;
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(`메인페이지 게시글 목록을 가져오는데 실패했습니다. ${error.message}`);
+      throw new Error(
+        `메인페이지 게시글 목록을 가져오는데 실패했습니다. ${error.message}`
+      );
     }
     throw error;
   }
@@ -40,15 +34,9 @@ export const getBoardListByPage = async ({
   search?: string;
 }): Promise<{ data: BoardWithRelations[]; count: number }> => {
   try {
-    let query = supabase.from("board").select(
-      `
-        *,
-        board_comments!board_comments_board_id_fkey(count),
-        board_likes(count),
-        user!inner(id, name, avatar_url)
-      `,
-      { count: "exact" },
-    );
+    let query = supabase
+      .from("board_with_meta")
+      .select("*", { count: "exact" });
 
     // 검색어가 있으면 제목 필터링
     if (search && search.trim() !== "") {
@@ -56,14 +44,19 @@ export const getBoardListByPage = async ({
     }
 
     const { data, error, count } = await query
-      .range((page - 1) * PAGINATION.BOARD.ITEMS_PER_PAGE, page * PAGINATION.BOARD.ITEMS_PER_PAGE - 1)
+      .range(
+        (page - 1) * PAGINATION.BOARD.ITEMS_PER_PAGE,
+        page * PAGINATION.BOARD.ITEMS_PER_PAGE - 1
+      )
       .order("created_at", { ascending: false });
 
     if (error) throw error;
     return { data: data || [], count: count || 0 };
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(`게시글 목록을 가져오는데 실패했습니다. ${error.message}`);
+      throw new Error(
+        `게시글 목록을 가져오는데 실패했습니다. ${error.message}`
+      );
     }
     throw error;
   }
@@ -83,7 +76,7 @@ export const getBoardDetail = async (boardId: number) => {
           ),
           board_comments!board_comments_board_id_fkey(count),
           board_likes(count)
-        `,
+        `
       )
       .eq("id", boardId)
       .single();
@@ -92,21 +85,29 @@ export const getBoardDetail = async (boardId: number) => {
     return data;
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(`게시글 목록을 가져오는데 실패했습니다. ${error.message}`);
+      throw new Error(
+        `게시글 목록을 가져오는데 실패했습니다. ${error.message}`
+      );
     }
     throw error;
   }
 };
 
 //게시글 추가하기
-export const createBoard = async ({ user_id, title, content }: Omit<BoardInsert, "created_at">) => {
+export const createBoard = async ({
+  user_id,
+  title,
+  content,
+}: Omit<BoardInsert, "created_at">) => {
   try {
+    const thumbnail = extractFirstImage(content ?? "");
     const { data, error } = await supabase
       .from("board")
       .insert({
         user_id,
         title,
         content,
+        thumbnail,
       })
       .select(
         `
@@ -115,7 +116,7 @@ export const createBoard = async ({ user_id, title, content }: Omit<BoardInsert,
             name,
             avatar_url
           )
-        `,
+        `
       )
       .single();
 
@@ -131,11 +132,16 @@ export const createBoard = async ({ user_id, title, content }: Omit<BoardInsert,
 };
 
 //게시글 수정
-export const updateBoard = async (boardId: number, { title, content }: Pick<BoardInsert, "title" | "content">) => {
+export const updateBoard = async (
+  boardId: number,
+  { title, content }: Pick<BoardInsert, "title" | "content">
+) => {
   try {
+    const thumbnail = extractFirstImage(content ?? "");
+
     const { data, error } = await supabase
       .from("board")
-      .update({ title, content })
+      .update({ title, content, thumbnail })
       .eq("id", boardId)
       .select(
         `
@@ -144,7 +150,7 @@ export const updateBoard = async (boardId: number, { title, content }: Pick<Boar
             name,
             avatar_url
           )
-        `,
+        `
       )
       .single();
 
@@ -204,7 +210,7 @@ export const getMyBoards = async (userId: string) => {
             name,
             avatar_url
           )
-        `,
+        `
       )
       .eq("user_id", userId)
       .order("created_at", { ascending: false });
@@ -214,7 +220,9 @@ export const getMyBoards = async (userId: string) => {
     return data;
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(`내가 쓴 게시글 목록을 가져오는데 실패했습니다. ${error.message}`);
+      throw new Error(
+        `내가 쓴 게시글 목록을 가져오는데 실패했습니다. ${error.message}`
+      );
     }
     throw error;
   }

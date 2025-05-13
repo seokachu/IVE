@@ -35,13 +35,11 @@ const MainBoardListItem = ({ item }: MainBoardListItemProps) => {
           </h3>
           <div className="flex gap-3 text-gray-400 text-sm">
             <p className="relative after:content-['•'] after:absolute after:left-[calc(100%+4px)] after:top-2/4 after:-translate-y-2/4">
-              {item.user.name}
+              {item.name}
             </p>
             <div className="flex gap-1 items-center translate-y-[2px]">
               <BiCommentDots size={20} />
-              <p className="-translate-y-[2px]">
-                {item.board_comments[0]?.count || 0}
-              </p>
+              <p className="-translate-y-[2px]">{item.comment_count}</p>
             </div>
           </div>
         </div>
