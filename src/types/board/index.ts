@@ -4,7 +4,9 @@ import type { Tables } from "../supabase";
 
 export type CommentMode = "create" | "edit";
 export type CommentType = "comment" | "reply";
-export type BoardWriteFormProps = CreateBoardWriteFormProps | EditBoardWriteFormProps;
+export type BoardWriteFormProps =
+  | CreateBoardWriteFormProps
+  | EditBoardWriteFormProps;
 export type ButtonMode = "default" | "edit";
 
 export interface BoardWithComment extends Tables<"board"> {
@@ -123,3 +125,8 @@ export type UpdateBoardParams = {
   title: string;
   content: string;
 };
+
+export interface BoardActionsProps {
+  onSearch: (value: string) => void;
+  onClickWrite: () => void;
+}
