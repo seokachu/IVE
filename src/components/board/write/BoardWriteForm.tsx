@@ -1,26 +1,31 @@
 "use client";
-import dynamic from "next/dynamic";
+
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import "react-quill/dist/quill.snow.css";
 import { toast } from "@/hooks/use-toast";
 import { RHFInput } from "@/components/common/RHFInput";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { boardDefaultValues, boardWriteSchema, BoardWriteType } from "@/hooks/user";
+import {
+  boardDefaultValues,
+  boardWriteSchema,
+  BoardWriteType,
+} from "@/hooks/user";
 import { Button } from "@/components/ui/button";
 import "@/styles/quill.css";
-import { useAddBoard, useBoardDetail, useUpdateBoard } from "@/hooks/queries/useBoard";
+import {
+  useAddBoard,
+  useBoardDetail,
+  useUpdateBoard,
+} from "@/hooks/queries/useBoard";
 import { useRecoilValue } from "recoil";
 import { sessionState } from "@/store";
-import BoardWriteSkeleton from "@/components/common/loading/BoardWriteSkeleton";
-import type { BoardWriteFormProps, EditBoardWriteFormProps } from "@/types/board";
-
-const ReactQuill = dynamic(async () => await import("react-quill"), {
-  ssr: false,
-  loading: () => <BoardWriteSkeleton />,
-});
+import QuillEditor from "../editor/QuillEditor";
+import type {
+  BoardWriteFormProps,
+  EditBoardWriteFormProps,
+} from "@/types/board";
 
 const BoardWriteForm = (props: BoardWriteFormProps) => {
   const session = useRecoilValue(sessionState);
@@ -28,16 +33,15 @@ const BoardWriteForm = (props: BoardWriteFormProps) => {
   const { mutate: addBoardList } = useAddBoard();
   const { mutate: editBoard } = useUpdateBoard();
 
-  const modules = {
-    toolbar: [[{ header: [1, 2, 3, false] }], ["bold", "italic", "underline"], ["image"]],
-  };
-
-  //수정 Mode 게시글 데이터 불러오기
-  const isEditMode = (props: BoardWriteFormProps): props is EditBoardWriteFormProps => {
+  const isEditMode = (
+    props: BoardWriteFormProps
+  ): props is EditBoardWriteFormProps => {
     return props.mode === "edit";
   };
 
-  const { data: boardData } = useBoardDetail(props.mode === "edit" ? props.boardId : undefined);
+  const { data: boardData } = useBoardDetail(
+    props.mode === "edit" ? props.boardId : undefined
+  );
 
   const form = useForm<BoardWriteType>({
     mode: "onChange",
@@ -53,6 +57,8 @@ const BoardWriteForm = (props: BoardWriteFormProps) => {
     formState: { errors, isValid, isSubmitting },
   } = form;
 
+  const contentValue = watch("content");
+
   useEffect(() => {
     if (isEditMode(props) && boardData) {
       reset({
@@ -63,13 +69,15 @@ const BoardWriteForm = (props: BoardWriteFormProps) => {
   }, [boardData, props, reset]);
 
   const onChangeContent = (value: string) => {
-    setValue("content", value === "<p><br></p>" ? "" : value);
-    trigger("content");
+    const newValue = value === "<p><br></p>" ? "" : value;
+    if (newValue !== contentValue) {
+      setValue("content", newValue);
+      trigger("content");
+    }
   };
 
   const onClickSubmit = async (data: BoardWriteType) => {
     try {
-      //이전 내용과 비교
       if (props.mode === "edit" && boardData) {
         const isContentSame = data.content === boardData.content;
         const isTitleSame = data.title === boardData.title;
@@ -113,7 +121,7 @@ const BoardWriteForm = (props: BoardWriteFormProps) => {
       if (error instanceof Error) {
         toast({
           title: "게시글 등록에 실패했습니다.",
-          description: error instanceof Error ? error.message : "알 수 없는 오류가 발생했습니다.",
+          description: error.message ?? "알 수 없는 오류가 발생했습니다.",
           variant: "destructive",
         });
         throw error.message;
@@ -135,18 +143,21 @@ const BoardWriteForm = (props: BoardWriteFormProps) => {
             />
           </div>
         </div>
-        <div className="overflow-hidden">
-          <ReactQuill
-            onChange={onChangeContent}
-            modules={modules}
-            value={watch("content")}
-            className={errors.content && "quill-error"}
-            placeholder="내용을 입력해 주세요."
-          />
-          {errors.content && <span className="text-destructive text-xs px-3">{errors.content.message}</span>}
-        </div>
-        <Button type="submit" disabled={!isValid || isSubmitting} className="w-full py-2 mt-5">
-          {isSubmitting ? "등록 중..." : props.mode === "create" ? "등록하기" : "수정하기"}
+        <QuillEditor
+          value={contentValue}
+          onChange={onChangeContent}
+          error={errors.content?.message}
+        />
+        <Button
+          type="submit"
+          disabled={!isValid || isSubmitting}
+          className="w-full py-2 mt-5"
+        >
+          {isSubmitting
+            ? "등록 중..."
+            : props.mode === "create"
+            ? "등록하기"
+            : "수정하기"}
         </Button>
       </form>
     </Form>

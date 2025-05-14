@@ -9,18 +9,17 @@ export type BoardWriteFormProps =
   | EditBoardWriteFormProps;
 export type ButtonMode = "default" | "edit";
 
-export interface BoardWithComment {
+export interface BoardComment {
   id: number;
   title: string;
   content: string;
-  created_at?: string;
   user_id: string;
   name: string;
-  avatar_url?: string;
   comment_count: number;
+  thumbnail: string;
 }
 
-export interface BoardWithRelations {
+export interface BoardSummary {
   id: number;
   title: string;
   created_at: string;
@@ -32,15 +31,24 @@ export interface BoardWithRelations {
   like_count: number;
 }
 
+export interface BoardWithRelations extends Tables<"board"> {
+  board_comments: [{ count: number }];
+  board_likes: [{ count: number }];
+  user: {
+    name: string;
+    avatar_url: string;
+  };
+}
+
 export interface BoardListItemProps {
-  item: BoardWithRelations;
+  item: BoardSummary;
   keyword?: string;
 }
 
 export interface BoardListProps {
   boards:
     | {
-        data: BoardWithRelations[];
+        data: BoardSummary[];
         count: number;
       }
     | undefined;
@@ -58,6 +66,10 @@ export interface BoardDetailContainerProps {
 }
 
 export interface BoardDetailProps {
+  item: BoardWithRelations;
+}
+
+export interface BoardLikeButtonProps {
   item: BoardWithRelations;
 }
 

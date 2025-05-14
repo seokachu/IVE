@@ -1,8 +1,8 @@
 import { supabase } from "@/lib/supabase/client";
 import { PAGINATION } from "@/utils/constants";
-import type { BoardInsert } from "@/types";
-import type { BoardWithRelations } from "@/types/board";
 import { extractFirstImage } from "@/utils/extractImage";
+import type { BoardInsert } from "@/types";
+import type { BoardSummary } from "@/types/board";
 
 //메인페이지 게시글 목록 가져오기
 export const getMainRecentBoards = async () => {
@@ -32,7 +32,7 @@ export const getBoardListByPage = async ({
 }: {
   page?: number;
   search?: string;
-}): Promise<{ data: BoardWithRelations[]; count: number }> => {
+}): Promise<{ data: BoardSummary[]; count: number }> => {
   try {
     let query = supabase
       .from("board_with_meta")
