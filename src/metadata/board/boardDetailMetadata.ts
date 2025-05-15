@@ -22,9 +22,9 @@ export const generateMetadata = async ({ params }: BoardDetailPageParams) => {
 
     if (!boardData) return fallbackMetadata;
 
-    //게시글 제목이 길 경우 최대 50자까지 자르기
+    //게시글 제목이 길 경우 최대 10자까지 자르기
     const title = truncate(boardData.title, {
-      length: 50,
+      length: 10,
       omission: "...",
     });
 

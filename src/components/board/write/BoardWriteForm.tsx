@@ -140,6 +140,7 @@ const BoardWriteForm = (props: BoardWriteFormProps) => {
               messageClassName="text-xs py-1 px-3"
               placeholder="제목을 입력해 주세요."
               className="py-1 rounded-sm w-full"
+              maxLength={100}
             />
           </div>
         </div>
