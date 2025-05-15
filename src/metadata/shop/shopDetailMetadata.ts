@@ -3,10 +3,10 @@ import type { ShopDetailPageParams } from "@/types/shop";
 
 const fallbackMetadata = {
   title: "굿즈샵 상세페이지 - IVE DIVE",
-  description: "IVE DIVE - 굿즈샵 샹세정보 페이지 입니다.",
+  description: "IVE DIVE - 굿즈샵 상세정보 페이지 입니다.",
   openGraph: {
     title: "굿즈샵 상세페이지 - IVE DIVE",
-    description: "IVE DIVE - 굿즈샵 샹세정보 페이지 입니다.",
+    description: "IVE DIVE - 굿즈샵 상세정보 페이지 입니다.",
     images: [
       "https://res.cloudinary.com/dknj7kdek/image/upload/v1737888335/og_nb8ueg.png",
     ],
@@ -31,8 +31,8 @@ export const generateMetadata = async ({ params }: ShopDetailPageParams) => {
         type: "website",
       },
     };
-  } catch (err) {
-    console.error("메타데이터 에러:", err);
+  } catch (error) {
+    console.error("메타데이터 에러:", error);
     return fallbackMetadata;
   }
 };
