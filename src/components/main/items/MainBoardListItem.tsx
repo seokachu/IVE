@@ -1,14 +1,12 @@
 import Image from "next/image";
 import { BiCommentDots } from "react-icons/bi";
 import DefaultImage from "@/assets/images/default_image.avif";
-import { extractFirstImage } from "@/utils/extractImage";
 import { useRouter } from "next/navigation";
 import type { MainBoardListItemProps } from "@/types/main";
 
 const MainBoardListItem = ({ item }: MainBoardListItemProps) => {
   const { push } = useRouter();
-  const firstImage = item.content ? extractFirstImage(item.content) : null;
-  const imageSrc = firstImage ? firstImage : DefaultImage;
+  const imageSrc = item.thumbnail ? item.thumbnail : DefaultImage;
 
   const handleBoardDetail = () => {
     push(`/board/${item.id}`);
@@ -23,10 +21,10 @@ const MainBoardListItem = ({ item }: MainBoardListItemProps) => {
         <div className="border overflow-hidden rounded-lg">
           <Image
             src={imageSrc}
-            alt={item.title || "게시글 이미지"}
+            alt={item.thumbnail || "게시글 이미지"}
             className="object-cover w-[70px] h-[70px] lg:w-[100px] lg:h-[100px]"
-            width={500}
-            height={500}
+            width={100}
+            height={100}
           />
         </div>
         <div className="flex flex-col gap-2 w-2/3">
@@ -35,11 +33,11 @@ const MainBoardListItem = ({ item }: MainBoardListItemProps) => {
           </h3>
           <div className="flex gap-3 text-gray-400 text-sm">
             <p className="relative after:content-['•'] after:absolute after:left-[calc(100%+4px)] after:top-2/4 after:-translate-y-2/4">
-              {item.user.name}
+              {item.name}
             </p>
             <div className="flex gap-1 items-center translate-y-[2px]">
               <BiCommentDots size={20} />
-              <p className="-translate-y-[2px]">{item.board_comments[0]?.count || 0}</p>
+              <p className="-translate-y-[2px]">{item.comment_count}</p>
             </div>
           </div>
         </div>

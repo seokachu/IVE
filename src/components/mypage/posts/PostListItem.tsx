@@ -45,7 +45,7 @@ const PostListItem = ({ item }: PostListItemProps) => {
         <div onClick={stopPropagation}>
           <ActionButton
             onClick={onClickCommentDetail}
-            variant="default"
+            variant="default" 
             className="px-3 py-2 flex flex-col items-center gap-1 bg-white group"
           >
             <strong className="font-bold">{item.board_comments[0]?.count || 0}</strong>

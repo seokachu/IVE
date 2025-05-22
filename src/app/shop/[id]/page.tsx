@@ -1,8 +1,8 @@
 import ProductAccordion from "@/components/shop/product/ProductAccordion";
 import ProductSection from "@/components/shop/product/ProductSection";
-import { shopDetailMetadata } from "@/metadata/shop/shopDetailMetadata";
+import { generateMetadata } from "@/metadata/shop/shopDetailMetadata";
 
-export const metadata = shopDetailMetadata;
+export { generateMetadata };
 
 const page = () => {
   return (
@@ -10,7 +10,9 @@ const page = () => {
       <ProductSection />
       <section className="w-full">
         <div>
-          <h2 className="text-lg lg:text-xl font-bold mb-5">자주 묻는 질문 FAQ</h2>
+          <h2 className="text-lg lg:text-xl font-bold mb-5">
+            자주 묻는 질문 FAQ
+          </h2>
           <ProductAccordion />
         </div>
       </section>

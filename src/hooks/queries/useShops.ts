@@ -28,7 +28,7 @@ export const useShopDetail = (id: string) => {
 export const useShopCarousel = () => {
   return useQuery({
     queryKey: ["shops", "carousel"],
-    queryFn: () => getCarouselShop(),
+    queryFn: getCarouselShop,
   });
 };
 

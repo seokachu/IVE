@@ -4,6 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 export const useAlbums = () => {
   return useQuery({
     queryKey: ["albums"],
-    queryFn: () => getAlbums(),
+    queryFn: getAlbums,
   });
 };

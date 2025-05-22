@@ -11,7 +11,7 @@ import { useAverageRating, useReviewCount } from "@/hooks/queries/useReviews";
 import type { ShopListItemProps } from "@/types/shop";
 
 const SHOP_STYLES = {
-  shop: "w-2/6 md:w-[calc(33.333%-0.9rem)] lg:w-[calc(25%-0.95rem)]  mb-7 md:mb-5",
+  shop: "w-2/6 md:w-[calc(33.333%-0.9rem)] lg:w-[calc(25%-0.95rem)] mb-7 md:mb-5",
   carousel: "w-full sm:border sm:p-4 sm:rounded-lg",
 } as const;
 

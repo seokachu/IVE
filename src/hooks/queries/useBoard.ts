@@ -24,7 +24,6 @@ export const useBoards = (page: number = 1, search?: string) => {
   return useQuery({
     queryKey: ["boards", page, search],
     queryFn: () => getBoardListByPage({ page, search }),
-    staleTime: 60 * 1000,
   });
 };
 
@@ -34,7 +33,6 @@ export const useBoardDetail = (boardId: number | undefined) => {
     queryKey: ["boards", boardId],
     queryFn: () => getBoardDetail(boardId as number),
     enabled: !!boardId,
-    staleTime: 0,
   });
 };
 
@@ -57,7 +55,8 @@ export const useUpdateBoard = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ boardId, title, content }: UpdateBoardParams) => updateBoard(boardId, { title, content }),
+    mutationFn: ({ boardId, title, content }: UpdateBoardParams) =>
+      updateBoard(boardId, { title, content }),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
         queryKey: ["boards", variables.boardId],
@@ -102,7 +101,11 @@ export const useIncrementViewCount = () => {
         if (!old) return old;
         return {
           ...old,
-          data: old.data.map((board) => (board.id === boardId ? { ...board, views: (board.views || 0) + 1 } : board)),
+          data: old.data.map((board) =>
+            board.id === boardId
+              ? { ...board, views: (board.views || 0) + 1 }
+              : board
+          ),
         };
       });
 
