@@ -19,6 +19,7 @@
 
 이 프로젝트는 아이브(IVE) 관련 정보를 제공하는 웹사이트로, 최신 소식, 갤러리, 자유게시판, 굿즈를 결제할 수 있도록 제공합니다.
 
+
 <br>
 <br>
 
@@ -28,6 +29,7 @@
   <tr>
     <th>Next.js</th>
     <th>TypeScript</th>
+    <th>Tailwind CSS</th>
     <th>Supabase</th>
     <th>Recoil</th>
     <th>Shadcn UI</th>
@@ -40,6 +42,9 @@
     </td>
     <td align="center">
       <img src="https://techstack-generator.vercel.app/ts-icon.svg" alt="icon" width="65" height="65" />
+    </td>
+     <td align="center">
+      <img src="https://github.com/user-attachments/assets/21eabe6d-8cfd-435e-b872-fed2d7032914" alt="icon" width="45" />
     </td>
     <td align="center">
       <img src="https://github.com/user-attachments/assets/6e168931-ee0d-4e90-8710-050dad01942f" alt="supabase icon" width="50" height="50" />

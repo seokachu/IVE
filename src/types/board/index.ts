@@ -4,15 +4,31 @@ import type { Tables } from "../supabase";
 
 export type CommentMode = "create" | "edit";
 export type CommentType = "comment" | "reply";
-export type BoardWriteFormProps = CreateBoardWriteFormProps | EditBoardWriteFormProps;
+export type BoardWriteFormProps =
+  | CreateBoardWriteFormProps
+  | EditBoardWriteFormProps;
 export type ButtonMode = "default" | "edit";
 
-export interface BoardWithComment extends Tables<"board"> {
-  user: {
-    id: string;
-    name: string;
-  };
-  board_comments: { count: number }[];
+export interface BoardComment {
+  id: number;
+  title: string;
+  content: string;
+  user_id: string;
+  name: string;
+  comment_count: number;
+  thumbnail: string;
+}
+
+export interface BoardSummary {
+  id: number;
+  title: string;
+  created_at: string;
+  views: number;
+  user_id: string;
+  name: string;
+  avatar_url: string;
+  comment_count: number;
+  like_count: number;
 }
 
 export interface BoardWithRelations extends Tables<"board"> {
@@ -25,14 +41,14 @@ export interface BoardWithRelations extends Tables<"board"> {
 }
 
 export interface BoardListItemProps {
-  item: BoardWithRelations;
+  item: BoardSummary;
   keyword?: string;
 }
 
 export interface BoardListProps {
   boards:
     | {
-        data: BoardWithRelations[];
+        data: BoardSummary[];
         count: number;
       }
     | undefined;
@@ -50,6 +66,10 @@ export interface BoardDetailContainerProps {
 }
 
 export interface BoardDetailProps {
+  item: BoardWithRelations;
+}
+
+export interface BoardLikeButtonProps {
   item: BoardWithRelations;
 }
 
@@ -123,3 +143,8 @@ export type UpdateBoardParams = {
   title: string;
   content: string;
 };
+
+export interface BoardActionsProps {
+  onSearch: (value: string) => void;
+  onClickWrite: () => void;
+}

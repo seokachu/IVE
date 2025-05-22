@@ -1,4 +1,4 @@
-import type { BoardWithComment } from "../board";
+import type { BoardComment } from "../board";
 import type { Tables } from "../supabase";
 
 export interface AlbumItemProps {
@@ -6,5 +6,5 @@ export interface AlbumItemProps {
 }
 
 export interface MainBoardListItemProps {
-  item: BoardWithComment;
+  item: BoardComment;
 }

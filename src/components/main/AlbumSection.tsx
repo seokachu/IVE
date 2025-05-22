@@ -8,7 +8,7 @@ const AlbumSection = () => {
     >
       <video
         className="h-full w-full object-cover absolute top-0 left-0"
-        src="https://res.cloudinary.com/dknj7kdek/video/upload/v1729011643/1110732_Animation_Blurred_3840x2160_diyuzd.mp4"
+        src="https://res.cloudinary.com/dknj7kdek/video/upload/f_auto,c_limit,q_auto:best/v1729011643/1110732_Animation_Blurred_3840x2160_diyuzd.mp4"
         autoPlay
         muted
         loop

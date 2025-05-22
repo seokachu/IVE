@@ -1,9 +1,9 @@
-import { boardDetailMetadata } from "@/metadata/board/boardDetailMetadata";
 import BoardDetailContainer from "@/components/board/detail/BoardDetailContainer";
 import GoTopButton from "@/components/common/button/GoTopButton";
+import { generateMetadata } from "@/metadata/board/boardDetailMetadata";
 import type { BoardDetailPageParams } from "@/types/board";
 
-export const metadata = boardDetailMetadata;
+export { generateMetadata };
 
 const page = ({ params }: BoardDetailPageParams) => {
   return (
