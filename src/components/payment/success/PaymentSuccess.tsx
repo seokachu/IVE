@@ -21,12 +21,18 @@ const PaymentSuccess = () => {
   const orderId = searchParams.get("orderId") as string;
   const paymentKey = searchParams.get("paymentKey");
   const amount = searchParams.get("amount");
-  const orderName = searchParams.get("orderName");
+  const orderName = localStorage.getItem("order_name") ?? "주문상품";
 
-  const { data: address } = useShippingAddress(session?.user.id);
+  const { data: address, isLoading: addressLoading } = useShippingAddress(
+    session?.user.id
+  );
 
   //결제 정보
-  const { data: payment, isLoading: paymentLoading, error: paymentError } = usePayment(orderId);
+  const {
+    data: payment,
+    isLoading: paymentLoading,
+    error: paymentError,
+  } = usePayment(orderId);
 
   //결제 처리
   const {
@@ -40,6 +46,7 @@ const PaymentSuccess = () => {
     orderName,
     address,
     payment,
+    addressLoading,
   });
 
   //주문 상품 조회
