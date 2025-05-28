@@ -5,7 +5,7 @@ import { agreementsState, selectedItemState, sessionState } from "@/store";
 import { formatPrice } from "@/utils/calculateDiscount";
 import { toast } from "@/hooks/use-toast";
 import { useCustomerInfo } from "@/hooks/queries/useCustomerInfo";
-import { randomOrderId } from "@/utils/randomOrderName";
+import { generateRandomOrderId } from "@/utils/randomOrderName";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
 import useAuthGuard from "@/hooks/useAuthGuard";
 import type { PaymentButtonProps } from "@/types/payment";
@@ -16,7 +16,7 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
   const selectedItems = useRecoilValue(selectedItemState);
   const { data: customerInfo } = useCustomerInfo(session?.user.id);
   const { data: customerAddress } = useShippingAddress(session?.user.id);
-  const orderId = randomOrderId;
+  const orderId = generateRandomOrderId();
   const { checkAuth } = useAuthGuard({
     title: "로그인이 필요합니다.",
     description: "로그인 후 결제할 수 있습니다.",
@@ -66,17 +66,17 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
     //결제 처리
     try {
       localStorage.setItem("checkout_items", JSON.stringify(selectedItems));
+      localStorage.setItem("order_name", orderName);
 
-      const tossPayments = await loadTossPayments(process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY!);
+      const tossPayments = await loadTossPayments(
+        process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY!
+      );
 
       await tossPayments.requestPayment("카드", {
         amount,
-        orderId: orderId,
+        orderId,
         orderName,
-        customerName: customerInfo.name,
-        successUrl: `${
-          window.location.origin
-        }/payment/success?orderId=${orderId}&amount=${amount}&orderName=${encodeURIComponent(orderName)}`,
+        successUrl: `${window.location.origin}/payment/success`,
         failUrl: `${window.location.origin}/payment/fail`,
       });
     } catch (error) {
@@ -98,7 +98,10 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
       variant="primary"
       className="flex items-baseline justify-center text-center w-full rounded-md py-2 bg-purple text-white"
     >
-      <strong className="text-lg lg:text-xl mr-[2px]">{formatPrice(amount)}</strong>원 결제하기
+      <strong className="text-lg lg:text-xl mr-[2px]">
+        {formatPrice(amount)}
+      </strong>
+      원 결제하기
     </ActionButton>
   );
 };
