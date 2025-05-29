@@ -3,7 +3,7 @@
 import { usePayment } from "@/hooks/queries/usePayment";
 import { useOrderItemsByOrderId } from "@/hooks/queries/useOrderItems";
 import Error from "@/components/common/error/Error";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { sessionState } from "@/store";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
@@ -21,7 +21,14 @@ const PaymentSuccess = () => {
   const orderId = searchParams.get("orderId") as string;
   const paymentKey = searchParams.get("paymentKey");
   const amount = searchParams.get("amount");
-  const orderName = localStorage.getItem("order_name") ?? "주문상품";
+  const [orderName, setOrderName] = useState("주문상품");
+
+  useEffect(() => {
+    const storedOrderName = localStorage.getItem("order_name");
+    if (storedOrderName) {
+      setOrderName(storedOrderName);
+    }
+  }, []);
 
   const { data: address, isLoading: addressLoading } = useShippingAddress(
     session?.user.id
