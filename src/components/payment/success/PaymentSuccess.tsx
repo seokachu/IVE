@@ -3,7 +3,7 @@
 import { usePayment } from "@/hooks/queries/usePayment";
 import { useOrderItemsByOrderId } from "@/hooks/queries/useOrderItems";
 import Error from "@/components/common/error/Error";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { sessionState } from "@/store";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
@@ -21,12 +21,25 @@ const PaymentSuccess = () => {
   const orderId = searchParams.get("orderId") as string;
   const paymentKey = searchParams.get("paymentKey");
   const amount = searchParams.get("amount");
-  const orderName = searchParams.get("orderName");
+  const [orderName, setOrderName] = useState("주문상품");
 
-  const { data: address } = useShippingAddress(session?.user.id);
+  useEffect(() => {
+    const storedOrderName = localStorage.getItem("order_name");
+    if (storedOrderName) {
+      setOrderName(storedOrderName);
+    }
+  }, []);
+
+  const { data: address, isLoading: addressLoading } = useShippingAddress(
+    session?.user.id
+  );
 
   //결제 정보
-  const { data: payment, isLoading: paymentLoading, error: paymentError } = usePayment(orderId);
+  const {
+    data: payment,
+    isLoading: paymentLoading,
+    error: paymentError,
+  } = usePayment(orderId);
 
   //결제 처리
   const {
@@ -40,6 +53,7 @@ const PaymentSuccess = () => {
     orderName,
     address,
     payment,
+    addressLoading,
   });
 
   //주문 상품 조회

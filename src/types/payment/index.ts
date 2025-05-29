@@ -1,7 +1,10 @@
 import type { Tables } from "@/types/supabase";
 import type { OrderItem } from "@/types/index";
 
-export type OrderItemInput = Omit<OrderItem, "created_at" | "id" | "is_confirmed">;
+export type OrderItemInput = Omit<
+  OrderItem,
+  "created_at" | "id" | "is_confirmed"
+>;
 
 export interface TossPaymentResponse {
   status: string;
@@ -46,6 +49,7 @@ export interface UsePaymentConfirmationProps {
   orderName: string | null;
   address?: Tables<"shipping_addresses">;
   payment?: Tables<"payments">;
+  addressLoading: boolean;
 }
 
 export interface UseCartCleanupParams {

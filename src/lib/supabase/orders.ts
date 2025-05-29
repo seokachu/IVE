@@ -51,34 +51,6 @@ export const getOrderDetail = async (orderId: string) => {
   }
 };
 
-//결제목록 삭제
-export const deleteOrderItems = async (itemIds: string[]) => {
-  try {
-    const { data, error } = await supabase.from("order_items").delete().in("id", itemIds);
-
-    if (error) throw error;
-    return data;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(`결제목록을 삭제하는데 실패했습니다.${error.message}`);
-    }
-  }
-};
-
-//결제목록 주문 전체 삭제
-export const deleteAllOrderItems = async (userId: string) => {
-  try {
-    const { data, error } = await supabase.from("order_items").delete().eq("user_id", userId);
-
-    if (error) throw error;
-    return data;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(`결제목록을 전체 삭제하는데 실패했습니다.${error.message}`);
-    }
-  }
-};
-
 //order 구매 확정 업데이트
 export const confirmOrderItem = async (itemId: string) => {
   try {

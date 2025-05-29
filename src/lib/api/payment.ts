@@ -1,17 +1,21 @@
 import axios from "axios";
 import { saveOrderItems } from "@/lib/supabase/orders";
 import { savePayment } from "@/lib/supabase/payment";
-import type { OrderItemInput, TossPaymentErrorResponse, TossPaymentResponse } from "@/types/payment";
+import type {
+  OrderItemInput,
+  TossPaymentErrorResponse,
+  TossPaymentResponse,
+} from "@/types/payment";
 import type { Tables } from "@/types/supabase";
 import type { CartItem } from "@/types/cart";
 
-const PAYMENT_URL = process.env.NEXT_PUBLIC_PAYMENT_CONFIRM_URL!;
+const PAYMENT_URL = "/api/payment/confirm";
 
 //Toss Payments API
 export const confirmTossPayment = async (
   paymentKey: string,
   orderId: string,
-  amount: number,
+  amount: number
 ): Promise<TossPaymentResponse> => {
   try {
     const { data } = await axios.post(
@@ -23,10 +27,9 @@ export const confirmTossPayment = async (
       },
       {
         headers: {
-          Authorization: `Basic ${btoa(`${process.env.NEXT_PUBLIC_TOSS_SECRET_KEY}:`)}`,
           "Content-Type": "application/json",
         },
-      },
+      }
     );
 
     return data;
@@ -34,17 +37,22 @@ export const confirmTossPayment = async (
     if (axios.isAxiosError(error) && error.response) {
       return {
         ...(error.response.data as TossPaymentErrorResponse),
-        message: error.response.data.message || "결제 처리 중 오류가 발생했습니다.",
+        message:
+          error.response.data.message || "결제 처리 중 오류가 발생했습니다.",
       };
     }
-    throw new Error(error instanceof Error ? error.message : "결제 처리 중 오류가 발생했습니다.");
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : "결제 처리 중 오류가 발생했습니다."
+    );
   }
 };
 
 //결제정보, 주문상품 정보 저장
 export const savePaymentData = async (
   paymentData: Partial<Tables<"payments">>,
-  orderItemsData: OrderItemInput[],
+  orderItemsData: OrderItemInput[]
 ): Promise<void> => {
   try {
     //순차적으로 저장
@@ -63,15 +71,20 @@ export const cartListItemsToOrderItems = (
   cartItems: CartItem[],
   checkoutItems: (string | CartItem)[],
   userId: string,
-  orderId: string,
+  orderId: string
 ) => {
   //바로구매 버튼과 장바구니 결제 필터링
   const filterCartByCheckoutItems = (item: CartItem) =>
-    checkoutItems.some((checkItem) => (typeof checkItem === "string" ? checkItem : checkItem.id) === item.id);
+    checkoutItems.some(
+      (checkItem) =>
+        (typeof checkItem === "string" ? checkItem : checkItem.id) === item.id
+    );
 
   const selectedCartItems: CartItem[] =
     cartItems.length === 0
-      ? checkoutItems.filter((item): item is CartItem => typeof item !== "string")
+      ? checkoutItems.filter(
+          (item): item is CartItem => typeof item !== "string"
+        )
       : cartItems.filter(filterCartByCheckoutItems);
 
   return selectedCartItems.map((item) => ({
@@ -99,14 +112,16 @@ export const createPaymentData = (
   orderId: string,
   amount: string,
   orderName: string | null,
-  address: Tables<"shipping_addresses">,
+  address: Tables<"shipping_addresses">
 ): Partial<Tables<"payments">> => {
   return {
     user_id: userId,
     order_id: orderId,
     amount: amount,
     order_name: orderName || "",
-    payment_method: paymentInfo.easyPay ? `${paymentInfo.easyPay.provider} 간편결제` : paymentInfo.method || "카드",
+    payment_method: paymentInfo.easyPay
+      ? `${paymentInfo.easyPay.provider} 간편결제`
+      : paymentInfo.method || "카드",
     status: "결제 완료",
     installment_months: paymentInfo.card?.installmentPlanMonths || 0,
     recipient_name: address.recipient_name,
