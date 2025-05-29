@@ -3,14 +3,17 @@ import { sessionState } from "@/store";
 import { getDiscountedPrice } from "@/utils/calculateDiscount";
 import { toast } from "@/hooks/use-toast";
 import { useCustomerInfo } from "@/hooks/queries/useCustomerInfo";
-import { randomOrderId } from "@/utils/randomOrderName";
+import { generateRandomOrderId } from "@/utils/randomOrderName";
 import { useRecoilValue } from "recoil";
 import ActionButton from "../common/button/ActionButton";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
 import useAuthGuard from "@/hooks/useAuthGuard";
 import type { DirectPaymentButtonProps } from "@/types/shop";
 
-const DirectPaymentButton = ({ product, quantity }: DirectPaymentButtonProps) => {
+const DirectPaymentButton = ({
+  product,
+  quantity,
+}: DirectPaymentButtonProps) => {
   const session = useRecoilValue(sessionState);
   const { data: customerInfo } = useCustomerInfo(session?.user.id);
   const { data: userAddress } = useShippingAddress(session?.user.id);
@@ -40,12 +43,17 @@ const DirectPaymentButton = ({ product, quantity }: DirectPaymentButtonProps) =>
     try {
       const discountedPrice = getDiscountedPrice(product);
       const amount = discountedPrice * quantity;
-      const orderId = randomOrderId;
+      const orderId = generateRandomOrderId();
 
       // 단일 상품 결제 정보 저장(성공 페이지에 넘겨줘야 함)
-      localStorage.setItem("checkout_items", JSON.stringify([{ ...product, quantity }]));
+      localStorage.setItem(
+        "checkout_items",
+        JSON.stringify([{ ...product, quantity }])
+      );
 
-      const tossPayments = await loadTossPayments(process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY!);
+      const tossPayments = await loadTossPayments(
+        process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY!
+      );
 
       await tossPayments.requestPayment("카드", {
         amount,
@@ -54,7 +62,9 @@ const DirectPaymentButton = ({ product, quantity }: DirectPaymentButtonProps) =>
         customerName: customerInfo?.name,
         successUrl: `${
           window.location.origin
-        }/payment/success?orderId=${orderId}&amount=${amount}&orderName=${encodeURIComponent(product.title)}`,
+        }/payment/success?orderId=${orderId}&amount=${amount}&orderName=${encodeURIComponent(
+          product.title
+        )}`,
         failUrl: `${window.location.origin}/payment/fail`,
       });
     } catch (error) {
@@ -72,7 +82,11 @@ const DirectPaymentButton = ({ product, quantity }: DirectPaymentButtonProps) =>
   };
 
   return (
-    <ActionButton onClick={handleDirectPayment} variant="primary" className="w-full py-3 text-center">
+    <ActionButton
+      onClick={handleDirectPayment}
+      variant="primary"
+      className="w-full py-3 text-center"
+    >
       구매하기
     </ActionButton>
   );
