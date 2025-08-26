@@ -1,6 +1,11 @@
+
+
+<img width="1920" height="960" alt="cover" src="https://github.com/user-attachments/assets/6f73587c-9a34-4944-9d83-7651281b7ea8" />
+
 # 프로젝트명 "IVE로 DIVE"
 
 <br/>
+
 
 배포 주소 : [배포 링크 이동하기](https://ive-three.vercel.app)
 
