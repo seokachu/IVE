@@ -3,7 +3,7 @@ import type { BoardListProps } from "@/types/board";
 
 const BoardList = ({ boards, keyword }: BoardListProps) => {
   return (
-    <ul>
+    <ul data-testid="board-list">
       {boards?.data?.map((item) => (
         <BoardListItem key={item.id} item={item} keyword={keyword} />
       ))}

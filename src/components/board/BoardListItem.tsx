@@ -59,6 +59,8 @@ const BoardListItem = ({ item, keyword }: BoardListItemProps) => {
     <li
       onClick={onClickBoardDetail}
       className="cursor-pointer first:border-t lg:first:border-t-0 lg:h-[50px] border-b"
+      data-testid="board-item"
+      data-detail-path={`/board/${item.id}`}
     >
       {/* Desktop */}
       <div className="hidden lg:flex text-center py-3 hover:bg-gray-50 items-center">

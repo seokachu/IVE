@@ -51,7 +51,10 @@ const ShopList = ({ sort }: SortProps) => {
 
   return (
     <>
-      <ul className="flex flex-wrap sm:gap-0 md:gap-5 md:justify-start">
+      <ul
+        className="flex flex-wrap sm:gap-0 md:gap-5 md:justify-start"
+        data-testid="shop-list"
+      >
         {items.map((el, index) => (
           <ShopListItem key={el.id} item={el} variant="shop" index={index} />
         ))}

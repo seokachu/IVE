@@ -56,7 +56,12 @@ const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
       <BoardDetailContent item={board} />
       <BoardLikeButton item={board} />
       <BoardDetailUserInfo item={board} />
-      <div ref={commentsRef} className="flex gap-4 mt-5 border-t pt-5 pb-5" id="comments">
+      <div
+        ref={commentsRef}
+        className="flex gap-4 mt-5 border-t pt-5 pb-5"
+        id="comments"
+        data-testid="board-comments"
+      >
         <p className="font-bold">댓글 {board?.board_comments[0]?.count || 0}개</p>
       </div>
       <CommentSection />
