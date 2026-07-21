@@ -3,14 +3,13 @@ import { useOrderItems } from "@/hooks/queries/useOrderItems";
 import { useRouter } from "next/navigation";
 import _ from "lodash";
 import OrderDetail from "@/components/mypage/order/OrderDetail";
-import { useRecoilValue } from "recoil";
-import { sessionState } from "@/store";
 import MyPageLoading from "@/components/common/loading/MyPageLoading";
 import type { OrderDetailPageProps } from "@/types/mypage";
+import { useSession } from "@/store/zustand";
 
 const OrderDetailPage = ({ params: { orderId } }: OrderDetailPageProps) => {
   const router = useRouter();
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const { data: orderItems, isLoading } = useOrderItems(session?.user?.id);
 
   if (isLoading) return <MyPageLoading />;

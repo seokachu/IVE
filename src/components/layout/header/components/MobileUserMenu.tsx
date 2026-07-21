@@ -1,12 +1,11 @@
 import Link from "next/link";
 import SignInModal from "../../../auth/modal/SignInModal";
 import { SheetClose } from "@/components/ui/sheet";
-import { useRecoilValue } from "recoil";
-import { sessionState } from "@/store";
 import CartIcon from "./CartIcon";
+import { useSession } from "@/store/zustand";
 
 const MobileUserMenu = () => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const navListStyle = "flex-1 hover:bg-zinc-400 h-full w-2/6 block border border-dark-gray group";
 
   const hoverStyle = "group-hover:[color:white]";

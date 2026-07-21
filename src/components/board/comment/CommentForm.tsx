@@ -2,17 +2,16 @@ import { useAddComment, useEditComment } from "@/hooks/queries/useComment";
 import { toast } from "@/hooks/use-toast";
 import useAuthGuard from "@/hooks/useAuthGuard";
 import { boardCommentSchema, BoardCommentType, boardDefaultValues } from "@/hooks/user";
-import { sessionState } from "@/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { useRecoilValue } from "recoil";
 import ThreadView from "./ThreadView";
 import type { CommentFormProps } from "@/types/board";
+import { useSession } from "@/store/zustand";
 
 const CommentForm = ({ mode, type, initialContent, commentId, onSuccess, parentId }: CommentFormProps) => {
   const { id: boardId } = useParams();
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const { checkAuth } = useAuthGuard();
   const { mutate: addComment } = useAddComment(Number(boardId));
   const { mutate: editComment } = useEditComment(Number(boardId));

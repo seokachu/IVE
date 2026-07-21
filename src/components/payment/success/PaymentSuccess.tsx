@@ -4,19 +4,18 @@ import { usePayment } from "@/hooks/queries/usePayment";
 import { useOrderItemsByOrderId } from "@/hooks/queries/useOrderItems";
 import Error from "@/components/common/error/Error";
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { sessionState } from "@/store";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
 import { useQueryClient } from "@tanstack/react-query";
 import PaymentSuccessLoading from "@/components/common/loading/PaymentSuccessLoading";
 import { useSearchParams } from "next/navigation";
 import PaymentSuccessView from "./PaymentSuccessView";
 import { usePaymentConfirmation } from "@/hooks/payment/usePaymentConfirmation";
+import { useSession } from "@/store/zustand";
 
 const PaymentSuccess = () => {
   const searchParams = useSearchParams();
   const queryClient = useQueryClient();
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
 
   const orderId = searchParams.get("orderId") as string;
   const paymentKey = searchParams.get("paymentKey");

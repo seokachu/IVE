@@ -1,8 +1,6 @@
 import SearchAddress from "./SearchAddress";
 import { Form } from "@/components/ui/form";
 import { AddressType } from "@/hooks/user";
-import { sessionState } from "@/store";
-import { useRecoilValue } from "recoil";
 import { useShippingAddresses } from "@/hooks/queries/useShippingAddress";
 import AddressRecipient from "./AddressRecipient";
 import AddressLocation from "./AddressLocation";
@@ -13,9 +11,10 @@ import { useAddressForm } from "@/hooks/useAddressForm";
 import { useAddressAPI } from "@/hooks/useAddressAPI";
 import { SubmitButton } from "./SubmitButton";
 import type { AddressFormProps } from "@/types/mypage";
+import { useSession } from "@/store/zustand";
 
 const AddressForm = ({ mode = "create", initialData, onClose }: AddressFormProps) => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const { data: addresses } = useShippingAddresses(session?.user?.id);
   const isFirstAddress = !addresses || addresses.length === 0; //첫번째 배송지 등록 여부
 

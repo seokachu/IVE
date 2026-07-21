@@ -1,10 +1,9 @@
 "use client";
-import { scrollState } from "@/store";
-import { useRecoilValue } from "recoil";
 import { cn } from "@/utils/utils";
+import { useIsScrolled } from "@/store/zustand";
 
 const VisualSection = () => {
-  const isScrolled = useRecoilValue(scrollState);
+  const isScrolled = useIsScrolled();
   const textStyle = "[text-shadow:_1px_3px_5px_rgb(0_0_0_/_0.3)] lg:text-xl";
 
   return (

@@ -6,8 +6,6 @@ import ActionButton from "@/components/common/button/ActionButton";
 import { useDeleteComment, useRepliesCommentList } from "@/hooks/queries/useComment";
 import { formatDate } from "@/utils/formatDate";
 import BoardActionButton from "../BoardActionButton";
-import { useRecoilValue } from "recoil";
-import { sessionState } from "@/store";
 import { toast } from "@/hooks/use-toast";
 import { useState } from "react";
 import CommentForm from "./CommentForm";
@@ -15,9 +13,10 @@ import { PiArrowBendDownRightBold } from "react-icons/pi";
 import useAuthGuard from "@/hooks/useAuthGuard";
 import { useCommentLikeStatus, useToggleCommentLike } from "@/hooks/queries/useLike";
 import type { CommentListItemProps } from "@/types/board";
+import { useSession } from "@/store/zustand";
 
 const CommentListItem = ({ item, boardId, activeEditId, handleEditChange }: CommentListItemProps) => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const [showReplyForm, setShowReplyForm] = useState(false);
   const { checkAuth } = useAuthGuard();
   const { mutate: deleteComment } = useDeleteComment(boardId, item.id, item.parent_id);

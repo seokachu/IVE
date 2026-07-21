@@ -6,18 +6,17 @@ import BoardLikeButton from "../BoardLikeButton";
 import BoardDetailHeader from "./BoardDetailHeader";
 import BoardDetailContent from "./BoardDetailContent";
 import Error from "@/components/common/error/Error";
-import { sessionState } from "@/store";
-import { useRecoilValue } from "recoil";
 import BoardDetailSkeleton from "@/components/common/loading/BoardDetailSkeleton";
 import { useRouter } from "next/navigation";
 import { toast } from "@/hooks/use-toast";
 import { useEffect, useRef } from "react";
 import type { BoardDetailContainerProps } from "@/types/board";
+import { useSession } from "@/store/zustand";
 
 const BoardDetailContainer = ({ boardId }: BoardDetailContainerProps) => {
   const commentsRef = useRef<HTMLDivElement>(null);
   const { push } = useRouter();
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const { data: board, isLoading, isError } = useBoardDetail(boardId);
   const { mutate: deleteBoard } = useDeleteBoard(board?.id);
 

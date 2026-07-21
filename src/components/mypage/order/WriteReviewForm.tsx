@@ -7,13 +7,12 @@ import InteractiveStars from "@/utils/InteractiveStars";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useAddOrderItemReview, useUpdateOrderItemReview } from "@/hooks/queries/useReviews";
-import { useRecoilValue } from "recoil";
-import { sessionState } from "@/store";
 import { toast } from "@/hooks/use-toast";
 import type { ReviewFormData, WriteReviewFormProps } from "@/types/mypage";
+import { useSession } from "@/store/zustand";
 
 const WriteReviewForm = ({ mode, reviewData, orderId, goodsId, onClose }: WriteReviewFormProps) => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const { mutate: addOrderItemReview } = useAddOrderItemReview();
   const { mutate: updateItemReview } = useUpdateOrderItemReview();
   const form = useForm<ReviewType>({

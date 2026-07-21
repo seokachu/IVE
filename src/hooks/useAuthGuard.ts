@@ -1,6 +1,5 @@
-import { sessionState } from "@/store";
-import { useRecoilValue } from "recoil";
 import { toast } from "./use-toast";
+import { useSession } from "@/store/zustand";
 
 interface useAuthGuardProps {
   title?: string;
@@ -8,7 +7,7 @@ interface useAuthGuardProps {
 }
 
 const useAuthGuard = (options?: useAuthGuardProps) => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
 
   const defaultOptions = {
     title: "로그인이 필요합니다.",

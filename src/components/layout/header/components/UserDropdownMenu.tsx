@@ -8,12 +8,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import { useRecoilValue } from "recoil";
-import { sessionState } from "@/store";
 import SignOutButton from "@/components/common/button/SignOutButton";
+import { useSession } from "@/store/zustand";
 
 const UserDropdownMenu = () => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
 
   return (
     <DropdownMenu>

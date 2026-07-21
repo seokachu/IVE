@@ -1,7 +1,5 @@
 "use client";
 import CartListItem from "./CartListItem";
-import { useRecoilState } from "recoil";
-import { cartState, selectedItemState } from "@/store";
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import useLoading from "@/hooks/useLoading";
@@ -9,12 +7,15 @@ import CartListLoading from "../common/loading/CartListLoading";
 import { toast } from "@/hooks/use-toast";
 import SelectionControl from "../common/select/SelectionControl";
 import { useShops } from "@/hooks/queries/useShops";
+import { useCartActions, useCartItems, useCheckoutActions, useSelectedItemIds } from "@/store/zustand";
 
 const CartList = () => {
   const { fetchNextPage, hasNextPage, isFetchingNextPage } = useShops("latest");
   const [mounted, setMounted] = useState(false);
-  const [cartItems, setCartItems] = useRecoilState(cartState);
-  const [selectedItems, setSelectedItems] = useRecoilState(selectedItemState);
+  const cartItems = useCartItems();
+  const selectedItems = useSelectedItemIds();
+  const { setCartItems } = useCartActions();
+  const { setSelectedItemIds: setSelectedItems } = useCheckoutActions();
   const { startLoading, stopLoading } = useLoading();
 
   //loading 처리

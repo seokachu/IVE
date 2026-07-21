@@ -1,12 +1,11 @@
 import CartIcon from "./CartIcon";
 import UserDropdownMenu from "./UserDropdownMenu";
-import { useRecoilValue } from "recoil";
-import { sessionState } from "@/store";
 import SignInModal from "@/components/auth/modal/SignInModal";
 import Link from "next/link";
+import { useSession } from "@/store/zustand";
 
 const UserMenu = () => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
 
   return (
     <nav className="hidden lg:block">

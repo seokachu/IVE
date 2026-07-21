@@ -5,15 +5,14 @@ import { RHFInput } from "@/components/common/RHFInput";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { useSaveCustomerInfo } from "@/hooks/queries/useCustomerInfo";
-import { useRecoilValue } from "recoil";
-import { sessionState } from "@/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { customerInfoSchema, CustomerInfoType } from "@/hooks/user";
 import type { CustomerInfoFormProps } from "@/types/cart";
+import { useSession } from "@/store/zustand";
 
 const CustomerInfoForm = ({ initialData, defaultValues, onSuccess }: CustomerInfoFormProps) => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const { mutate: saveCustomerInfo } = useSaveCustomerInfo();
   const queryClient = useQueryClient();
 

@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRecoilValue } from "recoil";
-import { sessionState, cartState } from "@/store";
 import { useQueryClient } from "@tanstack/react-query";
 import { getPaymentByOrderId } from "@/lib/supabase/payment";
 import {
@@ -12,6 +10,7 @@ import {
   createPaymentData,
 } from "@/lib/api/payment";
 import useCartCleanup from "./useCartCleanup";
+import { useCartItems, useSession } from "@/store/zustand";
 import type { UsePaymentConfirmationProps } from "@/types/payment";
 import type { CartItem } from "@/types/cart";
 
@@ -25,8 +24,8 @@ export const usePaymentConfirmation = ({
   addressLoading,
 }: UsePaymentConfirmationProps) => {
   const queryClient = useQueryClient();
-  const session = useRecoilValue(sessionState);
-  const allCartItems = useRecoilValue(cartState);
+  const session = useSession();
+  const allCartItems = useCartItems();
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [checkoutItemsProcessed, setCheckoutItemsProcessed] = useState<

@@ -1,6 +1,7 @@
+"use client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useRecoilValue } from "recoil";
-import { sessionState } from "@/store";
+import { useSession } from "@/store/zustand";
 
 interface AvatarProps {
   userId?: string | null;
@@ -11,7 +12,7 @@ interface AvatarProps {
 }
 
 const UserAvatar = ({ userId, avatarUrl, userName, size = "md", className }: AvatarProps) => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
 
   const getUserImage = () => {
     if (!userId) return session?.user.user_metadata.avatar_url;

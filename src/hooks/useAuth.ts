@@ -1,15 +1,14 @@
 import axios from "axios";
-import { sessionState } from "@/store";
-import { useSetRecoilState } from "recoil";
 import { supabase } from "@/lib/supabase/client";
 import { wishlistStorage } from "@/utils/wishlistStorage";
 import { addToWishList, checkedWishLists } from "@/lib/supabase/wishlist";
 import { useCallback, useRef } from "react";
 import { toast } from "./use-toast";
+import { useSessionActions } from "@/store/zustand";
 import type { Session } from "@supabase/supabase-js";
 
 export const useAuth = () => {
-  const setSession = useSetRecoilState(sessionState);
+  const { setSession } = useSessionActions();
   const isSyncing = useRef(false);
 
   const syncWishlist = async (session: Session) => {
