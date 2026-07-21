@@ -56,9 +56,9 @@ export interface BoardListProps {
 }
 
 export interface BoardDetailPageParams {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export interface BoardDetailContainerProps {
@@ -101,9 +101,9 @@ export interface BoardsResponse {
 }
 
 export interface EditPageParams {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 export interface CreateBoardWriteFormProps {
   mode: "create";

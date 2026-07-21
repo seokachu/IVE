@@ -29,9 +29,9 @@ export interface OrderSummaryProps {
 }
 
 export interface OrderDetailPageProps {
-  params: {
+  params: Promise<{
     orderId: string;
-  };
+  }>;
 }
 
 export interface OrderDetailProps {

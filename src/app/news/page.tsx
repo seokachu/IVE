@@ -13,7 +13,7 @@ import { getNewsGallery } from "@/lib/supabase/news";
 import { getGallery } from "@/lib/supabase/gallery";
 
 export const metadata = newsMetadata;
-export const revalidate = 60 * 60 * 24;
+export const revalidate = 86400;
 
 const page = async () => {
   const queryClient = new QueryClient();

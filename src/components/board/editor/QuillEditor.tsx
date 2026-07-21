@@ -1,11 +1,11 @@
-import "react-quill/dist/quill.snow.css";
+import "react-quill-new/dist/quill.snow.css";
 import { useMemo } from "react";
 import dynamic from "next/dynamic";
 import BoardWriteSkeleton from "@/components/common/loading/BoardWriteSkeleton";
 import { getQuillModules } from "./getQuillModules";
 
 // ReactQuill은 SSR이 안 되므로 dynamic import로 처리
-const ReactQuill = dynamic(async () => await import("react-quill"), {
+const ReactQuill = dynamic(async () => await import("react-quill-new"), {
   ssr: false,
   loading: () => <BoardWriteSkeleton />,
 });

@@ -5,11 +5,12 @@ import type { BoardDetailPageParams } from "@/types/board";
 
 export { generateMetadata };
 
-const page = ({ params }: BoardDetailPageParams) => {
+const page = async ({ params }: BoardDetailPageParams) => {
+  const { id } = await params;
   return (
     <main className="w-full min-h-screen">
       <section className="max-w-[1320px] m-auto px-5 pb-28 lg:px-8">
-        <BoardDetailContainer boardId={parseInt(params.id)} />
+        <BoardDetailContainer boardId={parseInt(id)} />
       </section>
       <GoTopButton />
     </main>

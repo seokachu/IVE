@@ -11,7 +11,7 @@ import GoodsPromoSection from "@/components/main/GoodsPromoSection";
 import ShopSection from "@/components/main/ShopSection";
 import GoTopButton from "@/components/common/button/GoTopButton";
 
-export const revalidate = 60 * 60 * 24;
+export const revalidate = 86400;
 
 export default async function Home() {
   const queryClient = new QueryClient();

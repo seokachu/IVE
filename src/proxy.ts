@@ -2,7 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   try {
     let res = NextResponse.next({ request });
     const supabase = createServerClient(
@@ -69,7 +69,7 @@ export async function middleware(request: NextRequest) {
     return res;
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(`Middleware Error : ${error.message}`);
+      throw new Error(`Proxy Error : ${error.message}`);
     }
 
     return NextResponse.next();

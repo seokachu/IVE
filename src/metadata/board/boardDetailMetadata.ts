@@ -17,7 +17,8 @@ export const fallbackMetadata = {
 
 export const generateMetadata = async ({ params }: BoardDetailPageParams) => {
   try {
-    const boardId = Number(params.id);
+    const { id } = await params;
+    const boardId = Number(id);
     const boardData = await getBoardDetail(boardId);
 
     if (!boardData) return fallbackMetadata;
