@@ -1,16 +1,35 @@
-import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
+import { createServerClient } from "@supabase/ssr";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
   try {
-    const res = NextResponse.next();
-    const supabase = createMiddlewareClient({ req: request, res });
-    const session = await supabase.auth.getSession();
+    let res = NextResponse.next({ request });
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() {
+            return request.cookies.getAll();
+          },
+          setAll(cookiesToSet) {
+            cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
+            res = NextResponse.next({ request });
+            cookiesToSet.forEach(({ name, value, options }) =>
+              res.cookies.set(name, value, options)
+            );
+          },
+        },
+      }
+    );
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
     // mypage 경로 보호
     if (request.nextUrl.pathname.startsWith("/mypage")) {
-      if (!session.data.session) {
+      if (!user) {
         return NextResponse.redirect(new URL("/login", request.url));
       }
     }
@@ -21,7 +40,7 @@ export async function middleware(request: NextRequest) {
       request.nextUrl.pathname.startsWith("/payment/fail")
     ) {
       //로그인 체크
-      if (!session.data.session) {
+      if (!user) {
         return NextResponse.redirect(new URL("/login", request.url));
       }
       //orderId 파라미터 체크
@@ -33,14 +52,14 @@ export async function middleware(request: NextRequest) {
 
     //회원가입 페이지
     if (request.nextUrl.pathname === "/signup") {
-      if (session.data.session) {
+      if (user) {
         return NextResponse.redirect(new URL("/", request.url));
       }
     }
 
     // 로그인 페이지
     if (request.nextUrl.pathname === "/login") {
-      if (session.data.session) {
+      if (user) {
         return NextResponse.redirect(new URL("/", request.url));
       }
       if (request.nextUrl.searchParams.get("form") === "signup" && !request.cookies.get("firstSignup")) {
