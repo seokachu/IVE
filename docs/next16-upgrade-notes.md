@@ -3,18 +3,14 @@
 `chore/upgrade-next16` 브랜치에서 Next 14.2 → 16.2.10, React 18 → 19.2 업그레이드 완료.
 빌드 · 타입체크 · lint · E2E(15/15) 통과. 상세 변경 내역은 git log 참고.
 
-## 폴더 이동 후 해야 할 일
+## Turbopack 한글 경로 이슈 (해결됨)
 
 프로젝트 경로에 한글(`IVE개인포폴`)이 있으면 Turbopack이 빌드 중 panic한다
 (turbopack-core/ident.rs char boundary 버그, 16.2.10 기준 재현).
-현재 package.json의 dev/build 스크립트에 `--webpack` 플래그로 우회 중.
-
-폴더를 ASCII 경로로 옮긴 뒤:
-
-1. `rm -rf .next node_modules && pnpm install` (캐시/절대경로 정리)
-2. package.json의 dev/build에서 `--webpack` 플래그 제거
-3. `pnpm build`로 Turbopack 빌드 확인 → 성공하면 커밋
-4. `pnpm test:e2e`로 회귀 확인
+한동안 dev/build 스크립트에 `--webpack` 플래그로 우회했으나,
+2026-07-21 프로젝트를 ASCII 경로(`Front-End/ive`)로 이동한 뒤
+플래그를 제거하고 Turbopack 빌드 + E2E(15/15) 통과 확인 완료.
+프로젝트 경로에 다시 비ASCII 문자를 넣지 말 것.
 
 ## 남은 정리 거리
 
