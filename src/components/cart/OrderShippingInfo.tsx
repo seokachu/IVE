@@ -1,13 +1,12 @@
 import { useRouter } from "next/navigation";
 import ActionButton from "../common/button/ActionButton";
-import { useRecoilValue } from "recoil";
-import { sessionState } from "@/store";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
 import EmptyStateMessage from "./EmptyStateMessage";
+import { useSession } from "@/store/zustand";
 
 const OrderShippingInfo = () => {
   const { push } = useRouter();
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const { data: shippingAddress } = useShippingAddress(session?.user.id);
 
   if (!session) {

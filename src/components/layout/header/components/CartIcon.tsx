@@ -1,8 +1,7 @@
 "use client";
-import { cartState } from "@/store";
+import { useCartItems } from "@/store/zustand";
 import { useEffect, useState } from "react";
 import { IoCartOutline } from "react-icons/io5";
-import { useRecoilState } from "recoil";
 
 interface CartIconProps {
   iconSize?: number;
@@ -18,7 +17,7 @@ const CartIcon = ({
   className = "",
 }: CartIconProps): JSX.Element => {
   const [mounted, setMounted] = useState(false);
-  const [cartItems] = useRecoilState(cartState);
+  const cartItems = useCartItems();
 
   const uniqueItemsCount = cartItems.length;
 

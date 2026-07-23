@@ -19,16 +19,15 @@ import {
   useBoardDetail,
   useUpdateBoard,
 } from "@/hooks/queries/useBoard";
-import { useRecoilValue } from "recoil";
-import { sessionState } from "@/store";
 import QuillEditor from "../editor/QuillEditor";
 import type {
   BoardWriteFormProps,
   EditBoardWriteFormProps,
 } from "@/types/board";
+import { useSession } from "@/store/zustand";
 
 const BoardWriteForm = (props: BoardWriteFormProps) => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const { push } = useRouter();
   const { mutate: addBoardList } = useAddBoard();
   const { mutate: editBoard } = useUpdateBoard();

@@ -1,20 +1,19 @@
 import { loadTossPayments } from "@tosspayments/payment-sdk";
-import { sessionState } from "@/store";
 import { getDiscountedPrice } from "@/utils/calculateDiscount";
 import { toast } from "@/hooks/use-toast";
 import { useCustomerInfo } from "@/hooks/queries/useCustomerInfo";
 import { generateRandomOrderId } from "@/utils/randomOrderName";
-import { useRecoilValue } from "recoil";
 import ActionButton from "../common/button/ActionButton";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
 import useAuthGuard from "@/hooks/useAuthGuard";
+import { useSession } from "@/store/zustand";
 import type { DirectPaymentButtonProps } from "@/types/shop";
 
 const DirectPaymentButton = ({
   product,
   quantity,
 }: DirectPaymentButtonProps) => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const { data: customerInfo } = useCustomerInfo(session?.user.id);
   const { data: userAddress } = useShippingAddress(session?.user.id);
   const { checkAuth } = useAuthGuard({

@@ -3,11 +3,10 @@ import Error from "@/components/common/error/Error";
 import MyPageLoading from "@/components/common/loading/MyPageLoading";
 import PostList from "@/components/mypage/posts/PostList";
 import { useMyBoards } from "@/hooks/queries/useBoard";
-import { sessionState } from "@/store";
-import { useRecoilValue } from "recoil";
+import { useSession } from "@/store/zustand";
 
 const PostPage = () => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const { data, isLoading, isError } = useMyBoards(session?.user?.id);
 
   if (isLoading) return <MyPageLoading title="내가 쓴 글" />;

@@ -70,7 +70,7 @@ export interface UseReviewsProps {
 }
 
 export interface ShopDetailPageParams {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }

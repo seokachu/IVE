@@ -3,16 +3,15 @@ import { FaArrowLeft } from "react-icons/fa";
 import DetailOrderItem from "./DetailOrderItem";
 import { formatDate } from "@/utils/formatDate";
 import OrderCustomerInfoItem from "@/components/cart/OrderCustomerInfoItem";
-import { useRecoilValue } from "recoil";
 import { useCustomerInfo } from "@/hooks/queries/useCustomerInfo";
-import { sessionState } from "@/store";
 import { usePayment } from "@/hooks/queries/usePayment";
 import PaymentOverview from "./PaymentOverview";
 import { useConfirmOrder } from "@/hooks/queries/useOrderItems";
 import type { OrderDetailProps } from "@/types/mypage";
+import { useSession } from "@/store/zustand";
 
 const OrderDetail = ({ orderItems, onBack }: OrderDetailProps) => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const { data: customerInfo } = useCustomerInfo(session?.user.id);
   const { data: payment } = usePayment(orderItems[0].order_id);
   const { mutate: confirmOrder } = useConfirmOrder();

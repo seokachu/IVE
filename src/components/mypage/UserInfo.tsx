@@ -1,6 +1,4 @@
 "use client";
-import { sessionState } from "@/store";
-import { useRecoilValue } from "recoil";
 import UserAvatar from "../common/UserAvatar";
 import Link from "next/link";
 import { MYPAGE_GNB_ARRAY } from "@/utils/constants";
@@ -19,9 +17,10 @@ import { PiUploadSimpleBold } from "react-icons/pi";
 import { useWishLists } from "@/hooks/queries/useWishList";
 import { useUpdateUserSession } from "@/hooks/useUpdateUserSession";
 import { useMyBoards } from "@/hooks/queries/useBoard";
+import { useSession } from "@/store/zustand";
 
 const UserInfo = () => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const pathname = usePathname();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [isEditingNickname, setIsEditingNickname] = useState(false);

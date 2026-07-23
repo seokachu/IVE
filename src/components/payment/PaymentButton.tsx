@@ -1,19 +1,18 @@
-import { useRecoilValue } from "recoil";
 import ActionButton from "../common/button/ActionButton";
 import { loadTossPayments } from "@tosspayments/payment-sdk";
-import { agreementsState, selectedItemState, sessionState } from "@/store";
 import { formatPrice } from "@/utils/calculateDiscount";
 import { toast } from "@/hooks/use-toast";
 import { useCustomerInfo } from "@/hooks/queries/useCustomerInfo";
 import { generateRandomOrderId } from "@/utils/randomOrderName";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
 import useAuthGuard from "@/hooks/useAuthGuard";
+import { useAgreements, useSelectedItemIds, useSession } from "@/store/zustand";
 import type { PaymentButtonProps } from "@/types/payment";
 
 const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
-  const session = useRecoilValue(sessionState);
-  const agreements = useRecoilValue(agreementsState);
-  const selectedItems = useRecoilValue(selectedItemState);
+  const session = useSession();
+  const agreements = useAgreements();
+  const selectedItems = useSelectedItemIds();
   const { data: customerInfo } = useCustomerInfo(session?.user.id);
   const { data: customerAddress } = useShippingAddress(session?.user.id);
   const orderId = generateRandomOrderId();

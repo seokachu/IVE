@@ -1,14 +1,13 @@
-import { useRecoilValue } from "recoil";
-import { sessionState } from "@/store";
 import { useCustomerInfo } from "@/hooks/queries/useCustomerInfo";
 import ActionButton from "../common/button/ActionButton";
 import { useState } from "react";
 import CustomerInfoForm from "./CustomerInfoForm";
 import EmptyStateMessage from "./EmptyStateMessage";
 import OrderCustomerInfoItem from "./OrderCustomerInfoItem";
+import { useSession } from "@/store/zustand";
 
 const OrderCustomerInfo = () => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const { data: customerInfo } = useCustomerInfo(session?.user.id);
   const [isEditing, setIsEditing] = useState(false);
 

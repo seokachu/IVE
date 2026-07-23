@@ -14,14 +14,14 @@ import LogoImage from "@/assets/images/logo_black.svg";
 import MobileNavigator from "./MobileNavigator";
 import MobileUserMenu from "./MobileUserMenu";
 import UserAvatar from "@/components/common/UserAvatar";
-import { sessionState } from "@/store";
-import { useRecoilValue } from "recoil";
 import SignOutButton from "@/components/common/button/SignOutButton";
 import { useRef } from "react";
 import Link from "next/link";
+import { useSession } from "@/store/zustand";
+
 
 const HeaderAside = () => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const closeRef = useRef<HTMLButtonElement>(null);
 
   const onSignOutSuccess = () => {

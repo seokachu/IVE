@@ -1,10 +1,9 @@
 "use client";
 
-import { sessionState } from "@/store";
 import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
 import { toast } from "@/hooks/use-toast";
 import { useAuth } from "./useAuth";
+import { useSession } from "@/store/zustand";
 
 interface AuthGuardProps {
   children: React.ReactNode;
@@ -12,7 +11,7 @@ interface AuthGuardProps {
 }
 
 const AuthGuard = ({ children, loadingComponent }: AuthGuardProps) => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const { initializeAuth } = useAuth();
   const [isInitialized, setIsInitialized] = useState(false);
 

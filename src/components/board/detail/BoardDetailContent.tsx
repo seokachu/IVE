@@ -1,4 +1,4 @@
-import "react-quill/dist/quill.snow.css";
+import "react-quill-new/dist/quill.snow.css";
 import "@/styles/quill.css";
 import type { BoardDetailProps } from "@/types/board";
 

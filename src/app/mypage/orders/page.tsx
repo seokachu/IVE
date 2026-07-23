@@ -1,14 +1,13 @@
 "use client";
 import { useOrderItems } from "@/hooks/queries/useOrderItems";
-import { sessionState } from "@/store";
-import { useRecoilValue } from "recoil";
+import { useSession } from "@/store/zustand";
 import _ from "lodash";
 import OrderSummary from "@/components/mypage/order/OrderSummary";
 import { getDiscountedPrice } from "@/utils/calculateDiscount";
 import MyPageLoading from "@/components/common/loading/MyPageLoading";
 
 const OrderListPage = () => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const { data: orderItems, isLoading, isSuccess } = useOrderItems(session?.user?.id);
 
   if (isLoading || !isSuccess) {

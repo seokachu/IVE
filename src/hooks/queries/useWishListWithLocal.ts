@@ -1,12 +1,11 @@
 import { addToWishList, checkedWishLists, removeWishList } from "@/lib/supabase/wishlist";
-import { sessionState } from "@/store";
+import { useSession } from "@/store/zustand";
 import { wishlistStorage } from "@/utils/wishlistStorage";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useRecoilValue } from "recoil";
 import { toast } from "../use-toast";
 
 const useWishListWithLocal = (productId: string) => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const queryClient = useQueryClient();
 
   const { data: isWished } = useQuery({

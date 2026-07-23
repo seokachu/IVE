@@ -49,6 +49,8 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
       className={`${SHOP_STYLES[variant]} md:border p-0 md:p-4 md:rounded-lg cursor-pointer md:hover:shadow-lg group`}
       tabIndex={0}
       aria-label={`상품: ${item.title}, 가격: ${item.price}원, 할인율: ${item.discount_rate}%`}
+      data-testid="shop-item"
+      data-detail-path={`/shop/${item.id}`}
     >
       <div className="relative w-full h-auto md:rounded-lg overflow-hidden aspect-square border">
         <Image

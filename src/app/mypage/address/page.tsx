@@ -1,13 +1,12 @@
 "use client";
 import AddressAddButton from "@/components/mypage/address/AddressAddButton";
 import { useShippingAddresses } from "@/hooks/queries/useShippingAddress";
-import { sessionState } from "@/store";
-import { useRecoilValue } from "recoil";
 import AddressList from "@/components/mypage/address/AddressList";
 import MyPageLoading from "@/components/common/loading/MyPageLoading";
+import { useSession } from "@/store/zustand";
 
 const AddressManagementPage = () => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const { data: addresses, isLoading, isSuccess } = useShippingAddresses(session?.user?.id);
 
   if (isLoading || !isSuccess) return <MyPageLoading title="배송지 관리" />;

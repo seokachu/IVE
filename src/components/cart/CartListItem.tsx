@@ -1,12 +1,11 @@
 import DefaultImage from "@/assets/images/default_image.avif";
-import { cartState, selectedItemState } from "@/store";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import Image from "next/image";
 import { useEffect, useId } from "react";
-import { useRecoilState } from "recoil";
 import QuantitySelector from "../common/QuantitySelector";
 import { toast } from "@/hooks/use-toast";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useCartActions, useCartItems, useCheckoutActions, useSelectedItemIds } from "@/store/zustand";
 import type { CartListItemProps } from "@/types/cart";
 
 const CartListItem = ({ item }: CartListItemProps) => {
@@ -14,8 +13,10 @@ const CartListItem = ({ item }: CartListItemProps) => {
   const { push } = useRouter();
   const searchParams = useSearchParams();
   const selectedParam = searchParams.get("selected");
-  const [selectedItems, setSelectedItems] = useRecoilState(selectedItemState);
-  const [cartItems, setCartItems] = useRecoilState(cartState);
+  const cartItems = useCartItems();
+  const selectedItems = useSelectedItemIds();
+  const { setCartItems } = useCartActions();
+  const { setSelectedItemIds: setSelectedItems } = useCheckoutActions();
   const isChecked = selectedItems.includes(item.id);
 
   const discountPrice = getDiscountedPrice(item);
@@ -145,7 +146,7 @@ const CartListItem = ({ item }: CartListItemProps) => {
           </div>
           <div className="lg:text-right flex-1">
             <span className="mr-1 text-purple font-bold">{item.discount_rate}%</span>
-            <s className="text-dark-gray text-sm mr-1 lg:mr-0 text-nowrap">{price}원</s>
+            <s className="text-dark-gray text-sm mr-1 lg:mr-0 text-nowrap">{formatPrice(price)}원</s>
             <strong>{formatPrice(totalDiscountPrice)}원</strong>
           </div>
         </div>

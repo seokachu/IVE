@@ -1,15 +1,14 @@
 import ActionButton from "@/components/common/button/ActionButton";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiFillLike } from "react-icons/ai";
-import { sessionState } from "@/store";
-import { useRecoilValue } from "recoil";
 import { toast } from "@/hooks/use-toast";
 import { useLikeStatus, useToggleLike } from "@/hooks/queries/useLike";
 import useAuthGuard from "@/hooks/useAuthGuard";
 import type { BoardLikeButtonProps } from "@/types/board";
+import { useSession } from "@/store/zustand";
 
 const BoardLikeButton = ({ item }: BoardLikeButtonProps) => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const userId = session?.user?.id;
 
   //좋아요 상태 query

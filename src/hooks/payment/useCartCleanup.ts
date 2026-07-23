@@ -1,12 +1,12 @@
 "use client";
 
-import { useRecoilState } from "recoil";
-import { cartState } from "@/store";
+import { useCartActions, useCartItems } from "@/store/zustand";
 import type { CartItem } from "@/types/cart";
 import type { UseCartCleanupParams } from "@/types/payment";
 
 export const useCartCleanup = ({ isPaymentComplete }: UseCartCleanupParams) => {
-  const [cartItems, setCartItems] = useRecoilState(cartState);
+  const cartItems = useCartItems();
+  const { setCartItems } = useCartActions();
 
   const cleanupCart = (checkoutItems: (string | CartItem)[]) => {
     if (!isPaymentComplete || !checkoutItems.length) return;
@@ -17,7 +17,7 @@ export const useCartCleanup = ({ isPaymentComplete }: UseCartCleanupParams) => {
         !checkoutItems.some((checkItem) => (typeof checkItem === "string" ? checkItem : checkItem.id) === item.id),
     );
 
-    //로컬 스토리지 & Recoil 상태 업데이트
+    //로컬 스토리지와 Zustand 상태 업데이트
     localStorage.setItem("shopping_cart", JSON.stringify(updatedCart));
     setCartItems(updatedCart);
 

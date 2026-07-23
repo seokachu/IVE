@@ -1,9 +1,8 @@
 import { supabase } from "@/lib/supabase/client";
-import { useRecoilState } from "recoil";
-import { sessionState } from "@/store";
+import { useSessionActions } from "@/store/zustand";
 
 export const useUpdateUserSession = () => {
-  const [, setSession] = useRecoilState(sessionState);
+  const { setSession } = useSessionActions();
 
   const updateUserAndRefresh = async (updateData: { data: { [key: string]: string } }) => {
     const { error } = await supabase.auth.updateUser(updateData);

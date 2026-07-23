@@ -2,13 +2,13 @@ import { signOut } from "@/lib/supabase/auth";
 import { toast } from "./use-toast";
 import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
-import { useResetRecoilState } from "recoil";
-import { cartState } from "@/store";
+import { useCartActions, useSessionActions } from "@/store/zustand";
 
 const useSignOut = (onSuccess?: () => void) => {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const resetCart = useResetRecoilState(cartState);
+  const { resetCart } = useCartActions();
+  const { clearSession } = useSessionActions();
 
   const handleSignOut = async () => {
     try {
@@ -23,6 +23,7 @@ const useSignOut = (onSuccess?: () => void) => {
 
       queryClient.invalidateQueries({ queryKey: ["wishlists"] });
       resetCart();
+      clearSession();
 
       onSuccess?.();
       router.refresh();

@@ -2,11 +2,10 @@
 import MyPageLoading from "@/components/common/loading/MyPageLoading";
 import UserWishList from "@/components/mypage/wishlist/UserWishList";
 import { useWishLists } from "@/hooks/queries/useWishList";
-import { sessionState } from "@/store";
-import { useRecoilValue } from "recoil";
+import { useSession } from "@/store/zustand";
 
 const WishListPage = () => {
-  const session = useRecoilValue(sessionState);
+  const session = useSession();
   const { data: wishlists, isLoading, isSuccess } = useWishLists(session?.user.id);
 
   if (isLoading || !isSuccess) return <MyPageLoading title="찜 목록" />;

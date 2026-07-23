@@ -9,18 +9,18 @@ import HeaderAside from "./components/HeaderAside";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { cn } from "@/utils/utils";
-import { scrollState } from "@/store";
-import { useRecoilState } from "recoil";
+import { useIsScrolled, useUiActions } from "@/store/zustand";
 import { throttle } from "lodash";
 
 const Header = () => {
   const pathname = usePathname();
   const isMainPage = pathname === "/";
-  const [isScrolled, setIsScrolled] = useRecoilState(scrollState);
+  const isScrolled = useIsScrolled();
+  const { setScrolled } = useUiActions();
 
   useEffect(() => {
-    setIsScrolled(!isMainPage);
-  }, [pathname, isMainPage, setIsScrolled]);
+    setScrolled(!isMainPage);
+  }, [pathname, isMainPage, setScrolled]);
 
   useEffect(() => {
     if (!isMainPage) return;
@@ -30,9 +30,9 @@ const Header = () => {
       if (secondSection) {
         const sectionTop = secondSection.getBoundingClientRect().top;
         if (sectionTop <= 30) {
-          setIsScrolled(true);
+          setScrolled(true);
         } else {
-          setIsScrolled(false);
+          setScrolled(false);
         }
       }
     }, 100);
@@ -42,7 +42,7 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
       handleScroll.cancel();
     };
-  }, [isMainPage, setIsScrolled]);
+  }, [isMainPage, setScrolled]);
 
   // 조건문 header logo
   const logoSrc = isMainPage ? (isScrolled ? SubLogoImage : LogoImage) : SubLogoImage;

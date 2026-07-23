@@ -1,6 +1,4 @@
 "use client";
-import { useRecoilState } from "recoil";
-import { cartState, selectedItemState } from "@/store";
 import { getDiscountedPrice } from "@/utils/calculateDiscount";
 import { useEffect, useState } from "react";
 import CartSummarySkeleton from "../common/loading/CartSummarySkeleton";
@@ -9,10 +7,11 @@ import OrderPriceSummary from "./OrderPriceSummary";
 import OrderCustomerInfo from "./OrderCustomerInfo";
 import OrderShippingInfo from "./OrderShippingInfo";
 import OrderAgreements from "./OrderAgreements";
+import { useCartItems, useSelectedItemIds } from "@/store/zustand";
 
 const CartSummary = () => {
-  const [cartItems] = useRecoilState(cartState);
-  const [selectedItems] = useRecoilState(selectedItemState);
+  const cartItems = useCartItems();
+  const selectedItems = useSelectedItemIds();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

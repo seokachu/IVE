@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { IoIosArrowUp } from "react-icons/io";
 import AgreementModal from "./AgreementModal";
-import { useRecoilState } from "recoil";
-import { agreementsState } from "@/store";
 import AgreementCheckbox from "./AgreementCheckbox";
+import { useAgreements, useCheckoutActions } from "@/store/zustand";
 import type { AgreementType, ModalType } from "@/types/cart";
 
 const OrderAgreements = () => {
-  const [agreements, setAgreements] = useRecoilState(agreementsState);
+  const agreements = useAgreements();
+  const { setAgreements } = useCheckoutActions();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedAgreement, setSelectedAgreement] = useState<ModalType>(null);
 

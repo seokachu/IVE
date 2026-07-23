@@ -16,7 +16,7 @@ const fallbackMetadata = {
 
 export const generateMetadata = async ({ params }: ShopDetailPageParams) => {
   try {
-    const shopId = params.id;
+    const { id: shopId } = await params;
     const shopData = await getGoodsShopDetail(shopId);
 
     if (!shopData) return fallbackMetadata;
