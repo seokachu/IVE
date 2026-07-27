@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     //요청한 댓글이 실제로 본인이 방금 작성한 댓글인지 검증
     const { data: comment } = await admin
       .from("board_comments")
-      .select("id, user_id, board_id, parent_id")
+      .select("id, user_id, board_id, parent_id, content")
       .eq("id", commentId)
       .single();
     if (!comment || comment.user_id !== user.id || comment.board_id !== boardId) {
@@ -89,13 +89,17 @@ export async function POST(request: Request) {
     const boardTitle = truncate(board.title ?? "게시글", { length: 15, omission: "..." });
     const origin = new URL(request.url).origin;
 
+    //내용 미리보기: 제목이 맥락을, 본문이 댓글 내용을 담는다.
+    //잠금화면 노출 여부는 OS의 민감한 알림 설정에 위임한다.
+    const contentPreview = truncate((comment.content ?? "").trim(), { length: 40, omission: "..." });
+
     const messages = tokens.map(({ token, user_id }) => ({
       to: token,
-      title: recipients.get(user_id) === "reply" ? "내 댓글에 답글이 달렸습니다" : "새 댓글이 달렸습니다",
-      body:
+      title:
         recipients.get(user_id) === "reply"
-          ? `${commenterName}님이 "${boardTitle}" 글의 회원님 댓글에 답글을 남겼습니다.`
-          : `${commenterName}님이 "${boardTitle}" 글에 댓글을 남겼습니다.`,
+          ? "내 댓글에 답글이 달렸습니다"
+          : `"${boardTitle}" 글에 새 댓글이 달렸습니다`,
+      body: contentPreview ? `${commenterName}: ${contentPreview}` : `${commenterName}님이 댓글을 남겼습니다.`,
       data: { url: `${origin}/board/${boardId}` },
     }));
 
