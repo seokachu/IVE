@@ -6,7 +6,7 @@ import { truncate } from "lodash";
 
 const EXPO_PUSH_URL = "https://exp.host/--/api/v2/push/send";
 
-//댓글 작성 시 게시글 작성자에게 푸시 알림 발송
+//댓글 작성 시 게시글 작성자(+대댓글이면 원댓글 작성자)에게 푸시 알림 발송
 export async function POST(request: Request) {
   try {
     const { boardId, commentId } = await request.json();
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     //요청한 댓글이 실제로 본인이 방금 작성한 댓글인지 검증
     const { data: comment } = await admin
       .from("board_comments")
-      .select("id, user_id, board_id")
+      .select("id, user_id, board_id, parent_id")
       .eq("id", commentId)
       .single();
     if (!comment || comment.user_id !== user.id || comment.board_id !== boardId) {
@@ -52,12 +52,34 @@ export async function POST(request: Request) {
     }
 
     const { data: board } = await admin.from("board").select("id, title, user_id").eq("id", boardId).single();
-    //본인 글에 단 댓글은 알림 제외
-    if (!board?.user_id || board.user_id === user.id) {
+    if (!board) {
+      return NextResponse.json({ error: "게시글을 찾을 수 없습니다." }, { status: 404 });
+    }
+
+    //수신자 결정: 글 작성자 + (대댓글이면) 원댓글 작성자. 본인은 제외하고,
+    //글 작성자와 원댓글 작성자가 같으면 더 구체적인 답글 알림 하나만 보낸다.
+    const recipients = new Map<string, "comment" | "reply">();
+    if (board.user_id && board.user_id !== user.id) {
+      recipients.set(board.user_id, "comment");
+    }
+    if (comment.parent_id) {
+      const { data: parentComment } = await admin
+        .from("board_comments")
+        .select("user_id")
+        .eq("id", comment.parent_id)
+        .single();
+      if (parentComment?.user_id && parentComment.user_id !== user.id) {
+        recipients.set(parentComment.user_id, "reply");
+      }
+    }
+    if (recipients.size === 0) {
       return NextResponse.json({ skipped: true });
     }
 
-    const { data: tokens } = await admin.from("push_tokens").select("token").eq("user_id", board.user_id);
+    const { data: tokens } = await admin
+      .from("push_tokens")
+      .select("token, user_id")
+      .in("user_id", [...recipients.keys()]);
     if (!tokens || tokens.length === 0) {
       return NextResponse.json({ skipped: true });
     }
@@ -67,10 +89,13 @@ export async function POST(request: Request) {
     const boardTitle = truncate(board.title ?? "게시글", { length: 15, omission: "..." });
     const origin = new URL(request.url).origin;
 
-    const messages = tokens.map(({ token }) => ({
+    const messages = tokens.map(({ token, user_id }) => ({
       to: token,
-      title: "새 댓글이 달렸습니다",
-      body: `${commenterName}님이 "${boardTitle}" 글에 댓글을 남겼습니다.`,
+      title: recipients.get(user_id) === "reply" ? "내 댓글에 답글이 달렸습니다" : "새 댓글이 달렸습니다",
+      body:
+        recipients.get(user_id) === "reply"
+          ? `${commenterName}님이 "${boardTitle}" 글의 회원님 댓글에 답글을 남겼습니다.`
+          : `${commenterName}님이 "${boardTitle}" 글에 댓글을 남겼습니다.`,
       data: { url: `${origin}/board/${boardId}` },
     }));
 
