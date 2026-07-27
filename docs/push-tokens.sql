@@ -7,6 +7,10 @@ create table if not exists public.push_tokens (
   updated_at timestamptz not null default now()
 );
 
+-- 알림 수신 설정 (마이페이지 토글). 기본값 true라 기존 동작에 영향 없음.
+alter table public.push_tokens
+  add column if not exists enabled boolean not null default true;
+
 alter table public.push_tokens enable row level security;
 
 -- 본인 토큰만 등록/수정/삭제 가능. 다른 사용자 토큰 조회는 서버(service role)에서만.

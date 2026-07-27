@@ -18,6 +18,7 @@ import { useWishLists } from "@/hooks/queries/useWishList";
 import { useUpdateUserSession } from "@/hooks/useUpdateUserSession";
 import { useMyBoards } from "@/hooks/queries/useBoard";
 import { useSession } from "@/store/zustand";
+import PushSettingRow from "./PushSettingRow";
 
 const UserInfo = () => {
   const session = useSession();
@@ -198,6 +199,7 @@ const UserInfo = () => {
           <strong>{wishlist}</strong>
         </div>
       </div>
+      <PushSettingRow />
       <ul className="flex lg:flex-col gap-5 border-b lg:border-b-0 pb-5 text-center lg:text-left">
         {MYPAGE_GNB_ARRAY.map((el, index) => (
           <li key={index}>
