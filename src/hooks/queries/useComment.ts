@@ -30,6 +30,13 @@ export const useAddComment = (boardId: number) => {
   return useMutation({
     mutationFn: createComment,
     onSuccess: (newComment) => {
+      //게시글 작성자에게 푸시 알림 (실패해도 댓글 흐름에는 영향 없음)
+      fetch("/api/push/comment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ boardId, commentId: newComment.id }),
+      }).catch(() => {});
+
       if (newComment.parent_id) {
         queryClient.invalidateQueries({
           queryKey: ["comments", "replies", newComment.parent_id],
