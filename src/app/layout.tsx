@@ -7,6 +7,7 @@ import QueryProvider from "@/providers/QueryProvider";
 import { notoSansKr } from "../assets/fonts/fonts";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/providers/AuthProvider";
+import PushTokenSync from "@/components/common/PushTokenSync";
 
 export const metadata: Metadata = {
   title: "IVE-DIVE",
@@ -45,6 +46,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AuthProvider>
+            <PushTokenSync />
             <QueryProvider>
               <Header />
               {children}
