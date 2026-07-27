@@ -79,7 +79,8 @@ export async function POST(request: Request) {
     const { data: tokens } = await admin
       .from("push_tokens")
       .select("token, user_id")
-      .in("user_id", [...recipients.keys()]);
+      .in("user_id", [...recipients.keys()])
+      .eq("enabled", true);
     if (!tokens || tokens.length === 0) {
       return NextResponse.json({ skipped: true });
     }
