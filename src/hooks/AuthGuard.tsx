@@ -22,21 +22,25 @@ const AuthGuard = ({ children, loadingComponent }: AuthGuardProps) => {
   }, [initializeAuth]);
 
   useEffect(() => {
-    const showToastAndRedirect = () => {
-      if (isInitialized && !session) {
-        Promise.resolve(
-          toast({
-            title: "로그인 후 이용 가능합니다.",
-            duration: 2000,
-          }),
-        ).then(() => {
-          setTimeout(() => {
-            window.location.href = "/login";
-          }, 1500);
-        });
-      }
+    if (!isInitialized || session) return;
+
+    //세션 복원이 끝나기 전에 성급하게 튕기지 않도록 잠깐 기다렸다가 이동한다.
+    //그 사이 세션이 생기면 effect가 재실행되며 아래 cleanup으로 타이머가 취소된다.
+    let redirectTimer: ReturnType<typeof setTimeout>;
+    const checkTimer = setTimeout(() => {
+      toast({
+        title: "로그인 후 이용 가능합니다.",
+        duration: 2000,
+      });
+      redirectTimer = setTimeout(() => {
+        window.location.href = "/login";
+      }, 1500);
+    }, 300);
+
+    return () => {
+      clearTimeout(checkTimer);
+      clearTimeout(redirectTimer);
     };
-    setTimeout(showToastAndRedirect, 100);
   }, [session, isInitialized]);
 
   if (!isInitialized || !session) {
