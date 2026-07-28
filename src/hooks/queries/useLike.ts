@@ -20,7 +20,16 @@ export const useToggleLike = (boardId: number, userId?: string) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => toggleBoardLike(boardId, userId!),
-    onSuccess: () => {
+    onSuccess: (liked) => {
+      //좋아요 추가일 때만 글 작성자에게 푸시 알림 (취소는 제외, 실패해도 흐름에 영향 없음)
+      if (liked) {
+        fetch("/api/push/like", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ boardId }),
+        }).catch(() => {});
+      }
+
       queryClient.invalidateQueries({
         queryKey: ["boards"],
       });
