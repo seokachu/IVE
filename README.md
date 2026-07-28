@@ -7,7 +7,8 @@
 <br/>
 
 
-배포 주소 : [배포 링크 이동하기](https://ive-three.vercel.app)
+배포 주소 : [배포 링크 이동하기](https://ive-three.vercel.app)<br/>
+하이브리드 앱(Android) : [seokachu/ive-app](https://github.com/seokachu/ive-app) — 이 웹을 WebView로 감싸고 푸시 알림·카드사 앱 결제를 지원
 
 <br>
 
@@ -16,6 +17,7 @@
 `3차 배포` : 2025.02.02 ~ 2025.03.06 (자유게시판 추가) <br/>
 `4차 배포` : 2025.03.06 ~ 2025.03.16 (소식 페이지 추가) <br/>
 `추가 배포` : 2025.03.16 ~ 버그 수정 진행중 <br>
+`리뉴얼` : 2026.07 ~ (Next.js 16 · React 19 마이그레이션, 하이브리드 앱 & 푸시 알림) <br>
 
 <br>
 <br>
@@ -28,6 +30,20 @@
 <br>
 <br>
 
+## 🚀 2026 리뉴얼
+
+운영 중이던 서비스를 최신 스택으로 단계적으로 마이그레이션하고, 하이브리드 앱으로 확장했습니다.
+
+- **Next.js 14 → 16, React 18 → 19** — 동적 라우트 async params, `middleware` → `proxy` 전환 포함
+- **Recoil → Zustand** — 상태별 스토어 분리(session/cart/checkout/ui), 점진적 전환
+- **Supabase 인증 현대화** — deprecated auth-helpers → `@supabase/ssr` (쿠키 기반 서버 검증)
+- **npm → pnpm**, **Playwright E2E 기준선** 구축 (프로덕션 빌드 기준 15케이스)
+- **하이브리드 앱 + 푸시 알림** — [seokachu/ive-app](https://github.com/seokachu/ive-app),
+  댓글/답글 푸시 발송 서버 구현 ([설계 문서](docs/push-notifications.md))
+
+<br>
+<br>
+
 ## ✏️ 기술 스택
 
 <table>
@@ -36,7 +52,7 @@
     <th>TypeScript</th>
     <th>Tailwind CSS</th>
     <th>Supabase</th>
-    <th>Recoil</th>
+    <th>Zustand</th>
     <th>Shadcn UI</th>
     <th>Toss Payment</th>
     <th>Prettier</th>
@@ -55,7 +71,7 @@
       <img src="https://github.com/user-attachments/assets/6e168931-ee0d-4e90-8710-050dad01942f" alt="supabase icon" width="50" height="50" />
     </td>
     <td align="center">
-      <img src="https://github.com/user-attachments/assets/1b0fb313-98c1-4790-9eb3-0e266cd926d8" alt="recoil icon" width="50" height="50" />
+      <h1>🐻</h1>
     </td>
     <td align="center">
       <img src="https://github.com/user-attachments/assets/55af3049-b93f-4cf1-a6ab-d57a95022743" alt="shadcn ui icon" width="45" height="45" />
