@@ -39,10 +39,9 @@ export async function proxy(request: NextRequest) {
       request.nextUrl.pathname.startsWith("/payment/success") ||
       request.nextUrl.pathname.startsWith("/payment/fail")
     ) {
-      //로그인 체크
-      if (!user) {
-        return NextResponse.redirect(new URL("/login", request.url));
-      }
+      //PG(토스) 결제 후 복귀는 크로스 사이트 리다이렉트라 SameSite=Lax 쿠키가
+      //요청에 실리지 않을 수 있다. 서버에서 로그인을 검사하면 실제 로그인
+      //사용자도 튕기므로, 이 경로의 인증은 클라이언트 AuthGuard가 담당한다.
       //orderId 파라미터 체크
       const orderId = request.nextUrl.searchParams.get("orderId");
       if (!orderId) {
