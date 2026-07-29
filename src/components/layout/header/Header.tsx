@@ -45,8 +45,8 @@ const Header = () => {
     };
   }, [isMainPage, setScrolled]);
 
-  // 조건문 header logo
-  const logoSrc = isMainPage ? (isScrolled ? SubLogoImage : LogoImage) : SubLogoImage;
+  // 메인 히어로 위(스크롤 전)는 테마와 무관하게 흰 로고, 그 외는 라이트=검정 / 다크=흰 로고
+  const isOnHeroImage = isMainPage && !isScrolled;
 
   return (
     <header
@@ -65,7 +65,14 @@ const Header = () => {
         <HeaderAside />
         <h1 className="cursor-pointer absolute top-[20px] left-2/4 -translate-x-2/4 lg:static lg:translate-x-0">
           <Link href="/" className="relative w-[80px] h-auto block">
-            <Image src={logoSrc} alt="logo" className="fill" priority />
+            {isOnHeroImage ? (
+              <Image src={LogoImage} alt="logo" className="fill" priority />
+            ) : (
+              <>
+                <Image src={SubLogoImage} alt="logo" className="fill dark:hidden" priority />
+                <Image src={LogoImage} alt="logo" className="fill hidden dark:block" priority />
+              </>
+            )}
           </Link>
         </h1>
         <Navigator />
