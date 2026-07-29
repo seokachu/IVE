@@ -116,8 +116,8 @@ body,
     --radius: 0.5rem;
   }
   .dark {
-    /* Pencil 다크 팔레트와 동기화: bg #141416 · surface(card) #1E1E21 · border #2E2E33 */
-    --background: 240 5% 8%;
+    /* Pencil 다크 팔레트와 동기화: bg #1B1B1F · surface(card) #1E1E21 · border #2E2E33 */
+    --background: 240 7% 11%;
     --foreground: 240 5% 96%;
     --card: 240 5% 12%;
     --card-foreground: 240 5% 96%;
