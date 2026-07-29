@@ -1,9 +1,9 @@
-import { ClipLoader } from "react-spinners";
+import Spinner from "@/components/common/Spinner";
 
 const BoardWriteSkeleton = () => {
   return (
     <div className="w-full rounded-sm min-h-[543px] bg-white border flex items-center justify-center">
-      <ClipLoader />
+      <Spinner />
     </div>
   );
 };

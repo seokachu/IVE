@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { FaArrowDown } from "react-icons/fa6";
+import { ArrowDown } from "lucide-react";
 import GalleryPhotoList from "./GalleryPhotoList";
 import { useGallery } from "@/hooks/queries/useGallery";
 import Error from "../common/error/Error";
@@ -48,7 +48,7 @@ const GallerySection = () => {
               className="inline-flex justify-center items-center gap-1 px-8 py-4 !rounded-full text-sm lg:text-base"
             >
               <span>더 많은 사진 보기</span>
-              <FaArrowDown className="animate-arrow" />
+              <ArrowDown className="animate-arrow" />
             </Button>
           )}
         </div>

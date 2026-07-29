@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { VscChevronRight } from "react-icons/vsc";
+import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { SheetClose } from "@/components/ui/sheet";
 import type { GnbArrayList } from "@/types";
@@ -22,7 +22,7 @@ const MobileNavigator = () => {
                 className="w-full h-full py-4 px-4 font-normal text-base text-left flex items-center justify-between"
               >
                 <span>{el.label}</span>
-                <VscChevronRight size={20} />
+                <ChevronRight size={20} />
               </Button>
             </SheetClose>
           </li>

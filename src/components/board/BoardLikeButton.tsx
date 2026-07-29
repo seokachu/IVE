@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { AiOutlineLike } from "react-icons/ai";
-import { AiFillLike } from "react-icons/ai";
+import { ThumbsUp } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { useLikeStatus, useToggleLike } from "@/hooks/queries/useLike";
 import useAuthGuard from "@/hooks/useAuthGuard";
@@ -40,7 +39,7 @@ const BoardLikeButton = ({ item }: BoardLikeButtonProps) => {
         onClick={handleToggleLikeClick}
         disabled={isPending}
       >
-        {!isLiked ? <AiOutlineLike size={20} /> : <AiFillLike size={20} />}
+        <ThumbsUp size={20} fill={isLiked ? "currentColor" : "none"} />
         <span>{item.board_likes[0]?.count}</span>
       </Button>
     </div>

@@ -4,7 +4,7 @@ import ShopListItem from "./ShopListItem";
 import { useShops } from "@/hooks/queries/useShops";
 import ShopSkeleton from "../common/loading/ShopSkeleton";
 import Error from "../common/error/Error";
-import { ClipLoader } from "react-spinners";
+import Spinner from "@/components/common/Spinner";
 import type { SortProps } from "@/types/shop";
 
 const ShopList = ({ sort }: SortProps) => {
@@ -62,7 +62,7 @@ const ShopList = ({ sort }: SortProps) => {
       <div ref={observerRef} className="h-10" />
       {isFetchingNextPage && (
         <div className="flex justify-center items-center py-4">
-          <ClipLoader />
+          <Spinner />
         </div>
       )}
       {!hasNextPage && items.length > 0 && (

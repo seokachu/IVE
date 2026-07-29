@@ -1,14 +1,12 @@
 "use client";
 import { COLORS } from "@/utils/constants";
 import { Form } from "@/components/ui/form";
-import { FaExclamationCircle } from "react-icons/fa";
+import { AlertCircle, Eye, EyeOff } from "lucide-react";
 import { RHFInput } from "@/components/common/RHFInput";
 import { Button } from "@/components/ui/button";
 import { SignUpType, userDefaultValues, userSchemas } from "@/hooks/user";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AiOutlineEye } from "react-icons/ai";
-import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import { signUpEmail } from "@/lib/supabase/auth";
@@ -89,14 +87,14 @@ const SignUpForm = () => {
                 aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 표시"}
               >
                 {showPassword ? (
-                  <AiOutlineEye size={24} color={COLORS.gray300} />
+                  <Eye size={24} color={COLORS.gray300} />
                 ) : (
-                  <AiOutlineEyeInvisible size={24} color={COLORS.gray300} />
+                  <EyeOff size={24} color={COLORS.gray300} />
                 )}
               </Button>
             </div>
             <p className="flex items-center gap-1 text-xs text-gray-400">
-              <FaExclamationCircle />
+              <AlertCircle />
               비밀번호 영문, 숫자, 특수문자 포함 8-20자
             </p>
           </div>
@@ -124,9 +122,9 @@ const SignUpForm = () => {
                 aria-label={showPasswordCheck ? "비밀번호 숨기기" : "비밀번호 표시"}
               >
                 {showPasswordCheck ? (
-                  <AiOutlineEye size={24} color={COLORS.gray300} />
+                  <Eye size={24} color={COLORS.gray300} />
                 ) : (
-                  <AiOutlineEyeInvisible size={24} color={COLORS.gray300} />
+                  <EyeOff size={24} color={COLORS.gray300} />
                 )}
               </Button>
             </div>

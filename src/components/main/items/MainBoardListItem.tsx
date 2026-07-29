@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { BiCommentDots } from "react-icons/bi";
+import { MessageSquareMore } from "lucide-react";
 import DefaultImage from "@/assets/images/default_image.avif";
 import { useRouter } from "next/navigation";
 import type { MainBoardListItemProps } from "@/types/main";
@@ -36,7 +36,7 @@ const MainBoardListItem = ({ item }: MainBoardListItemProps) => {
               {item.name}
             </p>
             <div className="flex gap-1 items-center translate-y-[2px]">
-              <BiCommentDots size={20} />
+              <MessageSquareMore size={20} />
               <p className="-translate-y-[2px]">{item.comment_count}</p>
             </div>
           </div>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import NewsCategoryFilter from "./NewsCategoryFilter";
 import NewsGallery from "./NewsGallery";
-import { FaArrowDown } from "react-icons/fa6";
+import { ArrowDown } from "lucide-react";
 import { LATEST_DEFAULT_LIMIT, NEWS_CATEGORY_ARRAY } from "@/utils/constants";
 import { useNewsGallery } from "@/hooks/queries/useNews";
 import Error from "../common/error/Error";
@@ -47,7 +47,7 @@ const LatestNewsSection = () => {
               className="inline-flex justify-center items-center gap-1 px-8 py-4 !rounded-full text-sm lg:text-base"
             >
               <span>더 많은 소식 보기</span>
-              <FaArrowDown className="animate-arrow" />
+              <ArrowDown className="animate-arrow" />
             </Button>
           )}
         </div>

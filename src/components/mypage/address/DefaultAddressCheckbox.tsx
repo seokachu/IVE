@@ -1,6 +1,6 @@
 import { RHFInput } from "@/components/common/RHFInput";
 import { Label } from "@/components/ui/label";
-import { FaCheck } from "react-icons/fa";
+import { Check } from "lucide-react";
 import type { DefaultAddressCheckboxProps } from "@/types/mypage";
 
 const DefaultAddressCheckbox = ({ isDefaultAddress }: DefaultAddressCheckboxProps) => {
@@ -8,7 +8,7 @@ const DefaultAddressCheckbox = ({ isDefaultAddress }: DefaultAddressCheckboxProp
     return (
       <div className="my-5">
         <Label className="text-sm text-gray-600 flex items-center gap-2">
-          <FaCheck className="text-success" />
+          <Check className="text-success" />
           <span>현재 기본 배송지로 설정되어 있습니다.</span>
         </Label>
       </div>

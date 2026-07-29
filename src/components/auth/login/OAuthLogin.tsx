@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 import { oAuthLogin } from "@/lib/supabase/auth";
-import { FcGoogle } from "react-icons/fc";
-import { IoChatbubble } from "react-icons/io5";
+import GoogleIcon from "@/components/common/icons/GoogleIcon";
+import { MessageCircle } from "lucide-react";
 import type { OAuthProvider } from "@/types";
 
 const OAuthLogin = () => {
@@ -29,7 +29,7 @@ const OAuthLogin = () => {
         className="w-full h-12 rounded-lg text-base gap-2"
         aria-label="카카오로 로그인하기 버튼"
       >
-        <IoChatbubble size={18} />
+        <MessageCircle size={18} className="fill-current" />
         카카오로 시작하기
       </Button>
       <Button
@@ -39,7 +39,7 @@ const OAuthLogin = () => {
         className="w-full h-12 rounded-lg text-base gap-2"
         aria-label="구글로 로그인하기 버튼"
       >
-        <FcGoogle size={20} />
+        <GoogleIcon size={20} />
         구글로 시작하기
       </Button>
     </div>

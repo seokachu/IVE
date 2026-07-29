@@ -1,8 +1,7 @@
 "use client";
 import { useCartItems } from "@/store/zustand";
 import { useEffect, useState } from "react";
-import { IoCartOutline } from "react-icons/io5";
-
+import { ShoppingCart } from "lucide-react";
 interface CartIconProps {
   iconSize?: number;
   iconClassName?: string;
@@ -28,7 +27,7 @@ const CartIcon = ({
   return (
     <div className={linkClassName}>
       <div className="relative">
-        <IoCartOutline className={`${iconClassName} cursor-pointer`} size={iconSize} />
+        <ShoppingCart className={`${iconClassName} cursor-pointer`} size={iconSize} />
         {mounted && uniqueItemsCount > 0 && (
           <span
             className={`${className} absolute bottom-3 rounded-full bg-red text-xs text-white w-5 h-5 flex items-center justify-center`}

@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { IconType } from "react-icons/lib";
+import type { ComponentType } from "react";
 
 interface OAuthButtonProps {
-  icon: IconType;
+  icon: ComponentType<{ size?: number; className?: string }>;
   text?: string;
   size?: number;
   className?: string;

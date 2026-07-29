@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { FaArrowLeft } from "react-icons/fa";
+import { ArrowLeft } from "lucide-react";
 import DetailOrderItem from "./DetailOrderItem";
 import { formatDate } from "@/utils/formatDate";
 import OrderCustomerInfoItem from "@/components/cart/OrderCustomerInfoItem";
@@ -25,7 +25,7 @@ const OrderDetail = ({ orderItems, onBack }: OrderDetailProps) => {
           variant="outline" size="auto"
           className="flex items-center gap-1 text-xs lg:text-sm py-1 px-3 hover:bg-purple hover:text-white hover:border-purple"
         >
-          <FaArrowLeft className="translate-y-[1px]" />
+          <ArrowLeft className="translate-y-[1px]" />
           돌아가기
         </Button>
       </div>

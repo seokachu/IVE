@@ -1,6 +1,6 @@
 import { COLORS } from "@/utils/constants";
 import { useState } from "react";
-import { FaStar, FaRegStar } from "react-icons/fa";
+import { Star } from "lucide-react";
 
 interface InteractiveStarProps {
   rating: number;
@@ -20,11 +20,7 @@ const InteractiveStars = ({ rating, size = 24, onChange }: InteractiveStarProps)
           onClick={() => onChange(index + 1)}
           className="cursor-pointer"
         >
-          {index < (hoverRating || rating) ? (
-            <FaStar size={size} color={COLORS.warning} />
-          ) : (
-            <FaRegStar size={size} color={COLORS.warning} />
-          )}
+          <Star size={size} color={COLORS.warning} fill={index < (hoverRating || rating) ? COLORS.warning : "none"} />
         </span>
       ))}
     </div>

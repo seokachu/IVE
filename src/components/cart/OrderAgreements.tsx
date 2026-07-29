@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { IoIosArrowUp } from "react-icons/io";
+import { ChevronUp } from "lucide-react";
 import AgreementModal from "./AgreementModal";
 import AgreementCheckbox from "./AgreementCheckbox";
 import { useAgreements, useCheckoutActions } from "@/store/zustand";
@@ -75,7 +75,7 @@ const OrderAgreements = () => {
               &#91;필수&#93; 주문 내역에 대한 필수 동의
             </label>
             <Button variant="plain" size="auto" type="button" className="text-gray-500" aria-label={isOpen ? "접기" : "펼치기"}>
-              <IoIosArrowUp
+              <ChevronUp
                 className={`transition-transform duration-300 ease-in-out ${isOpen ? "rotate-0" : "rotate-180"}`}
               />
             </Button>

@@ -1,13 +1,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { IoChatbubble } from "react-icons/io5";
-import { MdOutlineEmail } from "react-icons/md";
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
+import { ChevronLeft, Mail, MessageCircle } from "lucide-react";
+import GoogleIcon from "@/components/common/icons/GoogleIcon";
 import Link from "next/link";
 import { useState } from "react";
 import SignInEmail from "./SignInEmail";
-import { IoIosArrowBack } from "react-icons/io";
 import { DialogClose } from "@/components/ui/dialog";
 import { oAuthLogin } from "@/lib/supabase/auth";
 import { useToast } from "@/hooks/use-toast";
@@ -55,15 +52,15 @@ const SignInContent = () => {
             onClick={() => handleOAuthLogin("kakao")}
             className="w-full bg-kakao px-20 py-3 rounded-full flex items-center justify-center relative text-sm font-bold mb-3"
             text="카카오로 3초 만에 시작하기"
-            icon={IoChatbubble}
+            icon={MessageCircle}
             size={20}
-            iconStyle="absolute left-5 top-2/4 -translate-y-2/4"
+            iconStyle="absolute left-5 top-2/4 -translate-y-2/4 fill-current"
           />
           <Button variant="plain" size="auto"
             onClick={toggleEmailSignIn}
             className="w-full border border-1 border-gray-300 px-20 py-3 rounded-full flex items-center justify-center relative text-sm font-bold"
           >
-            <MdOutlineEmail className="absolute left-5 top-2/4 -translate-y-2/4" size={20} />
+            <Mail className="absolute left-5 top-2/4 -translate-y-2/4" size={20} />
             이메일로 로그인
           </Button>
           <div className="my-5">
@@ -75,18 +72,9 @@ const SignInContent = () => {
                 <OAuthButton
                   onClick={() => handleOAuthLogin("google")}
                   className="rounded-full border p-1 w-10 h-10"
-                  icon={FcGoogle}
+                  icon={GoogleIcon}
                   size={30}
                   iconStyle="m-auto"
-                />
-              </li>
-              <li>
-                <OAuthButton
-                  onClick={() => handleOAuthLogin("github")}
-                  className="w-10 h-10"
-                  icon={FaGithub}
-                  size={38}
-                  iconStyle="translate-y-[2px]"
                 />
               </li>
             </ul>
@@ -105,7 +93,7 @@ const SignInContent = () => {
       ) : (
         <div className="w-full max-w-[380px] py-5">
           <Button variant="plain" size="auto" onClick={toggleEmailSignIn} className="absolute top-5 left-5">
-            <IoIosArrowBack size={25} className="text-gray-500 hover:text-gray-900" />
+            <ChevronLeft size={25} className="text-gray-500 hover:text-gray-900" />
           </Button>
           <SignInEmail redirectPath={null} />
         </div>

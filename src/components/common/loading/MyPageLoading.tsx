@@ -1,4 +1,4 @@
-import { ClipLoader } from "react-spinners";
+import Spinner from "@/components/common/Spinner";
 
 interface MyPageLoadingProps {
   title?: string;
@@ -11,7 +11,7 @@ const MyPageLoading = ({ title }: MyPageLoadingProps) => {
         <h2 className="font-bold text-xl mb-5 hidden lg:block">{title}</h2>
       </div>
       <div className="flex flex-col gap-3 items-center justify-center w-full h-[250px] lg:h-[500px]">
-        <ClipLoader />
+        <Spinner />
       </div>
     </div>
   );

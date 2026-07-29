@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { NicknameType, userSchemas } from "@/hooks/user";
 import ImageCropper from "../common/ImageCropper";
 import { uploadAvatar } from "@/lib/supabase/storage";
-import { PiUploadSimpleBold } from "react-icons/pi";
+import { Upload } from "lucide-react";
 import { useWishLists } from "@/hooks/queries/useWishList";
 import { useUpdateUserSession } from "@/hooks/useUpdateUserSession";
 import { useMyBoards } from "@/hooks/queries/useBoard";
@@ -160,7 +160,7 @@ const UserInfo = () => {
             onSave={handleSaveImage}
           />
           <div className="absolute top-2/3 left-10 bg-gray-900/75 p-1 rounded-full m-1">
-            <PiUploadSimpleBold color="white" />
+            <Upload color="white" />
           </div>
         </div>
         <div className="flex justify-between items-baseline mt-5 gap-2">

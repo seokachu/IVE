@@ -9,7 +9,7 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 import Image from "next/image";
-import { RxHamburgerMenu } from "react-icons/rx";
+import { Menu } from "lucide-react";
 import LogoImage from "@/assets/images/logo_black.svg";
 import MobileNavigator from "./MobileNavigator";
 import MobileUserMenu from "./MobileUserMenu";
@@ -32,7 +32,7 @@ const HeaderAside = () => {
     <div className="lg:hidden">
       <Sheet>
         <SheetTrigger>
-          <RxHamburgerMenu size={25} aria-label="메뉴 리스트 클릭하기" />
+          <Menu size={25} aria-label="메뉴 리스트 클릭하기" />
         </SheetTrigger>
         <SheetContent className="sm:w-2/3 sm:w-max-w-2/3">
           <SheetHeader>
