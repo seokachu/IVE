@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { IoIosArrowForward } from "react-icons/io";
+import { ChevronRight } from "lucide-react";
 import type { AgreementCheckboxProps } from "@/types/cart";
 
 const AgreementCheckbox = ({ modalType, onChange, checked, labelText }: AgreementCheckboxProps) => {
@@ -10,7 +10,7 @@ const AgreementCheckbox = ({ modalType, onChange, checked, labelText }: Agreemen
         {labelText}
       </label>
       <Button variant="plain" size="auto" onClick={modalType}>
-        <IoIosArrowForward className="text-gray-500" />
+        <ChevronRight className="text-gray-500" />
       </Button>
     </div>
   );

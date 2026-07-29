@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { IoMdShare } from "react-icons/io";
+import { Share2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { ButtonHTMLAttributes } from "react";
 interface classNameProps {
@@ -27,7 +27,7 @@ const ShareButton = ({ className }: classNameProps) => {
 
   return (
     <Button variant="plain" size="auto" onClick={onClickShare} className={className} aria-label="현재 페이지 공유하기">
-      <IoMdShare size={25} />
+      <Share2 size={25} />
     </Button>
   );
 };

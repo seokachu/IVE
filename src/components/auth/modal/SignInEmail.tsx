@@ -3,8 +3,7 @@ import { COLORS } from "@/utils/constants";
 import { Form } from "@/components/ui/form";
 import { RHFInput } from "@/components/common/RHFInput";
 import { Button } from "@/components/ui/button";
-import { AiOutlineEye } from "react-icons/ai";
-import { AiOutlineEyeInvisible } from "react-icons/ai";
+import { Eye, EyeOff } from "lucide-react";
 import { LoginType, userDefaultValues, userSchemas } from "@/hooks/user";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -103,7 +102,7 @@ const SignInEmail = ({ redirectPath = "/" }: SignInEmailProps) => {
               onClick={() => setShowPassword(!showPassword)}
               aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 표시"}
             >
-              {showPassword ? <AiOutlineEye size={24} color={COLORS.gray300} /> : <AiOutlineEyeInvisible size={24} color={COLORS.gray300} />}
+              {showPassword ? <Eye size={24} color={COLORS.gray300} /> : <EyeOff size={24} color={COLORS.gray300} />}
             </Button>
           </div>
         </div>

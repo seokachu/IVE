@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Search from "@/components/common/search/Search";
-import { GoPlusCircle } from "react-icons/go";
+import { PlusCircle } from "lucide-react";
 import type { BoardActionsProps } from "@/types/board";
 
 const BoardActions = ({ onSearch, onClickWrite }: BoardActionsProps) => {
@@ -20,7 +20,7 @@ const BoardActions = ({ onSearch, onClickWrite }: BoardActionsProps) => {
         className="flex items-center justify-center gap-2 px-4 py-2 w-full lg:w-28 text-base lg:text-sm"
         aria-label="글쓰기"
       >
-        <GoPlusCircle className="w-5 h-5 translate-y-[1px]" />
+        <PlusCircle className="w-5 h-5 translate-y-[1px]" />
         <span>글쓰기</span>
       </Button>
     </div>

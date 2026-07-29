@@ -4,7 +4,7 @@ import { toast } from "@/hooks/use-toast";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import Image from "next/image";
 import { useState } from "react";
-import { FaCheck } from "react-icons/fa";
+import { Check } from "lucide-react";
 import WriteReviewModal from "./WriteReviewModal";
 import { useOrderItemReview } from "@/hooks/queries/useReviews";
 import { useRouter } from "next/navigation";
@@ -52,7 +52,7 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
     <li className="border rounded-lg p-4">
       {item.is_confirmed && (
         <p className="text-sm text-success flex items-center gap-1 mb-2 border-b py-2">
-          <FaCheck />
+          <Check />
           <span>구매확정</span>
         </p>
       )}

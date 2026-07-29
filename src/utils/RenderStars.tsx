@@ -1,5 +1,5 @@
 import { COLORS } from "@/utils/constants";
-import { FaStar, FaRegStar } from "react-icons/fa";
+import { Star } from "lucide-react";
 
 interface RenderStarsProps {
   rating: number;
@@ -9,7 +9,7 @@ interface RenderStarsProps {
 const RenderStars = ({ rating, size }: RenderStarsProps) => {
   return Array.from({ length: 5 }).map((_, index) => (
     <span key={index}>
-      {index < rating ? <FaStar size={size} color={COLORS.warning} /> : <FaRegStar size={size} color={COLORS.warning} />}
+      <Star size={size} color={COLORS.warning} fill={index < rating ? COLORS.warning : "none"} />
     </span>
   ));
 };

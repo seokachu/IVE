@@ -10,7 +10,7 @@ import BoardSkeleton from "@/components/common/loading/BoardSkeleton";
 import { PAGINATION } from "@/utils/constants";
 import useAuthGuard from "@/hooks/useAuthGuard";
 import SearchLoading from "../common/loading/SearchLoading";
-import { TbMoodEmpty } from "react-icons/tb";
+import { Meh } from "lucide-react";
 import BoardActions from "./BoardActions";
 
 const BoardContainer = () => {
@@ -76,7 +76,7 @@ const BoardContainer = () => {
     if (boardList && boardList.data.length === 0) {
       return (
         <div className="flex items-center justify-center min-h-[500px] flex-col gap-3">
-          <TbMoodEmpty className="w-8 h-8 lg:w-10 lg:h-10" />
+          <Meh className="w-8 h-8 lg:w-10 lg:h-10" />
           <h2 className="text-xs lg:text-sm">
             {searchKeyWord ? "검색 결과가 없습니다." : "게시글이 없습니다."}
           </h2>

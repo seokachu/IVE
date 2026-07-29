@@ -5,8 +5,7 @@ import AddToCartDrawer from "./AddToCartDrawer";
 import { cartStorage } from "@/utils/cartStorage";
 import { toast } from "@/hooks/use-toast";
 import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
-import { GoHeartFill } from "react-icons/go";
-import { GoHeart } from "react-icons/go";
+import { Heart } from "lucide-react";
 import DirectPaymentButton from "@/components/payment/DirectPaymentButton";
 import { useCartActions } from "@/store/zustand";
 import type { ProductActionsProps } from "@/types/shop";
@@ -68,9 +67,9 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
             aria-label="찜하기"
           >
             {isWished ? (
-              <GoHeartFill size={25} className="text-red" />
+              <Heart size={25} className="text-red" fill="currentColor" />
             ) : (
-              <GoHeart size={25} className="text-white" />
+              <Heart size={25} className="text-white" />
             )}
           </Button>
         </li>

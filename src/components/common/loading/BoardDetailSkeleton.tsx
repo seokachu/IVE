@@ -1,5 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { ClipLoader } from "react-spinners";
+import Spinner from "@/components/common/Spinner";
 
 const BoardDetailSkeleton = () => {
   return (
@@ -23,7 +23,7 @@ const BoardDetailSkeleton = () => {
         </div>
       </div>
       <div className="flex items-center justify-center min-h-96">
-        <ClipLoader />
+        <Spinner />
       </div>
       <div className="flex items-center justify-center mb-5">
         <Skeleton className="w-16 h-12" />

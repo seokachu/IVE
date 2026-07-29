@@ -1,7 +1,6 @@
 import Image from "next/image";
 import DefaultImage from "@/assets/images/default_image.avif";
-import { AiOutlineLike } from "react-icons/ai";
-import { AiFillLike } from "react-icons/ai";
+import { CornerDownRight, ThumbsUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDeleteComment, useRepliesCommentList } from "@/hooks/queries/useComment";
 import { formatDate } from "@/utils/formatDate";
@@ -9,7 +8,6 @@ import BoardActionButton from "../BoardActionButton";
 import { toast } from "@/hooks/use-toast";
 import { useState } from "react";
 import CommentForm from "./CommentForm";
-import { PiArrowBendDownRightBold } from "react-icons/pi";
 import useAuthGuard from "@/hooks/useAuthGuard";
 import { useCommentLikeStatus, useToggleCommentLike } from "@/hooks/queries/useLike";
 import type { CommentListItemProps } from "@/types/board";
@@ -106,7 +104,7 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange }: Comm
                           isCommentLiked ? "text-purple" : ""
                         }`}
                       >
-                        {!isCommentLiked ? <AiOutlineLike size={15} /> : <AiFillLike size={15} />}
+                        <ThumbsUp size={15} fill={isCommentLiked ? "currentColor" : "none"} />
                         <span>{item?.likes[0]?.count || 0}</span>
                       </Button>
                       <Button onClick={onClickReplies} variant="outline" size="auto" className="border-none">
@@ -127,7 +125,7 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange }: Comm
                 </div>
                 {replies && replies.length > 0 && (
                   <div className="flex gap-2">
-                    <PiArrowBendDownRightBold size={20} className="translate-y-3" />
+                    <CornerDownRight size={20} className="translate-y-3" />
                     <ul className="flex flex-col w-full">
                       {replies.map((reply) => (
                         <CommentListItem

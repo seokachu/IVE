@@ -1,4 +1,4 @@
-import { IoSearch } from "react-icons/io5";
+import { Search as SearchIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import debounce from "lodash/debounce";
 
@@ -37,7 +37,7 @@ const Search = ({ className, placeholder, iconClassName, onSearch }: SearchProps
   return (
     <div className="relative flex items-center">
       <Input type="text" placeholder={placeholder} className={className} onChange={handleChange} value={value} />
-      <IoSearch className={iconClassName} />
+      <SearchIcon className={iconClassName} />
     </div>
   );
 };

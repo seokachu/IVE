@@ -1,6 +1,6 @@
 import Image from "next/image";
 import DefaultImage from "@/assets/images/default_image.avif";
-import { FaSearchPlus } from "react-icons/fa";
+import { ZoomIn } from "lucide-react";
 import type { GalleryPhotoListItemProps } from "@/types/news";
 
 const GalleryPhotoListItem = ({ item, onClick }: GalleryPhotoListItemProps) => {
@@ -19,9 +19,9 @@ const GalleryPhotoListItem = ({ item, onClick }: GalleryPhotoListItemProps) => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 group-hover:opacity-100" />
         <div className="absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <FaSearchPlus className="w-5 h-5 text-gray-900" />
+          <ZoomIn className="w-5 h-5 text-gray-900" />
         </div>
-        <FaSearchPlus />
+        <ZoomIn />
       </div>
     </li>
   );

@@ -3992,59 +3992,37 @@
         },
         {
           "type": "frame",
-          "id": "kgaSQ",
-          "name": "Socials",
+          "id": "uhGOm",
+          "name": "구글 로그인",
           "width": "fill_container",
-          "gap": 16,
+          "height": 48,
+          "fill": "$white",
+          "cornerRadius": "$radius-lg",
+          "stroke": "$border-strong",
+          "strokeWidth": 1,
+          "gap": 8,
           "justifyContent": "center",
+          "alignItems": "center",
           "children": [
             {
-              "type": "frame",
-              "id": "jhhyL",
-              "name": "Google",
-              "width": 40,
-              "height": 40,
-              "fill": "$white",
-              "cornerRadius": "$radius-full",
-              "stroke": "$border-strong",
-              "strokeWidth": 1,
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "rOxcD",
-                  "name": "G",
-                  "fill": "$text-secondary",
-                  "content": "G",
-                  "fontFamily": "$font-family",
-                  "fontSize": 16,
-                  "fontWeight": "$font-weight-bold"
-                }
-              ]
+              "type": "text",
+              "id": "KhsG8",
+              "name": "G",
+              "fill": "$info",
+              "content": "G",
+              "fontFamily": "$font-family",
+              "fontSize": 16,
+              "fontWeight": "$font-weight-bold"
             },
             {
-              "type": "frame",
-              "id": "q7kwCu",
-              "name": "Github",
-              "width": 40,
-              "height": 40,
-              "fill": "$gray-900",
-              "cornerRadius": "$radius-full",
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "icon",
-                  "id": "fZGG8",
-                  "name": "GhIcon",
-                  "width": 20,
-                  "height": 20,
-                  "icon": "github",
-                  "library": "lucide",
-                  "fill": "$white"
-                }
-              ]
+              "type": "text",
+              "id": "J5zRnt",
+              "name": "Label",
+              "fill": "$text-primary",
+              "content": "구글로 시작하기",
+              "fontFamily": "$font-family",
+              "fontSize": 16,
+              "fontWeight": "$font-weight-semibold"
             }
           ]
         },

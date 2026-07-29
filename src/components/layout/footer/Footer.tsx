@@ -1,7 +1,7 @@
 import Image from "next/image";
 import LogoImage from "@/assets/images/logo.svg";
-import { FaGithub } from "react-icons/fa";
-import { FaBlog } from "react-icons/fa";
+import { Rss } from "lucide-react";
+import GithubIcon from "@/components/common/icons/GithubIcon";
 import Link from "next/link";
 
 const Footer = () => {
@@ -31,12 +31,12 @@ const Footer = () => {
           <ul className="flex gap-4">
             <li>
               <Link href="https://github.com/seokachu/IVE" target="_blank" aria-label="깃허브 링크 새창으로 열기">
-                <FaGithub size={25} />
+                <GithubIcon size={25} />
               </Link>
             </li>
             <li>
               <Link href="https://seokachu.tistory.com" target="_blank" aria-label="블로그 링크 새창으로 열기">
-                <FaBlog size={25} />
+                <Rss size={25} />
               </Link>
             </li>
           </ul>

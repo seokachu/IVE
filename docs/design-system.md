@@ -245,7 +245,16 @@ colors: {
 
 ---
 
-## 6. Pencil 파일 구성
+## 6. 아이콘 · 로딩 (2026-07-29 통일)
+
+- **아이콘은 `lucide-react` 단일 사용** — react-icons 제거됨. 채움 토글(하트·좋아요·별점)은 같은 아이콘에 `fill` 조건부로 표현
+  (`<Heart fill={isWished ? "currentColor" : "none"} />`)
+- **브랜드 로고**(구글·깃허브)는 lucide 미제공 → `components/common/icons/`의 커스텀 SVG 사용
+- **로딩 표시는 `common/Spinner`만 사용** — react-spinners 제거됨 (lucide LoaderCircle + animate-spin)
+- 진입 애니메이션은 tailwindcss-animate(`animate-in fade-in …`) 사용 — framer-motion 제거됨
+- 남은 중복(후속 검토): 캐러셀 2종(swiper 커버플로우 + embla/ui-carousel), `quill` 직접 의존(타입용)
+
+## 7. Pencil 파일 구성
 
 `ive/design/ive-design-system.pen`
 

@@ -3,8 +3,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import DefaultImage from "@/assets/images/default_image.avif";
 import Badge from "@/components/common/Badge";
-import { FaStar } from "react-icons/fa";
-import { GoHeartFill } from "react-icons/go";
+import { Heart, Star } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
@@ -64,7 +63,7 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
           priority={variant === "shop" && index < 6}
         />
         <Button variant="plain" size="auto" onClick={onClickHeart} className="absolute right-2 bottom-2 text-gray-300" aria-label="찜하기">
-          <GoHeartFill
+          <Heart fill="currentColor"
             size={30}
             className={`opacity-90 transition-colors ${isWished ? "text-red" : "text-gray-300"}`}
           />
@@ -80,7 +79,7 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
           <span className="whitespace-nowrap">{formatPrice(price)}원</span>
         </div>
         <div className="flex items-center gap-1 text-gray-400 text-xs lg:text-sm">
-          <FaStar />
+          <Star />
           <span>{averageRating}</span>
         </div>
       </div>

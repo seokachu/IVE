@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { LuMusic4 } from "react-icons/lu";
+import { Music4 } from "lucide-react";
 import { MUSIC_ICONS } from "@/utils/constants";
 import DefaultImage from "@/assets/images/default_image.avif";
 import type { AlbumItemProps } from "@/types/main";
@@ -58,7 +58,7 @@ const AlbumListItem = ({ album }: AlbumItemProps) => {
           </li>
         </ul>
         <h3 className="flex items-center justify-center gap-1 font-bold my-5 border-b-[1px] pb-3">
-          <LuMusic4 size={20} className="translate-y-[1px]" />
+          <Music4 size={20} className="translate-y-[1px]" />
           음원듣기
         </h3>
         <ul className="flex items-center justify-center gap-3">

@@ -1,7 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { CiSquarePlus } from "react-icons/ci";
-import { CiSquareMinus } from "react-icons/ci";
-
+import { SquareMinus, SquarePlus } from "lucide-react";
 interface QuantitySelectorProps {
   className: string;
   quantity: number;
@@ -20,7 +18,7 @@ const QuantitySelector = ({ className, quantity, increase, decrease }: QuantityS
           className={`${quantity === 1 ? "opacity-50 cursor-not-allowed" : "hover:text-purple"}`}
           aria-label="수량 감소"
         >
-          <CiSquareMinus size={25} />
+          <SquareMinus size={25} />
         </Button>
         <p>{quantity}</p>
         <Button variant="plain" size="auto"
@@ -28,7 +26,7 @@ const QuantitySelector = ({ className, quantity, increase, decrease }: QuantityS
           className={`${quantity >= 5 ? "opacity-50 " : "hover:text-purple"}`}
           aria-label="수량 증가"
         >
-          <CiSquarePlus size={25} />
+          <SquarePlus size={25} />
         </Button>
       </div>
     </div>

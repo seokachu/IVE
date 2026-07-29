@@ -1,6 +1,6 @@
 import { Tables } from "@/types/supabase";
 import { Button } from "@/components/ui/button";
-import { FiMapPin } from "react-icons/fi";
+import { MapPin } from "lucide-react";
 import { useDeleteShippingAddress, useUpdateShippingAddress } from "@/hooks/queries/useShippingAddress";
 import { toast } from "@/hooks/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
@@ -108,7 +108,7 @@ const AddressListItem = ({ item }: AddressListItems) => {
       <div className="flex flex-col lg:flex-row lg:items-center gap-1 text-gray-500 text-sm">
         <p className="flex items-center gap-1">
           <span>
-            <FiMapPin />
+            <MapPin />
           </span>
           <span>[{item.postal_code}]</span>
         </p>
