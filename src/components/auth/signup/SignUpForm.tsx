@@ -4,6 +4,7 @@ import { Form } from "@/components/ui/form";
 import { AlertCircle, Eye, EyeOff } from "lucide-react";
 import { RHFInput } from "@/components/common/RHFInput";
 import { Button } from "@/components/ui/button";
+import SignUpAgreements from "./SignUpAgreements";
 import { SignUpType, userDefaultValues, userSchemas } from "@/hooks/user";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,6 +17,7 @@ const SignUpForm = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordCheck, setShowPasswordCheck] = useState(false);
+  const [agreedRequired, setAgreedRequired] = useState(false);
 
   useEffect(() => {
     router.prefetch("/login?form=signup");
@@ -129,7 +131,12 @@ const SignUpForm = () => {
               </Button>
             </div>
           </div>
-          <Button type="submit" disabled={!isValid || !isDirty || isSubmitting} className="w-full h-12 rounded-lg text-base mt-2">
+          <SignUpAgreements onChange={setAgreedRequired} />
+          <Button
+            type="submit"
+            disabled={!isValid || !isDirty || isSubmitting || !agreedRequired}
+            className="w-full h-12 rounded-lg text-base mt-2"
+          >
             {isSubmitting ? "처리 중..." : "가입하기"}
           </Button>
         </form>
