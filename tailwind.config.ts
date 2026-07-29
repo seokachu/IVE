@@ -13,12 +13,30 @@ const config: Config = {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        purple: {
+          50: "var(--purple-50)",
+          100: "var(--purple-100)",
+          200: "var(--purple-200)",
+          300: "var(--purple-300)",
+          400: "var(--purple-400)",
+          500: "var(--purple-500)",
+          DEFAULT: "var(--purple-300)",
+        },
+        orange: {
+          100: "var(--orange-100)",
+          300: "var(--orange-300)",
+          500: "var(--orange-500)",
+          DEFAULT: "var(--orange-300)",
+        },
+        success: "var(--success)",
+        warning: "var(--warning)",
+        info: "var(--info)",
+        kakao: "var(--kakao)",
+        // legacy — 마이그레이션 완료 후 제거 (docs/design-system.md §5-3)
         "silver-gray": "var(--silver-gray)",
         "dark-gray": "var(--dark-gray)",
         "font-color": "var(--font-primary)",
         "custom-orange": "var(--orange)",
-        "custom-pink": "var(--pink)",
-        purple: "var(--purple)",
         red: "var(--red)",
         "dark-orange": "var(--dark-orange)",
         card: {
