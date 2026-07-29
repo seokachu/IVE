@@ -11,6 +11,7 @@ import {
 import Image from "next/image";
 import { Menu } from "lucide-react";
 import LogoImage from "@/assets/images/logo_black.svg";
+import WhiteLogoImage from "@/assets/images/logo.svg";
 import MobileNavigator from "./MobileNavigator";
 import MobileUserMenu from "./MobileUserMenu";
 import UserAvatar from "@/components/common/UserAvatar";
@@ -39,7 +40,8 @@ const HeaderAside = () => {
             <SheetTitle className="p-[20px] relative w-[120px] h-auto">
               <SheetClose asChild>
                 <Link href="/">
-                  <Image src={LogoImage} alt="logo" className="fill" />
+                  <Image src={LogoImage} alt="logo" className="fill dark:hidden" />
+                  <Image src={WhiteLogoImage} alt="logo" className="fill hidden dark:block" />
                 </Link>
               </SheetClose>
             </SheetTitle>
