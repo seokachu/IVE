@@ -1,4 +1,4 @@
-import ActionButton from "@/components/common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiFillLike } from "react-icons/ai";
 import { toast } from "@/hooks/use-toast";
@@ -32,17 +32,17 @@ const BoardLikeButton = ({ item }: BoardLikeButtonProps) => {
 
   return (
     <div className="flex items-center justify-center mb-5">
-      <ActionButton
-        variant="default"
-        className={`flex items-center gap-1 py-3 px-3 hover:bg-silver-gray ${
-          isLiked ? "bg-silver-gray" : ""
+      <Button
+        variant="outline" size="auto"
+        className={`flex items-center gap-1 py-3 px-3 hover:bg-gray-200 ${
+          isLiked ? "bg-gray-200" : ""
         } `}
         onClick={handleToggleLikeClick}
         disabled={isPending}
       >
         {!isLiked ? <AiOutlineLike size={20} /> : <AiFillLike size={20} />}
         <span>{item.board_likes[0]?.count}</span>
-      </ActionButton>
+      </Button>
     </div>
   );
 };

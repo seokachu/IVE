@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ActionButton from "@/components/common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import ConfirmModal from "@/components/common/modal/ConfirmModal";
 import type { BoardActionButtonProps } from "@/types/board";
 
@@ -14,12 +14,12 @@ const BoardActionButton = ({ onEdit, onDelete, mode = "default" }: BoardActionBu
     <>
       {mode === "default" ? (
         <div className="shrink-0">
-          <ActionButton onClick={onEdit} variant="default" className="border-none text-gray-500 mr-2">
+          <Button onClick={onEdit} variant="outline" size="auto" className="border-none text-gray-500 mr-2">
             수정
-          </ActionButton>
-          <ActionButton onClick={handleClickDelete} variant="default" className="border-none text-gray-500">
+          </Button>
+          <Button onClick={handleClickDelete} variant="outline" size="auto" className="border-none text-gray-500">
             삭제
-          </ActionButton>
+          </Button>
           {isModalOpen && (
             <ConfirmModal
               isOpen={setIsModalOpen}
@@ -33,9 +33,9 @@ const BoardActionButton = ({ onEdit, onDelete, mode = "default" }: BoardActionBu
         </div>
       ) : (
         <div className="shrink-0">
-          <ActionButton onClick={onEdit} variant="default" className="border-none text-gray-500 mr-2">
+          <Button onClick={onEdit} variant="outline" size="auto" className="border-none text-gray-500 mr-2">
             취소
-          </ActionButton>
+          </Button>
         </div>
       )}
     </>

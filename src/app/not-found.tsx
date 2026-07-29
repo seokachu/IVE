@@ -11,7 +11,7 @@ const NotFound = () => {
         </div>
 
         <h1 className="font-bold text-lg">죄송합니다. 잘못된 경로로 들어오셨습니다.</h1>
-        <p className="text-slate-500 mb-5">잠시 후 다시 접속해 주세요.</p>
+        <p className="text-gray-500 mb-5">잠시 후 다시 접속해 주세요.</p>
         <Link href="/" className="hover:text-purple">
           메인으로 이동하기
         </Link>

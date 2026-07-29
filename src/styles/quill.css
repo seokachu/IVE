@@ -1,5 +1,5 @@
 .ql-toolbar.ql-snow {
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--gray-200);
   border-radius: 4px 4px 0 0;
 }
 
@@ -9,7 +9,7 @@
 }
 
 .ql-container.ql-snow {
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--gray-200);
   border-radius: 0 0 4px 4px;
 }
 
@@ -84,7 +84,7 @@
 
 .ql-editor.ql-blank::before {
   font-style: normal !important;
-  color: #71717a;
+  color: var(--gray-400);
   font-size: 1.1em;
   padding-top: 0.3em;
 }

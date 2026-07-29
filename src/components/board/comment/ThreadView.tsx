@@ -1,7 +1,7 @@
 import { Form } from "@/components/ui/form";
 import { cn } from "@/utils/utils";
 import { Textarea } from "@/components/ui/textarea";
-import ActionButton from "@/components/common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import type { ThreadViewProps } from "@/types/board";
 
 const ThreadView = ({ onSubmit, form, placeholder, submitButtonLabel, onContentChange }: ThreadViewProps) => {
@@ -24,14 +24,14 @@ const ThreadView = ({ onSubmit, form, placeholder, submitButtonLabel, onContentC
               onChange: onContentChange,
             })}
           />
-          <ActionButton
+          <Button
             type="submit"
-            variant="primary"
+            size="auto"
             className="rounded-sm text-sm py-4 px-5 shrink-0"
             disabled={isSubmitting}
           >
             {isSubmitting ? "처리 중..." : submitButtonLabel}
-          </ActionButton>
+          </Button>
         </div>
         {errors.content && <span className="text-destructive text-xs px-3">{errors.content.message}</span>}
       </form>

@@ -3,14 +3,38 @@
 @tailwind utilities;
 
 :root {
-  --font-primary: #0a0a0a;
-  --silver-gray: #eeeeee;
-  --dark-gray: #cccccc;
-  --pink: #e88ee2;
-  --orange: #ff9f87;
-  --purple: #db97e9;
+  /* Brand — Purple ramp (기준색: purple-300, docs/design-system.md §1) */
+  --purple-50: #fbf3fc;
+  --purple-100: #f5e3f8;
+  --purple-200: #ebc4f2;
+  --purple-300: #db97e9;
+  --purple-400: #c876dc;
+  --purple-500: #a94fc0;
+
+  /* Brand — Orange ramp */
+  --orange-100: #ffeae3;
+  --orange-300: #ff9f87;
+  --orange-500: #fd5631;
+
+  /* Neutral 램프 — tailwind.config의 gray와 동일 값 (Tailwind를 못 쓰는 CSS 파일용) */
+  --gray-50: #f9f9f9;
+  --gray-100: #f5f5f5;
+  --gray-200: #eeeeee;
+  --gray-300: #cccccc;
+  --gray-400: #a0a0a0;
+  --gray-500: #6b7280;
+  --gray-600: #495057;
+  --gray-700: #333333;
+  --gray-900: #0a0a0a;
+
+  /* Status / 고정색 */
+  --success: #22c55e;
+  --warning: #facc15;
+  --info: #3b82f6;
+  --kakao: #fee500;
+
+  /* Error red — tailwind.config의 red.DEFAULT가 참조 */
   --red: #e72424;
-  --dark-orange: #fd5631;
 }
 /* 
 @media (prefers-color-scheme: dark) {
@@ -23,10 +47,6 @@
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 html,
@@ -51,7 +71,7 @@ body,
   }
 
   input[type="checkbox"] {
-    accent-color: var(--purple);
+    accent-color: var(--purple-300);
     min-width: 1rem;
     min-height: 1rem;
     max-width: 1rem;
@@ -65,19 +85,22 @@ body,
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
+    /* 브랜드 보라 #DB97E9 — ui/button 등 shadcn primary가 브랜드색을 쓰도록 재정의 */
+    --primary: 290 65% 75%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
     --accent: 0 0% 96.1%;
     --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    /* 에러 레드 #E72424 (기존 --red와 동일 계열) */
+    --destructive: 0 80% 52%;
+    --destructive-foreground: 0 0% 100%;
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    /* 포커스 링도 브랜드 보라로 */
+    --ring: 290 65% 75%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;

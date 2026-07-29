@@ -1,5 +1,5 @@
 import { Tables } from "@/types/supabase";
-import ActionButton from "../../common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import { FiMapPin } from "react-icons/fi";
 import { useDeleteShippingAddress, useUpdateShippingAddress } from "@/hooks/queries/useShippingAddress";
 import { toast } from "@/hooks/use-toast";
@@ -82,27 +82,27 @@ const AddressListItem = ({ item }: AddressListItems) => {
         <div className={`flex gap-2 items-stretch ${item.is_default ? "pointer-events-none" : ""}`}>
           <h3 className="text-base">{item.recipient_name}</h3>
           {item.is_default ? (
-            <ActionButton variant="primary" className="text-xs rounded-sm px-1 cursor-auto" disabled>
+            <Button size="auto" className="text-xs rounded-sm px-1 cursor-auto disabled:opacity-100" disabled>
               기본 배송지
-            </ActionButton>
+            </Button>
           ) : (
-            <ActionButton
+            <Button
               onClick={onClickDefaultRecipient}
-              variant="default"
+              variant="outline" size="auto"
               type="button"
-              className="text-xs rounded-sm px-1 text-gray-600 hover:bg-silver-gray hover:text-primary"
+              className="text-xs rounded-sm px-1 text-gray-600 hover:bg-gray-200 hover:text-primary"
             >
               기본 배송지로 설정
-            </ActionButton>
+            </Button>
           )}
         </div>
         <div className="flex gap-2 text-xs">
-          <ActionButton onClick={onClickEdit} variant="default" className="border-none">
+          <Button onClick={onClickEdit} variant="outline" size="auto" className="border-none">
             수정
-          </ActionButton>
-          <ActionButton onClick={onClickDelete} variant="default" className="border-none">
+          </Button>
+          <Button onClick={onClickDelete} variant="outline" size="auto" className="border-none">
             삭제
-          </ActionButton>
+          </Button>
         </div>
       </div>
       <div className="flex flex-col lg:flex-row lg:items-center gap-1 text-gray-500 text-sm">

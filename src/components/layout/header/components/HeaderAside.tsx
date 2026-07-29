@@ -49,7 +49,7 @@ const HeaderAside = () => {
                 <div className="flex items-center gap-2">
                   <UserAvatar size="md" />
                   <h2 className="font-bold">{session?.user.user_metadata.name}</h2>
-                  <SignOutButton className="text-sm text-dark-gray ml-auto" onSuccess={onSignOutSuccess} />
+                  <SignOutButton className="text-sm text-gray-300 ml-auto" onSuccess={onSignOutSuccess} />
                 </div>
               </div>
             )}

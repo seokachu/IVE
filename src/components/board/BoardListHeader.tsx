@@ -1,6 +1,6 @@
 const BoardListHeader = () => {
   return (
-    <ul className="hidden lg:flex text-center py-3 bg-gray-100 border-dark-gray lg:h-[50px]">
+    <ul className="hidden lg:flex text-center py-3 bg-gray-100 border-gray-300 lg:h-[50px]">
       <li className="w-[10%]">번호</li>
       <li className="w-[40%]">제목</li>
       <li className="w-[15%] text-left pl-3">작성자</li>

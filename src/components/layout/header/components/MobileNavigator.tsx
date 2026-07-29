@@ -13,7 +13,7 @@ const MobileNavigator = () => {
         {GNB_ARRAY.map((el: GnbArrayList) => (
           <li
             key={el.label}
-            className="data-[state=closed] border-b-[1px] border-dark-gray cursor-pointer hover:bg-zinc-400 hover:text-white"
+            className="data-[state=closed] border-b-[1px] border-gray-300 cursor-pointer hover:bg-gray-400 hover:text-white"
           >
             <SheetClose asChild>
               <button

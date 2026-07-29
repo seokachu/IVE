@@ -1,4 +1,4 @@
-import ActionButton from "@/components/common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import UserAvatar from "@/components/common/UserAvatar";
 import { formatDate } from "@/utils/formatDate";
 import { useRouter } from "next/navigation";
@@ -43,14 +43,14 @@ const PostListItem = ({ item }: PostListItemProps) => {
           </div>
         </div>
         <div onClick={stopPropagation}>
-          <ActionButton
+          <Button
             onClick={onClickCommentDetail}
-            variant="default" 
+            variant="outline" size="auto" 
             className="px-3 py-2 flex flex-col items-center gap-1 bg-white group"
           >
             <strong className="font-bold">{item.board_comments[0]?.count || 0}</strong>
             <span className="text-xs text-gray-500 group-hover:text-purple">댓글</span>
-          </ActionButton>
+          </Button>
         </div>
       </div>
     </li>

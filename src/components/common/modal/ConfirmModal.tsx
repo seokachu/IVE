@@ -6,7 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import ActionButton from "../button/ActionButton";
+import { Button } from "@/components/ui/button";
 
 interface ConfirmModalProps {
   isOpen: (value: boolean) => void;
@@ -31,12 +31,12 @@ const ConfirmModal = ({ isOpen, onConfirm, title, description, cancelText, confi
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         <DialogFooter className="sm:w-full sm:justify-center mt-3">
-          <ActionButton variant="primary" onClick={() => isOpen(false)} className="w-full text-xs py-2">
+          <Button size="auto" onClick={() => isOpen(false)} className="w-full text-xs py-2">
             {cancelText}
-          </ActionButton>
-          <ActionButton variant="outline" onClick={handleConfirm} className="w-full text-xs py-2">
+          </Button>
+          <Button variant="outlineBrand" size="auto" onClick={handleConfirm} className="w-full text-xs py-2">
             {confirmText}
-          </ActionButton>
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

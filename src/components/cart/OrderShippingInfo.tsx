@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import ActionButton from "../common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
 import EmptyStateMessage from "./EmptyStateMessage";
 import { useSession } from "@/store/zustand";
@@ -28,9 +28,9 @@ const OrderShippingInfo = () => {
       <div className="flex justify-between border-b pb-4 mb-5">
         <h2 className="font-bold">배송 정보</h2>
         {session && (
-          <ActionButton onClick={handleShippingAddressChange} variant="primary" className="text-xs px-2">
+          <Button onClick={handleShippingAddressChange} size="auto" className="text-xs px-2">
             {hasShippingAddress ? "배송지 변경" : "배송지 추가"}
-          </ActionButton>
+          </Button>
         )}
       </div>
       <ul className="flex flex-col justify-between gap-2 text-sm">

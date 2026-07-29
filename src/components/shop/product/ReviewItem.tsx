@@ -19,7 +19,7 @@ const ReviewItem = ({ item }: ReviewItemProps) => {
             </div>
           </div>
         </div>
-        <time className="text-dark-gray text-sm">{formatDate(item.created_at)}</time>
+        <time className="text-gray-300 text-sm">{formatDate(item.created_at)}</time>
       </div>
       <p className="mt-3 px-2">{item.content}</p>
     </li>

@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/utils/formatDate";
-import ActionButton from "@/components/common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import { useIncrementViewCount } from "@/hooks/queries/useBoard";
 import { hasViewedPost, markPostAsViewed } from "@/utils/viewCount";
 import UserAvatar from "@/components/common/UserAvatar";
@@ -46,7 +46,7 @@ const BoardListItem = ({ item, keyword }: BoardListItemProps) => {
     return word.map((text, index) => {
       if (text.toLowerCase() === keyword.toLowerCase()) {
         return (
-          <span key={index} className="bg-yellow-200">
+          <span key={index} className="bg-purple-100">
             {text}
           </span>
         );
@@ -70,7 +70,7 @@ const BoardListItem = ({ item, keyword }: BoardListItemProps) => {
             {highlightKeyword(item.title, keyword || "")}
           </p>
           <p
-            className="text-blue-500"
+            className="text-info"
             aria-label={`댓글 ${item.comment_count || 0}개`}
           >
             &#91;{item.comment_count}&#93;
@@ -120,16 +120,16 @@ const BoardListItem = ({ item, keyword }: BoardListItemProps) => {
             </div>
           </div>
           <div onClick={stopPropagation}>
-            <ActionButton
+            <Button
               onClick={onClickCommentDetail}
-              variant="default"
+              variant="outline" size="auto"
               className="px-3 py-2 flex flex-col items-center gap-1 bg-white group"
             >
               <strong className="font-bold">{item.comment_count}</strong>
               <span className="text-xs text-gray-500 group-hover:text-purple">
                 댓글
               </span>
-            </ActionButton>
+            </Button>
           </div>
         </div>
       </div>

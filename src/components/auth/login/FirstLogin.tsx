@@ -1,3 +1,4 @@
+import { COLORS } from "@/utils/constants";
 import { useEffect, useState } from "react";
 import JSConfetti from "js-confetti";
 import { toast } from "@/hooks/use-toast";
@@ -24,7 +25,7 @@ const FirstLogin = () => {
   useEffect(() => {
     if (jsConfetti) {
       jsConfetti?.addConfetti({
-        confettiColors: ["#ff9f87", "#FFFFFF", "#EB7FEC", "#E72424"],
+        confettiColors: [COLORS.orange300, COLORS.white, COLORS.purple300, COLORS.red],
         confettiRadius: 5,
         confettiNumber: 300,
       });

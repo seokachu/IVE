@@ -14,7 +14,7 @@ const NewsCategoryFilter = ({ selectedCategory, setSelectedCategory }: NewsCateg
           >
             <button
               onClick={() => setSelectedCategory(el.category)}
-              className={`hover:text-font-color ${selectedCategory === el.category ? "text-purple" : ""}`}
+              className={`hover:text-gray-900 ${selectedCategory === el.category ? "text-purple" : ""}`}
             >
               {el.category}
             </button>

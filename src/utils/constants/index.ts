@@ -174,3 +174,13 @@ export const LATEST_DEFAULT_LIMIT = 5;
 
 //소식 페이지 gallery section 데이터 불러오기 6개 제한
 export const GALLERY_DEFAULT_LIMIT = 6;
+
+//디자인 시스템 색상 토큰 — className이 아닌 JS 코드(아이콘 color, 컨페티 등)에서 사용 (docs/design-system.md §1)
+export const COLORS = {
+  white: "#ffffff",
+  gray300: "#cccccc",
+  purple300: "#db97e9",
+  orange300: "#ff9f87",
+  red: "#e72424",
+  warning: "#facc15",
+} as const;

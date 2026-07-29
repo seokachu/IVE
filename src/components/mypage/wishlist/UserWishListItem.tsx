@@ -62,8 +62,8 @@ const UserWishListItem = ({ item, index }: UserWishListItemProps) => {
           loading={index < 6 ? "eager" : "lazy"}
           priority={index < 6}
         />
-        <button onClick={onClickHeart} className="absolute right-2 bottom-2 text-dark-gray" aria-label="찜하기 취소">
-          <GoHeartFill size={30} className="opacity-90 transition-colors text-rose-500" />
+        <button onClick={onClickHeart} className="absolute right-2 bottom-2 text-gray-300" aria-label="찜하기 취소">
+          <GoHeartFill size={30} className="opacity-90 transition-colors text-red" />
         </button>
       </div>
       <div className="flex flex-col gap-1">
@@ -75,7 +75,7 @@ const UserWishListItem = ({ item, index }: UserWishListItemProps) => {
           <span className="text-purple">{goodsItem.discount_rate}%</span>
           <span className="whitespace-nowrap">{formatPrice(price)}원</span>
         </div>
-        <div className="flex items-center gap-1 text-[#878f91] text-xs lg:text-sm">
+        <div className="flex items-center gap-1 text-gray-400 text-xs lg:text-sm">
           <FaStar />
           <span>{averageRating}</span>
         </div>

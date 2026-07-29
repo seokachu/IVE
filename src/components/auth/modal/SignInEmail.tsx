@@ -1,4 +1,5 @@
 "use client";
+import { COLORS } from "@/utils/constants";
 import { Form } from "@/components/ui/form";
 import { RHFInput } from "@/components/common/RHFInput";
 import { Button } from "@/components/ui/button";
@@ -99,7 +100,7 @@ const SignInEmail = ({ redirectPath = "/" }: SignInEmailProps) => {
             className="pl-11"
           />
           <span className="absolute right-4 top-[14px] cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
-            {showPassword ? <AiOutlineEye size={24} color="#ccc" /> : <AiOutlineEyeInvisible size={24} color="#ccc" />}
+            {showPassword ? <AiOutlineEye size={24} color={COLORS.gray300} /> : <AiOutlineEyeInvisible size={24} color={COLORS.gray300} />}
           </span>
         </div>
         <Button

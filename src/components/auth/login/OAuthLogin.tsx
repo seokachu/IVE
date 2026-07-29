@@ -26,7 +26,7 @@ const OAuthLogin = () => {
       <li>
         <OAuthButton
           onClick={() => handleOAuthLogin("kakao")}
-          className="bg-[#fee500] rounded-full border p-1 w-10 h-10"
+          className="bg-kakao rounded-full border p-1 w-10 h-10"
           icon={IoChatbubble}
           size={20}
           iconStyle="m-auto"
