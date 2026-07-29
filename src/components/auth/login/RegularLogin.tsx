@@ -4,7 +4,7 @@ import LogoImage from "@/assets/images/logo_pink.svg";
 import OAuthLogin from "./OAuthLogin";
 import SignInEmail from "@/components/auth/modal/SignInEmail";
 
-const RegularLogin = () => {
+const RegularLogin = ({ redirectPath = "/" }: { redirectPath?: string }) => {
   return (
     <div className="flex flex-col gap-6 w-full">
       <div className="flex flex-col gap-2">
@@ -20,7 +20,7 @@ const RegularLogin = () => {
         <span className="text-xs text-gray-400">또는</span>
         <span className="h-px flex-1 bg-gray-200" />
       </div>
-      <SignInEmail redirectPath="/" />
+      <SignInEmail redirectPath={redirectPath} />
       <p className="flex items-center justify-center gap-1.5 text-sm text-gray-500">
         아직 계정이 없나요?
         <Link href="/signup" className="font-semibold text-purple-500">

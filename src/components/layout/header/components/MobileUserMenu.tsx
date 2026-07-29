@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SignInModal from "../../../auth/modal/SignInModal";
+import LoginLink from "@/components/auth/login/LoginLink";
 import { SheetClose } from "@/components/ui/sheet";
 import CartIcon from "./CartIcon";
 import { useSession } from "@/store/zustand";
@@ -23,7 +23,9 @@ const MobileUserMenu = () => {
         </li>
         <li className={`${navListStyle} border-r-0`}>
           {!session ? (
-            <SignInModal title="로그인" className={`${hoverStyle} w-full h-full`} />
+            <SheetClose asChild>
+              <LoginLink className={`${navListItemStyle} ${hoverStyle}`}>로그인</LoginLink>
+            </SheetClose>
           ) : (
             <SheetClose asChild>
               <Link href="/mypage" className={`${navListItemStyle} ${hoverStyle}`}>

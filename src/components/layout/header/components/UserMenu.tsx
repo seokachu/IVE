@@ -1,6 +1,6 @@
 import CartIcon from "./CartIcon";
 import UserDropdownMenu from "./UserDropdownMenu";
-import SignInModal from "@/components/auth/modal/SignInModal";
+import LoginLink from "@/components/auth/login/LoginLink";
 import Link from "next/link";
 import { useSession } from "@/store/zustand";
 
@@ -15,7 +15,7 @@ const UserMenu = () => {
             <CartIcon className="left-3" />
           </Link>
         </li>
-        <li className="flex">{!session ? <SignInModal /> : <UserDropdownMenu />}</li>
+        <li className="flex">{!session ? <LoginLink>로그인/회원가입</LoginLink> : <UserDropdownMenu />}</li>
       </ul>
     </nav>
   );

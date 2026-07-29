@@ -8,8 +8,10 @@ import type { OAuthProvider } from "@/types";
 const OAuthLogin = () => {
   const handleOAuthLogin = async (provider: OAuthProvider) => {
     try {
-      //현재페이지 저장
-      sessionStorage.setItem("redirectUrl", window.location.pathname + window.location.search);
+      //로그인 후 복귀 경로 저장 — OAuth 복귀 시 useAuth에서 소비 (내부 경로만 허용)
+      const redirect = new URLSearchParams(window.location.search).get("redirect");
+      const redirectUrl = redirect && redirect.startsWith("/") && !redirect.startsWith("//") ? redirect : "/";
+      sessionStorage.setItem("redirectUrl", redirectUrl);
       await oAuthLogin(provider);
     } catch (error) {
       if (error instanceof Error) {

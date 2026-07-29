@@ -1,6 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
 import LogoImage from "@/assets/images/logo_pink.svg";
-import SignInModal from "@/components/auth/modal/SignInModal";
 import SignUpForm from "@/components/auth/signup/SignUpForm";
 import { signUpMetadata } from "@/metadata/signup/signupMetadata";
 
@@ -20,7 +20,9 @@ const SignUp = () => {
         <SignUpForm />
         <p className="flex items-center justify-center gap-1.5 text-sm text-gray-500 mt-6">
           이미 계정이 있나요?
-          <SignInModal title="로그인" className="font-semibold text-purple-500" />
+          <Link href="/login" className="font-semibold text-purple-500">
+            로그인
+          </Link>
         </p>
       </section>
     </main>
