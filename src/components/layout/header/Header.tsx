@@ -9,6 +9,7 @@ import HeaderAside from "./components/HeaderAside";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { cn } from "@/utils/utils";
+import ThemeToggle from "./components/ThemeToggle";
 import { useIsScrolled, useUiActions } from "@/store/zustand";
 import { throttle } from "lodash";
 
@@ -52,7 +53,7 @@ const Header = () => {
       className={cn(
         isMainPage ? "fixed" : "relative",
         "right-0 top-0 left-0 z-20 w-screen overflow-x-hidden h-[75px] flex items-center",
-        isScrolled && "bg-white text-black shadow-sm",
+        isScrolled && "bg-background text-foreground shadow-sm",
       )}
     >
       <div
@@ -68,7 +69,10 @@ const Header = () => {
           </Link>
         </h1>
         <Navigator />
-        <UserMenu />
+        <div className="flex items-center gap-4">
+          <ThemeToggle />
+          <UserMenu />
+        </div>
       </div>
     </header>
   );

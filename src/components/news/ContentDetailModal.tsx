@@ -20,7 +20,7 @@ const ContentDetailModal = ({ isOpen, onOpenChange, content, contentType = "news
           contentType === "news" ? "min-h-[90dvh] lg:min-h-[80dvh] max-h-[90dvh] lg:max-h-[80dvh]" : "h-auto"
         }`}
       >
-        <DialogClose className="absolute right-4 top-4 rounded-full bg-white p-2 shadow-md z-50 hover:bg-gray-100 flex items-center justify-center w-8 h-8">
+        <DialogClose className="absolute right-4 top-4 rounded-full bg-background p-2 shadow-md z-50 hover:bg-gray-100 flex items-center justify-center w-8 h-8">
           <X className="h-5 w-5" />
           <span className="sr-only">닫기</span>
         </DialogClose>

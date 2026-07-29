@@ -159,7 +159,7 @@ const UserInfo = () => {
             }}
             onSave={handleSaveImage}
           />
-          <div className="absolute top-2/3 left-10 bg-gray-900/75 p-1 rounded-full m-1">
+          <div className="absolute top-2/3 left-10 bg-black/70 p-1 rounded-full m-1">
             <Upload color="white" />
           </div>
         </div>

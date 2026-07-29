@@ -10,7 +10,7 @@ const NewsCategoryFilter = ({ selectedCategory, setSelectedCategory }: NewsCateg
           <li
             key={el.category}
             className={`px-6 py-2 rounded-full whitespace-nowrap text-xs lg:text-sm ${
-              selectedCategory === el.category ? "bg-white" : ""
+              selectedCategory === el.category ? "bg-background" : ""
             }`}
           >
             <Button variant="plain" size="auto"

@@ -27,7 +27,7 @@ const SearchAddress = ({ onClose, onAddressChange }: SearchAddressProps) => {
 
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
-      <div className="bg-white p-4 rounded-lg w-[500px] relative">
+      <div className="bg-background p-4 rounded-lg w-[500px] relative">
         <Button variant="plain" size="auto" onClick={onClose} className="absolute right-4 top-4 text-gray-500 hover:text-purple z-10">
           &times;
         </Button>

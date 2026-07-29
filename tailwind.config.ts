@@ -34,16 +34,17 @@ const config: Config = {
         kakao: "var(--kakao)",
         // Neutral 램프 — 기본 Tailwind gray를 디자인 시스템 값으로 재정의 (docs/design-system.md §1-1)
         // 불투명도 변형(bg-gray-500/90 등) 지원을 위해 hex 리터럴 사용
+        // 다크모드에서 값이 플립되도록 CSS 변수 참조 (불투명도 변형이 필요하면 오버레이는 black/white 사용)
         gray: {
-          50: "#f9f9f9",
-          100: "#f5f5f5",
-          200: "#eeeeee",
-          300: "#cccccc",
-          400: "#a0a0a0",
-          500: "#6b7280",
-          600: "#495057",
-          700: "#333333",
-          900: "#0a0a0a",
+          50: "var(--gray-50)",
+          100: "var(--gray-100)",
+          200: "var(--gray-200)",
+          300: "var(--gray-300)",
+          400: "var(--gray-400)",
+          500: "var(--gray-500)",
+          600: "var(--gray-600)",
+          700: "var(--gray-700)",
+          900: "var(--gray-900)",
         },
         red: {
           DEFAULT: "var(--red)",

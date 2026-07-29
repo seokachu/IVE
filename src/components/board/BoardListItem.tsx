@@ -123,7 +123,7 @@ const BoardListItem = ({ item, keyword }: BoardListItemProps) => {
             <Button
               onClick={onClickCommentDetail}
               variant="outline" size="auto"
-              className="px-3 py-2 flex flex-col items-center gap-1 bg-white group"
+              className="px-3 py-2 flex flex-col items-center gap-1 bg-background group"
             >
               <strong className="font-bold">{item.comment_count}</strong>
               <span className="text-xs text-gray-500 group-hover:text-purple">

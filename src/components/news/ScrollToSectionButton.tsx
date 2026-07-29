@@ -21,7 +21,7 @@ const ScrollToSectionButton = () => {
       <Button
         onClick={() => scrollToSection("gallery_section")}
         variant="outline" size="auto"
-        className="px-8 py-4 !rounded-full bg-white font-bold w-full md:w-[400px] lg:w-max"
+        className="px-8 py-4 !rounded-full bg-background font-bold w-full md:w-[400px] lg:w-max"
       >
         View Gallery
       </Button>
