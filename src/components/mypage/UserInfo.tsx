@@ -3,7 +3,7 @@ import UserAvatar from "../common/UserAvatar";
 import Link from "next/link";
 import { MYPAGE_GNB_ARRAY } from "@/utils/constants";
 import { usePathname } from "next/navigation";
-import ActionButton from "../common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import { ChangeEvent, useRef, useState } from "react";
 import { updateNickname } from "@/lib/supabase/auth";
 import { toast } from "@/hooks/use-toast";
@@ -173,18 +173,18 @@ const UserInfo = () => {
             <h2 className="font-bold py-1">{session?.user.user_metadata.name}</h2>
           )}
           <div className="flex gap-1 whitespace-nowrap">
-            <ActionButton
+            <Button
               onClick={handleNicknameChange}
-              variant="primary"
+              size="auto"
               className="text-sm py-2 px-3"
               aria-label={!isEditingNickname ? "수정 버튼" : "수정완료 버튼"}
             >
               {!isEditingNickname ? "수정" : "수정완료"}
-            </ActionButton>
+            </Button>
             {isEditingNickname && (
-              <ActionButton onClick={handleNicknameCancel} variant="default" className="text-sm py-2 px-3">
+              <Button onClick={handleNicknameCancel} variant="outline" size="auto" className="text-sm py-2 px-3">
                 취소
-              </ActionButton>
+              </Button>
             )}
           </div>
         </div>

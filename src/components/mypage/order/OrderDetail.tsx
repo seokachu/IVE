@@ -1,4 +1,4 @@
-import ActionButton from "@/components/common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import { FaArrowLeft } from "react-icons/fa";
 import DetailOrderItem from "./DetailOrderItem";
 import { formatDate } from "@/utils/formatDate";
@@ -20,14 +20,14 @@ const OrderDetail = ({ orderItems, onBack }: OrderDetailProps) => {
     <div>
       <h2 className="font-bold lg:text-xl hidden lg:block">주문 상세 내역</h2>
       <div className="flex items-center my-5">
-        <ActionButton
+        <Button
           onClick={onBack}
-          variant="default"
+          variant="outline" size="auto"
           className="flex items-center gap-1 text-xs lg:text-sm py-1 px-3 hover:bg-purple hover:text-white hover:border-purple"
         >
           <FaArrowLeft className="translate-y-[1px]" />
           돌아가기
-        </ActionButton>
+        </Button>
       </div>
       <div className="flex justify-between border-b text-xs lg:text-sm">
         <time>{formatDate(orderItems[0].created_at)}</time>

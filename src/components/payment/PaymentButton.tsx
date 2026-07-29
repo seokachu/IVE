@@ -1,4 +1,4 @@
-import ActionButton from "../common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import { loadTossPayments } from "@tosspayments/payment-sdk";
 import { formatPrice } from "@/utils/calculateDiscount";
 import { toast } from "@/hooks/use-toast";
@@ -92,16 +92,16 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
   };
 
   return (
-    <ActionButton
+    <Button
       onClick={handlePayment}
-      variant="primary"
-      className="flex items-baseline justify-center text-center w-full rounded-md py-2 bg-purple text-white"
+      size="auto"
+      className="flex items-baseline justify-center text-center w-full py-2"
     >
       <strong className="text-lg lg:text-xl mr-[2px]">
         {formatPrice(amount)}
       </strong>
       원 결제하기
-    </ActionButton>
+    </Button>
   );
 };
 

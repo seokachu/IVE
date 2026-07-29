@@ -1,5 +1,5 @@
 "use client";
-import ActionButton from "@/components/common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import AddToCartDrawer from "./AddToCartDrawer";
 import { cartStorage } from "@/utils/cartStorage";
@@ -61,9 +61,9 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
     <>
       <ul className="flex items-stretch justify-center gap-1 lg:gap-2">
         <li className="w-1/5">
-          <ActionButton
+          <Button
             onClick={onClickHeart}
-            variant="primary"
+            size="auto"
             className="w-full flex items-center justify-center h-full"
             aria-label="찜하기"
           >
@@ -72,12 +72,12 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
             ) : (
               <GoHeart size={25} className="text-white" />
             )}
-          </ActionButton>
+          </Button>
         </li>
         <li className="w-2/4">
-          <ActionButton onClick={onClickCart} variant="outline" className="w-full py-3 text-center">
+          <Button onClick={onClickCart} variant="outlineBrand" size="auto" className="w-full py-3 text-center">
             장바구니
-          </ActionButton>
+          </Button>
         </li>
         <li className="w-2/4">
           <DirectPaymentButton product={product} quantity={quantity} />

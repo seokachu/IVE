@@ -1,5 +1,5 @@
 "use client";
-import ActionButton from "../common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import { FaArrowDown } from "react-icons/fa6";
 import GalleryPhotoList from "./GalleryPhotoList";
 import { useGallery } from "@/hooks/queries/useGallery";
@@ -42,14 +42,14 @@ const GallerySection = () => {
         <GalleryPhotoList gallery={gallery} onClick={handleGalleryClick} />
         <div className="text-center sticky bottom-10">
           {gallery.length >= itemLimit && (
-            <ActionButton
+            <Button
               onClick={handleLoadMore}
-              variant="primary"
+              size="auto"
               className="inline-flex justify-center items-center gap-1 px-8 py-4 !rounded-full text-sm lg:text-base"
             >
               <span>더 많은 사진 보기</span>
               <FaArrowDown className="animate-arrow" />
-            </ActionButton>
+            </Button>
           )}
         </div>
       </div>

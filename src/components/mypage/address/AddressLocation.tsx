@@ -1,4 +1,4 @@
-import ActionButton from "@/components/common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import { RHFInput } from "@/components/common/RHFInput";
 import type { AddressLocationProps } from "@/types/mypage";
 
@@ -21,9 +21,9 @@ const AddressLocation = ({ searchAddress, detailAddress }: AddressLocationProps)
               readOnly
             />
           </div>
-          <ActionButton onClick={searchAddress} type="button" variant="primary" className="w-2/6 text-sm h-[40px]">
+          <Button onClick={searchAddress} type="button" size="auto" className="w-2/6 text-sm h-[40px]">
             주소 검색
-          </ActionButton>
+          </Button>
         </div>
         <RHFInput
           type="text"

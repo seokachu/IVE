@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import ActionButton from "../common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import NewsCategoryFilter from "./NewsCategoryFilter";
 import NewsGallery from "./NewsGallery";
 import { FaArrowDown } from "react-icons/fa6";
@@ -41,14 +41,14 @@ const LatestNewsSection = () => {
         <NewsGallery selectedCategory={selectedCategory} newsItems={newsItems} onClick={handleNewsClick} />
         <div className="text-center sticky bottom-10">
           {newsItems.length >= itemLimit && (
-            <ActionButton
+            <Button
               onClick={handleLoadMore}
-              variant="primary"
+              size="auto"
               className="inline-flex justify-center items-center gap-1 px-8 py-4 !rounded-full text-sm lg:text-base"
             >
               <span>더 많은 소식 보기</span>
               <FaArrowDown className="animate-arrow" />
-            </ActionButton>
+            </Button>
           )}
         </div>
       </div>

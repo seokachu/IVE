@@ -1,6 +1,6 @@
 "use client";
 import { useId, useState } from "react";
-import ActionButton from "../button/ActionButton";
+import { Button } from "@/components/ui/button";
 import ConfirmModal from "../modal/ConfirmModal";
 
 interface SelectionControlProps {
@@ -47,20 +47,20 @@ const SelectionControl = ({
         전체선택 {selectedCount}/{totalItems}
       </label>
       <div className="flex gap-2">
-        <ActionButton
-          variant="outline"
+        <Button
+          variant="outlineBrand" size="auto"
           className="px-2 py-1 border rounded-md text-xs lg:text-sm"
           onClick={onDeleteSelected}
         >
           선택삭제
-        </ActionButton>
-        <ActionButton
-          variant="primary"
-          className="px-2 py-1 border rounded-md text-xs lg:text-sm"
+        </Button>
+        <Button
+          size="auto"
+          className="px-2 py-1 rounded-md text-xs lg:text-sm"
           onClick={handleDeleteAll}
         >
           전체삭제
-        </ActionButton>
+        </Button>
       </div>
       {isModal && (
         <ConfirmModal

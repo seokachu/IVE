@@ -1,5 +1,5 @@
 "use client";
-import ActionButton from "@/components/common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const PaymentFail = () => {
@@ -28,9 +28,9 @@ const PaymentFail = () => {
         <h1 className="text-lg lg:text-2xl font-bold mb-4">결제가 실패 되었습니다.</h1>
         <p className="text-gray-600 mb-6">에러 사유 : {message}&#46;</p>
         <div className="flex gap-4 justify-center">
-          <ActionButton onClick={onClickGoToCart} variant="primary" className="px-4 py-2">
+          <Button onClick={onClickGoToCart} size="auto" className="px-4 py-2">
             장바구니로 돌아가기
-          </ActionButton>
+          </Button>
         </div>
       </div>
     </main>

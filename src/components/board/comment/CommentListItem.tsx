@@ -2,7 +2,7 @@ import Image from "next/image";
 import DefaultImage from "@/assets/images/default_image.avif";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiFillLike } from "react-icons/ai";
-import ActionButton from "@/components/common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import { useDeleteComment, useRepliesCommentList } from "@/hooks/queries/useComment";
 import { formatDate } from "@/utils/formatDate";
 import BoardActionButton from "../BoardActionButton";
@@ -98,20 +98,20 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange }: Comm
                 <div className="flex items-center gap-4">
                   {!item.parent_id && (
                     <>
-                      <ActionButton
+                      <Button
                         onClick={handleCommentLikeToggle}
                         disabled={isPending}
-                        variant="default"
+                        variant="outline" size="auto"
                         className={`border-none flex items-center gap-[2px] hover:text-purple ${
                           isCommentLiked ? "text-purple" : ""
                         }`}
                       >
                         {!isCommentLiked ? <AiOutlineLike size={15} /> : <AiFillLike size={15} />}
                         <span>{item?.likes[0]?.count || 0}</span>
-                      </ActionButton>
-                      <ActionButton onClick={onClickReplies} variant="default" className="border-none">
+                      </Button>
+                      <Button onClick={onClickReplies} variant="outline" size="auto" className="border-none">
                         {!showReplyForm ? "답변" : "닫기"}
-                      </ActionButton>
+                      </Button>
                     </>
                   )}
                 </div>

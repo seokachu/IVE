@@ -1,4 +1,4 @@
-import ActionButton from "@/components/common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import {
   Drawer,
   DrawerClose,
@@ -30,14 +30,14 @@ const AddToCartDrawer = ({ isOpen, onClose }: CartDrawerProps) => {
           <DrawerDescription className="sr-only">장바구니 영역</DrawerDescription>
         </DrawerHeader>
         <DrawerFooter className="flex flex-row pb-10">
-          <ActionButton variant="outline" onClick={onClickCart} className="w-full lg:w-2/4 py-3 text-center">
+          <Button variant="outlineBrand" size="auto" onClick={onClickCart} className="w-full lg:w-2/4 py-3 text-center">
             장바구니 보기
-          </ActionButton>
+          </Button>
           <div className="w-full lg:w-2/4">
             <DrawerClose asChild>
-              <ActionButton variant="primary" className="w-full py-3 text-center">
+              <Button size="auto" className="w-full py-3 text-center">
                 계속 쇼핑하기
-              </ActionButton>
+              </Button>
             </DrawerClose>
           </div>
         </DrawerFooter>

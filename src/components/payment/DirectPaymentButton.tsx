@@ -3,7 +3,7 @@ import { getDiscountedPrice } from "@/utils/calculateDiscount";
 import { toast } from "@/hooks/use-toast";
 import { useCustomerInfo } from "@/hooks/queries/useCustomerInfo";
 import { generateRandomOrderId } from "@/utils/randomOrderName";
-import ActionButton from "../common/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
 import useAuthGuard from "@/hooks/useAuthGuard";
 import { useSession } from "@/store/zustand";
@@ -81,13 +81,13 @@ const DirectPaymentButton = ({
   };
 
   return (
-    <ActionButton
+    <Button
       onClick={handleDirectPayment}
-      variant="primary"
+      size="auto"
       className="w-full py-3 text-center"
     >
       구매하기
-    </ActionButton>
+    </Button>
   );
 };
 
