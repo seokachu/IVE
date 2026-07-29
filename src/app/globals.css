@@ -36,17 +36,23 @@
   /* Error red — tailwind.config의 red.DEFAULT가 참조 */
   --red: #e72424;
 }
-/* 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
-
+/* 다크 테마 — 같은 토큰의 두 번째 값 (docs/design-system.md §1-3). 브랜드 원색(purple/orange 300+, status)은 유지 */
 .dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --purple-50: #251329;
+  --purple-100: #33193a;
+  --purple-200: #46224f;
+
+  --orange-100: #38201a;
+
+  --gray-50: #171717;
+  --gray-100: #232323;
+  --gray-200: #2e2e2e;
+  --gray-300: #414141;
+  --gray-400: #757575;
+  --gray-500: #a8a8ad;
+  --gray-600: #c9ccd1;
+  --gray-700: #dcdcdc;
+  --gray-900: #f4f4f5;
 }
 
 html,
@@ -109,25 +115,26 @@ body,
     --radius: 0.5rem;
   }
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --background: 0 0% 7%;
+    --foreground: 0 0% 96%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 96%;
+    /* 브랜드 보라 유지 — 다크에서도 primary는 동일 */
+    --primary: 290 65% 75%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 96%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 290 65% 75%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;

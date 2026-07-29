@@ -29,7 +29,7 @@ export default async function Home() {
           <VisualSection />
           <AlbumSection />
         </div>
-        <div className="relative z-10 bg-white">
+        <div className="relative z-10 bg-background">
           <BoardSection />
           <GoodsPromoSection />
           <ShopSection />

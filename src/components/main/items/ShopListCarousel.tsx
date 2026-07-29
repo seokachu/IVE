@@ -24,7 +24,7 @@ const ShopListCarousel = () => {
   const [swiper, setSwiper] = useState<SwiperClass | null>(null);
 
   const navButtonStyle =
-    "absolute top-1/2 -translate-y-1/2 z-10 h-8 w-8 rounded-full border border-gray-300 bg-white p-0 hover:bg-gray-100";
+    "absolute top-1/2 -translate-y-1/2 z-10 h-8 w-8 rounded-full border border-gray-300 bg-background p-0 hover:bg-gray-100";
 
   return (
     <div className="relative w-full max-w-content">
