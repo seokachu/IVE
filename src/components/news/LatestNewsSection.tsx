@@ -33,7 +33,7 @@ const LatestNewsSection = () => {
   };
 
   return (
-    <section className="max-w-[1280px] flex justify-center align-center flex-col px-5 py-32 m-auto" id="news_section">
+    <section className="max-w-content flex justify-center align-center flex-col px-5 py-32 m-auto" id="news_section">
       <h2 className="text-2xl font-bold lg:text-4xl mb-6 text-center">Latest News</h2>
       <h3 className="text-center text-gray-600 mb-12">아이브의 새로운 소식을 가장 먼저 만나보세요</h3>
       <div>

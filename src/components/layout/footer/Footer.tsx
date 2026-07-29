@@ -7,7 +7,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="bg-gray-400 relative z-10">
-      <div className="max-w-[1320px] m-auto py-9 px-[20px] flex justify-between items-center flex-col gap-5 lg:flex-row">
+      <div className="max-w-container m-auto py-9 px-[20px] flex justify-between items-center flex-col gap-5 lg:flex-row">
         <div className="flex gap-5 items-center flex-col lg:flex-row">
           <h1 className="relative w-[80px] h-auto">
             <Image src={LogoImage} alt="logo" className="fill" />

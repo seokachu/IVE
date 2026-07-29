@@ -20,7 +20,7 @@ const VisualSection = () => {
         aria-hidden="true"
         role="presentation"
       />
-      <ul className="absolute max-w-[1320px] w-full flex items-center text-center justify-center font-bold lg:justify-start lg:text-left">
+      <ul className="absolute max-w-container w-full flex items-center text-center justify-center font-bold lg:justify-start lg:text-left">
         <li className="text-white lg:pl-20">
           <h1 className="lg:[text-shadow:_1px_3px_5px_rgb(0_0_0_/_0.3)] text-3xl mb-5 tracking-wide lg:text-6xl">
             DIVE INTO IVE
