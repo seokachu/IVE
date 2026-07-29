@@ -96,7 +96,7 @@ const SignUpForm = () => {
               </Button>
             </div>
             <p className="flex items-center gap-1 text-xs text-gray-400">
-              <AlertCircle />
+              <AlertCircle size={14} />
               비밀번호 영문, 숫자, 특수문자 포함 8-20자
             </p>
           </div>

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IVE로 DIVE — 기능명세서 v2</title>
+<style>
+  :root {
+    --ink: #1f2430;
+    --sub: #5c6470;
+    --line: #e3e6ec;
+    --bg: #ffffff;
+    --soft: #f6f7fa;
+    --accent: #7c3aed;
+    --accent-soft: #f1e9ff;
+    --pink: #e85c8a;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--bg);
+    font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 48px 28px 96px; }
+
+  /* ── 문서 헤더 ── */
+  .back-link { display: inline-block; margin-bottom: 18px; color: var(--sub); text-decoration: none; font-size: 13px; }
+  .back-link:hover { color: var(--accent); }
+  .doc-head { border-bottom: 3px solid var(--ink); padding-bottom: 28px; margin-bottom: 32px; }
+  .doc-head .kicker { color: var(--accent); font-weight: 700; letter-spacing: .12em; font-size: 12px; text-transform: uppercase; }
+  .doc-head h1 { margin: 6px 0 4px; font-size: 30px; letter-spacing: -0.02em; }
+  .doc-head p.sub { margin: 0; color: var(--sub); }
+  .meta-table { margin-top: 20px; width: 100%; border-collapse: collapse; font-size: 13px; }
+  .meta-table th, .meta-table td { border: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+  .meta-table th { background: var(--soft); width: 130px; font-weight: 600; white-space: nowrap; }
+
+  /* ── 목차 ── */
+  .toc { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 20px 24px; margin: 32px 0 48px; }
+  .toc h2 { margin: 0 0 12px; font-size: 15px; }
+  .toc ol { margin: 0; padding-left: 20px; columns: 2; column-gap: 40px; }
+  .toc li { margin: 3px 0; break-inside: avoid; }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { color: var(--accent); text-decoration: underline; }
+
+  /* ── 섹션 ── */
+  section { margin-bottom: 56px; }
+  h2.sec {
+    font-size: 21px; letter-spacing: -0.01em;
+    border-left: 5px solid var(--accent);
+    padding: 2px 0 2px 14px;
+    margin: 0 0 6px;
+  }
+  .sec-desc { color: var(--sub); margin: 0 0 18px; }
+  h3 { font-size: 16px; margin: 30px 0 10px; }
+  h3 .path {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px; font-weight: 600;
+    background: var(--accent-soft); color: var(--accent);
+    border-radius: 6px; padding: 2px 8px; margin-left: 8px; vertical-align: 2px;
+  }
+
+  /* ── 기능 표 ── */
+  table.spec { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.spec th, table.spec td { border: 1px solid var(--line); padding: 8px 10px; vertical-align: top; text-align: left; }
+  table.spec th { background: var(--soft); font-weight: 600; white-space: nowrap; }
+  table.spec td:first-child { white-space: nowrap; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; color: var(--accent); font-weight: 600; }
+  table.spec td:nth-child(2) { font-weight: 600; min-width: 96px; }
+  table.spec tr:nth-child(even) td { background: #fbfbfd; }
+  .col-id { width: 84px; } .col-name { width: 130px; } .col-auth { width: 74px; }
+  .auth { display: inline-block; font-size: 11.5px; font-weight: 700; border-radius: 20px; padding: 1px 9px; white-space: nowrap; }
+  .auth.any    { background: #e8f4ee; color: #14794a; }
+  .auth.login  { background: #fff3e0; color: #b45f06; }
+  .auth.owner  { background: #fde8ef; color: #c2255c; }
+  .auth.app    { background: #e7f0fe; color: #1a5dbf; }
+
+  /* ── 변경점 표 ── */
+  table.diff { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.diff th, table.diff td { border: 1px solid var(--line); padding: 8px 10px; vertical-align: top; text-align: left; }
+  table.diff th { background: var(--soft); font-weight: 600; white-space: nowrap; }
+  table.diff td:first-child { font-weight: 600; white-space: nowrap; }
+  table.diff td:nth-child(2) { color: var(--sub); }
+
+  /* ── 보조 요소 ── */
+  code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; background: var(--soft); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; }
+  .msg { color: #8a2f5b; }
+  .note {
+    background: #fffaf0; border: 1px solid #f3e3bd; border-radius: 10px;
+    padding: 12px 16px; margin: 14px 0; font-size: 13px;
+  }
+  .note b { color: #9a6b00; }
+  ul.tight { margin: 6px 0; padding-left: 20px; }
+  ul.tight li { margin: 2px 0; }
+  .foot { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--sub); font-size: 12px; }
+
+  @media (max-width: 720px) {
+    .toc ol { columns: 1; }
+    .wrap { padding: 32px 16px 64px; }
+    table.spec, table.diff { display: block; overflow-x: auto; }
+  }
+  @media print {
+    .toc { break-inside: avoid; }
+    section { break-inside: auto; }
+    table.spec tr { break-inside: avoid; }
+    h2.sec { break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ══════════ 문서 헤더 ══════════ -->
+<a class="back-link" href="./index.html">← 기능명세서 아카이브</a>
+<header class="doc-head">
+  <div class="kicker">Functional Specification · v2</div>
+  <h1>IVE로 DIVE — 기능명세서 v2</h1>
+  <p class="sub">2026 리뉴얼 — 최신 스택 마이그레이션 · 하이브리드 앱 &amp; 푸시 알림 · 디자인 시스템</p>
+  <table class="meta-table">
+    <tr><th>문서 버전</th><td>v2 — Draft (리뉴얼 진행 중)</td></tr>
+    <tr><th>서비스명</th><td>IVE로 DIVE (<a href="https://ive-three.vercel.app">ive-three.vercel.app</a>) · Expo 하이브리드 앱(Android WebView, <code>seokachu/ive-app</code>) 병행</td></tr>
+    <tr><th>문서 기준</th><td>2026 리뉴얼 진행 중 — dev 브랜치 커밋 <code>565ede8</code> (2026-07-29)</td></tr>
+    <tr><th>작성일</th><td>2026-07-29</td></tr>
+    <tr><th>범위</th><td>메인 · 소식 · 인증 · 자유게시판 · 굿즈샵 · 장바구니/결제 · 마이페이지 · 푸시 알림 · 디자인 시스템 · 공통 UI</td></tr>
+    <tr><th>기술 스택</th><td>Next.js 16 (App Router, proxy) · React 19 · Supabase(<code>@supabase/ssr</code>) · Zustand · TanStack Query · Tailwind CSS · lucide-react · 토스페이먼츠 · Expo Push · pnpm · Playwright E2E</td></tr>
+    <tr><th>권한 표기</th><td><span class="auth any">전체</span> 비로그인 포함 누구나 · <span class="auth login">로그인</span> 로그인 필요 · <span class="auth owner">작성자</span> 본인 리소스만 · <span class="auth app">앱</span> 하이브리드 앱 환경 필요</td></tr>
+  </table>
+</header>
+
+<!-- ══════════ 목차 ══════════ -->
+<nav class="toc">
+  <h2>목차</h2>
+  <ol>
+    <li><a href="#changes">리뉴얼 개요 (v1 대비 변경점)</a></li>
+    <li><a href="#common">공통 (헤더 · 푸터 · 전역 UI)</a></li>
+    <li><a href="#main">메인 페이지</a></li>
+    <li><a href="#news">소식 페이지</a></li>
+    <li><a href="#auth">인증 (로그인 · 회원가입)</a></li>
+    <li><a href="#board">자유게시판</a></li>
+    <li><a href="#shop">굿즈샵</a></li>
+    <li><a href="#cart">장바구니 · 주문서</a></li>
+    <li><a href="#payment">결제</a></li>
+    <li><a href="#mypage">마이페이지</a></li>
+    <li><a href="#push">푸시 알림 · 하이브리드 연동</a></li>
+    <li><a href="#design">디자인 시스템</a></li>
+    <li><a href="#access">접근 제어 정책 요약</a></li>
+    <li><a href="#appendix">부록 (데이터 · 저장소 · 알려진 한계)</a></li>
+  </ol>
+</nav>
+
+<!-- ══════════ 1. 변경점 ══════════ -->
+<section id="changes">
+  <h2 class="sec">1. 리뉴얼 개요 (v1 대비 변경점)</h2>
+  <p class="sec-desc">v1(Next.js 14, 2025.05.29 배포분) 대비 이번 리뉴얼에서 달라진 것. 상세 동작은 각 섹션에 반영되어 있다.</p>
+  <table class="diff">
+    <tr><th>구분</th><th>v1</th><th>v2 (현재)</th></tr>
+    <tr><td>프레임워크</td><td>Next.js 14 · React 18 · <code>middleware.ts</code></td><td>Next.js 16 · React 19 — <code>middleware</code> → <code>proxy</code> 전환, 동적 라우트 async params 대응</td></tr>
+    <tr><td>상태 관리</td><td>Recoil 단일 스토어</td><td>Zustand — session / cart / checkout / ui 스토어 분리</td></tr>
+    <tr><td>인증 클라이언트</td><td><code>@supabase/auth-helpers</code> (deprecated)</td><td><code>@supabase/ssr</code> — 쿠키 기반 서버 검증</td></tr>
+    <tr><td>개발 인프라</td><td>npm · E2E 없음</td><td>pnpm · Playwright E2E 기준선(프로덕션 빌드 기준 15케이스)</td></tr>
+    <tr><td>플랫폼</td><td>웹 전용</td><td><b>Expo 하이브리드 앱(Android)</b> + <b>푸시 알림 3종</b>(댓글·답글·좋아요) + 수신 설정 토글 + Android App Links — 10·11장</td></tr>
+    <tr><td>결제 복귀</td><td>PG 복귀 시 로그인 검사에 걸려 로그인 페이지로 튕기는 문제</td><td><b>수정됨</b> — 서버는 주문번호 검사만 수행하고 로그인 검사는 클라이언트 가드가 담당 (PAY-02)</td></tr>
+    <tr><td>로그인 진입</td><td>헤더에서 2단계 모달(소셜 선택 → 이메일)</td><td>모달 제거, <code>/login</code> 페이지로 단일화 + 로그인 후 원래 페이지로 복귀(<code>?redirect</code>) — AUTH-07</td></tr>
+    <tr><td>소셜 로그인</td><td>카카오 · 구글 · 깃허브 (원형 아이콘 3종)</td><td>카카오 · 구글 (전체 너비 라벨 버튼 2종) — 깃허브 제거</td></tr>
+    <tr><td>회원가입</td><td>약관 동의 없음</td><td><b>필수 약관 2건</b>(이용약관 · 개인정보 수집·이용) 동의 시에만 가입 가능 + 약관 전문 모달 — AUTH-10</td></tr>
+    <tr><td>테마</td><td>라이트 고정</td><td><b>다크모드 지원</b> — 헤더 토글(기본 라이트, 시스템 미연동), 다크 전용 팔레트, 하이브리드 앱 테마 연동 — COM-16 · PUSH-10</td></tr>
+    <tr><td>UI 기반</td><td>하드코딩 hex · 컴포넌트별 개별 버튼/아이콘/스피너</td><td>디자인 토큰(색상 램프·타이포·스페이싱) + <code>ui/button</code>·<code>ui/input</code> 단일화 + lucide 아이콘 · 공용 Spinner(접근성 role 부여) — 12장</td></tr>
+    <tr><td>화면 리디자인</td><td>—</td><td>로그인 · 회원가입 화면 디자인 시스템 기반 리디자인 (진행 중, 이후 다른 화면으로 확대 예정)</td></tr>
+  </table>
+</section>
+
+<!-- ══════════ 2. 공통 ══════════ -->
+<section id="common">
+  <h2 class="sec">2. 공통 (헤더 · 푸터 · 전역 UI)</h2>
+  <p class="sec-desc">모든 화면에 공통 적용되는 레이아웃과 전역 동작.</p>
+
+  <h3>2-1. 헤더 (데스크톱)</h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>COM-01</td><td>로고 / 홈 이동</td><td>좌측 로고 클릭 시 메인(<code>/</code>)으로 이동.</td><td>메인 상단(미스크롤)에서는 흰색 로고, 그 외에는 검정 로고 표시. 다크모드에서는 흰색 로고 사용.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-02</td><td>스크롤 반응 헤더</td><td>메인 페이지에서는 투명 배경으로 고정(fixed)되며, 앨범 섹션에 도달하면 흰 배경 + 그림자 스타일로 전환.</td><td>스크롤 감지는 100ms 스로틀. 메인 외 페이지는 항상 흰 배경(relative).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-03</td><td>GNB 메뉴</td><td>소식(<code>/news</code>) · 굿즈샵(<code>/shop</code>) · 자유게시판(<code>/board</code>) 3개 메뉴. 데스크톱(lg 이상)에서만 노출.</td><td>현재 경로가 해당 메뉴로 시작하면(하위 경로 포함) 굵은 글씨로 활성 표시.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-04</td><td>장바구니 아이콘 · 뱃지</td><td>장바구니(<code>/cart</code>) 이동 아이콘. 담긴 <b>상품 종류 수</b>를 빨간 원형 뱃지로 표시.</td><td>수량 합계가 아닌 고유 품목 수. 0개면 뱃지 숨김. 하이드레이션 전에는 미표시.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-05</td><td>유저 메뉴 분기</td><td>비로그인: “로그인” 링크 → 로그인 페이지로 이동(현재 경로를 <code>?redirect</code>로 첨부, AUTH-07). 로그인: 아바타 → 드롭다운(닉네임 표시, 마이페이지, 로그아웃).</td><td>세션 상태에 따라 실시간 전환. <b>v1의 로그인 모달은 제거됨.</b></td><td><span class="auth any">전체</span></td></tr>
+  </table>
+
+  <h3>2-2. 헤더 (모바일)</h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>COM-06</td><td>햄버거 사이드 메뉴</td><td>햄버거 버튼 → 좌측 슬라이드 시트 오픈. 로고 클릭 시 홈 이동과 함께 시트 닫힘.</td><td>lg 미만 화면 전용.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-07</td><td>시트 내 프로필</td><td>로그인 시 아바타 + 닉네임 + 로그아웃 버튼 노출. 로그아웃 성공 시 시트 자동 닫힘.</td><td>비로그인 시 프로필 영역 미노출.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>COM-08</td><td>3분할 퀵 메뉴</td><td>① 장바구니 ② 로그인(로그인 페이지 링크) 또는 마이페이지 ③ 회원가입 링크.</td><td>회원가입 링크는 비로그인 시에만 노출.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-09</td><td>모바일 GNB</td><td>GNB 3개 메뉴를 세로 리스트로 제공. 항목 이동 시 시트 닫힘.</td><td>—</td><td><span class="auth any">전체</span></td></tr>
+  </table>
+
+  <h3>2-3. 푸터 · 404 · 전역 UI</h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>COM-10</td><td>푸터</td><td>로고, 사업자 정보 4항목(회사명·대표·사업자등록번호·주소), GitHub / 블로그 외부 링크(새 창).</td><td>로그인 상태와 무관하게 항상 동일한 정적 콘텐츠.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-11</td><td>404 페이지</td><td>존재하지 않는 경로 접근 시 안내 이미지 + <span class="msg">“죄송합니다. 잘못된 경로로 들어오셨습니다.”</span> · <span class="msg">“잠시 후 다시 접속해 주세요.”</span> 문구 + “메인으로 이동하기” 링크 표시.</td><td>자동 리다이렉트 없음. 헤더/푸터는 함께 표시.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-12</td><td>최상단 이동 버튼</td><td>페이지 우하단 고정 버튼. 클릭 시 최상단으로 부드럽게 스크롤.</td><td>스크롤 200px 이상일 때만 노출. 메인·소식·게시판 상세·마이페이지 등에 배치.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-13</td><td>토스트 알림</td><td>동작 결과(성공/실패)를 화면 토스트로 안내. 실패는 붉은(destructive) 스타일.</td><td>동시 1개만 표시(신규 발생 시 교체).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-14</td><td>확인 모달</td><td>파괴적 동작(게시글/댓글 삭제, 장바구니 비우기, 구매확정 등) 전 공통 확인 다이얼로그 표시.</td><td>바깥 영역 클릭으로도 닫힘(취소 처리).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-15</td><td>로딩 표준화</td><td>로딩 인디케이터는 공용 Spinner로 통일되어 스크린리더에 “로딩 중”으로 읽힘.</td><td>—</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-16</td><td>다크모드</td><td>헤더의 달/해 토글 버튼으로 라이트 ↔ 다크 전환(데스크톱·모바일 공통 노출). 선택한 테마는 기기에 저장되어 재방문 시 유지.</td><td>기본 라이트, 시스템 테마와 미연동(옵트인 방식). 하이브리드 앱에서는 현재 테마가 네이티브 셸로 전달됨(PUSH-10).</td><td><span class="auth any">전체</span></td></tr>
+  </table>
+</section>
+
+<!-- ══════════ 3. 메인 ══════════ -->
+<section id="main">
+  <h2 class="sec">3. 메인 페이지</h2>
+  <p class="sec-desc">서비스 첫 화면. 24시간 주기 ISR로 재생성되며 앨범 데이터는 서버에서 미리 조회(prefetch)된다.</p>
+
+  <h3>3-1. 메인 <span class="path">/</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>MAIN-01</td><td>비주얼 히어로</td><td>전체 화면 높이의 배경 영상(자동재생·음소거·반복)과 카피(“DIVE INTO IVE”), 하단 스크롤 유도 인디케이터 표시.</td><td>스크롤로 앨범 섹션 도달 시 배경 영상 숨김 처리.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MAIN-02</td><td>앨범 캐러셀</td><td>앨범 목록을 커버플로우(coverflow) 캐러셀로 표시. 카드에는 앨범 이미지·제목·발매 정보(구분 · 발매일 · 장르 · 수록곡 수) 노출. 현재/전체 위치를 분수(fraction)로 표시.</td><td>발매일 내림차순. 드래그로 탐색.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MAIN-03</td><td>음원 플랫폼 링크</td><td>앨범 카드에서 Apple Music · Melon · FLO · Bugs · Genie 아이콘으로 각 스트리밍 페이지 이동(새 창).</td><td>링크가 없거나 <code>#</code>인 플랫폼 아이콘은 미노출.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MAIN-04</td><td>최신 게시글 (FREE BOARD)</td><td>자유게시판 최신 글 6개를 카드로 표시(썸네일·제목·작성자·댓글 수). 항목 클릭 시 게시글 상세로 이동. “더보기” → 게시판 목록.</td><td>작성일 내림차순 6건 고정. 썸네일 없으면 기본 이미지.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MAIN-05</td><td>굿즈샵 프로모 배너</td><td>“굿즈샵 오픈!” 홍보 문구와 이미지를 표시하는 정적 배너.</td><td>링크/버튼 없음(안내 전용).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MAIN-06</td><td>상품 캐러셀 (SHOP)</td><td>인기 상품 12개를 좌우 화살표 캐러셀로 표시. 카드에 썸네일·배지·상품명·할인율·할인가·평균 별점 노출, 찜(하트) 토글 가능. 클릭 시 상품 상세 이동. “더보기” → 굿즈샵.</td><td>리뷰 수 기준 상위 12개. 찜 동작은 SHOP-04와 동일.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MAIN-07</td><td>로딩 · 오류 처리</td><td>각 섹션은 로딩 중 스켈레톤 표시, 조회 실패 시 오류 안내(<span class="msg">“Oops! 잠시 후 다시 확인해주세요...”</span>)로 대체.</td><td>재시도 버튼 없음. 상품 캐러셀은 오류 시 별도 안내 없이 미표시.</td><td><span class="auth any">전체</span></td></tr>
+  </table>
+</section>
+
+<!-- ══════════ 4. 소식 ══════════ -->
+<section id="news">
+  <h2 class="sec">4. 소식 페이지</h2>
+  <p class="sec-desc">아티스트 최신 소식과 사진 갤러리를 제공. 24시간 주기 ISR.</p>
+
+  <h3>4-1. 소식 <span class="path">/news</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>NEWS-01</td><td>히어로 · 섹션 이동</td><td>전체 화면 히어로와 “Latest News” / “View Gallery” 버튼 2개. 클릭 시 해당 섹션으로 부드럽게 스크롤.</td><td>—</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-02</td><td>소식 카테고리 필터</td><td>전체 · 음악 · 방송 · 행사 · 화보 5개 pill 필터. 선택한 카테고리의 소식만 목록에 표시.</td><td>현재 로드된 목록 내에서만 필터링(서버 재조회 없음). 기본값 “전체”.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-03</td><td>최신 소식 목록</td><td>16:9 카드 그리드(기본 2열). 카드에 카테고리·날짜(YYYY-MM-DD)·제목·본문 1줄 미리보기 표시.</td><td>최초 5건, 작성일 내림차순. 총 개수가 홀수면 첫 카드만 전체 폭.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-04</td><td>소식 더 보기</td><td>“더 많은 소식 보기” 버튼 클릭 시 5건씩 추가 로드.</td><td>더 불러올 데이터가 없으면 버튼 자동 숨김. 무한스크롤 아님.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-05</td><td>소식 상세 모달</td><td>카드 클릭 시 모달로 상세 표시: 대표 이미지, 카테고리, 제목, 날짜, 출처, 본문.</td><td>출처는 텍스트 표기(외부 링크 아님).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-06</td><td>갤러리 그리드</td><td>정사각형 사진 그리드(모바일 1열 → 3열). 호버 시 확대 아이콘 표시.</td><td>최초 6건, 작성일 내림차순. 사진이 0장이면 섹션 자체 미노출.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-07</td><td>갤러리 더 보기 · 원본 보기</td><td>“더 많은 사진 보기”로 6건씩 추가 로드. 사진 클릭 시 모달에서 원본 비율로 확대 표시.</td><td>더 불러올 데이터가 없으면 버튼 자동 숨김.</td><td><span class="auth any">전체</span></td></tr>
+  </table>
+</section>
+
+<!-- ══════════ 5. 인증 ══════════ -->
+<section id="auth">
+  <h2 class="sec">5. 인증 (로그인 · 회원가입)</h2>
+  <p class="sec-desc">이메일/비밀번호 및 소셜 로그인(카카오·구글)을 지원. v2에서 로그인 모달이 제거되어 <code>/login</code> 페이지로 진입점이 단일화됐고, 로그인 후 원래 보던 페이지로 복귀한다.</p>
+
+  <h3>5-1. 로그인 페이지 <span class="path">/login</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>AUTH-01</td><td>로그인 화면 구성</td><td>로고 → “로그인” 제목 + 서브카피(“다시 만나서 반가워요! 아이브의 모든 소식을 만나보세요”) → 소셜 로그인 버튼 2종 → 구분선(“또는”) → 이메일 로그인 폼(라벨형 필드) → 하단 “아직 계정이 없나요? <b>회원가입</b>” 링크.</td><td>로그인 상태로 접근 시 서버에서 메인으로 리다이렉트.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>AUTH-02</td><td>가입 축하 화면</td><td><code>/login?form=signup</code> 진입 시 “회원이 되신 것을 축하드립니다!” 화면으로 전환. 최초 1회 폭죽(컨페티) 효과 + <span class="msg">“회원가입이 완료되었습니다!”</span> 토스트 후 이메일 로그인 폼 제공.</td><td>가입 직후 발급되는 5분짜리 쿠키가 없으면 일반 로그인으로 리다이렉트(직접 접근 차단). 축하 효과는 1회만 재생. 이 화면에는 소셜 버튼·회원가입 링크 없음.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>AUTH-03</td><td>이메일 로그인</td><td>이메일 + 비밀번호 입력 후 로그인. 각 필드에 라벨 제공, 입력 즉시 실시간 검증(onChange), 유효한 값 입력 전까지 로그인 버튼 비활성.
+      <ul class="tight">
+        <li>이메일: 이메일 형식 — <span class="msg">“올바른 이메일을 입력해 주세요.”</span></li>
+        <li>비밀번호: 영문+숫자+특수문자 포함 8자 이상 (최대 20자 입력 제한) — <span class="msg">“비밀번호는 영문, 숫자, 특수문자를 포함하여 8자 이상이어야 합니다.”</span></li>
+      </ul></td>
+      <td>비밀번호 표시/숨김 토글은 버튼으로 제공되어 키보드·스크린리더로도 조작 가능. 제출 중에는 “처리 중...” 표시.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>AUTH-04</td><td>로그인 성공 처리</td><td>① 비로그인 상태에서 담아둔 로컬 찜 목록을 계정으로 자동 이관 ② <span class="msg">“로그인 되었습니다.”</span> 토스트 ③ 원래 보던 페이지로 복귀 — 헤더에서 진입한 경우 현재 경로가 <code>?redirect</code>로 전달되어 로그인 후 그 위치로 돌아간다.</td><td>복귀 경로는 내부 경로(<code>/</code>로 시작)만 허용, 없으면 메인으로 이동.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>AUTH-05</td><td>로그인 실패 처리</td><td>계정 정보 불일치 시 이메일·비밀번호 두 필드에 <span class="msg">“이메일 또는 비밀번호가 일치하지 않습니다.”</span> 에러 표시.</td><td>그 외 오류(네트워크 등)는 별도 안내 없음.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>AUTH-06</td><td>소셜 로그인</td><td>“<b>카카오로 시작하기</b>”(카카오 옐로 전체 너비) · “<b>구글로 시작하기</b>”(아웃라인 전체 너비) 버튼으로 OAuth 로그인. 완료 후 저장된 복귀 경로(또는 메인)로 이동하며 <span class="msg">“로그인 되었습니다.”</span> 토스트 표시. 로컬 찜 목록도 자동 이관.</td><td>깃허브 로그인은 v2에서 제거됨. 실패 시 오류 메시지 토스트.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>AUTH-07</td><td>로그인 진입점</td><td>데스크톱 헤더 · 모바일 시트의 “로그인”, 회원가입 페이지 하단 “로그인” — 모두 <code>/login</code> 페이지로 이동(모달 없음). 메인·인증 화면 외에서 진입하면 현재 경로가 <code>?redirect</code>로 첨부된다. 회원가입 유도는 로그인 화면 하단 링크가 담당.</td><td>v1의 2단계 로그인 모달(소셜 선택 → 이메일)은 제거됨.</td><td><span class="auth any">전체</span></td></tr>
+  </table>
+
+  <h3>5-2. 회원가입 <span class="path">/signup</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>AUTH-08</td><td>이메일 회원가입 폼</td><td>로고 → “회원가입” 제목 + 서브카피(“가입하고 아이브 팬 커뮤니티를 시작해 보세요”) → 이메일 · 비밀번호 · 비밀번호 확인 3개 필드(라벨형). 실시간 검증, 입력값이 모두 유효하고 필수 약관에 동의해야(AUTH-09) “가입하기” 활성.
+      <ul class="tight">
+        <li>이메일 형식 — <span class="msg">“올바른 이메일을 입력해 주세요.”</span></li>
+        <li>비밀번호: 영문+숫자+특수문자 8자 이상 — 필드 바로 아래 안내문 “비밀번호 영문, 숫자, 특수문자 포함 8-20자” 상시 노출</li>
+        <li>확인 미입력 — <span class="msg">“비밀번호를 한번 더 입력해주세요.”</span> / 불일치 — <span class="msg">“비밀번호가 일치하지 않습니다.”</span></li>
+      </ul>
+      하단 “이미 계정이 있나요? <b>로그인</b>” 링크(<code>/login</code>).</td>
+      <td>비밀번호·확인 각각 표시/숨김 토글. 로그인 상태로 접근 시 메인으로 리다이렉트.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>AUTH-09</td><td>가입 약관 동의</td><td>폼 하단 약관 동의 영역: “약관에 모두 동의합니다” 전체 동의 체크박스 + 필수 2건(“이용약관 동의 (필수)” · “개인정보 수집·이용 동의 (필수)”) 개별 체크. 각 항목의 화살표 버튼으로 약관 전문을 모달로 열람(“확인”으로 닫기).</td><td>필수 2건 모두 동의해야 “가입하기” 활성. 전체 동의 체크 시 일괄 선택, 개별 2건 모두 선택 시 전체 동의 자동 체크.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>AUTH-10</td><td>랜덤 닉네임 자동 부여</td><td>가입 시 한국어 랜덤 닉네임을 외부 API로 발급받아 초기 닉네임으로 자동 설정.</td><td>닉네임은 마이페이지에서 변경 가능(MY-03).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>AUTH-11</td><td>가입 성공 처리</td><td>가입 완료 후 자동 로그인되지 않고, 가입 축하 화면(<code>/login?form=signup</code>, AUTH-02)으로 이동해 직접 로그인하도록 유도.</td><td>축하 화면 접근용 쿠키(5분 유효) 발급.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>AUTH-12</td><td>가입 실패 처리</td><td>실패 시 <span class="msg">“회원가입에 실패했습니다. — 이미 등록된 이메일 입니다.”</span> 토스트 표시.</td><td>실패 원인과 무관하게 동일 문구 사용(중복 이메일 외 원인 포함).</td><td><span class="auth any">전체</span></td></tr>
+  </table>
+
+  <h3>5-3. 세션 · 로그아웃</h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>AUTH-13</td><td>세션 유지 · 복원</td><td>새로고침 시에도 Supabase 쿠키 세션에서 로그인 상태 자동 복원. 서버(proxy)에서도 쿠키 기반으로 사용자를 검증한다(<code>@supabase/ssr</code>). 세션 변화는 전역 구독으로 헤더 등 UI에 즉시 반영.</td><td>—</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>AUTH-14</td><td>로그아웃</td><td>헤더 드롭다운/모바일 시트의 “로그아웃” 클릭 시 세션 종료 후 <span class="msg">“로그아웃 되었습니다.”</span> 토스트.</td><td>로그아웃 시 로컬 장바구니·찜 목록 삭제 및 화면 상태 초기화. 실패 시 <span class="msg">“로그아웃 실패, 다시 시도해 주세요.”</span></td><td><span class="auth login">로그인</span></td></tr>
+  </table>
+</section>
+
+<!-- ══════════ 6. 게시판 ══════════ -->
+<section id="board">
+  <h2 class="sec">6. 자유게시판</h2>
+  <p class="sec-desc">회원 커뮤니티 게시판. 조회는 누구나 가능하며 작성·좋아요·댓글은 로그인이 필요하다. v2에서 댓글·답글·좋아요에 푸시 알림 발송이 연동됐다.</p>
+
+  <h3>6-1. 게시글 목록 <span class="path">/board</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>BRD-01</td><td>목록 조회</td><td>게시글을 최신순으로 표시. 데스크톱은 표 형식(번호·제목·작성자·작성일·조회·추천), 모바일은 요약 카드 형식. 제목 옆에 댓글 수 표시.</td><td>정렬 변경 기능 없음(최신순 고정).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-02</td><td>페이지네이션</td><td>페이지당 10건. 이전/다음 및 페이지 번호(최대 3개 노출, 말줄임 처리)로 이동. 현재 페이지는 URL 쿼리(<code>?page=N</code>)에 유지.</td><td>전체가 1페이지 이하이면 페이저 미노출.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-03</td><td>제목 검색</td><td>검색어 입력 시 0.5초 디바운스 후 제목 부분일치로 검색. 결과 목록에서 일치 구간을 노란색으로 하이라이트.</td><td>검색 대상은 제목만(본문·작성자 제외). 검색 시 1페이지로 리셋. 결과 없으면 <span class="msg">“검색 결과가 없습니다.”</span></td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-04</td><td>글쓰기 진입</td><td>“글쓰기” 버튼으로 작성 화면 이동.</td><td>비로그인 시 <span class="msg">“로그인이 필요합니다.”</span> 토스트 후 이동 차단.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>BRD-05</td><td>상세 진입 · 조회수</td><td>행 클릭 시 상세로 이동하며 이때 조회수 1 증가. 모바일 댓글 수 버튼 클릭 시 상세의 댓글 영역으로 바로 이동.</td><td>같은 글은 기기당 24시간 내 재클릭해도 조회수 중복 증가 없음. 상세 URL 직접 접근으로는 조회수가 증가하지 않음.</td><td><span class="auth any">전체</span></td></tr>
+  </table>
+
+  <h3>6-2. 게시글 작성 · 수정 <span class="path">/board/write</span> <span class="path">/board/edit/[id]</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>BRD-06</td><td>글 작성 폼</td><td>제목(최대 100자 입력 제한) + 리치 텍스트 에디터(제목 크기 3단계 · 굵게 · 기울임 · 밑줄 · 이미지). 두 필드 모두 필수이며 유효할 때만 “등록하기” 활성.</td><td>미입력 시 <span class="msg">“제목을 입력해 주세요.”</span> / <span class="msg">“내용을 입력해 주세요.”</span> 본문 길이 상한 없음.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>BRD-07</td><td>본문 이미지 업로드</td><td>에디터의 이미지 버튼으로 이미지 1장씩 선택 → 스토리지 업로드 후 커서 위치에 삽입.</td><td>실패 시 <span class="msg">“이미지 업로드 실패”</span> 토스트. 파일 크기·개수 제한 없음(브라우저 이미지 형식 필터만 적용).</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>BRD-08</td><td>썸네일 자동 지정</td><td>본문의 첫 번째 이미지를 목록 썸네일 및 공유(OG) 이미지로 자동 사용.</td><td>이미지가 없으면 기본 이미지 사용.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>BRD-09</td><td>등록 · 수정 처리</td><td>등록 성공 시 <span class="msg">“게시글 등록이 완료되었습니다.”</span> 후 목록으로, 수정 성공 시 <span class="msg">“게시글 수정이 완료되었습니다.”</span> 후 상세로 이동.</td><td>수정 시 변경 사항이 없으면 저장 없이 <span class="msg">“수정된 내용이 없습니다.”</span> 안내 후 상세로 이동.</td><td><span class="auth owner">작성자</span></td></tr>
+  </table>
+
+  <h3>6-3. 게시글 상세 <span class="path">/board/[id]</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>BRD-10</td><td>상세 조회</td><td>제목, 작성일, 조회수, 추천 수, 본문(서식·이미지 포함), 작성자 정보(아바타·이름) 표시.</td><td>본문 HTML은 DOMPurify로 소독(sanitize) 후 렌더링(XSS 방어).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-11</td><td>게시글 좋아요</td><td>좋아요 버튼 토글. 상태에 따라 아이콘 채움/비움 및 카운트 갱신. <span class="msg">“좋아요를 눌렀습니다.”</span> / <span class="msg">“좋아요가 취소되었습니다.”</span> 토스트.</td><td>비로그인 시 로그인 안내 토스트 후 차단. 좋아요 시 작성자에게 푸시 발송(PUSH-03).</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>BRD-12</td><td>공유 (링크 복사)</td><td>공유 버튼 클릭 시 현재 페이지 URL을 클립보드에 복사, <span class="msg">“링크가 복사되었습니다.”</span> 토스트.</td><td>실패 시 <span class="msg">“링크 복사에 실패했습니다.”</span></td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-13</td><td>수정 · 삭제 (작성자)</td><td>본인 글에만 수정/삭제 버튼 노출. 삭제는 확인 모달(<span class="msg">“정말로 삭제하시겠습니까? 삭제 후 되돌릴 수 없습니다.”</span>) 통과 시 실행 후 목록 이동 + <span class="msg">“게시글이 삭제 되었습니다.”</span></td><td>타인 글에는 버튼 자체가 미노출. 데이터 권한은 서버(RLS) 정책으로 보호.</td><td><span class="auth owner">작성자</span></td></tr>
+  </table>
+
+  <h3>6-4. 댓글 · 대댓글</h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>BRD-14</td><td>댓글 목록</td><td>상세 하단에 “댓글 N개” 헤딩과 전체 댓글을 작성순으로 표시. 대댓글은 들여쓰기로 원댓글 아래에 표시.</td><td>페이지네이션 없이 전체 로드. 댓글 앵커(<code>#comments</code>) 진입 시 자동 스크롤.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-15</td><td>댓글 작성</td><td>입력창에 내용 입력 후 “등록”. 성공 시 <span class="msg">“댓글 작성에 성공했습니다.”</span> 토스트.</td><td>빈 내용 차단(<span class="msg">“내용을 입력해 주세요.”</span>). 비로그인 제출 시 로그인 안내 토스트. 작성 시 게시글 작성자에게 푸시 발송(PUSH-01).</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>BRD-16</td><td>대댓글 작성</td><td>댓글의 “답변” 버튼으로 인라인 답글 폼 토글(열림 시 “닫기”). 등록 성공 시 폼 자동 닫힘.</td><td>답글 깊이는 2단계까지(대댓글에는 답변 버튼 없음). 작성 시 게시글 작성자·원댓글 작성자에게 푸시 발송(PUSH-02).</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>BRD-17</td><td>댓글 수정 · 삭제</td><td>본인 댓글에만 수정/삭제 버튼 노출. 수정은 인라인 편집(동시에 1개만), 삭제는 확인 모달 후 <span class="msg">“댓글이 삭제 되었습니다.”</span></td><td>내용 변경 없이 저장 시 <span class="msg">“수정된 내용이 없습니다.”</span> 안내.</td><td><span class="auth owner">작성자</span></td></tr>
+    <tr><td>BRD-18</td><td>댓글 좋아요</td><td>최상위 댓글에 좋아요 토글 제공(카운트·강조 표시).</td><td>대댓글에는 좋아요 없음. 비로그인 차단. 푸시 알림 미발송.</td><td><span class="auth login">로그인</span></td></tr>
+  </table>
+</section>
+
+<!-- ══════════ 7. 굿즈샵 ══════════ -->
+<section id="shop">
+  <h2 class="sec">7. 굿즈샵</h2>
+  <p class="sec-desc">굿즈 상품 탐색·찜·구매 진입. 가격은 할인율 적용 후 10원 단위 내림으로 계산해 표시한다.</p>
+
+  <h3>7-1. 상품 목록 <span class="path">/shop</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>SHOP-01</td><td>목록 조회 · 무한 스크롤</td><td>상품 카드를 12개 단위로 표시하고, 스크롤이 하단에 도달하면 다음 12개 자동 로드.</td><td>마지막 페이지에서 <span class="msg">“더 이상 표시할 상품이 없습니다.”</span> 표시.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-02</td><td>정렬</td><td>인기순(기본) · 최신순 · 가격 낮은 순 · 가격 높은 순 4종 셀렉트 제공.</td><td>인기순은 리뷰 수 기준, 가격 정렬은 할인 적용가 기준. 카테고리·검색 기능 없음.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-03</td><td>상품 카드</td><td>썸네일 · 배지 · 상품명 · 할인율(%) · 할인가 · 평균 별점 표시. 클릭(또는 Enter/Space) 시 상세 이동.</td><td>배지 규칙: 무료배송 상품 → “무료배송”, 리뷰 10개 이상 &amp; 평점 4.0 이상 → “Best👍”.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-04</td><td>찜(위시리스트) 토글</td><td>카드의 하트 버튼으로 찜 추가/해제. <span class="msg">“찜하기가 추가되었습니다.”</span> / <span class="msg">“찜하기가 취소되었습니다.”</span> 토스트.</td><td>비로그인은 기기(로컬)에 저장되며, 로그인 시 계정으로 자동 이관. 로그인 사용자는 계정에 저장.</td><td><span class="auth any">전체</span></td></tr>
+  </table>
+
+  <h3>7-2. 상품 상세 <span class="path">/shop/[id]</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>SHOP-05</td><td>상품 정보</td><td>이미지, 상품명, 배송 정보, 사이즈/색상, 원가·할인율·할인가, 평균 별점 표시. 공유(링크 복사) 버튼 제공.</td><td>사이즈·색상은 정보 표시 전용(옵션 선택 기능 없음).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-06</td><td>수량 선택</td><td>+/− 버튼으로 수량 조절, “총 상품금액(할인가 × 수량)” 실시간 표시.</td><td>최소 1개 ~ 최대 5개. 초과 시 <span class="msg">“최대 5개 까지 구매 가능합니다.”</span> 토스트.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-07</td><td>장바구니 담기</td><td>선택 수량을 장바구니에 추가하고 하단 드로어로 안내(<span class="msg">“장바구니에 상품이 담겼습니다.”</span> + “장바구니 보기 / 계속 쇼핑하기”).</td><td>이미 담긴 수량과 합산해 상품당 5개 초과 시 차단(현재 수량 안내). 비로그인도 가능(기기 저장).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-08</td><td>바로 구매</td><td>“구매하기” 클릭 시 장바구니를 거치지 않고 곧바로 토스페이먼츠 결제창 호출.</td><td>검증: ① 로그인 ② 주문자 정보 · 기본 배송지 존재(누락된 항목을 묶어 하나의 토스트로 안내). 미충족 시 중단.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>SHOP-09</td><td>상세정보 · 리뷰 탭</td><td>“상세정보” 탭(상품 설명)과 “리뷰” 탭(개수 표시) 전환. 리뷰 탭은 평균 별점(소수 1자리/5.0, 현재 페이지에 로드된 리뷰 기준)과 리뷰 목록을 페이지당 5개 페이지네이션으로 제공.</td><td>리뷰 작성은 구매확정 후 마이페이지 주문 상세에서만 가능(MY-10).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-10</td><td>구매 안내 아코디언</td><td>판매자 고객센터 / 배송 정보 / 교환·반품 정책 3개 접이식 안내(정적 텍스트).</td><td>—</td><td><span class="auth any">전체</span></td></tr>
+  </table>
+</section>
+
+<!-- ══════════ 8. 장바구니 ══════════ -->
+<section id="cart">
+  <h2 class="sec">8. 장바구니 · 주문서</h2>
+  <p class="sec-desc">별도 결제 페이지 없이 <b>장바구니 화면이 곧 주문서(체크아웃)</b> 역할을 한다. 좌측 상품 목록 + 우측 주문 요약(금액·주문자·배송지·약관·결제 버튼) 2단 구성. 장바구니 데이터는 기기(localStorage)에 저장되며 서버 동기화는 없다.</p>
+
+  <h3>8-1. 장바구니 <span class="path">/cart</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>CART-01</td><td>담긴 상품 목록</td><td>썸네일 · 상품명 · 배송 정보 · 사이즈/색상 · 수량 · 할인율 · 원가(취소선) · 할인 적용 합계 표시. 썸네일 클릭 시 상품 상세 이동.</td><td>비어 있으면 <span class="msg">“장바구니가 비어있습니다. 원하는 상품을 담아보세요!”</span> + 쇼핑하기 링크.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>CART-02</td><td>선택 관리</td><td>전체선택 체크박스와 개별 체크박스, “선택 n/전체 m” 카운트 제공. 결제·금액 계산은 선택된 상품만 대상.</td><td>진입 시 전체 자동 선택(장바구니 내용이 변경되면 전체 선택으로 재설정). 결제 실패 후 복귀 시 이전 선택 상태 복원.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>CART-03</td><td>수량 변경</td><td>아이템별 +/− 버튼으로 수량 조절, 합계 즉시 반영.</td><td>1~5개 제한(초과 시 토스트).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>CART-04</td><td>삭제 (3종)</td><td>① 개별 삭제(× 버튼) ② 선택삭제 ③ 전체삭제.</td><td>선택 0개로 선택삭제 시 <span class="msg">“선택한 내용이 없습니다.”</span> 전체삭제는 확인 모달(<span class="msg">“장바구니의 모든 상품이 삭제됩니다. 정말 비우시겠습니까?”</span>) 필요.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>CART-05</td><td>결제 금액 요약</td><td>선택 상품 기준으로 총 결제 금액(상단 강조) / 상품 금액 / 총 할인 금액(− 표시) 순으로 표시.</td><td>배송비 항목 없음(전 상품 배송비 0원 정책, 부록 참고).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>CART-06</td><td>주문자 정보</td><td>로그인 시 [정보 입력/정보 변경] 버튼으로 인라인 폼 오픈: 이름(최대 25자) · 휴대폰(하이픈 없이 숫자 11자리 입력, 저장 시 자동 포맷) · 이메일. 계정당 1건 저장(이후 자동 표시).</td><td>비로그인 시 <span class="msg">“주문자 정보가 없습니다. 로그인 후 정보를 입력해주세요.”</span> 변경 없이 저장 시 <span class="msg">“변경된 내용이 없습니다.”</span></td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>CART-07</td><td>배송 정보</td><td>기본 배송지(받는 분 · 휴대폰 · 우편번호+주소 · 요청사항)를 표시. [배송지 변경] 또는 [배송지 추가] 버튼으로 마이페이지 배송지 관리로 이동.</td><td>주문서에서 배송지 직접 입력은 불가(마이페이지에서 관리).</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>CART-08</td><td>주문 약관 동의</td><td>“[필수] 주문 내역에 대한 필수 동의” 부모 체크 + 자식 2개(개인정보 수집·제3자 제공 / 결제 이후 환불·취소 불가). 부모 체크 시 일괄 동의, 자식 모두 체크 시 부모 자동 체크. 각 항목 상세는 모달로 열람.</td><td>자식 항목은 기본 접힘 상태(화살표로 펼침). “본인은 만 14세 이상이며 주문내용을 확인하였습니다.” 문구 상시 노출.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>CART-09</td><td>주문하기 (결제 요청)</td><td>검증 통과 시 토스페이먼츠 결제창 호출. 주문명은 “{첫 상품명} 외 N건” 형식, 주문번호는 <code>YYYYMMDD-랜덤8자리</code> 자동 생성.</td><td>검증 순서: ① 로그인(<span class="msg">“로그인이 필요합니다.”</span>) ② 결제 금액 0원(<span class="msg">“결제할 내용이 없습니다.”</span>) ③ 약관 동의(<span class="msg">“약관 동의가 필요합니다”</span>) ④ 주문자 정보(<span class="msg">“주문자 정보가 없습니다.”</span>) ⑤ 배송 정보(<span class="msg">“배송 정보가 없습니다.”</span>). 하나라도 미충족 시 토스트 후 중단.</td><td><span class="auth login">로그인</span></td></tr>
+  </table>
+</section>
+
+<!-- ══════════ 9. 결제 ══════════ -->
+<section id="payment">
+  <h2 class="sec">9. 결제</h2>
+  <p class="sec-desc">PG는 토스페이먼츠 단일 연동(결제수단 “카드” 고정, 카드사 간편결제 포함). 결제 완료 후 성공 페이지에서 승인·주문 저장이 이루어진다. v2에서 결제 복귀 시 로그인 페이지로 튕기던 문제가 수정됐다.</p>
+
+  <h3>9-1. 결제 승인 API <span class="path">POST /api/payment/confirm</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>PAY-01</td><td>결제 승인 프록시</td><td>결제창에서 돌아온 <code>paymentKey · orderId · amount</code>를 받아 서버에서 토스페이먼츠 승인 API로 전달(시크릿 키는 서버 보관).</td><td>세 값 중 누락 시 400 <span class="msg">“결제 승인에 필요한 항목이 누락되었습니다.”</span> 토스 승인 실패 시 해당 상태 코드·메시지 그대로 반환.</td><td><span class="auth any">전체</span></td></tr>
+  </table>
+
+  <h3>9-2. 결제 성공 <span class="path">/payment/success</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>PAY-02</td><td>접근 가드</td><td><code>orderId</code> 쿼리 없이 접근하면 서버에서 메인으로 리다이렉트. 비로그인 상태면 클라이언트에서 <span class="msg">“로그인 후 이용 가능합니다.”</span> 토스트 후 로그인 페이지로 이동.</td><td>PG(토스) 복귀는 크로스사이트 리다이렉트라 세션 쿠키가 실리지 않으므로, 서버는 로그인 검사를 하지 않고 클라이언트 가드가 담당한다 — v1의 “결제 복귀 시 로그인 페이지로 튕김” 문제를 수정한 지점 (E2E로 검증).</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>PAY-03</td><td>결제 승인 · 주문 저장</td><td>페이지 진입 시 자동으로 ① 승인 API 호출 ② 승인 완료(DONE) 확인 ③ 결제 정보(payments) + 주문 상품(order_items) 저장. 상태는 “결제 완료 / 배송전”으로 기록되고 배송지 정보는 결제 시점 스냅샷으로 함께 저장.</td><td>동일 주문번호가 이미 저장돼 있으면 승인·저장을 건너뜀(새로고침 중복 방지). 승인 결과가 DONE이 아니면 실패 페이지로 이동.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>PAY-04</td><td>장바구니 정리</td><td>결제된 상품만 장바구니에서 자동 제거(미선택 상품은 유지).</td><td>—</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>PAY-05</td><td>완료 화면</td><td>“주문이 완료되었습니다.” + 주문번호, 주문 상품 목록(총 N개), 배송 정보 / 결제 정보(총 주문 금액·배송비·총 결제 금액) / 결제 수단(방법·일시불/할부·결제 일시·주문 상태) 카드 표시. [주문상세 보기 → 마이페이지] / [쇼핑 계속하기 → 굿즈샵] 버튼.</td><td>결제 조회 실패 시 1초 간격 3회 재시도 후 오류 표시.</td><td><span class="auth login">로그인</span></td></tr>
+  </table>
+
+  <h3>9-3. 결제 실패 <span class="path">/payment/fail</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>PAY-06</td><td>실패 안내</td><td>“결제가 실패 되었습니다.” + PG가 전달한 실패 사유(“에러 사유 : …”) 표시.</td><td>접근 가드는 성공 페이지와 동일.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>PAY-07</td><td>장바구니 복귀</td><td>[장바구니로 돌아가기] 클릭 시 결제 시도했던 상품들이 선택된 상태로 장바구니 복원.</td><td>복원 정보가 없으면 일반 장바구니로 이동.</td><td><span class="auth login">로그인</span></td></tr>
+  </table>
+</section>
+
+<!-- ══════════ 10. 마이페이지 ══════════ -->
+<section id="mypage">
+  <h2 class="sec">10. 마이페이지</h2>
+  <p class="sec-desc">좌측 프로필 + 메뉴(찜 목록 · 결제 목록 · 내가 쓴 글 · 배송지 관리), 우측 콘텐츠 2단 구성. <code>/mypage</code> 진입 시 찜 목록으로 자동 이동. 전 영역 로그인 필수(서버·클라이언트 이중 가드).</p>
+
+  <h3>10-1. 프로필 (공통 사이드)</h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>MY-01</td><td>프로필 표시</td><td>프로필 이미지, 닉네임, 활동 통계(글 작성수 · 찜 수) 표시.</td><td>—</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-02</td><td>프로필 이미지 변경</td><td>아바타 클릭 → 이미지 선택 → 크롭 모달(원형, 확대/축소 슬라이더)에서 편집 후 저장. 성공 시 <span class="msg">“프로필 이미지가 변경되었습니다.”</span> 헤더 아바타에도 즉시 반영.</td><td>250×250 원형으로 저장. 파일 용량·형식 별도 제한 없음(이미지 파일 필터만).</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-03</td><td>닉네임 변경</td><td>“수정” 클릭 → 인라인 편집 → “수정완료”로 저장. 성공 시 <span class="msg">“닉네임이 변경 되었습니다.”</span></td><td>2글자 이상(<span class="msg">“2글자 이상 입력해 주세요.”</span>), 입력창 최대 6자. 동일 닉네임 저장 시 <span class="msg">“변경된 닉네임이 없습니다.”</span></td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-04</td><td>푸시 알림 수신 설정</td><td>“푸시 알림” 스위치로 앱 푸시 수신 on/off. <span class="msg">“푸시 알림을 켰습니다/껐습니다.”</span> 토스트.</td><td>앱에서 로그인해 기기가 등록된 경우에만 조작 가능(미등록 시 “앱에서 로그인하면 받을 수 있어요” + 비활성). 설정은 등록된 모든 기기에 일괄 적용.</td><td><span class="auth app">앱</span></td></tr>
+  </table>
+
+  <h3>10-2. 찜 목록 <span class="path">/mypage/wishlist</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>MY-05</td><td>찜 목록 조회</td><td>찜한 상품을 카드 그리드(3열)로 표시: 썸네일 · 배지 · 상품명 · 할인율 · 할인가 · 평균 별점. 카드 클릭 시 상품 상세 이동.</td><td>최신 찜 순. 비어 있으면 <span class="msg">“찜 목록이 없습니다.”</span></td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-06</td><td>찜 해제</td><td>카드의 하트 버튼 클릭 시 즉시 해제, <span class="msg">“찜하기가 취소되었습니다.”</span> 토스트.</td><td>확인 절차 없이 즉시 삭제.</td><td><span class="auth login">로그인</span></td></tr>
+  </table>
+
+  <h3>10-3. 결제 목록 · 주문 상세 <span class="path">/mypage/orders</span> <span class="path">/mypage/orders/[orderId]</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>MY-07</td><td>결제 목록</td><td>주문 단위 카드로 표시: 주문번호, 첫 상품 썸네일, “{첫 상품명} 외 N건”, 총 수량, 주문일시, 총 결제 금액. 카드 또는 “주문상세” 버튼으로 상세 이동.</td><td>주문일 내림차순. 없으면 <span class="msg">“결제한 목록이 없습니다.”</span></td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-08</td><td>주문 상세</td><td>주문일시·주문번호, 주문 상품 리스트(썸네일·상품명·색상/사이즈/수량·원가·할인가), 주문자 정보, 배송 정보, 결제 정보(총 주문 금액·배송비·총 결제 금액), 결제 수단(방법·일시불/할부·결제 일시·주문 상태) 표시.</td><td>존재하지 않는 주문번호면 <span class="msg">“주문을 찾을 수 없습니다.”</span> 상품 클릭 시 상품 상세 이동.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-09</td><td>구매확정</td><td>미확정 상품의 “구매확정” 버튼 → 확인 모달(<span class="msg">“구매를 확정하시겠습니까? 구매 확정 후에는 취소나 변경이 불가능합니다.”</span>) → 확정 시 <span class="msg">“구매가 확정되었습니다.”</span> + 초록 “구매확정” 배지 표시.</td><td>확정 후 되돌리기 불가. 주문 취소/환불 기능은 미제공(부록 참고).</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-10</td><td>리뷰 작성 · 수정</td><td>구매확정된 상품에 “리뷰쓰기”(작성 후엔 “리뷰수정”) 버튼 노출. 모달에서 별점(1~5) + 내용(10~200자) 작성. 작성된 리뷰는 상품 상세 리뷰 탭에 반영.</td><td>별점 미선택 시 <span class="msg">“별점을 선택해주세요.”</span> 내용 10자 미만/200자 초과 차단. 수정 시 변경 없으면 <span class="msg">“변경된 내용이 없습니다.”</span></td><td><span class="auth login">로그인</span></td></tr>
+  </table>
+
+  <h3>10-4. 내가 쓴 글 <span class="path">/mypage/posts</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>MY-11</td><td>내 게시글 목록</td><td>내가 작성한 글을 최신순으로 표시: 제목 · 작성자 · 조회수 · 추천 수 · 작성일 · 댓글 수. 클릭 시 게시글 상세, 댓글 수 버튼 클릭 시 댓글 영역으로 이동.</td><td>없으면 <span class="msg">“작성한 게시글이 없습니다.”</span> 수정·삭제는 게시글 상세에서 수행.</td><td><span class="auth login">로그인</span></td></tr>
+  </table>
+
+  <h3>10-5. 배송지 관리 <span class="path">/mypage/address</span> <span class="path">/mypage/address/new</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>MY-12</td><td>배송지 목록</td><td>받는 사람 · 우편번호 · 주소 · 휴대폰 · 요청사항 표시. 기본 배송지는 배지로 구분되어 항상 최상단.</td><td>없으면 <span class="msg">“배송지가 없습니다.”</span> + 추가 버튼.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-13</td><td>배송지 추가</td><td>받는 분 · 우편번호/주소(다음(Daum) 우편번호 검색 연동, 직접 입력 불가) · 나머지 주소 · 휴대폰(앞자리 셀렉트 + 숫자 3~4자리/4자리) · 배송 요청사항(선택지 5종 + 직접 입력) · 기본 배송지 여부 입력. 모두 유효해야 “저장하기” 활성. 성공 시 <span class="msg">“배송지 정보가 저장되었습니다.”</span></td><td>필수 미입력 시 필드별 안내(<span class="msg">“받는 사람을 입력해 주세요.”</span> 등). 첫 배송지는 자동으로 기본 배송지 지정.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-14</td><td>배송지 수정</td><td>목록의 “수정” → 모달에서 동일 폼으로 수정. 성공 시 <span class="msg">“배송지가 수정되었습니다.”</span></td><td>이미 기본 배송지면 “현재 기본 배송지로 설정되어 있습니다.” 안내로 대체.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-15</td><td>배송지 삭제</td><td>“삭제” → 확인 모달(<span class="msg">“배송지를 삭제하시겠습니까?”</span>) → 성공 시 <span class="msg">“배송지가 삭제 되었습니다.”</span></td><td>기본 배송지를 삭제하면 남은 배송지 중에서 기본 배송지가 자동 재지정.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-16</td><td>기본 배송지 설정</td><td>“기본 배송지로 설정” 버튼으로 변경, <span class="msg">“기본 배송지가 변경 되었습니다.”</span> 토스트. 기본 배송지는 주문서(CART-07)의 배송 정보로 사용.</td><td>기본 배송지는 계정당 1개.</td><td><span class="auth login">로그인</span></td></tr>
+  </table>
+</section>
+
+<!-- ══════════ 11. 푸시 알림 ══════════ -->
+<section id="push">
+  <h2 class="sec">11. 푸시 알림 · 하이브리드 연동</h2>
+  <p class="sec-desc">v2 신규. 하이브리드 앱(Android WebView) 사용자 대상 Expo Push 기반 알림과 앱 연동 기능. 웹 자체 알림함(인앱 알림 목록)은 없다.</p>
+
+  <h3>11-1. 알림 종류</h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">알림</th><th>발송 시점 · 수신자</th><th>제목 · 본문 형식</th><th class="col-auth">채널</th></tr>
+    <tr><td>PUSH-01</td><td>새 댓글</td><td>내 게시글에 댓글이 달렸을 때 → 게시글 작성자.</td><td>제목: “&#8220;{글 제목 15자}&#8221; 글에 새 댓글이 달렸습니다” / 본문: “{작성자명}: {댓글 내용 40자 미리보기}”.</td><td><span class="auth app">앱</span></td></tr>
+    <tr><td>PUSH-02</td><td>새 답글</td><td>내 댓글에 답글이 달렸을 때 → 원댓글 작성자(+ 게시글 작성자에게는 PUSH-01 형식으로 함께 발송).</td><td>제목: “내 댓글에 답글이 달렸습니다” / 본문: 동일 형식.</td><td><span class="auth app">앱</span></td></tr>
+    <tr><td>PUSH-03</td><td>게시글 좋아요</td><td>내 게시글이 좋아요를 받았을 때(추가 시에만) → 게시글 작성자.</td><td>제목: “&#8220;{글 제목 15자}&#8221; 글에 좋아요를 받았습니다” / 본문: “{이름}님이 회원님의 글을 좋아합니다. ❤️”.</td><td><span class="auth app">앱</span></td></tr>
+  </table>
+
+  <h3>11-2. 발송 규칙 · 인프라</h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">채널</th></tr>
+    <tr><td>PUSH-04</td><td>발송 제외 규칙</td><td>본인 행동에 대한 알림은 발송하지 않음(내 글에 내가 단 댓글, 내 댓글에 내가 단 답글, 내 글 좋아요).</td><td>게시글 작성자 = 원댓글 작성자인 경우 더 구체적인 “답글” 알림 1건만 발송(중복 방지). 댓글 수정·삭제, 댓글 좋아요는 알림 없음. 좋아요 취소 시 미발송.</td><td><span class="auth app">앱</span></td></tr>
+    <tr><td>PUSH-05</td><td>알림 탭 이동</td><td>알림에 해당 게시글 URL이 포함되어, 탭하면 앱이 해당 게시글 화면을 연다.</td><td>—</td><td><span class="auth app">앱</span></td></tr>
+    <tr><td>PUSH-06</td><td>기기 토큰 등록</td><td>앱이 WebView에 푸시 토큰을 주입하면, 웹이 로그인 사용자와 연결해 서버에 자동 등록(기기당 1건, 계정 전환 시 갱신).</td><td>비로그인 상태에서는 등록되지 않음. 만료된 토큰은 발송 실패 감지 시 자동 삭제.</td><td><span class="auth app">앱</span></td></tr>
+    <tr><td>PUSH-07</td><td>수신 설정 반영</td><td>마이페이지 스위치(MY-04)로 끈 사용자는 발송 대상에서 제외(발송 직전 서버에서 필터링).</td><td>알림 종류별 세분화 설정은 없음(전체 on/off 단일 설정).</td><td><span class="auth app">앱</span></td></tr>
+    <tr><td>PUSH-08</td><td>발송 실패 무영향</td><td>푸시 발송은 백그라운드로 처리되어, 실패해도 댓글 작성·좋아요 등 원 기능에는 영향 없음.</td><td>발송 API는 요청자 세션·소유권을 서버에서 재검증(위조 요청 차단).</td><td><span class="auth app">앱</span></td></tr>
+    <tr><td>PUSH-09</td><td>앱 링크 연결</td><td>도메인-앱 연결 선언 파일(assetlinks.json)을 제공해, 결제 등 외부 앱에서 서비스 주소로 복귀할 때 브라우저 대신 하이브리드 앱이 열리도록 지원.</td><td>스토어 배포 시 릴리즈 키 지문으로 교체 필요(현재 개발용).</td><td><span class="auth app">앱</span></td></tr>
+    <tr><td>PUSH-10</td><td>앱 테마 연동</td><td>웹의 현재 테마(라이트/다크)가 바뀔 때마다 WebView 메시지로 앱에 전달되어, 네이티브 셸(상태바 · 세이프에어리어)이 웹 테마를 따라간다.</td><td>웹 단독(브라우저) 사용 시에는 동작하지 않음. COM-16 다크모드와 연동.</td><td><span class="auth app">앱</span></td></tr>
+  </table>
+</section>
+
+<!-- ══════════ 12. 디자인 시스템 ══════════ -->
+<section id="design">
+  <h2 class="sec">12. 디자인 시스템</h2>
+  <p class="sec-desc">v2 신규. 단일 소스 문서는 <code>docs/design-system.md</code>, 디자인 파일은 <code>design/ive-design-system.pen</code>, 미리보기는 <code>docs/design-system.html</code> · <code>docs/design-screens.html</code>.</p>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">항목</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">적용</th></tr>
+    <tr><td>DS-01</td><td>색상 토큰</td><td>브랜드 Purple 6단계 램프(기준색 <code>#DB97E9</code> = purple-300) + Orange 3단계 + Neutral gray 9단계 + 상태색(success · warning · info · error · kakao). shadcn 시맨틱 토큰(<code>--primary</code> · <code>--ring</code>)을 브랜드 보라로 재정의해 버튼·포커스 링·에러 상태가 브랜드색을 따름. 다크모드용 팔레트 별도 정의 — 배경 <code>#1B1B1F</code> · 카드 <code>#1E1E21</code> · 보더 <code>#2E2E33</code>(zinc 쿨톤) + 다크용 purple 램프.</td><td>레거시 토큰과 하드코딩 hex 전면 제거. JS 코드(별점·컨페티 등)는 <code>COLORS</code> 상수, Tailwind 밖 CSS는 <code>var(--gray-*)</code> 참조.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>DS-02</td><td>타이포 · 간격</td><td>Noto Sans KR 기준 7단계 타입 스케일(Display 36 / H1 24 / H2 20 / H3 18 / Body 16·14 / Caption 12), 간격은 4px 배수, 라운드 4/6/8/16/full, 그림자 3단계. 컨테이너 폭은 <code>max-w-container/content</code> 토큰으로 통일.</td><td>—</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>DS-03</td><td>컴포넌트 단일화</td><td><code>ui/button</code> variant 9종(브랜드 primary · kakao · outlineBrand · plain 등) + size 5종으로 모든 버튼 통일. <code>ui/input</code>은 h-12 · rounded-lg · 브랜드 포커스 링으로 통일. 아이콘은 lucide-react 단일, 로딩은 공용 Spinner(접근성 role 부여) 단일.</td><td>react-icons · react-spinners · framer-motion 의존성 제거.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>DS-04</td><td>적용 현황</td><td>토큰·버튼·아이콘·로딩·다크 팔레트는 전 화면 적용 완료. 캐러셀은 swiper로 단일화(embla 제거). 화면 단위 리디자인은 로그인 · 회원가입부터 적용(AUTH-01~12).</td><td>잔여 작업: 공용 SectionTitle 미도입, card/badge/tabs 수제 구현 산재.</td><td><span class="auth any">전체</span></td></tr>
+  </table>
+</section>
+
+<!-- ══════════ 13. 접근 제어 ══════════ -->
+<section id="access">
+  <h2 class="sec">13. 접근 제어 정책 요약</h2>
+  <p class="sec-desc">서버 가드(proxy)와 클라이언트 가드(화면/액션)의 이중 구조.</p>
+  <table class="spec">
+    <tr><th>구분</th><th>대상</th><th>정책</th></tr>
+    <tr><td style="white-space:nowrap; font-weight:600;">서버 가드</td><td><code>/mypage/*</code></td><td>비로그인 접근 시 로그인 페이지로 리다이렉트.</td></tr>
+    <tr><td></td><td><code>/login</code> · <code>/signup</code></td><td>로그인 상태로 접근 시 메인으로 리다이렉트.</td></tr>
+    <tr><td></td><td><code>/login?form=signup</code></td><td>가입 직후 발급 쿠키(5분) 없으면 일반 로그인으로 리다이렉트.</td></tr>
+    <tr><td></td><td><code>/payment/success · fail</code></td><td>주문번호 쿼리 없으면 메인으로 리다이렉트. (PG 복귀 특성상 로그인 검사는 클라이언트가 담당 — v1 튕김 문제 수정)</td></tr>
+    <tr><td style="white-space:nowrap; font-weight:600;">화면 가드</td><td>마이페이지 · 결제 성공/실패</td><td>세션 복원 후에도 비로그인이면 <span class="msg">“로그인 후 이용 가능합니다.”</span> 토스트 → 로그인 페이지 이동.</td></tr>
+    <tr><td style="white-space:nowrap; font-weight:600;">액션 가드</td><td>글쓰기 · 게시글/댓글 좋아요 · 댓글/답글 작성 · 결제하기 · 바로구매</td><td>비로그인 시 <span class="msg">“로그인이 필요합니다.”</span> 토스트 후 동작 차단(리다이렉트 없음).</td></tr>
+    <tr><td style="white-space:nowrap; font-weight:600;">비로그인 허용</td><td>—</td><td>메인/소식/게시판/굿즈샵 조회, 게시글 검색, 공유(링크 복사), 장바구니 담기·수량변경·삭제, 찜(기기 저장, 로그인 시 계정 이관).</td></tr>
+    <tr><td style="white-space:nowrap; font-weight:600;">데이터 권한</td><td>수정 · 삭제</td><td>UI는 본인 리소스에만 버튼 노출, 데이터 계층은 Supabase RLS 정책으로 보호.</td></tr>
+  </table>
+</section>
+
+<!-- ══════════ 14. 부록 ══════════ -->
+<section id="appendix">
+  <h2 class="sec">14. 부록</h2>
+
+  <h3>14-1. 데이터 저장소 (Supabase)</h3>
+  <table class="spec">
+    <tr><th>구분</th><th>이름</th><th>용도</th></tr>
+    <tr><td rowspan="15" style="font-weight:600;">테이블</td>
+        <td><code>user</code></td><td>회원 프로필(닉네임 · 아바타), Auth 계정과 연동</td></tr>
+    <tr><td><code>album</code></td><td>메인 앨범 캐러셀(발매 정보 · 음원 플랫폼 링크)</td></tr>
+    <tr><td><code>news_gallery</code> / <code>gallery</code></td><td>소식 기사 / 사진 갤러리</td></tr>
+    <tr><td><code>board</code></td><td>게시글(제목 · 본문 · 조회수 · 썸네일)</td></tr>
+    <tr><td><code>board_with_meta</code> (뷰)</td><td>게시글 목록용 집계 뷰(작성자명 · 댓글 수 · 추천 수 포함)</td></tr>
+    <tr><td><code>board_comments</code></td><td>댓글 · 대댓글(자기참조 parent_id)</td></tr>
+    <tr><td><code>board_likes</code> / <code>comment_likes</code></td><td>게시글 / 댓글 좋아요</td></tr>
+    <tr><td><code>goods</code></td><td>굿즈 상품(가격 · 할인율 · 사이즈/색상 · 배송 유형)</td></tr>
+    <tr><td><code>goods_reviews</code></td><td>상품 리뷰(별점 · 내용)</td></tr>
+    <tr><td><code>wish_lists</code></td><td>회원 찜 목록</td></tr>
+    <tr><td><code>customer_info</code></td><td>주문자 정보(계정당 1건)</td></tr>
+    <tr><td><code>shipping_addresses</code></td><td>배송지(기본 배송지 플래그 포함)</td></tr>
+    <tr><td><code>payments</code></td><td>결제 레코드(주문번호 · 결제수단 · 상태 · 배송지 스냅샷)</td></tr>
+    <tr><td><code>order_items</code></td><td>주문 상품(수량 · 구매확정 여부)</td></tr>
+    <tr><td><code>push_tokens</code></td><td>앱 푸시 토큰(기기당 1건 · 수신 on/off) — v2 신규</td></tr>
+    <tr><td style="font-weight:600;">스토리지</td><td><code>boards</code> / <code>avatars</code></td><td>게시글 본문 이미지 / 프로필 이미지</td></tr>
+    <tr><td style="font-weight:600;">DB 함수</td><td><code>increment_view_count</code> 외</td><td>조회수 증가, 기본 배송지 지정·재지정(<code>set_default_address</code>, <code>update_default_address</code>)</td></tr>
+  </table>
+
+  <h3>14-2. 클라이언트 저장소 키</h3>
+  <table class="spec">
+    <tr><th>키</th><th>저장소</th><th>용도</th></tr>
+    <tr><td><code>shopping_cart</code></td><td>localStorage</td><td>장바구니(서버 미저장). 로그아웃 시 삭제</td></tr>
+    <tr><td><code>wishlist</code></td><td>localStorage</td><td>비로그인 찜 목록. 로그인 시 계정으로 이관 후 삭제</td></tr>
+    <tr><td><code>checkout_items</code> / <code>order_name</code></td><td>localStorage</td><td>결제 진행 중 주문 상품 · 주문명 임시 보관(완료 시 삭제, 실패 시 복원용 유지)</td></tr>
+    <tr><td><code>viewedPosts</code></td><td>localStorage</td><td>게시글 조회수 24시간 중복 방지</td></tr>
+    <tr><td><code>loginEffect</code></td><td>localStorage</td><td>가입 축하 연출 1회 재생 플래그</td></tr>
+    <tr><td><code>firstSignup</code></td><td>쿠키 (5분)</td><td>가입 축하 화면 접근 허용 티켓</td></tr>
+    <tr><td><code>redirectUrl</code></td><td>sessionStorage</td><td>로그인 후 원래 페이지 복귀 경로(내부 경로만 허용) — v2 신규</td></tr>
+  </table>
+
+  <h3>14-3. 미구현 · 알려진 한계</h3>
+  <div class="note"><b>참고</b> — 아래는 기준 시점 코드에서 확인된 사실로, 이후 고도화 후보 목록으로 활용할 수 있다.</div>
+  <ul class="tight">
+    <li><b>회원 탈퇴 미구현</b> — 버튼이 주석 처리된 상태로만 존재.</li>
+    <li><b>비밀번호 찾기/재설정 없음</b>, 이메일 인증(확인 메일) 안내 플로우 없음.</li>
+    <li><b>주문 취소 · 환불 기능 없음</b> — 약관 문구로만 안내(“결제 이후 환불·취소 불가”).</li>
+    <li><b>배송비 로직 없음</b> — 주문서에 배송비 항목이 없고 주문 상세의 “총 배송비”는 0원 하드코딩.</li>
+    <li><b>상품 옵션(사이즈/색상) 선택 불가</b> — 정보 표시 전용.</li>
+    <li>회원가입 실패 시 원인과 무관하게 “이미 등록된 이메일 입니다.”로 표기됨.</li>
+    <li>소식 카테고리 필터는 로드된 목록 내 클라이언트 필터라, 더보기 이전에는 해당 카테고리 글이 있어도 안 보일 수 있음.</li>
+    <li>게시글 조회수는 목록 클릭 경유 시에만 증가(공유 링크 직접 진입 시 미증가).</li>
+    <li>결제 승인 API에 세션·금액 대조 검증 없음(토스 측 검증 및 클라이언트 중복 확인에 의존), 결제·주문 저장이 트랜잭션이 아님.</li>
+    <li>에디터 의존성 quill 2.0.3에 낮은 심각도 XSS 취약점(CVE-2025-15056)이 있으나 상위 버전 미출시로 업그레이드 불가 — 본문 렌더링이 DOMPurify로 소독되고 있어 실질 영향은 제한적(Dependabot #246 모니터링 중).</li>
+    <li>비밀번호 20자 상한, 닉네임 6자 상한이 입력창 속성으로만 강제되고 검증 스키마에는 없음.</li>
+    <li>장바구니는 기기 저장 전용 — 로그인해도 서버 동기화되지 않고 기기 간 공유 불가.</li>
+    <li>상품 목록 무한 스크롤이 매 페이지 전체 상품을 조회한 뒤 잘라내는 방식(서버 페이지네이션 없음).</li>
+    <li>바로 구매로 결제하면 주문명이 기본값(“주문상품”)으로 저장될 수 있음 — 주문명 임시 저장이 장바구니 결제 경로에만 존재.</li>
+    <li>알림 종류별 수신 설정 세분화 없음, 좋아요 재발송 방지(발송 이력) 없음, 웹 인앱 알림함 없음.</li>
+    <li>디자인 시스템 잔여 작업 — SectionTitle 공용화, card/badge/tabs 컴포넌트화 (DS-04).</li>
+  </ul>
+</section>
+
+<footer class="foot">
+  IVE로 DIVE 기능명세서 v2 (Draft) · 기준 커밋 <code>565ede8</code> (2026 리뉴얼 진행 중) · 2026-07-29 생성 · <a href="./index.html">기능명세서 아카이브</a> · <a href="./spec-v1.html">v1 보기</a>
+</footer>
+
+</div>
+</body>
+</html>

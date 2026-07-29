@@ -15,7 +15,7 @@ const UserMenu = () => {
             <CartIcon className="left-3" />
           </Link>
         </li>
-        <li className="flex">{!session ? <LoginLink>로그인/회원가입</LoginLink> : <UserDropdownMenu />}</li>
+        <li className="flex">{!session ? <LoginLink>로그인</LoginLink> : <UserDropdownMenu />}</li>
       </ul>
     </nav>
   );
