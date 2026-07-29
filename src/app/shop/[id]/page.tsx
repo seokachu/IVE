@@ -6,7 +6,7 @@ export { generateMetadata };
 
 const page = () => {
   return (
-    <main className="px-5 pt-14 pb-28 lg:px-8 max-w-[1320px] m-auto flex flex-col items-center justify-center min-h-screen">
+    <main className="px-5 pt-14 pb-28 lg:px-8 max-w-container m-auto flex flex-col items-center justify-center min-h-screen">
       <ProductSection />
       <section className="w-full">
         <div>

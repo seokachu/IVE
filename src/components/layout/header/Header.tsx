@@ -57,7 +57,7 @@ const Header = () => {
     >
       <div
         className={cn(
-          "flex w-full p-[20px] justify-between items-center max-w-[1320px] m-auto relative text-white",
+          "flex w-full p-[20px] justify-between items-center max-w-container m-auto relative text-white",
           isScrolled && "text-gray-900",
         )}
       >

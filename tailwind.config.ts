@@ -92,6 +92,11 @@ const config: Config = {
           "5": "hsl(var(--chart-5))",
         },
       },
+      // 컨테이너 폭 토큰 — 임의값(max-w-[1320px] 등) 대신 사용
+      maxWidth: {
+        container: "1320px",
+        content: "1280px",
+      },
       backgroundImage: {
         "main-image": "url('/images/main_bg.webp')",
       },

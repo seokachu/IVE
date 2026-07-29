@@ -31,7 +31,7 @@ const GoTopButton = () => {
 
   return (
     <div className="fixed bottom-3 left-0 right-3 z-50">
-      <div className="max-w-[1320px] m-auto relative">
+      <div className="max-w-container m-auto relative">
         <Button variant="plain" size="auto"
           onClick={onClickToTop}
           aria-label="최상단으로 이동"

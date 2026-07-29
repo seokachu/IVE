@@ -20,7 +20,7 @@ const MyPageLayout = ({ children }: { children: React.ReactNode }) => {
     <AuthGuard
       loadingComponent={
         <main className="w-full min-h-screen">
-          <div className="max-w-[1320px] m-auto flex flex-col lg:flex-row">
+          <div className="max-w-container m-auto flex flex-col lg:flex-row">
             <aside className="w-full lg:min-h-screen lg:w-[30%] lg:border-r px-5 pt-14 lg:px-8">
               <MyPageSkeleton />
             </aside>
@@ -32,7 +32,7 @@ const MyPageLayout = ({ children }: { children: React.ReactNode }) => {
       }
     >
       <main className="w-full min-h-screen">
-        <div className="max-w-[1320px] m-auto flex flex-col lg:flex-row">
+        <div className="max-w-container m-auto flex flex-col lg:flex-row">
           <aside className="w-full lg:min-h-screen lg:w-[30%] lg:border-r px-5 pt-14 lg:px-8">
             <UserInfo />
           </aside>

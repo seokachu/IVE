@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const GalleryPhotoSkeleton = () => {
   return (
-    <section className="max-w-[1280px] flex justify-center align-center flex-col px-5 pt-32 pb-40 m-auto">
+    <section className="max-w-content flex justify-center align-center flex-col px-5 pt-32 pb-40 m-auto">
       <div className="flex flex-col items-center mb-12">
         <Skeleton className="w-56 h-12" />
         <Skeleton className="w-80 h-5 mt-5 mb-12" />
