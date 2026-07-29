@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import DefaultImage from "@/assets/images/default_image.avif";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import Image from "next/image";
@@ -151,9 +152,9 @@ const CartListItem = ({ item }: CartListItemProps) => {
           </div>
         </div>
       </label>
-      <button onClick={handleDeleteItem} className="absolute right-2 top-[10px] hover:text-purple">
+      <Button variant="plain" size="auto" onClick={handleDeleteItem} className="absolute right-2 top-[10px] hover:text-purple">
         &times;
-      </button>
+      </Button>
     </li>
   );
 };

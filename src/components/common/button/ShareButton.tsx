@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { IoMdShare } from "react-icons/io";
 import { useToast } from "@/hooks/use-toast";
 import { ButtonHTMLAttributes } from "react";
@@ -25,9 +26,9 @@ const ShareButton = ({ className }: classNameProps) => {
   };
 
   return (
-    <button onClick={onClickShare} className={className} aria-label="현재 페이지 공유하기">
+    <Button variant="plain" size="auto" onClick={onClickShare} className={className} aria-label="현재 페이지 공유하기">
       <IoMdShare size={25} />
-    </button>
+    </Button>
   );
 };
 

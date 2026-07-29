@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import DefaultImage from "@/assets/images/default_image.avif";
 import Badge from "@/components/common/Badge";
@@ -62,9 +63,9 @@ const UserWishListItem = ({ item, index }: UserWishListItemProps) => {
           loading={index < 6 ? "eager" : "lazy"}
           priority={index < 6}
         />
-        <button onClick={onClickHeart} className="absolute right-2 bottom-2 text-gray-300" aria-label="찜하기 취소">
+        <Button variant="plain" size="auto" onClick={onClickHeart} className="absolute right-2 bottom-2 text-gray-300" aria-label="찜하기 취소">
           <GoHeartFill size={30} className="opacity-90 transition-colors text-red" />
-        </button>
+        </Button>
       </div>
       <div className="flex flex-col gap-1">
         <div className="mt-2 md:mt-4 mb-1 min-h-[20px]">

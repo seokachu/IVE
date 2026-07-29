@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { IoIosArrowUp } from "react-icons/io";
 import AgreementModal from "./AgreementModal";
@@ -73,11 +74,11 @@ const OrderAgreements = () => {
               />
               &#91;필수&#93; 주문 내역에 대한 필수 동의
             </label>
-            <button type="button" className="text-gray-500" aria-label={isOpen ? "접기" : "펼치기"}>
+            <Button variant="plain" size="auto" type="button" className="text-gray-500" aria-label={isOpen ? "접기" : "펼치기"}>
               <IoIosArrowUp
                 className={`transition-transform duration-300 ease-in-out ${isOpen ? "rotate-0" : "rotate-180"}`}
               />
-            </button>
+            </Button>
           </div>
           {isOpen && (
             <div className="pl-6 mt-3 space-y-2">

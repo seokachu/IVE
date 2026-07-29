@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { IoChatbubble } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
@@ -58,13 +59,13 @@ const SignInContent = () => {
             size={20}
             iconStyle="absolute left-5 top-2/4 -translate-y-2/4"
           />
-          <button
+          <Button variant="plain" size="auto"
             onClick={toggleEmailSignIn}
             className="w-full border border-1 border-gray-300 px-20 py-3 rounded-full flex items-center justify-center relative text-sm font-bold"
           >
             <MdOutlineEmail className="absolute left-5 top-2/4 -translate-y-2/4" size={20} />
             이메일로 로그인
-          </button>
+          </Button>
           <div className="my-5">
             <p className="relative w-full text-gray-300 text-center text-xs before:absolute before:w-32 before:h-[1px] before:left-0 before:bg-gray-200 before:top-2/4 before:-translate-y-2/4 after:absolute after:w-32 after:h-[1px] after:right-0 after:bg-gray-200 after:top-2/4 after:-translate-y-2/4">
               또는
@@ -103,9 +104,9 @@ const SignInContent = () => {
         </div>
       ) : (
         <div className="w-full max-w-[380px] py-5">
-          <button onClick={toggleEmailSignIn} className="absolute top-5 left-5">
+          <Button variant="plain" size="auto" onClick={toggleEmailSignIn} className="absolute top-5 left-5">
             <IoIosArrowBack size={25} className="text-gray-500 hover:text-gray-900" />
-          </button>
+          </Button>
           <SignInEmail redirectPath={null} />
         </div>
       )}

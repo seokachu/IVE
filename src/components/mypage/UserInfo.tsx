@@ -209,11 +209,11 @@ const UserInfo = () => {
           </li>
         ))}
         {/* <li>
-          <button
-            className="text-gray-300 text-sm"
+          <Button variant="plain" size="auto"
+            className="text-gray-300 text-sm font-normal"
           >
             회원탈퇴
-          </button>
+          </Button>
         </li> */}
       </ul>
     </section>

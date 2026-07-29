@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { VscChevronRight } from "react-icons/vsc";
 import { useRouter } from "next/navigation";
 import { SheetClose } from "@/components/ui/sheet";
@@ -16,13 +17,13 @@ const MobileNavigator = () => {
             className="data-[state=closed] border-b-[1px] border-gray-300 cursor-pointer hover:bg-gray-400 hover:text-white"
           >
             <SheetClose asChild>
-              <button
+              <Button variant="plain" size="auto"
                 onClick={() => push(el.path)}
-                className="w-full h-full py-4 px-4 text-left flex items-center justify-between"
+                className="w-full h-full py-4 px-4 font-normal text-base text-left flex items-center justify-between"
               >
                 <span>{el.label}</span>
                 <VscChevronRight size={20} />
-              </button>
+              </Button>
             </SheetClose>
           </li>
         ))}
