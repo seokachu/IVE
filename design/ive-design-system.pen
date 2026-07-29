@@ -3921,6 +3921,521 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "u8XX2w",
+      "x": 1395,
+      "y": 1201,
+      "name": "로그인",
+      "clip": true,
+      "width": 360,
+      "height": 717,
+      "fill": "$white",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": [
+        40,
+        24,
+        32,
+        24
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "f7uyxV",
+          "name": "Header",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "children": [
+            {
+              "type": "text",
+              "id": "XbOlO",
+              "name": "Wordmark",
+              "fill": "$primary-pressed",
+              "content": "IVE로 DIVE",
+              "fontFamily": "$font-family",
+              "fontSize": 14,
+              "fontWeight": "$font-weight-semibold",
+              "letterSpacing": "$font-letter-spacing"
+            },
+            {
+              "type": "text",
+              "id": "r7FvP",
+              "name": "Title",
+              "fill": "$text-primary",
+              "content": "로그인",
+              "lineHeight": "$font-line-height-tight",
+              "fontFamily": "$font-family",
+              "fontSize": "$font-size-600",
+              "fontWeight": "$font-weight-bold"
+            },
+            {
+              "type": "text",
+              "id": "b6LbJ",
+              "name": "Sub",
+              "fill": "$text-secondary",
+              "content": "다시 만나서 반가워요! 아이브의 모든 소식을 만나보세요",
+              "fontFamily": "$font-family",
+              "fontSize": "$font-size-200",
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "id": "VDn2p",
+          "type": "ref",
+          "ref": "qrL3V",
+          "name": "카카오 로그인",
+          "width": "fill_container"
+        },
+        {
+          "type": "frame",
+          "id": "kgaSQ",
+          "name": "Socials",
+          "width": "fill_container",
+          "gap": 16,
+          "justifyContent": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "jhhyL",
+              "name": "Google",
+              "width": 40,
+              "height": 40,
+              "fill": "$white",
+              "cornerRadius": "$radius-full",
+              "stroke": "$border-strong",
+              "strokeWidth": 1,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "rOxcD",
+                  "name": "G",
+                  "fill": "$text-secondary",
+                  "content": "G",
+                  "fontFamily": "$font-family",
+                  "fontSize": 16,
+                  "fontWeight": "$font-weight-bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "q7kwCu",
+              "name": "Github",
+              "width": 40,
+              "height": 40,
+              "fill": "$gray-900",
+              "cornerRadius": "$radius-full",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "fZGG8",
+                  "name": "GhIcon",
+                  "width": 20,
+                  "height": 20,
+                  "icon": "github",
+                  "library": "lucide",
+                  "fill": "$white"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "uZBuY",
+          "name": "Divider",
+          "width": "fill_container",
+          "gap": 12,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "rectangle",
+              "id": "mVxhV",
+              "name": "Line L",
+              "fill": "$border-default",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "text",
+              "id": "O2KxAl",
+              "name": "Or",
+              "fill": "$text-tertiary",
+              "content": "또는",
+              "fontFamily": "$font-family",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "rectangle",
+              "id": "pRZx4",
+              "name": "Line R",
+              "fill": "$border-default",
+              "width": "fill_container",
+              "height": 1
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "oaxDx",
+          "name": "Form",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "children": [
+            {
+              "id": "YLERs",
+              "type": "ref",
+              "ref": "dstrp",
+              "name": "이메일 입력",
+              "width": "fill_container",
+              "descendants": {
+                "hQqlU": {
+                  "content": "이메일"
+                },
+                "FP00k": {
+                  "content": "example@example.com"
+                }
+              }
+            },
+            {
+              "id": "GGPhJ",
+              "type": "ref",
+              "ref": "dstrp",
+              "name": "비밀번호 입력",
+              "width": "fill_container",
+              "descendants": {
+                "hQqlU": {
+                  "content": "비밀번호"
+                },
+                "FP00k": {
+                  "type": "frame",
+                  "id": "S4JVd",
+                  "name": "PwRow",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "d8zMM",
+                      "name": "Ph",
+                      "fill": "$text-tertiary",
+                      "content": "비밀번호",
+                      "fontFamily": "$font-family",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "T6lI3C",
+                      "name": "Eye",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "eye-off",
+                      "library": "lucide",
+                      "fill": "$text-tertiary"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "mT7Wt",
+              "type": "ref",
+              "ref": "q2pQUC",
+              "name": "로그인 버튼",
+              "width": "fill_container",
+              "descendants": {
+                "jDkeV": {
+                  "content": "로그인"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "x0zqF",
+          "name": "Footer",
+          "width": "fill_container",
+          "gap": 6,
+          "justifyContent": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "v3La5",
+              "name": "Q",
+              "fill": "$text-secondary",
+              "content": "아직 계정이 없나요?",
+              "fontFamily": "$font-family",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "H9dTCL",
+              "name": "Link",
+              "fill": "$primary-pressed",
+              "content": "회원가입",
+              "fontFamily": "$font-family",
+              "fontSize": 14,
+              "fontWeight": "$font-weight-semibold"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "sYMYD",
+      "x": 1855,
+      "y": 1201,
+      "name": "회원가입",
+      "clip": true,
+      "width": 360,
+      "fill": "$white",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": [
+        40,
+        24,
+        32,
+        24
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "CtGBm",
+          "name": "Header",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "children": [
+            {
+              "type": "text",
+              "id": "m2rpz",
+              "name": "Wordmark",
+              "fill": "$primary-pressed",
+              "content": "IVE로 DIVE",
+              "fontFamily": "$font-family",
+              "fontSize": 14,
+              "fontWeight": "$font-weight-semibold",
+              "letterSpacing": "$font-letter-spacing"
+            },
+            {
+              "type": "text",
+              "id": "U1sup",
+              "name": "Title",
+              "fill": "$text-primary",
+              "content": "회원가입",
+              "lineHeight": "$font-line-height-tight",
+              "fontFamily": "$font-family",
+              "fontSize": "$font-size-600",
+              "fontWeight": "$font-weight-bold"
+            },
+            {
+              "type": "text",
+              "id": "YylSu",
+              "name": "Sub",
+              "fill": "$text-secondary",
+              "content": "가입하고 아이브 팬 커뮤니티를 시작해 보세요",
+              "fontFamily": "$font-family",
+              "fontSize": "$font-size-200",
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "ohaFW",
+          "name": "Form",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "children": [
+            {
+              "id": "R7gJZ",
+              "type": "ref",
+              "ref": "dstrp",
+              "name": "이메일 입력",
+              "width": "fill_container",
+              "descendants": {
+                "hQqlU": {
+                  "content": "이메일"
+                },
+                "FP00k": {
+                  "content": "example@example.com"
+                }
+              }
+            },
+            {
+              "id": "UcXKA",
+              "type": "ref",
+              "ref": "dstrp",
+              "name": "비밀번호 입력",
+              "width": "fill_container",
+              "descendants": {
+                "hQqlU": {
+                  "content": "비밀번호"
+                },
+                "FP00k": {
+                  "type": "frame",
+                  "id": "gOhB4",
+                  "name": "PwRow",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "CWB9H",
+                      "name": "Ph",
+                      "fill": "$text-tertiary",
+                      "content": "비밀번호",
+                      "fontFamily": "$font-family",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "PHlKL",
+                      "name": "Eye",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "eye-off",
+                      "library": "lucide",
+                      "fill": "$text-tertiary"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "frame",
+              "id": "NcHL5",
+              "name": "Pw Hint",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "tWoWy",
+                  "name": "Info",
+                  "width": 12,
+                  "height": 12,
+                  "icon": "info",
+                  "library": "lucide",
+                  "fill": "$text-tertiary"
+                },
+                {
+                  "type": "text",
+                  "id": "CRCJ1",
+                  "name": "HintText",
+                  "fill": "$text-tertiary",
+                  "content": "비밀번호 영문, 숫자, 특수문자 포함 8-20자",
+                  "fontFamily": "$font-family",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "id": "Vt6Zg",
+              "type": "ref",
+              "ref": "dstrp",
+              "name": "비밀번호 확인",
+              "width": "fill_container",
+              "descendants": {
+                "hQqlU": {
+                  "content": "비밀번호 확인"
+                },
+                "FP00k": {
+                  "type": "frame",
+                  "id": "m9COG",
+                  "name": "PwRow2",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "yTCe6",
+                      "name": "Ph",
+                      "fill": "$text-tertiary",
+                      "content": "비밀번호 확인",
+                      "fontFamily": "$font-family",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "qr9FB",
+                      "name": "Eye",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "eye-off",
+                      "library": "lucide",
+                      "fill": "$text-tertiary"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "GmXvo",
+          "type": "ref",
+          "ref": "q2pQUC",
+          "name": "가입 버튼",
+          "width": "fill_container",
+          "descendants": {
+            "jDkeV": {
+              "content": "가입하기"
+            }
+          }
+        },
+        {
+          "type": "frame",
+          "id": "U9EyU",
+          "name": "Footer",
+          "width": "fill_container",
+          "gap": 6,
+          "justifyContent": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "bf52f",
+              "name": "Q",
+              "fill": "$text-secondary",
+              "content": "이미 계정이 있나요?",
+              "fontFamily": "$font-family",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "vwton",
+              "name": "Link",
+              "fill": "$primary-pressed",
+              "content": "로그인",
+              "fontFamily": "$font-family",
+              "fontSize": 14,
+              "fontWeight": "$font-weight-semibold"
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {
