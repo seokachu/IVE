@@ -1,4 +1,5 @@
 import OAuthButton from "@/components/common/button/OAuthButton";
+import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 import { oAuthLogin } from "@/lib/supabase/auth";
 import { FcGoogle } from "react-icons/fc";
@@ -22,38 +23,40 @@ const OAuthLogin = () => {
   };
 
   return (
-    <ul className="flex gap-5 items-center justify-center mt-3">
-      <li>
-        <OAuthButton
-          onClick={() => handleOAuthLogin("kakao")}
-          className="bg-kakao rounded-full border p-1 w-10 h-10"
-          icon={IoChatbubble}
-          size={20}
-          iconStyle="m-auto"
-          aria-label="카카오로 로그인하기 버튼"
-        />
-      </li>
-      <li>
-        <OAuthButton
-          onClick={() => handleOAuthLogin("google")}
-          className="rounded-full border p-1 w-10 h-10"
-          icon={FcGoogle}
-          size={30}
-          iconStyle="m-auto"
-          aria-label="구글로 로그인하기 버튼"
-        />
-      </li>
-      <li>
-        <OAuthButton
-          onClick={() => handleOAuthLogin("github")}
-          className="w-10 h-10"
-          icon={FaGithub}
-          size={38}
-          iconStyle="translate-y-[2px]"
-          aria-label="깃허브로 로그인하기 버튼"
-        />
-      </li>
-    </ul>
+    <div className="flex flex-col gap-3 w-full">
+      <Button
+        variant="kakao"
+        size="auto"
+        onClick={() => handleOAuthLogin("kakao")}
+        className="w-full h-12 rounded-lg text-base gap-2"
+        aria-label="카카오로 로그인하기 버튼"
+      >
+        <IoChatbubble size={18} />
+        카카오로 시작하기
+      </Button>
+      <ul className="flex gap-4 items-center justify-center">
+        <li>
+          <OAuthButton
+            onClick={() => handleOAuthLogin("google")}
+            className="rounded-full border p-1 w-10 h-10"
+            icon={FcGoogle}
+            size={30}
+            iconStyle="m-auto"
+            aria-label="구글로 로그인하기 버튼"
+          />
+        </li>
+        <li>
+          <OAuthButton
+            onClick={() => handleOAuthLogin("github")}
+            className="w-10 h-10"
+            icon={FaGithub}
+            size={38}
+            iconStyle="translate-y-[2px]"
+            aria-label="깃허브로 로그인하기 버튼"
+          />
+        </li>
+      </ul>
+    </div>
   );
 };
 
