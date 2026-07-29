@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
 interface SearchAddressProps {
   onClose: () => void;
@@ -27,9 +28,9 @@ const SearchAddress = ({ onClose, onAddressChange }: SearchAddressProps) => {
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
       <div className="bg-white p-4 rounded-lg w-[500px] relative">
-        <button onClick={onClose} className="absolute right-4 top-4 text-gray-500 hover:text-purple z-10">
+        <Button variant="plain" size="auto" onClick={onClose} className="absolute right-4 top-4 text-gray-500 hover:text-purple z-10">
           &times;
-        </button>
+        </Button>
         <h2 className="text-lg font-medium mb-4">주소 검색</h2>
         <DaumPostcodeEmbed onComplete={handleComplete} />
       </div>

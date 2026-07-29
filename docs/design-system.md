@@ -152,7 +152,10 @@ Pencil에 재사용 컴포넌트로 등록된 목록과 대응 코드:
 **정리 방향 (현재 분열 상태 → 단일화)**
 - ~~버튼 구현이 3갈래로 분열~~ → **2026-07-28 완료**: `ActionButton` 삭제, 27개 파일을 `ui/button.tsx`로 통일
   (`primary`→`default`, `outline`→`outlineBrand`, `default`→`outline`, 기존 여백 보존용 `size="auto"` 추가,
-  `Button` 기본 `type="button"`). 날 `<button>` 19곳은 화면 작업 시 점진 전환.
+  `Button` 기본 `type="button"`).
+- **2026-07-29 날 `<button>` 정리 완료**: 아이콘·인라인 유틸리티 버튼용 `plain` variant(배경·테두리 없음,
+  포커스 링·disabled 처리만) 신설 후 15개 파일 17곳을 `<Button variant="plain" size="auto">`로 전환.
+  예외: `PushSettingRow`는 `role="switch"` 토글이라 버튼 컴포넌트 대상이 아님.
 - 제목(h2/h3 + text-xl font-bold 인라인 반복 20여 파일) → `SectionTitle` 공용 컴포넌트 신설 권장.
 - shadcn `card`, `badge`, `tabs`가 없어 수제 구현이 흩어짐 → 필요 시 shadcn 추가 후 토큰 연결.
 

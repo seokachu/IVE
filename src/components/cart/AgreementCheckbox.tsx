@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { IoIosArrowForward } from "react-icons/io";
 import type { AgreementCheckboxProps } from "@/types/cart";
 
@@ -8,9 +9,9 @@ const AgreementCheckbox = ({ modalType, onChange, checked, labelText }: Agreemen
         <input type="checkbox" className="mr-2 translate-y-[1px]" checked={checked} onChange={onChange} />
         {labelText}
       </label>
-      <button onClick={modalType}>
+      <Button variant="plain" size="auto" onClick={modalType}>
         <IoIosArrowForward className="text-gray-500" />
-      </button>
+      </Button>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { NEWS_CATEGORY_ARRAY } from "@/utils/constants";
 import type { NewsCategoryFilterProps } from "@/types/news";
 
@@ -12,12 +13,12 @@ const NewsCategoryFilter = ({ selectedCategory, setSelectedCategory }: NewsCateg
               selectedCategory === el.category ? "bg-white" : ""
             }`}
           >
-            <button
+            <Button variant="plain" size="auto"
               onClick={() => setSelectedCategory(el.category)}
-              className={`hover:text-gray-900 ${selectedCategory === el.category ? "text-purple" : ""}`}
+              className={`font-normal hover:text-gray-900 ${selectedCategory === el.category ? "text-purple" : ""}`}
             >
               {el.category}
-            </button>
+            </Button>
           </li>
         ))}
       </ul>

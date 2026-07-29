@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import useSignOut from "@/hooks/useSignOut";
 
 interface SignOutButtonProps {
@@ -9,9 +10,9 @@ const SignOutButton = ({ className, onSuccess }: SignOutButtonProps) => {
   const { handleSignOut } = useSignOut(onSuccess);
 
   return (
-    <button onClick={handleSignOut} className={className}>
+    <Button variant="plain" size="auto" onClick={handleSignOut} className={`font-normal ${className}`}>
       로그아웃
-    </button>
+    </Button>
   );
 };
 
