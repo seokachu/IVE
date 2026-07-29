@@ -11,13 +11,13 @@ const TabMenu = ({ activeTab, setActiveTab, id }: TabMenuProps) => {
       <ul className="flex justify-between items-center text-center cursor-pointer">
         <li
           onClick={() => setActiveTab("description")}
-          className={`${activeTab === "description" ? "border-b-2 border-dark-gray" : "border-b"} w-2/4 py-4`}
+          className={`${activeTab === "description" ? "border-b-2 border-gray-300" : "border-b"} w-2/4 py-4`}
         >
           <h3 className={`${activeTab === "description" ? "font-bold" : ""}`}>상세정보</h3>
         </li>
         <li
           onClick={() => setActiveTab("review")}
-          className={`${activeTab === "review" ? "border-b-2 border-dark-gray" : "border-b"} w-2/4 py-4`}
+          className={`${activeTab === "review" ? "border-b-2 border-gray-300" : "border-b"} w-2/4 py-4`}
         >
           <h3 className={`${activeTab === "review" ? "font-bold" : ""} flex gap-2 justify-center items-center`}>
             리뷰<span>{count}</span>

@@ -1,3 +1,4 @@
+import { COLORS } from "@/utils/constants";
 import { useState } from "react";
 import { FaStar, FaRegStar } from "react-icons/fa";
 
@@ -20,9 +21,9 @@ const InteractiveStars = ({ rating, size = 24, onChange }: InteractiveStarProps)
           className="cursor-pointer"
         >
           {index < (hoverRating || rating) ? (
-            <FaStar size={size} color="#FACC15" />
+            <FaStar size={size} color={COLORS.warning} />
           ) : (
-            <FaRegStar size={size} color="#FACC15" />
+            <FaRegStar size={size} color={COLORS.warning} />
           )}
         </span>
       ))}

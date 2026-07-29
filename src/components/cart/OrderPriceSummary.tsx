@@ -22,7 +22,7 @@ const OrderPriceSummary = ({
         </p>
         <p className="flex justify-between items-center">
           총 할인 금액
-          <span className="text-dark-orange">-{formatPrice(totalDiscountAmount)}원</span>
+          <span className="text-orange-500">-{formatPrice(totalDiscountAmount)}원</span>
         </p>
       </div>
     </div>

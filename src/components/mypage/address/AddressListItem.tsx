@@ -90,7 +90,7 @@ const AddressListItem = ({ item }: AddressListItems) => {
               onClick={onClickDefaultRecipient}
               variant="outline" size="auto"
               type="button"
-              className="text-xs rounded-sm px-1 text-gray-600 hover:bg-silver-gray hover:text-primary"
+              className="text-xs rounded-sm px-1 text-gray-600 hover:bg-gray-200 hover:text-primary"
             >
               기본 배송지로 설정
             </Button>

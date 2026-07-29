@@ -16,20 +16,25 @@
   --orange-300: #ff9f87;
   --orange-500: #fd5631;
 
+  /* Neutral 램프 — tailwind.config의 gray와 동일 값 (Tailwind를 못 쓰는 CSS 파일용) */
+  --gray-50: #f9f9f9;
+  --gray-100: #f5f5f5;
+  --gray-200: #eeeeee;
+  --gray-300: #cccccc;
+  --gray-400: #a0a0a0;
+  --gray-500: #6b7280;
+  --gray-600: #495057;
+  --gray-700: #333333;
+  --gray-900: #0a0a0a;
+
   /* Status / 고정색 */
   --success: #22c55e;
   --warning: #facc15;
   --info: #3b82f6;
   --kakao: #fee500;
 
-  /* Legacy aliases — 마이그레이션 완료 후 제거 예정 */
-  --font-primary: #0a0a0a;
-  --silver-gray: #eeeeee;
-  --dark-gray: #cccccc;
-  --orange: var(--orange-300);
-  --purple: var(--purple-300);
+  /* Error red — tailwind.config의 red.DEFAULT가 참조 */
   --red: #e72424;
-  --dark-orange: var(--orange-500);
 }
 /* 
 @media (prefers-color-scheme: dark) {
@@ -66,7 +71,7 @@ body,
   }
 
   input[type="checkbox"] {
-    accent-color: var(--purple);
+    accent-color: var(--purple-300);
     min-width: 1rem;
     min-height: 1rem;
     max-width: 1rem;

@@ -1,4 +1,5 @@
 "use client";
+import { COLORS } from "@/utils/constants";
 import { Form } from "@/components/ui/form";
 import { FaExclamationCircle } from "react-icons/fa";
 import { RHFInput } from "@/components/common/RHFInput";
@@ -78,9 +79,9 @@ const SignUpForm = () => {
             />
             <span className="absolute right-4 top-[14px] cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? (
-                <AiOutlineEye size={24} color="#ccc" />
+                <AiOutlineEye size={24} color={COLORS.gray300} />
               ) : (
-                <AiOutlineEyeInvisible size={24} color="#ccc" />
+                <AiOutlineEyeInvisible size={24} color={COLORS.gray300} />
               )}
             </span>
           </div>
@@ -101,13 +102,13 @@ const SignUpForm = () => {
               }}
             >
               {showPasswordCheck ? (
-                <AiOutlineEye size={24} color="#ccc" />
+                <AiOutlineEye size={24} color={COLORS.gray300} />
               ) : (
-                <AiOutlineEyeInvisible size={24} color="#ccc" />
+                <AiOutlineEyeInvisible size={24} color={COLORS.gray300} />
               )}
             </span>
           </div>
-          <p className="flex items-center gap-1 text-sm text-dark-gray pl-5">
+          <p className="flex items-center gap-1 text-sm text-gray-300 pl-5">
             <FaExclamationCircle />
             비밀번호 영문, 숫자, 특수문자 포함 8-20자
           </p>

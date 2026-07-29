@@ -34,8 +34,8 @@ const BoardLikeButton = ({ item }: BoardLikeButtonProps) => {
     <div className="flex items-center justify-center mb-5">
       <Button
         variant="outline" size="auto"
-        className={`flex items-center gap-1 py-3 px-3 hover:bg-silver-gray ${
-          isLiked ? "bg-silver-gray" : ""
+        className={`flex items-center gap-1 py-3 px-3 hover:bg-gray-200 ${
+          isLiked ? "bg-gray-200" : ""
         } `}
         onClick={handleToggleLikeClick}
         disabled={isPending}

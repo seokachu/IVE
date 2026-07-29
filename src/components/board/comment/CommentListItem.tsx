@@ -75,7 +75,7 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange }: Comm
           <div className="flex justify-between">
             <div className="flex gap-2">
               <h2>{item?.user?.name}</h2>
-              <time className="text-dark-gray">{formatDate(item?.created_at)}</time>
+              <time className="text-gray-300">{formatDate(item?.created_at)}</time>
             </div>
             {isAuthor && (
               <BoardActionButton onDelete={onClickDelete} onEdit={onClickEdit} mode={isEditing ? "edit" : "default"} />

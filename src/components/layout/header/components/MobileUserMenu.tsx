@@ -6,7 +6,7 @@ import { useSession } from "@/store/zustand";
 
 const MobileUserMenu = () => {
   const session = useSession();
-  const navListStyle = "flex-1 hover:bg-zinc-400 h-full w-2/6 block border border-dark-gray group";
+  const navListStyle = "flex-1 hover:bg-gray-400 h-full w-2/6 block border border-gray-300 group";
 
   const hoverStyle = "group-hover:[color:white]";
   const navListItemStyle = "w-full h-full flex items-center justify-center";

@@ -13,7 +13,7 @@ const getBadgeColor = (badge: string) => {
     case BADGE_TYPES.FREE_DELIVERY:
       return `bg-purple`;
     case BADGE_TYPES.BEST:
-      return `bg-custom-orange`;
+      return `bg-orange-500`;
     default:
       return `bg-gray-500`;
   }

@@ -51,7 +51,7 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
   return (
     <li className="border rounded-lg p-4">
       {item.is_confirmed && (
-        <p className="text-sm text-green-500 flex items-center gap-1 mb-2 border-b py-2">
+        <p className="text-sm text-success flex items-center gap-1 mb-2 border-b py-2">
           <FaCheck />
           <span>구매확정</span>
         </p>
@@ -75,11 +75,11 @@ const DetailOrderItem = ({ item, onConfirm }: DetailOrderItemProps) => {
               <p>색상 : {item.color}</p>
               <span className="hidden lg:block">&#47;</span>
               <p>사이즈 : {item.size}</p>
-              <span className="hidden lg:block -translate-y-[1px] text-dark-gray">|</span>
+              <span className="hidden lg:block -translate-y-[1px] text-gray-300">|</span>
               <p>수량 : {item.quantity}개</p>
             </div>
             <div className="flex gap-2 items-baseline">
-              <s className="text-sm text-dark-gray">{formatPrice(item.price * item.quantity)}</s>
+              <s className="text-sm text-gray-300">{formatPrice(item.price * item.quantity)}</s>
               <strong className="text-sm lg:text-base">{formatPrice(price)}원</strong>
             </div>
           </div>

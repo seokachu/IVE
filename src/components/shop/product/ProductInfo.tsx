@@ -57,7 +57,7 @@ const ProductInfo = ({ id }: ShopMenuProps) => {
           <h2 className="text-lg lg:text-xl font-bold break-all pr-10">{data.title}</h2>
           <ShareButton className="mt-[2px]" />
         </div>
-        <s className="lg:text-lg text-dark-gray mb-1">{formatPrice(data.price)}</s>
+        <s className="lg:text-lg text-gray-300 mb-1">{formatPrice(data.price)}</s>
         <div className="flex gap-2 items-center">
           <strong className="text-lg lg:text-xl text-purple">{data.discount_rate}%</strong>
           <strong className="text-lg lg:text-xl">{formatPrice(price)}원</strong>

@@ -41,7 +41,7 @@ const ReviewTab = ({ id }: ShopMenuProps) => {
             </div>
             <div className="flex items-center gap-2">
               <strong className="text-2xl">{roundedRating}</strong>
-              <p className="text-dark-gray translate-y-[1px]">/5.0</p>
+              <p className="text-gray-300 translate-y-[1px]">/5.0</p>
             </div>
           </div>
           <div>
@@ -65,7 +65,7 @@ const ReviewTab = ({ id }: ShopMenuProps) => {
             </div>
             <div className="flex items-center gap-2">
               <strong className="text-2xl">{roundedRating}</strong>
-              <p className="text-dark-gray translate-y-[1px]">/5.0</p>
+              <p className="text-gray-300 translate-y-[1px]">/5.0</p>
             </div>
           </div>
           <div>

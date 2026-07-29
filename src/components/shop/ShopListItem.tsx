@@ -62,10 +62,10 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
           loading={variant === "shop" && index < 6 ? "eager" : "lazy"}
           priority={variant === "shop" && index < 6}
         />
-        <button onClick={onClickHeart} className="absolute right-2 bottom-2 text-dark-gray" aria-label="찜하기">
+        <button onClick={onClickHeart} className="absolute right-2 bottom-2 text-gray-300" aria-label="찜하기">
           <GoHeartFill
             size={30}
-            className={`opacity-90 transition-colors ${isWished ? "text-rose-500" : "text-dark-gray"}`}
+            className={`opacity-90 transition-colors ${isWished ? "text-red" : "text-gray-300"}`}
           />
         </button>
       </div>
@@ -78,7 +78,7 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
           <span className="text-purple">{item.discount_rate}%</span>
           <span className="whitespace-nowrap">{formatPrice(price)}원</span>
         </div>
-        <div className="flex items-center gap-1 text-[#878f91] text-xs lg:text-sm">
+        <div className="flex items-center gap-1 text-gray-400 text-xs lg:text-sm">
           <FaStar />
           <span>{averageRating}</span>
         </div>

@@ -159,7 +159,7 @@ const UserInfo = () => {
             }}
             onSave={handleSaveImage}
           />
-          <div className="absolute top-2/3 left-10 bg-gray-800 bg-opacity-75 p-1 rounded-full m-1">
+          <div className="absolute top-2/3 left-10 bg-gray-900/75 p-1 rounded-full m-1">
             <PiUploadSimpleBold color="white" />
           </div>
         </div>
@@ -191,11 +191,11 @@ const UserInfo = () => {
       </div>
       <div className="flex border-y p-5 my-5">
         <div className="w-2/4">
-          <p className="text-xs text-[#495057] mb-1">글 작성수</p>
+          <p className="text-xs text-gray-600 mb-1">글 작성수</p>
           <strong>{myBoardList}</strong>
         </div>
         <div className="w-2/4">
-          <p className="text-xs text-[#495057] mb-1">찜</p>
+          <p className="text-xs text-gray-600 mb-1">찜</p>
           <strong>{wishlist}</strong>
         </div>
       </div>
@@ -210,7 +210,7 @@ const UserInfo = () => {
         ))}
         {/* <li>
           <button
-            className="text-dark-gray text-sm"
+            className="text-gray-300 text-sm"
           >
             회원탈퇴
           </button>

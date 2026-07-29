@@ -158,7 +158,13 @@ Pencil에 재사용 컴포넌트로 등록된 목록과 대응 코드:
 
 ---
 
-## 5. 코드 적용 (제안 스니펫 — 아직 미적용)
+## 5. 코드 적용 — **2026-07-29 전면 적용 완료**
+
+> 아래 스니펫 대로 적용됐고, 추가로:
+> - Tailwind `gray`를 §1-1 Neutral 램프로 재정의(불투명도 변형 지원 위해 hex 리터럴), `red`는 DEFAULT #E72424 + 50~700 램프
+> - legacy 토큰(`silver-gray`/`dark-gray`/`font-color`/`custom-orange`/`dark-orange`) **제거 완료** — 사용처 전부 치환됨
+> - className이 아닌 JS 코드(별점·컨페티·아이콘 color)는 `COLORS` 상수 사용 (`src/utils/constants`)
+> - `quill.css`는 `var(--gray-200)`/`var(--gray-400)` 참조 (globals.css에 gray 램프 CSS 변수 정의)
 
 ### 5-1. `globals.css` — 브랜드를 shadcn 토큰에 연결
 
@@ -212,7 +218,7 @@ colors: {
 }
 ```
 
-### 5-3. 마이그레이션 치환표 (감사 기준 사용 빈도 포함)
+### 5-3. 마이그레이션 치환표 (감사 기준 사용 빈도 포함) — ✅ 전부 치환 완료
 
 | 현재 (빈도) | 변경 |
 |---|---|

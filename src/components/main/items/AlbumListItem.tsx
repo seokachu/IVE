@@ -44,7 +44,7 @@ const AlbumListItem = ({ album }: AlbumItemProps) => {
       <div className="w-full">
         <h3 className="text-xl lg:text-2xl font-bold text-center mt-5 mb-2">{album.title}</h3>
         <ul>
-          <li className="flex justify-center gap-3 text-sm lg:text-base text-silver-gray opacity-90">
+          <li className="flex justify-center gap-3 text-sm lg:text-base text-gray-200 opacity-90">
             <p className="relative after:content-['•'] after:absolute after:left-[calc(100%+4px)] after:top-0">
               {album.album_info}
             </p>

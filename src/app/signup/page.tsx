@@ -17,9 +17,9 @@ const SignUp = () => {
           <h3 className="text-xl font-bold">회원가입</h3>
         </div>
         <SignUpForm />
-        <div className="text-dark-gray text-sm flex items-center gap-2 justify-center mt-5 ">
+        <div className="text-gray-300 text-sm flex items-center gap-2 justify-center mt-5 ">
           <p>이미 회원이신가요?</p>
-          <div className="text-font-color">
+          <div className="text-gray-900">
             <SignInModal title="로그인하기" className="underline underline-offset-1" />
           </div>
         </div>

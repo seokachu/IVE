@@ -25,7 +25,7 @@ const UserDropdownMenu = () => {
         <DropdownMenuItem asChild className="cursor-pointer">
           <Link href="/mypage">마이페이지</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className="text-dark-gray text-xs cursor-pointer">
+        <DropdownMenuItem className="text-gray-300 text-xs cursor-pointer">
           <SignOutButton className="w-full text-left" />
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -32,13 +32,27 @@ const config: Config = {
         warning: "var(--warning)",
         info: "var(--info)",
         kakao: "var(--kakao)",
-        // legacy — 마이그레이션 완료 후 제거 (docs/design-system.md §5-3)
-        "silver-gray": "var(--silver-gray)",
-        "dark-gray": "var(--dark-gray)",
-        "font-color": "var(--font-primary)",
-        "custom-orange": "var(--orange)",
-        red: "var(--red)",
-        "dark-orange": "var(--dark-orange)",
+        // Neutral 램프 — 기본 Tailwind gray를 디자인 시스템 값으로 재정의 (docs/design-system.md §1-1)
+        // 불투명도 변형(bg-gray-500/90 등) 지원을 위해 hex 리터럴 사용
+        gray: {
+          50: "#f9f9f9",
+          100: "#f5f5f5",
+          200: "#eeeeee",
+          300: "#cccccc",
+          400: "#a0a0a0",
+          500: "#6b7280",
+          600: "#495057",
+          700: "#333333",
+          900: "#0a0a0a",
+        },
+        red: {
+          DEFAULT: "var(--red)",
+          50: "#fef2f2",
+          300: "#fca5a5",
+          400: "#f87171",
+          600: "#dc2626",
+          700: "#b91c1c",
+        },
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",

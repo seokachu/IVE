@@ -46,7 +46,7 @@ const BoardListItem = ({ item, keyword }: BoardListItemProps) => {
     return word.map((text, index) => {
       if (text.toLowerCase() === keyword.toLowerCase()) {
         return (
-          <span key={index} className="bg-yellow-200">
+          <span key={index} className="bg-purple-100">
             {text}
           </span>
         );
@@ -70,7 +70,7 @@ const BoardListItem = ({ item, keyword }: BoardListItemProps) => {
             {highlightKeyword(item.title, keyword || "")}
           </p>
           <p
-            className="text-blue-500"
+            className="text-info"
             aria-label={`댓글 ${item.comment_count || 0}개`}
           >
             &#91;{item.comment_count}&#93;

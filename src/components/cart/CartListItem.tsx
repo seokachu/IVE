@@ -146,7 +146,7 @@ const CartListItem = ({ item }: CartListItemProps) => {
           </div>
           <div className="lg:text-right flex-1">
             <span className="mr-1 text-purple font-bold">{item.discount_rate}%</span>
-            <s className="text-dark-gray text-sm mr-1 lg:mr-0 text-nowrap">{formatPrice(price)}원</s>
+            <s className="text-gray-300 text-sm mr-1 lg:mr-0 text-nowrap">{formatPrice(price)}원</s>
             <strong>{formatPrice(totalDiscountPrice)}원</strong>
           </div>
         </div>

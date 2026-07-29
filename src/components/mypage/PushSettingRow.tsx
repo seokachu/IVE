@@ -32,7 +32,7 @@ const PushSettingRow = () => {
     <div className="flex items-center justify-between border-b pb-5 mb-5 px-5 lg:px-0">
       <div>
         <p className="text-sm font-medium">푸시 알림</p>
-        <p className="text-xs text-[#495057] mt-1">
+        <p className="text-xs text-gray-600 mt-1">
           {hasToken ? "댓글·답글 알림을 앱으로 받습니다" : "앱에서 로그인하면 받을 수 있어요"}
         </p>
       </div>

@@ -7,7 +7,7 @@ const OrderListItem = ({ item }: OrderListItemProps) => {
   const price = getDiscountedPrice(item);
 
   return (
-    <li key={item.id} className="flex gap-4 items-center mb-5 p-4 rounded-lg bg-[#F5F5F5]">
+    <li key={item.id} className="flex gap-4 items-center mb-5 p-4 rounded-lg bg-gray-100">
       <Image
         src={item.product_image || DefaultImage}
         alt={item.product_name}

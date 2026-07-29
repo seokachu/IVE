@@ -68,7 +68,7 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
             aria-label="찜하기"
           >
             {isWished ? (
-              <GoHeartFill size={25} className="text-rose-500" />
+              <GoHeartFill size={25} className="text-red" />
             ) : (
               <GoHeart size={25} className="text-white" />
             )}
