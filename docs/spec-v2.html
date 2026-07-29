@@ -319,7 +319,7 @@
   <h3>6-3. 게시글 상세 <span class="path">/board/[id]</span></h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>BRD-10</td><td>상세 조회</td><td>제목, 작성일, 조회수, 추천 수, 본문(서식·이미지 포함), 작성자 정보(아바타·이름) 표시.</td><td>—</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-10</td><td>상세 조회</td><td>제목, 작성일, 조회수, 추천 수, 본문(서식·이미지 포함), 작성자 정보(아바타·이름) 표시.</td><td>본문 HTML은 DOMPurify로 소독(sanitize) 후 렌더링(XSS 방어).</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>BRD-11</td><td>게시글 좋아요</td><td>좋아요 버튼 토글. 상태에 따라 아이콘 채움/비움 및 카운트 갱신. <span class="msg">“좋아요를 눌렀습니다.”</span> / <span class="msg">“좋아요가 취소되었습니다.”</span> 토스트.</td><td>비로그인 시 로그인 안내 토스트 후 차단. 좋아요 시 작성자에게 푸시 발송(PUSH-03).</td><td><span class="auth login">로그인</span></td></tr>
     <tr><td>BRD-12</td><td>공유 (링크 복사)</td><td>공유 버튼 클릭 시 현재 페이지 URL을 클립보드에 복사, <span class="msg">“링크가 복사되었습니다.”</span> 토스트.</td><td>실패 시 <span class="msg">“링크 복사에 실패했습니다.”</span></td><td><span class="auth any">전체</span></td></tr>
     <tr><td>BRD-13</td><td>수정 · 삭제 (작성자)</td><td>본인 글에만 수정/삭제 버튼 노출. 삭제는 확인 모달(<span class="msg">“정말로 삭제하시겠습니까? 삭제 후 되돌릴 수 없습니다.”</span>) 통과 시 실행 후 목록 이동 + <span class="msg">“게시글이 삭제 되었습니다.”</span></td><td>타인 글에는 버튼 자체가 미노출. 데이터 권한은 서버(RLS) 정책으로 보호.</td><td><span class="auth owner">작성자</span></td></tr>
@@ -564,7 +564,7 @@
     <li>소식 카테고리 필터는 로드된 목록 내 클라이언트 필터라, 더보기 이전에는 해당 카테고리 글이 있어도 안 보일 수 있음.</li>
     <li>게시글 조회수는 목록 클릭 경유 시에만 증가(공유 링크 직접 진입 시 미증가).</li>
     <li>결제 승인 API에 세션·금액 대조 검증 없음(토스 측 검증 및 클라이언트 중복 확인에 의존), 결제·주문 저장이 트랜잭션이 아님.</li>
-    <li>게시글 본문이 sanitize 없이 HTML로 렌더링됨(XSS 방어 부재).</li>
+    <li>에디터 의존성 quill 2.0.3에 낮은 심각도 XSS 취약점(CVE-2025-15056)이 있으나 상위 버전 미출시로 업그레이드 불가 — 본문 렌더링이 DOMPurify로 소독되고 있어 실질 영향은 제한적(Dependabot #246 모니터링 중).</li>
     <li>비밀번호 20자 상한, 닉네임 6자 상한이 입력창 속성으로만 강제되고 검증 스키마에는 없음.</li>
     <li>장바구니는 기기 저장 전용 — 로그인해도 서버 동기화되지 않고 기기 간 공유 불가.</li>
     <li>상품 목록 무한 스크롤이 매 페이지 전체 상품을 조회한 뒤 잘라내는 방식(서버 페이지네이션 없음).</li>
