@@ -15,7 +15,7 @@ const CartIcon = ({
   iconClassName = "",
   linkClassName = "",
   className = "",
-}: CartIconProps): JSX.Element => {
+}: CartIconProps) => {
   const [mounted, setMounted] = useState(false);
   const cartItems = useCartItems();
 
