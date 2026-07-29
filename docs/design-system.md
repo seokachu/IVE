@@ -92,13 +92,18 @@
 별도 시스템이 아니라 **같은 토큰의 두 번째 값**이다. 기본은 라이트, 헤더 토글로 옵트인(next-themes, class 전략).
 브랜드 원색(purple-300~500, orange-300/500, status, kakao)은 다크에서도 동일하고, 아래만 플립된다:
 
+다크 값은 **Pencil에서 확정한 zinc 쿨톤 팔레트**(2026-07-29 디자이너 확정)와 동기화한다:
+
 | 토큰 | Light | Dark |
 |---|---|---|
-| `gray-50` ~ `gray-900` | #F9F9F9 → #0A0A0A | #171717 → #F4F4F5 (역순 램프) |
-| `purple-50/100/200` (틴트) | #FBF3FC / #F5E3F8 / #EBC4F2 | #251329 / #33193A / #46224F |
+| `gray-50` ~ `gray-900` | #F9F9F9 → #0A0A0A | #1A1A1D → #F4F4F5 (zinc 역순 램프: 26262A·2E2E33·3F3F46·7A7A83·A1A1AA·D4D4D8·E4E4E7) |
+| `purple-50` (틴트) | #FBF3FC | #2B2130 (100/200: #33193A / #46224F) |
 | `orange-100` (틴트) | #FFEAE3 | #38201A |
-| `--background` / `--card` | 흰색 / 흰색 | #121212 / #1A1A1A |
-| `--border` / `--input` | 89.8% | 18% |
+| `--background` / `--card` | 흰색 / 흰색 | #141416 / #1E1E21 (Pencil의 `bg-surface` = 코드의 `--card`) |
+| `--border` / `--input` | 89.8% | #2E2E33 |
+
+Pencil 전용 참고: `primary-hover`는 다크에서 더 밝은 보라($purple-200)로 반전, `text-disabled`(#52525B)와
+`border-strong`(#3F3F46)은 디자인에선 분리 — 코드 raw 램프에서는 `gray-300` 다크값 #3F3F46 하나로 수렴.
 
 **규칙**: 표면은 `bg-background`/`bg-card`(bg-white 금지 — 스위치 노브·이미지 위 오버레이만 예외),
 이미지 위 오버레이는 테마 무관하게 `black/white + 투명도` 사용 (gray 램프는 변수 기반이라 불투명도 변형 불가).
