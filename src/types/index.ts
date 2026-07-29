@@ -1,5 +1,4 @@
 import type { Database } from "@/types/supabase";
-import { ButtonHTMLAttributes } from "react";
 
 //supabase type
 export type NewsItem = Database["public"]["Tables"]["news_gallery"]["Row"];
@@ -23,11 +22,6 @@ export interface GnbArrayList {
   label: string;
   path: string;
   exact: boolean;
-}
-
-export interface SignInProps {
-  title?: string;
-  className?: ButtonHTMLAttributes<HTMLButtonElement>["className"];
 }
 
 export interface SignInEmailProps {

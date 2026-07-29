@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IVE DIVE Docs — 기능명세서 아카이브</title>
+<style>
+  :root {
+    --ink: #1f2430;
+    --sub: #5c6470;
+    --line: #e3e6ec;
+    --bg: #ffffff;
+    --soft: #f6f7fa;
+    --accent: #7c3aed;
+    --accent-soft: #f1e9ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--bg);
+    font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 64px 24px 96px; }
+
+  /* ── 헤더 ── */
+  .site-nav { color: var(--sub); font-size: 13px; margin-bottom: 40px; }
+  .site-nav b { color: var(--ink); }
+  header.hero { border-bottom: 3px solid var(--ink); padding-bottom: 32px; margin-bottom: 40px; }
+  header.hero .kicker { color: var(--accent); font-weight: 700; letter-spacing: .12em; font-size: 12px; text-transform: uppercase; }
+  header.hero h1 { margin: 8px 0 4px; font-size: 34px; letter-spacing: -0.02em; }
+  header.hero .subtitle { font-size: 17px; font-weight: 600; color: var(--ink); margin: 0 0 14px; }
+  header.hero p.desc { margin: 0; color: var(--sub); }
+  header.hero p.desc b { color: var(--ink); }
+
+  /* ── 버전 카드 ── */
+  .cards { display: flex; flex-direction: column; gap: 16px; margin-bottom: 56px; }
+  .card {
+    border: 1px solid var(--line); border-radius: 14px;
+    padding: 24px 26px;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  a.card { display: block; text-decoration: none; color: inherit; }
+  a.card:hover { border-color: var(--accent); box-shadow: 0 4px 18px rgba(124, 58, 237, .08); }
+  a.card:hover .go { color: var(--accent); transform: translateX(2px); }
+  .card .top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+  .card h2 { margin: 0; font-size: 19px; letter-spacing: -0.01em; }
+  .tag { font-size: 11.5px; font-weight: 700; border-radius: 20px; padding: 2px 10px; white-space: nowrap; }
+  .tag.live  { background: #e8f4ee; color: #14794a; }
+  .tag.draft { background: #fff3e0; color: #b45f06; }
+  .card p.summary { margin: 0 0 10px; color: var(--sub); }
+  .card .meta { font-size: 12.5px; color: var(--sub); }
+  .card .meta code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; background: var(--soft); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; }
+  .card .go { display: inline-block; margin-top: 12px; font-weight: 700; font-size: 14px; color: var(--ink); transition: color .15s, transform .15s; }
+  .card.pending { background: var(--soft); }
+  .card.pending h2, .card.pending p.summary { color: var(--sub); }
+  .card.pending .go { color: #a4abb6; font-weight: 600; }
+
+  /* ── 버전 기록 ── */
+  h2.sec { font-size: 20px; border-left: 5px solid var(--accent); padding: 2px 0 2px 14px; margin: 0 0 16px; }
+  table.history { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  table.history th, table.history td { border: 1px solid var(--line); padding: 9px 12px; text-align: left; vertical-align: top; }
+  table.history th { background: var(--soft); font-weight: 600; white-space: nowrap; }
+  table.history td:first-child { font-weight: 700; white-space: nowrap; }
+  table.history a { color: var(--accent); }
+
+  .foot { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--sub); font-size: 12px; }
+
+  @media (max-width: 560px) {
+    .wrap { padding: 40px 16px 64px; }
+    header.hero h1 { font-size: 28px; }
+    table.history { display: block; overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="site-nav"><b>IVE로 DIVE</b> · 문서</div>
+
+  <header class="hero">
+    <div class="kicker">Documentation</div>
+    <h1>IVE DIVE Docs</h1>
+    <p class="subtitle">기능명세서 아카이브</p>
+    <p class="desc">
+      아이브(IVE) 팬 커뮤니티 · 굿즈 커머스 서비스 <b>“IVE로 DIVE”</b>의 기능명세서 모음.<br />
+      버전별 명세를 남겨 서비스가 어떻게 고도화되었는지 추적한다.
+    </p>
+  </header>
+
+  <!-- ── 버전 카드 ── -->
+  <div class="cards">
+
+    <a class="card" href="./spec-v1.html">
+      <div class="top">
+        <h2>기능명세서 v1</h2>
+        <span class="tag live">완료 · As-Built</span>
+      </div>
+      <p class="summary">Next.js 14 기반 운영 서비스(1차~4차 배포)에 구현된 전체 기능의 화면별 명세. 2026 리뉴얼(v2) 착수 직전 기준.</p>
+      <div class="meta">기준 커밋 <code>a7d842e</code> · 2025.05.29 배포분 · Next.js 14 · React 18</div>
+      <span class="go">문서 보기 →</span>
+    </a>
+
+    <div class="card pending">
+      <div class="top">
+        <h2>기능명세서 v2</h2>
+        <span class="tag draft">진행 중 · 작성 예정</span>
+      </div>
+      <p class="summary">2026 리뉴얼 — Next.js 14→16 · React 19 마이그레이션, Expo 하이브리드 앱(Android) &amp; 푸시 알림, 디자인 시스템 도입과 로그인 · 회원가입 리디자인.</p>
+      <div class="meta">리뉴얼 작업 완료 후 작성 예정</div>
+      <span class="go">문서 준비 중</span>
+    </div>
+
+  </div>
+
+  <!-- ── 버전 기록 ── -->
+  <h2 class="sec">버전 기록</h2>
+  <table class="history">
+    <tr><th>버전</th><th>상태</th><th>기준 시점</th><th>요약</th></tr>
+    <tr>
+      <td><a href="./spec-v1.html">v1</a></td>
+      <td>완료</td>
+      <td>2025.05.29 배포분 (커밋 <code>a7d842e</code>)</td>
+      <td>Next.js 14 운영 서비스 전체 기능 as-built 명세 — 메인 · 소식 · 인증 · 게시판 · 굿즈샵 · 장바구니/결제 · 마이페이지</td>
+    </tr>
+    <tr>
+      <td>v2</td>
+      <td>작성 예정</td>
+      <td>—</td>
+      <td>2026 리뉴얼 — Next.js 16 · React 19 · Expo 하이브리드 앱 · 푸시 알림 · 디자인 시스템 고도화</td>
+    </tr>
+  </table>
+
+  <footer class="foot">
+    IVE로 DIVE · 기능명세서 아카이브 · 2026-07-29
+  </footer>
+
+</div>
+</body>
+</html>

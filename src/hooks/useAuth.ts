@@ -63,6 +63,12 @@ export const useAuth = () => {
           toast({
             title: "로그인 되었습니다.",
           });
+          //OAuth 로그인 전 저장해 둔 복귀 경로로 이동 (OAuth는 항상 홈으로 돌아오므로)
+          const redirectUrl = sessionStorage.getItem("redirectUrl");
+          sessionStorage.removeItem("redirectUrl");
+          if (redirectUrl && redirectUrl !== "/" && window.location.pathname === "/") {
+            window.location.replace(redirectUrl);
+          }
         } else if (!session) {
           delete axios.defaults.headers.common["Authorization"];
         }
