@@ -9,8 +9,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
-import { FaUser } from "react-icons/fa";
-import { FaLock } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import { signUpEmail } from "@/lib/supabase/auth";
@@ -55,68 +53,85 @@ const SignUpForm = () => {
   return (
     <>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-3 sm:w-full md:w-[400px]">
-          <div className="relative">
-            <FaUser className="absolute top-[17px] left-5" />
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-4 w-full">
+          <div className="flex flex-col gap-2">
+            <label htmlFor="signup-email" className="text-sm font-semibold text-gray-900">
+              이메일
+            </label>
             <RHFInput
+              id="signup-email"
               type="email"
               name="email"
               placeholder="example@example.com"
               autoComplete="email"
               autoFocus
-              className="pl-11"
             />
           </div>
-          <div className="relative">
-            <FaLock className="absolute top-[17px] left-5" />
-            <RHFInput
-              type={showPassword ? "text" : "password"}
-              name="password"
-              placeholder="비밀번호"
-              maxLength={20}
-              autoComplete="new-password"
-              className="pl-11"
-            />
-            <span className="absolute right-4 top-[14px] cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? (
-                <AiOutlineEye size={24} color={COLORS.gray300} />
-              ) : (
-                <AiOutlineEyeInvisible size={24} color={COLORS.gray300} />
-              )}
-            </span>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="signup-password" className="text-sm font-semibold text-gray-900">
+              비밀번호
+            </label>
+            <div className="relative">
+              <RHFInput
+                id="signup-password"
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="비밀번호"
+                maxLength={20}
+                autoComplete="new-password"
+                className="pr-12"
+              />
+              <Button
+                variant="plain"
+                size="auto"
+                className="absolute right-4 top-3"
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 표시"}
+              >
+                {showPassword ? (
+                  <AiOutlineEye size={24} color={COLORS.gray300} />
+                ) : (
+                  <AiOutlineEyeInvisible size={24} color={COLORS.gray300} />
+                )}
+              </Button>
+            </div>
+            <p className="flex items-center gap-1 text-xs text-gray-400">
+              <FaExclamationCircle />
+              비밀번호 영문, 숫자, 특수문자 포함 8-20자
+            </p>
           </div>
-          <div className="relative">
-            <FaLock className="absolute top-[17px] left-5" />
-            <RHFInput
-              type={showPasswordCheck ? "text" : "password"}
-              name="passwordCheck"
-              placeholder="비밀번호 확인"
-              maxLength={20}
-              autoComplete="new-password"
-              className="pl-11"
-            />
-            <span
-              className="absolute right-4 top-[14px] cursor-pointer"
-              onClick={() => {
-                setShowPasswordCheck(!showPasswordCheck);
-              }}
-            >
-              {showPasswordCheck ? (
-                <AiOutlineEye size={24} color={COLORS.gray300} />
-              ) : (
-                <AiOutlineEyeInvisible size={24} color={COLORS.gray300} />
-              )}
-            </span>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="signup-password-check" className="text-sm font-semibold text-gray-900">
+              비밀번호 확인
+            </label>
+            <div className="relative">
+              <RHFInput
+                id="signup-password-check"
+                type={showPasswordCheck ? "text" : "password"}
+                name="passwordCheck"
+                placeholder="비밀번호 확인"
+                maxLength={20}
+                autoComplete="new-password"
+                className="pr-12"
+              />
+              <Button
+                variant="plain"
+                size="auto"
+                className="absolute right-4 top-3"
+                onClick={() => {
+                  setShowPasswordCheck(!showPasswordCheck);
+                }}
+                aria-label={showPasswordCheck ? "비밀번호 숨기기" : "비밀번호 표시"}
+              >
+                {showPasswordCheck ? (
+                  <AiOutlineEye size={24} color={COLORS.gray300} />
+                ) : (
+                  <AiOutlineEyeInvisible size={24} color={COLORS.gray300} />
+                )}
+              </Button>
+            </div>
           </div>
-          <p className="flex items-center gap-1 text-sm text-gray-300 pl-5">
-            <FaExclamationCircle />
-            비밀번호 영문, 숫자, 특수문자 포함 8-20자
-          </p>
-          <Button
-            type="submit"
-            disabled={!isValid || !isDirty || isSubmitting}
-            className="w-full rounded-full mt-6 p-6 transition ease-in delay-300"
-          >
+          <Button type="submit" disabled={!isValid || !isDirty || isSubmitting} className="w-full h-12 rounded-lg text-base mt-2">
             {isSubmitting ? "처리 중..." : "가입하기"}
           </Button>
         </form>

@@ -5,8 +5,6 @@ import { RHFInput } from "@/components/common/RHFInput";
 import { Button } from "@/components/ui/button";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
-import { FaUser } from "react-icons/fa";
-import { FaLock } from "react-icons/fa";
 import { LoginType, userDefaultValues, userSchemas } from "@/hooks/user";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -77,37 +75,39 @@ const SignInEmail = ({ redirectPath = "/" }: SignInEmailProps) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-3 w-full">
-        <div className="relative">
-          <FaUser className="absolute top-[17px] left-5" />
-          <RHFInput
-            type="email"
-            name="email"
-            placeholder="example@example.com"
-            autoComplete="email"
-            autoFocus
-            className="pl-11"
-          />
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="flex flex-col gap-4 w-full">
+        <div className="flex flex-col gap-2">
+          <label htmlFor="login-email" className="text-sm font-semibold text-gray-900">
+            이메일
+          </label>
+          <RHFInput id="login-email" type="email" name="email" placeholder="example@example.com" autoComplete="email" autoFocus />
         </div>
-        <div className="relative">
-          <FaLock className="absolute top-[17px] left-5" />
-          <RHFInput
-            type={showPassword ? "text" : "password"}
-            name="password"
-            placeholder="비밀번호"
-            maxLength={20}
-            autoComplete="new-password"
-            className="pl-11"
-          />
-          <span className="absolute right-4 top-[14px] cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
-            {showPassword ? <AiOutlineEye size={24} color={COLORS.gray300} /> : <AiOutlineEyeInvisible size={24} color={COLORS.gray300} />}
-          </span>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="login-password" className="text-sm font-semibold text-gray-900">
+            비밀번호
+          </label>
+          <div className="relative">
+            <RHFInput
+              id="login-password"
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="비밀번호"
+              maxLength={20}
+              autoComplete="new-password"
+              className="pr-12"
+            />
+            <Button
+              variant="plain"
+              size="auto"
+              className="absolute right-4 top-3"
+              onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 표시"}
+            >
+              {showPassword ? <AiOutlineEye size={24} color={COLORS.gray300} /> : <AiOutlineEyeInvisible size={24} color={COLORS.gray300} />}
+            </Button>
+          </div>
         </div>
-        <Button
-          type="submit"
-          disabled={!isValid || !isDirty || isSubmitting}
-          className="w-full rounded-full mt-6 p-6 transition ease-in delay-300"
-        >
+        <Button type="submit" disabled={!isValid || !isDirty || isSubmitting} className="w-full h-12 rounded-lg text-base mt-2">
           {isSubmitting ? "처리 중..." : "로그인"}
         </Button>
       </form>

@@ -12,7 +12,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className, type,
       className={cn(
         type === "checkbox"
           ? "w-4 h-4"
-          : "flex h-10 w-full rounded-full border border-input bg-background px-5 py-6 text-base lg:text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus:outline-ring disabled:opacity-50",
+          : "flex h-12 w-full rounded-lg border border-gray-300 bg-background px-4 text-base lg:text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-gray-400 focus:outline-ring disabled:opacity-50",
         error && "border-destructive focus:border-destructive focus:outline-destructive",
         className,
       )}
