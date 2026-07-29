@@ -7,8 +7,11 @@ const SHOP_STYLES = {
 } as const;
 
 const ShopSkeleton = ({ variant = "shop" }: VariantTypeProps) => {
+  //carousel에서는 SwiperSlide(li)가 감싸므로 li 중첩을 피하기 위해 div로 렌더링
+  const Tag = variant === "carousel" ? "div" : "li";
+
   return (
-    <li className={`${SHOP_STYLES[variant]} md:border p-0 md:p-4 md:rounded-lg group mb-7 md:mb-5`}>
+    <Tag className={`${SHOP_STYLES[variant]} md:border p-0 md:p-4 md:rounded-lg group mb-7 md:mb-5`}>
       <div className="relative w-full aspect-square md:rounded-lg border">
         <Skeleton className="w-full h-full" />
       </div>
@@ -24,7 +27,7 @@ const ShopSkeleton = ({ variant = "shop" }: VariantTypeProps) => {
           <Skeleton className="h-4 w-10 rounded" />
         </div>
       </div>
-    </li>
+    </Tag>
   );
 };
 

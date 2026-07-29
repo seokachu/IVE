@@ -42,8 +42,11 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
     toggleWishList();
   };
 
+  //carousel에서는 SwiperSlide(li)가 감싸므로 li 중첩을 피하기 위해 div로 렌더링
+  const Tag = variant === "carousel" ? "div" : "li";
+
   return (
-    <li
+    <Tag
       onClick={onClickDetail}
       onKeyDown={handleKeyDown}
       className={`${SHOP_STYLES[variant]} md:border p-0 md:p-4 md:rounded-lg cursor-pointer md:hover:shadow-lg group`}
@@ -83,7 +86,7 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
           <span>{averageRating}</span>
         </div>
       </div>
-    </li>
+    </Tag>
   );
 };
 
