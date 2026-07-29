@@ -99,7 +99,7 @@
 | `gray-50` ~ `gray-900` | #F9F9F9 → #0A0A0A | #1A1A1D → #F4F4F5 (zinc 역순 램프: 26262A·2E2E33·3F3F46·7A7A83·A1A1AA·D4D4D8·E4E4E7) |
 | `purple-50` (틴트) | #FBF3FC | #2B2130 (100/200: #33193A / #46224F) |
 | `orange-100` (틴트) | #FFEAE3 | #38201A |
-| `--background` / `--card` | 흰색 / 흰색 | #141416 / #1E1E21 (Pencil의 `bg-surface` = 코드의 `--card`) |
+| `--background` / `--card` | 흰색 / 흰색 | #1B1B1F / #1E1E21 (Pencil의 `bg-surface` = 코드의 `--card`) |
 | `--border` / `--input` | 89.8% | #2E2E33 |
 
 Pencil 전용 참고: `primary-hover`는 다크에서 더 밝은 보라($purple-200)로 반전, `text-disabled`(#52525B)와
