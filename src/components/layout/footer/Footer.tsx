@@ -1,16 +1,18 @@
 import Image from "next/image";
 import LogoImage from "@/assets/images/logo.svg";
+import SubLogoImage from "@/assets/images/logo_black.svg";
 import { Rss } from "lucide-react";
 import GithubIcon from "@/components/common/icons/GithubIcon";
 import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-400 relative z-10">
+    <footer className="bg-gray-100 border-t border-gray-200 relative z-10">
       <div className="max-w-container m-auto py-9 px-[20px] flex justify-between items-center flex-col gap-5 lg:flex-row">
         <div className="flex gap-5 items-center flex-col lg:flex-row">
           <h1 className="relative w-[80px] h-auto">
-            <Image src={LogoImage} alt="logo" className="fill" />
+            <Image src={SubLogoImage} alt="logo" className="fill dark:hidden" />
+            <Image src={LogoImage} alt="logo" className="fill hidden dark:block" />
           </h1>
           <address className="not-italic text-xs sm:text-xs lg:text-sm">
             <ul className="flex text-center gap-[3px] flex-col lg:flex-row lg:gap-3">

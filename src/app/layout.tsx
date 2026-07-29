@@ -8,6 +8,7 @@ import { notoSansKr } from "../assets/fonts/fonts";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/providers/AuthProvider";
 import PushTokenSync from "@/components/common/PushTokenSync";
+import ThemeBridge from "@/components/common/ThemeBridge";
 
 export const metadata: Metadata = {
   title: "IVE-DIVE",
@@ -47,6 +48,7 @@ export default function RootLayout({
         >
           <AuthProvider>
             <PushTokenSync />
+            <ThemeBridge />
             <QueryProvider>
               <Header />
               {children}
