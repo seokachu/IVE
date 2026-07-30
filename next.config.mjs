@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
 const config = {
   outputFileTracingRoot: import.meta.dirname,
+  async redirects() {
+    return [
+      {
+        source: "/docs",
+        destination: "/docs/index.html",
+        permanent: false,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {
