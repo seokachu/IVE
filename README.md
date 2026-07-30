@@ -39,7 +39,7 @@
 - **Supabase 인증 현대화** — deprecated auth-helpers → `@supabase/ssr` (쿠키 기반 서버 검증)
 - **npm → pnpm**, **Playwright E2E 기준선** 구축 (프로덕션 빌드 기준 15케이스)
 - **하이브리드 앱 + 푸시 알림** — [seokachu/ive-app](https://github.com/seokachu/ive-app),
-  댓글/답글 푸시 발송 서버 구현 ([설계 문서](docs/push-notifications.md))
+  댓글/답글 푸시 발송 서버 구현 ([설계 문서](public/docs/push-notifications.md))
 
 <br>
 <br>
