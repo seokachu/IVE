@@ -8,7 +8,8 @@
 
 
 배포 주소 : [배포 링크 이동하기](https://ive-three.vercel.app)<br/>
-하이브리드 앱(Android) : [seokachu/ive-app](https://github.com/seokachu/ive-app) — 이 웹을 WebView로 감싸고 푸시 알림·카드사 앱 결제를 지원
+하이브리드 앱(Android) : [seokachu/ive-app](https://github.com/seokachu/ive-app) — 이 웹을 WebView로 감싸고 푸시 알림·카드사 앱 결제를 지원<br/>
+기능명세서 : [문서 아카이브 보러가기](https://ive-three.vercel.app/docs) — v1(리뉴얼 전) · v2(리뉴얼 진행 중) 기능명세와 디자인 시스템 문서
 
 <br>
 
