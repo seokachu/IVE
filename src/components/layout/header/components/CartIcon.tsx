@@ -26,11 +26,12 @@ const CartIcon = ({
 
   return (
     <div className={linkClassName}>
-      <div className="relative">
+      {/* w-fit: 뱃지가 아이콘 모서리에 정확히 겹치도록 래퍼를 아이콘 크기로 고정 */}
+      <div className="relative w-fit">
         <ShoppingCart className={`${iconClassName} cursor-pointer`} size={iconSize} />
         {mounted && uniqueItemsCount > 0 && (
           <span
-            className={`${className} absolute bottom-3 rounded-full bg-red text-xs text-white w-5 h-5 flex items-center justify-center`}
+            className={`${className} absolute -right-2 -top-1.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-orange-500 px-1 text-[10px] font-bold leading-none text-white`}
           >
             {uniqueItemsCount}
           </span>

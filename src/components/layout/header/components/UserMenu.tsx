@@ -12,7 +12,7 @@ const UserMenu = () => {
       <ul className="flex gap-4 items-center">
         <li className={`${!session ? "translate-y-0" : "translate-y-[2px]"} `}>
           <Link href="/cart" aria-label="장바구니">
-            <CartIcon iconSize={19} className="left-3" />
+            <CartIcon iconSize={19} />
           </Link>
         </li>
         <li className="flex">
