@@ -4,7 +4,7 @@ import ThemeProvider from "@/providers/ThemeProvider";
 import Header from "@/components/layout/header/Header";
 import Footer from "@/components/layout/footer/Footer";
 import QueryProvider from "@/providers/QueryProvider";
-import { notoSansKr } from "../assets/fonts/fonts";
+import { pretendard } from "../assets/fonts/fonts";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/providers/AuthProvider";
 import PushTokenSync from "@/components/common/PushTokenSync";
@@ -39,7 +39,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://kakaocdn.net" />
         <link rel="preconnect" href="https://img1.kakaocdn.net" />
       </head>
-      <body className={`${notoSansKr.className} w-screen overflow-x-hidden`}>
+      <body className={`${pretendard.className} w-screen overflow-x-hidden`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
