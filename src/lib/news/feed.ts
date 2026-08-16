@@ -7,14 +7,32 @@ export const FEED_REVALIDATE_SECONDS = 1800;
 //IVE 공식 유튜브 채널 ID (https://www.youtube.com/@IVEstarship)
 const IVE_YOUTUBE_CHANNEL_ID = "UC-Fnix71vRP64WXeo0ikd0Q";
 
+//유튜브 Atom 피드는 채널당 최신 15개가 상한이라, 보조 채널에서 IVE 영상을 추가 수집해 영상 수를 늘린다
+const EXTRA_YOUTUBE_CHANNELS = [
+  { id: "UCweOkPb1wVVH0Q0Tlj4a5Pw", name: "1theK" },
+  { id: "UCbD8EppRX3ZwJSou-TVo90A", name: "Mnet K-POP" },
+] as const;
+
+//공식 채널 재생목록 피드(각 15개) — 업로드 피드에 없는 영상을 보충해 영상 수를 늘린다
+const IVE_YOUTUBE_PLAYLISTS = [
+  "PLPhtNKiHTFyob6KUBxHdAdHlliwZTMBFc", //IVE STAGE
+  "PLPhtNKiHTFyojdj9Vh58iGG2NEYxMMx1P", //IVE LOG
+  "PLPhtNKiHTFyoOEiI_J6DjifSZvDFIR32O", //IVE-minute
+  "PLPhtNKiHTFyp-lZVrrfEYwfEhNC_IHejw", //IVE'S WEEK
+] as const;
+
+//보조 채널은 여러 아티스트가 섞여 있어 제목으로 필터 — LIVE/DIVE 같은 단어 속 IVE는 제외
+const IVE_VIDEO_PATTERN = /아이브|(?<![A-Za-z])IVE(?![A-Za-z])/;
+
 const GOOGLE_NEWS_RSS_URL =
   "https://news.google.com/rss/search?q=%EC%95%84%EC%9D%B4%EB%B8%8C%20IVE&hl=ko&gl=KR&ceid=KR:ko";
-const YOUTUBE_FEED_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${IVE_YOUTUBE_CHANNEL_ID}`;
+const YOUTUBE_FEED_BASE_URL = "https://www.youtube.com/feeds/videos.xml";
 //NAVER API Hub (구 개발자센터 검색 API가 네이버 클라우드 플랫폼으로 이관됨)
 const NAVER_NEWS_API_URL =
   "https://naverapihub.apigw.ntruss.com/search/v1/news?query=%EC%95%84%EC%9D%B4%EB%B8%8C%20IVE&display=20&sort=date&format=json";
 
-const FEED_TOTAL_LIMIT = 60;
+const FEED_ARTICLE_LIMIT = 50;
+const FEED_VIDEO_LIMIT = 30;
 
 //XML/HTML 문자열 정리 헬퍼
 const decodeEntities = (text: string) =>
@@ -78,9 +96,9 @@ const fetchGoogleNews = async (): Promise<FeedItem[]> => {
   });
 };
 
-//유튜브 공식 채널 Atom 피드 — API 키 불필요, 썸네일 포함
-const fetchYouTubeFeed = async (): Promise<FeedItem[]> => {
-  const xml = await fetchXml(YOUTUBE_FEED_URL);
+//유튜브 채널·재생목록 Atom 피드 — API 키 불필요, 썸네일 포함
+const fetchYouTubeXmlFeed = async (feedQuery: string, sourceName: string): Promise<FeedItem[]> => {
+  const xml = await fetchXml(`${YOUTUBE_FEED_BASE_URL}?${feedQuery}`);
 
   return getBlocks(xml, "entry").map((block) => {
     const videoId = getTagContent(block, "yt:videoId");
@@ -91,11 +109,28 @@ const fetchYouTubeFeed = async (): Promise<FeedItem[]> => {
       summary: stripHtml(getTagContent(block, "media:description")).slice(0, 200),
       url: `https://www.youtube.com/watch?v=${videoId}`,
       sourceType: "youtube" as const,
-      sourceName: "IVE 공식 유튜브",
+      sourceName,
       thumbnail: block.match(/<media:thumbnail url="([^"]+)"/)?.[1] || null,
       publishedAt: new Date(getTagContent(block, "published")).toISOString(),
     };
   });
+};
+
+const fetchYouTubeFeed = async (): Promise<FeedItem[]> => {
+  const results = await Promise.allSettled([
+    fetchYouTubeXmlFeed(`channel_id=${IVE_YOUTUBE_CHANNEL_ID}`, "IVE 공식 유튜브"),
+    ...IVE_YOUTUBE_PLAYLISTS.map((playlistId) =>
+      fetchYouTubeXmlFeed(`playlist_id=${playlistId}`, "IVE 공식 유튜브")
+    ),
+    ...EXTRA_YOUTUBE_CHANNELS.map(async (channel) => {
+      const items = await fetchYouTubeXmlFeed(`channel_id=${channel.id}`, channel.name);
+      return items.filter((item) => IVE_VIDEO_PATTERN.test(item.title));
+    }),
+  ]);
+
+  //같은 영상이 업로드 피드와 재생목록에 중복으로 잡히면 하나만 유지
+  const items = results.flatMap((result) => (result.status === "fulfilled" ? result.value : []));
+  return [...new Map(items.map((item) => [item.id, item])).values()];
 };
 
 //네이버 뉴스 검색 API — NAVER_CLIENT_ID/SECRET 없으면 자동 스킵
@@ -151,9 +186,14 @@ export const getNewsFeed = async (): Promise<FeedItem[]> => {
     if (!existing || (!existing.thumbnail && item.thumbnail)) byTitle.set(key, item);
   }
 
-  const deduped = [...byTitle.values()]
-    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
-    .slice(0, FEED_TOTAL_LIMIT);
+  const byDateDesc = (a: FeedItem, b: FeedItem) =>
+    new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+
+  //영상은 채널당 최신 15개뿐이라 기사에 밀려 잘리지 않도록 소스별로 따로 컷
+  const sorted = [...byTitle.values()].sort(byDateDesc);
+  const videos = sorted.filter((item) => item.sourceType === "youtube").slice(0, FEED_VIDEO_LIMIT);
+  const articles = sorted.filter((item) => item.sourceType !== "youtube").slice(0, FEED_ARTICLE_LIMIT);
+  const deduped = [...videos, ...articles].sort(byDateDesc);
 
   //썸네일 없는 기사는 이미지 검색으로 대표 이미지를 채움 (검색 결과는 하루 캐싱)
   return Promise.all(
