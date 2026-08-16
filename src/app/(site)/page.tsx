@@ -6,6 +6,7 @@ import {
 import { getAlbums } from "@/lib/supabase/album";
 import AlbumSection from "@/components/main/AlbumSection";
 import VisualSection from "@/components/main/VisualSection";
+import NewsPreviewSection from "@/components/main/NewsPreviewSection";
 import BoardSection from "@/components/main/BoardSection";
 import GoodsPromoSection from "@/components/main/GoodsPromoSection";
 import ShopSection from "@/components/main/ShopSection";
@@ -30,6 +31,7 @@ export default async function Home() {
           <AlbumSection />
         </div>
         <div className="relative z-10 bg-background">
+          <NewsPreviewSection />
           <BoardSection />
           <GoodsPromoSection />
           <ShopSection />
