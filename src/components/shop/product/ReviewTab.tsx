@@ -6,6 +6,7 @@ import RenderStars from "@/utils/RenderStars";
 import { useRef, useState } from "react";
 import { PAGINATION } from "@/utils/constants";
 import ReviewTabSkeleton from "@/components/common/loading/ReviewTabSkeleton";
+import { Info, Star } from "lucide-react";
 import type { ShopMenuProps } from "@/types/shop";
 
 const RATING_LEVELS = [5, 4, 3, 2, 1] as const;
@@ -36,14 +37,19 @@ const ReviewTab = ({ id }: ShopMenuProps) => {
     reviewsRef.current?.scrollIntoView();
   };
 
+  //시안 기준: 리뷰 0개 빈 상태 — 파스텔 별 서클 + 안내 힌트 필
   if (totalCount === 0) {
     return (
-      <div className="flex flex-col items-center gap-2 py-24 text-center">
-        <div className="flex gap-1">
-          <RenderStars rating={0} size={22} />
-        </div>
-        <p className="mt-2 text-lg font-bold">아직 리뷰가 없어요</p>
-        <p className="text-sm text-gray-500">첫 번째 리뷰를 남겨보세요!</p>
+      <div className="flex flex-col items-center py-16 text-center lg:py-20">
+        <span aria-hidden className="flex h-[72px] w-[72px] items-center justify-center rounded-full bg-purple-50">
+          <Star size={30} className="fill-purple-300 text-purple-300" />
+        </span>
+        <p className="mt-5 text-lg font-bold">아직 리뷰가 없어요</p>
+        <p className="mt-1.5 text-[13px] text-gray-500">이 상품의 첫 번째 리뷰를 남겨보세요!</p>
+        <p className="mt-5 flex items-center gap-1.5 rounded-full bg-gray-50 px-4 py-2 text-xs text-gray-400">
+          <Info size={13} aria-hidden />
+          구매 후 마이페이지 &gt; 주문/배송에서 작성할 수 있어요
+        </p>
       </div>
     );
   }

@@ -1,8 +1,11 @@
 import {
   createBoard,
   deleteBoard,
+  getAdjacentBoards,
+  getAuthorPostCount,
   getBoardDetail,
   getBoardListByPage,
+  getBoardStats,
   getHotBoards,
   getMainRecentBoards,
   getMyBoards,
@@ -10,7 +13,11 @@ import {
   updateBoard,
 } from "@/lib/supabase/board";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import type { BoardsResponse, UpdateBoardParams } from "@/types/board";
+import type {
+  BoardSortValue,
+  BoardsResponse,
+  UpdateBoardParams,
+} from "@/types/board";
 
 //메인페이지 게시글 목록 불러오기
 export const useMainRecentBoards = () => {
@@ -29,10 +36,44 @@ export const useHotBoards = () => {
 };
 
 //게시글 목록
-export const useBoards = (page: number = 1, search?: string) => {
+export const useBoards = (
+  page: number = 1,
+  search?: string,
+  sort: BoardSortValue = "latest",
+  userId?: string,
+  enabled: boolean = true
+) => {
   return useQuery({
-    queryKey: ["boards", page, search],
-    queryFn: () => getBoardListByPage({ page, search }),
+    queryKey: ["boards", page, search, sort, userId],
+    queryFn: () => getBoardListByPage({ page, search, sort, userId }),
+    enabled,
+  });
+};
+
+//자유게시판 히어로 커뮤니티 스탯
+export const useBoardStats = () => {
+  return useQuery({
+    queryKey: ["boardStats"],
+    queryFn: getBoardStats,
+    staleTime: 1000 * 60 * 5,
+  });
+};
+
+//이전/다음 글
+export const useAdjacentBoards = (createdAt?: string) => {
+  return useQuery({
+    queryKey: ["adjacentBoards", createdAt],
+    queryFn: () => getAdjacentBoards(createdAt as string),
+    enabled: !!createdAt,
+  });
+};
+
+//작성자가 쓴 글 수
+export const useAuthorPostCount = (userId?: string | null) => {
+  return useQuery({
+    queryKey: ["authorPostCount", userId],
+    queryFn: () => getAuthorPostCount(userId as string),
+    enabled: !!userId,
   });
 };
 

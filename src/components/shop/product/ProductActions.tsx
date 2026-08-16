@@ -29,6 +29,7 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
         toast({
           title: `현재 장바구니에 ${currentQuantity}개가 있어 ${quantity}개를 추가할 수 없습니다.`,
           description: "최대 구매 가능 수량은 5개입니다.",
+          variant: "warning",
         });
         return;
       }

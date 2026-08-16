@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ThumbsUp } from "lucide-react";
+import { Heart } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { useLikeStatus, useToggleLike } from "@/hooks/queries/useLike";
 import useAuthGuard from "@/hooks/useAuthGuard";
@@ -30,18 +30,24 @@ const BoardLikeButton = ({ item }: BoardLikeButtonProps) => {
   };
 
   return (
-    <div className="flex items-center justify-center mb-5">
+    <div className="flex flex-col items-center gap-2.5 py-2">
       <Button
-        variant="outline" size="auto"
-        className={`flex items-center gap-1 py-3 px-3 hover:bg-gray-200 ${
-          isLiked ? "bg-gray-200" : ""
-        } `}
+        variant="plain"
+        size="auto"
+        className={`flex items-center gap-2 px-8 py-3.5 rounded-full text-white text-[15px] font-bold transition-all shadow-[0_4px_14px_rgba(219,151,233,0.4)] ${
+          isLiked
+            ? "bg-gradient-to-r from-purple-500 to-purple-400"
+            : "bg-gradient-to-r from-purple-400 to-purple-300 hover:from-purple-500 hover:to-purple-400"
+        }`}
         onClick={handleToggleLikeClick}
         disabled={isPending}
       >
-        <ThumbsUp size={20} fill={isLiked ? "currentColor" : "none"} />
-        <span>{item.board_likes[0]?.count}</span>
+        <Heart size={18} fill={isLiked ? "currentColor" : "none"} />
+        <span>추천 {item.board_likes[0]?.count || 0}</span>
       </Button>
+      <p className="text-xs text-gray-400">
+        이 글이 마음에 들었다면 하트로 응원해 주세요
+      </p>
     </div>
   );
 };

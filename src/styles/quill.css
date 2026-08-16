@@ -37,6 +37,15 @@
   overflow: visible;
 }
 
+/* 상세 리딩 뷰(800px 칼럼) — 이미지가 칼럼을 넘지 않게 + 라운드 코너.
+   투명 배경 PNG가 다크 모드에서 어둡게 비치지 않도록 흰 바탕 고정 */
+.ql-editor.board-view img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  background-color: #fff;
+}
+
 @media (max-width: 1200px) {
   .ql-editor img {
     max-width: 100%;

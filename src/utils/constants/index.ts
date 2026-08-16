@@ -39,6 +39,32 @@ export const BADGE_TYPES = {
   NEW: "NEW",
 } as const;
 
+//자유게시판 필터 필
+export const BOARD_FILTER_PILLS = [
+  { value: "all", label: "전체" },
+  { value: "popular", label: "인기" },
+  { value: "notice", label: "공지" },
+  { value: "mine", label: "내가 쓴 글" },
+] as const;
+
+//자유게시판 정렬 옵션
+export const BOARD_SORT_OPTIONS = [
+  { value: "latest", label: "최신순" },
+  { value: "popular", label: "인기순" },
+  { value: "comments", label: "댓글순" },
+] as const;
+
+//자유게시판 상단 고정 공지
+export const BOARD_NOTICE = {
+  title: "자유게시판 이용 규칙 & 팬 에티켓 안내 (필독)",
+};
+
+//좋아요가 이 값 이상이면 리스트에서 오렌지 하이라이트
+export const BOARD_HOT_LIKE_THRESHOLD = 50;
+
+//작성 후 이 시간(시간 단위) 이내면 NEW 도트 표시
+export const BOARD_NEW_POST_HOURS = 24;
+
 export const PAGINATION = {
   REVIEW: {
     ITEMS_PER_PAGE: 5,

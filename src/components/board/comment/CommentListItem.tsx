@@ -1,9 +1,9 @@
 import Image from "next/image";
 import DefaultImage from "@/assets/images/default_image.avif";
-import { CornerDownRight, ThumbsUp } from "lucide-react";
+import { CornerDownRight, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDeleteComment, useRepliesCommentList } from "@/hooks/queries/useComment";
-import { formatDate } from "@/utils/formatDate";
+import { formatRelativeTime } from "@/utils/formatDate";
 import BoardActionButton from "../BoardActionButton";
 import { toast } from "@/hooks/use-toast";
 import { useState } from "react";
@@ -13,7 +13,7 @@ import { useCommentLikeStatus, useToggleCommentLike } from "@/hooks/queries/useL
 import type { CommentListItemProps } from "@/types/board";
 import { useSession } from "@/store/zustand";
 
-const CommentListItem = ({ item, boardId, activeEditId, handleEditChange }: CommentListItemProps) => {
+const CommentListItem = ({ item, boardId, activeEditId, handleEditChange, boardAuthorId }: CommentListItemProps) => {
   const session = useSession();
   const [showReplyForm, setShowReplyForm] = useState(false);
   const { checkAuth } = useAuthGuard();
@@ -23,7 +23,9 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange }: Comm
   const { mutate: toggleCommentLike, isPending } = useToggleCommentLike(item.id, session?.user?.id);
 
   const isAuthor = session?.user?.id === item?.user_id;
+  const isBoardAuthor = !!item.user_id && item.user_id === boardAuthorId;
   const isEditing = activeEditId === item.id;
+  const isReply = !!item.parent_id;
 
   const onClickDelete = () => {
     deleteComment();
@@ -58,22 +60,31 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange }: Comm
   };
 
   return (
-    <li className="py-2">
-      <div className="flex gap-2 items-start">
-        <h3 className="relative w-[40px] h-auto overflow-hidden rounded-full border shrink-0">
+    <li className={isReply ? "bg-gray-50 rounded-lg px-3.5 py-3" : "py-4"}>
+      <div className="flex gap-2.5 items-start">
+        <span
+          className={`relative shrink-0 rounded-full border overflow-hidden ${
+            isReply ? "w-[30px] h-[30px]" : "w-9 h-9"
+          }`}
+        >
           <Image
             src={item?.user?.avatar_url || DefaultImage}
-            alt={item?.user?.name}
-            className="fill"
-            width={500}
-            height={500}
+            alt={item?.user?.name || "유저 프로필"}
+            fill
+            className="object-cover"
+            sizes="36px"
           />
-        </h3>
-        <div className="w-full">
-          <div className="flex justify-between">
-            <div className="flex gap-2">
-              <h2>{item?.user?.name}</h2>
-              <time className="text-gray-300">{formatDate(item?.created_at)}</time>
+        </span>
+        <div className="w-full min-w-0">
+          <div className="flex justify-between items-center gap-2">
+            <div className="flex items-center gap-2 min-w-0">
+              <h2 className="text-sm font-semibold truncate">{item?.user?.name}</h2>
+              {isBoardAuthor && (
+                <span className="shrink-0 px-1.5 py-0.5 rounded-full bg-purple-100 text-[10px] font-bold text-purple-500 dark:text-purple-300">
+                  작성자
+                </span>
+              )}
+              <time className="shrink-0 text-xs text-gray-400">{formatRelativeTime(item?.created_at)}</time>
             </div>
             {isAuthor && (
               <BoardActionButton onDelete={onClickDelete} onEdit={onClickEdit} mode={isEditing ? "edit" : "default"} />
@@ -91,42 +102,44 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange }: Comm
             </div>
           ) : (
             <>
-              <p className="text-sm py-2 whitespace-pre-wrap">{item?.content}</p>
+              <p className="text-sm py-1.5 whitespace-pre-wrap leading-relaxed">{item?.content}</p>
               <div>
-                <div className="flex items-center gap-4">
-                  {!item.parent_id && (
-                    <>
-                      <Button
-                        onClick={handleCommentLikeToggle}
-                        disabled={isPending}
-                        variant="outline" size="auto"
-                        className={`border-none flex items-center gap-[2px] hover:text-purple ${
-                          isCommentLiked ? "text-purple" : ""
-                        }`}
-                      >
-                        <ThumbsUp size={15} fill={isCommentLiked ? "currentColor" : "none"} />
-                        <span>{item?.likes[0]?.count || 0}</span>
-                      </Button>
-                      <Button onClick={onClickReplies} variant="outline" size="auto" className="border-none">
-                        {!showReplyForm ? "답변" : "닫기"}
-                      </Button>
-                    </>
-                  )}
-                </div>
-                <div className="mt-2">
-                  {showReplyForm && (
+                {!item.parent_id && (
+                  <div className="flex items-center gap-3.5">
+                    <Button
+                      onClick={handleCommentLikeToggle}
+                      disabled={isPending}
+                      variant="plain" size="auto"
+                      className={`flex items-center gap-1 text-xs font-semibold hover:text-purple ${
+                        isCommentLiked ? "text-purple" : "text-gray-400"
+                      }`}
+                    >
+                      <Heart size={13} fill={isCommentLiked ? "currentColor" : "none"} />
+                      <span>{item?.likes[0]?.count || 0}</span>
+                    </Button>
+                    <Button
+                      onClick={onClickReplies}
+                      variant="plain" size="auto"
+                      className="text-xs font-semibold text-gray-400 hover:text-gray-600"
+                    >
+                      {!showReplyForm ? "답글 쓰기" : "닫기"}
+                    </Button>
+                  </div>
+                )}
+                {showReplyForm && (
+                  <div className="mt-3">
                     <CommentForm
                       mode="create"
                       type="reply"
                       parentId={item.id}
                       onSuccess={() => setShowReplyForm(false)}
                     />
-                  )}
-                </div>
+                  </div>
+                )}
                 {replies && replies.length > 0 && (
-                  <div className="flex gap-2">
-                    <CornerDownRight size={20} className="translate-y-3" />
-                    <ul className="flex flex-col w-full">
+                  <div className="flex gap-2 mt-3">
+                    <CornerDownRight size={16} className="text-purple-300 shrink-0 mt-3" />
+                    <ul className="flex flex-col gap-2 w-full">
                       {replies.map((reply) => (
                         <CommentListItem
                           key={reply.id}
@@ -134,6 +147,7 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange }: Comm
                           boardId={boardId}
                           activeEditId={activeEditId}
                           handleEditChange={handleEditChange}
+                          boardAuthorId={boardAuthorId}
                         />
                       ))}
                     </ul>

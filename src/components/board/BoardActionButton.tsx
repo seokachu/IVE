@@ -24,10 +24,11 @@ const BoardActionButton = ({ onEdit, onDelete, mode = "default" }: BoardActionBu
             <ConfirmModal
               isOpen={setIsModalOpen}
               onConfirm={onDelete}
-              title="정말로 삭제하시겠습니까?"
-              description="삭제 후 되돌릴 수 없습니다."
+              title="댓글을 삭제할까요?"
+              description="삭제한 댓글은 되돌릴 수 없어요."
               cancelText="취소"
-              confirmText="삭제"
+              confirmText="삭제하기"
+              variant="destructive"
             />
           )}
         </div>

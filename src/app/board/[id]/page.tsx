@@ -9,7 +9,7 @@ const page = async ({ params }: BoardDetailPageParams) => {
   const { id } = await params;
   return (
     <main className="w-full min-h-screen">
-      <section className="max-w-container m-auto px-5 pb-28 lg:px-8">
+      <section className="max-w-content m-auto px-5 pb-24 lg:pb-28 lg:px-8">
         <BoardDetailContainer boardId={parseInt(id)} />
       </section>
       <GoTopButton />
