@@ -1,7 +1,7 @@
 import Image from "next/image";
 import PinkLogoImage from "@/assets/images/logo_pink.svg";
 import { UserRound } from "lucide-react";
-import GithubIcon from "@/components/common/icons/GithubIcon";
+import GithubOutlineIcon from "@/components/common/icons/GithubOutlineIcon";
 import Link from "next/link";
 
 const Footer = () => {
@@ -25,7 +25,7 @@ const Footer = () => {
               aria-label="깃허브 새창으로 열기"
               className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
             >
-              <GithubIcon size={17} className="text-gray-600" />
+              <GithubOutlineIcon size={17} className="text-gray-600" />
             </Link>
           </li>
           <li>

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import DefaultImage from "@/assets/images/default_image.avif";
 import Image from "next/image";
-import { Play, X } from "lucide-react";
+import { ExternalLink, Play, X } from "lucide-react";
 import { formatDate } from "@/utils/formatDate";
 import type { NewsFeedItemProps } from "@/types/news";
 
@@ -14,6 +14,7 @@ const getYouTubeEmbedUrl = (url: string) => {
 
 const NewsFeedItem = ({ item, index }: NewsFeedItemProps) => {
   const [playing, setPlaying] = useState(false);
+  const [showSummary, setShowSummary] = useState(false);
   const isVideo = item.sourceType === "youtube";
   const embedUrl = isVideo ? getYouTubeEmbedUrl(item.url) : null;
 
@@ -113,6 +114,40 @@ const NewsFeedItem = ({ item, index }: NewsFeedItemProps) => {
     </div>
   );
 
+  //기사: 클릭 시 페이지 이탈 없이 카드 안에서 요약 표시, 원문은 오버레이 안의 링크로만 이동
+  if (showSummary) {
+    return (
+      <li className="relative overflow-hidden border rounded-md w-full bg-gray-900 text-white">
+        <div className="aspect-square p-4 flex flex-col gap-2.5 overflow-hidden">
+          <div className="flex items-center gap-2 text-xs shrink-0 pr-8">
+            <span className="px-2.5 py-0.5 rounded-2xl bg-[#3B82F6]/85 font-bold shrink-0">기사</span>
+            <span className="opacity-75 truncate">{item.sourceName}</span>
+            <time className="opacity-75 shrink-0">{formatDate(item.publishedAt, "dash")}</time>
+          </div>
+          <h3 className="font-bold text-sm leading-snug shrink-0">{item.title}</h3>
+          <p className="text-xs text-white/75 leading-relaxed overflow-y-auto scrollbar-hide flex-1">
+            {item.summary || "이 기사는 미리보기 요약을 제공하지 않아요. 아래에서 원문으로 볼 수 있어요."}
+          </p>
+          <a
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-purple-300 hover:text-purple-200 shrink-0"
+          >
+            원문 보기 <ExternalLink className="w-3 h-3" />
+          </a>
+        </div>
+        <button
+          onClick={() => setShowSummary(false)}
+          aria-label="요약 닫기"
+          className="absolute top-2.5 right-2.5 flex items-center justify-center w-7 h-7 rounded-full bg-white/15 hover:bg-white/30 transition-colors"
+        >
+          <X className="w-4 h-4" />
+        </button>
+      </li>
+    );
+  }
+
   return (
     <li className="relative overflow-hidden border rounded-md group text-white w-full">
       {embedUrl ? (
@@ -120,9 +155,13 @@ const NewsFeedItem = ({ item, index }: NewsFeedItemProps) => {
           {card}
         </button>
       ) : (
-        <a href={item.url} target="_blank" rel="noopener noreferrer" aria-label={item.title}>
+        <button
+          onClick={() => setShowSummary(true)}
+          aria-label={`${item.title} 요약 보기`}
+          className="block w-full cursor-pointer text-left"
+        >
           {card}
-        </a>
+        </button>
       )}
     </li>
   );

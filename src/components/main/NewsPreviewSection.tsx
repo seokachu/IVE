@@ -13,7 +13,7 @@ const SubHead = ({ icon, title, sub }: { icon: React.ReactNode; title: string; s
   <div className="w-full flex items-center gap-2.5">
     <span className="text-purple-500 dark:text-purple-300">{icon}</span>
     <h4 className="text-lg font-bold">{title}</h4>
-    <p className="text-sm text-gray-500 hidden sm:block">{sub}</p>
+    <p className="text-sm text-gray-400 hidden sm:block">{sub}</p>
   </div>
 );
 
@@ -43,7 +43,7 @@ const NewsPreviewSection = () => {
                       href="/news"
                       className="flex items-center gap-4 p-4 lg:p-5 bg-background border border-gray-200 dark:border-gray-700 rounded-lg hover:border-purple transition-colors"
                     >
-                      <span className="shrink-0 w-16 text-center text-sm font-bold py-2 rounded-md bg-purple-100 text-purple-700">
+                      <span className="shrink-0 w-16 text-center text-sm font-bold py-2 rounded-md bg-purple-100 text-purple-500">
                         {dday.label}
                       </span>
                       <div className="min-w-0 flex-1">
@@ -51,7 +51,7 @@ const NewsPreviewSection = () => {
                           <span className={`px-2 py-0.5 rounded-full text-xs ${category.badgeClass}`}>
                             {category.label}
                           </span>
-                          <time className="text-xs text-gray-500">{formatScheduleDate(item)}</time>
+                          <time className="text-xs text-gray-400">{formatScheduleDate(item)}</time>
                         </div>
                         <h5 className="font-bold truncate">{item.title}</h5>
                       </div>

@@ -12,7 +12,7 @@ const FILTER_ARRAY = ["전체", "정규", "미니", "싱글"] as const;
 
 const CATEGORY_BADGE_CLASS = {
   정규: "bg-purple text-white",
-  미니: "bg-purple-100 text-purple-700",
+  미니: "bg-purple-100 text-purple-500",
   싱글: "bg-gray-200 text-gray-700 dark:bg-white/15 dark:text-white",
 } as const;
 

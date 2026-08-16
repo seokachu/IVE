@@ -9,7 +9,7 @@ const SectionTitle = ({ title, subtitle, className }: SectionTitleProps) => {
   return (
     <div className={`flex flex-col items-center gap-2 ${className || ""}`}>
       <h2 className="text-2xl font-bold lg:text-4xl text-center">{title}</h2>
-      <h3 className="text-center text-gray-600 dark:text-gray-400 text-sm lg:text-base">{subtitle}</h3>
+      <h3 className="text-center text-gray-500 text-sm lg:text-base">{subtitle}</h3>
     </div>
   );
 };

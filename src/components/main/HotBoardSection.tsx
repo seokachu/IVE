@@ -87,7 +87,7 @@ const HotBoardSection = () => {
                 <span className="text-xl font-bold text-purple w-6 text-center shrink-0">{index + 2}</span>
                 <div className="min-w-0 flex-1">
                   <p className="font-semibold truncate group-hover:text-purple transition-colors">{item.title}</p>
-                  <div className="flex items-center gap-3 text-gray-500 mt-0.5 text-xs">
+                  <div className="flex items-center gap-3 text-gray-400 mt-0.5 text-xs">
                     <span>{item.name}</span>
                     <StatPair likes={item.like_count ?? 0} comments={item.comment_count ?? 0} />
                   </div>

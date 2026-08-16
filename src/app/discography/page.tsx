@@ -17,7 +17,7 @@ const page = async () => {
     <main className="bg-background text-foreground min-h-screen">
       <section className="max-w-content flex flex-col px-5 pt-32 pb-40 m-auto">
         <h2 className="text-2xl font-bold lg:text-4xl mb-6 text-center">Discography</h2>
-        <h3 className="text-center text-gray-600 dark:text-gray-400 mb-12">아이브의 모든 발매 — 정규 · 미니 · 싱글</h3>
+        <h3 className="text-center text-gray-500 mb-12">아이브의 모든 발매 — 정규 · 미니 · 싱글</h3>
         <DiscographyList items={releases} />
       </section>
       <AlbumPlayerBar />

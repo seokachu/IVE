@@ -149,10 +149,10 @@ export const PHONE_OPTIONS = [
 
 //일정 카테고리 라벨·배지 색상
 export const SCHEDULE_CATEGORY_MAP = {
-  concert: { label: "콘서트", badgeClass: "bg-purple-100 text-purple-700" },
+  concert: { label: "콘서트", badgeClass: "bg-purple-100 text-purple-500" },
   comeback: { label: "컴백", badgeClass: "bg-pink-100 text-pink-700" },
   broadcast: { label: "방송", badgeClass: "bg-blue-100 text-blue-700" },
-  fanmeeting: { label: "팬미팅", badgeClass: "bg-orange-100 text-orange-700" },
+  fanmeeting: { label: "팬미팅", badgeClass: "bg-orange-100 text-orange-500" },
   popup: { label: "팝업", badgeClass: "bg-green-100 text-green-700" },
   release: { label: "발매", badgeClass: "bg-yellow-100 text-yellow-700" },
   etc: { label: "기타", badgeClass: "bg-gray-100 text-gray-700" },

@@ -29,6 +29,7 @@ const AlbumShowcase = () => {
     <div className="w-full flex flex-col gap-10">
       <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
         <div className="w-full lg:w-[55%] min-w-0">
+          {/* 슬롯 폭은 고정하고 활성 커버만 scale로 확대 — 레이아웃 재계산이 없어 배경·정렬이 흔들리지 않는다 */}
           <Swiper
             grabCursor
             centeredSlides
@@ -41,15 +42,15 @@ const AlbumShowcase = () => {
             onSwiper={setSwiper}
             onSlideChange={(s) => setActiveIndex(s.realIndex)}
             wrapperTag="ul"
-            className="w-full [&_.swiper-wrapper]:items-center"
+            className="w-full h-[250px] lg:h-[350px] [&_.swiper-wrapper]:items-center"
           >
             {albums.map((album, index) => (
-              <SwiperSlide key={album.title} tag="li" className="!w-auto">
+              <SwiperSlide key={album.title} tag="li" className="!w-[170px] lg:!w-[240px] flex items-center h-full">
                 <div
-                  className={`relative aspect-square rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 ${
+                  className={`relative aspect-square w-full rounded-2xl overflow-hidden transition-transform duration-300 ${
                     index === activeIndex
-                      ? "w-[240px] lg:w-[340px]"
-                      : "w-[130px] lg:w-[170px] opacity-40"
+                      ? "scale-[1.35] z-10 shadow-2xl"
+                      : "scale-[0.7] opacity-40"
                   }`}
                 >
                   <Image
@@ -76,7 +77,12 @@ const AlbumShowcase = () => {
             <AlbumTrackList albumTitle={active.title} albumImage={active.album_image} />
           </div>
           <div className="mt-5">
-            <StreamingLinkChips albumTitle={active.title} melonLink={active.melon_link} appleLink={active.apple_link} />
+            <StreamingLinkChips
+              albumTitle={active.title}
+              melonLink={active.melon_link}
+              appleLink={active.apple_link}
+              align="left"
+            />
           </div>
         </div>
       </div>

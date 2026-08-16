@@ -57,8 +57,8 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
       data-detail-path={`/shop/${item.id}`}
     >
       <div
-        className={`relative w-full h-auto rounded-lg overflow-hidden aspect-square ${
-          variant === "carousel" ? "bg-gray-100" : "border"
+        className={`relative w-full h-auto rounded-lg overflow-hidden aspect-square border ${
+          variant === "carousel" ? "bg-gray-100 border-gray-200" : ""
         }`}
       >
         <Image
@@ -80,7 +80,7 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
             variant="plain"
             size="auto"
             onClick={onClickHeart}
-            className="absolute right-2.5 top-2.5 flex items-center justify-center w-9 h-9 rounded-full bg-white/90 shadow-sm"
+            className="absolute right-2.5 top-2.5 flex items-center justify-center w-9 h-9 rounded-full bg-white/90 border border-gray-200"
             aria-label="찜하기"
           >
             <Heart
@@ -98,14 +98,24 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
           </Button>
         )}
       </div>
-      <div className="flex flex-col gap-1">
+      <div className={`flex flex-col gap-1 ${variant === "carousel" ? "mt-2.5" : ""}`}>
         {variant === "shop" && (
           <div className="mt-2 md:mt-4 mb-1 min-h-[20px]">
             <Badge item={{ ...item, review_count: reviewCount }} averageRating={averageRating} />
           </div>
         )}
-        <h3 className="text-xs lg:text-base overflow-hidden overflow-ellipsis whitespace-nowrap">{item.title}</h3>
-        <div className="font-bold flex items-center flex-wrap gap-x-1.5 lg:gap-x-2 text-sm lg:text-lg">
+        <h3
+          className={`overflow-hidden overflow-ellipsis whitespace-nowrap ${
+            variant === "carousel" ? "text-sm font-semibold" : "text-xs lg:text-base"
+          }`}
+        >
+          {item.title}
+        </h3>
+        <div
+          className={`font-bold flex items-center flex-wrap gap-x-1.5 lg:gap-x-2 ${
+            variant === "carousel" ? "text-[15px]" : "text-sm lg:text-lg"
+          }`}
+        >
           <span className="text-orange-500">{item.discount_rate}%</span>
           <span className="whitespace-nowrap">{formatPrice(price)}원</span>
           <span className="flex items-center gap-1 text-gray-400 text-xs lg:text-sm font-normal">

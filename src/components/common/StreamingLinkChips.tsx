@@ -28,10 +28,11 @@ interface StreamingLinkChipsProps {
   albumTitle: string;
   melonLink?: string | null;
   appleLink?: string | null;
+  align?: "left" | "center";
 }
 
 //풀버전 스트리밍 링크 칩 — 직접 링크가 있으면 우선, 없으면 검색 링크로 폴백
-const StreamingLinkChips = ({ albumTitle, melonLink, appleLink }: StreamingLinkChipsProps) => {
+const StreamingLinkChips = ({ albumTitle, melonLink, appleLink, align = "center" }: StreamingLinkChipsProps) => {
   const query = encodeURIComponent(`아이브 ${albumTitle}`);
   const services: { label: string; url: string; icon: ReactNode }[] = [
     {
@@ -49,14 +50,16 @@ const StreamingLinkChips = ({ albumTitle, melonLink, appleLink }: StreamingLinkC
   ];
 
   return (
-    <div className="flex items-center justify-center flex-wrap gap-2 text-xs">
+    <div
+      className={`flex items-center flex-wrap gap-2 text-xs ${align === "center" ? "justify-center" : "justify-start"}`}
+    >
       <span className="opacity-70">풀버전 듣기</span>
       {services.map((service) => (
         <Link
           key={service.label}
           href={service.url}
           target="_blank"
-          className="inline-flex items-center gap-1.5 pl-1.5 pr-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-white/10 dark:hover:bg-white/25 transition-colors"
+          className="inline-flex items-center gap-1.5 pl-1.5 pr-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-white/10 dark:hover:bg-white/25 text-gray-900 dark:text-white transition-colors"
         >
           {service.icon}
           {service.label}

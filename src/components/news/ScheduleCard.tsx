@@ -7,7 +7,7 @@ import { getDdayStatus, formatScheduleDate } from "@/utils/schedule";
 import type { ScheduleCardProps } from "@/types/schedule";
 
 const DDAY_BADGE_CLASS = {
-  upcoming: "bg-purple-100 text-purple-700",
+  upcoming: "bg-purple-100 text-purple-500",
   today: "bg-purple text-white",
   ongoing: "bg-green-100 text-green-700",
   ended: "bg-gray-100 text-gray-400",
@@ -39,7 +39,7 @@ const ScheduleCard = ({ item }: ScheduleCardProps) => {
             {item.source === "auto" && (
               <span className="px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-500">자동 수집</span>
             )}
-            <time className="text-xs text-gray-500">{formatScheduleDate(item)}</time>
+            <time className="text-xs text-gray-400">{formatScheduleDate(item)}</time>
           </div>
           <h4 className="font-bold truncate lg:text-lg">{item.title}</h4>
           {item.location && (
