@@ -1,5 +1,4 @@
 import AlbumShowcase from "@/components/main/AlbumShowcase";
-import AlbumPlayerBar from "@/components/main/AlbumPlayerBar";
 
 const AlbumSection = () => {
   return (
@@ -20,7 +19,6 @@ const AlbumSection = () => {
         </div>
         <AlbumShowcase />
       </div>
-      <AlbumPlayerBar />
     </section>
   );
 };

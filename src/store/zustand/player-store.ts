@@ -11,6 +11,8 @@ interface PlayerStore {
   volume: number;
   currentTime: number;
   duration: number;
+  //바를 우측 하단 미니 디스크로 접은 상태 — 페이지 이동 시 자동으로 접힌다
+  isMinimized: boolean;
   actions: {
     playAlbumTrack: (payload: {
       albumTitle: string;
@@ -23,6 +25,7 @@ interface PlayerStore {
     playPrev: () => void;
     seek: (seconds: number) => void;
     setVolume: (volume: number) => void;
+    setMinimized: (minimized: boolean) => void;
     closePlayer: () => void;
   };
 }
@@ -67,7 +70,9 @@ const usePlayerStore = create<PlayerStore>((set, get) => {
     volume: 0.5,
     currentTime: 0,
     duration: 0,
+    isMinimized: false,
     actions: {
+      //isMinimized는 건드리지 않는다 — 펼칠지 접을지는 호출 맥락(그리드·히어로 vs 시트)이 결정
       playAlbumTrack: ({ albumTitle, albumImage, tracks, index }) => {
         const previewUrl = tracks[index]?.previewUrl;
         if (!previewUrl) return;
@@ -114,6 +119,7 @@ const usePlayerStore = create<PlayerStore>((set, get) => {
         if (player) player.volume = volume;
         set({ volume });
       },
+      setMinimized: (minimized) => set({ isMinimized: minimized }),
       closePlayer: () => {
         const player = getAudio();
         if (player) {
@@ -128,6 +134,7 @@ const usePlayerStore = create<PlayerStore>((set, get) => {
           isPlaying: false,
           currentTime: 0,
           duration: 0,
+          isMinimized: false,
         });
       },
     },
@@ -145,9 +152,12 @@ export const usePlayerState = () =>
       volume: state.volume,
       currentTime: state.currentTime,
       duration: state.duration,
+      isMinimized: state.isMinimized,
     }))
   );
 export const useCurrentTrack = () =>
   usePlayerStore((state) => (state.currentIndex !== null ? state.tracks[state.currentIndex] : null));
+//재생 중 앨범 타이틀만 구독 — 그리드 카드가 currentTime 변경에 리렌더되지 않도록 분리
+export const usePlayingAlbumTitle = () => usePlayerStore((state) => state.albumTitle);
 export const useIsPlaying = () => usePlayerStore((state) => state.isPlaying);
 export const usePlayerActions = () => usePlayerStore((state) => state.actions);

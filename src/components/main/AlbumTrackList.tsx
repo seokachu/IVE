@@ -10,10 +10,10 @@ const formatDuration = (durationMs: number | null) => {
   return `${Math.floor(totalSeconds / 60)}:${String(totalSeconds % 60).padStart(2, "0")}`;
 };
 
-const AlbumTrackList = ({ albumTitle, albumImage }: AlbumTrackListProps) => {
+const AlbumTrackList = ({ albumTitle, albumImage, limit, expandPlayerOnPlay = true }: AlbumTrackListProps) => {
   const { data: tracks = [], isLoading, isError } = useAlbumTracks(albumTitle);
   const { albumTitle: playingAlbum, currentIndex, isPlaying } = usePlayerState();
-  const { playAlbumTrack, togglePlay } = usePlayerActions();
+  const { playAlbumTrack, togglePlay, setMinimized } = usePlayerActions();
 
   if (isLoading) {
     return (
@@ -33,11 +33,15 @@ const AlbumTrackList = ({ albumTitle, albumImage }: AlbumTrackListProps) => {
       return;
     }
     playAlbumTrack({ albumTitle, albumImage, tracks, index });
+    setMinimized(!expandPlayerOnPlay);
   };
+
+  //slice(0, limit)는 원본 인덱스를 보존하므로 playAlbumTrack의 index와 어긋나지 않는다
+  const visibleTracks = limit ? tracks.slice(0, limit) : tracks;
 
   return (
     <ul className="max-h-40 lg:max-h-56 overflow-y-auto flex flex-col divide-y divide-gray-200 dark:divide-white/10 text-sm scrollbar-hide">
-      {tracks.map((track, index) => {
+      {visibleTracks.map((track, index) => {
         const isCurrent = playingAlbum === albumTitle && currentIndex === index;
         const isTrackPlaying = isCurrent && isPlaying;
         return (

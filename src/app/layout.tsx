@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/providers/AuthProvider";
 import PushTokenSync from "@/components/common/PushTokenSync";
 import ThemeBridge from "@/components/common/ThemeBridge";
+import AlbumPlayerBar from "@/components/main/AlbumPlayerBar";
 
 export const metadata: Metadata = {
   title: "IVE-DIVE",
@@ -47,6 +48,8 @@ export default function RootLayout({
             <QueryProvider>
               <Header />
               {children}
+              {/* 재생 중이면 어느 페이지에서든 유지 — 트랙이 없으면 스스로 숨는다 */}
+              <AlbumPlayerBar />
               <Toaster />
             </QueryProvider>
           </AuthProvider>
