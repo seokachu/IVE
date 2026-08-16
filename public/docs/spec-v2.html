@@ -122,10 +122,10 @@
   <table class="meta-table">
     <tr><th>문서 버전</th><td>v2 — Draft (리뉴얼 진행 중)</td></tr>
     <tr><th>서비스명</th><td>IVE로 DIVE (<a href="https://ive-three.vercel.app">ive-three.vercel.app</a>) · Expo 하이브리드 앱(Android WebView, <code>seokachu/ive-app</code>) 병행</td></tr>
-    <tr><th>문서 기준</th><td>2026 리뉴얼 진행 중 — dev 브랜치 커밋 <code>63d2f32</code> (2026-07-29)</td></tr>
-    <tr><th>작성일</th><td>2026-07-29</td></tr>
+    <tr><th>문서 기준</th><td>2026 리뉴얼 진행 중 — dev 브랜치 커밋 <code>d70f671</code> (2026-08-17)</td></tr>
+    <tr><th>작성일</th><td>2026-07-29 생성 · 2026-08-17 갱신 (소식 개편 · 일정 · 앨범 미리듣기)</td></tr>
     <tr><th>범위</th><td>메인 · 소식 · 인증 · 자유게시판 · 굿즈샵 · 장바구니/결제 · 마이페이지 · 푸시 알림 · 디자인 시스템 · 공통 UI</td></tr>
-    <tr><th>기술 스택</th><td>Next.js 16 (App Router, proxy) · React 19 · Supabase(<code>@supabase/ssr</code>) · Zustand · TanStack Query · Tailwind CSS · lucide-react · 토스페이먼츠 · Expo Push · pnpm · Playwright E2E</td></tr>
+    <tr><th>기술 스택</th><td>Next.js 16 (App Router, proxy) · React 19 · Supabase(<code>@supabase/ssr</code>) · Zustand · TanStack Query · Tailwind CSS · lucide-react · 토스페이먼츠 · Expo Push · pnpm · Playwright E2E · 외부 API(네이버 API Hub 검색 · KOPIS · iTunes Search · Google News RSS · YouTube RSS) · Vercel Cron</td></tr>
     <tr><th>권한 표기</th><td><span class="auth any">전체</span> 비로그인 포함 누구나 · <span class="auth login">로그인</span> 로그인 필요 · <span class="auth owner">작성자</span> 본인 리소스만 · <span class="auth app">앱</span> 하이브리드 앱 환경 필요</td></tr>
   </table>
 </header>
@@ -169,6 +169,8 @@
     <tr><td>테마</td><td>라이트 고정</td><td><b>다크모드 지원</b> — 헤더 토글(기본 라이트, 시스템 미연동), 다크 전용 팔레트, 하이브리드 앱 테마 연동 — COM-16 · PUSH-10</td></tr>
     <tr><td>UI 기반</td><td>하드코딩 hex · 컴포넌트별 개별 버튼/아이콘/스피너</td><td>디자인 토큰(색상 램프·타이포·스페이싱) + <code>ui/button</code>·<code>ui/input</code> 단일화 + lucide 아이콘 · 공용 Spinner(접근성 role 부여) — 12장</td></tr>
     <tr><td>화면 리디자인</td><td>—</td><td>로그인 · 회원가입 화면 디자인 시스템 기반 리디자인 (진행 중, 이후 다른 화면으로 확대 예정)</td></tr>
+    <tr><td>소식</td><td>Supabase 수동 입력 기사(<code>news_gallery</code>) + 사진 갤러리</td><td><b>자동 수집 피드</b>(네이버 API Hub 뉴스 · 구글 뉴스 RSS · 유튜브 공식 채널 RSS) + <b>일정 허브</b>(수동 큐레이션 · KOPIS 공연 자동 수집 · 뉴스 일정 자동 추출 크론) — 갤러리·히어로 제거, 4장</td></tr>
+    <tr><td>앨범 · 메인</td><td>앨범 정보 + 음원 플랫폼 링크 5종</td><td><b>iTunes 30초 미리듣기</b> + 하단 미니 플레이어 바 + 풀버전 칩(멜론 · Apple Music · Spotify · YouTube Music) + 메인 일정·소식 티저 섹션 — MAIN-03 · 08 · 09</td></tr>
   </table>
 </section>
 
@@ -218,30 +220,37 @@
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
     <tr><td>MAIN-01</td><td>비주얼 히어로</td><td>전체 화면 높이의 배경 영상(자동재생·음소거·반복)과 카피(“DIVE INTO IVE”), 하단 스크롤 유도 인디케이터 표시.</td><td>스크롤로 앨범 섹션 도달 시 배경 영상 숨김 처리.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>MAIN-02</td><td>앨범 캐러셀</td><td>앨범 목록을 커버플로우(coverflow) 캐러셀로 표시. 카드에는 앨범 이미지·제목·발매 정보(구분 · 발매일 · 장르 · 수록곡 수) 노출. 현재/전체 위치를 분수(fraction)로 표시.</td><td>발매일 내림차순. 드래그로 탐색.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>MAIN-03</td><td>음원 플랫폼 링크</td><td>앨범 카드에서 Apple Music · Melon · FLO · Bugs · Genie 아이콘으로 각 스트리밍 페이지 이동(새 창).</td><td>링크가 없거나 <code>#</code>인 플랫폼 아이콘은 미노출.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MAIN-02</td><td>앨범 캐러셀</td><td>앨범 목록을 커버플로우(coverflow) 캐러셀로 표시. 카드에는 앨범 이미지·제목·발매 정보(구분 · 발매일 · 장르 · 수록곡 수)와 수록곡 미리듣기(기본 펼침, MAIN-03) 노출. 현재/전체 위치를 분수(fraction)로 표시.</td><td>발매일 내림차순. 드래그로 탐색.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MAIN-03</td><td>수록곡 미리듣기 · 풀버전 링크</td><td>iTunes Search API로 앨범 수록곡 목록(트랙 번호·곡명·재생시간)을 표시하고, 트랙 행 클릭 시 30초 미리듣기 재생(MAIN-08 플레이어 연동). 하단 “풀버전 듣기” 칩으로 멜론 · Apple Music · Spotify · YouTube Music 이동(새 창).</td><td>“수록곡 미리듣기” 토글로 접기 가능(기본 펼침). 멜론·Apple은 DB 앨범 링크 우선, 없으면 검색 링크 폴백. Spotify·YouTube Music은 검색 링크. 미리듣기 없는 곡은 흐림 처리·클릭 불가. iTunes 결과 일주일 캐싱.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>MAIN-04</td><td>최신 게시글 (FREE BOARD)</td><td>자유게시판 최신 글 6개를 카드로 표시(썸네일·제목·작성자·댓글 수). 항목 클릭 시 게시글 상세로 이동. “더보기” → 게시판 목록.</td><td>작성일 내림차순 6건 고정. 썸네일 없으면 기본 이미지.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>MAIN-05</td><td>굿즈샵 프로모 배너</td><td>“굿즈샵 오픈!” 홍보 문구와 이미지를 표시하는 정적 배너.</td><td>링크/버튼 없음(안내 전용).</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>MAIN-06</td><td>상품 캐러셀 (SHOP)</td><td>인기 상품 12개를 좌우 화살표 캐러셀로 표시. 카드에 썸네일·배지·상품명·할인율·할인가·평균 별점 노출, 찜(하트) 토글 가능. 클릭 시 상품 상세 이동. “더보기” → 굿즈샵.</td><td>리뷰 수 기준 상위 12개. 찜 동작은 SHOP-04와 동일.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>MAIN-07</td><td>로딩 · 오류 처리</td><td>각 섹션은 로딩 중 스켈레톤 표시, 조회 실패 시 오류 안내(<span class="msg">“Oops! 잠시 후 다시 확인해주세요...”</span>)로 대체.</td><td>재시도 버튼 없음. 상품 캐러셀은 오류 시 별도 안내 없이 미표시.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MAIN-08</td><td>미니 플레이어 바</td><td>미리듣기 재생 시 화면 하단에 고정 플레이어 표시: 앨범아트·곡명(아이브 · 앨범명), 이전/재생·일시정지/다음 버튼, 드래그 시킹 진행바(현재/전체 시간), 볼륨 슬라이더·음소거, 닫기(✕).</td><td>곡 종료 시 미리듣기 가능한 다음 곡 자동 재생, 마지막 곡이면 정지. 기본 볼륨 50%. 모바일에서는 볼륨 슬라이더 숨김(기기 볼륨 사용). 닫으면 재생 중지·바 제거.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MAIN-09</td><td>일정 · 소식 티저</td><td>앨범 섹션과 게시판 섹션 사이 “News” 섹션: 다가오는 일정 최대 3건(D-day 배지·카테고리·기간·제목·장소) + 최신 소식 카드 3건 + “소식 전체 보기” 버튼.</td><td>일정·소식 클릭 시 소식 페이지로 이동. 종료된 일정은 티저에서 제외. 로딩 중 스켈레톤.</td><td><span class="auth any">전체</span></td></tr>
   </table>
 </section>
 
 <!-- ══════════ 4. 소식 ══════════ -->
 <section id="news">
   <h2 class="sec">4. 소식 페이지</h2>
-  <p class="sec-desc">아티스트 최신 소식과 사진 갤러리를 제공. 24시간 주기 ISR.</p>
+  <p class="sec-desc">2026-08 전면 개편 — 수동 입력 기사·갤러리를 걷어내고 <b>일정(Schedule) · 영상(Video) · 기사(News)</b> 3개 섹션의 자동 수집 허브로 재구성. 피드·일정 모두 30분 주기 ISR. 구 히어로 섹션 · 카테고리 필터 · 사진 갤러리 · 상세 모달은 제거됨.</p>
 
-  <h3>4-1. 소식 <span class="path">/news</span></h3>
+  <h3>4-1. 일정 <span class="path">/news #schedule_section</span></h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>NEWS-01</td><td>히어로 · 섹션 이동</td><td>전체 화면 히어로와 “Latest News” / “View Gallery” 버튼 2개. 클릭 시 해당 섹션으로 부드럽게 스크롤.</td><td>—</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>NEWS-02</td><td>소식 카테고리 필터</td><td>전체 · 음악 · 방송 · 행사 · 화보 5개 pill 필터. 선택한 카테고리의 소식만 목록에 표시.</td><td>현재 로드된 목록 내에서만 필터링(서버 재조회 없음). 기본값 “전체”.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>NEWS-03</td><td>최신 소식 목록</td><td>16:9 카드 그리드(기본 2열). 카드에 카테고리·날짜(YYYY-MM-DD)·제목·본문 1줄 미리보기 표시.</td><td>최초 5건, 작성일 내림차순. 총 개수가 홀수면 첫 카드만 전체 폭.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>NEWS-04</td><td>소식 더 보기</td><td>“더 많은 소식 보기” 버튼 클릭 시 5건씩 추가 로드.</td><td>더 불러올 데이터가 없으면 버튼 자동 숨김. 무한스크롤 아님.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>NEWS-05</td><td>소식 상세 모달</td><td>카드 클릭 시 모달로 상세 표시: 대표 이미지, 카테고리, 제목, 날짜, 출처, 본문.</td><td>출처는 텍스트 표기(외부 링크 아님).</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>NEWS-06</td><td>갤러리 그리드</td><td>정사각형 사진 그리드(모바일 1열 → 3열). 호버 시 확대 아이콘 표시.</td><td>최초 6건, 작성일 내림차순. 사진이 0장이면 섹션 자체 미노출.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>NEWS-07</td><td>갤러리 더 보기 · 원본 보기</td><td>“더 많은 사진 보기”로 6건씩 추가 로드. 사진 클릭 시 모달에서 원본 비율로 확대 표시.</td><td>더 불러올 데이터가 없으면 버튼 자동 숨김.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-01</td><td>일정 목록 (D-day 카드)</td><td>다가오는 순으로 일정 카드 표시: D-day 배지(D-n · D-DAY · 진행중 · 종료), 카테고리 배지(콘서트·컴백·방송·팬미팅·팝업·발매·기타), 기간(요일 포함), 제목, 장소. “다가오는 일정 ↔ 캘린더” 뷰 토글 제공.</td><td>지난 일정(30일 이내)은 “지난 일정”으로 분리·흐림 처리. 캘린더는 월 이동 + 일정 있는 날 점 표시 + 날짜 선택 시 해당일 일정 표시.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-02</td><td>일정 인라인 상세</td><td>카드 클릭 시 그 자리에서 아래로 펼쳐짐(모달·페이지 이동 없음): 대표 사진, 설명, 기간(연도 포함)·장소, “이 일정 관련 소식”(제목 키워드로 피드에서 자동 매칭, 최대 4건), 원문/예매 외부 링크.</td><td>대표 사진은 KOPIS 포스터 → 네이버 이미지 검색 → 관련 영상 썸네일 순 폴백. 자동 수집 일정은 “자동 수집” 배지 표시. 정보가 없으면 <span class="msg">“아직 등록된 상세 정보가 없어요.”</span></td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-03</td><td>일정 데이터 수집</td><td>3개 소스 병합: ① Supabase <code>schedules</code> 수동 큐레이션 ② KOPIS 공연 자동 수집 ③ 뉴스 일정 자동 추출(매일 06시 KST Vercel Cron이 일정 키워드+명시적 날짜가 있는 기사에서 초안 생성 후 저장).</td><td>KOPIS는 31일 단위로 향후 90일 조회, 공연명에 “아이브”/단어 IVE 포함 공연만 매칭(상세 API로 출연·관람연령·티켓 설명 구성). 동일 제목은 수동 입력 우선. 크론은 <code>CRON_SECRET</code> Bearer 인증, 카테고리+시작일 기준 중복 제거.</td><td><span class="auth any">전체</span></td></tr>
+  </table>
+
+  <h3>4-2. 영상 · 기사 <span class="path">/news #video_section · #article_section</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>NEWS-04</td><td>피드 자동 수집</td><td>네이버 API Hub 뉴스 검색 + 구글 뉴스 RSS + 유튜브 공식 채널 RSS를 서버에서 병합 수집(총 60건 상한). 발행일 내림차순 정렬.</td><td>30분 캐싱(<code>/api/news/feed</code>). 제목 정규화로 소스 간 중복 제거(썸네일 있는 항목 우선). 특정 소스 실패 시 나머지 소스로 응답, 전부 실패 시 오류 안내.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-05</td><td>기사 대표 이미지 자동 매칭</td><td>썸네일이 없는 기사(네이버·구글 출처)는 기사 제목으로 네이버 이미지 검색을 수행해 대표 이미지를 자동으로 채움.</td><td>검색 결과 썸네일을 400px로 업그레이드해 사용, 하루 캐싱. 결과가 없으면 기본 이미지 유지.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-06</td><td>Video 섹션</td><td>유튜브 공식 채널 영상을 1:1 카드 3열 그리드로 표시(출처·날짜·제목). 카드 클릭 시 <b>페이지 이탈 없이 카드가 임베드 플레이어로 전환</b>되어 자동 재생, ✕로 썸네일 복귀.</td><td>youtube-nocookie 임베드. 전체화면 해제(ESC) 시 이전 스크롤 위치 복원. 기본 6건, “더 많은 영상 보기”로 6건씩 추가.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-07</td><td>News(기사) 섹션</td><td>네이버·구글 수집 기사를 1:1 카드 3열 그리드로 표시(“기사” 배지·출처·날짜·제목). 클릭 시 원문 새 탭 이동.</td><td>기본 6건, “더 많은 기사 보기”로 6건씩 추가. 더 불러올 항목이 없으면 버튼 숨김.</td><td><span class="auth any">전체</span></td></tr>
   </table>
 </section>
 
@@ -520,10 +529,11 @@
   <h3>14-1. 데이터 저장소 (Supabase)</h3>
   <table class="spec">
     <tr><th>구분</th><th>이름</th><th>용도</th></tr>
-    <tr><td rowspan="15" style="font-weight:600;">테이블</td>
+    <tr><td rowspan="16" style="font-weight:600;">테이블</td>
         <td><code>user</code></td><td>회원 프로필(닉네임 · 아바타), Auth 계정과 연동</td></tr>
     <tr><td><code>album</code></td><td>메인 앨범 캐러셀(발매 정보 · 음원 플랫폼 링크)</td></tr>
-    <tr><td><code>news_gallery</code> / <code>gallery</code></td><td>소식 기사 / 사진 갤러리</td></tr>
+    <tr><td><code>schedules</code></td><td>일정(제목 · 카테고리 · 기간 · 장소 · 설명 · 링크 · 출처 manual/auto) — 수동 큐레이션 + 크론 자동 추출 초안, 공개 읽기 전용 RLS — v2 신규</td></tr>
+    <tr><td><code>news_gallery</code> / <code>gallery</code></td><td>(구) 소식 기사 / 사진 갤러리 — 2026-08 소식 개편으로 코드에서 미사용</td></tr>
     <tr><td><code>board</code></td><td>게시글(제목 · 본문 · 조회수 · 썸네일)</td></tr>
     <tr><td><code>board_with_meta</code> (뷰)</td><td>게시글 목록용 집계 뷰(작성자명 · 댓글 수 · 추천 수 포함)</td></tr>
     <tr><td><code>board_comments</code></td><td>댓글 · 대댓글(자기참조 parent_id)</td></tr>
@@ -561,7 +571,10 @@
     <li><b>배송비 로직 없음</b> — 주문서에 배송비 항목이 없고 주문 상세의 “총 배송비”는 0원 하드코딩.</li>
     <li><b>상품 옵션(사이즈/색상) 선택 불가</b> — 정보 표시 전용.</li>
     <li>회원가입 실패 시 원인과 무관하게 “이미 등록된 이메일 입니다.”로 표기됨.</li>
-    <li>소식 카테고리 필터는 로드된 목록 내 클라이언트 필터라, 더보기 이전에는 해당 카테고리 글이 있어도 안 보일 수 있음.</li>
+    <li>일정 자동 추출은 제목·요약에 “N월 N일” 형태의 명시적 날짜가 있는 기사만 수집 — 날짜 없는 발표는 수동 입력 필요.</li>
+    <li>KOPIS 자동 수집은 공연명에 “아이브”/IVE가 포함된 공연만 매칭 — 페스티벌처럼 아티스트명이 없는 공연은 수동 입력 필요.</li>
+    <li>기사 대표 이미지는 제목 기반 이미지 검색이라 원문 기사의 실제 이미지와 다를 수 있음.</li>
+    <li>앨범 미리듣기는 iTunes 앨범명 매칭 실패 시 <span class="msg">“수록곡 정보를 찾지 못했어요.”</span>로 표시(수동 보정 수단 없음).</li>
     <li>게시글 조회수는 목록 클릭 경유 시에만 증가(공유 링크 직접 진입 시 미증가).</li>
     <li>결제 승인 API에 세션·금액 대조 검증 없음(토스 측 검증 및 클라이언트 중복 확인에 의존), 결제·주문 저장이 트랜잭션이 아님.</li>
     <li>에디터 의존성 quill 2.0.3에 낮은 심각도 XSS 취약점(CVE-2025-15056)이 있으나 상위 버전 미출시로 업그레이드 불가 — 본문 렌더링이 DOMPurify로 소독되고 있어 실질 영향은 제한적(Dependabot #246 모니터링 중).</li>
@@ -575,7 +588,7 @@
 </section>
 
 <footer class="foot">
-  IVE로 DIVE 기능명세서 v2 (Draft) · 기준 커밋 <code>63d2f32</code> (2026 리뉴얼 진행 중) · 2026-07-29 생성 · <a href="./index.html">기능명세서 아카이브</a> · <a href="./spec-v1.html">v1 보기</a>
+  IVE로 DIVE 기능명세서 v2 (Draft) · 기준 커밋 <code>d70f671</code> (2026 리뉴얼 진행 중) · 2026-07-29 생성 · 2026-08-17 갱신 · <a href="./index.html">기능명세서 아카이브</a> · <a href="./spec-v1.html">v1 보기</a>
 </footer>
 
 </div>
