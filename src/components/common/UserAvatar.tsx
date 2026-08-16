@@ -59,7 +59,8 @@ const UserAvatar = ({ userId, avatarUrl, userName, size = "md", className }: Ava
   return (
     <Avatar className={`border ${sizeStyles[size]} ${className || ""}`}>
       <AvatarImage src={imageUrl} alt={displayName || "유저 프로필"} key={avatarUrl} />
-      <AvatarFallback className={`font-bold ${fallbackTextStyles[size]} ${fallbackStyle} ${sizeStyles[size]}`}>
+      {/* 크기는 부모(Avatar)를 꽉 채움 — 고정 px를 주면 !w-5 같은 축소 오버라이드와 어긋나 글자가 밀림 */}
+      <AvatarFallback className={`h-full w-full font-bold leading-none ${fallbackTextStyles[size]} ${fallbackStyle}`}>
         {nameForFallback.slice(0, 1)}
       </AvatarFallback>
     </Avatar>

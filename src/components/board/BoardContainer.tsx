@@ -206,7 +206,7 @@ const BoardContainer = () => {
         onClickWrite={onClickBoardWrite}
       />
       {/* 어떤 필터든 콘텐츠가 적을 때 푸터가 딸려 올라오지 않게 최소 높이 확보 */}
-      <div className="mt-5 flex min-h-[440px] flex-col gap-5 lg:mt-6 lg:min-h-[560px]">
+      <div className="mt-5 flex min-h-[420px] flex-col gap-5 lg:mt-6">
         {showNotice && <BoardNoticeRow />}
         {filter === "notice" && (
           <BoardEmptyState

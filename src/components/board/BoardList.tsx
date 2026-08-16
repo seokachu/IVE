@@ -2,8 +2,9 @@ import BoardListItem from "./BoardListItem";
 import type { BoardListProps } from "@/types/board";
 
 const BoardList = ({ boards, keyword }: BoardListProps) => {
+  //마지막(또는 단일) 행도 하단 보더로 마감 — divide-y는 행 사이에만 그려짐
   return (
-    <ul data-testid="board-list" className="divide-y divide-gray-200">
+    <ul data-testid="board-list" className="divide-y divide-gray-200 border-b border-gray-200">
       {boards?.data?.map((item) => (
         <BoardListItem key={item.id} item={item} keyword={keyword} />
       ))}
