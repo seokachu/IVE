@@ -12,40 +12,31 @@ const DescriptionTab = ({ id }: ShopMenuProps) => {
   if (isError) return <Error />;
 
   return (
-    <div className="text-center">
-      <h3 className="font-bold text-lg mb-10">{data.title}</h3>
-      <div className="flex flex-col gap-1">
-        <p>{data.description?.[0]}</p>
-      </div>
-      <div className="w-full h-auto m-auto relative my-16">
+    //시안 기준: 가운데 정렬 본문 + 라운드 상세 이미지
+    <div className="m-auto max-w-[960px] text-center">
+      <h3 className="text-xl font-bold lg:text-[1.375rem]">{data.title}</h3>
+      <p className="mt-4 text-sm text-gray-500">{data.description?.[0]}</p>
+      <div className="relative m-auto my-10 w-full overflow-hidden rounded-2xl lg:my-12">
         <Image
           src={data.images?.[0] || DefaultImage}
           alt={data.title}
-          className="fill m-auto"
-          width={650}
-          height={650}
+          className="m-auto w-full"
+          width={960}
+          height={960}
         />
       </div>
-      {data.description?.[1] && (
-        <div>
-          <p>{data.description?.[1]}</p>
-        </div>
-      )}
+      {data.description?.[1] && <p className="text-sm text-gray-500">{data.description?.[1]}</p>}
       {data.images?.[1] && (
-        <div className="w-full h-auto m-auto relative my-16">
-          <Image src={data.images[1]} alt={data.title} className="fill m-auto" width={650} height={650} />
+        <div className="relative m-auto my-10 w-full overflow-hidden rounded-2xl lg:my-12">
+          <Image src={data.images[1]} alt={data.title} className="m-auto w-full" width={960} height={960} />
         </div>
       )}
       {data.images?.[2] && (
-        <div className="w-full h-auto m-auto relative my-16">
-          <Image src={data.images[2]} alt={data.title} className="fill m-auto" width={650} height={650} />
+        <div className="relative m-auto my-10 w-full overflow-hidden rounded-2xl lg:my-12">
+          <Image src={data.images[2]} alt={data.title} className="m-auto w-full" width={960} height={960} />
         </div>
       )}
-      {data.description?.[2] && (
-        <div>
-          <p>{data.description[2]}</p>
-        </div>
-      )}
+      {data.description?.[2] && <p className="text-sm text-gray-500">{data.description[2]}</p>}
     </div>
   );
 };

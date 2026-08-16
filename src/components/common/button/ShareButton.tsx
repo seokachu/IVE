@@ -5,9 +5,10 @@ import { useToast } from "@/hooks/use-toast";
 import { ButtonHTMLAttributes } from "react";
 interface classNameProps {
   className?: ButtonHTMLAttributes<HTMLButtonElement>["className"];
+  iconSize?: number;
 }
 
-const ShareButton = ({ className }: classNameProps) => {
+const ShareButton = ({ className, iconSize = 25 }: classNameProps) => {
   const { toast } = useToast();
 
   const onClickShare = async () => {
@@ -27,7 +28,7 @@ const ShareButton = ({ className }: classNameProps) => {
 
   return (
     <Button variant="plain" size="auto" onClick={onClickShare} className={className} aria-label="현재 페이지 공유하기">
-      <Share2 size={25} />
+      <Share2 size={iconSize} />
     </Button>
   );
 };

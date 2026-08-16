@@ -12,6 +12,8 @@ import type { DirectPaymentButtonProps } from "@/types/shop";
 const DirectPaymentButton = ({
   product,
   quantity,
+  className,
+  children,
 }: DirectPaymentButtonProps) => {
   const session = useSession();
   const { data: customerInfo } = useCustomerInfo(session?.user.id);
@@ -84,9 +86,9 @@ const DirectPaymentButton = ({
     <Button
       onClick={handleDirectPayment}
       size="auto"
-      className="w-full py-3 text-center"
+      className={className ?? "w-full py-3 text-center"}
     >
-      구매하기
+      {children ?? "구매하기"}
     </Button>
   );
 };

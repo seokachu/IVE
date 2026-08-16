@@ -5,7 +5,7 @@ test("navigates from shop list to product detail", async ({ page }) => {
 
   await page.goto("/shop");
 
-  await expect(page.getByRole("heading", { name: "굿즈샵" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Goods Shop" })).toBeVisible();
 
   const firstProduct = page.getByTestId("shop-item").first();
   await expect(firstProduct).toBeVisible({ timeout: 15000 });
@@ -15,5 +15,5 @@ test("navigates from shop list to product detail", async ({ page }) => {
   await page.goto(detailPath!, { waitUntil: "domcontentloaded" });
 
   await expect(page).toHaveURL(/\/shop\/[^/]+$/);
-  await expect(page.getByRole("heading", { name: "자주 묻는 질문 FAQ" })).toBeVisible({ timeout: 20000 });
+  await expect(page.getByRole("heading", { name: "궁금한 점이 있나요?" })).toBeVisible({ timeout: 20000 });
 });

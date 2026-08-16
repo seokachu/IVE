@@ -1,29 +1,32 @@
 import { useReviewCount } from "@/hooks/queries/useReviews";
 import type { TabMenuProps } from "@/types/shop";
 
+//시안 기준: 세그먼트 필 탭 — 활성 탭은 서페이스 필 + 그림자
 const TabMenu = ({ activeTab, setActiveTab, id }: TabMenuProps) => {
   const { data } = useReviewCount(id);
 
   const count = data?.length;
 
+  const getTabClass = (isActive: boolean) =>
+    `rounded-full px-7 py-2.5 text-sm transition-colors lg:px-8 ${
+      isActive ? "bg-card font-bold shadow-sm" : "text-gray-500"
+    }`;
+
   return (
-    <div className="mb-16 sticky top-0 bg-background z-10">
-      <ul className="flex justify-between items-center text-center cursor-pointer">
-        <li
-          onClick={() => setActiveTab("description")}
-          className={`${activeTab === "description" ? "border-b-2 border-gray-300" : "border-b"} w-2/4 py-4`}
-        >
-          <h3 className={`${activeTab === "description" ? "font-bold" : ""}`}>상세정보</h3>
-        </li>
-        <li
+    <div className="sticky top-0 z-10 mb-12 flex justify-center bg-background py-3 lg:mb-16">
+      <div className="flex items-center gap-1 rounded-full bg-gray-100 p-1">
+        <button type="button" onClick={() => setActiveTab("description")} className={getTabClass(activeTab === "description")}>
+          상세정보
+        </button>
+        <button
+          type="button"
           onClick={() => setActiveTab("review")}
-          className={`${activeTab === "review" ? "border-b-2 border-gray-300" : "border-b"} w-2/4 py-4`}
+          className={`flex items-center gap-1.5 ${getTabClass(activeTab === "review")}`}
         >
-          <h3 className={`${activeTab === "review" ? "font-bold" : ""} flex gap-2 justify-center items-center`}>
-            리뷰<span>{count}</span>
-          </h3>
-        </li>
-      </ul>
+          리뷰
+          <span className="font-bold text-purple-500">{count}</span>
+        </button>
+      </div>
     </div>
   );
 };

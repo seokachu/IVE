@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { ShopListItem } from "@/types/index";
 
 export type SortOptionList =
@@ -41,6 +42,8 @@ export interface ProductActionsProps {
 export interface DirectPaymentButtonProps {
   product: ShopListItem;
   quantity: number;
+  className?: string;
+  children?: ReactNode;
 }
 
 export interface ReviewItem {
