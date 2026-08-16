@@ -105,7 +105,9 @@ const CommentForm = ({ mode, type, initialContent, commentId, onSuccess, parentI
     if (mode === "edit") {
       return type === "comment" ? "댓글을 수정해 주세요." : "답글을 수정해 주세요.";
     }
-    return type === "comment" ? "댓글을 입력해 주세요." : "답글을 입력해 주세요.";
+    return type === "comment"
+      ? "따뜻한 댓글로 함께 다이브해요 :)"
+      : "답글을 입력해 주세요.";
   };
 
   return (
@@ -115,6 +117,7 @@ const CommentForm = ({ mode, type, initialContent, commentId, onSuccess, parentI
       placeholder={getPlaceholder()}
       submitButtonLabel="등록"
       onContentChange={handleContentChange}
+      showAvatar={mode === "create" && type === "comment"}
     />
   );
 };

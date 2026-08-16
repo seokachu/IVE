@@ -101,6 +101,7 @@ const config: Config = {
       backgroundImage: {
         "main-image": "url('/images/main_bg.webp')",
         "news-hero-image": "url('/images/news_hero_bg.jpg')",
+        "board-hero-image": "url('/images/board_hero_bg.webp')",
       },
       keyframes: {
         wheels: {

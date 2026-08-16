@@ -29,6 +29,17 @@ export interface BoardSummary {
   avatar_url: string;
   comment_count: number;
   like_count: number;
+  thumbnail: string | null;
+}
+
+export type BoardSortValue = "latest" | "popular" | "comments";
+
+export type BoardFilterValue = "all" | "popular" | "notice" | "mine";
+
+export interface BoardStats {
+  totalPosts: number;
+  todayPosts: number;
+  totalComments: number;
 }
 
 export interface BoardWithRelations extends Tables<"board"> {
@@ -93,6 +104,29 @@ export interface CommentListItemProps {
   item: Comment;
   activeEditId: number | null;
   handleEditChange: (id: number | null) => void;
+  boardAuthorId?: string | null;
+}
+
+export interface AdjacentBoard {
+  id: number;
+  title: string | null;
+}
+
+export interface AdjacentBoards {
+  prev: AdjacentBoard | null;
+  next: AdjacentBoard | null;
+}
+
+export type CommentSortValue = "oldest" | "latest";
+
+export interface CommentSectionProps {
+  commentCount: number;
+  boardAuthorId?: string | null;
+}
+
+export interface CommentListProps {
+  sort: CommentSortValue;
+  boardAuthorId?: string | null;
 }
 
 export interface BoardsResponse {
@@ -136,6 +170,7 @@ export interface ThreadViewProps {
   placeholder: string;
   submitButtonLabel: string;
   onContentChange?: () => void;
+  showAvatar?: boolean;
 }
 
 export type UpdateBoardParams = {
@@ -145,6 +180,10 @@ export type UpdateBoardParams = {
 };
 
 export interface BoardActionsProps {
+  filter: BoardFilterValue;
+  sort: BoardSortValue;
+  onFilterChange: (filter: BoardFilterValue) => void;
+  onSortChange: (sort: BoardSortValue) => void;
   onSearch: (value: string) => void;
   onClickWrite: () => void;
 }
