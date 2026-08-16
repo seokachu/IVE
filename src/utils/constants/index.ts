@@ -1,8 +1,3 @@
-import AppleMusicIcon from "@/assets/images/apple_music_icon.avif";
-import MelonMusicIcon from "@/assets/images/melon_music_icon.avif";
-import FloMusicIcon from "@/assets/images/flo_music_icon.avif";
-import BugsMusicIcon from "@/assets/images/bugs_music_icon.avif";
-import GenieMusicIcon from "@/assets/images/genie_music_icon.avif";
 import type { SortOption, SortOptionList } from "@/types/shop";
 
 //header gnb list
@@ -10,15 +5,6 @@ export const GNB_ARRAY = [
   { label: "소식", path: "/news", exact: false },
   { label: "굿즈샵", path: "/shop", exact: false },
   { label: "자유게시판", path: "/board", exact: false },
-];
-
-//main album music icon list
-export const MUSIC_ICONS = [
-  { icon: AppleMusicIcon, label: "apple" },
-  { icon: MelonMusicIcon, label: "Melon" },
-  { icon: FloMusicIcon, label: "FLO" },
-  { icon: BugsMusicIcon, label: "Bugs" },
-  { icon: GenieMusicIcon, label: "Genie" },
 ];
 
 //shop sort options
@@ -160,20 +146,25 @@ export const PHONE_OPTIONS = [
   },
 ];
 
-//news category list
-export const NEWS_CATEGORY_ARRAY = [
-  { category: "전체" },
-  { category: "음악" },
-  { category: "방송" },
-  { category: "행사" },
-  { category: "화보" },
-];
+//일정 카테고리 라벨·배지 색상
+export const SCHEDULE_CATEGORY_MAP = {
+  concert: { label: "콘서트", badgeClass: "bg-purple-100 text-purple-700" },
+  comeback: { label: "컴백", badgeClass: "bg-pink-100 text-pink-700" },
+  broadcast: { label: "방송", badgeClass: "bg-blue-100 text-blue-700" },
+  fanmeeting: { label: "팬미팅", badgeClass: "bg-orange-100 text-orange-700" },
+  popup: { label: "팝업", badgeClass: "bg-green-100 text-green-700" },
+  release: { label: "발매", badgeClass: "bg-yellow-100 text-yellow-700" },
+  etc: { label: "기타", badgeClass: "bg-gray-100 text-gray-700" },
+} as const;
 
-//소식 페이지 latest news section 데이터 불러오기 5개 제한
-export const LATEST_DEFAULT_LIMIT = 5;
+//일정 섹션 뷰 토글 목록
+export const SCHEDULE_VIEW_ARRAY = [
+  { value: "card", label: "다가오는 일정" },
+  { value: "calendar", label: "캘린더" },
+] as const;
 
-//소식 페이지 gallery section 데이터 불러오기 6개 제한
-export const GALLERY_DEFAULT_LIMIT = 6;
+//소식 페이지 뉴스 피드 한 번에 노출할 개수
+export const NEWS_FEED_DEFAULT_LIMIT = 6;
 
 //디자인 시스템 색상 토큰 — className이 아닌 JS 코드(아이콘 color, 컨페티 등)에서 사용 (public/docs/design-system.md §1)
 export const COLORS = {

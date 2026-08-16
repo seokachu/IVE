@@ -1,19 +1,17 @@
 import { newsMetadata } from "@/metadata/news/newsMetadata";
-import { GALLERY_DEFAULT_LIMIT, LATEST_DEFAULT_LIMIT } from "@/utils/constants";
-import HeroSection from "@/components/news/HeroSection";
 import GoTopButton from "@/components/common/button/GoTopButton";
-import LatestNewsSection from "@/components/news/LatestNewsSection";
-import GallerySection from "@/components/news/GallerySection";
+import NewsFeedSection from "@/components/news/NewsFeedSection";
+import ScheduleSection from "@/components/news/ScheduleSection";
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { getNewsGallery } from "@/lib/supabase/news";
-import { getGallery } from "@/lib/supabase/gallery";
+import { getNewsFeed } from "@/lib/news/feed";
+import { getScheduleFeed } from "@/lib/schedule/feed";
 
 export const metadata = newsMetadata;
-export const revalidate = 86400;
+export const revalidate = 1800;
 
 const page = async () => {
   const queryClient = new QueryClient();
@@ -21,22 +19,22 @@ const page = async () => {
   //데이터 prefetch
   await Promise.all([
     queryClient.prefetchQuery({
-      queryKey: ["news", LATEST_DEFAULT_LIMIT],
-      queryFn: () => getNewsGallery(LATEST_DEFAULT_LIMIT),
+      queryKey: ["newsFeed"],
+      queryFn: getNewsFeed,
     }),
 
     queryClient.prefetchQuery({
-      queryKey: ["gallery", GALLERY_DEFAULT_LIMIT],
-      queryFn: () => getGallery(GALLERY_DEFAULT_LIMIT),
+      queryKey: ["scheduleFeed"],
+      queryFn: getScheduleFeed,
     }),
   ]);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <main>
-        <HeroSection />
-        <LatestNewsSection />
-        <GallerySection />
+        <ScheduleSection />
+        <NewsFeedSection type="video" />
+        <NewsFeedSection type="article" />
         <GoTopButton />
       </main>
     </HydrationBoundary>
