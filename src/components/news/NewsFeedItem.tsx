@@ -96,7 +96,13 @@ const NewsFeedItem = ({ item, index }: NewsFeedItemProps) => {
       )}
       <div className="absolute bottom-0 w-full text-left">
         <div className="flex items-center gap-2 p-3 pb-1.5 text-xs">
-          <span className="px-2.5 py-0.5 rounded-2xl bg-white/20 backdrop-blur-sm">{isVideo ? "영상" : "기사"}</span>
+          <span
+            className={`px-2.5 py-0.5 rounded-2xl backdrop-blur-sm font-bold ${
+              isVideo ? "bg-[#FF0000]/85" : "bg-white/25"
+            }`}
+          >
+            {isVideo ? "영상" : "기사"}
+          </span>
           <span className="opacity-75 truncate">{item.sourceName}</span>
           <time className="opacity-75 shrink-0">{formatDate(item.publishedAt, "dash")}</time>
         </div>

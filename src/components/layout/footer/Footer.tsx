@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 border-t border-gray-200 relative z-10">
+    <footer className="bg-gray-50 border-t border-gray-200 relative z-10">
       <div className="max-w-container m-auto py-10 px-5 flex flex-col items-center gap-5">
         <h1 className="relative w-[80px] h-auto">
           <Image src={SubLogoImage} alt="logo" className="fill dark:hidden" />
@@ -25,7 +25,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="깃허브 새창으로 열기"
-              className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
             >
               <GithubIcon size={18} />
             </Link>
@@ -36,7 +36,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="포트폴리오 사이트 새창으로 열기"
-              className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
             >
               <UserRound size={18} />
             </Link>
