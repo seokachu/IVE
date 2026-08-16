@@ -122,7 +122,7 @@
   <table class="meta-table">
     <tr><th>문서 버전</th><td>v2 — Draft (리뉴얼 진행 중)</td></tr>
     <tr><th>서비스명</th><td>IVE로 DIVE (<a href="https://ive-three.vercel.app">ive-three.vercel.app</a>) · Expo 하이브리드 앱(Android WebView, <code>seokachu/ive-app</code>) 병행</td></tr>
-    <tr><th>문서 기준</th><td>2026 리뉴얼 진행 중 — dev 브랜치 커밋 <code>d70f671</code> (2026-08-17)</td></tr>
+    <tr><th>문서 기준</th><td>2026 리뉴얼 진행 중 — dev 브랜치 커밋 <code>d5f5f22</code> (2026-08-17)</td></tr>
     <tr><th>작성일</th><td>2026-07-29 생성 · 2026-08-17 갱신 (소식 개편 · 일정 · 앨범 미리듣기)</td></tr>
     <tr><th>범위</th><td>메인 · 소식 · 인증 · 자유게시판 · 굿즈샵 · 장바구니/결제 · 마이페이지 · 푸시 알림 · 디자인 시스템 · 공통 UI</td></tr>
     <tr><th>기술 스택</th><td>Next.js 16 (App Router, proxy) · React 19 · Supabase(<code>@supabase/ssr</code>) · Zustand · TanStack Query · Tailwind CSS · lucide-react · 토스페이먼츠 · Expo Push · pnpm · Playwright E2E · 외부 API(네이버 API Hub 검색 · KOPIS · iTunes Search · Google News RSS · YouTube RSS) · Vercel Cron</td></tr>
@@ -136,7 +136,7 @@
   <ol>
     <li><a href="#changes">리뉴얼 개요 (v1 대비 변경점)</a></li>
     <li><a href="#common">공통 (헤더 · 푸터 · 전역 UI)</a></li>
-    <li><a href="#main">메인 페이지</a></li>
+    <li><a href="#main">메인 페이지 · 디스코그래피</a></li>
     <li><a href="#news">소식 페이지</a></li>
     <li><a href="#auth">인증 (로그인 · 회원가입)</a></li>
     <li><a href="#board">자유게시판</a></li>
@@ -184,7 +184,7 @@
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
     <tr><td>COM-01</td><td>로고 / 홈 이동</td><td>좌측 로고 클릭 시 메인(<code>/</code>)으로 이동.</td><td>메인 상단(미스크롤)에서는 흰색 로고, 그 외에는 검정 로고 표시. 다크모드에서는 흰색 로고 사용.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>COM-02</td><td>스크롤 반응 헤더</td><td>메인 페이지에서는 투명 배경으로 고정(fixed)되며, 앨범 섹션에 도달하면 흰 배경 + 그림자 스타일로 전환.</td><td>스크롤 감지는 100ms 스로틀. 메인 외 페이지는 항상 흰 배경(relative).</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>COM-03</td><td>GNB 메뉴</td><td>소식(<code>/news</code>) · 굿즈샵(<code>/shop</code>) · 자유게시판(<code>/board</code>) 3개 메뉴. 데스크톱(lg 이상)에서만 노출.</td><td>현재 경로가 해당 메뉴로 시작하면(하위 경로 포함) 굵은 글씨로 활성 표시.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-03</td><td>GNB 메뉴</td><td>소식(<code>/news</code>) · 디스코그래피(<code>/discography</code>) · 굿즈샵(<code>/shop</code>) · 자유게시판(<code>/board</code>) 4개 메뉴. 데스크톱(lg 이상)에서만 노출.</td><td>현재 경로가 해당 메뉴로 시작하면(하위 경로 포함) 굵은 글씨로 활성 표시.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>COM-04</td><td>장바구니 아이콘 · 뱃지</td><td>장바구니(<code>/cart</code>) 이동 아이콘. 담긴 <b>상품 종류 수</b>를 빨간 원형 뱃지로 표시.</td><td>수량 합계가 아닌 고유 품목 수. 0개면 뱃지 숨김. 하이드레이션 전에는 미표시.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>COM-05</td><td>유저 메뉴 분기</td><td>비로그인: “로그인” 링크 → 로그인 페이지로 이동(현재 경로를 <code>?redirect</code>로 첨부, AUTH-07). 로그인: 아바타 → 드롭다운(닉네임 표시, 마이페이지, 로그아웃).</td><td>세션 상태에 따라 실시간 전환. <b>v1의 로그인 모달은 제거됨.</b></td><td><span class="auth any">전체</span></td></tr>
   </table>
@@ -213,7 +213,7 @@
 
 <!-- ══════════ 3. 메인 ══════════ -->
 <section id="main">
-  <h2 class="sec">3. 메인 페이지</h2>
+  <h2 class="sec">3. 메인 페이지 · 디스코그래피</h2>
   <p class="sec-desc">서비스 첫 화면. 24시간 주기 ISR로 재생성되며 앨범 데이터는 서버에서 미리 조회(prefetch)된다.</p>
 
   <h3>3-1. 메인 <span class="path">/</span></h3>
@@ -228,6 +228,15 @@
     <tr><td>MAIN-07</td><td>로딩 · 오류 처리</td><td>각 섹션은 로딩 중 스켈레톤 표시, 조회 실패 시 오류 안내(<span class="msg">“Oops! 잠시 후 다시 확인해주세요...”</span>)로 대체.</td><td>재시도 버튼 없음. 상품 캐러셀은 오류 시 별도 안내 없이 미표시.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>MAIN-08</td><td>미니 플레이어 바</td><td>미리듣기 재생 시 화면 하단에 고정 플레이어 표시: 앨범아트·곡명(아이브 · 앨범명), 이전/재생·일시정지/다음 버튼, 드래그 시킹 진행바(현재/전체 시간), 볼륨 슬라이더·음소거, 닫기(✕).</td><td>곡 종료 시 미리듣기 가능한 다음 곡 자동 재생, 마지막 곡이면 정지. 기본 볼륨 50%. 모바일에서는 볼륨 슬라이더 숨김(기기 볼륨 사용). 닫으면 재생 중지·바 제거.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>MAIN-09</td><td>일정 · 소식 티저</td><td>앨범 섹션과 게시판 섹션 사이 “News” 섹션: 다가오는 일정 최대 3건(D-day 배지·카테고리·기간·제목·장소) + 최신 소식 카드 3건 + “소식 전체 보기” 버튼.</td><td>일정·소식 클릭 시 소식 페이지로 이동. 종료된 일정은 티저에서 제외. 로딩 중 스켈레톤.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MAIN-10</td><td>앨범 자동 등록</td><td>매일 06:30(KST) Vercel Cron이 iTunes 아티스트 룩업으로 새 발매반을 감지해 <code>album</code> 테이블에 자동 추가(제목·커버 600px·구분·발매일·곡 수·Apple 링크). 별도 승인 없이 즉시 캐러셀에 노출.</td><td>4곡 이상 발매반(정규·미니)만 등록 — 1~2곡 싱글·리믹스 제외. 제목 정규화로 기존 행과 중복 방지. <code>CRON_SECRET</code> Bearer 인증. 곡 수 10 이상이면 “정규”, 미만이면 “미니”. 멜론 링크는 수동 보강.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MAIN-11</td><td>타이틀곡 뱃지</td><td>수록곡 목록에서 활동곡에 보라색 “타이틀” 뱃지 표시.</td><td>판별 기준: 해당 곡이 아이브 싱글(1~2곡 컬렉션)로도 발매되었거나 곡명이 앨범명과 동일한 경우. 싱글 발매 없이 활동한 타이틀곡은 누락될 수 있음.</td><td><span class="auth any">전체</span></td></tr>
+  </table>
+
+  <h3>디스코그래피 <span class="path">/discography</span> <span class="tag">v2 신규 · GNB 메뉴</span></h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>DISC-01</td><td>전체 발매 목록</td><td>iTunes에서 아이브 전체 발매(정규·미니·싱글, 일본반 포함)를 실시간 조회해 커버 그리드(2~4열)로 표시: 커버·구분 뱃지·제목·발매일·곡 수. “전체 · 정규 · 미니 · 싱글” 필터 제공.</td><td>DB 미사용(iTunes 직접 조회, 하루 캐싱). 발매일 내림차순, 제목 정규화 중복 제거. 곡 수 10↑ 정규 · 4↑ 미니 · 그 외 싱글로 분류.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>DISC-02</td><td>발매 상세 · 미리듣기</td><td>커버 클릭 시 하단 상세 패널: 커버·구분·발매일·곡 수·Apple Music 링크 + 수록곡 목록(타이틀 뱃지 포함). 트랙 클릭으로 30초 미리듣기 — 메인과 동일한 하단 미니 플레이어(MAIN-08) 사용.</td><td>같은 커버 재클릭 또는 ✕로 패널 닫기. 필터 변경 시 패널 초기화.</td><td><span class="auth any">전체</span></td></tr>
   </table>
 </section>
 
@@ -575,6 +584,8 @@
     <li>KOPIS 자동 수집은 공연명에 “아이브”/IVE가 포함된 공연만 매칭 — 페스티벌처럼 아티스트명이 없는 공연은 수동 입력 필요.</li>
     <li>기사 대표 이미지는 제목 기반 이미지 검색이라 원문 기사의 실제 이미지와 다를 수 있음.</li>
     <li>앨범 미리듣기는 iTunes 앨범명 매칭 실패 시 <span class="msg">“수록곡 정보를 찾지 못했어요.”</span>로 표시(수동 보정 수단 없음).</li>
+    <li>타이틀곡 뱃지는 싱글 발매 이력 기반 판별이라 싱글 없이 활동한 타이틀곡(예: Baddie)은 누락, 선공개곡도 뱃지가 붙을 수 있음.</li>
+    <li>자동 등록 앨범은 멜론 직링크가 없어 검색 링크로 폴백됨(수동 보강 가능), 장르는 “K-POP” 고정.</li>
     <li>게시글 조회수는 목록 클릭 경유 시에만 증가(공유 링크 직접 진입 시 미증가).</li>
     <li>결제 승인 API에 세션·금액 대조 검증 없음(토스 측 검증 및 클라이언트 중복 확인에 의존), 결제·주문 저장이 트랜잭션이 아님.</li>
     <li>에디터 의존성 quill 2.0.3에 낮은 심각도 XSS 취약점(CVE-2025-15056)이 있으나 상위 버전 미출시로 업그레이드 불가 — 본문 렌더링이 DOMPurify로 소독되고 있어 실질 영향은 제한적(Dependabot #246 모니터링 중).</li>
@@ -588,7 +599,7 @@
 </section>
 
 <footer class="foot">
-  IVE로 DIVE 기능명세서 v2 (Draft) · 기준 커밋 <code>d70f671</code> (2026 리뉴얼 진행 중) · 2026-07-29 생성 · 2026-08-17 갱신 · <a href="./index.html">기능명세서 아카이브</a> · <a href="./spec-v1.html">v1 보기</a>
+  IVE로 DIVE 기능명세서 v2 (Draft) · 기준 커밋 <code>d5f5f22</code> (2026 리뉴얼 진행 중) · 2026-07-29 생성 · 2026-08-17 갱신 · <a href="./index.html">기능명세서 아카이브</a> · <a href="./spec-v1.html">v1 보기</a>
 </footer>
 
 </div>
