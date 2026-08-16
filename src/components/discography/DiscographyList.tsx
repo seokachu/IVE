@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import StreamingLinkChips from "@/components/common/StreamingLinkChips";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
-import SelectMenu from "@/components/common/select/SelectMenu";
+import SortDropdown from "@/components/common/select/SortDropdown";
 import AlbumTrackList from "@/components/main/AlbumTrackList";
 import LatestReleaseHero from "@/components/discography/LatestReleaseHero";
 import AlbumCard from "@/components/discography/AlbumCard";
@@ -17,8 +17,8 @@ const FILTER_ARRAY = ["전체", "정규", "미니", "싱글"] as const;
 type Filter = (typeof FILTER_ARRAY)[number];
 
 const SORT_OPTIONS = [
-  { value: "latest", title: "최신순" },
-  { value: "oldest", title: "오래된순" },
+  { value: "latest", label: "최신순" },
+  { value: "oldest", label: "오래된순" },
 ];
 type SortOrder = "latest" | "oldest";
 
@@ -102,11 +102,11 @@ const DiscographyList = ({ items }: { items: DiscographyItem[] }) => {
               ))}
             </ul>
           </nav>
-          <SelectMenu
+          <SortDropdown
             options={SORT_OPTIONS}
             value={sortOrder}
             onChange={(value) => setSortOrder(value as SortOrder)}
-            className="w-[110px] h-9 rounded-full text-sm"
+            ariaLabel="앨범 정렬 기준 선택"
           />
         </div>
 

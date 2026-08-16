@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import SelectMenu from "@/components/common/select/SelectMenu";
+import SortDropdown from "@/components/common/select/SortDropdown";
 import ShopList from "@/components/shop/ShopList";
 import { useShopsCount } from "@/hooks/queries/useShops";
 import { PRODUCT_SORT_OPTIONS } from "@/utils/constants";
@@ -31,11 +31,14 @@ const ShopContainer = () => {
       </div>
       <div className="mt-7 mb-6 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <span className="text-sm text-gray-500">{typeof totalCount === "number" && `전체 ${totalCount}개`}</span>
-        <SelectMenu
-          options={PRODUCT_SORT_OPTIONS}
+        <SortDropdown
+          options={PRODUCT_SORT_OPTIONS.map((option) => ({
+            value: option.value,
+            label: option.title,
+          }))}
           value={sort}
           onChange={handleSortChange}
-          className="lg:w-[180px] w-full"
+          ariaLabel="상품 정렬 기준 선택"
         />
       </div>
       <ShopList sort={sort} />

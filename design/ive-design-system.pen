@@ -19421,45 +19421,38 @@
             },
             {
               "type": "frame",
-              "id": "P272A",
+              "id": "QPdXG",
               "name": "SortSelect",
-              "width": 180,
-              "height": 40,
-              "fill": "$bg-page",
-              "cornerRadius": "$radius-md",
+              "fill": "$bg-surface",
+              "cornerRadius": "$radius-full",
               "stroke": "$border-default",
               "strokeWidth": 1,
+              "gap": 6,
               "padding": [
-                0,
-                14
+                10,
+                16
               ],
-              "justifyContent": "space_between",
               "alignItems": "center",
               "children": [
                 {
                   "type": "text",
-                  "id": "Q4U3i",
+                  "id": "cbsWp",
                   "name": "SortLabel",
                   "fill": "$text-primary",
                   "content": "인기순",
                   "fontFamily": "$font-family",
-                  "fontSize": 14,
-                  "fontWeight": "normal"
+                  "fontSize": 13,
+                  "fontWeight": "$font-weight-semibold"
                 },
                 {
-                  "id": "m2d0u",
-                  "type": "ref",
-                  "ref": "FcFt4",
-                  "name": "Chevron",
-                  "width": 16,
-                  "height": 16,
-                  "descendants": {
-                    "gauXo": {
-                      "width": 16,
-                      "height": 16,
-                      "stroke": "$text-secondary"
-                    }
-                  }
+                  "type": "icon",
+                  "id": "J75Ef",
+                  "name": "SortIcon",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "chevron-down",
+                  "library": "lucide",
+                  "fill": "$text-secondary"
                 }
               ]
             }
@@ -21733,45 +21726,38 @@
             },
             {
               "type": "frame",
-              "id": "epblb",
+              "id": "njZ5D",
               "name": "SortSelect",
-              "width": 180,
-              "height": 40,
-              "fill": "$bg-page",
-              "cornerRadius": "$radius-md",
+              "fill": "$bg-surface",
+              "cornerRadius": "$radius-full",
               "stroke": "$border-default",
               "strokeWidth": 1,
+              "gap": 6,
               "padding": [
-                0,
-                14
+                10,
+                16
               ],
-              "justifyContent": "space_between",
               "alignItems": "center",
               "children": [
                 {
                   "type": "text",
-                  "id": "T0kTnD",
+                  "id": "f8Nw11",
                   "name": "SortLabel",
                   "fill": "$text-primary",
                   "content": "인기순",
                   "fontFamily": "$font-family",
-                  "fontSize": 14,
-                  "fontWeight": "normal"
+                  "fontSize": 13,
+                  "fontWeight": "$font-weight-semibold"
                 },
                 {
-                  "id": "NTCax",
-                  "type": "ref",
-                  "ref": "FcFt4",
-                  "name": "Chevron",
-                  "width": 16,
-                  "height": 16,
-                  "descendants": {
-                    "gauXo": {
-                      "width": 16,
-                      "height": 16,
-                      "stroke": "$text-secondary"
-                    }
-                  }
+                  "type": "icon",
+                  "id": "oTAsh",
+                  "name": "SortIcon",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "chevron-down",
+                  "library": "lucide",
+                  "fill": "$text-secondary"
                 }
               ]
             }
@@ -29056,18 +29042,26 @@
                   "type": "frame",
                   "id": "Ni8ZO",
                   "name": "Sort",
+                  "fill": "$bg-surface",
+                  "cornerRadius": "$radius-full",
+                  "stroke": "$border-default",
+                  "strokeWidth": 1,
                   "gap": 6,
+                  "padding": [
+                    10,
+                    16
+                  ],
                   "alignItems": "center",
                   "children": [
                     {
                       "type": "text",
                       "id": "w7rGw",
                       "name": "SortLabel",
-                      "fill": "$text-secondary",
+                      "fill": "$text-primary",
                       "content": "최신순",
                       "fontFamily": "$font-family",
                       "fontSize": 13,
-                      "fontWeight": "$font-weight-regular"
+                      "fontWeight": "$font-weight-semibold"
                     },
                     {
                       "id": "y0LQaH",
@@ -59418,6 +59412,194 @@
                       "fontWeight": "$font-weight-semibold"
                     }
                   ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "m9lmO",
+      "x": 17555,
+      "y": 10874,
+      "name": "정렬 셀렉트 · 스펙",
+      "width": 400,
+      "fill": "$bg-page",
+      "cornerRadius": "$radius-xl",
+      "stroke": "$border-default",
+      "strokeWidth": 1,
+      "layout": "vertical",
+      "gap": 20,
+      "padding": 32,
+      "children": [
+        {
+          "type": "text",
+          "id": "ha5eE",
+          "name": "SpecTitle",
+          "fill": "$text-secondary",
+          "content": "공통 SortDropdown — 자유게시판·굿즈샵",
+          "fontFamily": "$font-family",
+          "fontSize": 12,
+          "fontWeight": "$font-weight-semibold"
+        },
+        {
+          "type": "frame",
+          "id": "xpHYC",
+          "name": "SortSelect",
+          "fill": "$bg-surface",
+          "cornerRadius": "$radius-full",
+          "stroke": "$border-default",
+          "strokeWidth": 1,
+          "gap": 6,
+          "padding": [
+            10,
+            16
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "cM7WU",
+              "name": "SortLabel",
+              "fill": "$text-primary",
+              "content": "인기순",
+              "fontFamily": "$font-family",
+              "fontSize": 13,
+              "fontWeight": "$font-weight-semibold"
+            },
+            {
+              "type": "icon",
+              "id": "CKi2A",
+              "name": "SortIcon",
+              "width": 14,
+              "height": 14,
+              "icon": "chevron-down",
+              "library": "lucide",
+              "fill": "$text-secondary"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "ZNZJN",
+          "name": "SortMenu",
+          "width": 170,
+          "fill": "$bg-surface",
+          "cornerRadius": 14,
+          "stroke": "$border-default",
+          "strokeWidth": 1,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000014",
+            "offset": {
+              "x": 0,
+              "y": 8
+            },
+            "blur": 24
+          },
+          "layout": "vertical",
+          "gap": 2,
+          "padding": 6,
+          "children": [
+            {
+              "type": "frame",
+              "id": "dl7ZZ",
+              "name": "MenuItem_최신순",
+              "width": "fill_container",
+              "cornerRadius": "$radius-lg",
+              "gap": 10,
+              "padding": [
+                10,
+                12
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "i5GdD",
+                  "name": "CheckSpacer",
+                  "width": 15,
+                  "height": 15
+                },
+                {
+                  "type": "text",
+                  "id": "EiNpq",
+                  "name": "ItemLabel",
+                  "fill": "$text-primary",
+                  "content": "최신순",
+                  "fontFamily": "$font-family",
+                  "fontSize": 14,
+                  "fontWeight": "$font-weight-regular"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "BRfpD",
+              "name": "MenuItem_인기순",
+              "width": "fill_container",
+              "cornerRadius": "$radius-lg",
+              "gap": 10,
+              "padding": [
+                10,
+                12
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "sm8P6",
+                  "name": "ItemCheck",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "check",
+                  "library": "lucide",
+                  "fill": "$purple-500"
+                },
+                {
+                  "type": "text",
+                  "id": "FpGqn",
+                  "name": "ItemLabel",
+                  "fill": "$purple-500",
+                  "content": "인기순",
+                  "fontFamily": "$font-family",
+                  "fontSize": 14,
+                  "fontWeight": "$font-weight-bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "FTbj5",
+              "name": "MenuItem_댓글순",
+              "width": "fill_container",
+              "cornerRadius": "$radius-lg",
+              "gap": 10,
+              "padding": [
+                10,
+                12
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "VScfn",
+                  "name": "CheckSpacer",
+                  "width": 15,
+                  "height": 15
+                },
+                {
+                  "type": "text",
+                  "id": "b9t91F",
+                  "name": "ItemLabel",
+                  "fill": "$text-primary",
+                  "content": "댓글순",
+                  "fontFamily": "$font-family",
+                  "fontSize": 14,
+                  "fontWeight": "$font-weight-regular"
                 }
               ]
             }
