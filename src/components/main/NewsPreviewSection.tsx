@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight, Calendar, MapPin, Sparkles } from "lucide-react";
+import { ArrowRight, Calendar, ChevronRight, MapPin, Sparkles } from "lucide-react";
 import SectionTitle from "@/components/common/SectionTitle";
 import NewsFeedItem from "@/components/news/NewsFeedItem";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -61,6 +61,9 @@ const NewsPreviewSection = () => {
                           {item.location}
                         </p>
                       )}
+                      <span className="shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-gray-100 dark:bg-white/15 text-gray-500 dark:text-white">
+                        <ChevronRight className="w-3.5 h-3.5" />
+                      </span>
                     </Link>
                   </li>
                 );

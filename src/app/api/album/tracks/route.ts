@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
   try {
     const tracks = await getAlbumTracks(title);
     return NextResponse.json(tracks, {
-      headers: { "Cache-Control": "public, s-maxage=604800, stale-while-revalidate=86400" },
+      headers: { "Cache-Control": "public, max-age=0, s-maxage=604800, stale-while-revalidate=86400" },
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "수록곡을 가져오는데 실패했습니다.";

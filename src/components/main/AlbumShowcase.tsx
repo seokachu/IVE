@@ -34,13 +34,14 @@ const AlbumShowcase = () => {
             effect="coverflow"
             grabCursor
             centeredSlides
+            loop
             slidesPerView="auto"
             slideToClickedSlide
             coverflowEffect={{ rotate: 30, stretch: 0, depth: 140, modifier: 1, slideShadows: true }}
             keyboard={{ enabled: true }}
             modules={[EffectCoverflow, Keyboard]}
             onSwiper={setSwiper}
-            onSlideChange={(s) => setActiveIndex(s.activeIndex)}
+            onSlideChange={(s) => setActiveIndex(s.realIndex)}
             wrapperTag="ul"
             className="w-full"
           >
@@ -77,9 +78,8 @@ const AlbumShowcase = () => {
       <nav aria-label="앨범 이동" className="hidden lg:flex items-center justify-center gap-5 text-white/60">
         <button
           onClick={() => swiper?.slidePrev()}
-          disabled={activeIndex === 0}
           aria-label="이전 앨범"
-          className="hover:text-white transition-colors disabled:opacity-30"
+          className="hover:text-white transition-colors"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
@@ -88,9 +88,8 @@ const AlbumShowcase = () => {
         </span>
         <button
           onClick={() => swiper?.slideNext()}
-          disabled={activeIndex === albums.length - 1}
           aria-label="다음 앨범"
-          className="hover:text-white transition-colors disabled:opacity-30"
+          className="hover:text-white transition-colors"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
