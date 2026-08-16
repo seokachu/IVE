@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, X } from "lucide-react";
 import DefaultImage from "@/assets/images/default_image.avif";
@@ -11,65 +10,17 @@ const formatTime = (seconds: number) => {
 };
 
 const AlbumPlayerBar = () => {
-  const { albumTitle, albumImage, tracks, currentIndex, isPlaying, volume } = usePlayerState();
-  const { togglePlay, playNext, playPrev, setIsPlaying, setVolume, closePlayer } = usePlayerActions();
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  //트랙 교체 시에도 현재 볼륨을 유지하기 위한 ref
-  const volumeRef = useRef(volume);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
+  const { albumTitle, albumImage, tracks, currentIndex, isPlaying, volume, currentTime, duration } = usePlayerState();
+  const { togglePlay, playNext, playPrev, seek, setVolume, closePlayer } = usePlayerActions();
 
   const currentTrack = currentIndex !== null ? tracks[currentIndex] : null;
   const hasPrev = currentIndex !== null && tracks.slice(0, currentIndex).some((track) => track.previewUrl);
   const hasNext = currentIndex !== null && tracks.slice(currentIndex + 1).some((track) => track.previewUrl);
 
-  //트랙 변경 시 오디오 교체
-  useEffect(() => {
-    if (!currentTrack?.previewUrl) return;
-    const audio = new Audio(currentTrack.previewUrl);
-    audio.volume = volumeRef.current;
-    audioRef.current = audio;
-    setCurrentTime(0);
-    setDuration(0);
-
-    audio.onloadedmetadata = () => setDuration(audio.duration);
-    audio.ontimeupdate = () => setCurrentTime(audio.currentTime);
-    audio.onended = () => playNext();
-    audio.onpause = () => setIsPlaying(false);
-    audio.onplay = () => setIsPlaying(true);
-    audio.play().catch(() => setIsPlaying(false));
-
-    return () => {
-      audio.pause();
-      audio.src = "";
-      audioRef.current = null;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentTrack?.previewUrl]);
-
-  //재생/일시정지 동기화
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    if (isPlaying && audio.paused) audio.play().catch(() => setIsPlaying(false));
-    if (!isPlaying && !audio.paused) audio.pause();
-  }, [isPlaying]);
-
-  //볼륨 동기화
-  useEffect(() => {
-    volumeRef.current = volume;
-    if (audioRef.current) audioRef.current.volume = volume;
-  }, [volume]);
-
   if (!currentTrack) return null;
 
-  const handleSeek = (value: number) => {
-    if (audioRef.current) audioRef.current.currentTime = value;
-    setCurrentTime(value);
-  };
-
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-black/85 backdrop-blur-md text-white border-t border-white/10">
+    <div className="fixed bottom-0 left-0 right-0 z-[60] bg-black/85 backdrop-blur-md text-white border-t border-white/10">
       <div className="max-w-content m-auto flex items-center gap-4 px-4 py-3 lg:px-6">
         <div className="flex items-center gap-3 min-w-0 flex-1 lg:w-64 lg:flex-none">
           <div className="relative w-11 h-11 shrink-0 rounded overflow-hidden bg-white/10">
@@ -105,7 +56,7 @@ const AlbumPlayerBar = () => {
               max={duration || 30}
               step={0.1}
               value={currentTime}
-              onChange={(e) => handleSeek(Number(e.target.value))}
+              onChange={(e) => seek(Number(e.target.value))}
               aria-label="재생 위치"
               className="w-full h-1 accent-white cursor-pointer"
             />
