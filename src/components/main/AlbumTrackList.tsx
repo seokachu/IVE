@@ -52,7 +52,7 @@ const AlbumTrackList = ({ albumTitle, albumImage }: AlbumTrackListProps) => {
                 <span className={`truncate text-left ${isCurrent ? "font-bold" : ""}`}>{track.name}</span>
                 {track.isTitle && (
                   <span className="shrink-0 px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-purple text-white">
-                    타이틀
+                    TITLE
                   </span>
                 )}
                 <span className="opacity-60 shrink-0 text-xs flex-1 text-right">{formatDuration(track.durationMs)}</span>
