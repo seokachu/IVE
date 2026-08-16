@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { ArrowUpCircle } from "lucide-react";
+import { ChevronUp } from "lucide-react";
 const GoTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -30,17 +30,15 @@ const GoTopButton = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-3 left-0 right-3 z-50">
-      <div className="max-w-container m-auto relative">
-        <Button variant="plain" size="auto"
-          onClick={onClickToTop}
-          aria-label="최상단으로 이동"
-          className="absolute right-3 bottom-3 lg:right-5 lg:bottom-14 hover:opacity-80 transition-opacity z-[999]"
-        >
-          <ArrowUpCircle size={40} className="bg-background rounded-full text-purple" />
-        </Button>
-      </div>
-    </div>
+    <Button
+      variant="plain"
+      size="auto"
+      onClick={onClickToTop}
+      aria-label="최상단으로 이동"
+      className="fixed bottom-6 right-6 z-50 flex w-11 h-11 items-center justify-center rounded-full bg-purple text-white shadow-[0_4px_12px_rgba(0,0,0,0.2)] transition-colors hover:bg-purple-400"
+    >
+      <ChevronUp className="w-5 h-5" />
+    </Button>
   );
 };
 

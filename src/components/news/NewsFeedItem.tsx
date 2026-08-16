@@ -56,7 +56,7 @@ const NewsFeedItem = ({ item, index }: NewsFeedItemProps) => {
 
   if (playing && embedUrl) {
     return (
-      <li className="relative overflow-hidden border rounded-md w-full">
+      <li className="relative overflow-hidden border rounded-lg w-full">
         <div className="aspect-square">
           <iframe
             src={embedUrl}
@@ -117,7 +117,7 @@ const NewsFeedItem = ({ item, index }: NewsFeedItemProps) => {
   //기사: 클릭 시 페이지 이탈 없이 카드 안에서 요약 표시, 원문은 오버레이 안의 링크로만 이동
   if (showSummary) {
     return (
-      <li className="relative overflow-hidden border rounded-md w-full bg-gray-900 text-white">
+      <li className="relative overflow-hidden border rounded-lg w-full bg-gray-900 text-white">
         <div className="aspect-square p-4 flex flex-col gap-2.5 overflow-hidden">
           <div className="flex items-center gap-2 text-xs shrink-0 pr-8">
             <span className="px-2.5 py-0.5 rounded-2xl bg-[#3B82F6]/85 font-bold shrink-0">기사</span>
@@ -149,7 +149,7 @@ const NewsFeedItem = ({ item, index }: NewsFeedItemProps) => {
   }
 
   return (
-    <li className="relative overflow-hidden border rounded-md group text-white w-full">
+    <li className="relative overflow-hidden border rounded-lg group text-white w-full">
       {embedUrl ? (
         <button onClick={() => setPlaying(true)} aria-label={`${item.title} 재생`} className="block w-full cursor-pointer">
           {card}

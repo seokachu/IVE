@@ -1,5 +1,6 @@
 import { newsMetadata } from "@/metadata/news/newsMetadata";
 import GoTopButton from "@/components/common/button/GoTopButton";
+import NewsHero from "@/components/news/NewsHero";
 import NewsFeedSection from "@/components/news/NewsFeedSection";
 import ScheduleSection from "@/components/news/ScheduleSection";
 import {
@@ -32,6 +33,7 @@ const page = async () => {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <main>
+        <NewsHero />
         <ScheduleSection />
         <NewsFeedSection type="video" />
         <NewsFeedSection type="article" />

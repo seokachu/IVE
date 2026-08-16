@@ -1,8 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
-
 export type ScheduleCategory = "concert" | "comeback" | "broadcast" | "fanmeeting" | "popup" | "release" | "etc";
-
-export type ScheduleViewValue = "card" | "calendar";
 
 export interface ScheduleItem {
   id: string;
@@ -17,14 +13,6 @@ export interface ScheduleItem {
   poster: string | null;
 }
 
-export interface ScheduleViewToggleProps {
-  selectedView: ScheduleViewValue;
-  setSelectedView: Dispatch<SetStateAction<ScheduleViewValue>>;
-}
-
-export interface ScheduleCardListProps {
-  items: ScheduleItem[];
-}
 
 export interface ScheduleCardProps {
   item: ScheduleItem;
@@ -32,4 +20,6 @@ export interface ScheduleCardProps {
 
 export interface ScheduleCalendarProps {
   items: ScheduleItem[];
+  selectedDate: Date;
+  onSelectDate: (date: Date) => void;
 }

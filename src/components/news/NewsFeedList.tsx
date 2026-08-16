@@ -7,7 +7,7 @@ const NewsFeedList = ({ items }: NewsFeedListProps) => {
   }
 
   return (
-    <ul className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mt-16 mb-10">
+    <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 mt-10 mb-10">
       {items.map((item, index) => (
         <NewsFeedItem key={item.id} item={item} index={index} />
       ))}

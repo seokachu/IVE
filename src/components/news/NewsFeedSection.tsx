@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import SectionTitle from "@/components/common/SectionTitle";
 import NewsFeedList from "./NewsFeedList";
+import NewsArticleRow from "./NewsArticleRow";
 import { ArrowDown } from "lucide-react";
-import { NEWS_FEED_DEFAULT_LIMIT } from "@/utils/constants";
 import { useNewsFeed } from "@/hooks/queries/useNews";
 import Error from "../common/error/Error";
 import NewsFeedSkeleton from "../common/loading/NewsFeedSkeleton";
@@ -15,22 +16,25 @@ const SECTION_META = {
     title: "Video",
     subtitle: "아이브의 최신 영상을 페이지에서 바로 재생해보세요",
     moreLabel: "더 많은 영상 보기",
-    sectionClass: "pt-32",
+    //4열 그리드에 맞춰 8개 단위로 노출
+    limit: 8,
+    sectionClass: "pt-24 lg:pt-32",
   },
   article: {
     id: "article_section",
     title: "News",
     subtitle: "아이브의 새로운 소식을 한눈에 모아보세요",
     moreLabel: "더 많은 기사 보기",
+    limit: 6,
     //마지막 섹션이라 푸터와의 간격 확보
-    sectionClass: "pt-32 pb-40",
+    sectionClass: "pt-24 lg:pt-32 pb-32 lg:pb-40",
   },
 } as const;
 
 const NewsFeedSection = ({ type }: NewsFeedSectionProps) => {
-  const [visibleCount, setVisibleCount] = useState(NEWS_FEED_DEFAULT_LIMIT);
-  const { data: feedItems = [], isLoading, isError } = useNewsFeed();
   const meta = SECTION_META[type];
+  const [visibleCount, setVisibleCount] = useState<number>(meta.limit);
+  const { data: feedItems = [], isLoading, isError } = useNewsFeed();
 
   if (isLoading) return <NewsFeedSkeleton />;
   if (isError) return <Error />;
@@ -42,14 +46,26 @@ const NewsFeedSection = ({ type }: NewsFeedSectionProps) => {
 
   //더 보기 button
   const handleLoadMore = () => {
-    setVisibleCount((prev) => prev + NEWS_FEED_DEFAULT_LIMIT);
+    setVisibleCount((prev) => prev + meta.limit);
   };
 
   return (
-    <section className={`max-w-content flex justify-center align-center flex-col px-5 m-auto ${meta.sectionClass}`} id={meta.id}>
-      <h2 className="text-2xl font-bold lg:text-4xl mb-6 text-center">{meta.title}</h2>
-      <h3 className="text-center text-gray-600">{meta.subtitle}</h3>
-      <NewsFeedList items={visibleItems} />
+    <section
+      className={`max-w-content flex justify-center align-center flex-col px-5 m-auto ${meta.sectionClass}`}
+      id={meta.id}
+    >
+      <SectionTitle title={meta.title} subtitle={meta.subtitle} />
+      {visibleItems.length === 0 ? (
+        <p className="text-center text-gray-500 py-20">표시할 소식이 없습니다.</p>
+      ) : type === "video" ? (
+        <NewsFeedList items={visibleItems} />
+      ) : (
+        <ul className="w-full max-w-3xl m-auto flex flex-col gap-3 mt-10 mb-10">
+          {visibleItems.map((item) => (
+            <NewsArticleRow key={item.id} item={item} />
+          ))}
+        </ul>
+      )}
       <div className="text-center sticky bottom-10">
         {filteredItems.length > visibleCount && (
           <Button
