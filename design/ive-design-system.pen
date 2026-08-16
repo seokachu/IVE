@@ -10717,7 +10717,7 @@
                               "height": 32,
                               "fill": "#FFFFFFD9",
                               "cornerRadius": "$radius-full",
-                              "stroke": "$border-default",
+                              "stroke": "#EEEEEE",
                               "strokeWidth": 1,
                               "justifyContent": "center",
                               "alignItems": "center",
@@ -10925,7 +10925,7 @@
                               "height": 32,
                               "fill": "#FFFFFFD9",
                               "cornerRadius": "$radius-full",
-                              "stroke": "$border-default",
+                              "stroke": "#EEEEEE",
                               "strokeWidth": 1,
                               "justifyContent": "center",
                               "alignItems": "center",
@@ -11134,7 +11134,7 @@
                               "height": 32,
                               "fill": "#FFFFFFD9",
                               "cornerRadius": "$radius-full",
-                              "stroke": "$border-default",
+                              "stroke": "#EEEEEE",
                               "strokeWidth": 1,
                               "justifyContent": "center",
                               "alignItems": "center",
@@ -11342,7 +11342,7 @@
                               "height": 32,
                               "fill": "#FFFFFFD9",
                               "cornerRadius": "$radius-full",
-                              "stroke": "$border-default",
+                              "stroke": "#EEEEEE",
                               "strokeWidth": 1,
                               "justifyContent": "center",
                               "alignItems": "center",
@@ -12982,7 +12982,7 @@
     },
     {
       "type": "frame",
-      "id": "TvrVL",
+      "id": "pfFsN",
       "x": 2955,
       "y": 3539,
       "name": "메인 · 다크",
@@ -12995,7 +12995,7 @@
       "children": [
         {
           "type": "frame",
-          "id": "XegSi",
+          "id": "l8eMnS",
           "name": "Header",
           "width": "fill_container",
           "height": 72,
@@ -13008,14 +13008,14 @@
           "alignItems": "center",
           "children": [
             {
-              "id": "VetIe",
+              "id": "B9tDr8",
               "type": "ref",
               "ref": "kgWTm",
               "name": "Logo"
             },
             {
               "type": "frame",
-              "id": "ooew7",
+              "id": "LMCPX",
               "name": "Nav",
               "width": "fill_container",
               "gap": 36,
@@ -13024,7 +13024,7 @@
               "children": [
                 {
                   "type": "text",
-                  "id": "lxF09",
+                  "id": "GrI17",
                   "name": "N1",
                   "fill": "$text-primary",
                   "content": "소식",
@@ -13034,7 +13034,7 @@
                 },
                 {
                   "type": "text",
-                  "id": "KQl7j",
+                  "id": "N4zYE",
                   "name": "N2",
                   "fill": "$text-secondary",
                   "content": "음악",
@@ -13044,7 +13044,7 @@
                 },
                 {
                   "type": "text",
-                  "id": "POY0p",
+                  "id": "rtSFo",
                   "name": "N3",
                   "fill": "$text-secondary",
                   "content": "굿즈샵",
@@ -13054,7 +13054,7 @@
                 },
                 {
                   "type": "text",
-                  "id": "YRnPL",
+                  "id": "mP2rY",
                   "name": "N4",
                   "fill": "$text-secondary",
                   "content": "자유게시판",
@@ -13066,13 +13066,13 @@
             },
             {
               "type": "frame",
-              "id": "ios4R",
+              "id": "Lp5qP",
               "name": "Actions",
               "gap": 20,
               "alignItems": "center",
               "children": [
                 {
-                  "id": "k9cU7e",
+                  "id": "gSerD",
                   "type": "ref",
                   "ref": "Sh8g2",
                   "width": 18,
@@ -13086,7 +13086,7 @@
                   }
                 },
                 {
-                  "id": "v2oLW",
+                  "id": "TlBWa",
                   "type": "ref",
                   "ref": "Y0wy2",
                   "width": 18,
@@ -13101,7 +13101,7 @@
                 },
                 {
                   "type": "frame",
-                  "id": "xQEs9",
+                  "id": "y8df6",
                   "name": "LoginBtn",
                   "fill": "$primary",
                   "cornerRadius": "$radius-full",
@@ -13112,7 +13112,7 @@
                   "children": [
                     {
                       "type": "text",
-                      "id": "MSDnx",
+                      "id": "QSFcF",
                       "name": "Login",
                       "fill": "$white",
                       "content": "로그인",
@@ -13128,7 +13128,7 @@
         },
         {
           "type": "frame",
-          "id": "MmZ7X",
+          "id": "iMk6E",
           "name": "Hero",
           "metadata": {
             "type": "unsplash",
@@ -13152,7 +13152,7 @@
           "children": [
             {
               "type": "text",
-              "id": "kVsyg",
+              "id": "CKm5T",
               "name": "Kicker",
               "fill": "$purple-200",
               "content": "IVE FAN COMMUNITY",
@@ -13163,7 +13163,7 @@
             },
             {
               "type": "text",
-              "id": "zPmxI",
+              "id": "Z2DWJ",
               "name": "Copy",
               "fill": "$white",
               "content": "DIVE INTO IVE",
@@ -13174,7 +13174,7 @@
             },
             {
               "type": "text",
-              "id": "xt14M",
+              "id": "CttP3",
               "name": "Sub",
               "fill": "#FFFFFFCC",
               "content": "아이브의 일정 · 소식 · 음악 · 굿즈를 한곳에서",
@@ -13184,14 +13184,14 @@
             },
             {
               "type": "frame",
-              "id": "nUMXI",
+              "id": "Eu4dP",
               "name": "HeroCta",
               "gap": 12,
               "alignItems": "center",
               "children": [
                 {
                   "type": "frame",
-                  "id": "uLtaU",
+                  "id": "JtxjV",
                   "name": "Cta1",
                   "fill": "$primary",
                   "cornerRadius": "$radius-full",
@@ -13202,7 +13202,7 @@
                   "children": [
                     {
                       "type": "text",
-                      "id": "pvfNU",
+                      "id": "r70DAF",
                       "name": "C1",
                       "fill": "$white",
                       "content": "최신 소식 보기",
@@ -13214,7 +13214,7 @@
                 },
                 {
                   "type": "frame",
-                  "id": "A77Bvz",
+                  "id": "n2sVy5",
                   "name": "Cta2",
                   "fill": "#FFFFFF26",
                   "cornerRadius": "$radius-full",
@@ -13225,7 +13225,7 @@
                   "children": [
                     {
                       "type": "text",
-                      "id": "T31nG",
+                      "id": "agq1k",
                       "name": "C2",
                       "fill": "$white",
                       "content": "음악 듣기",
@@ -13239,7 +13239,7 @@
             },
             {
               "type": "frame",
-              "id": "vF3tf",
+              "id": "nCBzx",
               "name": "ScrollWrap",
               "padding": [
                 40,
@@ -13249,7 +13249,7 @@
               ],
               "children": [
                 {
-                  "id": "uFsot",
+                  "id": "Cq16u",
                   "type": "ref",
                   "ref": "FcFt4",
                   "width": 22,
@@ -13266,7 +13266,7 @@
             },
             {
               "type": "frame",
-              "id": "WUmNi",
+              "id": "pHmoJ",
               "layoutPosition": "absolute",
               "x": 60,
               "y": 100,
@@ -13282,7 +13282,7 @@
               "children": [
                 {
                   "type": "ellipse",
-                  "id": "v8rNv",
+                  "id": "n5z28v",
                   "name": "Dot",
                   "fill": "$white",
                   "width": 8,
@@ -13290,7 +13290,7 @@
                 },
                 {
                   "type": "text",
-                  "id": "rceU8",
+                  "id": "YhrBJ",
                   "name": "LiveLabel",
                   "fill": "$white",
                   "content": "OFFICIAL · 최신 영상 자동 재생",
@@ -13302,7 +13302,7 @@
             },
             {
               "type": "frame",
-              "id": "HFBL5",
+              "id": "c8gyt",
               "layoutPosition": "absolute",
               "x": 1336,
               "y": 696,
@@ -13315,7 +13315,7 @@
               "alignItems": "center",
               "children": [
                 {
-                  "id": "A2gbBN",
+                  "id": "QABiH",
                   "type": "ref",
                   "ref": "vpOdy",
                   "width": 18,
@@ -13332,7 +13332,7 @@
             },
             {
               "type": "rectangle",
-              "id": "XzNJc",
+              "id": "pzkVy",
               "layoutPosition": "absolute",
               "x": 0,
               "y": 600,
@@ -13363,7 +13363,7 @@
         },
         {
           "type": "frame",
-          "id": "BMVuv",
+          "id": "tyxRP",
           "name": "Marquee",
           "clip": true,
           "width": "fill_container",
@@ -13377,7 +13377,7 @@
           "children": [
             {
               "type": "text",
-              "id": "MvbmD",
+              "id": "YF1uz",
               "name": "M1",
               "fill": "$purple-300",
               "content": "IVE ✦ LOVE DIVE ✦ LUCID DREAM ✦ REVIVE+ ✦ MINIVE ✦ I AM ✦ Kitsch ✦ After LIKE ✦ IVE ✦ LOVE DIVE ✦ LUCID DREAM ✦ REVIVE+",
@@ -13390,7 +13390,7 @@
         },
         {
           "type": "frame",
-          "id": "Niyvu",
+          "id": "RmwT5",
           "name": "Album Section",
           "width": "fill_container",
           "fill": "$gray-900",
@@ -13404,7 +13404,7 @@
           "children": [
             {
               "type": "ellipse",
-              "id": "XyiFn",
+              "id": "fdCA7",
               "layoutPosition": "absolute",
               "x": 60,
               "y": 120,
@@ -13434,7 +13434,7 @@
             },
             {
               "type": "ellipse",
-              "id": "FmKVC",
+              "id": "K07GV",
               "layoutPosition": "absolute",
               "x": 920,
               "y": 300,
@@ -13464,7 +13464,7 @@
             },
             {
               "type": "frame",
-              "id": "kLv1L",
+              "id": "PkAoZ",
               "name": "TitleWrap",
               "layout": "vertical",
               "gap": 8,
@@ -13472,7 +13472,7 @@
               "children": [
                 {
                   "type": "text",
-                  "id": "nCmNt",
+                  "id": "RhrRA",
                   "name": "H",
                   "fill": "$white",
                   "content": "ALBUM",
@@ -13482,7 +13482,7 @@
                 },
                 {
                   "type": "text",
-                  "id": "Oygug",
+                  "id": "cHJmz",
                   "name": "S",
                   "fill": "#FFFFFF99",
                   "content": "수록곡 미리듣기와 함께 아이브의 앨범을 만나보세요",
@@ -13494,7 +13494,7 @@
             },
             {
               "type": "frame",
-              "id": "e1HFud",
+              "id": "pvVjf",
               "name": "AlbumStage",
               "context": "커버플로우 — 앨범 전환(화살표·양옆 커버 클릭·드래그) 시 우측 앨범 정보/수록곡/스트리밍 칩이 함께 갱신",
               "gap": 48,
@@ -13502,7 +13502,7 @@
               "children": [
                 {
                   "type": "frame",
-                  "id": "ImxLC",
+                  "id": "g7U8uI",
                   "name": "Covers",
                   "gap": 24,
                   "alignItems": "center",
@@ -13510,7 +13510,7 @@
                     {
                       "type": "rectangle",
                       "cornerRadius": "$radius-lg",
-                      "id": "X2v3f8",
+                      "id": "A8FUD5",
                       "name": "CoverPrev",
                       "context": "클릭 시 해당 앨범으로 전환",
                       "opacity": 0.4,
@@ -13526,7 +13526,7 @@
                     {
                       "type": "rectangle",
                       "cornerRadius": "$radius-xl",
-                      "id": "gAAQ6",
+                      "id": "vuvJd",
                       "name": "CoverMain",
                       "metadata": {
                         "type": "unsplash",
@@ -13546,7 +13546,7 @@
                     {
                       "type": "rectangle",
                       "cornerRadius": "$radius-lg",
-                      "id": "k0c0J",
+                      "id": "UKZkI",
                       "name": "CoverNext",
                       "context": "클릭 시 해당 앨범으로 전환",
                       "opacity": 0.4,
@@ -13563,7 +13563,7 @@
                 },
                 {
                   "type": "frame",
-                  "id": "N0hsvs",
+                  "id": "gcGGc",
                   "name": "AlbumInfo",
                   "width": 420,
                   "layout": "vertical",
@@ -13571,14 +13571,14 @@
                   "children": [
                     {
                       "type": "frame",
-                      "id": "E141Xe",
+                      "id": "lBL6W",
                       "name": "InfoHead",
                       "layout": "vertical",
                       "gap": 6,
                       "children": [
                         {
                           "type": "text",
-                          "id": "e1V8ic",
+                          "id": "vng78",
                           "name": "AlbumName",
                           "fill": "$white",
                           "content": "LUCID DREAM",
@@ -13588,7 +13588,7 @@
                         },
                         {
                           "type": "text",
-                          "id": "x9N2Bi",
+                          "id": "BfFcm",
                           "name": "AlbumMeta",
                           "fill": "#FFFFFF80",
                           "content": "미니 · 2026.05.27 · K-POP · 6곡",
@@ -13600,7 +13600,7 @@
                     },
                     {
                       "type": "frame",
-                      "id": "F1xBJ",
+                      "id": "B7GEzI",
                       "name": "Tracks",
                       "theme": {
                         "mode": "dark"
@@ -13609,19 +13609,19 @@
                       "layout": "vertical",
                       "children": [
                         {
-                          "id": "H1sFi",
+                          "id": "yEh4W",
                           "type": "ref",
                           "ref": "rAKse",
                           "name": "T1"
                         },
                         {
-                          "id": "YxQ3y",
+                          "id": "HpEkP",
                           "type": "ref",
                           "ref": "rAKse",
                           "name": "T2"
                         },
                         {
-                          "id": "N77Z4",
+                          "id": "dLABT",
                           "type": "ref",
                           "ref": "rAKse",
                           "name": "T3"
@@ -13630,14 +13630,14 @@
                     },
                     {
                       "type": "frame",
-                      "id": "Ls8NP",
+                      "id": "D62KTp",
                       "name": "Chips",
                       "gap": 8,
                       "alignItems": "center",
                       "children": [
                         {
                           "type": "text",
-                          "id": "yeaRy",
+                          "id": "YL2ST",
                           "name": "ChipLabel",
                           "fill": "#FFFFFF80",
                           "content": "풀버전 듣기",
@@ -13646,22 +13646,22 @@
                           "fontWeight": "$font-weight-regular"
                         },
                         {
-                          "id": "sp4Sx",
+                          "id": "B1SL71",
                           "type": "ref",
                           "ref": "iF2VE"
                         },
                         {
-                          "id": "coKxt",
+                          "id": "bB8Cd",
                           "type": "ref",
                           "ref": "U0heJm"
                         },
                         {
-                          "id": "nHC9J",
+                          "id": "jy9fj",
                           "type": "ref",
                           "ref": "f1vI5"
                         },
                         {
-                          "id": "plZEn",
+                          "id": "KmwIk",
                           "type": "ref",
                           "ref": "obwjC"
                         }
@@ -13673,14 +13673,14 @@
             },
             {
               "type": "frame",
-              "id": "C3NxYT",
+              "id": "CJfda",
               "name": "AlbumPager",
               "context": "PC 전용 페이지네이션 — 이전/다음 앨범 전환 (모바일은 스와이프, 양옆 커버 클릭·드래그도 동작)",
               "gap": 16,
               "alignItems": "center",
               "children": [
                 {
-                  "id": "AmWSV",
+                  "id": "y2how5",
                   "type": "ref",
                   "ref": "c0U1f",
                   "width": 18,
@@ -13695,7 +13695,7 @@
                 },
                 {
                   "type": "text",
-                  "id": "kTjb8",
+                  "id": "j1Ojwq",
                   "name": "Fraction",
                   "fill": "#FFFFFF99",
                   "content": "3 / 13",
@@ -13704,7 +13704,7 @@
                   "fontWeight": "$font-weight-regular"
                 },
                 {
-                  "id": "Y4SMQ",
+                  "id": "IMrDH",
                   "type": "ref",
                   "ref": "Aon0g",
                   "width": 18,
@@ -13723,7 +13723,7 @@
         },
         {
           "type": "frame",
-          "id": "yNHSs",
+          "id": "fHAUb",
           "name": "News Teaser",
           "width": "fill_container",
           "fill": "$bg-subtle",
@@ -13736,7 +13736,7 @@
           "alignItems": "center",
           "children": [
             {
-              "id": "h0uLGR",
+              "id": "yovFa",
               "type": "ref",
               "ref": "r4bC1",
               "name": "NewsTitle",
@@ -13751,14 +13751,14 @@
             },
             {
               "type": "frame",
-              "id": "EFYDZ",
+              "id": "cmOFz",
               "name": "SchedHead",
               "width": 1200,
               "gap": 10,
               "alignItems": "center",
               "children": [
                 {
-                  "id": "r8nOvu",
+                  "id": "hZR3i",
                   "type": "ref",
                   "ref": "AcsPw",
                   "width": 18,
@@ -13773,7 +13773,7 @@
                 },
                 {
                   "type": "text",
-                  "id": "eBKjL",
+                  "id": "vxoRT",
                   "name": "SchedHeadT",
                   "fill": "$text-primary",
                   "content": "다가오는 일정",
@@ -13783,7 +13783,7 @@
                 },
                 {
                   "type": "text",
-                  "id": "L7G1g",
+                  "id": "vxJwH",
                   "name": "SchedHeadS",
                   "fill": "$text-tertiary",
                   "content": "놓치면 안 될 아이브의 스케줄",
@@ -13795,14 +13795,14 @@
             },
             {
               "type": "frame",
-              "id": "Sij2e",
+              "id": "lTX8Y",
               "name": "ScheduleList",
               "width": 1200,
               "layout": "vertical",
               "gap": 12,
               "children": [
                 {
-                  "id": "h8zTu",
+                  "id": "C0IgOq",
                   "type": "ref",
                   "ref": "P7bBF",
                   "name": "S1",
@@ -13818,14 +13818,14 @@
                   }
                 },
                 {
-                  "id": "G6XThM",
+                  "id": "s32L52",
                   "type": "ref",
                   "ref": "P7bBF",
                   "name": "S2",
                   "width": 1200
                 },
                 {
-                  "id": "aStle",
+                  "id": "H0LE9",
                   "type": "ref",
                   "ref": "P7bBF",
                   "name": "S3",
@@ -13835,14 +13835,14 @@
             },
             {
               "type": "frame",
-              "id": "Z8Iau",
+              "id": "h35NW",
               "name": "FeedHead",
               "width": 1200,
               "gap": 10,
               "alignItems": "center",
               "children": [
                 {
-                  "id": "W7Q3V",
+                  "id": "hoPQV",
                   "type": "ref",
                   "ref": "oTpp0",
                   "width": 18,
@@ -13857,7 +13857,7 @@
                 },
                 {
                   "type": "text",
-                  "id": "irGxM",
+                  "id": "C0ea3",
                   "name": "FeedHeadT",
                   "fill": "$text-primary",
                   "content": "최신 소식",
@@ -13867,7 +13867,7 @@
                 },
                 {
                   "type": "text",
-                  "id": "xHeXF",
+                  "id": "jRZtC",
                   "name": "FeedHeadS",
                   "fill": "$text-tertiary",
                   "content": "뉴스와 영상을 한눈에",
@@ -13879,18 +13879,18 @@
             },
             {
               "type": "frame",
-              "id": "BoJMy",
+              "id": "gOM4D",
               "name": "NewsCards",
               "gap": 24,
               "children": [
                 {
-                  "id": "R6Uc44",
+                  "id": "NJjnZ",
                   "type": "ref",
                   "ref": "r10cC",
                   "name": "NC1"
                 },
                 {
-                  "id": "zO0fi",
+                  "id": "p7WQG1",
                   "type": "ref",
                   "ref": "r10cC",
                   "name": "NC2",
@@ -13916,7 +13916,7 @@
                   }
                 },
                 {
-                  "id": "PoCuQ",
+                  "id": "U3i87U",
                   "type": "ref",
                   "ref": "r10cC",
                   "name": "NC3",
@@ -13936,7 +13936,7 @@
                   }
                 },
                 {
-                  "id": "TDftc",
+                  "id": "P9A0X",
                   "type": "ref",
                   "ref": "r10cC",
                   "name": "NC4",
@@ -13968,7 +13968,7 @@
             },
             {
               "type": "frame",
-              "id": "MDS4z",
+              "id": "YkgAQ",
               "name": "MoreBtn",
               "context": "화살표 아이콘은 animate-arrow-x(좌우 4px 왕복 1.2s 무한) 애니메이션",
               "fill": "$primary",
@@ -13980,7 +13980,7 @@
               "children": [
                 {
                   "type": "text",
-                  "id": "jTdng",
+                  "id": "AcSxC",
                   "name": "More",
                   "fill": "$white",
                   "content": "소식 전체 보기 →",
@@ -13994,7 +13994,7 @@
         },
         {
           "type": "frame",
-          "id": "POeOR",
+          "id": "KNJZr",
           "name": "Board Section",
           "width": "fill_container",
           "fill": "$bg-subtle",
@@ -14007,7 +14007,7 @@
           "alignItems": "center",
           "children": [
             {
-              "id": "DSyfU",
+              "id": "mus8y",
               "type": "ref",
               "ref": "r4bC1",
               "name": "BoardTitle",
@@ -14022,13 +14022,13 @@
             },
             {
               "type": "frame",
-              "id": "zasig",
+              "id": "FBzdB",
               "name": "BoardMoreRow",
               "width": 1200,
               "justifyContent": "end",
               "children": [
                 {
-                  "id": "vv1Lt",
+                  "id": "RrJUD",
                   "type": "ref",
                   "ref": "gtlsH",
                   "name": "BoardMore"
@@ -14037,14 +14037,14 @@
             },
             {
               "type": "frame",
-              "id": "p9G7R",
+              "id": "v4jz7v",
               "name": "PostGrid",
               "width": 1200,
               "gap": 40,
               "children": [
                 {
                   "type": "frame",
-                  "id": "i3SXj",
+                  "id": "jNx3w",
                   "name": "Featured",
                   "metadata": {
                     "type": "unsplash",
@@ -14067,7 +14067,7 @@
                   "children": [
                     {
                       "type": "frame",
-                      "id": "Lgy7e",
+                      "id": "TjX4a",
                       "name": "FScrim",
                       "width": "fill_container",
                       "fill": "#000000A6",
@@ -14080,14 +14080,14 @@
                       "children": [
                         {
                           "type": "frame",
-                          "id": "fOzOd",
+                          "id": "jiphN",
                           "name": "FBadgeRow",
                           "gap": 8,
                           "alignItems": "center",
                           "children": [
                             {
                               "type": "frame",
-                              "id": "Q05Vw",
+                              "id": "xMMwL",
                               "name": "FRank",
                               "fill": "$primary",
                               "cornerRadius": "$radius-full",
@@ -14098,7 +14098,7 @@
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "s2GJS",
+                                  "id": "KMR40",
                                   "name": "FR",
                                   "fill": "$white",
                                   "content": "1위",
@@ -14110,7 +14110,7 @@
                             },
                             {
                               "type": "text",
-                              "id": "VucNH",
+                              "id": "jwPmF",
                               "name": "FCat",
                               "fill": "#FFFFFFB3",
                               "content": "인기 게시글",
@@ -14122,7 +14122,7 @@
                         },
                         {
                           "type": "text",
-                          "id": "fayOQ",
+                          "id": "BQWJb",
                           "name": "FT",
                           "fill": "$white",
                           "content": "오늘 콘서트 다녀왔는데 진짜 최고였어요 🥹 (직찍 20장)",
@@ -14132,13 +14132,13 @@
                         },
                         {
                           "type": "frame",
-                          "id": "pNB3I",
+                          "id": "B7eecF",
                           "name": "FM",
                           "gap": 12,
                           "children": [
                             {
                               "type": "text",
-                              "id": "YP1BL",
+                              "id": "xVx2e",
                               "name": "FA",
                               "fill": "#FFFFFFB3",
                               "content": "밤비",
@@ -14148,13 +14148,13 @@
                             },
                             {
                               "type": "frame",
-                              "id": "cf5ST",
+                              "id": "uIU1G",
                               "name": "FMLike",
                               "gap": 4,
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "id": "ofO5U",
+                                  "id": "iVVnY",
                                   "type": "ref",
                                   "ref": "Fczgz",
                                   "width": 12,
@@ -14169,7 +14169,7 @@
                                 },
                                 {
                                   "type": "text",
-                                  "id": "x3rR9K",
+                                  "id": "OUcVD",
                                   "name": "FMLikeN",
                                   "fill": "#FFFFFFB3",
                                   "content": "214",
@@ -14181,13 +14181,13 @@
                             },
                             {
                               "type": "frame",
-                              "id": "zqAcx",
+                              "id": "gHS3V",
                               "name": "FMCmt",
                               "gap": 4,
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "id": "d9Ehc",
+                                  "id": "v7x4Eg",
                                   "type": "ref",
                                   "ref": "GkYdj",
                                   "width": 12,
@@ -14202,7 +14202,7 @@
                                 },
                                 {
                                   "type": "text",
-                                  "id": "BJqlh",
+                                  "id": "J9Qmoh",
                                   "name": "FMCmtN",
                                   "fill": "#FFFFFFB3",
                                   "content": "89",
@@ -14220,14 +14220,14 @@
                 },
                 {
                   "type": "frame",
-                  "id": "E7cSB",
+                  "id": "MTKu7",
                   "name": "RankList",
                   "width": "fill_container",
                   "layout": "vertical",
                   "children": [
                     {
                       "type": "frame",
-                      "id": "V1NKe",
+                      "id": "X4Yhm",
                       "name": "Rank2",
                       "width": "fill_container",
                       "gap": 16,
@@ -14239,7 +14239,7 @@
                       "children": [
                         {
                           "type": "text",
-                          "id": "Xs6fh",
+                          "id": "K076Bg",
                           "name": "RankNo2",
                           "fill": "$primary",
                           "content": "2",
@@ -14249,7 +14249,7 @@
                         },
                         {
                           "type": "frame",
-                          "id": "KBKmz",
+                          "id": "coEXJ",
                           "name": "RB2",
                           "width": "fill_container",
                           "layout": "vertical",
@@ -14257,7 +14257,7 @@
                           "children": [
                             {
                               "type": "text",
-                              "id": "jKicJ",
+                              "id": "jfM2w",
                               "name": "RT2",
                               "fill": "$text-primary",
                               "content": "미니브 팝업 후기 (사진 많음)",
@@ -14267,13 +14267,13 @@
                             },
                             {
                               "type": "frame",
-                              "id": "ysbaB",
+                              "id": "cK8Jo",
                               "name": "RM2",
                               "gap": 10,
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "DXj23",
+                                  "id": "iVXE6",
                                   "name": "RA2",
                                   "fill": "$text-tertiary",
                                   "content": "aening",
@@ -14283,13 +14283,13 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "sqrqs",
+                                  "id": "mCy6R",
                                   "name": "RM2Like",
                                   "gap": 4,
                                   "alignItems": "center",
                                   "children": [
                                     {
-                                      "id": "rUpAR",
+                                      "id": "x4Gl9",
                                       "type": "ref",
                                       "ref": "Fczgz",
                                       "width": 12,
@@ -14304,7 +14304,7 @@
                                     },
                                     {
                                       "type": "text",
-                                      "id": "aJHnd",
+                                      "id": "yG5jx",
                                       "name": "RM2LikeN",
                                       "fill": "$text-tertiary",
                                       "content": "187",
@@ -14316,13 +14316,13 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "eAfWc",
+                                  "id": "sIpS3",
                                   "name": "RM2Cmt",
                                   "gap": 4,
                                   "alignItems": "center",
                                   "children": [
                                     {
-                                      "id": "lUEWF",
+                                      "id": "gnO1a",
                                       "type": "ref",
                                       "ref": "GkYdj",
                                       "width": 12,
@@ -14337,7 +14337,7 @@
                                     },
                                     {
                                       "type": "text",
-                                      "id": "bjRJc",
+                                      "id": "tvPAZ",
                                       "name": "RM2CmtN",
                                       "fill": "$text-tertiary",
                                       "content": "51",
@@ -14354,7 +14354,7 @@
                         {
                           "type": "rectangle",
                           "cornerRadius": "$radius-sm",
-                          "id": "cNl2n",
+                          "id": "PCYQR",
                           "name": "RThumb2",
                           "metadata": {
                             "type": "unsplash",
@@ -14375,7 +14375,7 @@
                     },
                     {
                       "type": "rectangle",
-                      "id": "MppiW",
+                      "id": "c1sCB",
                       "name": "Divider0",
                       "fill": "$border-default",
                       "width": "fill_container",
@@ -14383,7 +14383,7 @@
                     },
                     {
                       "type": "frame",
-                      "id": "Gkl95",
+                      "id": "CeFAX",
                       "name": "Rank3",
                       "width": "fill_container",
                       "gap": 16,
@@ -14395,7 +14395,7 @@
                       "children": [
                         {
                           "type": "text",
-                          "id": "GO3KR",
+                          "id": "likKf",
                           "name": "RankNo3",
                           "fill": "$primary",
                           "content": "3",
@@ -14405,7 +14405,7 @@
                         },
                         {
                           "type": "frame",
-                          "id": "Vi2yx",
+                          "id": "K6yP5y",
                           "name": "RB3",
                           "width": "fill_container",
                           "layout": "vertical",
@@ -14413,7 +14413,7 @@
                           "children": [
                             {
                               "type": "text",
-                              "id": "m8Ixh",
+                              "id": "xSr1s",
                               "name": "RT3",
                               "fill": "$text-primary",
                               "content": "LUCID DREAM 타이틀 무대 직캠 모음",
@@ -14423,13 +14423,13 @@
                             },
                             {
                               "type": "frame",
-                              "id": "S7XvI8",
+                              "id": "I4qTYV",
                               "name": "RM3",
                               "gap": 10,
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "R4yjGQ",
+                                  "id": "oEeG9",
                                   "name": "RA3",
                                   "fill": "$text-tertiary",
                                   "content": "wony",
@@ -14439,13 +14439,13 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "t1Jyih",
+                                  "id": "hc9R7",
                                   "name": "RM3Like",
                                   "gap": 4,
                                   "alignItems": "center",
                                   "children": [
                                     {
-                                      "id": "n58mPW",
+                                      "id": "o00WCL",
                                       "type": "ref",
                                       "ref": "Fczgz",
                                       "width": 12,
@@ -14460,7 +14460,7 @@
                                     },
                                     {
                                       "type": "text",
-                                      "id": "R8A5Ku",
+                                      "id": "P1cbYM",
                                       "name": "RM3LikeN",
                                       "fill": "$text-tertiary",
                                       "content": "156",
@@ -14472,13 +14472,13 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "ujSJX",
+                                  "id": "IlyVx",
                                   "name": "RM3Cmt",
                                   "gap": 4,
                                   "alignItems": "center",
                                   "children": [
                                     {
-                                      "id": "PQrth",
+                                      "id": "inwep",
                                       "type": "ref",
                                       "ref": "GkYdj",
                                       "width": 12,
@@ -14493,7 +14493,7 @@
                                     },
                                     {
                                       "type": "text",
-                                      "id": "ApQcK",
+                                      "id": "WReN6",
                                       "name": "RM3CmtN",
                                       "fill": "$text-tertiary",
                                       "content": "18",
@@ -14510,7 +14510,7 @@
                         {
                           "type": "rectangle",
                           "cornerRadius": "$radius-sm",
-                          "id": "jfgoa",
+                          "id": "nlcYS",
                           "name": "RThumb3",
                           "metadata": {
                             "type": "unsplash",
@@ -14531,7 +14531,7 @@
                     },
                     {
                       "type": "rectangle",
-                      "id": "T0ETC",
+                      "id": "E13js9",
                       "name": "Divider1",
                       "fill": "$border-default",
                       "width": "fill_container",
@@ -14539,7 +14539,7 @@
                     },
                     {
                       "type": "frame",
-                      "id": "lOeHN",
+                      "id": "Y4O21s",
                       "name": "Rank4",
                       "width": "fill_container",
                       "gap": 16,
@@ -14551,7 +14551,7 @@
                       "children": [
                         {
                           "type": "text",
-                          "id": "tJyRt",
+                          "id": "w5Pa1",
                           "name": "RankNo4",
                           "fill": "$primary",
                           "content": "4",
@@ -14561,7 +14561,7 @@
                         },
                         {
                           "type": "frame",
-                          "id": "Yenbn",
+                          "id": "P5je8X",
                           "name": "RB4",
                           "width": "fill_container",
                           "layout": "vertical",
@@ -14569,7 +14569,7 @@
                           "children": [
                             {
                               "type": "text",
-                              "id": "a8VO8",
+                              "id": "AdrCh",
                               "name": "RT4",
                               "fill": "$text-primary",
                               "content": "이번 컴백 의상 정리해봤어요",
@@ -14579,13 +14579,13 @@
                             },
                             {
                               "type": "frame",
-                              "id": "faNPb",
+                              "id": "pLvw0",
                               "name": "RM4",
                               "gap": 10,
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "rxXnm",
+                                  "id": "suFMR",
                                   "name": "RA4",
                                   "fill": "$text-tertiary",
                                   "content": "리즈덕후",
@@ -14595,13 +14595,13 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "LUrHP",
+                                  "id": "Z1aIut",
                                   "name": "RM4Like",
                                   "gap": 4,
                                   "alignItems": "center",
                                   "children": [
                                     {
-                                      "id": "jnnFf",
+                                      "id": "CdEQ8",
                                       "type": "ref",
                                       "ref": "Fczgz",
                                       "width": 12,
@@ -14616,7 +14616,7 @@
                                     },
                                     {
                                       "type": "text",
-                                      "id": "N6BUD",
+                                      "id": "En56s",
                                       "name": "RM4LikeN",
                                       "fill": "$text-tertiary",
                                       "content": "132",
@@ -14628,13 +14628,13 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "X2JiB",
+                                  "id": "QO90l",
                                   "name": "RM4Cmt",
                                   "gap": 4,
                                   "alignItems": "center",
                                   "children": [
                                     {
-                                      "id": "LPebj",
+                                      "id": "W6OXV",
                                       "type": "ref",
                                       "ref": "GkYdj",
                                       "width": 12,
@@ -14649,7 +14649,7 @@
                                     },
                                     {
                                       "type": "text",
-                                      "id": "Q9PD2L",
+                                      "id": "O7MEDU",
                                       "name": "RM4CmtN",
                                       "fill": "$text-tertiary",
                                       "content": "33",
@@ -14667,7 +14667,7 @@
                     },
                     {
                       "type": "rectangle",
-                      "id": "aM96z",
+                      "id": "cKckR",
                       "name": "Divider2",
                       "fill": "$border-default",
                       "width": "fill_container",
@@ -14675,7 +14675,7 @@
                     },
                     {
                       "type": "frame",
-                      "id": "Xkj8e",
+                      "id": "ZUZXF",
                       "name": "Rank5",
                       "width": "fill_container",
                       "gap": 16,
@@ -14687,7 +14687,7 @@
                       "children": [
                         {
                           "type": "text",
-                          "id": "QMLM3",
+                          "id": "KMvwj",
                           "name": "RankNo5",
                           "fill": "$primary",
                           "content": "5",
@@ -14697,7 +14697,7 @@
                         },
                         {
                           "type": "frame",
-                          "id": "XDklm",
+                          "id": "AqFnW",
                           "name": "RB5",
                           "width": "fill_container",
                           "layout": "vertical",
@@ -14705,7 +14705,7 @@
                           "children": [
                             {
                               "type": "text",
-                              "id": "Uc52E",
+                              "id": "B4hT3",
                               "name": "RT5",
                               "fill": "$text-primary",
                               "content": "첫 팬미팅 가는데 팁 좀 주세요!",
@@ -14715,13 +14715,13 @@
                             },
                             {
                               "type": "frame",
-                              "id": "i0N2E",
+                              "id": "UZ4WN",
                               "name": "RM5",
                               "gap": 10,
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "i5ISi",
+                                  "id": "Gn1oH",
                                   "name": "RA5",
                                   "fill": "$text-tertiary",
                                   "content": "새싹다이브",
@@ -14731,13 +14731,13 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "ciY4H",
+                                  "id": "f9lLwu",
                                   "name": "RM5Like",
                                   "gap": 4,
                                   "alignItems": "center",
                                   "children": [
                                     {
-                                      "id": "c2MRZ",
+                                      "id": "fPTBj",
                                       "type": "ref",
                                       "ref": "Fczgz",
                                       "width": 12,
@@ -14752,7 +14752,7 @@
                                     },
                                     {
                                       "type": "text",
-                                      "id": "CAMHf",
+                                      "id": "iDKWi",
                                       "name": "RM5LikeN",
                                       "fill": "$text-tertiary",
                                       "content": "98",
@@ -14764,13 +14764,13 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "aChjc",
+                                  "id": "YlnP6",
                                   "name": "RM5Cmt",
                                   "gap": 4,
                                   "alignItems": "center",
                                   "children": [
                                     {
-                                      "id": "aQfav",
+                                      "id": "RgFf6",
                                       "type": "ref",
                                       "ref": "GkYdj",
                                       "width": 12,
@@ -14785,7 +14785,7 @@
                                     },
                                     {
                                       "type": "text",
-                                      "id": "Y3g9Z",
+                                      "id": "rrfiC",
                                       "name": "RM5CmtN",
                                       "fill": "$text-tertiary",
                                       "content": "42",
@@ -14803,7 +14803,7 @@
                     },
                     {
                       "type": "rectangle",
-                      "id": "moCzV",
+                      "id": "tiV0V",
                       "name": "Divider3",
                       "fill": "$border-default",
                       "width": "fill_container",
@@ -14811,7 +14811,7 @@
                     },
                     {
                       "type": "frame",
-                      "id": "oYiwj",
+                      "id": "HxQTm",
                       "name": "Rank6",
                       "width": "fill_container",
                       "gap": 16,
@@ -14823,7 +14823,7 @@
                       "children": [
                         {
                           "type": "text",
-                          "id": "h93W22",
+                          "id": "axzqg",
                           "name": "RankNo6",
                           "fill": "$primary",
                           "content": "6",
@@ -14833,7 +14833,7 @@
                         },
                         {
                           "type": "frame",
-                          "id": "l7IcZr",
+                          "id": "jhksu",
                           "name": "RB6",
                           "width": "fill_container",
                           "layout": "vertical",
@@ -14841,7 +14841,7 @@
                           "children": [
                             {
                               "type": "text",
-                              "id": "wI5u5",
+                              "id": "g7IiC0",
                               "name": "RT6",
                               "fill": "$text-primary",
                               "content": "이번 주 음방 본방사수 인증합니다 📺",
@@ -14851,13 +14851,13 @@
                             },
                             {
                               "type": "frame",
-                              "id": "G55Dh",
+                              "id": "aKPFo",
                               "name": "RM6",
                               "gap": 10,
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "dN6Mf",
+                                  "id": "mHaVT",
                                   "name": "RA6",
                                   "fill": "$text-tertiary",
                                   "content": "직녀",
@@ -14867,13 +14867,13 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "IGRbm",
+                                  "id": "TgNCJ",
                                   "name": "RM6Like",
                                   "gap": 4,
                                   "alignItems": "center",
                                   "children": [
                                     {
-                                      "id": "Lbl5q",
+                                      "id": "rIYtX",
                                       "type": "ref",
                                       "ref": "Fczgz",
                                       "width": 12,
@@ -14888,7 +14888,7 @@
                                     },
                                     {
                                       "type": "text",
-                                      "id": "HXRbp",
+                                      "id": "Ffu3k",
                                       "name": "RM6LikeN",
                                       "fill": "$text-tertiary",
                                       "content": "85",
@@ -14900,13 +14900,13 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "LRWSd",
+                                  "id": "GE4uQ",
                                   "name": "RM6Cmt",
                                   "gap": 4,
                                   "alignItems": "center",
                                   "children": [
                                     {
-                                      "id": "utvhS",
+                                      "id": "k2vZxi",
                                       "type": "ref",
                                       "ref": "GkYdj",
                                       "width": 12,
@@ -14921,7 +14921,7 @@
                                     },
                                     {
                                       "type": "text",
-                                      "id": "o7wMgM",
+                                      "id": "LcliT",
                                       "name": "RM6CmtN",
                                       "fill": "$text-tertiary",
                                       "content": "27",
@@ -14939,7 +14939,7 @@
                     },
                     {
                       "type": "rectangle",
-                      "id": "A7NH1g",
+                      "id": "B5w0PJ",
                       "name": "Divider4",
                       "fill": "$border-default",
                       "width": "fill_container",
@@ -14953,7 +14953,7 @@
         },
         {
           "type": "frame",
-          "id": "gG4LO",
+          "id": "fO18W",
           "name": "Shop Section",
           "width": "fill_container",
           "fill": "$bg-page",
@@ -14966,7 +14966,7 @@
           "alignItems": "center",
           "children": [
             {
-              "id": "l2aXKY",
+              "id": "w6hlF",
               "type": "ref",
               "ref": "r4bC1",
               "name": "ShopTitle",
@@ -14981,13 +14981,13 @@
             },
             {
               "type": "frame",
-              "id": "j7Nc6",
+              "id": "r4w5c",
               "name": "ShopMoreRow",
               "width": 1200,
               "justifyContent": "end",
               "children": [
                 {
-                  "id": "SdZ40",
+                  "id": "nXRnV",
                   "type": "ref",
                   "ref": "gtlsH",
                   "name": "ShopMore"
@@ -14996,7 +14996,7 @@
             },
             {
               "type": "frame",
-              "id": "aSaeV",
+              "id": "y5PGzz",
               "name": "ProductCarousel",
               "width": 1280,
               "gap": 16,
@@ -15004,7 +15004,7 @@
               "children": [
                 {
                   "type": "frame",
-                  "id": "m53R0h",
+                  "id": "vv7pl",
                   "name": "ArrowL",
                   "width": 32,
                   "height": 32,
@@ -15016,7 +15016,7 @@
                   "alignItems": "center",
                   "children": [
                     {
-                      "id": "AXc7m",
+                      "id": "VFncH",
                       "type": "ref",
                       "ref": "c0U1f",
                       "width": 16,
@@ -15033,14 +15033,14 @@
                 },
                 {
                   "type": "frame",
-                  "id": "jW5Gk",
+                  "id": "tSsj6",
                   "name": "ProductRow",
                   "width": "fill_container",
                   "gap": 24,
                   "children": [
                     {
                       "type": "frame",
-                      "id": "I2WnhW",
+                      "id": "Shgw5",
                       "name": "ProductCard",
                       "width": "fill_container",
                       "layout": "vertical",
@@ -15048,7 +15048,7 @@
                       "children": [
                         {
                           "type": "frame",
-                          "id": "Pl5L1",
+                          "id": "njWWV",
                           "name": "ImgWrap",
                           "metadata": {
                             "type": "unsplash",
@@ -15071,7 +15071,7 @@
                           "children": [
                             {
                               "type": "frame",
-                              "id": "sJxPk",
+                              "id": "ifv3h",
                               "layoutPosition": "absolute",
                               "x": 230,
                               "y": 12,
@@ -15080,13 +15080,13 @@
                               "height": 32,
                               "fill": "#FFFFFFD9",
                               "cornerRadius": "$radius-full",
-                              "stroke": "$border-default",
+                              "stroke": "#EEEEEE",
                               "strokeWidth": 1,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "id": "EgPCI",
+                                  "id": "hd6pn",
                                   "type": "ref",
                                   "ref": "Fczgz",
                                   "width": 16,
@@ -15103,7 +15103,7 @@
                             },
                             {
                               "type": "frame",
-                              "id": "VnM0B",
+                              "id": "PU9xB",
                               "layoutPosition": "absolute",
                               "x": 12,
                               "y": 12,
@@ -15112,7 +15112,7 @@
                               "children": [
                                 {
                                   "type": "frame",
-                                  "id": "WVhPJ",
+                                  "id": "ZZK6x",
                                   "name": "BFree",
                                   "fill": "$gray-100",
                                   "cornerRadius": "$radius-sm",
@@ -15124,7 +15124,7 @@
                                   "children": [
                                     {
                                       "type": "text",
-                                      "id": "PJ4eP",
+                                      "id": "k5wpX",
                                       "name": "BFreeL",
                                       "fill": "$gray-600",
                                       "content": "무료배송",
@@ -15136,7 +15136,7 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "i2IyOZ",
+                                  "id": "XZrrB",
                                   "name": "BBest",
                                   "fill": "$accent-strong",
                                   "cornerRadius": "$radius-sm",
@@ -15148,7 +15148,7 @@
                                   "children": [
                                     {
                                       "type": "text",
-                                      "id": "D6Q9cy",
+                                      "id": "b5QpQ",
                                       "name": "BBestL",
                                       "fill": "$white",
                                       "content": "HOT",
@@ -15164,14 +15164,14 @@
                         },
                         {
                           "type": "frame",
-                          "id": "llkBf",
+                          "id": "AdTca",
                           "name": "PInfo",
                           "layout": "vertical",
                           "gap": 4,
                           "children": [
                             {
                               "type": "text",
-                              "id": "Q2P5O",
+                              "id": "N3yzqn",
                               "name": "PName",
                               "fill": "$text-primary",
                               "content": "미니브 키링 (부산 한정)",
@@ -15181,14 +15181,14 @@
                             },
                             {
                               "type": "frame",
-                              "id": "w7Xqn",
+                              "id": "Dqiyz",
                               "name": "PriceRow",
                               "gap": 8,
                               "alignItems": "center",
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "AyYmQ",
+                                  "id": "bFHI6",
                                   "name": "PDisc",
                                   "fill": "$accent-strong",
                                   "content": "20%",
@@ -15198,7 +15198,7 @@
                                 },
                                 {
                                   "type": "text",
-                                  "id": "jNPsY",
+                                  "id": "TcV8K",
                                   "name": "PPrice",
                                   "fill": "$text-primary",
                                   "content": "12,800원",
@@ -15208,13 +15208,13 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "Fs2US",
+                                  "id": "UAsUm",
                                   "name": "StarRow",
                                   "gap": 3,
                                   "alignItems": "center",
                                   "children": [
                                     {
-                                      "id": "m842jo",
+                                      "id": "C9FimA",
                                       "type": "ref",
                                       "ref": "NTXzU",
                                       "width": 12,
@@ -15230,7 +15230,7 @@
                                     },
                                     {
                                       "type": "text",
-                                      "id": "n8u0ev",
+                                      "id": "FDWoH",
                                       "name": "StarN",
                                       "fill": "$text-tertiary",
                                       "content": "4.8",
@@ -15248,7 +15248,7 @@
                     },
                     {
                       "type": "frame",
-                      "id": "vhne8",
+                      "id": "KH5aT",
                       "name": "ProductCard",
                       "width": "fill_container",
                       "layout": "vertical",
@@ -15256,7 +15256,7 @@
                       "children": [
                         {
                           "type": "frame",
-                          "id": "yPDkJ",
+                          "id": "lC6QQ",
                           "name": "ImgWrap",
                           "metadata": {
                             "type": "unsplash",
@@ -15279,7 +15279,7 @@
                           "children": [
                             {
                               "type": "frame",
-                              "id": "cjU3p",
+                              "id": "ad2NA",
                               "layoutPosition": "absolute",
                               "x": 230,
                               "y": 12,
@@ -15288,13 +15288,13 @@
                               "height": 32,
                               "fill": "#FFFFFFD9",
                               "cornerRadius": "$radius-full",
-                              "stroke": "$border-default",
+                              "stroke": "#EEEEEE",
                               "strokeWidth": 1,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "id": "sGhbA",
+                                  "id": "Cdu5G",
                                   "type": "ref",
                                   "ref": "Fczgz",
                                   "width": 16,
@@ -15312,7 +15312,7 @@
                             },
                             {
                               "type": "frame",
-                              "id": "J3AYy4",
+                              "id": "V2Qz0s",
                               "layoutPosition": "absolute",
                               "x": 12,
                               "y": 12,
@@ -15321,7 +15321,7 @@
                               "children": [
                                 {
                                   "type": "frame",
-                                  "id": "OUaaa",
+                                  "id": "L2jnUm",
                                   "name": "BFree",
                                   "fill": "$gray-100",
                                   "cornerRadius": "$radius-sm",
@@ -15333,7 +15333,7 @@
                                   "children": [
                                     {
                                       "type": "text",
-                                      "id": "tpMK1",
+                                      "id": "HZdMU",
                                       "name": "BFreeL",
                                       "fill": "$gray-600",
                                       "content": "무료배송",
@@ -15345,7 +15345,7 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "rr3RZ",
+                                  "id": "Di17O",
                                   "name": "BBest",
                                   "fill": "$primary",
                                   "cornerRadius": "$radius-sm",
@@ -15357,7 +15357,7 @@
                                   "children": [
                                     {
                                       "type": "text",
-                                      "id": "Ukn0k",
+                                      "id": "pNHfA",
                                       "name": "BBestL",
                                       "fill": "$white",
                                       "content": "NEW",
@@ -15373,14 +15373,14 @@
                         },
                         {
                           "type": "frame",
-                          "id": "m1kqJ",
+                          "id": "m58R8",
                           "name": "PInfo",
                           "layout": "vertical",
                           "gap": 4,
                           "children": [
                             {
                               "type": "text",
-                              "id": "d1J7ls",
+                              "id": "eKa3m",
                               "name": "PName",
                               "fill": "$text-primary",
                               "content": "IVE 응원봉 ver.2",
@@ -15390,14 +15390,14 @@
                             },
                             {
                               "type": "frame",
-                              "id": "Q5ifd",
+                              "id": "J45Fjk",
                               "name": "PriceRow",
                               "gap": 8,
                               "alignItems": "center",
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "AvyBY",
+                                  "id": "nsoT3",
                                   "name": "PDisc",
                                   "fill": "$accent-strong",
                                   "content": "20%",
@@ -15407,7 +15407,7 @@
                                 },
                                 {
                                   "type": "text",
-                                  "id": "IUXCx",
+                                  "id": "FAyNe",
                                   "name": "PPrice",
                                   "fill": "$text-primary",
                                   "content": "38,400원",
@@ -15417,13 +15417,13 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "bNYHF",
+                                  "id": "Q6Hta",
                                   "name": "StarRow",
                                   "gap": 3,
                                   "alignItems": "center",
                                   "children": [
                                     {
-                                      "id": "uYRsX",
+                                      "id": "HXdma",
                                       "type": "ref",
                                       "ref": "NTXzU",
                                       "width": 12,
@@ -15439,7 +15439,7 @@
                                     },
                                     {
                                       "type": "text",
-                                      "id": "H6fJOC",
+                                      "id": "DqgC6",
                                       "name": "StarN",
                                       "fill": "$text-tertiary",
                                       "content": "4.8",
@@ -15457,7 +15457,7 @@
                     },
                     {
                       "type": "frame",
-                      "id": "cQA21",
+                      "id": "EmBJD",
                       "name": "ProductCard",
                       "width": "fill_container",
                       "layout": "vertical",
@@ -15465,7 +15465,7 @@
                       "children": [
                         {
                           "type": "frame",
-                          "id": "zSM8Q",
+                          "id": "N7BTyq",
                           "name": "ImgWrap",
                           "metadata": {
                             "type": "unsplash",
@@ -15488,7 +15488,7 @@
                           "children": [
                             {
                               "type": "frame",
-                              "id": "T850FS",
+                              "id": "oQaCk",
                               "layoutPosition": "absolute",
                               "x": 230,
                               "y": 12,
@@ -15497,13 +15497,13 @@
                               "height": 32,
                               "fill": "#FFFFFFD9",
                               "cornerRadius": "$radius-full",
-                              "stroke": "$border-default",
+                              "stroke": "#EEEEEE",
                               "strokeWidth": 1,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "id": "sb8j2",
+                                  "id": "F4FjXD",
                                   "type": "ref",
                                   "ref": "Fczgz",
                                   "width": 16,
@@ -15520,7 +15520,7 @@
                             },
                             {
                               "type": "frame",
-                              "id": "FiloU",
+                              "id": "kjMoh",
                               "layoutPosition": "absolute",
                               "x": 12,
                               "y": 12,
@@ -15529,7 +15529,7 @@
                               "children": [
                                 {
                                   "type": "frame",
-                                  "id": "IPgnk",
+                                  "id": "Q6bJI",
                                   "name": "BFree",
                                   "fill": "$gray-100",
                                   "cornerRadius": "$radius-sm",
@@ -15541,7 +15541,7 @@
                                   "children": [
                                     {
                                       "type": "text",
-                                      "id": "A5cHp",
+                                      "id": "mbrB6",
                                       "name": "BFreeL",
                                       "fill": "$gray-600",
                                       "content": "무료배송",
@@ -15553,7 +15553,7 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "Bhgnj",
+                                  "id": "mO9dl",
                                   "name": "BBest",
                                   "fill": "$accent-strong",
                                   "cornerRadius": "$radius-sm",
@@ -15565,7 +15565,7 @@
                                   "children": [
                                     {
                                       "type": "text",
-                                      "id": "QuCPA",
+                                      "id": "jFgaJ",
                                       "name": "BBestL",
                                       "fill": "$white",
                                       "content": "HOT",
@@ -15581,14 +15581,14 @@
                         },
                         {
                           "type": "frame",
-                          "id": "t9qAvv",
+                          "id": "z2piq",
                           "name": "PInfo",
                           "layout": "vertical",
                           "gap": 4,
                           "children": [
                             {
                               "type": "text",
-                              "id": "cQ8Zl",
+                              "id": "K2z2N",
                               "name": "PName",
                               "fill": "$text-primary",
                               "content": "LUCID DREAM 포토카드 세트",
@@ -15598,14 +15598,14 @@
                             },
                             {
                               "type": "frame",
-                              "id": "mgMxD",
+                              "id": "UjGaQ",
                               "name": "PriceRow",
                               "gap": 8,
                               "alignItems": "center",
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "hFNZX",
+                                  "id": "l0eQs3",
                                   "name": "PDisc",
                                   "fill": "$accent-strong",
                                   "content": "20%",
@@ -15615,7 +15615,7 @@
                                 },
                                 {
                                   "type": "text",
-                                  "id": "X9h2nm",
+                                  "id": "xdy8m",
                                   "name": "PPrice",
                                   "fill": "$text-primary",
                                   "content": "9,600원",
@@ -15625,13 +15625,13 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "gNuvD",
+                                  "id": "ThIFx",
                                   "name": "StarRow",
                                   "gap": 3,
                                   "alignItems": "center",
                                   "children": [
                                     {
-                                      "id": "I2kbr5",
+                                      "id": "ShK2T",
                                       "type": "ref",
                                       "ref": "NTXzU",
                                       "width": 12,
@@ -15647,7 +15647,7 @@
                                     },
                                     {
                                       "type": "text",
-                                      "id": "bush9",
+                                      "id": "gLDE4",
                                       "name": "StarN",
                                       "fill": "$text-tertiary",
                                       "content": "4.8",
@@ -15665,7 +15665,7 @@
                     },
                     {
                       "type": "frame",
-                      "id": "k4XY3f",
+                      "id": "LVX16",
                       "name": "ProductCard",
                       "width": "fill_container",
                       "layout": "vertical",
@@ -15673,7 +15673,7 @@
                       "children": [
                         {
                           "type": "frame",
-                          "id": "H0BMl",
+                          "id": "krFUA",
                           "name": "ImgWrap",
                           "metadata": {
                             "type": "unsplash",
@@ -15696,7 +15696,7 @@
                           "children": [
                             {
                               "type": "frame",
-                              "id": "XJKmR",
+                              "id": "simpl",
                               "layoutPosition": "absolute",
                               "x": 230,
                               "y": 12,
@@ -15705,13 +15705,13 @@
                               "height": 32,
                               "fill": "#FFFFFFD9",
                               "cornerRadius": "$radius-full",
-                              "stroke": "$border-default",
+                              "stroke": "#EEEEEE",
                               "strokeWidth": 1,
                               "justifyContent": "center",
                               "alignItems": "center",
                               "children": [
                                 {
-                                  "id": "rkIWx",
+                                  "id": "LvaS2",
                                   "type": "ref",
                                   "ref": "Fczgz",
                                   "width": 16,
@@ -15728,7 +15728,7 @@
                             },
                             {
                               "type": "frame",
-                              "id": "VNm6N",
+                              "id": "G6Otzt",
                               "layoutPosition": "absolute",
                               "x": 12,
                               "y": 12,
@@ -15737,7 +15737,7 @@
                               "children": [
                                 {
                                   "type": "frame",
-                                  "id": "CRkJE",
+                                  "id": "LNC3U",
                                   "name": "BFree",
                                   "fill": "$gray-100",
                                   "cornerRadius": "$radius-sm",
@@ -15749,7 +15749,7 @@
                                   "children": [
                                     {
                                       "type": "text",
-                                      "id": "br73M",
+                                      "id": "CEOBL",
                                       "name": "BFreeL",
                                       "fill": "$gray-600",
                                       "content": "무료배송",
@@ -15761,7 +15761,7 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "KBqE4",
+                                  "id": "hMYPN",
                                   "name": "BBest",
                                   "fill": "$accent-strong",
                                   "cornerRadius": "$radius-sm",
@@ -15773,7 +15773,7 @@
                                   "children": [
                                     {
                                       "type": "text",
-                                      "id": "yiHdx",
+                                      "id": "b5sua",
                                       "name": "BBestL",
                                       "fill": "$white",
                                       "content": "HOT",
@@ -15789,14 +15789,14 @@
                         },
                         {
                           "type": "frame",
-                          "id": "J9PGZy",
+                          "id": "sP1UO",
                           "name": "PInfo",
                           "layout": "vertical",
                           "gap": 4,
                           "children": [
                             {
                               "type": "text",
-                              "id": "W456q0",
+                              "id": "xZNyb",
                               "name": "PName",
                               "fill": "$text-primary",
                               "content": "아이브 후드집업 (블랙)",
@@ -15806,14 +15806,14 @@
                             },
                             {
                               "type": "frame",
-                              "id": "zyP43",
+                              "id": "q0G3po",
                               "name": "PriceRow",
                               "gap": 8,
                               "alignItems": "center",
                               "children": [
                                 {
                                   "type": "text",
-                                  "id": "sCEmV",
+                                  "id": "AuBis",
                                   "name": "PDisc",
                                   "fill": "$accent-strong",
                                   "content": "20%",
@@ -15823,7 +15823,7 @@
                                 },
                                 {
                                   "type": "text",
-                                  "id": "VAYqB",
+                                  "id": "GfgZ1",
                                   "name": "PPrice",
                                   "fill": "$text-primary",
                                   "content": "52,000원",
@@ -15833,13 +15833,13 @@
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "Yszod",
+                                  "id": "dnYQk",
                                   "name": "StarRow",
                                   "gap": 3,
                                   "alignItems": "center",
                                   "children": [
                                     {
-                                      "id": "qhIeE",
+                                      "id": "igVo4",
                                       "type": "ref",
                                       "ref": "NTXzU",
                                       "width": 12,
@@ -15855,7 +15855,7 @@
                                     },
                                     {
                                       "type": "text",
-                                      "id": "QPHBo",
+                                      "id": "D8PBj",
                                       "name": "StarN",
                                       "fill": "$text-tertiary",
                                       "content": "4.8",
@@ -15875,7 +15875,7 @@
                 },
                 {
                   "type": "frame",
-                  "id": "m8Qd6K",
+                  "id": "Rey7Y",
                   "name": "ArrowR",
                   "width": 32,
                   "height": 32,
@@ -15887,7 +15887,7 @@
                   "alignItems": "center",
                   "children": [
                     {
-                      "id": "l8vcZH",
+                      "id": "fZx04",
                       "type": "ref",
                       "ref": "Aon0g",
                       "width": 16,
@@ -15908,7 +15908,7 @@
         },
         {
           "type": "frame",
-          "id": "prKoc",
+          "id": "edAft",
           "name": "Footer",
           "width": "fill_container",
           "fill": "$bg-subtle",
@@ -15923,14 +15923,14 @@
           "alignItems": "center",
           "children": [
             {
-              "id": "ZMNP1",
+              "id": "mnz8c",
               "type": "ref",
               "ref": "kgWTm",
               "name": "FooterLogo"
             },
             {
               "type": "frame",
-              "id": "Iiap6",
+              "id": "P6qQJM",
               "name": "FootLines",
               "layout": "vertical",
               "gap": 6,
@@ -15938,7 +15938,7 @@
               "children": [
                 {
                   "type": "text",
-                  "id": "S1UB8",
+                  "id": "NECNl",
                   "name": "F1",
                   "fill": "$text-tertiary",
                   "content": "IVE로 DIVE는 팬이 만든 비공식 팬 사이트이며, 포트폴리오 목적으로 제작되었습니다.",
@@ -15948,7 +15948,7 @@
                 },
                 {
                   "type": "text",
-                  "id": "WiV2x",
+                  "id": "AQYiL",
                   "name": "F2",
                   "fill": "$text-tertiary",
                   "content": "아이브(IVE) 관련 콘텐츠의 저작권은 스타쉽엔터테인먼트에 있습니다.",
@@ -15958,7 +15958,7 @@
                 },
                 {
                   "type": "text",
-                  "id": "WzR56",
+                  "id": "vbtP5",
                   "name": "F3",
                   "fill": "$text-secondary",
                   "content": "© 2026 seokachu. All rights reserved.",
@@ -15970,14 +15970,14 @@
             },
             {
               "type": "frame",
-              "id": "xc9Up",
+              "id": "VMMhR",
               "name": "FooterLinks",
               "gap": 10,
               "alignItems": "center",
               "children": [
                 {
                   "type": "frame",
-                  "id": "Zs2ng",
+                  "id": "G8Tei",
                   "name": "GithubLink",
                   "context": "링크: https://github.com/seokachu (target=_blank)",
                   "width": 36,
@@ -15988,7 +15988,7 @@
                   "alignItems": "center",
                   "children": [
                     {
-                      "id": "FZzUS",
+                      "id": "xWe3R",
                       "type": "ref",
                       "ref": "FNbSo",
                       "width": 18,
@@ -16005,7 +16005,7 @@
                 },
                 {
                   "type": "frame",
-                  "id": "xlLuK",
+                  "id": "P2pXY1",
                   "name": "PortfolioLink",
                   "context": "링크: https://www.seokachu.site/ (target=_blank)",
                   "width": 36,
@@ -16016,7 +16016,7 @@
                   "alignItems": "center",
                   "children": [
                     {
-                      "id": "jlaxF",
+                      "id": "yFjI4",
                       "type": "ref",
                       "ref": "b29nK0",
                       "width": 18,
