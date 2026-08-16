@@ -2,16 +2,10 @@
 import { useState } from "react";
 import { MapPin, ChevronDown } from "lucide-react";
 import ScheduleCardDetail from "./ScheduleCardDetail";
+import DdayBadge from "@/components/common/DdayBadge";
 import { SCHEDULE_CATEGORY_MAP } from "@/utils/constants";
 import { getDdayStatus, formatScheduleDate } from "@/utils/schedule";
 import type { ScheduleCardProps } from "@/types/schedule";
-
-const DDAY_BADGE_CLASS = {
-  upcoming: "bg-purple-100 text-purple-500",
-  today: "bg-purple text-white",
-  ongoing: "bg-green-100 text-green-700",
-  ended: "bg-gray-100 text-gray-400",
-} as const;
 
 const ScheduleCard = ({ item }: ScheduleCardProps) => {
   const [expanded, setExpanded] = useState(false);
@@ -28,11 +22,7 @@ const ScheduleCard = ({ item }: ScheduleCardProps) => {
           expanded ? "rounded-b-none border-purple" : ""
         } ${isEnded ? "opacity-50" : "hover:border-purple"}`}
       >
-        <span
-          className={`shrink-0 w-16 text-center text-sm font-bold py-2 rounded-md ${DDAY_BADGE_CLASS[dday.state]}`}
-        >
-          {dday.label}
-        </span>
+        <DdayBadge item={item} />
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 mb-1">
             <span className={`px-2 py-0.5 rounded-full text-xs ${category.badgeClass}`}>{category.label}</span>

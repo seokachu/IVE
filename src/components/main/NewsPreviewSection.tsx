@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { ArrowRight, Calendar, ChevronRight, MapPin, Sparkles } from "lucide-react";
 import SectionTitle from "@/components/common/SectionTitle";
+import DdayBadge from "@/components/common/DdayBadge";
 import NewsFeedItem from "@/components/news/NewsFeedItem";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SCHEDULE_CATEGORY_MAP } from "@/utils/constants";
@@ -43,9 +44,7 @@ const NewsPreviewSection = () => {
                       href="/news"
                       className="flex items-center gap-4 p-4 lg:p-5 bg-background border border-gray-200 dark:border-gray-700 rounded-lg hover:border-purple transition-colors"
                     >
-                      <span className="shrink-0 w-16 text-center text-sm font-bold py-2 rounded-md bg-purple-100 text-purple-500">
-                        {dday.label}
-                      </span>
+                      <DdayBadge item={item} />
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           <span className={`px-2 py-0.5 rounded-full text-xs ${category.badgeClass}`}>
