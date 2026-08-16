@@ -94,7 +94,9 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
           </Button>
         </div>
       </div>
-      {isDrawerOpen && <AddToCartDrawer isOpen={isDrawerOpen} onClose={onClickCloseDrawer} />}
+      {isDrawerOpen && (
+        <AddToCartDrawer isOpen={isDrawerOpen} onClose={onClickCloseDrawer} product={product} quantity={quantity} />
+      )}
     </>
   );
 };
