@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronDown, Volume2, VolumeX } from "lucide-react";
 
 interface VisualSectionProps {
@@ -18,15 +19,26 @@ const VisualSection = ({ videoId }: VisualSectionProps) => {
   return (
     <section className="h-[100dvh] lg:h-screen w-full relative overflow-hidden bg-gray-900 flex items-center justify-center">
       {embedUrl ? (
-        <iframe
-          key={String(muted)}
-          src={embedUrl}
-          title="IVE 공식 최신 영상"
-          aria-hidden="true"
-          tabIndex={-1}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[max(100vw,177.78vh)] h-[max(100vh,56.25vw)] pointer-events-none"
-          allow="autoplay; encrypted-media"
-        />
+        <>
+          {/* 영상 로드 전·실패 시 폴백 — 유튜브 썸네일이 항상 밑레이어에 깔린다 */}
+          <Image
+            src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
+            alt=""
+            fill
+            priority
+            className="object-cover"
+            aria-hidden="true"
+          />
+          <iframe
+            key={String(muted)}
+            src={embedUrl}
+            title="IVE 공식 최신 영상"
+            aria-hidden="true"
+            tabIndex={-1}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[max(100vw,177.78vh)] h-[max(100vh,56.25vw)] pointer-events-none"
+            allow="autoplay; encrypted-media"
+          />
+        </>
       ) : (
         <div className="absolute inset-0 bg-main-image bg-cover bg-center" aria-hidden="true" />
       )}

@@ -45,7 +45,7 @@ const AlbumShowcase = () => {
             className="w-full h-[250px] lg:h-[350px] [&_.swiper-wrapper]:items-center"
           >
             {albums.map((album, index) => (
-              <SwiperSlide key={album.title} tag="li" className="!w-[170px] lg:!w-[240px] flex items-center h-full">
+              <SwiperSlide key={album.title} tag="li" className="!w-[170px] lg:!w-[240px] !h-auto">
                 <div
                   className={`relative aspect-square w-full rounded-2xl overflow-hidden transition-transform duration-300 ${
                     index === activeIndex

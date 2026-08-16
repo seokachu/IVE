@@ -7,15 +7,17 @@ export interface BadgeItemProps {
   averageRating: number;
 }
 
-// badge color 설정
+// badge color 설정 — 디자인 시스템 기준
 const getBadgeColor = (badge: string) => {
   switch (badge) {
     case BADGE_TYPES.FREE_DELIVERY:
-      return `bg-purple`;
-    case BADGE_TYPES.BEST:
-      return `bg-orange-500`;
+      return `bg-gray-100 text-gray-600`;
+    case BADGE_TYPES.HOT:
+      return `bg-orange-500 text-white`;
+    case BADGE_TYPES.NEW:
+      return `bg-purple text-white`;
     default:
-      return `bg-gray-500`;
+      return `bg-gray-500 text-white`;
   }
 };
 
@@ -26,7 +28,7 @@ const Badge = ({ item, averageRating }: BadgeItemProps) => {
   return (
     <div className="flex items-center gap-1">
       {badges.map((badge) => (
-        <span key={badge} className={`text-xs px-2 py-1 rounded-md text-white ${getBadgeColor(badge)}`}>
+        <span key={badge} className={`text-xs px-2 py-1 rounded-md font-bold ${getBadgeColor(badge)}`}>
           {badge}
         </span>
       ))}

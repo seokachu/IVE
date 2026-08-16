@@ -34,7 +34,9 @@ export const SORT_OPTIONS: Record<SortOptionList, SortOption> = {
 
 export const BADGE_TYPES = {
   FREE_DELIVERY: "무료배송",
-  BEST: "Best👍",
+  HOT: "HOT",
+  //신상품 뱃지 — 부여 로직은 추후 추가 예정 (calculateBadge 참고)
+  NEW: "NEW",
 } as const;
 
 export const PAGINATION = {
