@@ -3,7 +3,7 @@ import type { SortOption, SortOptionList } from "@/types/shop";
 //header gnb list
 export const GNB_ARRAY = [
   { label: "소식", path: "/news", exact: false },
-  { label: "디스코그래피", path: "/discography", exact: false },
+  { label: "음악", path: "/discography", exact: false },
   { label: "굿즈샵", path: "/shop", exact: false },
   { label: "자유게시판", path: "/board", exact: false },
 ];

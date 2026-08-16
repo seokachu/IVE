@@ -184,7 +184,7 @@
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
     <tr><td>COM-01</td><td>로고 / 홈 이동</td><td>좌측 로고 클릭 시 메인(<code>/</code>)으로 이동.</td><td>메인 상단(미스크롤)에서는 흰색 로고, 그 외에는 검정 로고 표시. 다크모드에서는 흰색 로고 사용.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>COM-02</td><td>스크롤 반응 헤더</td><td>메인 페이지에서는 투명 배경으로 고정(fixed)되며, 앨범 섹션에 도달하면 흰 배경 + 그림자 스타일로 전환.</td><td>스크롤 감지는 100ms 스로틀. 메인 외 페이지는 항상 흰 배경(relative).</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>COM-03</td><td>GNB 메뉴</td><td>소식(<code>/news</code>) · 디스코그래피(<code>/discography</code>) · 굿즈샵(<code>/shop</code>) · 자유게시판(<code>/board</code>) 4개 메뉴. 데스크톱(lg 이상)에서만 노출.</td><td>현재 경로가 해당 메뉴로 시작하면(하위 경로 포함) 굵은 글씨로 활성 표시.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-03</td><td>GNB 메뉴</td><td>소식(<code>/news</code>) · 음악(<code>/discography</code>) · 굿즈샵(<code>/shop</code>) · 자유게시판(<code>/board</code>) 4개 메뉴. 데스크톱(lg 이상)에서만 노출.</td><td>현재 경로가 해당 메뉴로 시작하면(하위 경로 포함) 굵은 글씨로 활성 표시.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>COM-04</td><td>장바구니 아이콘 · 뱃지</td><td>장바구니(<code>/cart</code>) 이동 아이콘. 담긴 <b>상품 종류 수</b>를 빨간 원형 뱃지로 표시.</td><td>수량 합계가 아닌 고유 품목 수. 0개면 뱃지 숨김. 하이드레이션 전에는 미표시.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>COM-05</td><td>유저 메뉴 분기</td><td>비로그인: “로그인” 링크 → 로그인 페이지로 이동(현재 경로를 <code>?redirect</code>로 첨부, AUTH-07). 로그인: 아바타 → 드롭다운(닉네임 표시, 마이페이지, 로그아웃).</td><td>세션 상태에 따라 실시간 전환. <b>v1의 로그인 모달은 제거됨.</b></td><td><span class="auth any">전체</span></td></tr>
   </table>
