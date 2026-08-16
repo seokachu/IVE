@@ -1,0 +1,32 @@
+#굿즈샵 자동 수집 — 매일 스타쉽스퀘어에서 IVE 신상품을 감지해 goods 테이블에 등록하고
+#상세 갤러리 이미지까지 채운다 (scripts/crawl-goods.mjs · enrich-goods-images.mjs 재사용)
+name: goods-sync
+
+on:
+  schedule:
+    - cron: "15 21 * * *" #매일 06:15 KST
+  workflow_dispatch:
+
+concurrency:
+  group: goods-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: 신상품 수집
+        run: node scripts/crawl-goods.mjs
+      - name: 갤러리 이미지 채우기
+        run: node scripts/enrich-goods-images.mjs
