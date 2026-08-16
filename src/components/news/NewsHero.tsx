@@ -1,9 +1,15 @@
-//소식 페이지 상단 히어로 — 보라빛 공연 사진을 블러+스크림으로 깔아 톤만 남긴다
+//소식 페이지 상단 히어로 — 시안 확정: 실제 단체 사진(메인과 동일 에셋)을 약한 블러 + 그라데이션 스크림으로 깔아 인물이 은은하게 비치게
 const NewsHero = () => {
   return (
     <section className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-news-hero-image bg-cover bg-center blur-xl scale-110" aria-hidden="true" />
-      <div className="absolute inset-0 bg-white/80 dark:bg-[#1B1B1F]/85" aria-hidden="true" />
+      <div
+        className="absolute inset-0 bg-main-image bg-cover bg-[position:50%_22%] blur-[6px] scale-110"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-white/55 to-white/[0.92] dark:from-[#1B1B1F]/60 dark:to-[#1B1B1F]/95"
+        aria-hidden="true"
+      />
       <div className="relative max-w-content m-auto px-5 pt-14 lg:pt-20 pb-12 lg:pb-14 flex flex-col items-center text-center gap-3">
         <p className="text-[11px] lg:text-xs font-semibold tracking-[0.25em] text-purple-500 dark:text-purple-300">
           NEWS &amp; SCHEDULE

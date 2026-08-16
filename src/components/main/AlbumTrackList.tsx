@@ -1,5 +1,5 @@
 "use client";
-import { Play, Pause, Loader2 } from "lucide-react";
+import { Play, Pause } from "lucide-react";
 import { useAlbumTracks } from "@/hooks/queries/useAlbumTracks";
 import { usePlayerState, usePlayerActions } from "@/store/zustand/player-store";
 import type { AlbumTrackListProps } from "@/types/main";
@@ -16,10 +16,17 @@ const AlbumTrackList = ({ albumTitle, albumImage, limit, expandPlayerOnPlay = tr
   const { playAlbumTrack, togglePlay, setMinimized } = usePlayerActions();
 
   if (isLoading) {
+    //시안 기준: 스피너 대신 트랙 행 스켈레톤 3행
     return (
-      <div className="flex justify-center py-6">
-        <Loader2 className="w-5 h-5 animate-spin" />
-      </div>
+      <ul className="flex flex-col divide-y divide-gray-200 dark:divide-white/10 animate-pulse" aria-hidden>
+        {["w-1/2", "w-2/5", "w-3/5"].map((width) => (
+          <li key={width} className="flex items-center gap-3 px-1 py-3.5">
+            <span className="h-7 w-7 shrink-0 rounded-full bg-gray-200 dark:bg-white/10" />
+            <span className={`h-3 rounded-full bg-gray-200 dark:bg-white/10 ${width}`} />
+            <span className="ml-auto h-3 w-8 shrink-0 rounded-full bg-gray-100 dark:bg-white/5" />
+          </li>
+        ))}
+      </ul>
     );
   }
   if (isError || tracks.length === 0) {

@@ -17,7 +17,7 @@ const MobileUserMenu = () => {
         <li className={`${navListStyle} border-r-0`}>
           <SheetClose asChild>
             <Link href="/cart" className={`${navListItemStyle}`}>
-              <CartIcon iconSize={28} iconClassName="group-hover:[color:white] m-auto" className="left-2/4" />
+              <CartIcon iconSize={28} iconClassName="group-hover:[color:white]" />
             </Link>
           </SheetClose>
         </li>
