@@ -7,7 +7,7 @@ test.describe("cart actions", () => {
     await page.getByRole("link", { name: "쇼핑하기" }).click();
 
     await expect(page).toHaveURL(/\/shop$/);
-    await expect(page.getByRole("heading", { name: "굿즈샵" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Goods Shop" })).toBeVisible();
   });
 
   test("shows a login-required toast when an unauthenticated user tries to pay", async ({ page }) => {

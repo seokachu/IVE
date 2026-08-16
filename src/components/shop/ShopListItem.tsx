@@ -7,17 +7,15 @@ import { Heart, Star } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
-import { useAverageRating, useReviewCount } from "@/hooks/queries/useReviews";
 import type { ShopListItemProps } from "@/types/shop";
 
 //시안 기준: 목록·캐러셀 공통 카드 — 보더 없는 카드, 배지·하트는 이미지 위 오버레이
 const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) => {
   const { push } = useRouter();
-  const { data: reviewData } = useReviewCount(item.id);
-  const { data: averageRating = 0 } = useAverageRating(item.id);
   const { isWished, toggleWishList } = useWishListWithLocal(item.id);
 
-  const reviewCount = reviewData?.length || 0;
+  //리뷰 수·평균 별점은 목록 조회에 포함되어 상품별 추가 요청이 없다
+  const averageRating = item.average_rating;
 
   const onClickDetail = () => {
     push(`/shop/${item.id}`);
@@ -55,14 +53,14 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
         <Image
           src={item.thumbnail || DefaultImage}
           alt={item.title || "상품 썸네일 이미지"}
-          className="fill group-hover:scale-110 transition-transform duration-300 object-cover w-full"
+          className="group-hover:scale-110 transition-transform duration-300 object-cover w-full"
           width={250}
           height={250}
           loading={variant === "shop" && index < 6 ? "eager" : "lazy"}
           priority={variant === "shop" && index < 6}
         />
         <div className="absolute top-2.5 left-2.5">
-          <Badge item={{ ...item, review_count: reviewCount }} averageRating={averageRating} />
+          <Badge item={item} averageRating={averageRating} />
         </div>
         <Button
           variant="plain"
@@ -81,7 +79,7 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
       <div className="flex flex-col gap-1 mt-2.5">
         <h3 className="overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-semibold">{item.title}</h3>
         <div className="font-bold flex items-center flex-wrap gap-x-1.5 lg:gap-x-2 text-[15px]">
-          <span className="text-orange-500">{item.discount_rate}%</span>
+          {(item.discount_rate ?? 0) > 0 && <span className="text-orange-500">{item.discount_rate}%</span>}
           <span className="whitespace-nowrap">{formatPrice(price)}원</span>
           <span className="flex items-center gap-1 text-gray-400 text-xs font-normal">
             <Star size={13} className="text-warning fill-warning" />

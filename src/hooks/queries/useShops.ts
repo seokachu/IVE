@@ -1,17 +1,11 @@
 import { getCarouselShop, getGoodsCount, getGoodsShop, getGoodsShopDetail } from "@/lib/supabase/shop";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import type { SortOptionList } from "@/types/shop";
+import { useQuery } from "@tanstack/react-query";
 
-//상품 목록 정렬
-export const useShops = (sortBy: SortOptionList) => {
-  return useInfiniteQuery({
-    queryKey: ["shops", "list", sortBy],
-    queryFn: ({ pageParam = 1 }) => getGoodsShop(pageParam, sortBy),
-    initialPageParam: 1,
-    getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.length === 0) return undefined;
-      return allPages.length + 1;
-    },
+//상품 목록 — 전체를 한 번만 조회하고 정렬·더보기는 클라이언트에서 처리
+export const useShops = () => {
+  return useQuery({
+    queryKey: ["shops", "list"],
+    queryFn: getGoodsShop,
   });
 };
 
