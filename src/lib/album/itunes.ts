@@ -28,6 +28,25 @@ const normalize = (title: string) =>
     .replace(/[^\p{L}\p{N}]/gu, "")
     .toLowerCase();
 
+//아이브 싱글(1~2곡 컬렉션) 곡명 목록 — 타이틀/활동곡 판별용 (싱글로도 발매된 곡 = 활동곡 관행)
+const getSingleTrackNames = async (): Promise<Set<string>> => {
+  try {
+    const params = new URLSearchParams({ id: "1594159996", entity: "album", country: "KR", limit: "200" });
+    const res = await fetch(`https://itunes.apple.com/lookup?${params}`, {
+      next: { revalidate: ITUNES_REVALIDATE_SECONDS },
+    });
+    if (!res.ok) return new Set();
+    const data: { results: (ItunesCollection & { trackCount?: number })[] } = await res.json();
+    return new Set(
+      data.results
+        .filter((result) => result.wrapperType === "collection" && (result.trackCount || 0) <= 2)
+        .map((result) => normalize(result.collectionName))
+    );
+  } catch {
+    return new Set();
+  }
+};
+
 export const getAlbumTracks = async (albumTitle: string): Promise<AlbumTrack[]> => {
   const searchParams = new URLSearchParams({
     term: `아이브 ${albumTitle}`,
@@ -60,9 +79,10 @@ export const getAlbumTracks = async (albumTitle: string): Promise<AlbumTrack[]> 
     country: "KR",
     limit: "50",
   });
-  const songRes = await fetch(`${ITUNES_SEARCH_URL}?${songParams}`, {
-    next: { revalidate: ITUNES_REVALIDATE_SECONDS },
-  });
+  const [songRes, singleNames] = await Promise.all([
+    fetch(`${ITUNES_SEARCH_URL}?${songParams}`, { next: { revalidate: ITUNES_REVALIDATE_SECONDS } }),
+    getSingleTrackNames(),
+  ]);
   if (!songRes.ok) throw new Error(`iTunes 곡 검색 실패 (${songRes.status})`);
   const songData: { results: ItunesTrack[] } = await songRes.json();
 
@@ -73,6 +93,8 @@ export const getAlbumTracks = async (albumTitle: string): Promise<AlbumTrack[]> 
       name: track.trackName!,
       previewUrl: track.previewUrl || null,
       durationMs: track.trackTimeMillis || null,
+      //싱글로도 발매된 곡이거나 앨범명과 같은 곡이면 타이틀/활동곡으로 표시
+      isTitle: singleNames.has(normalize(track.trackName!)) || normalize(track.trackName!) === target,
     }))
     .sort((a, b) => a.trackNumber - b.trackNumber);
 };

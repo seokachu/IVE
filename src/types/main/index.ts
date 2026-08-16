@@ -11,6 +11,7 @@ export interface AlbumTrack {
   name: string;
   previewUrl: string | null;
   durationMs: number | null;
+  isTitle: boolean;
 }
 
 export interface AlbumTrackListProps {

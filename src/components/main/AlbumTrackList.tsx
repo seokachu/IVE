@@ -49,8 +49,13 @@ const AlbumTrackList = ({ albumTitle, albumImage }: AlbumTrackListProps) => {
                 className="w-full flex items-center gap-3 py-2.5 px-1 rounded-md hover:bg-white/10 transition-colors cursor-pointer"
               >
                 <span className="w-5 text-center opacity-60 shrink-0">{track.trackNumber}</span>
-                <span className={`truncate flex-1 text-left ${isCurrent ? "font-bold" : ""}`}>{track.name}</span>
-                <span className="opacity-60 shrink-0 text-xs">{formatDuration(track.durationMs)}</span>
+                <span className={`truncate text-left ${isCurrent ? "font-bold" : ""}`}>{track.name}</span>
+                {track.isTitle && (
+                  <span className="shrink-0 px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-purple text-white">
+                    타이틀
+                  </span>
+                )}
+                <span className="opacity-60 shrink-0 text-xs flex-1 text-right">{formatDuration(track.durationMs)}</span>
                 <span className="shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-white/15">
                   {isTrackPlaying ? (
                     <Pause className="w-3.5 h-3.5 fill-white" />
