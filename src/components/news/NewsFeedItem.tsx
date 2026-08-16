@@ -98,7 +98,7 @@ const NewsFeedItem = ({ item, index }: NewsFeedItemProps) => {
         <div className="flex items-center gap-2 p-3 pb-1.5 text-xs">
           <span
             className={`px-2.5 py-0.5 rounded-2xl backdrop-blur-sm font-bold ${
-              isVideo ? "bg-[#FF0000]/85" : "bg-white/25"
+              isVideo ? "bg-[#FF0000]/85" : "bg-[#3B82F6]/85"
             }`}
           >
             {isVideo ? "영상" : "기사"}
