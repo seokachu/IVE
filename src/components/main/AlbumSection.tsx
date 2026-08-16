@@ -1,4 +1,5 @@
 import AlbumList from "@/components/main/AlbumList";
+import AlbumPlayerBar from "@/components/main/AlbumPlayerBar";
 
 const AlbumSection = () => {
   return (
@@ -22,6 +23,7 @@ const AlbumSection = () => {
           <AlbumList />
         </div>
       </div>
+      <AlbumPlayerBar />
     </section>
   );
 };
