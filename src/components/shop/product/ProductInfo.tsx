@@ -13,7 +13,11 @@ import { Minus, Package, Plus, Sparkles, Star, Truck } from "lucide-react";
 import { useState } from "react";
 import type { ShopMenuProps } from "@/types/shop";
 
-const ProductInfo = ({ id }: ShopMenuProps) => {
+interface ProductInfoProps extends ShopMenuProps {
+  onClickReview?: () => void;
+}
+
+const ProductInfo = ({ id, onClickReview }: ProductInfoProps) => {
   const [count, setCount] = useState(1);
 
   const { data, isLoading, isError } = useShopDetail(id);
@@ -38,6 +42,7 @@ const ProductInfo = ({ id }: ShopMenuProps) => {
     if (count >= 5) {
       toast({
         title: "최대 5개 까지 구매 가능합니다.",
+        variant: "warning",
       });
       return;
     }
@@ -53,9 +58,10 @@ const ProductInfo = ({ id }: ShopMenuProps) => {
   return (
     //시안 기준: 브랜드 컬러 단색 배경 위 갤러리 + 플로팅 구매 카드 히어로
     <div className="relative w-full overflow-hidden bg-purple-50">
-      <Sparkles size={26} className="absolute left-1/2 top-24 hidden text-purple-200 lg:block" aria-hidden />
-      <Sparkles size={20} className="absolute left-6 top-1/2 hidden text-purple-200 lg:block" aria-hidden />
-      <Sparkles size={22} className="absolute right-5 top-64 hidden text-orange-300/60 lg:block" aria-hidden />
+      {/* 시안 기준: 채워진 스파클 — var() 팔레트는 /60 같은 불투명도 수식이 무효라 opacity 유틸 사용 */}
+      <Sparkles size={26} className="absolute left-1/2 top-24 hidden fill-purple-200 text-purple-200 lg:block" aria-hidden />
+      <Sparkles size={20} className="absolute left-6 top-1/2 hidden fill-purple-200 text-purple-200 lg:block" aria-hidden />
+      <Sparkles size={22} className="absolute right-5 top-64 hidden fill-orange-300 text-orange-300 opacity-60 lg:block" aria-hidden />
       <div className="relative m-auto flex max-w-container flex-col items-start gap-8 px-5 py-8 lg:flex-row lg:gap-16 lg:px-8 lg:py-12">
         <ProductGallery title={data.title} images={galleryImages} />
         <div className="w-full rounded-3xl bg-card p-6 shadow-[0_12px_32px_rgba(169,79,192,0.12)] lg:w-1/2 lg:p-7">
@@ -74,7 +80,13 @@ const ProductInfo = ({ id }: ShopMenuProps) => {
             <Star size={14} className="text-warning fill-warning" />
             <span className="font-bold">{rating}</span>
             <span className="text-gray-400">·</span>
-            <span className="text-gray-500 underline">리뷰 {reviewCount}개</span>
+            <button
+              type="button"
+              onClick={onClickReview}
+              className="text-gray-500 underline transition-colors hover:text-purple-500"
+            >
+              리뷰 {reviewCount}개
+            </button>
           </div>
           <div className="mt-6">
             {(data.discount_rate ?? 0) > 0 && (

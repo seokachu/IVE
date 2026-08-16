@@ -1,4 +1,5 @@
 "use client";
+import { useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import ProductDescription from "./ProductDescription";
@@ -11,6 +12,15 @@ const ProductSection = () => {
   const params = useParams();
   const id = params?.id as string;
   const { data } = useShopDetail(id);
+
+  const [activeTab, setActiveTab] = useState<"description" | "review">("description");
+  const descriptionRef = useRef<HTMLDivElement>(null);
+
+  //탭 전환 시 콘텐츠 높이가 급변해 스크롤이 아래 섹션(FAQ)에 떨어지는 것 방지 — 탭 상단으로 복귀
+  const handleTabChange = (tab: "description" | "review") => {
+    setActiveTab(tab);
+    descriptionRef.current?.scrollIntoView();
+  };
 
   return (
     <section className="w-full">
@@ -32,9 +42,9 @@ const ProductSection = () => {
           )}
         </ol>
       </nav>
-      <ProductInfo id={id} />
-      <div className="m-auto max-w-container px-5 lg:px-8">
-        <ProductDescription id={id} />
+      <ProductInfo id={id} onClickReview={() => handleTabChange("review")} />
+      <div ref={descriptionRef} className="m-auto max-w-container px-5 lg:px-8">
+        <ProductDescription id={id} activeTab={activeTab} onTabChange={handleTabChange} />
       </div>
       <GoTopButton />
     </section>
