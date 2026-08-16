@@ -1,4 +1,4 @@
-import { getCarouselShop, getGoodsShop, getGoodsShopDetail } from "@/lib/supabase/shop";
+import { getCarouselShop, getGoodsCount, getGoodsShop, getGoodsShopDetail } from "@/lib/supabase/shop";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import type { SortOptionList } from "@/types/shop";
 
@@ -12,6 +12,14 @@ export const useShops = (sortBy: SortOptionList) => {
       if (lastPage.length === 0) return undefined;
       return allPages.length + 1;
     },
+  });
+};
+
+//상품 전체 개수
+export const useShopsCount = () => {
+  return useQuery({
+    queryKey: ["shops", "count"],
+    queryFn: getGoodsCount,
   });
 };
 

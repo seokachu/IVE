@@ -10,12 +10,7 @@ import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
 import { useAverageRating, useReviewCount } from "@/hooks/queries/useReviews";
 import type { ShopListItemProps } from "@/types/shop";
 
-const SHOP_STYLES = {
-  shop: "w-2/6 md:w-[calc(33.333%-0.9rem)] lg:w-[calc(25%-0.95rem)] mb-7 md:mb-5 md:border p-0 md:p-4 md:rounded-lg md:hover:shadow-lg",
-  //메인 캐러셀: 시안 기준 — 보더 없는 카드, 배지·하트는 이미지 위 오버레이
-  carousel: "w-full",
-} as const;
-
+//시안 기준: 목록·캐러셀 공통 카드 — 보더 없는 카드, 배지·하트는 이미지 위 오버레이
 const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) => {
   const { push } = useRouter();
   const { data: reviewData } = useReviewCount(item.id);
@@ -50,17 +45,13 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
     <Tag
       onClick={onClickDetail}
       onKeyDown={handleKeyDown}
-      className={`${SHOP_STYLES[variant]} cursor-pointer group`}
+      className="w-full cursor-pointer group"
       tabIndex={0}
       aria-label={`상품: ${item.title}, 가격: ${item.price}원, 할인율: ${item.discount_rate}%`}
       data-testid="shop-item"
       data-detail-path={`/shop/${item.id}`}
     >
-      <div
-        className={`relative w-full h-auto rounded-lg overflow-hidden aspect-square border ${
-          variant === "carousel" ? "bg-gray-100 border-gray-200" : ""
-        }`}
-      >
+      <div className="relative w-full h-auto rounded-lg overflow-hidden aspect-square bg-gray-100 border border-gray-200">
         <Image
           src={item.thumbnail || DefaultImage}
           alt={item.title || "상품 썸네일 이미지"}
@@ -70,55 +61,29 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
           loading={variant === "shop" && index < 6 ? "eager" : "lazy"}
           priority={variant === "shop" && index < 6}
         />
-        {variant === "carousel" && (
-          <div className="absolute top-2.5 left-2.5">
-            <Badge item={{ ...item, review_count: reviewCount }} averageRating={averageRating} />
-          </div>
-        )}
-        {variant === "carousel" ? (
-          <Button
-            variant="plain"
-            size="auto"
-            onClick={onClickHeart}
-            className="absolute right-2.5 top-2.5 flex items-center justify-center w-9 h-9 rounded-full bg-white/90 border border-[#EEEEEE]"
-            aria-label="찜하기"
-          >
-            <Heart
-              size={17}
-              fill={isWished ? "currentColor" : "none"}
-              className={`transition-colors ${isWished ? "text-red" : "text-gray-500"}`}
-            />
-          </Button>
-        ) : (
-          <Button variant="plain" size="auto" onClick={onClickHeart} className="absolute right-2 bottom-2 text-gray-300" aria-label="찜하기">
-            <Heart fill="currentColor"
-              size={30}
-              className={`opacity-90 transition-colors ${isWished ? "text-red" : "text-gray-300"}`}
-            />
-          </Button>
-        )}
+        <div className="absolute top-2.5 left-2.5">
+          <Badge item={{ ...item, review_count: reviewCount }} averageRating={averageRating} />
+        </div>
+        <Button
+          variant="plain"
+          size="auto"
+          onClick={onClickHeart}
+          className="absolute right-2.5 top-2.5 flex items-center justify-center w-9 h-9 rounded-full bg-white/90 border border-[#EEEEEE]"
+          aria-label="찜하기"
+        >
+          <Heart
+            size={17}
+            fill={isWished ? "currentColor" : "none"}
+            className={`transition-colors ${isWished ? "text-red" : "text-gray-500"}`}
+          />
+        </Button>
       </div>
-      <div className={`flex flex-col gap-1 ${variant === "carousel" ? "mt-2.5" : ""}`}>
-        {variant === "shop" && (
-          <div className="mt-2 md:mt-4 mb-1 min-h-[20px]">
-            <Badge item={{ ...item, review_count: reviewCount }} averageRating={averageRating} />
-          </div>
-        )}
-        <h3
-          className={`overflow-hidden overflow-ellipsis whitespace-nowrap ${
-            variant === "carousel" ? "text-sm font-semibold" : "text-xs lg:text-base"
-          }`}
-        >
-          {item.title}
-        </h3>
-        <div
-          className={`font-bold flex items-center flex-wrap gap-x-1.5 lg:gap-x-2 ${
-            variant === "carousel" ? "text-[15px]" : "text-sm lg:text-lg"
-          }`}
-        >
+      <div className="flex flex-col gap-1 mt-2.5">
+        <h3 className="overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-semibold">{item.title}</h3>
+        <div className="font-bold flex items-center flex-wrap gap-x-1.5 lg:gap-x-2 text-[15px]">
           <span className="text-orange-500">{item.discount_rate}%</span>
           <span className="whitespace-nowrap">{formatPrice(price)}원</span>
-          <span className="flex items-center gap-1 text-gray-400 text-xs lg:text-sm font-normal">
+          <span className="flex items-center gap-1 text-gray-400 text-xs font-normal">
             <Star size={13} className="text-warning fill-warning" />
             {averageRating}
           </span>

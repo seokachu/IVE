@@ -63,6 +63,21 @@ export const getGoodsShop = async (page = 1, sortBy: SortOptionList = "best") =>
   }
 };
 
+//상품 전체 개수 — 목록 툴바 표기용
+export const getGoodsCount = async () => {
+  try {
+    const { count, error } = await supabase.from("goods").select("id", { count: "exact", head: true });
+
+    if (error) throw error;
+    return count ?? 0;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`상품 개수를 불러오는데 실패했습니다. ${error.message}`);
+    }
+    throw error;
+  }
+};
+
 //상품 목록 상세정보
 export const getGoodsShopDetail = async (id: string) => {
   try {

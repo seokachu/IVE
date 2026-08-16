@@ -2,11 +2,13 @@
 import { useState } from "react";
 import SelectMenu from "@/components/common/select/SelectMenu";
 import ShopList from "@/components/shop/ShopList";
+import { useShopsCount } from "@/hooks/queries/useShops";
 import { PRODUCT_SORT_OPTIONS } from "@/utils/constants";
 import type { SortOptionList } from "@/types/shop";
 
 const ShopContainer = () => {
   const [sort, setSort] = useState<SortOptionList>("best");
+  const { data: totalCount } = useShopsCount();
 
   //Type Guard 함수
   const handleSortChange = (value: string) => {
@@ -21,8 +23,14 @@ const ShopContainer = () => {
 
   return (
     <section className="max-w-container m-auto px-5 pt-14 pb-28 lg:px-8">
-      <div className="flex justify-between mb-8 flex-col lg:flex-row gap-5">
-        <h2 className="text-lg lg:text-xl font-bold">굿즈샵</h2>
+      {/* 시안 기준: 아이브로우 + 영문 타이틀 + 서브 카피 페이지 헤드 */}
+      <div className="flex flex-col gap-2">
+        <span className="text-xs font-bold tracking-[2px] text-orange-500">OFFICIAL MD</span>
+        <h2 className="text-2xl font-bold lg:text-[2rem]">Goods Shop</h2>
+        <p className="text-sm text-gray-500">아이브의 공식 굿즈를 한자리에서 만나보세요</p>
+      </div>
+      <div className="mt-7 mb-6 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+        <span className="text-sm text-gray-500">{typeof totalCount === "number" && `전체 ${totalCount}개`}</span>
         <SelectMenu
           options={PRODUCT_SORT_OPTIONS}
           value={sort}
