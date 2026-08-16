@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import AlbumTrackList from "@/components/main/AlbumTrackList";
 import StreamingLinkChips from "@/components/common/StreamingLinkChips";
 import DefaultImage from "@/assets/images/default_image.avif";
-import { CATEGORY_BADGE_CLASS, formatReleaseDate } from "@/components/discography/constants";
+import { CATEGORY_BADGE_CLASS_ON_DARK, formatReleaseDate } from "@/components/discography/constants";
 import type { DiscographyItem } from "@/lib/album/sync";
 
 interface LatestReleaseHeroProps {
@@ -47,8 +47,10 @@ const LatestReleaseHero = ({ album, isLatestRelease, onOpenDetail }: LatestRelea
           {/* 섹션이 항상 다크이므로 내부 배지·수록곡·칩은 다크 토큰으로 렌더 */}
           <div className="dark w-full lg:flex-1 min-w-0 text-white">
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-orange-500 text-white">NEW</span>
-              <span className={`px-1.5 py-0.5 rounded-full text-[10px] ${CATEGORY_BADGE_CLASS[album.category]}`}>
+              <span className="px-2.5 py-[3px] rounded-full text-[10px] font-bold bg-orange-500 text-white">NEW</span>
+              <span
+                className={`px-2 py-[3px] rounded-full text-[11px] font-bold ${CATEGORY_BADGE_CLASS_ON_DARK[album.category]}`}
+              >
                 {album.category}
               </span>
             </div>
