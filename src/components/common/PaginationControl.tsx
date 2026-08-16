@@ -58,7 +58,7 @@ const PaginationControl = ({ currentPage, totalPages, onPageChange, maxDisplayPa
               e.preventDefault();
               if (currentPage > 1) onPageChange(currentPage - 1);
             }}
-            className={currentPage <= 1 ? "pointer-events-none opacity-50" : ""}
+            className={`h-8 w-8 rounded-full p-0 text-[13px] text-gray-500 hover:bg-gray-100 [&_span]:hidden ${currentPage <= 1 ? "pointer-events-none opacity-50" : ""}`}
           />
         </PaginationItem>
 
@@ -67,6 +67,7 @@ const PaginationControl = ({ currentPage, totalPages, onPageChange, maxDisplayPa
             <PaginationItem>
               <PaginationLink
                 href="#"
+                className="h-8 w-8 rounded-full p-0 text-[13px] text-gray-500 hover:bg-gray-100"
                 onClick={(e) => {
                   e.preventDefault();
                   onPageChange(1);
@@ -92,6 +93,11 @@ const PaginationControl = ({ currentPage, totalPages, onPageChange, maxDisplayPa
                 onPageChange(page);
               }}
               isActive={currentPage === page}
+              className={
+                currentPage === page
+                  ? "h-8 w-8 rounded-full p-0 border-0 bg-purple text-[13px] font-bold text-white hover:bg-purple/90 hover:text-white"
+                  : "h-8 w-8 rounded-full p-0 text-[13px] text-gray-500 hover:bg-gray-100"
+              }
             >
               {page}
             </PaginationLink>
@@ -108,6 +114,7 @@ const PaginationControl = ({ currentPage, totalPages, onPageChange, maxDisplayPa
             <PaginationItem>
               <PaginationLink
                 href="#"
+                className="h-8 w-8 rounded-full p-0 text-[13px] text-gray-500 hover:bg-gray-100"
                 onClick={(e) => {
                   e.preventDefault();
                   onPageChange(totalPages);
@@ -126,7 +133,7 @@ const PaginationControl = ({ currentPage, totalPages, onPageChange, maxDisplayPa
               e.preventDefault();
               if (currentPage < totalPages) onPageChange(currentPage + 1);
             }}
-            className={currentPage >= totalPages ? "pointer-events-none opacity-50" : ""}
+            className={`h-8 w-8 rounded-full p-0 text-[13px] text-gray-500 hover:bg-gray-100 [&_span]:hidden ${currentPage >= totalPages ? "pointer-events-none opacity-50" : ""}`}
           />
         </PaginationItem>
       </PaginationContent>

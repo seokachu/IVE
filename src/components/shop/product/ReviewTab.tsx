@@ -49,7 +49,8 @@ const ReviewTab = ({ id }: ShopMenuProps) => {
   }
 
   return (
-    <div ref={reviewsRef} className="m-auto max-w-[960px]">
+    //scroll-mt: 페이지 이동 시 스티키 탭바에 요약 카드가 가려지지 않게 여백 확보
+    <div ref={reviewsRef} className="m-auto max-w-[960px] scroll-mt-24">
       {/* 시안 기준: 평균 별점 + 분포 게이지 요약 카드 */}
       <div className="flex flex-col items-center gap-6 rounded-3xl bg-gray-50 px-8 py-8 lg:flex-row lg:gap-12 lg:px-10">
         <div className="flex w-[200px] shrink-0 flex-col items-center gap-2">
