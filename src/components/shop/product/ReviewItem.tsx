@@ -6,22 +6,22 @@ import type { ReviewItemProps } from "@/types/shop";
 const ReviewItem = ({ item }: ReviewItemProps) => {
   return (
     <li className="border-b py-6">
-      <div className="flex gap-4 justify-between items-center">
-        <div className="flex gap-3">
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
           <UserAvatar size="md" userId={item.user_id} avatarUrl={item.user.avatar_url} userName={item.user.name} />
-          <div>
-            <h3 className="font-bold">{item.user.name}</h3>
-            <div className="flex gap-1 items-center justify-center">
-              <div className="flex">
-                <RenderStars rating={item.rating} size={15} />
+          <div className="flex flex-col gap-1">
+            <h3 className="text-sm font-semibold">{item.user.name}</h3>
+            <div className="flex items-center gap-1">
+              <div className="flex gap-0.5">
+                <RenderStars rating={item.rating} size={12} />
               </div>
-              <strong className="-translate-y-[1px]">{item.rating}</strong>
+              <strong className="text-xs text-gray-500">{item.rating}.0</strong>
             </div>
           </div>
         </div>
-        <time className="text-gray-300 text-sm">{formatDate(item.created_at)}</time>
+        <time className="text-xs text-gray-400">{formatDate(item.created_at)}</time>
       </div>
-      <p className="mt-3 px-2">{item.content}</p>
+      <p className="mt-3 pl-[52px] text-sm leading-relaxed text-gray-500">{item.content}</p>
     </li>
   );
 };
