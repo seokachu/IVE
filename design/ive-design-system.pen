@@ -16345,14 +16345,14 @@
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "assets/gen-O0pAZ7.jpg",
+                "url": "assets/news-hero-photo.webp",
                 "mode": "fill"
               },
               "width": 1440,
               "height": 292,
               "effect": {
                 "type": "blur",
-                "radius": 14
+                "radius": 7
               }
             },
             {
@@ -16362,7 +16362,25 @@
               "x": 0,
               "y": 0,
               "name": "BgScrim",
-              "fill": "#FFFFFFCC",
+              "fill": {
+                "type": "gradient",
+                "gradientType": "linear",
+                "enabled": true,
+                "rotation": 180,
+                "size": {
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#FFFFFF8C",
+                    "position": 0
+                  },
+                  {
+                    "color": "#FFFFFFEB",
+                    "position": 1
+                  }
+                ]
+              },
               "width": 1440,
               "height": 292
             },
@@ -25250,14 +25268,14 @@
               "fill": {
                 "type": "image",
                 "enabled": true,
-                "url": "assets/gen-O0pAZ7.jpg",
+                "url": "assets/news-hero-photo.webp",
                 "mode": "fill"
               },
               "width": 1440,
               "height": 292,
               "effect": {
                 "type": "blur",
-                "radius": 14
+                "radius": 7
               }
             },
             {
@@ -25267,7 +25285,25 @@
               "x": 0,
               "y": 0,
               "name": "BgScrim",
-              "fill": "#1B1B1FD9",
+              "fill": {
+                "type": "gradient",
+                "gradientType": "linear",
+                "enabled": true,
+                "rotation": 180,
+                "size": {
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#1B1B1F99",
+                    "position": 0
+                  },
+                  {
+                    "color": "#1B1B1FF0",
+                    "position": 1
+                  }
+                ]
+              },
               "width": 1440,
               "height": 292
             },
