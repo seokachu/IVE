@@ -16409,12 +16409,12 @@
                   "type": "ref",
                   "ref": "GZfHv",
                   "name": "AutoBadge",
-                  "fill": "$white",
+                  "fill": "$purple-100",
                   "stroke": "#EEEEEE",
-                  "strokeWidth": 1,
+                  "strokeWidth": 0,
                   "descendants": {
                     "EmaHS": {
-                      "fill": "$gray-600"
+                      "fill": "$purple-500"
                     }
                   }
                 },
@@ -35296,367 +35296,10 @@
     },
     {
       "type": "frame",
-      "id": "fZNic",
+      "id": "NfdV5",
       "x": 10755,
       "y": 8077.8,
       "name": "굿즈샵 상세 V2 · 장바구니 드로어",
-      "clip": true,
-      "width": 1440,
-      "height": 560,
-      "layout": "vertical",
-      "children": [
-        {
-          "type": "frame",
-          "id": "UbbP0",
-          "name": "DimOverlay",
-          "width": "fill_container",
-          "height": "fill_container",
-          "fill": "#0A0A0A66"
-        },
-        {
-          "type": "frame",
-          "id": "YPxMK",
-          "name": "DrawerSheet",
-          "width": "fill_container",
-          "fill": "$bg-surface",
-          "cornerRadius": [
-            16,
-            16,
-            0,
-            0
-          ],
-          "layout": "vertical",
-          "gap": 18,
-          "padding": [
-            12,
-            0,
-            40,
-            0
-          ],
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "rectangle",
-              "cornerRadius": "$radius-full",
-              "id": "sF15z",
-              "name": "DragHandle",
-              "fill": "$bg-muted",
-              "width": 100,
-              "height": 8
-            },
-            {
-              "type": "text",
-              "id": "X2nz7",
-              "name": "DrawerTitle",
-              "fill": "$text-primary",
-              "content": "장바구니에 상품이 담겼습니다.",
-              "fontFamily": "$font-family",
-              "fontSize": 16,
-              "fontWeight": "$font-weight-semibold"
-            },
-            {
-              "type": "frame",
-              "id": "OIP7s",
-              "name": "SummaryRow",
-              "width": 448,
-              "gap": 12,
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "v3yj9K",
-                  "name": "SummaryThumb",
-                  "clip": true,
-                  "width": 56,
-                  "height": 56,
-                  "fill": {
-                    "type": "image",
-                    "enabled": true,
-                    "url": "images/generated-1786911464965.png",
-                    "mode": "fill"
-                  },
-                  "cornerRadius": 12,
-                  "stroke": "$border-default",
-                  "strokeWidth": 1
-                },
-                {
-                  "type": "frame",
-                  "id": "z9R34K",
-                  "name": "SummaryCol",
-                  "layout": "vertical",
-                  "gap": 3,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "CIah7",
-                      "name": "SummaryName",
-                      "fill": "$text-primary",
-                      "content": "BADGE SET VOL.1",
-                      "fontFamily": "$font-family",
-                      "fontSize": 14,
-                      "fontWeight": "$font-weight-semibold"
-                    },
-                    {
-                      "type": "text",
-                      "id": "xntNV",
-                      "name": "SummaryMeta",
-                      "fill": "$text-secondary",
-                      "content": "수량 1개 · 9,600원",
-                      "fontFamily": "$font-family",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "kxOUH",
-              "name": "DrawerButtons",
-              "width": 448,
-              "gap": 8,
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "bJuTW",
-                  "name": "BtnCart",
-                  "width": "fill_container",
-                  "height": 48,
-                  "fill": "$bg-surface",
-                  "cornerRadius": "$radius-full",
-                  "stroke": "$primary",
-                  "strokeWidth": 1,
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "EemdA",
-                      "name": "BtnCartL",
-                      "fill": "$primary-pressed",
-                      "content": "장바구니 보기",
-                      "fontFamily": "$font-family",
-                      "fontSize": 14,
-                      "fontWeight": "$font-weight-semibold"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "wuv6A",
-                  "name": "BtnContinue",
-                  "width": "fill_container",
-                  "height": 48,
-                  "fill": "$primary",
-                  "cornerRadius": "$radius-full",
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "O3SId",
-                      "name": "BtnContinueL",
-                      "fill": "$text-inverse",
-                      "content": "계속 쇼핑하기",
-                      "fontFamily": "$font-family",
-                      "fontSize": 14,
-                      "fontWeight": "$font-weight-semibold"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "frame",
-      "id": "lMJDD",
-      "x": 12315,
-      "y": 8077.8,
-      "name": "굿즈샵 상세 V2 · 장바구니 드로어 · 다크",
-      "theme": {
-        "mode": "dark"
-      },
-      "clip": true,
-      "width": 1440,
-      "height": 560,
-      "layout": "vertical",
-      "children": [
-        {
-          "type": "frame",
-          "id": "V2GY8F",
-          "name": "DimOverlay",
-          "width": "fill_container",
-          "height": "fill_container",
-          "fill": "#0A0A0A66"
-        },
-        {
-          "type": "frame",
-          "id": "u2PFB",
-          "name": "DrawerSheet",
-          "width": "fill_container",
-          "fill": "$bg-surface",
-          "cornerRadius": [
-            16,
-            16,
-            0,
-            0
-          ],
-          "layout": "vertical",
-          "gap": 18,
-          "padding": [
-            12,
-            0,
-            40,
-            0
-          ],
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "rectangle",
-              "cornerRadius": "$radius-full",
-              "id": "u6tCAI",
-              "name": "DragHandle",
-              "fill": "$bg-muted",
-              "width": 100,
-              "height": 8
-            },
-            {
-              "type": "text",
-              "id": "uh59J",
-              "name": "DrawerTitle",
-              "fill": "$text-primary",
-              "content": "장바구니에 상품이 담겼습니다.",
-              "fontFamily": "$font-family",
-              "fontSize": 16,
-              "fontWeight": "$font-weight-semibold"
-            },
-            {
-              "type": "frame",
-              "id": "def2d",
-              "name": "SummaryRow",
-              "width": 448,
-              "gap": 12,
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "I4F5bl",
-                  "name": "SummaryThumb",
-                  "clip": true,
-                  "width": 56,
-                  "height": 56,
-                  "fill": {
-                    "type": "image",
-                    "enabled": true,
-                    "url": "images/generated-1786911464965.png",
-                    "mode": "fill"
-                  },
-                  "cornerRadius": 12,
-                  "stroke": "$border-default",
-                  "strokeWidth": 1
-                },
-                {
-                  "type": "frame",
-                  "id": "kso5N",
-                  "name": "SummaryCol",
-                  "layout": "vertical",
-                  "gap": 3,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "FMvBg",
-                      "name": "SummaryName",
-                      "fill": "$text-primary",
-                      "content": "BADGE SET VOL.1",
-                      "fontFamily": "$font-family",
-                      "fontSize": 14,
-                      "fontWeight": "$font-weight-semibold"
-                    },
-                    {
-                      "type": "text",
-                      "id": "h35lYR",
-                      "name": "SummaryMeta",
-                      "fill": "$text-secondary",
-                      "content": "수량 1개 · 9,600원",
-                      "fontFamily": "$font-family",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "TITPc",
-              "name": "DrawerButtons",
-              "width": 448,
-              "gap": 8,
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "pJOuu",
-                  "name": "BtnCart",
-                  "width": "fill_container",
-                  "height": 48,
-                  "fill": "$bg-surface",
-                  "cornerRadius": "$radius-full",
-                  "stroke": "$primary",
-                  "strokeWidth": 1,
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "yRbUL",
-                      "name": "BtnCartL",
-                      "fill": "$primary-pressed",
-                      "content": "장바구니 보기",
-                      "fontFamily": "$font-family",
-                      "fontSize": 14,
-                      "fontWeight": "$font-weight-semibold"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "DJHrD",
-                  "name": "BtnContinue",
-                  "width": "fill_container",
-                  "height": 48,
-                  "fill": "$primary",
-                  "cornerRadius": "$radius-full",
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "IXk7H",
-                      "name": "BtnContinueL",
-                      "fill": "$text-inverse",
-                      "content": "계속 쇼핑하기",
-                      "fontFamily": "$font-family",
-                      "fontSize": 14,
-                      "fontWeight": "$font-weight-semibold"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "frame",
-      "id": "NfdV5",
-      "x": 13875,
-      "y": 8077.8,
-      "name": "굿즈샵 상세 V2 · 장바구니 드로어 V2",
       "clip": true,
       "width": 1440,
       "height": 560,
@@ -35903,6 +35546,525 @@
                   "fontFamily": "$font-family",
                   "fontSize": 14,
                   "fontWeight": "$font-weight-semibold"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "T8QsL2",
+      "x": 12315,
+      "y": 8077.8,
+      "name": "굿즈샵 상세 V2 · 장바구니 드로어 · 다크",
+      "theme": {
+        "mode": "dark"
+      },
+      "clip": true,
+      "width": 1440,
+      "height": 560,
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "s3g4s",
+          "name": "DimOverlay",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "#0A0A0A66"
+        },
+        {
+          "type": "frame",
+          "id": "YB1LF",
+          "name": "DrawerSheet",
+          "width": "fill_container",
+          "fill": "$bg-surface",
+          "cornerRadius": [
+            24,
+            24,
+            0,
+            0
+          ],
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            12,
+            0,
+            36,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "rectangle",
+              "cornerRadius": "$radius-full",
+              "id": "B8Kutt",
+              "name": "DragHandle",
+              "fill": "$bg-muted",
+              "width": 100,
+              "height": 8
+            },
+            {
+              "type": "frame",
+              "id": "pLg1h",
+              "name": "DrawerHead",
+              "width": 448,
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Q33oMr",
+                  "name": "CheckCircle",
+                  "width": 44,
+                  "height": 44,
+                  "fill": "$primary-subtle",
+                  "cornerRadius": "$radius-full",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "LbDJh",
+                      "name": "CheckIc",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "check",
+                      "library": "lucide",
+                      "fill": "$purple-500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "m00yfR",
+                  "name": "HeadCol",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "F8wltK",
+                      "name": "DrawerTitle",
+                      "fill": "$text-primary",
+                      "content": "장바구니에 담았어요!",
+                      "fontFamily": "$font-family",
+                      "fontSize": 17,
+                      "fontWeight": "$font-weight-bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "SAqBl",
+                      "name": "DrawerSub",
+                      "fill": "$text-secondary",
+                      "content": "지금 주문하면 오늘 바로 출발해요",
+                      "fontFamily": "$font-family",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "N52Ln",
+              "name": "SummaryCard",
+              "width": 448,
+              "fill": "$bg-subtle",
+              "cornerRadius": 16,
+              "gap": 12,
+              "padding": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "TLfYW",
+                  "name": "SummaryThumb",
+                  "clip": true,
+                  "width": 56,
+                  "height": 56,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "images/generated-1786911464965.png",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 12,
+                  "stroke": "$border-default",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "ngVJa",
+                  "name": "SummaryCol",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "IFQdW",
+                      "name": "SummaryName",
+                      "fill": "$text-primary",
+                      "content": "BADGE SET VOL.1",
+                      "fontFamily": "$font-family",
+                      "fontSize": 14,
+                      "fontWeight": "$font-weight-semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "QLUmg",
+                      "name": "SummaryQty",
+                      "fill": "$text-tertiary",
+                      "content": "수량 1개",
+                      "fontFamily": "$font-family",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "CxdPm",
+                  "name": "SummaryPrice",
+                  "fill": "$text-primary",
+                  "content": "9,600원",
+                  "fontFamily": "$font-family",
+                  "fontSize": 15,
+                  "fontWeight": "$font-weight-bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "nMOXI",
+              "name": "DrawerButtons",
+              "width": 448,
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "OjILG",
+                  "name": "BtnGoCart",
+                  "width": "fill_container",
+                  "height": 52,
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 270,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "$purple-400",
+                        "position": 0
+                      },
+                      {
+                        "color": "$orange-300",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "cornerRadius": "$radius-full",
+                  "gap": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "bvH5I",
+                      "name": "GoCartIc",
+                      "width": 17,
+                      "height": 17,
+                      "icon": "shopping-cart",
+                      "library": "lucide",
+                      "fill": "$white"
+                    },
+                    {
+                      "type": "text",
+                      "id": "UBV4b",
+                      "name": "BtnGoCartL",
+                      "fill": "$white",
+                      "content": "장바구니 보기",
+                      "fontFamily": "$font-family",
+                      "fontSize": 15,
+                      "fontWeight": "$font-weight-bold"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "SWkNT",
+                  "name": "BtnContinueL",
+                  "fill": "$text-secondary",
+                  "content": "계속 쇼핑하기",
+                  "fontFamily": "$font-family",
+                  "fontSize": 14,
+                  "fontWeight": "$font-weight-semibold"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "tAPsF",
+      "x": 11900,
+      "y": 5100,
+      "name": "자동 수집 배지 · 시안",
+      "fill": "#ECE4F4",
+      "cornerRadius": 16,
+      "layout": "vertical",
+      "gap": 12,
+      "padding": 24,
+      "children": [
+        {
+          "type": "text",
+          "id": "Z0eVGq",
+          "name": "StripTitle",
+          "fill": "$gray-600",
+          "content": "자동 수집 배지 후보 (라이트 히어로 톤 위)",
+          "fontFamily": "$font-family",
+          "fontSize": 13,
+          "fontWeight": "$font-weight-semibold"
+        },
+        {
+          "type": "frame",
+          "id": "kb3Oe",
+          "name": "BadgeRow",
+          "gap": 28,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "RNuE5",
+              "name": "V-A",
+              "layout": "vertical",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "A16qh",
+                  "name": "Chip",
+                  "fill": "$purple-100",
+                  "cornerRadius": "$radius-full",
+                  "padding": [
+                    3,
+                    8
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "eLeLX",
+                      "name": "ChipT",
+                      "fill": "$purple-500",
+                      "content": "자동 수집",
+                      "fontFamily": "$font-family",
+                      "fontSize": 11,
+                      "fontWeight": "$font-weight-bold"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "X0mRZ",
+                  "name": "VL",
+                  "fill": "$gray-500",
+                  "content": "A 파스텔 보라",
+                  "fontFamily": "$font-family",
+                  "fontSize": 11,
+                  "fontWeight": "$font-weight-regular"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "wcxFz",
+              "name": "V-B",
+              "layout": "vertical",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "R73ja",
+                  "name": "Chip",
+                  "fill": "#FFFFFFB3",
+                  "cornerRadius": "$radius-full",
+                  "stroke": "#FFFFFF",
+                  "strokeWidth": 1,
+                  "padding": [
+                    3,
+                    8
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "A7aVM",
+                      "name": "ChipT",
+                      "fill": "$gray-600",
+                      "content": "자동 수집",
+                      "fontFamily": "$font-family",
+                      "fontSize": 11,
+                      "fontWeight": "$font-weight-bold"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "LEy3c",
+                  "name": "VL",
+                  "fill": "$gray-500",
+                  "content": "B 글래스",
+                  "fontFamily": "$font-family",
+                  "fontSize": 11,
+                  "fontWeight": "$font-weight-regular"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "FbVSp",
+              "name": "V-C",
+              "layout": "vertical",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "lr4px",
+                  "name": "Chip",
+                  "fill": "#00000000",
+                  "cornerRadius": "$radius-full",
+                  "stroke": "$purple-300",
+                  "strokeWidth": 1,
+                  "padding": [
+                    3,
+                    8
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "WoS5P",
+                      "name": "ChipT",
+                      "fill": "$purple-500",
+                      "content": "자동 수집",
+                      "fontFamily": "$font-family",
+                      "fontSize": 11,
+                      "fontWeight": "$font-weight-bold"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "hRx7G",
+                  "name": "VL",
+                  "fill": "$gray-500",
+                  "content": "C 아웃라인",
+                  "fontFamily": "$font-family",
+                  "fontSize": 11,
+                  "fontWeight": "$font-weight-regular"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "cxALq",
+              "name": "V-D",
+              "layout": "vertical",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "H0HQC",
+                  "name": "Chip",
+                  "fill": "$orange-100",
+                  "cornerRadius": "$radius-full",
+                  "padding": [
+                    3,
+                    8
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "WD8Md",
+                      "name": "ChipT",
+                      "fill": "$orange-500",
+                      "content": "자동 수집",
+                      "fontFamily": "$font-family",
+                      "fontSize": 11,
+                      "fontWeight": "$font-weight-bold"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "vRgBc",
+                  "name": "VL",
+                  "fill": "$gray-500",
+                  "content": "D 오렌지 파스텔",
+                  "fontFamily": "$font-family",
+                  "fontSize": 11,
+                  "fontWeight": "$font-weight-regular"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "c2e17",
+              "name": "V-E",
+              "layout": "vertical",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "F84952",
+                  "name": "Chip",
+                  "fill": "$purple-400",
+                  "cornerRadius": "$radius-full",
+                  "padding": [
+                    3,
+                    8
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ZixAl",
+                      "name": "ChipT",
+                      "fill": "$white",
+                      "content": "자동 수집",
+                      "fontFamily": "$font-family",
+                      "fontSize": 11,
+                      "fontWeight": "$font-weight-bold"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "pojtl",
+                  "name": "VL",
+                  "fill": "$gray-500",
+                  "content": "E 진보라",
+                  "fontFamily": "$font-family",
+                  "fontSize": 11,
+                  "fontWeight": "$font-weight-regular"
                 }
               ]
             }
