@@ -1,9 +1,8 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import StreamingLinkChips from "@/components/common/StreamingLinkChips";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import AlbumTrackList from "@/components/main/AlbumTrackList";
 import DefaultImage from "@/assets/images/default_image.avif";
@@ -14,7 +13,7 @@ const FILTER_ARRAY = ["전체", "정규", "미니", "싱글"] as const;
 const CATEGORY_BADGE_CLASS = {
   정규: "bg-purple text-white",
   미니: "bg-purple-100 text-purple-700",
-  싱글: "bg-white/15 text-white",
+  싱글: "bg-gray-200 text-gray-700 dark:bg-white/15 dark:text-white",
 } as const;
 
 const DiscographyList = ({ items }: { items: DiscographyItem[] }) => {
@@ -32,19 +31,19 @@ const DiscographyList = ({ items }: { items: DiscographyItem[] }) => {
   return (
     <div>
       <nav aria-label="발매 구분 필터" className="flex justify-center items-center mb-10">
-        <ul className="flex items-center gap-2 p-1 bg-white/10 rounded-full">
+        <ul className="flex items-center gap-2 p-1 bg-gray-100 dark:bg-white/10 rounded-full">
           {FILTER_ARRAY.map((filter) => (
             <li
               key={filter}
               className={`px-6 py-2 rounded-full whitespace-nowrap text-xs lg:text-sm ${
-                selectedFilter === filter ? "bg-white/20" : ""
+                selectedFilter === filter ? "bg-background dark:bg-white/20" : ""
               }`}
             >
               <Button
                 variant="plain"
                 size="auto"
                 onClick={() => handleFilterChange(filter)}
-                className={`font-normal text-white ${selectedFilter === filter ? "font-bold" : "opacity-70"}`}
+                className={`font-normal ${selectedFilter === filter ? "font-bold text-purple" : "opacity-70"}`}
               >
                 {filter}
               </Button>
@@ -60,7 +59,7 @@ const DiscographyList = ({ items }: { items: DiscographyItem[] }) => {
               onClick={() => setSelectedId(item.id)}
               className={`w-full text-left group rounded-md ${selectedId === item.id ? "ring-2 ring-purple" : ""}`}
             >
-              <div className="relative aspect-square rounded-md overflow-hidden bg-white/10">
+              <div className="relative aspect-square rounded-md overflow-hidden bg-gray-100 dark:bg-white/10">
                 <Image
                   src={item.image || DefaultImage}
                   alt={item.title}
@@ -88,7 +87,7 @@ const DiscographyList = ({ items }: { items: DiscographyItem[] }) => {
       <Sheet open={Boolean(selected)} onOpenChange={(open) => !open && setSelectedId(null)}>
         <SheetContent
           side="right"
-          className="w-full sm:max-w-md bg-neutral-950 text-white border-white/10 overflow-y-auto pb-24"
+          className="w-full sm:max-w-md bg-background text-foreground border-gray-200 dark:border-white/10 overflow-y-auto pb-24"
         >
           {selected && (
             <>
@@ -114,16 +113,10 @@ const DiscographyList = ({ items }: { items: DiscographyItem[] }) => {
               <p className="text-xs opacity-60 mb-1">
                 {selected.releaseDate.slice(0, 10).replaceAll("-", ".")} · {selected.trackCount}곡
               </p>
-              {selected.appleLink && (
-                <Link
-                  href={selected.appleLink}
-                  target="_blank"
-                  className="inline-flex items-center gap-1 text-xs opacity-70 hover:opacity-100 underline-offset-2 hover:underline"
-                >
-                  Apple Music에서 듣기 <ExternalLink className="w-3 h-3" />
-                </Link>
-              )}
-              <div className="mt-5 border-t border-white/10 pt-2">
+              <div className="mt-4">
+                <StreamingLinkChips albumTitle={selected.title} appleLink={selected.appleLink} />
+              </div>
+              <div className="mt-5 border-t border-gray-200 dark:border-white/10 pt-2">
                 <AlbumTrackList albumTitle={selected.title} albumImage={selected.image} />
               </div>
             </>

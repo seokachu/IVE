@@ -36,7 +36,7 @@ const AlbumTrackList = ({ albumTitle, albumImage }: AlbumTrackListProps) => {
   };
 
   return (
-    <ul className="max-h-40 lg:max-h-56 overflow-y-auto flex flex-col divide-y divide-white/10 text-sm scrollbar-hide">
+    <ul className="max-h-40 lg:max-h-56 overflow-y-auto flex flex-col divide-y divide-gray-200 dark:divide-white/10 text-sm scrollbar-hide">
       {tracks.map((track, index) => {
         const isCurrent = playingAlbum === albumTitle && currentIndex === index;
         const isTrackPlaying = isCurrent && isPlaying;
@@ -46,7 +46,7 @@ const AlbumTrackList = ({ albumTitle, albumImage }: AlbumTrackListProps) => {
               <button
                 onClick={() => handleToggle(index)}
                 aria-label={isTrackPlaying ? `${track.name} 일시정지` : `${track.name} 미리듣기`}
-                className="w-full flex items-center gap-3 py-2.5 px-1 rounded-md hover:bg-white/10 transition-colors cursor-pointer"
+                className="w-full flex items-center gap-3 py-2.5 px-1 rounded-md hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
               >
                 <span className="w-5 text-center opacity-60 shrink-0">{track.trackNumber}</span>
                 <span className={`truncate text-left ${isCurrent ? "font-bold" : ""}`}>{track.name}</span>
@@ -56,11 +56,11 @@ const AlbumTrackList = ({ albumTitle, albumImage }: AlbumTrackListProps) => {
                   </span>
                 )}
                 <span className="opacity-60 shrink-0 text-xs flex-1 text-right">{formatDuration(track.durationMs)}</span>
-                <span className="shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-white/15">
+                <span className="shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-gray-200 dark:bg-white/15">
                   {isTrackPlaying ? (
-                    <Pause className="w-3.5 h-3.5 fill-white" />
+                    <Pause className="w-3.5 h-3.5 fill-current" />
                   ) : (
-                    <Play className="w-3.5 h-3.5 fill-white" />
+                    <Play className="w-3.5 h-3.5 fill-current" />
                   )}
                 </span>
               </button>
