@@ -16408,7 +16408,15 @@
                   "id": "yj7Hp",
                   "type": "ref",
                   "ref": "GZfHv",
-                  "name": "AutoBadge"
+                  "name": "AutoBadge",
+                  "fill": "$white",
+                  "stroke": "#EEEEEE",
+                  "strokeWidth": 1,
+                  "descendants": {
+                    "EmaHS": {
+                      "fill": "$gray-600"
+                    }
+                  }
                 },
                 {
                   "type": "text",
@@ -25305,7 +25313,13 @@
                   "id": "S71gc",
                   "type": "ref",
                   "ref": "GZfHv",
-                  "name": "AutoBadge"
+                  "name": "AutoBadge",
+                  "fill": "$bg-muted",
+                  "descendants": {
+                    "EmaHS": {
+                      "fill": "$text-secondary"
+                    }
+                  }
                 },
                 {
                   "type": "text",
@@ -35630,6 +35644,265 @@
                       "fontWeight": "$font-weight-semibold"
                     }
                   ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "NfdV5",
+      "x": 13875,
+      "y": 8077.8,
+      "name": "굿즈샵 상세 V2 · 장바구니 드로어 V2",
+      "clip": true,
+      "width": 1440,
+      "height": 560,
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "uMY3J",
+          "name": "DimOverlay",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "#0A0A0A66"
+        },
+        {
+          "type": "frame",
+          "id": "iSHJU",
+          "name": "DrawerSheet",
+          "width": "fill_container",
+          "fill": "$bg-surface",
+          "cornerRadius": [
+            24,
+            24,
+            0,
+            0
+          ],
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            12,
+            0,
+            36,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "rectangle",
+              "cornerRadius": "$radius-full",
+              "id": "PeHhG",
+              "name": "DragHandle",
+              "fill": "$bg-muted",
+              "width": 100,
+              "height": 8
+            },
+            {
+              "type": "frame",
+              "id": "VnbE8",
+              "name": "DrawerHead",
+              "width": 448,
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "mz64p",
+                  "name": "CheckCircle",
+                  "width": 44,
+                  "height": 44,
+                  "fill": "$primary-subtle",
+                  "cornerRadius": "$radius-full",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "zgTLd",
+                      "name": "CheckIc",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "check",
+                      "library": "lucide",
+                      "fill": "$purple-500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "s1x2Z",
+                  "name": "HeadCol",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Lr9Mv",
+                      "name": "DrawerTitle",
+                      "fill": "$text-primary",
+                      "content": "장바구니에 담았어요!",
+                      "fontFamily": "$font-family",
+                      "fontSize": 17,
+                      "fontWeight": "$font-weight-bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "a16vA3",
+                      "name": "DrawerSub",
+                      "fill": "$text-secondary",
+                      "content": "지금 주문하면 오늘 바로 출발해요",
+                      "fontFamily": "$font-family",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "N1oA4w",
+              "name": "SummaryCard",
+              "width": 448,
+              "fill": "$bg-subtle",
+              "cornerRadius": 16,
+              "gap": 12,
+              "padding": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "pxtmf",
+                  "name": "SummaryThumb",
+                  "clip": true,
+                  "width": 56,
+                  "height": 56,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "images/generated-1786911464965.png",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 12,
+                  "stroke": "$border-default",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "YJUbf",
+                  "name": "SummaryCol",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Ngi7q",
+                      "name": "SummaryName",
+                      "fill": "$text-primary",
+                      "content": "BADGE SET VOL.1",
+                      "fontFamily": "$font-family",
+                      "fontSize": 14,
+                      "fontWeight": "$font-weight-semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Feov5",
+                      "name": "SummaryQty",
+                      "fill": "$text-tertiary",
+                      "content": "수량 1개",
+                      "fontFamily": "$font-family",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "cNUOS",
+                  "name": "SummaryPrice",
+                  "fill": "$text-primary",
+                  "content": "9,600원",
+                  "fontFamily": "$font-family",
+                  "fontSize": 15,
+                  "fontWeight": "$font-weight-bold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "BixsX",
+              "name": "DrawerButtons",
+              "width": 448,
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "hZ5vz",
+                  "name": "BtnGoCart",
+                  "width": "fill_container",
+                  "height": 52,
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 270,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "$purple-400",
+                        "position": 0
+                      },
+                      {
+                        "color": "$orange-300",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "cornerRadius": "$radius-full",
+                  "gap": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "alWIT",
+                      "name": "GoCartIc",
+                      "width": 17,
+                      "height": 17,
+                      "icon": "shopping-cart",
+                      "library": "lucide",
+                      "fill": "$white"
+                    },
+                    {
+                      "type": "text",
+                      "id": "REzV7",
+                      "name": "BtnGoCartL",
+                      "fill": "$white",
+                      "content": "장바구니 보기",
+                      "fontFamily": "$font-family",
+                      "fontSize": 15,
+                      "fontWeight": "$font-weight-bold"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "FhiQi",
+                  "name": "BtnContinueL",
+                  "fill": "$text-secondary",
+                  "content": "계속 쇼핑하기",
+                  "fontFamily": "$font-family",
+                  "fontSize": 14,
+                  "fontWeight": "$font-weight-semibold"
                 }
               ]
             }
