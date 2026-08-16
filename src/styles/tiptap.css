@@ -1,0 +1,51 @@
+/* 게시판 글쓰기 Tiptap 에디터 — 시안: 게시판 글쓰기 · 라이트 */
+.board-editor .tiptap {
+  min-height: 300px;
+  padding: 20px 18px;
+  font-size: 15px;
+  line-height: 1.7;
+  outline: none;
+}
+
+.board-editor .tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  color: var(--gray-400);
+}
+
+.board-editor .tiptap > * + * {
+  margin-top: 0.75em;
+}
+
+.board-editor .tiptap ul {
+  padding-left: 1.4em;
+  list-style: disc;
+}
+
+.board-editor .tiptap ol {
+  padding-left: 1.4em;
+  list-style: decimal;
+}
+
+.board-editor .tiptap blockquote {
+  border-left: 3px solid var(--purple-300);
+  padding-left: 14px;
+  color: var(--gray-500);
+}
+
+.board-editor .tiptap a {
+  color: var(--purple-500);
+  text-decoration: underline;
+}
+
+.board-editor .tiptap img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.board-editor .tiptap img.ProseMirror-selectednode {
+  outline: 2px solid var(--purple-300);
+}
