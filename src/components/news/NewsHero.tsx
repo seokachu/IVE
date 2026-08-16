@@ -11,7 +11,9 @@ const NewsHero = () => {
         <h1 className="text-3xl lg:text-[44px] lg:leading-tight font-bold">소식</h1>
         <p className="text-sm lg:text-base text-gray-500">아이브의 일정과 영상, 기사를 한곳에 모아 보여드려요</p>
         <div className="flex items-center gap-2 mt-1">
-          <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-gray-100 text-gray-500">자동 수집</span>
+          <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-purple-50 text-purple-500 dark:text-purple-300">
+            자동 수집
+          </span>
           <p className="text-xs text-gray-400">뉴스 · 영상 · 일정을 30분마다 자동으로 업데이트해요</p>
         </div>
       </div>
