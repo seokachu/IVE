@@ -8,6 +8,7 @@ import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
 import { Heart } from "lucide-react";
 import DirectPaymentButton from "@/components/payment/DirectPaymentButton";
 import { useCartActions } from "@/store/zustand";
+import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import type { ProductActionsProps } from "@/types/shop";
 import type { CartItem } from "@/types/cart";
 
@@ -15,6 +16,8 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { setCartItems } = useCartActions();
   const { isWished, toggleWishList } = useWishListWithLocal(product.id);
+
+  const totalPrice = getDiscountedPrice(product) * quantity;
 
   const onClickCart = () => {
     try {
@@ -58,31 +61,42 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
 
   return (
     <>
-      <ul className="flex items-stretch justify-center gap-1 lg:gap-2">
-        <li className="w-1/5">
+      {/* 시안 기준: 그라데이션 구매 CTA + 찜 서클 · 장바구니 필 보조 버튼 */}
+      <div className="flex flex-col gap-2.5">
+        <DirectPaymentButton
+          product={product}
+          quantity={quantity}
+          className="h-14 w-full rounded-full bg-gradient-to-r from-purple-400 to-orange-300 text-base font-bold text-white hover:opacity-90"
+        >
+          {formatPrice(totalPrice)}원 바로 구매하기
+        </DirectPaymentButton>
+        <div className="flex items-center gap-2.5">
           <Button
             onClick={onClickHeart}
+            variant="plain"
             size="auto"
-            className="w-full flex items-center justify-center h-full"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-gray-300"
             aria-label="찜하기"
           >
-            {isWished ? (
-              <Heart size={25} className="text-red" fill="currentColor" />
-            ) : (
-              <Heart size={25} className="text-white" />
-            )}
+            <Heart
+              size={20}
+              fill={isWished ? "currentColor" : "none"}
+              className={isWished ? "text-red" : "text-purple-400"}
+            />
           </Button>
-        </li>
-        <li className="w-2/4">
-          <Button onClick={onClickCart} variant="outlineBrand" size="auto" className="w-full py-3 text-center">
-            장바구니
+          <Button
+            onClick={onClickCart}
+            variant="outlineBrand"
+            size="auto"
+            className="h-12 w-full rounded-full bg-transparent text-[15px]"
+          >
+            장바구니 담기
           </Button>
-        </li>
-        <li className="w-2/4">
-          <DirectPaymentButton product={product} quantity={quantity} />
-        </li>
-      </ul>
-      {isDrawerOpen && <AddToCartDrawer isOpen={isDrawerOpen} onClose={onClickCloseDrawer} />}
+        </div>
+      </div>
+      {isDrawerOpen && (
+        <AddToCartDrawer isOpen={isDrawerOpen} onClose={onClickCloseDrawer} product={product} quantity={quantity} />
+      )}
     </>
   );
 };

@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/schedule-extract",
+      "schedule": "0 21 * * *"
+    },
+    {
+      "path": "/api/cron/album-sync",
+      "schedule": "30 21 * * *"
+    }
+  ]
+}

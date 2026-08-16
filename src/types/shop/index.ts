@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { ShopListItem } from "@/types/index";
 
 export type SortOptionList =
@@ -7,6 +8,12 @@ export type SortOptionList =
   | "price_high_to_low";
 export type ItemVariant = "shop" | "carousel";
 export type ShopMenuProps = Pick<ShopListItem, "id">;
+
+//목록·캐러셀 공용 상품 타입 — 리뷰 수·평균 별점을 목록 조회 시 함께 계산해 담는다
+export interface GoodsItem extends Omit<ShopListItem, "review_count"> {
+  review_count: number;
+  average_rating: number;
+}
 
 export interface SortOption {
   column: string;
@@ -24,7 +31,7 @@ export interface TabMenuProps {
 }
 
 export interface ShopListItemProps {
-  item: ShopListItem;
+  item: GoodsItem;
   variant: ItemVariant;
   index?: number;
 }
@@ -41,6 +48,8 @@ export interface ProductActionsProps {
 export interface DirectPaymentButtonProps {
   product: ShopListItem;
   quantity: number;
+  className?: string;
+  children?: ReactNode;
 }
 
 export interface ReviewItem {

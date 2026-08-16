@@ -1,17 +1,16 @@
 import ShopListCarousel from "@/components/main/items/ShopListCarousel";
-import Link from "next/link";
+import SectionTitle from "@/components/common/SectionTitle";
+import MoreLink from "@/components/common/MoreLink";
 
 const ShopSection = () => {
   return (
     <section>
-      <div className="max-w-content m-auto pt-16 px-5 pb-28 flex justify-center align-center flex-col">
-        <h2 className="text-2xl font-bold lg:text-4xl text-center mb-12">SHOP</h2>
-        <div className="w-full">
-          <Link href="/shop" className="float-right hover:text-purple">
-            더보기
-          </Link>
+      <div className="max-w-content m-auto px-5 pt-8 pb-32 flex justify-center align-center flex-col gap-8">
+        <SectionTitle title="Shop" subtitle="지금 인기 있는 공식 굿즈" />
+        <div className="flex justify-end">
+          <MoreLink href="/shop" />
         </div>
-        <ul className="mt-5">
+        <ul className="-mt-4">
           <ShopListCarousel />
         </ul>
       </div>

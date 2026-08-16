@@ -12,10 +12,18 @@ const UserMenu = () => {
       <ul className="flex gap-4 items-center">
         <li className={`${!session ? "translate-y-0" : "translate-y-[2px]"} `}>
           <Link href="/cart" aria-label="장바구니">
-            <CartIcon className="left-3" />
+            <CartIcon iconSize={19} className="left-3" />
           </Link>
         </li>
-        <li className="flex">{!session ? <LoginLink>로그인</LoginLink> : <UserDropdownMenu />}</li>
+        <li className="flex">
+          {!session ? (
+            <LoginLink className="px-5 py-2 rounded-full bg-purple text-white text-sm font-semibold hover:opacity-90 transition-opacity">
+              로그인
+            </LoginLink>
+          ) : (
+            <UserDropdownMenu />
+          )}
+        </li>
       </ul>
     </nav>
   );

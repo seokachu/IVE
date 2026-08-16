@@ -1,8 +1,6 @@
 import type { Database } from "@/types/supabase";
 
 //supabase type
-export type NewsItem = Database["public"]["Tables"]["news_gallery"]["Row"];
-export type GalleryItem = Database["public"]["Tables"]["gallery"]["Row"];
 export type OrderItem = Database["public"]["Tables"]["order_items"]["Row"];
 export type ShopListItem = Database["public"]["Tables"]["goods"]["Row"];
 export type ShippingAddress = Database["public"]["Tables"]["shipping_addresses"]["Row"];

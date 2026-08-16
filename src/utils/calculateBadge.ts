@@ -15,7 +15,9 @@ export const calculateBadge = ({ shipping_type, review_count, rating }: BadgeFie
   const hasEnoughReviews = typeof review_count === "number" && review_count >= 10;
   const hasHighRating = typeof rating === "number" && rating >= 4;
 
-  if (hasEnoughReviews && hasHighRating) badges.push(BADGE_TYPES.BEST);
+  if (hasEnoughReviews && hasHighRating) badges.push(BADGE_TYPES.HOT);
+
+  //TODO: 신상품(NEW) 뱃지 — 발매일/등록일 기준 부여 로직 추가 예정 (BADGE_TYPES.NEW)
 
   return badges;
 };

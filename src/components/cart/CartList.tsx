@@ -1,16 +1,14 @@
 "use client";
 import CartListItem from "./CartListItem";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import useLoading from "@/hooks/useLoading";
 import CartListLoading from "../common/loading/CartListLoading";
 import { toast } from "@/hooks/use-toast";
 import SelectionControl from "../common/select/SelectionControl";
-import { useShops } from "@/hooks/queries/useShops";
 import { useCartActions, useCartItems, useCheckoutActions, useSelectedItemIds } from "@/store/zustand";
 
 const CartList = () => {
-  const { fetchNextPage, hasNextPage, isFetchingNextPage } = useShops("latest");
   const [mounted, setMounted] = useState(false);
   const cartItems = useCartItems();
   const selectedItems = useSelectedItemIds();
@@ -24,24 +22,6 @@ const CartList = () => {
     setMounted(true);
     stopLoading();
   }, [startLoading, stopLoading]);
-
-  const onIntersect = useCallback(
-    (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) {
-          fetchNextPage();
-        }
-      });
-    },
-    [fetchNextPage, hasNextPage, isFetchingNextPage],
-  );
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(onIntersect, { threshold: 0.5 });
-    const target = document.querySelector("#sentinel");
-    if (target) observer.observe(target);
-    return () => observer.disconnect();
-  }, [onIntersect]);
 
   //컴포넌트가 마운트 되었을 때 장바구니 모든 아이템 선택하기, 선택삭제 버튼 클릭시 남은 item 선택
   useEffect(() => {

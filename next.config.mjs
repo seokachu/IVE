@@ -18,6 +18,30 @@ const config = {
         port: "",
         pathname: "/storage/v1/object/public/**",
       },
+      {
+        protocol: "https",
+        hostname: "*.ytimg.com",
+        port: "",
+        pathname: "/vi/**",
+      },
+      {
+        protocol: "http",
+        hostname: "www.kopis.or.kr",
+        port: "",
+        pathname: "/upload/**",
+      },
+      {
+        protocol: "https",
+        hostname: "search.pstatic.net",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.mzstatic.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

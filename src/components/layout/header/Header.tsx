@@ -1,8 +1,7 @@
 "use client";
 import Navigator from "@/components/layout/header/components/Navigator";
 import Image from "next/image";
-import LogoImage from "@/assets/images/logo.svg";
-import SubLogoImage from "@/assets/images/logo_black.svg";
+import PinkLogoImage from "@/assets/images/logo_pink.svg";
 import Link from "next/link";
 import UserMenu from "./components/UserMenu";
 import HeaderAside from "./components/HeaderAside";
@@ -45,8 +44,6 @@ const Header = () => {
     };
   }, [isMainPage, setScrolled]);
 
-  // 메인 히어로 위(스크롤 전)는 테마와 무관하게 흰 로고, 그 외는 라이트=검정 / 다크=흰 로고
-  const isOnHeroImage = isMainPage && !isScrolled;
 
   return (
     <header
@@ -65,14 +62,7 @@ const Header = () => {
         <HeaderAside />
         <h1 className="cursor-pointer absolute top-[20px] left-2/4 -translate-x-2/4 lg:static lg:translate-x-0">
           <Link href="/" className="relative w-[80px] h-auto block">
-            {isOnHeroImage ? (
-              <Image src={LogoImage} alt="logo" className="fill" priority />
-            ) : (
-              <>
-                <Image src={SubLogoImage} alt="logo" className="fill dark:hidden" priority />
-                <Image src={LogoImage} alt="logo" className="fill hidden dark:block" priority />
-              </>
-            )}
+            <Image src={PinkLogoImage} alt="logo" className="fill" priority />
           </Link>
         </h1>
         <Navigator />
