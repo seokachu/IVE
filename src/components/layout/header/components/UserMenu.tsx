@@ -10,7 +10,8 @@ const UserMenu = () => {
   return (
     <nav className="hidden lg:block">
       <ul className="flex gap-4 items-center">
-        <li className={`${!session ? "translate-y-0" : "translate-y-[2px]"} `}>
+        {/* 정렬은 ul items-center로 통일 — 세션별 translate 보정 제거 */}
+        <li className="flex items-center">
           <Link href="/cart" aria-label="장바구니">
             <CartIcon iconSize={19} />
           </Link>
