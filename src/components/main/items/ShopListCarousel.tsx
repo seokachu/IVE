@@ -10,12 +10,13 @@ import ShopListItem from "@/components/shop/ShopListItem";
 import { useShopCarousel } from "@/hooks/queries/useShops";
 
 //기존 embla(ui/carousel) 반응형 폭과 동일: 모바일 65% / md 40% / lg 28%
+//시안 기준: 데스크톱은 4개 정렬, 모바일·태블릿은 부분 노출로 스와이프 힌트
 const SLIDE_OPTIONS = {
   spaceBetween: 16,
   slidesPerView: 1.54,
   breakpoints: {
     768: { slidesPerView: 2.5 },
-    1024: { slidesPerView: 3.57 },
+    1024: { slidesPerView: 4, spaceBetween: 24 },
   },
 } as const;
 
@@ -28,7 +29,7 @@ const ShopListCarousel = () => {
 
   return (
     <div className="relative w-full max-w-content">
-      <Swiper {...SLIDE_OPTIONS} onSwiper={setSwiper} className="!px-5" wrapperTag="ul">
+      <Swiper {...SLIDE_OPTIONS} onSwiper={setSwiper} className="!px-5 lg:!px-0" wrapperTag="ul">
         {isLoading
           ? Array.from({ length: 4 }).map((_, index) => (
               <SwiperSlide key={index} tag="li">

@@ -3,9 +3,8 @@ import { useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
-import { EffectCoverflow, Keyboard } from "swiper/modules";
+import { Keyboard } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/effect-coverflow";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import DefaultImage from "@/assets/images/default_image.avif";
 import AlbumTrackList from "@/components/main/AlbumTrackList";
@@ -31,29 +30,34 @@ const AlbumShowcase = () => {
       <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
         <div className="w-full lg:w-[55%] min-w-0">
           <Swiper
-            effect="coverflow"
             grabCursor
             centeredSlides
             loop
             slidesPerView="auto"
+            spaceBetween={24}
             slideToClickedSlide
-            coverflowEffect={{ rotate: 30, stretch: 0, depth: 140, modifier: 1, slideShadows: true }}
             keyboard={{ enabled: true }}
-            modules={[EffectCoverflow, Keyboard]}
+            modules={[Keyboard]}
             onSwiper={setSwiper}
             onSlideChange={(s) => setActiveIndex(s.realIndex)}
             wrapperTag="ul"
-            className="w-full"
+            className="w-full [&_.swiper-wrapper]:items-center"
           >
-            {albums.map((album) => (
-              <SwiperSlide key={album.title} tag="li" className="!w-[220px] lg:!w-[320px] py-4">
-                <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl">
+            {albums.map((album, index) => (
+              <SwiperSlide key={album.title} tag="li" className="!w-auto">
+                <div
+                  className={`relative aspect-square rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 ${
+                    index === activeIndex
+                      ? "w-[240px] lg:w-[340px]"
+                      : "w-[130px] lg:w-[170px] opacity-40"
+                  }`}
+                >
                   <Image
                     src={album.album_image || DefaultImage}
                     alt={album.title}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 1024px) 220px, 320px"
+                    sizes="(max-width: 1024px) 240px, 340px"
                   />
                 </div>
               </SwiperSlide>
@@ -61,14 +65,16 @@ const AlbumShowcase = () => {
           </Swiper>
         </div>
 
-        <div className="w-full lg:w-[45%] text-white dark">
+        <div className="w-full lg:w-[45%] text-white">
           <h3 className="text-2xl lg:text-3xl font-bold">{active.title}</h3>
           <p className="text-sm text-white/50 mt-1.5 mb-5">
             {[active.album_info, active.date, active.genre, active.total_song ? `${active.total_song}곡` : null]
               .filter(Boolean)
               .join(" · ")}
           </p>
-          <AlbumTrackList albumTitle={active.title} albumImage={active.album_image} />
+          <div className="dark">
+            <AlbumTrackList albumTitle={active.title} albumImage={active.album_image} />
+          </div>
           <div className="mt-5">
             <StreamingLinkChips albumTitle={active.title} melonLink={active.melon_link} appleLink={active.apple_link} />
           </div>

@@ -94,7 +94,7 @@ const NewsPreviewSection = () => {
           className="inline-flex justify-center items-center gap-1 px-8 py-4 rounded-full text-sm lg:text-base bg-purple text-white hover:opacity-90 transition-opacity"
         >
           <span>소식 전체 보기</span>
-          <ArrowRight className="w-4 h-4" />
+          <ArrowRight className="w-4 h-4 animate-arrow-x" />
         </Link>
       </div>
     </section>

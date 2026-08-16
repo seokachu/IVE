@@ -11,10 +11,10 @@ const Footer = () => {
         <h1 className="relative w-[80px] h-auto">
           <Image src={PinkLogoImage} alt="logo" className="fill" />
         </h1>
-        <div className="flex flex-col items-center gap-1.5 text-center text-xs text-gray-500">
+        <div className="flex flex-col items-center gap-1.5 text-center text-xs text-gray-400">
           <p>IVE로 DIVE는 팬이 만든 비공식 팬 사이트이며, 포트폴리오 목적으로 제작되었습니다.</p>
           <p>아이브(IVE) 관련 콘텐츠의 저작권은 스타쉽엔터테인먼트에 있습니다.</p>
-          <p className="font-semibold text-gray-600 mt-1">© 2026 seokachu. All rights reserved.</p>
+          <p className="font-semibold text-gray-500 mt-1">© 2026 seokachu. All rights reserved.</p>
         </div>
         <ul className="flex gap-3">
           <li>

@@ -41,7 +41,7 @@ const VisualSection = ({ videoId }: VisualSectionProps) => {
 
       <div className="relative flex flex-col items-center text-center gap-5 px-5">
         <p className="text-xs lg:text-sm font-semibold tracking-[0.3em] text-purple-200">IVE FAN COMMUNITY</p>
-        <h1 className="text-white font-bold text-4xl lg:text-8xl tracking-tight [text-shadow:_1px_3px_12px_rgb(0_0_0_/_0.4)]">
+        <h1 className="text-white font-bold text-4xl lg:text-[88px] lg:leading-none tracking-[-0.01em] [text-shadow:_1px_3px_12px_rgb(0_0_0_/_0.4)]">
           DIVE INTO IVE
         </h1>
         <p className="text-white/80 text-sm lg:text-lg">아이브의 일정 · 소식 · 음악 · 굿즈를 한곳에서</p>

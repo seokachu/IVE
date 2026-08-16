@@ -120,6 +120,16 @@ const config: Config = {
             animationTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
           },
         },
+        "arrow-x": {
+          "0%,100%": {
+            transform: "translateX(0)",
+            animationTimingFunction: "cubic-bezier(0.8, 0, 1, 1)",
+          },
+          "50%": {
+            transform: "translateX(4px)",
+            animationTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
+          },
+        },
         "accordion-down": {
           from: {
             height: "0",
@@ -140,6 +150,7 @@ const config: Config = {
       animation: {
         wheels: "wheels 1.5s ease-in-out infinite",
         arrow: "arrow 1.2s infinite",
+        "arrow-x": "arrow-x 1.2s infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
