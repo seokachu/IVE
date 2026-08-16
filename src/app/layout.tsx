@@ -40,12 +40,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://img1.kakaocdn.net" />
       </head>
       <body className={`${pretendard.className} w-screen overflow-x-hidden`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <AuthProvider>
             <PushTokenSync />
             <ThemeBridge />
