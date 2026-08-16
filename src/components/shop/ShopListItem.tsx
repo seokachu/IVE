@@ -105,13 +105,13 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
           </div>
         )}
         <h3 className="text-xs lg:text-base overflow-hidden overflow-ellipsis whitespace-nowrap">{item.title}</h3>
-        <div className="font-bold flex items-start md:items-center gap-1 lg:gap-2 text-sm lg:text-xl">
-          <span className="text-purple">{item.discount_rate}%</span>
+        <div className="font-bold flex items-center flex-wrap gap-x-1.5 lg:gap-x-2 text-sm lg:text-lg">
+          <span className="text-orange-500">{item.discount_rate}%</span>
           <span className="whitespace-nowrap">{formatPrice(price)}원</span>
-        </div>
-        <div className="flex items-center gap-1 text-gray-400 text-xs lg:text-sm">
-          <Star />
-          <span>{averageRating}</span>
+          <span className="flex items-center gap-1 text-gray-400 text-xs lg:text-sm font-normal">
+            <Star size={13} className="text-warning fill-warning" />
+            {averageRating}
+          </span>
         </div>
       </div>
     </Tag>
