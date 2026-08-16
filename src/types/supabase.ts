@@ -569,6 +569,45 @@ export type Database = {
           },
         ];
       };
+      schedules: {
+        Row: {
+          category: string;
+          created_at: string;
+          description: string | null;
+          ends_at: string | null;
+          id: number;
+          link: string | null;
+          location: string | null;
+          source: string;
+          starts_at: string;
+          title: string;
+        };
+        Insert: {
+          category: string;
+          created_at?: string;
+          description?: string | null;
+          ends_at?: string | null;
+          id?: number;
+          link?: string | null;
+          location?: string | null;
+          source?: string;
+          starts_at: string;
+          title: string;
+        };
+        Update: {
+          category?: string;
+          created_at?: string;
+          description?: string | null;
+          ends_at?: string | null;
+          id?: number;
+          link?: string | null;
+          location?: string | null;
+          source?: string;
+          starts_at?: string;
+          title?: string;
+        };
+        Relationships: [];
+      };
       shipping_addresses: {
         Row: {
           address_line1: string;
