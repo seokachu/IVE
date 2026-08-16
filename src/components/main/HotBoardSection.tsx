@@ -80,7 +80,7 @@ const HotBoardSection = () => {
           </div>
         </Link>
 
-        <ul className="flex flex-col justify-center divide-y divide-gray-200 dark:divide-gray-700">
+        <ul className="flex flex-col justify-center divide-y divide-gray-200">
           {rest.map((item, index) => (
             <li key={item.id}>
               <Link href={`/board/${item.id}`} className="flex items-center gap-4 py-3.5 group">

@@ -80,7 +80,7 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
             variant="plain"
             size="auto"
             onClick={onClickHeart}
-            className="absolute right-2.5 top-2.5 flex items-center justify-center w-9 h-9 rounded-full bg-white/90 border border-gray-200"
+            className="absolute right-2.5 top-2.5 flex items-center justify-center w-9 h-9 rounded-full bg-white/90 border border-[#EEEEEE]"
             aria-label="찜하기"
           >
             <Heart

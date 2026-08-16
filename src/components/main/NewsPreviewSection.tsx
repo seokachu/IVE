@@ -42,7 +42,7 @@ const NewsPreviewSection = () => {
                   <li key={item.id}>
                     <Link
                       href="/news"
-                      className="flex items-center gap-4 p-4 lg:p-5 bg-background border border-gray-200 dark:border-gray-700 rounded-lg hover:border-purple transition-colors"
+                      className="flex items-center gap-4 p-4 lg:p-5 bg-background border border-gray-200 rounded-lg hover:border-purple transition-colors"
                     >
                       <DdayBadge item={item} />
                       <div className="min-w-0 flex-1">
