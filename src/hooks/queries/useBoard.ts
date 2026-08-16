@@ -3,6 +3,7 @@ import {
   deleteBoard,
   getBoardDetail,
   getBoardListByPage,
+  getHotBoards,
   getMainRecentBoards,
   getMyBoards,
   incrementViewCount,
@@ -16,6 +17,14 @@ export const useMainRecentBoards = () => {
   return useQuery({
     queryKey: ["boards"],
     queryFn: getMainRecentBoards,
+  });
+};
+
+//메인 Hot Board 인기글
+export const useHotBoards = () => {
+  return useQuery({
+    queryKey: ["hotBoards"],
+    queryFn: getHotBoards,
   });
 };
 

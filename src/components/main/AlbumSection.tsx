@@ -1,27 +1,24 @@
-import AlbumList from "@/components/main/AlbumList";
+import AlbumShowcase from "@/components/main/AlbumShowcase";
 import AlbumPlayerBar from "@/components/main/AlbumPlayerBar";
 
 const AlbumSection = () => {
   return (
-    <section
-      id="second-section"
-      className="h-[100dvh] lg:h-screen bg-purple-200 w-full relative flex items-center justify-center"
-    >
-      <video
-        className="h-full w-full object-cover absolute top-0 left-0"
-        src="https://res.cloudinary.com/dknj7kdek/video/upload/f_auto,c_limit,q_auto:best/v1729011643/1110732_Animation_Blurred_3840x2160_diyuzd.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        webkit-playsinline="true"
-        preload="auto"
+    <section id="second-section" className="relative w-full bg-[#0A0A0A] overflow-hidden">
+      {/* 무대 조명 무드의 오로라 글로우 */}
+      <div
+        aria-hidden="true"
+        className="absolute -left-20 top-24 w-[520px] h-[520px] rounded-full bg-[radial-gradient(circle,rgba(219,151,233,0.35)_0%,rgba(219,151,233,0)_70%)]"
       />
-      <div className="min-h-screen relative py-20 w-full flex justify-center items-center flex-col lg:gap-[80px] lg:justify-start text-white">
-        <h2 className="text-2xl font-bold lg:text-4xl mb-5">ALBUM</h2>
-        <div className="px-5 w-full min-h-[500px]">
-          <AlbumList />
+      <div
+        aria-hidden="true"
+        className="absolute right-0 bottom-0 w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(255,159,135,0.25)_0%,rgba(255,159,135,0)_70%)]"
+      />
+      <div className="relative max-w-content m-auto px-5 py-24 lg:py-32 flex flex-col items-center gap-12">
+        <div className="flex flex-col items-center gap-2 text-white">
+          <h2 className="text-2xl font-bold lg:text-4xl text-center">ALBUM</h2>
+          <h3 className="text-center text-white/60 text-sm lg:text-base">수록곡 미리듣기와 함께 아이브의 앨범을 만나보세요</h3>
         </div>
+        <AlbumShowcase />
       </div>
       <AlbumPlayerBar />
     </section>

@@ -73,7 +73,7 @@ export const getAlbumTracks = async (albumTitle: string): Promise<AlbumTrack[]> 
 
   //lookup API가 곡을 안 주는 경우가 있어 앨범명 기준 곡 검색 후 collectionId로 필터
   const songParams = new URLSearchParams({
-    term: matched.collectionName.replace(/\s*-\s*(EP|Single)\s*$/i, ""),
+    term: `아이브 ${matched.collectionName.replace(/\s*-\s*(EP|Single)\s*$/i, "")}`,
     attribute: "albumTerm",
     entity: "song",
     country: "KR",

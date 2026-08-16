@@ -5,6 +5,27 @@ import type { BoardInsert } from "@/types";
 import type { BoardSummary } from "@/types/board";
 
 //메인페이지 게시글 목록 가져오기
+//메인 Hot Board — 인기순(좋아요 → 댓글 순) 상위 6건
+export const getHotBoards = async () => {
+  try {
+    const { data, error } = await supabase
+      .from("board_with_meta")
+      .select("*")
+      .order("like_count", { ascending: false })
+      .order("comment_count", { ascending: false })
+      .order("created_at", { ascending: false })
+      .limit(6);
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`인기 게시글 목록을 가져오는데 실패했습니다. ${error.message}`);
+    }
+    throw error;
+  }
+};
+
 export const getMainRecentBoards = async () => {
   try {
     const { data, error } = await supabase

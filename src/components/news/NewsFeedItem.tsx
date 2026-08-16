@@ -101,7 +101,7 @@ const NewsFeedItem = ({ item, index }: NewsFeedItemProps) => {
           <time className="opacity-75 shrink-0">{formatDate(item.publishedAt, "dash")}</time>
         </div>
         <div className="p-3 pt-0 text-white">
-          <h3 className="text-base font-bold line-clamp-2 group-hover:text-purple transition-colors">{item.title}</h3>
+          <h3 className="text-base font-bold truncate group-hover:text-purple transition-colors">{item.title}</h3>
         </div>
       </div>
     </div>

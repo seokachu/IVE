@@ -1,48 +1,47 @@
 import Image from "next/image";
 import LogoImage from "@/assets/images/logo.svg";
 import SubLogoImage from "@/assets/images/logo_black.svg";
-import { Rss } from "lucide-react";
+import { UserRound } from "lucide-react";
 import GithubIcon from "@/components/common/icons/GithubIcon";
 import Link from "next/link";
 
 const Footer = () => {
   return (
     <footer className="bg-gray-100 border-t border-gray-200 relative z-10">
-      <div className="max-w-container m-auto py-9 px-[20px] flex justify-between items-center flex-col gap-5 lg:flex-row">
-        <div className="flex gap-5 items-center flex-col lg:flex-row">
-          <h1 className="relative w-[80px] h-auto">
-            <Image src={SubLogoImage} alt="logo" className="fill dark:hidden" />
-            <Image src={LogoImage} alt="logo" className="fill hidden dark:block" />
-          </h1>
-          <address className="not-italic text-xs sm:text-xs lg:text-sm">
-            <ul className="flex text-center gap-[3px] flex-col lg:flex-row lg:gap-3">
-              <li className="relative lg:after:absolute lg:after:top-[4px] lg:after:right-[-5.5px] lg:after:block lg:after:w-[1px] lg:after:h-[14px] lg:after:bg-gray-700">
-                회사명 : &#40;주&#41;스타쉽엔터테인먼트
-              </li>
-              <li className="relative lg:after:absolute lg:after:top-[4px] lg:after:right-[-6px] lg:after:block lg:after:w-[1px] lg:after:h-[14px] lg:after:bg-gray-700">
-                대표: 이훈희,이진성
-              </li>
-              <li className="relative lg:after:absolute lg:after:top-[4px] lg:after:right-[-7px] lg:after:block lg:after:w-[1px] lg:after:h-[14px] lg:after:bg-gray-700">
-                사업자등록번호 : 114-86-65214
-              </li>
-              <li>주소 : 서울시 강남구 삼성로146길 4-5</li>
-            </ul>
-          </address>
+      <div className="max-w-container m-auto py-10 px-5 flex flex-col items-center gap-5">
+        <h1 className="relative w-[80px] h-auto">
+          <Image src={SubLogoImage} alt="logo" className="fill dark:hidden" />
+          <Image src={LogoImage} alt="logo" className="fill hidden dark:block" />
+        </h1>
+        <div className="flex flex-col items-center gap-1.5 text-center text-xs text-gray-500">
+          <p>IVE로 DIVE는 팬이 만든 비공식 팬 사이트이며, 포트폴리오 목적으로 제작되었습니다.</p>
+          <p>아이브(IVE) 관련 콘텐츠의 저작권은 스타쉽엔터테인먼트에 있습니다.</p>
+          <p className="font-semibold text-gray-600 mt-1">© 2026 seokachu. All rights reserved.</p>
         </div>
-        <div>
-          <ul className="flex gap-4">
-            <li>
-              <Link href="https://github.com/seokachu/IVE" target="_blank" aria-label="깃허브 링크 새창으로 열기">
-                <GithubIcon size={25} />
-              </Link>
-            </li>
-            <li>
-              <Link href="https://seokachu.tistory.com" target="_blank" aria-label="블로그 링크 새창으로 열기">
-                <Rss size={25} />
-              </Link>
-            </li>
-          </ul>
-        </div>
+        <ul className="flex gap-3">
+          <li>
+            <Link
+              href="https://github.com/seokachu"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="깃허브 새창으로 열기"
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
+            >
+              <GithubIcon size={18} />
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="https://www.seokachu.site/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="포트폴리오 사이트 새창으로 열기"
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
+            >
+              <UserRound size={18} />
+            </Link>
+          </li>
+        </ul>
       </div>
     </footer>
   );
