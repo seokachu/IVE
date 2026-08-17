@@ -11,6 +11,7 @@
     "goods:crawl": "node scripts/crawl-goods.mjs",
     "goods:enrich": "node scripts/enrich-goods-images.mjs",
     "goods:optimize": "node scripts/optimize-goods-images.mjs",
+    "community:seed": "node scripts/seed-community.mjs",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:ui": "playwright test --ui",

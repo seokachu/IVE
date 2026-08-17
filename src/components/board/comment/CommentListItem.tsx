@@ -1,5 +1,4 @@
-import Image from "next/image";
-import DefaultImage from "@/assets/images/default_image.avif";
+import UserAvatar from "@/components/common/UserAvatar";
 import { CornerDownRight, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDeleteComment, useRepliesCommentList } from "@/hooks/queries/useComment";
@@ -62,19 +61,16 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange, boardA
   return (
     <li className={isReply ? "bg-gray-50 rounded-lg px-3.5 py-3" : "py-4"}>
       <div className="flex gap-2.5 items-start">
-        <span
-          className={`relative shrink-0 rounded-full border overflow-hidden ${
-            isReply ? "w-[30px] h-[30px]" : "w-9 h-9"
-          } ${membershipTier !== "free" ? "ring-[1.5px] ring-purple-300" : ""}`}
-        >
-          <Image
-            src={item?.user?.avatar_url || DefaultImage}
-            alt={item?.user?.name || "유저 프로필"}
-            fill
-            className="object-cover"
-            sizes="36px"
-          />
-        </span>
+        {/* 아바타 없으면 UserAvatar가 이니셜 파스텔 서클로 폴백 — 게시판 목록과 동일 규칙 */}
+        <UserAvatar
+          userId={item?.user_id}
+          avatarUrl={item?.user?.avatar_url}
+          userName={item?.user?.name}
+          size={isReply ? "sm" : "md"}
+          className={`shrink-0 ${isReply ? "" : "w-9 h-9"} ${
+            membershipTier !== "free" ? "ring-[1.5px] ring-purple-300" : ""
+          }`}
+        />
         <div className="w-full min-w-0">
           <div className="flex justify-between items-center gap-2">
             <div className="flex items-center gap-2 min-w-0">

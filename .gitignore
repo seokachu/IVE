@@ -40,3 +40,6 @@ next-env.d.ts
 
 # storybook
 /storybook-static
+
+# 시드 스크립트가 남기는 DB 백업 (커밋 대상 아님)
+scripts/backup/
