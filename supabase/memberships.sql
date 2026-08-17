@@ -25,6 +25,11 @@ alter table public.memberships enable row level security;
 create policy "memberships_own_read" on public.memberships
   for select using (auth.uid() = user_id);
 
+-- 컬럼 단위 방어선: 클라이언트 역할은 빌링키·고객키 컬럼을 아예 못 읽음 (서버는 서비스롤이라 무관)
+revoke select on public.memberships from anon, authenticated;
+grant select (id, user_id, tier, status, price, card_company, card_number, started_at, next_billing_at, canceled_at, created_at)
+  on public.memberships to authenticated;
+
 -- 커뮤니티 뱃지용 공개 뷰 — 민감 컬럼 제외, 혜택 유지 중인 구독만 노출
 -- (security definer 뷰라 RLS를 우회하므로 노출 컬럼을 꼭 최소로 유지할 것)
 create or replace view public.memberships_public as

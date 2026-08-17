@@ -18,9 +18,13 @@ const PaymentMethodModal = ({ membership, onClose }: PaymentMethodModalProps) =>
 
   const handleAddCard = async () => {
     if (!session?.user?.id) return;
+    let isTossOpened = false;
     try {
       setIsProcessing(true);
       const tossPayments = await loadTossPayments(process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY!);
+      //Radix Dialog의 포커스 트랩이 토스 창 입력을 막으므로 열기 전에 모달을 닫는다
+      isTossOpened = true;
+      onClose();
       await tossPayments.requestBillingAuth("카드", {
         customerKey: session.user.id,
         customerEmail: session.user.email,
@@ -29,7 +33,8 @@ const PaymentMethodModal = ({ membership, onClose }: PaymentMethodModalProps) =>
         failUrl: `${window.location.origin}/mypage/membership/billing?fail=1`,
       });
     } catch {
-      setIsProcessing(false);
+      //모달이 이미 닫혔으면 상태 갱신 불필요
+      if (!isTossOpened) setIsProcessing(false);
     }
   };
 

@@ -75,6 +75,20 @@
   figcaption b { color: var(--accent); font-size: 11.5px; letter-spacing: .04em; margin-right: 6px; }
   figcaption span { display: block; margin-top: 2px; font-size: 12px; color: var(--sub); line-height: 1.5; }
 
+
+  /* ── v1 → v2 비교 ── */
+  .compare { display: flex; flex-direction: column; gap: 32px; }
+  .compare .pair-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+  .compare .pair-head h3 { margin: 0; font-size: 15px; }
+  .compare .pair-head span { font-size: 12.5px; color: var(--sub); }
+  .compare .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+  .compare .ver { display: inline-block; font-size: 11px; font-weight: 700; border-radius: 20px; padding: 1px 9px; margin-right: 6px; }
+  .compare .ver.old { background: #f0f1f4; color: #5c6470; }
+  .compare .ver.new { background: var(--accent-soft); color: var(--accent); }
+  @media (max-width: 720px) {
+    .compare .pair { grid-template-columns: 1fr; }
+  }
+
   /* ── 디자인 시스템 ── */
   .ds { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 20px; }
   .ds figcaption code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11.5px; background: var(--soft); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; }
@@ -119,6 +133,7 @@
   </header>
 
   <nav class="toc">
+    <a href="#compare">v1 → v2 변화</a>
     <a href="#main">메인 · 음악</a>
     <a href="#news">소식</a>
     <a href="#auth">인증</a>
@@ -130,6 +145,157 @@
     <a href="#common">공통 · 시스템</a>
     <a href="#system">디자인 시스템</a>
   </nav>
+
+  <!-- ── v1 → v2 비교 ── -->
+  <section id="compare">
+    <h2 class="sec">v1 → v2 변화 <span class="count">11</span></h2>
+    <p class="lead">2025년 운영하던 v1 화면(직접 캡처한 GIF 기록)과 2026 리뉴얼 시안을 나란히 둔 비교. v1 전체 기록은 <a href="./spec-v1.html">기능명세서 v1</a>의 각 장에서, 변경점 요약은 <a href="./spec-v2.html#changes">기능명세서 v2 — 1장</a>에서 볼 수 있다.</p>
+    <div class="compare">
+      <div>
+        <div class="pair-head"><h3>메인</h3><span>영상 히어로 · 앨범 쇼케이스 · Hot Board로 재구성</span></div>
+        <div class="pair">
+          <figure>
+            <a class="shot" href="https://github.com/user-attachments/assets/4b18024f-5e03-4869-b0df-20cbf93cc221" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/4b18024f-5e03-4869-b0df-20cbf93cc221" alt="v1 메인" loading="lazy" /></a>
+            <figcaption><span class="ver old">v1</span>2025 운영 화면 기록(GIF)</figcaption>
+          </figure>
+          <figure>
+            <a class="shot" href="./assets/design/screens/main-light.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/main-light.webp" alt="v2 메인" loading="lazy" /></a>
+            <figcaption><span class="ver new">v2</span>2026 리뉴얼 시안</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div>
+        <div class="pair-head"><h3>소식</h3><span>수동 기사·갤러리 → 자동 수집 피드 + 캘린더 일정</span></div>
+        <div class="pair">
+          <figure>
+            <a class="shot" href="https://github.com/user-attachments/assets/9db11f54-4afb-4c2c-bd21-6885896f9a39" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/9db11f54-4afb-4c2c-bd21-6885896f9a39" alt="v1 소식" loading="lazy" /></a>
+            <figcaption><span class="ver old">v1</span>2025 운영 화면 기록(GIF)</figcaption>
+          </figure>
+          <figure>
+            <a class="shot" href="./assets/design/screens/news-light.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/news-light.webp" alt="v2 소식" loading="lazy" /></a>
+            <figcaption><span class="ver new">v2</span>2026 리뉴얼 시안</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div>
+        <div class="pair-head"><h3>로그인</h3><span>모달 제거 · 페이지 단일화 + 소셜 2종</span></div>
+        <div class="pair">
+          <figure>
+            <a class="shot" href="https://github.com/user-attachments/assets/0c1aadee-a1f0-4a63-97e2-bc3c470cc361" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/0c1aadee-a1f0-4a63-97e2-bc3c470cc361" alt="v1 로그인" loading="lazy" /></a>
+            <figcaption><span class="ver old">v1</span>2025 운영 화면 기록(GIF)</figcaption>
+          </figure>
+          <figure>
+            <a class="shot" href="./assets/design/screens/auth-login.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/auth-login.webp" alt="v2 로그인" loading="lazy" /></a>
+            <figcaption><span class="ver new">v2</span>2026 리뉴얼 시안</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div>
+        <div class="pair-head"><h3>게시판 목록</h3><span>표 목록 → 사진 히어로 · HOT 3 · 카드형 로우</span></div>
+        <div class="pair">
+          <figure>
+            <a class="shot" href="https://github.com/user-attachments/assets/c423bc33-333e-4c7c-a430-a36b42fa6abb" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/c423bc33-333e-4c7c-a430-a36b42fa6abb" alt="v1 게시판 목록" loading="lazy" /></a>
+            <figcaption><span class="ver old">v1</span>2025 운영 화면 기록(GIF)</figcaption>
+          </figure>
+          <figure>
+            <a class="shot" href="./assets/design/screens/board-list-light.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/board-list-light.webp" alt="v2 게시판 목록" loading="lazy" /></a>
+            <figcaption><span class="ver new">v2</span>2026 리뉴얼 시안</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div>
+        <div class="pair-head"><h3>게시판 글쓰기</h3><span>react-quill → Tiptap 에디터 카드</span></div>
+        <div class="pair">
+          <figure>
+            <a class="shot" href="https://github.com/user-attachments/assets/81919716-7891-4fd2-a6d2-5378852621cb" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/81919716-7891-4fd2-a6d2-5378852621cb" alt="v1 게시판 글쓰기" loading="lazy" /></a>
+            <figcaption><span class="ver old">v1</span>2025 운영 화면 기록(GIF)</figcaption>
+          </figure>
+          <figure>
+            <a class="shot" href="./assets/design/screens/board-write.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/board-write.webp" alt="v2 게시판 글쓰기" loading="lazy" /></a>
+            <figcaption><span class="ver new">v2</span>2026 리뉴얼 시안</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div>
+        <div class="pair-head"><h3>게시판 상세</h3><span>800px 리딩 칼럼 · 추천 버튼 · 작성자 카드</span></div>
+        <div class="pair">
+          <figure>
+            <a class="shot" href="https://github.com/user-attachments/assets/cff95a6d-cfe4-4e18-8e0f-718d744dadc9" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/cff95a6d-cfe4-4e18-8e0f-718d744dadc9" alt="v1 게시판 상세" loading="lazy" /></a>
+            <figcaption><span class="ver old">v1</span>2025 운영 화면 기록(GIF)</figcaption>
+          </figure>
+          <figure>
+            <a class="shot" href="./assets/design/screens/board-detail-light.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/board-detail-light.webp" alt="v2 게시판 상세" loading="lazy" /></a>
+            <figcaption><span class="ver new">v2</span>2026 리뉴얼 시안</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div>
+        <div class="pair-head"><h3>굿즈샵 목록</h3><span>페이지 헤드 + 공통 정렬 셀렉트</span></div>
+        <div class="pair">
+          <figure>
+            <a class="shot" href="https://github.com/user-attachments/assets/096f2bcc-dc1b-4719-921c-101dc4999323" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/096f2bcc-dc1b-4719-921c-101dc4999323" alt="v1 굿즈샵 목록" loading="lazy" /></a>
+            <figcaption><span class="ver old">v1</span>2025 운영 화면 기록(GIF)</figcaption>
+          </figure>
+          <figure>
+            <a class="shot" href="./assets/design/screens/shop-list-light.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/shop-list-light.webp" alt="v2 굿즈샵 목록" loading="lazy" /></a>
+            <figcaption><span class="ver new">v2</span>2026 리뉴얼 시안</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div>
+        <div class="pair-head"><h3>굿즈샵 상세</h3><span>갤러리 + 플로팅 구매 카드 + 세그먼트 탭</span></div>
+        <div class="pair">
+          <figure>
+            <a class="shot" href="https://github.com/user-attachments/assets/572054fa-0842-4e41-bcd7-01c03f6d86f3" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/572054fa-0842-4e41-bcd7-01c03f6d86f3" alt="v1 굿즈샵 상세" loading="lazy" /></a>
+            <figcaption><span class="ver old">v1</span>2025 운영 화면 기록(GIF)</figcaption>
+          </figure>
+          <figure>
+            <a class="shot" href="./assets/design/screens/shop-detail-light.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/shop-detail-light.webp" alt="v2 굿즈샵 상세" loading="lazy" /></a>
+            <figcaption><span class="ver new">v2</span>2026 리뉴얼 시안</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div>
+        <div class="pair-head"><h3>장바구니</h3><span>진행 단계 · 상품별 카드 · 요약 3분할</span></div>
+        <div class="pair">
+          <figure>
+            <a class="shot" href="https://github.com/user-attachments/assets/80205a66-8d13-4b39-9043-86ff5d3445dc" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/80205a66-8d13-4b39-9043-86ff5d3445dc" alt="v1 장바구니" loading="lazy" /></a>
+            <figcaption><span class="ver old">v1</span>2025 운영 화면 기록(GIF)</figcaption>
+          </figure>
+          <figure>
+            <a class="shot" href="./assets/design/screens/cart-light.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/cart-light.webp" alt="v2 장바구니" loading="lazy" /></a>
+            <figcaption><span class="ver new">v2</span>2026 리뉴얼 시안</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div>
+        <div class="pair-head"><h3>마이페이지</h3><span>프로필 밴드 + 사이드 내비 셸</span></div>
+        <div class="pair">
+          <figure>
+            <a class="shot" href="https://github.com/user-attachments/assets/7394ccb1-3384-4f1c-a6af-99b2bba4df11" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/7394ccb1-3384-4f1c-a6af-99b2bba4df11" alt="v1 마이페이지" loading="lazy" /></a>
+            <figcaption><span class="ver old">v1</span>2025 운영 화면 기록(GIF)</figcaption>
+          </figure>
+          <figure>
+            <a class="shot" href="./assets/design/screens/mypage-wishlist.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/mypage-wishlist.webp" alt="v2 마이페이지" loading="lazy" /></a>
+            <figcaption><span class="ver new">v2</span>2026 리뉴얼 시안</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div>
+        <div class="pair-head"><h3>결제 완료</h3><span>단계 인디케이터 · 주문번호 복사 칩</span></div>
+        <div class="pair">
+          <figure>
+            <a class="shot" href="https://github.com/user-attachments/assets/4a536b0e-1100-4bbb-8ee7-2b410f3c4d9a" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/4a536b0e-1100-4bbb-8ee7-2b410f3c4d9a" alt="v1 결제 완료" loading="lazy" /></a>
+            <figcaption><span class="ver old">v1</span>2025 운영 화면 기록(GIF)</figcaption>
+          </figure>
+          <figure>
+            <a class="shot" href="./assets/design/screens/pay-complete.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/pay-complete.webp" alt="v2 결제 완료" loading="lazy" /></a>
+            <figcaption><span class="ver new">v2</span>2026 리뉴얼 시안</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ── 메인 · 음악 ── -->
   <section id="main">
