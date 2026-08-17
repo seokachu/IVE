@@ -15,6 +15,7 @@
     "goods:dedupe": "node scripts/dedupe-goods.mjs",
     "goods:albums": "node scripts/seed-albums.mjs",
     "orders:seed": "node scripts/seed-orders.mjs",
+    "shipping:backfill": "node scripts/backfill-shipping-fee.mjs",
     "community:seed": "node scripts/seed-community.mjs",
     "avatars:sync": "node scripts/sync-avatars.mjs",
     "test:e2e": "playwright test",
