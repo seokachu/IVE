@@ -7,17 +7,14 @@ settings:
 overrides:
   postcss@<8.5.18: ^8.5.24
   sharp@<0.35.0: ^0.35.3
+  '@babel/helpers@<7.29.7': ^7.29.7
+  '@babel/runtime@<7.29.7': ^7.29.7
+  '@supabase/auth-js@<2.111.0': ^2.111.0
 
 importers:
 
   .:
     dependencies:
-      '@babel/helpers':
-        specifier: ^7.29.7
-        version: 7.29.7
-      '@babel/runtime':
-        specifier: ^7.29.7
-        version: 7.29.7
       '@hookform/resolvers':
         specifier: ^3.10.0
         version: 3.10.0(react-hook-form@7.83.0(react@19.2.8))
@@ -48,9 +45,6 @@ importers:
       '@radix-ui/react-toast':
         specifier: ^1.2.23
         version: 1.2.23(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@supabase/auth-js':
-        specifier: ^2.111.0
-        version: 2.111.0
       '@supabase/ssr':
         specifier: ^0.12.4
         version: 0.12.4(@supabase/supabase-js@2.111.0)
