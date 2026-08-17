@@ -84,14 +84,14 @@ const SignUpForm = () => {
               <Button
                 variant="plain"
                 size="auto"
-                className="absolute right-4 top-3"
+                className="absolute right-4 top-1/2 -translate-y-1/2"
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 표시"}
               >
                 {showPassword ? (
-                  <Eye size={24} color={COLORS.gray300} />
+                  <Eye size={18} color={COLORS.gray300} />
                 ) : (
-                  <EyeOff size={24} color={COLORS.gray300} />
+                  <EyeOff size={18} color={COLORS.gray300} />
                 )}
               </Button>
             </div>
@@ -117,16 +117,16 @@ const SignUpForm = () => {
               <Button
                 variant="plain"
                 size="auto"
-                className="absolute right-4 top-3"
+                className="absolute right-4 top-1/2 -translate-y-1/2"
                 onClick={() => {
                   setShowPasswordCheck(!showPasswordCheck);
                 }}
                 aria-label={showPasswordCheck ? "비밀번호 숨기기" : "비밀번호 표시"}
               >
                 {showPasswordCheck ? (
-                  <Eye size={24} color={COLORS.gray300} />
+                  <Eye size={18} color={COLORS.gray300} />
                 ) : (
-                  <EyeOff size={24} color={COLORS.gray300} />
+                  <EyeOff size={18} color={COLORS.gray300} />
                 )}
               </Button>
             </div>

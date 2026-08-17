@@ -17,6 +17,9 @@ export interface OrderPriceSummaryProps {
   totalDiscountedPrice: number;
   totalOriginalPrice: number;
   totalDiscountAmount: number;
+  /** 멤버십 상시 할인 (DIVE+ 5% / VIP 10%) — 무료 회원은 0 */
+  membershipDiscount?: number;
+  membershipTier?: import("@/types/mypage").MembershipTier;
 }
 
 export interface OrderCustomerInfoItemProps {

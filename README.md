@@ -1,141 +1,227 @@
-
-
 <img width="1920" height="960" alt="cover" src="https://github.com/user-attachments/assets/6f73587c-9a34-4944-9d83-7651281b7ea8" />
 
-# 프로젝트명 "IVE로 DIVE"
+# IVE로 DIVE
 
-<br/>
+**아이브(IVE) 팬을 위한 커뮤니티 + 굿즈 커머스 서비스.**
 
+소식·일정·음악·굿즈·게시판을 한 곳에서 보고, 같은 웹을 하이브리드 앱에서 그대로 쓴다.
 
-배포 주소 : [배포 링크 이동하기](https://ive-three.vercel.app)<br/>
-하이브리드 앱(Android) : [seokachu/ive-app](https://github.com/seokachu/ive-app) — 이 웹을 WebView로 감싸고 푸시 알림·카드사 앱 결제를 지원<br/>
-기능명세서 : [문서 아카이브 보러가기](https://ive-three.vercel.app/docs) — v1(리뉴얼 전) · v2(리뉴얼 진행 중) 기능명세와 디자인 시스템 문서
+![Next.js 16](https://img.shields.io/badge/Next.js%2016-000000?logo=nextdotjs&logoColor=white)
+![React 19](https://img.shields.io/badge/React%2019-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS%203-06B6D4?logo=tailwindcss&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?logo=supabase&logoColor=white)
+![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=white)
+![Toss Payments](https://img.shields.io/badge/Toss%20Payments-0064FF?logoColor=white)
 
-<br>
+**바로 보기** — [서비스](https://ive-three.vercel.app) · [기능명세서](https://ive-three.vercel.app/docs) · [디자인 시안](https://ive-three.vercel.app/docs/design.html) · [스토리북](https://ive-storybook.vercel.app) · [하이브리드 앱](https://github.com/seokachu/ive-app)
 
-`1차 배포` : 2024.10.18 ~ 2025.01.26 (메인페이지, 로그인, 회원가입, 굿즈샵, 장바구니, 마이페이지, 결제페이지)<br/>
-`2차 배포` : 2025.01.26 ~ 2025.02.02 (버그 수정 반영) <br/>
-`3차 배포` : 2025.02.02 ~ 2025.03.06 (자유게시판 추가) <br/>
-`4차 배포` : 2025.03.06 ~ 2025.03.16 (소식 페이지 추가) <br/>
-`추가 배포` : 2025.03.16 ~ 버그 수정 진행중 <br>
-`리뉴얼` : 2026.07 ~ (Next.js 16 · React 19 마이그레이션, 하이브리드 앱 & 푸시 알림) <br>
+`1차 배포` 2024.10.18 ~ 2025.01.26 — 메인·로그인·회원가입·굿즈샵·장바구니·마이페이지·결제<br/>
+`2차 배포` 2025.01.26 ~ 2025.02.02 — 버그 수정<br/>
+`3차 배포` 2025.02.02 ~ 2025.03.06 — 자유게시판<br/>
+`4차 배포` 2025.03.06 ~ 2025.03.16 — 소식 페이지<br/>
+`리뉴얼` 2026.07 ~ — Next.js 16 · React 19 마이그레이션, 하이브리드 앱·푸시 알림, 전면 리디자인
 
-<br>
-<br>
+---
 
-## 📌 프로젝트 소개
+## 화면
 
-이 프로젝트는 아이브(IVE) 관련 정보를 제공하는 웹사이트로, 최신 소식, 갤러리, 자유게시판, 굿즈를 결제할 수 있도록 제공합니다.
+<p>
+  <img src="./public/docs/assets/design/screens/main-light.webp" width="19%" alt="메인" />
+  <img src="./public/docs/assets/design/screens/music-light.webp" width="19%" alt="음악" />
+  <img src="./public/docs/assets/design/screens/news-light.webp" width="19%" alt="소식" />
+  <img src="./public/docs/assets/design/screens/shop-detail-light.webp" width="19%" alt="굿즈샵 상세" />
+  <img src="./public/docs/assets/design/screens/board-list-light.webp" width="19%" alt="자유게시판" />
+</p>
 
+전체 시안은 [디자인 시안 (웹)](https://ive-three.vercel.app/docs/design.html)에서 —
+화면 57장을 라이트/다크로 배포된 서비스 안에서 그대로 열람할 수 있다.
+리뉴얼 전 화면은 [아래 아카이브](#리뉴얼-전-화면-v1-아카이브)에 남겨 두었다.
 
-<br>
-<br>
+---
 
-## 🚀 2026 리뉴얼
+## 주요 기능
 
-운영 중이던 서비스를 최신 스택으로 단계적으로 마이그레이션하고, 하이브리드 앱으로 확장했습니다.
+**메인 · 음악**
+- 영상 히어로(썸네일 폴백)·마퀴 스트립·앨범 커버 3장 — 스크롤 위치에 따라 헤더 톤이 바뀐다
+- iTunes 30초 미리듣기 — **페이지를 옮겨도 재생이 끊기지 않는다.** 루트 레이아웃에 전역
+  마운트한 플레이어가 이동 시 우하단 미니 디스크로 접힌다
+- `/discography` — 최신 발매반 히어로, 연도 그룹핑, 커버에 마우스를 올리면 타이틀곡이 재생된다
+
+**소식 · 일정 (자동 수집)**
+- 수동 입력을 없앴다. NAVER API Hub(뉴스·이미지) + 구글 뉴스 RSS + 유튜브 공식 재생목록
+  RSS를 합쳐 피드를 만든다 — 크롤링 대신 공개 API만 쓴다
+- 일정은 KOPIS 공연 API와 **뉴스 본문에서 추출한 일정**을 합쳐 캘린더에 뿌린다
+- 카테고리 필터, 다가오는/지난 일정, 기사 원문은 새 탭으로
+
+**굿즈샵 · 장바구니 · 결제**
+- 굿즈 70종 — 수집·이미지 최적화(WebP) 스크립트로 데이터 파이프라인을 만들어 넣었다
+- 비회원도 찜할 수 있고(로컬스토리지), 로그인하면 서버 찜과 합쳐진다
+- 리뷰 별점·페이지네이션, FAQ 아코디언, 공유 시트
+- 토스페이먼츠 결제창 → 서버 승인(`/api/payment/confirm`) → 주문 완료까지 한 흐름
+
+**자유게시판**
+- 에디터는 **Tiptap** — 툴바·이미지 업로드(Supabase Storage)를 직접 구성했다
+- HOT 3 카드, 필터 필(전체/인기/공지/내 글), 정렬 드롭다운, 검색어 하이라이트
+- 댓글·대댓글·좋아요, 수정/삭제, 작성자 뱃지 — 댓글과 좋아요는 그 순간 **푸시로 나간다**
+
+**마이페이지 · 멤버십**
+- 위시리스트 · 주문 내역 · 내가 쓴 글 · 배송지 관리, 아바타 크롭 편집
+- **DIVE 멤버십** — 3단 플랜(무료 / DIVE+ / VIP), 토스 빌링키로 정기결제하고
+  카드 변경·해지까지 마이페이지에서 끝난다
+
+**공통**
+- 라이트/다크 단일 토큰 세트 — 색은 전부 CSS 변수로 정의하고 다크에서 값만 뒤집는다
+- 공통 UI는 [스토리북](https://ive-storybook.vercel.app)으로 문서화했다
+- Playwright E2E 10개 스펙(프로덕션 빌드 기준)으로 주요 흐름을 지킨다
+
+---
+
+## 구조
+
+```mermaid
+flowchart LR
+  subgraph client["클라이언트"]
+    web["웹 · Next.js 16 (Vercel)"]
+    app["앱 · Expo WebView 셸"]
+  end
+  subgraph supa["Supabase"]
+    db[("Postgres + RLS")]
+    auth["Auth (카카오 · 구글)"]
+    storage["Storage (이미지)"]
+  end
+  subgraph ext["외부 API"]
+    naver["NAVER API Hub · 구글/유튜브 RSS"]
+    kopis["KOPIS 공연"]
+    itunes["iTunes"]
+    toss["토스페이먼츠"]
+  end
+  cron["Vercel Cron"]
+  push["/api/push — Expo Push"]
+
+  app -->|"배포된 웹을 그대로 담는다"| web
+  web <--> db
+  web <--> auth
+  web <--> storage
+  web --> naver
+  web --> kopis
+  web --> itunes
+  web <--> toss
+  cron -->|"일정 · 앨범 · 정기결제"| web
+  db --> push
+  push --> app
+```
+
+**자동화 (Vercel Cron)**
+
+| 시각 (KST) | 경로 | 하는 일 |
+|---|---|---|
+| 06:00 | `/api/cron/schedule-extract` | 수집한 뉴스에서 일정을 뽑아 `schedules`에 반영 |
+| 06:30 | `/api/cron/album-sync` | iTunes 신규 발매반(4곡 이상)을 자동 등록 |
+| 07:00 | `/api/cron/membership-billing` | 멤버십 정기결제 실행 |
+
+---
+
+## 2026 리뉴얼
+
+운영 중이던 서비스를 최신 스택으로 단계적으로 옮기고, 앱과 디자인 시스템까지 확장했다.
 
 - **Next.js 14 → 16, React 18 → 19** — 동적 라우트 async params, `middleware` → `proxy` 전환 포함
-- **Recoil → Zustand** — 상태별 스토어 분리(session/cart/checkout/ui), 점진적 전환
-- **Supabase 인증 현대화** — deprecated auth-helpers → `@supabase/ssr` (쿠키 기반 서버 검증)
-- **npm → pnpm**, **Playwright E2E 기준선** 구축 (프로덕션 빌드 기준 15케이스)
+- **Recoil → Zustand** — 상태별 스토어 분리(session/cart/checkout/ui/player), 점진적 전환
+- **Supabase 인증 현대화** — deprecated auth-helpers → `@supabase/ssr`(쿠키 기반 서버 검증)
+- **npm → pnpm**, **Playwright E2E 기준선** 구축
 - **하이브리드 앱 + 푸시 알림** — [seokachu/ive-app](https://github.com/seokachu/ive-app),
   댓글/답글 푸시 발송 서버 구현 ([설계 문서](public/docs/push-notifications.md))
+- **전면 리디자인** — `.pen` 시안 57장을 기준으로 메인부터 마이페이지까지 다시 그렸고,
+  확정된 토큰·컴포넌트를 스토리북으로 공개했다
+- **에디터 교체** — react-quill → Tiptap (구 게시글 렌더링용 CSS만 남겨 하위 호환 유지)
 
-<br>
-<br>
+---
 
-## ✏️ 기술 스택
+## 스토리북 (디자인 시스템)
 
-<table>
-  <tr>
-    <th>Next.js</th>
-    <th>TypeScript</th>
-    <th>Tailwind CSS</th>
-    <th>Supabase</th>
-    <th>Zustand</th>
-    <th>Shadcn UI</th>
-    <th>Toss Payment</th>
-    <th>Prettier</th>
-  </tr>
-  <tr>
-    <td align="center">
-        <img src="https://github.com/user-attachments/assets/0e7ba33c-456b-491b-a815-afac91a22ae3" alt="next js icon" width="45" height="45" />
-    </td>
-    <td align="center">
-      <img src="https://techstack-generator.vercel.app/ts-icon.svg" alt="icon" width="65" height="65" />
-    </td>
-     <td align="center">
-      <img src="https://github.com/user-attachments/assets/21eabe6d-8cfd-435e-b872-fed2d7032914" alt="icon" width="45" />
-    </td>
-    <td align="center">
-      <img src="https://github.com/user-attachments/assets/6e168931-ee0d-4e90-8710-050dad01942f" alt="supabase icon" width="50" height="50" />
-    </td>
-    <td align="center">
-      <h1>🐻</h1>
-    </td>
-    <td align="center">
-      <img src="https://github.com/user-attachments/assets/55af3049-b93f-4cf1-a6ab-d57a95022743" alt="shadcn ui icon" width="45" height="45" />
-    </td>
-    <td align="center">
-      <img src="https://github.com/user-attachments/assets/b79abc72-27c9-4621-937b-1c768a760f2c" width="45" height="45" alt="Toss Payment icon"/>
-    </td>
-    <td align="center">
-      <img src="https://techstack-generator.vercel.app/prettier-icon.svg" alt="icon" width="65" height="65" />
-    </td>
-  </tr>
-</table>
+[**ive-storybook.vercel.app**](https://ive-storybook.vercel.app) — 색상·타이포그래피·간격 토큰과
+`src/components/ui`·`src/components/common`의 공통 컴포넌트를 앱과 같은 코드로 렌더링한다.
+툴바의 테마 토글은 앱과 같은 방식(`html.dark`)으로 다크 모드를 확인한다.
 
-<table>
-  <tr>
-    <th>React Hook Form</th>
-    <th>Swiper</th>
-    <th>React Icons</th>
-    <th>React Spinners</th>
-    <th>React Daum Postcode</th>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="https://github.com/user-attachments/assets/03bee6fc-6160-46f5-9a6f-832648438d75" width="45" height="45" alt="React Hook Form icon"/>
-    </td>
-    <td align="center"> 
-      <img src="https://github.com/user-attachments/assets/8ccd376d-57e0-4a8e-9ddb-21ae8b8f4d3c" width="45" height="45" alt="Swiper icon"/>
-    </td>
-     <td align="center">
-      <img src="https://github.com/user-attachments/assets/39220fa5-1a49-4303-986f-d143f0104830" width="50" height="50" alt="React Icons icon"/>
-    </td>
-    <td align="center">
-      <img src="https://github.com/user-attachments/assets/3f1d7331-2260-4392-bf10-4efe1a74fa68" width="45" height="45" alt="React Spinners icon"/>
-    </td>
-    <td align="center">
-      <img src="https://github.com/user-attachments/assets/3e37e861-3256-4092-99e0-7d2f7accf651" width="45" height="45" alt=""/>
-    </td>
-  </tr>
-</table>
+```bash
+pnpm storybook          # 로컬 개발 서버 (http://localhost:6006)
+pnpm build-storybook    # 정적 빌드 → storybook-static/
+pnpm storybook:deploy   # 빌드 후 Vercel(ive-storybook 프로젝트) 프로덕션 배포
+```
 
-<table>
-  <tr>
-    <th>React Quill</th>
-    <th>React Avatar Editor</th>
-    <th>Lodash</th>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="https://github.com/user-attachments/assets/7bba8da4-14e4-4489-b2ac-40eb24218da8" width="50" height="50" alt=""/>
-    </td>
-     <td align="center">
-      <img src="https://github.com/user-attachments/assets/a90b7205-b187-4c62-91f4-8bcc1a9b77e9" width="45" height="45" alt=""/>
-    </td>
-    <td align="center">
-      <img src="https://github.com/user-attachments/assets/df5b1157-ccfa-4ad4-a5ed-c0cdc2cb2493" width="45" height="45" alt=""/>
-    </td>
-  </tr>
-</table>
+- 설정: `.storybook/main.ts`(`@storybook/nextjs-vite`), `.storybook/preview.tsx`(globals.css·Pretendard·테마 데코레이터)
+- 스토리는 컴포넌트 옆에 `*.stories.tsx`로 두고, Foundations 문서만 `src/stories/`에 모은다
+- 규칙 원문은 [`public/docs/design-system.md`](public/docs/design-system.md)
 
-<br>
-<br>
+---
 
-## ✨ 화면 구성 및 주요 기능
+## 문서
+
+| 문서 | 내용 |
+|---|---|
+| [기능명세서 v2 (웹)](https://ive-three.vercel.app/docs/spec-v2.html) | 리뉴얼 기준 기능 명세 |
+| [기능명세서 v1 (웹)](https://ive-three.vercel.app/docs/spec-v1.html) | 리뉴얼 전 명세 · 아카이브 |
+| [디자인 시안 (웹)](https://ive-three.vercel.app/docs/design.html) | `.pen` 화면 시안 57장 (라이트/다크) |
+| [디자인 시스템 (웹)](https://ive-three.vercel.app/docs/design-system.html) | 색상·타이포·간격·컴포넌트 규칙 |
+| [스토리북](https://ive-storybook.vercel.app) | UI 컴포넌트 카탈로그 |
+| [푸시 알림 설계](public/docs/push-notifications.md) | 토큰 동기화 · 발송 서버 구조 |
+| [Next 16 업그레이드 노트](public/docs/next16-upgrade-notes.md) | 마이그레이션 중 겪은 이슈 |
+| [Zustand 마이그레이션](public/docs/zustand-migration-plan.md) | Recoil 제거 계획과 결과 |
+
+---
+
+## 기술 스택
+
+| 구분 | 사용 |
+|---|---|
+| Framework | Next.js 16 (App Router) · React 19 |
+| Language | TypeScript |
+| Styling | Tailwind CSS 3 · shadcn/ui · Pretendard |
+| State / Data | Zustand · TanStack Query · React Hook Form + Zod |
+| Backend | Supabase (Postgres · Auth · Storage) |
+| Payments | 토스페이먼츠 (결제 · 빌링키 정기결제) |
+| Editor | Tiptap |
+| App · Push | Expo WebView 셸 · Expo Push |
+| Test | Playwright |
+| Docs | Storybook · Pencil(`.pen`) |
+| 그 외 | Swiper · react-avatar-editor · react-daum-postcode · lodash · DOMPurify |
+
+---
+
+## 시작하기
+
+```bash
+pnpm install
+pnpm dev            # http://localhost:3000
+```
+
+`.env.local`에 아래 키가 필요하다.
+
+| 키 | 용도 |
+|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` · `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase 클라이언트 |
+| `SUPABASE_SERVICE_ROLE_KEY` | 크론·서버 라우트 전용 |
+| `NEXT_PUBLIC_KAKAO_JS_KEY` | 카카오 공유 |
+| `NEXT_PUBLIC_TOSS_CLIENT_KEY` · `TOSS_SECRET_KEY` · `PAYMENT_CONFIRM_URL` | 결제·정기결제 |
+| `NAVER_CLIENT_ID` · `NAVER_CLIENT_SECRET` · `KOPIS_API_KEY` | 소식·일정 수집 |
+| `NEXT_PUBLIC_RANDOM_NICKNAME_URL` | 랜덤 닉네임 |
+| `CRON_SECRET` | 크론 엔드포인트 보호 (프로덕션) |
+
+```bash
+pnpm lint            # ESLint
+pnpm test:e2e        # Playwright (프로덕션 빌드 기준)
+pnpm storybook       # 컴포넌트 카탈로그
+
+pnpm goods:crawl     # 굿즈 데이터 수집
+pnpm goods:optimize  # 굿즈 이미지 WebP 최적화
+```
+
+---
+
+## 리뉴얼 전 화면 (v1 아카이브)
+
+아래는 **2026 리디자인 이전**(v1) 화면과 기능이다. 현재 화면은 [디자인 시안](https://ive-three.vercel.app/docs/design.html)을 참고.
 
 <details>
 <summary>메인페이지</summary>
@@ -282,7 +368,7 @@
     <li>
       자유게시판 - 글쓰기 페이지
       <ul>
-        <li>React-quill 라이브러리 사용</li>
+        <li>React-quill 라이브러리 사용 (현재는 Tiptap으로 교체됨)</li>
       </ul>
     </li>
     <br>

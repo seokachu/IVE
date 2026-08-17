@@ -9,6 +9,8 @@ import { Heart } from "lucide-react";
 import DirectPaymentButton from "@/components/payment/DirectPaymentButton";
 import { useCartActions } from "@/store/zustand";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
+import { useMyMembership } from "@/hooks/queries/useMembership";
+import { MEMBERSHIP_DISCOUNT_RATES, getMembershipDiscount } from "@/lib/supabase/membership";
 import type { ProductActionsProps } from "@/types/shop";
 import type { CartItem } from "@/types/cart";
 
@@ -16,8 +18,12 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { setCartItems } = useCartActions();
   const { isWished, toggleWishList } = useWishListWithLocal(product.id);
+  const { tier } = useMyMembership();
 
   const totalPrice = getDiscountedPrice(product) * quantity;
+  //멤버십 상시 할인 반영 최종 결제액 — DirectPaymentButton의 실제 청구 금액과 일치시킨다
+  const membershipDiscount = getMembershipDiscount(tier, totalPrice);
+  const finalPrice = totalPrice - membershipDiscount;
 
   const onClickCart = () => {
     try {
@@ -64,12 +70,17 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
     <>
       {/* 시안 기준: 그라데이션 구매 CTA + 찜 서클 · 장바구니 필 보조 버튼 */}
       <div className="flex flex-col gap-2.5">
+        {membershipDiscount > 0 && (
+          <p className="text-center text-[11px] font-semibold text-purple-500 dark:text-purple-300">
+            {tier === "vip" ? "VIP" : "DIVE+"} 멤버십 {Math.round(MEMBERSHIP_DISCOUNT_RATES[tier] * 100)}% 할인 적용가
+          </p>
+        )}
         <DirectPaymentButton
           product={product}
           quantity={quantity}
           className="h-14 w-full rounded-full bg-gradient-to-r from-purple-400 to-orange-300 text-base font-bold text-white hover:opacity-90"
         >
-          {formatPrice(totalPrice)}원 바로 구매하기
+          {formatPrice(finalPrice)}원 바로 구매하기
         </DirectPaymentButton>
         <div className="flex items-center gap-2.5">
           <Button

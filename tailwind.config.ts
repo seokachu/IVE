@@ -7,6 +7,9 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    // 스토리북 문서 페이지(Foundations)와 프리뷰 데코레이터도 같은 토큰으로 렌더한다
+    "./src/stories/**/*.{js,ts,jsx,tsx,mdx}",
+    "./.storybook/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
