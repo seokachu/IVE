@@ -65,7 +65,6 @@
     "react-dom": "^19.2.8",
     "react-easy-crop": "^6.2.3",
     "react-hook-form": "^7.83.0",
-    "react-quill-new": "^3.8.3",
     "sharp": "^0.35.3",
     "swiper": "^14.0.7",
     "tailwind-merge": "^2.6.1",
