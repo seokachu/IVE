@@ -143,14 +143,13 @@ export interface AddressChange {
 //DIVE 멤버십 — free는 행 없음(기본값), plus/vip는 memberships 테이블 행
 export type MembershipTier = "free" | "plus" | "vip";
 
+//클라이언트용 멤버십 행 — billing_key·customer_key는 컬럼 권한으로 차단되어 서버에서만 접근
 export interface MembershipRow {
   id: string;
   user_id: string;
   tier: Exclude<MembershipTier, "free">;
   status: "active" | "canceled";
   price: number;
-  billing_key: string;
-  customer_key: string;
   card_company: string | null;
   card_number: string | null;
   started_at: string;
