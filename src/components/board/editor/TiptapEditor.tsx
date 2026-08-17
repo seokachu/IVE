@@ -146,7 +146,7 @@ const TiptapEditor = ({ value, onChange, error }: TiptapEditorProps) => {
           error ? "border-destructive" : "border-gray-300 focus-within:border-purple-300"
         }`}
       >
-        <div className="flex items-center gap-0.5 px-3 py-[9px] bg-gray-50 dark:bg-[#1A1A1D]">
+        <div className="scrollbar-hide flex items-center gap-0.5 overflow-x-auto px-3 py-[9px] bg-gray-50 dark:bg-[#1A1A1D]">
           <ToolbarButton
             label="굵게"
             active={editor?.isActive("bold")}

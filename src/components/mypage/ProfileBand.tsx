@@ -32,8 +32,8 @@ const ProfileBand = () => {
 
   return (
     <div className="border-b border-gray-200 bg-purple-50">
-      <div className="mx-auto flex w-full max-w-container flex-col gap-6 px-5 py-8 lg:flex-row lg:items-center lg:justify-between lg:px-8 lg:py-9">
-        <div className="flex items-center gap-5">
+      <div className="mx-auto flex w-full max-w-container flex-col gap-5 px-5 py-6 lg:flex-row lg:items-center lg:justify-between lg:gap-6 lg:px-8 lg:py-9">
+        <div className="flex items-center gap-4 lg:gap-5">
           {/* 아바타 + 카메라 뱃지 → 프로필 수정 모달 (구독자는 퍼플 링) */}
           <button
             type="button"
@@ -43,7 +43,10 @@ const ProfileBand = () => {
           >
             <UserAvatar
               size="xl"
-              className={cn("!w-[88px] !h-[88px]", tier !== "free" && "ring-2 ring-purple-300 ring-offset-2 ring-offset-purple-50")}
+              className={cn(
+                "!w-[72px] !h-[72px] lg:!w-[88px] lg:!h-[88px]",
+                tier !== "free" && "ring-2 ring-purple-300 ring-offset-2 ring-offset-purple-50",
+              )}
             />
             <span
               className="absolute -bottom-0.5 -right-0.5 flex h-7 w-7 items-center justify-center rounded-full border-2 border-card bg-gray-900"
@@ -54,7 +57,7 @@ const ProfileBand = () => {
           </button>
           <div className="flex flex-col gap-1.5">
             <div className="flex flex-wrap items-center gap-2.5">
-              <h1 className="text-[22px] font-bold leading-tight">{session?.user.user_metadata.name}</h1>
+              <h1 className="text-lg font-bold leading-tight lg:text-[22px]">{session?.user.user_metadata.name}</h1>
               <MembershipBadge tier={tier} size="lg" />
               <button
                 type="button"
@@ -62,16 +65,16 @@ const ProfileBand = () => {
                 className="flex items-center gap-1.5 rounded-full border border-gray-300 px-3 py-1.5 text-xs font-semibold text-gray-500 transition-colors hover:bg-white/60 dark:hover:bg-white/10"
               >
                 <Pencil size={12} aria-hidden="true" />
-                프로필 수정
+                <span className="hidden sm:inline">프로필 </span>수정
               </button>
             </div>
             <p className="text-[13px] text-gray-400">{session?.user.email}</p>
           </div>
         </div>
-        {/* 스탯 3종 */}
-        <div className="flex items-center gap-7 lg:gap-8">
+        {/* 스탯 3종 — 모바일은 밴드 전체 폭에 균등 배치 (.pen 모바일 시안) */}
+        <div className="flex w-full items-center justify-around lg:w-auto lg:justify-normal lg:gap-8">
           {stats.map((stat, index) => (
-            <div key={stat.label} className="flex items-center gap-7 lg:gap-8">
+            <div key={stat.label} className="flex items-center gap-6 lg:gap-8">
               {index > 0 && <span className="h-9 w-px bg-gray-200" aria-hidden="true" />}
               <Link href={stat.path} className="group flex flex-col items-center gap-0.5">
                 <strong className="text-xl font-bold leading-tight group-hover:text-purple-500 transition-colors">
