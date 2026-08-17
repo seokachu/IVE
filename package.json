@@ -16,6 +16,7 @@
     "goods:albums": "node scripts/seed-albums.mjs",
     "orders:seed": "node scripts/seed-orders.mjs",
     "community:seed": "node scripts/seed-community.mjs",
+    "avatars:sync": "node scripts/sync-avatars.mjs",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:ui": "playwright test --ui",

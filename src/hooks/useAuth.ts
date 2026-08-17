@@ -2,6 +2,7 @@ import axios from "axios";
 import { supabase } from "@/lib/supabase/client";
 import { wishlistStorage } from "@/utils/wishlistStorage";
 import { addToWishList, checkedWishLists } from "@/lib/supabase/wishlist";
+import { syncAvatarToPublicUser } from "@/lib/supabase/profileSync";
 import { useCallback, useRef } from "react";
 import { toast } from "./use-toast";
 import { useSessionActions } from "@/store/zustand";
@@ -48,6 +49,7 @@ export const useAuth = () => {
 
       if (session) {
         axios.defaults.headers.common["Authorization"] = `Bearer ${session.access_token}`;
+        await syncAvatarToPublicUser(session.user);
         await syncWishlist(session);
       }
 
@@ -58,6 +60,7 @@ export const useAuth = () => {
 
         if (session && sessionStorage.getItem("pendingAuth")) {
           axios.defaults.headers.common["Authorization"] = `Bearer ${session.access_token}`;
+          await syncAvatarToPublicUser(session.user);
           await syncWishlist(session);
           sessionStorage.removeItem("pendingAuth");
           toast({
