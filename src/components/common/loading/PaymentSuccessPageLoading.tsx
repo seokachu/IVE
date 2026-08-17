@@ -1,12 +1,8 @@
-import Spinner from "@/components/common/Spinner";
+import PaymentSuccessLoading from "./PaymentSuccessLoading";
 
+// Suspense fallback — 결제 처리 중 화면과 동일한 표시를 사용
 const PaymentSuccessPageLoading = () => {
-  return (
-    <div className="h-screen flex items-center justify-center flex-col sm:-mt-20 md:mt-0">
-      <h2 className="mb-5 font-bold">Loading...</h2>
-      <Spinner />
-    </div>
-  );
+  return <PaymentSuccessLoading />;
 };
 
 export default PaymentSuccessPageLoading;

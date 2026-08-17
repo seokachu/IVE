@@ -4,13 +4,13 @@ import type { AgreementCheckboxProps } from "@/types/cart";
 
 const AgreementCheckbox = ({ modalType, onChange, checked, labelText }: AgreementCheckboxProps) => {
   return (
-    <div className="flex items-center justify-between">
-      <label className="flex items-baseline">
-        <input type="checkbox" className="mr-2 translate-y-[1px]" checked={checked} onChange={onChange} />
+    <div className="flex items-center justify-between gap-2">
+      <label className="flex cursor-pointer items-baseline gap-2 text-[13px] text-gray-500">
+        <input type="checkbox" className="translate-y-[2px]" checked={checked} onChange={onChange} />
         {labelText}
       </label>
-      <Button variant="plain" size="auto" onClick={modalType}>
-        <ChevronRight className="text-gray-500" />
+      <Button variant="plain" size="auto" onClick={modalType} aria-label="약관 전문 보기">
+        <ChevronRight size={16} className="text-gray-400" />
       </Button>
     </div>
   );

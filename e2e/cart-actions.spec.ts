@@ -4,7 +4,7 @@ test.describe("cart actions", () => {
   test("moves from the empty cart to the shop page", async ({ page }) => {
     await page.goto("/cart");
 
-    await page.getByRole("link", { name: "쇼핑하기" }).click();
+    await page.getByRole("link", { name: "굿즈샵 구경하러 가기" }).click();
 
     await expect(page).toHaveURL(/\/shop$/);
     await expect(page.getByRole("heading", { name: "Goods Shop" })).toBeVisible();

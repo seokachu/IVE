@@ -99,72 +99,73 @@ const CustomerInfoForm = ({ initialData, defaultValues, onSuccess }: CustomerInf
   };
 
   return (
-    <div className="mb-12">
-      <div className="flex justify-between border-b pb-4 mb-5">
-        <h2 className="font-bold">주문자 정보</h2>
-      </div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <ul className="flex flex-col gap-2">
-            <li className="flex items-baseline">
-              <Label htmlFor="name" className="w-[100px] text-gray-400">
-                받는 분
-              </Label>
-              <div className="flex-1">
-                <RHFInput
-                  id="name"
-                  name="name"
-                  placeholder="이름을 입력해 주세요."
-                  messageClassName="text-xs py-1 px-3"
-                  className="rounded-sm py-0 px-4 w-full"
-                  maxLength={25}
-                />
-              </div>
-            </li>
-            <li className="flex items-baseline">
-              <Label htmlFor="phone" className="w-[100px] text-gray-400">
-                휴대폰 번호
-              </Label>
-              <div className="flex-1">
-                <RHFInput
-                  id="phone"
-                  name="phone"
-                  placeholder="하이픈(-) 없이 입력"
-                  pattern="[0-9]*"
-                  type="tel"
-                  inputMode="numeric"
-                  className="rounded-sm py-0 px-4 w-full"
-                  messageClassName="text-xs py-1 px-3"
-                  maxLength={11}
-                />
-              </div>
-            </li>
-            <li className="flex items-baseline">
-              <Label htmlFor="email" className="w-[100px] text-gray-400">
-                이메일 주소
-              </Label>
-              <div className="flex-1">
-                <RHFInput
-                  id="email"
-                  name="email"
-                  placeholder="example@email.com"
-                  className="rounded-sm py-0 px-4 w-full"
-                  messageClassName="text-xs py-1 px-3"
-                />
-              </div>
-            </li>
-          </ul>
-          <div className="flex gap-2 pt-1">
-            <Button type="submit" className="flex-1 py-2 text-xs" disabled={!isValid || isSubmitting}>
-              {isSubmitting ? "저장 중..." : "저장하기"}
-            </Button>
-            <Button type="button" variant="outline" onClick={() => onSuccess()} className="flex-1 py-2 text-xs">
-              취소
-            </Button>
-          </div>
-        </form>
-      </Form>
-    </div>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
+        <ul className="flex flex-col gap-3.5">
+          <li>
+            <Label htmlFor="name" className="mb-1.5 block text-[13px] font-semibold">
+              받는 분
+            </Label>
+            <RHFInput
+              id="name"
+              name="name"
+              placeholder="이름을 입력해 주세요."
+              messageClassName="text-xs py-1 px-1"
+              className="h-11 w-full rounded-lg px-4"
+              maxLength={25}
+            />
+          </li>
+          <li>
+            <Label htmlFor="phone" className="mb-1.5 block text-[13px] font-semibold">
+              휴대폰 번호
+            </Label>
+            <RHFInput
+              id="phone"
+              name="phone"
+              placeholder="하이픈(-) 없이 입력"
+              pattern="[0-9]*"
+              type="tel"
+              inputMode="numeric"
+              className="h-11 w-full rounded-lg px-4"
+              messageClassName="text-xs py-1 px-1"
+              maxLength={11}
+            />
+          </li>
+          <li>
+            <Label htmlFor="email" className="mb-1.5 block text-[13px] font-semibold">
+              이메일 주소
+            </Label>
+            <RHFInput
+              id="email"
+              name="email"
+              placeholder="example@email.com"
+              className="h-11 w-full rounded-lg px-4"
+              messageClassName="text-xs py-1 px-1"
+            />
+          </li>
+        </ul>
+        <div className="mt-5 flex gap-2.5">
+          <Button
+            type="button"
+            variant="plain"
+            size="auto"
+            onClick={() => onSuccess()}
+            className="h-[42px] flex-1 rounded-full border border-gray-300 text-[13px] font-semibold text-gray-500 hover:bg-gray-50"
+          >
+            취소
+          </Button>
+          <Button
+            type="submit"
+            variant="plain"
+            size="auto"
+            disabled={!isValid || isSubmitting}
+            className="h-[42px] flex-1 rounded-full bg-purple-300 text-[13px] font-bold text-white transition-colors hover:bg-purple-400"
+          >
+            {isSubmitting ? "저장 중..." : "저장하기"}
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 };
 
