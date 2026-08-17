@@ -12,6 +12,8 @@
     "goods:enrich": "node scripts/enrich-goods-images.mjs",
     "goods:optimize": "node scripts/optimize-goods-images.mjs",
     "goods:reprice": "node scripts/reprice-goods.mjs",
+    "goods:dedupe": "node scripts/dedupe-goods.mjs",
+    "orders:seed": "node scripts/seed-orders.mjs",
     "community:seed": "node scripts/seed-community.mjs",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",

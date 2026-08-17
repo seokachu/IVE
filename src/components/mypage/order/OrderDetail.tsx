@@ -2,6 +2,7 @@ import { ArrowLeft } from "lucide-react";
 import DetailOrderItem from "./DetailOrderItem";
 import PaymentOverview from "./PaymentOverview";
 import { formatDate } from "@/utils/formatDate";
+import { getOrderStatusBadge } from "@/utils/orderStatus";
 import { usePayment } from "@/hooks/queries/usePayment";
 import { useConfirmOrder } from "@/hooks/queries/useOrderItems";
 import type { OrderDetailProps } from "@/types/mypage";
@@ -12,6 +13,7 @@ const OrderDetail = ({ orderItems, onBack }: OrderDetailProps) => {
   const { mutate: confirmOrder } = useConfirmOrder();
 
   const isAllConfirmed = orderItems.every((item) => item.is_confirmed);
+  const status = getOrderStatusBadge(isAllConfirmed, payment?.delivery_status);
 
   return (
     <div>
@@ -25,13 +27,7 @@ const OrderDetail = ({ orderItems, onBack }: OrderDetailProps) => {
       </button>
       <div className="flex items-center justify-between gap-3">
         <h2 className="text-[22px] font-bold leading-tight">주문 상세</h2>
-        <span
-          className={`rounded-full px-3 py-1.5 text-xs font-bold ${
-            isAllConfirmed ? "bg-[#22C55E17] text-success" : "bg-purple-50 text-purple-500 dark:text-purple-300"
-          }`}
-        >
-          {isAllConfirmed ? "구매확정" : "결제 완료"}
-        </span>
+        <span className={`rounded-full px-3 py-1.5 text-xs font-bold ${status.chipClass}`}>{status.label}</span>
       </div>
       <p className="mt-2 text-[13px] text-gray-400">
         <time>{formatDate(orderItems[0].created_at)} 결제</time>

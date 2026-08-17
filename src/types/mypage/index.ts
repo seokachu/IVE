@@ -26,6 +26,8 @@ export interface OrderSummaryProps {
     firstItemName: string;
     firstOrderImage: string;
     isAllConfirmed: boolean;
+    /** payments.delivery_status — 구매확정 전 단계 표기용 */
+    deliveryStatus?: string | null;
   };
 }
 

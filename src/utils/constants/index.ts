@@ -70,6 +70,13 @@ export const BADGE_TYPES = {
 //등록 후 이 기간(일) 이내면 NEW 뱃지 — goods.created_at 기준
 export const GOODS_NEW_DAYS = 30;
 
+//주문 배송 단계 — payments.delivery_status에 저장되는 값
+export const DELIVERY_STATUS = {
+  READY: "배송전",
+  SHIPPING: "배송중",
+  DELIVERED: "배송완료",
+} as const;
+
 //배송 정책 — 기본 3,000원, 상품 금액이 기준을 넘으면 무료
 //(상품 자체가 무료배송이거나 VIP 멤버십이면 금액과 무관하게 무료 — calculateShipping 참고)
 export const SHIPPING_POLICY = {

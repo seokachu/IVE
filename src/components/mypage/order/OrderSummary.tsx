@@ -2,11 +2,13 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { formatPrice } from "@/utils/calculateDiscount";
 import { formatDate } from "@/utils/formatDate";
+import { getOrderStatusBadge } from "@/utils/orderStatus";
 import type { OrderSummaryProps } from "@/types/mypage";
 
 //주문 요약 카드 — 썸네일·상태·제목·금액 + 주문 상세/리뷰 쓰기 필 (.pen "마이페이지 · 결제 내역" 시안)
 const OrderSummary = ({ order }: OrderSummaryProps) => {
   const { push } = useRouter();
+  const status = getOrderStatusBadge(order.isAllConfirmed, order.deliveryStatus);
 
   const onClickDetail = () => {
     push(`/mypage/orders/${order.orderId}`);
@@ -28,9 +30,7 @@ const OrderSummary = ({ order }: OrderSummaryProps) => {
       </div>
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2 text-xs">
-          <strong className={order.isAllConfirmed ? "font-bold text-success" : "font-bold text-purple-500 dark:text-purple-300"}>
-            {order.isAllConfirmed ? "구매확정" : "결제 완료"}
-          </strong>
+          <strong className={`font-bold ${status.textClass}`}>{status.label}</strong>
           <time className="text-gray-400">{formatDate(order.orderDate)} 주문</time>
         </div>
         <h3 className="mt-1.5 truncate text-[15px] font-semibold">

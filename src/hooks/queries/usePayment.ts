@@ -1,13 +1,13 @@
-import { getPaymentAmountsByOrderIds, getPaymentByOrderId } from "@/lib/supabase/payment";
+import { getPaymentSummariesByOrderIds, getPaymentByOrderId } from "@/lib/supabase/payment";
 import { useQuery } from "@tanstack/react-query";
 
-//주문 id 목록의 결제 금액 맵 { orderId: amount } — 결제 내역 요약 카드용
-export const usePaymentAmounts = (orderIds: string[]) => {
+//주문 id 목록의 결제 금액·배송 상태 맵 — 결제 내역 요약 카드용
+export const usePaymentSummaries = (orderIds: string[]) => {
   const sortedIds = [...new Set(orderIds)].sort();
 
   return useQuery({
-    queryKey: ["payments", "amounts", sortedIds],
-    queryFn: () => getPaymentAmountsByOrderIds(sortedIds),
+    queryKey: ["payments", "summaries", sortedIds],
+    queryFn: () => getPaymentSummariesByOrderIds(sortedIds),
     enabled: sortedIds.length > 0,
   });
 };
