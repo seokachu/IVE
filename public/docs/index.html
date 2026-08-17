@@ -109,19 +109,29 @@
         <h2>기능명세서 v2</h2>
         <span class="tag draft">진행 중 · Draft</span>
       </div>
-      <p class="summary">2026 리뉴얼 — Next.js 14→16 · React 19 마이그레이션, Expo 하이브리드 앱(Android) &amp; 푸시 알림, 디자인 시스템 · 다크모드, 소식 자동 수집 피드 · 일정 허브, 앨범 미리듣기 · 미니 플레이어 · 자동 등록 · 디스코그래피 · 메인 페이지 전면 리디자인. v1 대비 변경점 요약 포함.</p>
-      <div class="meta">기준 커밋 <code>5c24829</code> · dev 브랜치 · 2026-08-17 · 리뉴얼 진행 중</div>
+      <p class="summary">2026 리뉴얼 — Next.js 14→16 · React 19 마이그레이션, Expo 하이브리드 앱(Android) &amp; 푸시 알림, 디자인 시스템 · 다크모드, 소식 자동 수집 피드 · 일정 허브, 앨범 미리듣기 · 전역 플로팅 플레이어 · 자동 등록, 그리고 <b>전면 리디자인</b>(메인 · 음악 · 소식 · 굿즈샵 · 자유게시판 · 장바구니/결제 · 404) + 마이페이지 리디자인과 DIVE 멤버십(토스 빌링 정기결제). v1 대비 변경점 요약 포함.</p>
+      <div class="meta">기준 커밋 <code>595e08c</code> · dev 브랜치 · 2026-08-17 · 리뉴얼 진행 중</div>
       <span class="go">문서 보기 →</span>
     </a>
 
     <a class="card" href="./design.html">
       <div class="top">
-        <h2>디자인 시스템</h2>
+        <h2>디자인 시스템 · 시안</h2>
         <span class="tag live">현행 · 리뉴얼 기준</span>
       </div>
-      <p class="summary">2026 리뉴얼 UI의 단일 기준 — 색상 토큰 · 타이포그래피 · 간격/라디우스/그림자 · 컴포넌트 · 다크 모드, 로그인/회원가입 적용 화면 4종을 한눈에 정리.</p>
-      <div class="meta">디자인 파일 <code>design/ive-design-system.pen</code> · 2026-07-30 기준 · 명세는 v2 12장(DS-01~04)</div>
+      <p class="summary">2026 리뉴얼 UI의 단일 기준 — 색상 토큰 · 타이포그래피 · 간격/라디우스/그림자 · 컴포넌트 · 다크 모드와 함께, 서비스 흐름 순으로 정리한 <b>화면 시안 전체 목록</b>(메인 · 음악 · 소식 · 게시판 · 굿즈샵 · 장바구니/결제 · 마이페이지 · 멤버십 · 404)을 한눈에 확인.</p>
+      <div class="meta">디자인 파일 <code>design/ive-design-system.pen</code> · 2026-08-17 기준 · 명세는 v2 12장(DS-01~06)</div>
       <span class="go">문서 보기 →</span>
+    </a>
+
+    <a class="card" href="https://ive-storybook-gray.vercel.app" target="_blank" rel="noreferrer">
+      <div class="top">
+        <h2>스토리북</h2>
+        <span class="tag live">컴포넌트 카탈로그</span>
+      </div>
+      <p class="summary">공용 컴포넌트와 파운데이션 문서를 실제 동작 상태로 확인하는 Storybook. 라이트 · 다크 테마 전환 지원.</p>
+      <div class="meta">Storybook 10 · 별도 Vercel 프로젝트 배포 · 명세는 v2 12장(DS-06)</div>
+      <span class="go">새 창으로 열기 ↗</span>
     </a>
 
   </div>
@@ -139,13 +149,13 @@
     <tr>
       <td><a href="./spec-v2.html">v2</a></td>
       <td>진행 중 (Draft)</td>
-      <td>2026-08-17 (커밋 <code>5c24829</code>)</td>
-      <td>2026 리뉴얼 — Next.js 16 · React 19 · Expo 하이브리드 앱 · 푸시 알림 3종 · 디자인 시스템 · 다크모드 · 회원가입 약관 동의 · 로그인 진입점 단일화 · 결제 복귀 가드 수정 · 소식 자동 수집 피드(뉴스·영상) · 일정 허브(KOPIS·자동 추출) · 앨범 30초 미리듣기 · 미니 플레이어 · 앨범 자동 등록 · 디스코그래피 페이지 · 메인 페이지 전면 리디자인(영상 히어로·Hot Board·다크 페이드)</td>
+      <td>2026-08-17 (커밋 <code>595e08c</code>)</td>
+      <td>2026 리뉴얼 — Next.js 16 · React 19 · Expo 하이브리드 앱 · 푸시 알림 3종 · 디자인 시스템 · 다크모드 · 회원가입 약관 동의 · 로그인 진입점 단일화 · 결제 복귀 가드 수정 · 소식 자동 수집 피드(뉴스·영상) · 일정 허브(KOPIS·자동 추출) · 앨범 30초 미리듣기 · 전역 플로팅 플레이어 · 앨범/굿즈 자동 등록 · 화면 전면 리디자인(메인 · 음악 · 소식 · 굿즈샵 상세 V2 · 자유게시판 · 장바구니/결제 · 404) · Tiptap 에디터 교체 · 마이페이지 리디자인 · DIVE 멤버십(토스 빌링 정기결제) · 스토리북 도입</td>
     </tr>
   </table>
 
   <footer class="foot">
-    IVE로 DIVE · 기능명세서 아카이브 · 2026-07-30
+    IVE로 DIVE · 기능명세서 아카이브 · 2026-08-17 갱신
   </footer>
 
 </div>
