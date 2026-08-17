@@ -1,0 +1,104 @@
+/*
+ * 게시판 상세 본문 렌더링 스타일 — .board-view
+ *
+ * 에디터가 Tiptap으로 바뀐 뒤에도 상세 뷰는 quill.snow.css에 서식을 기대고 있었다.
+ * quill 런타임은 쓰지 않는데 CSS 하나 때문에 패키지가 dependencies에 남아
+ * HTML export XSS(GHSA-v3m3-f69x-jf25, 패치 버전 없음)로 계속 잡혀 걷어냈다.
+ *
+ * 규칙은 tiptap.css의 .board-editor .tiptap 과 짝을 이룬다 —
+ * 글쓰기 화면에서 보이던 모습이 상세에서 그대로 유지되도록 값을 맞춰 둔다.
+ * (Tailwind preflight가 ul/ol/blockquote 기본 스타일을 지우므로 여기서 되살려야 한다)
+ */
+
+.board-view {
+  min-height: 300px;
+  line-height: 1.7;
+}
+
+.board-view > * + * {
+  margin-top: 0.75em;
+}
+
+/* 에디터 툴바로 만들 수 있는 서식 — 굵게·기울임·밑줄·취소선은 태그 기본형으로 충분 */
+.board-view ul {
+  padding-left: 1.4em;
+  list-style: disc;
+}
+
+.board-view ol {
+  padding-left: 1.4em;
+  list-style: decimal;
+}
+
+.board-view blockquote {
+  border-left: 3px solid var(--purple-300);
+  padding-left: 14px;
+  color: var(--gray-500);
+}
+
+.board-view a {
+  color: var(--purple-500);
+  text-decoration: underline;
+}
+
+/* 툴바에는 없지만 마크다운 입력(`# `, `--- `)으로 만들어질 수 있는 것들 */
+.board-view h1 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.board-view h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.board-view h3 {
+  font-size: 1.17em;
+  font-weight: bold;
+}
+
+.board-view hr {
+  border-top: 1px solid var(--gray-200);
+}
+
+.board-view code {
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  background-color: var(--gray-100);
+  font-size: 0.9em;
+}
+
+.board-view pre {
+  padding: 14px 16px;
+  border-radius: 8px;
+  background-color: var(--gray-100);
+  overflow-x: auto;
+}
+
+.board-view pre code {
+  padding: 0;
+  background: none;
+}
+
+/* 빈 줄로 문단을 띄운 옛 글이 붙어 보이지 않게 */
+.board-view br {
+  display: block;
+  content: "";
+  margin-top: 0.5em;
+}
+
+/* 상세 리딩 뷰(800px 칼럼) — 이미지가 칼럼을 넘지 않게 + 라운드 코너.
+   투명 배경 PNG가 다크 모드에서 어둡게 비치지 않도록 흰 바탕 고정 */
+.board-view img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  background-color: #fff;
+}
+
+@media (max-width: 768px) {
+  .board-view {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
