@@ -23,6 +23,15 @@ export async function POST(request: Request) {
     const admin = getAdminClient();
     if (!admin) return NextResponse.json({ error: "멤버십 설정이 완료되지 않았습니다." }, { status: 500 });
 
+    //결제 전에 테이블 존재 확인 — 마이그레이션 전에 카드만 결제되는 사고 방지
+    const { error: tableError } = await admin.from("memberships").select("id").limit(1);
+    if (tableError) {
+      return NextResponse.json(
+        { error: "멤버십 테이블이 없습니다. supabase/memberships.sql을 먼저 실행해주세요." },
+        { status: 500 },
+      );
+    }
+
     //빌링키 발급 후 첫 결제
     const { billingKey, cardCompany, cardNumber } = await issueBillingKey(authKey, user.id);
     await chargeBilling({ billingKey, customerKey: user.id, amount: plan.price, orderName: plan.orderName });
