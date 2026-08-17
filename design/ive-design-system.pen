@@ -36831,15 +36831,52 @@
                   "width": "fill_container",
                   "height": 220,
                   "fill": {
-                    "type": "image",
+                    "type": "gradient",
+                    "gradientType": "linear",
                     "enabled": true,
-                    "url": "https://images.unsplash.com/photo-1762788147946-ea0b4f6f3c94?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODY5MTc3MTF8&ixlib=rb-4.1.0&q=80&w=1080",
-                    "mode": "fill"
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#3B2547",
+                        "position": 0
+                      },
+                      {
+                        "color": "#57346B",
+                        "position": 0.5
+                      },
+                      {
+                        "color": "#1E1526",
+                        "position": 1
+                      }
+                    ]
                   },
                   "cornerRadius": "$radius-xl",
                   "layout": "vertical",
                   "justifyContent": "space_between",
                   "children": [
+                    {
+                      "type": "path",
+                      "id": "zMRkK",
+                      "layoutPosition": "absolute",
+                      "x": 250,
+                      "y": 60,
+                      "name": "LogoWatermark",
+                      "opacity": 0.08,
+                      "rotation": -10,
+                      "geometry": "",
+                      "viewBox": [
+                        0,
+                        0,
+                        1228.2,
+                        1501
+                      ],
+                      "fill": "#FFFFFF",
+                      "width": 243,
+                      "height": 297
+                    },
                     {
                       "type": "frame",
                       "id": "NabpR",
@@ -43745,15 +43782,52 @@
                   "width": "fill_container",
                   "height": 220,
                   "fill": {
-                    "type": "image",
+                    "type": "gradient",
+                    "gradientType": "linear",
                     "enabled": true,
-                    "url": "https://images.unsplash.com/photo-1762788147946-ea0b4f6f3c94?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODY5MTc3MTF8&ixlib=rb-4.1.0&q=80&w=1080",
-                    "mode": "fill"
+                    "rotation": 135,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#3B2547",
+                        "position": 0
+                      },
+                      {
+                        "color": "#57346B",
+                        "position": 0.5
+                      },
+                      {
+                        "color": "#1E1526",
+                        "position": 1
+                      }
+                    ]
                   },
                   "cornerRadius": "$radius-xl",
                   "layout": "vertical",
                   "justifyContent": "space_between",
                   "children": [
+                    {
+                      "type": "path",
+                      "id": "xJH5g",
+                      "layoutPosition": "absolute",
+                      "x": 250,
+                      "y": 60,
+                      "name": "LogoWatermark",
+                      "opacity": 0.08,
+                      "rotation": -10,
+                      "geometry": "",
+                      "viewBox": [
+                        0,
+                        0,
+                        1228.2,
+                        1501
+                      ],
+                      "fill": "#FFFFFF",
+                      "width": 243,
+                      "height": 297
+                    },
                     {
                       "type": "frame",
                       "id": "f1sRlC",
