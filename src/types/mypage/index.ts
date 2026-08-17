@@ -25,6 +25,7 @@ export interface OrderSummaryProps {
     orderDate: string;
     firstItemName: string;
     firstOrderImage: string;
+    isAllConfirmed: boolean;
   };
 }
 
@@ -42,6 +43,7 @@ export interface OrderDetailProps {
 export interface DetailOrderItemProps {
   item: Tables<"order_items">;
   onConfirm: () => void;
+  isLast?: boolean;
 }
 
 export interface WriteReviewModalProps {
@@ -51,6 +53,9 @@ export interface WriteReviewModalProps {
   orderId: string;
   goodsId: string;
   mode: "create" | "edit";
+  productName?: string;
+  productImage?: string | null;
+  productOption?: string;
 }
 
 export interface ReviewFormData {
@@ -83,6 +88,7 @@ export interface PaymentOverviewProps {
 
 export interface PostListItemProps {
   item: MyPageBoards;
+  isLast?: boolean;
 }
 
 export interface PostListProps {
@@ -95,12 +101,6 @@ export interface AddressListProps {
 
 export interface AddressListItems {
   item: Tables<"shipping_addresses">;
-}
-
-export interface AddressConfirmModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onDelete: () => void;
 }
 
 export interface AddressEditModalProps {
@@ -138,4 +138,30 @@ export interface UseAddressFormProps {
 export interface AddressChange {
   zonecode: string;
   fullAddress: string;
+}
+
+//DIVE 멤버십 — free는 행 없음(기본값), plus/vip는 memberships 테이블 행
+export type MembershipTier = "free" | "plus" | "vip";
+
+export interface MembershipRow {
+  id: string;
+  user_id: string;
+  tier: Exclude<MembershipTier, "free">;
+  status: "active" | "canceled";
+  price: number;
+  billing_key: string;
+  customer_key: string;
+  card_company: string | null;
+  card_number: string | null;
+  started_at: string;
+  next_billing_at: string;
+  canceled_at: string | null;
+  created_at: string;
+}
+
+export interface MembershipPlan {
+  tier: MembershipTier;
+  name: string;
+  price: number;
+  benefits: string[];
 }

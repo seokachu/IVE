@@ -1,13 +1,14 @@
 "use client";
 
 import GoTopButton from "@/components/common/button/GoTopButton";
-import MyPageLoading from "@/components/common/loading/MyPageLoading";
-import MyPageSkeleton from "@/components/common/loading/MyPageSkeleton";
-import UserInfo from "@/components/mypage/UserInfo";
+import Spinner from "@/components/common/Spinner";
+import ProfileBand from "@/components/mypage/ProfileBand";
+import SideNav from "@/components/mypage/SideNav";
 import AuthGuard from "@/hooks/AuthGuard";
 import { useAuth } from "@/hooks/useAuth";
 import { useEffect, useState } from "react";
 
+//마이페이지 셸 — 프로필 밴드 + 240px 사이드 내비 + 콘텐츠 (.pen 마이페이지 시안)
 const MyPageLayout = ({ children }: { children: React.ReactNode }) => {
   const [, setIsInitialized] = useState(false);
   const { initializeAuth } = useAuth();
@@ -20,23 +21,20 @@ const MyPageLayout = ({ children }: { children: React.ReactNode }) => {
     <AuthGuard
       loadingComponent={
         <main className="w-full min-h-screen">
-          <div className="max-w-container m-auto flex flex-col lg:flex-row">
-            <aside className="w-full lg:min-h-screen lg:w-[30%] lg:border-r px-5 pt-14 lg:px-8">
-              <MyPageSkeleton />
-            </aside>
-            <section className="w-full lg:w-[70%]">
-              <MyPageLoading />
-            </section>
+          <div className="h-[153px] border-b border-gray-200 bg-purple-50" />
+          <div className="flex h-[400px] items-center justify-center">
+            <Spinner />
           </div>
         </main>
       }
     >
       <main className="w-full min-h-screen">
-        <div className="max-w-container m-auto flex flex-col lg:flex-row">
-          <aside className="w-full lg:min-h-screen lg:w-[30%] lg:border-r px-5 pt-14 lg:px-8">
-            <UserInfo />
+        <ProfileBand />
+        <div className="mx-auto flex w-full max-w-container flex-col px-5 lg:flex-row lg:gap-12 lg:px-8">
+          <aside className="w-full pt-6 lg:w-[240px] lg:shrink-0 lg:pt-10">
+            <SideNav />
           </aside>
-          <section className="w-full lg:w-[70%]">{children}</section>
+          <section className="min-w-0 flex-1 pb-28 pt-8 lg:pt-10">{children}</section>
         </div>
         <GoTopButton />
       </main>

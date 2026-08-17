@@ -3,9 +3,9 @@ import type { AddressListProps } from "@/types/mypage";
 
 const AddressList = ({ addresses }: AddressListProps) => {
   return (
-    <ul className="mt-5">
+    <ul className="space-y-4">
       {addresses.map((address) => (
-        <li key={address.id} className="mb-5 animate-in fade-in slide-in-from-bottom-5 duration-300">
+        <li key={address.id} className="animate-in fade-in slide-in-from-bottom-5 duration-300">
           <AddressListItem item={address} />
         </li>
       ))}

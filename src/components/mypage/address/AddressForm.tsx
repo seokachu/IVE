@@ -56,7 +56,7 @@ const AddressForm = ({ mode = "create", initialData, onClose }: AddressFormProps
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="w-full lg:w-[500px]">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="w-full max-w-[560px]">
         <AddressRecipient />
         <AddressLocation searchAddress={onClickSearchAddress} detailAddress={handleDetailAddress} />
         <ContactInfo />

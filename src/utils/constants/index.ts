@@ -16,13 +16,42 @@ export const PRODUCT_SORT_OPTIONS = [
   { value: "price_high_to_low", title: "가격 높은 순" },
 ];
 
-//mypage nav
+//mypage nav — key는 SideNav 아이콘·카운트 매핑용
 export const MYPAGE_GNB_ARRAY = [
-  { label: "찜 목록", path: "/mypage/wishlist", exact: false },
-  { label: "결제 목록", path: "/mypage/orders", exact: false },
-  { label: "내가 쓴 글", path: "/mypage/posts", exact: false },
-  { label: "배송지 관리", path: "/mypage/address", exact: false },
-];
+  { key: "membership", label: "멤버십", path: "/mypage/membership", exact: false, isNew: true },
+  { key: "wishlist", label: "찜 목록", path: "/mypage/wishlist", exact: false, isNew: false },
+  { key: "orders", label: "결제 내역", path: "/mypage/orders", exact: false, isNew: false },
+  { key: "posts", label: "내가 쓴 글", path: "/mypage/posts", exact: false, isNew: false },
+  { key: "address", label: "배송지 관리", path: "/mypage/address", exact: false, isNew: false },
+] as const;
+
+//DIVE 멤버십 플랜 — 시안 확정: 무료 / DIVE+ 1,900 / DIVE VIP 5,900 (가격은 초기가, 추후 인상 전제)
+export const MEMBERSHIP_PLANS = [
+  {
+    tier: "free",
+    name: "베이직",
+    price: 0,
+    benefits: ["찜 · 게시판 · 리뷰 작성", "댓글 · 답글 푸시 알림"],
+  },
+  {
+    tier: "plus",
+    name: "DIVE+",
+    price: 1900,
+    benefits: ["DIVE+ 뱃지 · 아바타 퍼플 링", "신보 · 공연 소식 우선 알림", "굿즈샵 상시 5% 할인"],
+  },
+  {
+    tier: "vip",
+    name: "DIVE VIP",
+    price: 5900,
+    benefits: [
+      "DIVE+ 혜택 전부 포함",
+      "VIP 골드 뱃지",
+      "굿즈샵 상시 10% 할인",
+      "전 주문 무료배송",
+      "신상 굿즈 24시간 우선 구매",
+    ],
+  },
+] as const;
 
 //굿즈샵 정렬 조건 객체 맵핑
 export const SORT_OPTIONS: Record<SortOptionList, SortOption> = {

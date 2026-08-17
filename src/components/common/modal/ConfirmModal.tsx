@@ -16,6 +16,8 @@ interface ConfirmModalProps {
   confirmText: string;
   /** destructive: 빨간 삭제 톤, primary: 브랜드 퍼플 톤 (기본) */
   variant?: "destructive" | "primary";
+  /** 서클 안 아이콘 교체 (기본: destructive=Trash2, primary=CircleCheck) */
+  icon?: React.ReactNode;
 }
 
 const ConfirmModal = ({
@@ -26,6 +28,7 @@ const ConfirmModal = ({
   cancelText,
   confirmText,
   variant = "primary",
+  icon,
 }: ConfirmModalProps) => {
   const isDestructive = variant === "destructive";
 
@@ -44,11 +47,12 @@ const ConfirmModal = ({
             }`}
             aria-hidden="true"
           >
-            {isDestructive ? (
-              <Trash2 size={22} className="text-[#E72424]" />
-            ) : (
-              <CircleCheck size={22} className="text-purple-400" />
-            )}
+            {icon ??
+              (isDestructive ? (
+                <Trash2 size={22} className="text-[#E72424]" />
+              ) : (
+                <CircleCheck size={22} className="text-purple-400" />
+              ))}
           </span>
           <DialogHeader className="mt-[18px] space-y-2">
             <DialogTitle className="text-lg font-bold text-center">

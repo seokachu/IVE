@@ -5,11 +5,13 @@ import { reviewSchema, type ReviewType } from "@/hooks/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InteractiveStars from "@/utils/InteractiveStars";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 import { useAddOrderItemReview, useUpdateOrderItemReview } from "@/hooks/queries/useReviews";
 import { toast } from "@/hooks/use-toast";
 import type { ReviewFormData, WriteReviewFormProps } from "@/types/mypage";
 import { useSession } from "@/store/zustand";
+
+//점수별 캡션 (1~5점)
+const RATING_CAPTIONS = ["아쉬워요", "그저 그래요", "보통이에요", "마음에 들어요", "최고예요"];
 
 const WriteReviewForm = ({ mode, reviewData, orderId, goodsId, onClose }: WriteReviewFormProps) => {
   const session = useSession();
@@ -33,6 +35,7 @@ const WriteReviewForm = ({ mode, reviewData, orderId, goodsId, onClose }: WriteR
   } = form;
 
   const currentRating = watch("rating");
+  const contentLength = (watch("content") || "").length;
 
   const handleRatingChange = (rating: number) => {
     setValue("rating", rating, {
@@ -86,32 +89,46 @@ const WriteReviewForm = ({ mode, reviewData, orderId, goodsId, onClose }: WriteR
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="w-full lg:max-w-[500px] mx-auto">
-        <div className="space-y-2 mb-5">
-          <Label>
-            별점
-            <span className="translate-y-[3px] inline-block text-red ml-1">*</span>
-          </Label>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="w-full">
+        {/* 별점 — 시안 기준 센터 정렬 + 점수별 캡션 */}
+        <div className="flex flex-col items-center gap-2.5 py-1">
+          <Label className="text-sm font-semibold">굿즈는 만족하셨나요?</Label>
           <input type="hidden" {...register("rating")} />
-          <InteractiveStars size={24} rating={currentRating} onChange={handleRatingChange} />
-          {errors.rating && <p className="text-red text-xs mt-1">{errors.rating.message}</p>}
+          <InteractiveStars size={30} rating={currentRating} onChange={handleRatingChange} />
+          <p className="text-xs text-gray-400">
+            {currentRating > 0 ? `${currentRating}점 · ${RATING_CAPTIONS[currentRating - 1]}` : "별점을 선택해주세요"}
+          </p>
+          {errors.rating && <p className="text-red text-xs">{errors.rating.message}</p>}
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="content" className="mb-2">
-            내용
-            <span className="translate-y-[3px] inline-block text-red ml-1">*</span>
-          </Label>
+        <div className="mt-4">
           <Textarea
             {...register("content")}
-            className="w-full min-h-[250px]"
-            placeholder="리뷰 내용을 입력해주세요. (최소 10자)"
+            className="min-h-[120px] w-full rounded-lg border-gray-200 text-[13px]"
+            placeholder="좋았던 점을 다이브들과 나눠보세요 (최소 10자)"
             maxLength={200}
+            aria-label="리뷰 내용"
           />
-          {errors.content && <p className="text-red text-xs mt-1">{errors.content.message}</p>}
+          <div className="mt-1.5 flex items-center justify-between gap-2">
+            {errors.content ? <p className="text-red text-xs">{errors.content.message}</p> : <span />}
+            <span className="text-[11px] text-gray-400">{contentLength} / 200</span>
+          </div>
         </div>
-        <Button disabled={!isValid || isSubmitting} type="submit" className="py-2 w-full mt-5 text-sm">
-          {isSubmitting ? "처리 중..." : mode === "create" ? "리뷰 작성" : "리뷰 수정"}
-        </Button>
+        <div className="mt-4 flex items-center gap-2.5">
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex-1 h-[46px] rounded-full border border-gray-300 text-sm font-semibold text-gray-500 hover:bg-gray-50 transition-colors"
+          >
+            취소
+          </button>
+          <button
+            type="submit"
+            disabled={!isValid || isSubmitting}
+            className="flex-1 h-[46px] rounded-full bg-purple-300 text-sm font-bold text-white hover:bg-purple-400 transition-colors disabled:opacity-50"
+          >
+            {isSubmitting ? "처리 중..." : mode === "create" ? "등록하기" : "수정하기"}
+          </button>
+        </div>
       </form>
     </Form>
   );

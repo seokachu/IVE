@@ -122,10 +122,10 @@
   <table class="meta-table">
     <tr><th>문서 버전</th><td>v2 — Draft (리뉴얼 진행 중)</td></tr>
     <tr><th>서비스명</th><td>IVE로 DIVE (<a href="https://ive-three.vercel.app">ive-three.vercel.app</a>) · Expo 하이브리드 앱(Android WebView, <code>seokachu/ive-app</code>) 병행</td></tr>
-    <tr><th>문서 기준</th><td>2026 리뉴얼 진행 중 — dev 브랜치 커밋 <code>5c24829</code> (2026-08-17)</td></tr>
-    <tr><th>작성일</th><td>2026-07-29 생성 · 2026-08-17 갱신 (소식 개편 · 일정 · 앨범 미리듣기 · 메인 리디자인)</td></tr>
-    <tr><th>범위</th><td>메인 · 소식 · 인증 · 자유게시판 · 굿즈샵 · 장바구니/결제 · 마이페이지 · 푸시 알림 · 디자인 시스템 · 공통 UI</td></tr>
-    <tr><th>기술 스택</th><td>Next.js 16 (App Router, proxy) · React 19 · Supabase(<code>@supabase/ssr</code>) · Zustand · TanStack Query · Tailwind CSS · lucide-react · 토스페이먼츠 · Expo Push · pnpm · Playwright E2E · 외부 API(네이버 API Hub 검색 · KOPIS · iTunes Search · Google News RSS · YouTube RSS) · Vercel Cron</td></tr>
+    <tr><th>문서 기준</th><td>2026 리뉴얼 진행 중 — dev 브랜치 커밋 <code>595e08c</code> (2026-08-17) · 마이페이지 · DIVE 멤버십 반영 (남은 작업: 모바일 최적화 일괄)</td></tr>
+    <tr><th>작성일</th><td>2026-07-29 생성 · 2026-08-17 갱신 (음악 · 소식 · 굿즈샵 상세 · 자유게시판 · 장바구니/결제 · 404 · 마이페이지 리디자인 + DIVE 멤버십 신규 반영)</td></tr>
+    <tr><th>범위</th><td>메인 · 음악 · 소식 · 인증 · 자유게시판 · 굿즈샵 · 장바구니/결제 · 마이페이지 · DIVE 멤버십 · 푸시 알림 · 디자인 시스템 · 공통 UI</td></tr>
+    <tr><th>기술 스택</th><td>Next.js 16 (App Router, proxy) · React 19 · Supabase(<code>@supabase/ssr</code>) · Zustand · TanStack Query · Tailwind CSS · lucide-react · Tiptap v3(에디터) · 토스페이먼츠 · Expo Push · pnpm · Playwright E2E · 외부 API(네이버 API Hub 검색 · KOPIS · iTunes Search · Google News RSS · YouTube RSS) · Vercel Cron · GitHub Actions</td></tr>
     <tr><th>권한 표기</th><td><span class="auth any">전체</span> 비로그인 포함 누구나 · <span class="auth login">로그인</span> 로그인 필요 · <span class="auth owner">작성자</span> 본인 리소스만 · <span class="auth app">앱</span> 하이브리드 앱 환경 필요</td></tr>
   </table>
 </header>
@@ -136,7 +136,7 @@
   <ol>
     <li><a href="#changes">리뉴얼 개요 (v1 대비 변경점)</a></li>
     <li><a href="#common">공통 (헤더 · 푸터 · 전역 UI)</a></li>
-    <li><a href="#main">메인 페이지 · 디스코그래피</a></li>
+    <li><a href="#main">메인 페이지 · 음악(디스코그래피)</a></li>
     <li><a href="#news">소식 페이지</a></li>
     <li><a href="#auth">인증 (로그인 · 회원가입)</a></li>
     <li><a href="#board">자유게시판</a></li>
@@ -168,7 +168,13 @@
     <tr><td>회원가입</td><td>약관 동의 없음</td><td><b>필수 약관 2건</b>(이용약관 · 개인정보 수집·이용) 동의 시에만 가입 가능 + 약관 전문 모달 — AUTH-10</td></tr>
     <tr><td>테마</td><td>라이트 고정</td><td><b>다크모드 지원</b> — 헤더 토글(기본 라이트, 시스템 미연동), 다크 전용 팔레트, 하이브리드 앱 테마 연동 — COM-16 · PUSH-10</td></tr>
     <tr><td>UI 기반</td><td>하드코딩 hex · 컴포넌트별 개별 버튼/아이콘/스피너</td><td>디자인 토큰(색상 램프·타이포·스페이싱) + <code>ui/button</code>·<code>ui/input</code> 단일화 + lucide 아이콘 · 공용 Spinner(접근성 role 부여) — 12장</td></tr>
-    <tr><td>화면 리디자인</td><td>—</td><td>로그인 · 회원가입 + <b>메인 페이지 전면 리디자인 완료</b>(영상 히어로 · 트랙명 마퀴 · 앨범 쇼케이스 · Hot Board 인기순 · 포트폴리오 푸터 · 다크 페이드 전환 · Pretendard 서체 · 핑크 브랜드 로고) — 소식/음악/굿즈샵 등 순차 진행 중</td></tr>
+    <tr><td>화면 리디자인</td><td>—</td><td>디자인 파일(<code>design/ive-design-system.pen</code>)의 화면 시안을 기준으로 페이지별 전면 리디자인 — 로그인 · 회원가입 · 메인 · 음악 · 소식 · 굿즈샵(목록/상세) · 자유게시판(목록 · 글쓰기 · 상세 · 댓글) · 장바구니 · 결제 · 404 · 마이페이지까지 <b>완료</b>. 남은 작업은 모바일 최적화 일괄 진행. 시안 목록은 <a href="./design.html">디자인 시스템 · 시안 문서</a> 참고.</td></tr>
+    <tr><td>커뮤니티(게시판)</td><td>번호 중심 표 목록 · 최신순 고정 · 텍스트 수정/삭제 버튼</td><td><b>라운지형 리디자인</b> — 무대 사진 히어로 + 커뮤니티 통계, HOT 3 사진 카드, 필터 필(전체·인기·공지·내가 쓴 글) + 정렬 3종 + 검색 + 글쓰기 툴바, 썸네일·아바타 카드형 로우, 800px 리딩 칼럼 상세(이전/다음 · ⋯ 메뉴 · 그라데이션 추천 · 작성자 카드) — 6장</td></tr>
+    <tr><td>본문 에디터</td><td>react-quill</td><td><b>Tiptap v3로 교체</b> — 커스텀 툴바(굵게·기울임·밑줄·취소선·목록·인용·링크·이미지) + 글자 수 카운터. 구 글은 기존 서식 CSS로 계속 렌더 — BRD-13</td></tr>
+    <tr><td>굿즈샵</td><td>상품 그리드 + 상세(이미지 나열 · 아코디언 안내)</td><td><b>상세 V2</b> — 브레드크럼, 갤러리(화살표·인덱스·썸네일·모바일 스와이프), 플로팅 구매 카드, 세그먼트 필 탭(상세정보/리뷰 n), 별점 분포 리뷰 탭, 추천 섹션, FAQ 스플릿, 담기 드로어 개편 + <b>상품 자동 수집</b>(매일 06:15 KST GitHub Actions) — 7장</td></tr>
+    <tr><td>장바구니 · 결제</td><td>단일 목록 + 우측 요약, 완료 화면 텍스트 위주</td><td><b>주문 플로우 리디자인</b> — 3단계 진행 인디케이터(01 장바구니 → 02 주문·결제 → 03 주문완료), 상품별 개별 카드 + 필 스테퍼, 결제 금액 플로팅 카드, 주문자 인라인 편집 · 배송지 라디오 선택, 주문번호 복사 칩이 있는 완료 화면 — 8·9장</td></tr>
+    <tr><td>유료 멤버십</td><td>—</td><td><b>DIVE 멤버십 신규</b> — 3단 플랜(베이직 무료 / DIVE+ 월 1,900원 / DIVE VIP 월 5,900원), 토스페이먼츠 <b>빌링키 정기결제</b>(구독 · 해지 · 카드 변경 + 매일 자동결제 크론), 티어 뱃지 · 아바타 퍼플 링 — 10-6절</td></tr>
+    <tr><td>마이페이지</td><td>좌측 프로필 + 메뉴 리스트, 인라인 닉네임 편집</td><td><b>리디자인 완료</b> — 프로필 밴드(아바타 · 멤버십 뱃지 · 스탯 3종) + 240px 사이드 내비(카운트 · 푸시 카드 · 계정 링크), 카드형 결제 내역 · 주문 상세, 프로필 수정 모달(크롭 재사용), 배송지 카드 + 공용 수정/삭제 버튼 — 10장</td></tr>
     <tr><td>소식</td><td>Supabase 수동 입력 기사(<code>news_gallery</code>) + 사진 갤러리</td><td><b>자동 수집 피드</b>(네이버 API Hub 뉴스 · 구글 뉴스 RSS · 유튜브 공식 채널 RSS) + <b>일정 허브</b>(수동 큐레이션 · KOPIS 공연 자동 수집 · 뉴스 일정 자동 추출 크론) — 갤러리·히어로 제거, 4장</td></tr>
     <tr><td>앨범 · 메인</td><td>앨범 정보 + 음원 플랫폼 링크 5종</td><td><b>iTunes 30초 미리듣기</b> + 하단 미니 플레이어 바 + 풀버전 칩(멜론 · Apple Music · Spotify · YouTube Music) + 메인 일정·소식 티저 섹션 — MAIN-03 · 08 · 09</td></tr>
   </table>
@@ -185,7 +191,7 @@
     <tr><td>COM-01</td><td>로고 / 홈 이동</td><td>좌측 로고 클릭 시 메인(<code>/</code>)으로 이동.</td><td>2026-08 리디자인: 테마·스크롤 상태와 무관하게 브랜드 핑크(<code>#f465a5</code>) 로고로 통일.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>COM-02</td><td>스크롤 반응 헤더</td><td>메인 페이지에서는 투명 배경으로 고정(fixed)되며, 앨범 섹션에 도달하면 흰 배경 + 그림자 스타일로 전환.</td><td>스크롤 감지는 100ms 스로틀. 메인 외 페이지는 항상 흰 배경(relative).</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>COM-03</td><td>GNB 메뉴</td><td>소식(<code>/news</code>) · 음악(<code>/discography</code>) · 굿즈샵(<code>/shop</code>) · 자유게시판(<code>/board</code>) 4개 메뉴. 데스크톱(lg 이상)에서만 노출.</td><td>현재 경로가 해당 메뉴로 시작하면(하위 경로 포함) 굵은 글씨로 활성 표시. 우측 로그인은 보라 pill 버튼(비로그인 시).</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>COM-04</td><td>장바구니 아이콘 · 뱃지</td><td>장바구니(<code>/cart</code>) 이동 아이콘. 담긴 <b>상품 종류 수</b>를 빨간 원형 뱃지로 표시.</td><td>수량 합계가 아닌 고유 품목 수. 0개면 뱃지 숨김. 하이드레이션 전에는 미표시.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-04</td><td>장바구니 아이콘 · 뱃지</td><td>장바구니(<code>/cart</code>) 이동 아이콘. 담긴 <b>상품 종류 수</b>를 브랜드 오렌지 원형 뱃지로 표시. 장바구니 페이지에서는 아이콘이 보라로 활성 표시.</td><td>수량 합계가 아닌 고유 품목 수. 0개면 뱃지 숨김. 하이드레이션 전에는 미표시. (2026-08 리디자인에서 빨강 → 오렌지)</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>COM-05</td><td>유저 메뉴 분기</td><td>비로그인: “로그인” 링크 → 로그인 페이지로 이동(현재 경로를 <code>?redirect</code>로 첨부, AUTH-07). 로그인: 아바타 → 드롭다운(닉네임 표시, 마이페이지, 로그아웃).</td><td>세션 상태에 따라 실시간 전환. <b>v1의 로그인 모달은 제거됨.</b></td><td><span class="auth any">전체</span></td></tr>
   </table>
 
@@ -202,18 +208,22 @@
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
     <tr><td>COM-10</td><td>푸터</td><td>핑크 로고 + 포트폴리오 고지 3줄(비공식 팬 사이트·포트폴리오 목적 / 원저작권 스타쉽 / © 2026 seokachu) + GitHub·포트폴리오 사이트(<code>seokachu.site</code>) 원형 아이콘 버튼(새 창).</td><td>로그인 상태와 무관하게 항상 동일한 정적 콘텐츠.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>COM-11</td><td>404 페이지</td><td>존재하지 않는 경로 접근 시 안내 이미지 + <span class="msg">“죄송합니다. 잘못된 경로로 들어오셨습니다.”</span> · <span class="msg">“잠시 후 다시 접속해 주세요.”</span> 문구 + “메인으로 이동하기” 링크 표시.</td><td>자동 리다이렉트 없음. 헤더/푸터는 함께 표시.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-11</td><td>404 페이지 <span class="tag">2026-08 리디자인</span></td><td>존재하지 않는 경로 접근 시 <b>그라데이션 “404” 넘버럴</b> + <span class="msg">“페이지를 찾을 수 없어요”</span> + <span class="msg">“요청하신 주소가 변경되었거나 삭제되었어요.”</span>, 접근했던 경로를 취소선 칩으로 표시, [메인으로 가기 · 이전 페이지로] 2단 CTA, 하단 구분선 <b>“이런 페이지는 어때요?”</b> + 퀵링크 필 4종(음악 · 소식 · 게시판 · 굿즈샵).</td><td>자동 리다이렉트 없음. 헤더/푸터는 함께 표시. 구 안내 이미지 화면은 대체됨(<code>.pen</code> “404 · 라이트/다크”).</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>COM-12</td><td>최상단 이동 버튼</td><td>페이지 우하단 고정 버튼. 클릭 시 최상단으로 부드럽게 스크롤.</td><td>스크롤 200px 이상일 때만 노출. 메인·소식·게시판 상세·마이페이지 등에 배치.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>COM-13</td><td>토스트 알림</td><td>동작 결과(성공/실패)를 화면 토스트로 안내. 실패는 붉은(destructive) 스타일.</td><td>동시 1개만 표시(신규 발생 시 교체).</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>COM-14</td><td>확인 모달</td><td>파괴적 동작(게시글/댓글 삭제, 장바구니 비우기, 구매확정 등) 전 공통 확인 다이얼로그 표시.</td><td>바깥 영역 클릭으로도 닫힘(취소 처리).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-13</td><td>토스트 알림</td><td>동작 결과를 화면 토스트로 안내. 2026-08 리디자인에서 <b>4종 톤</b>(성공 · 안내 · 경고 · 실패)으로 정리되어 아이콘 + 색으로 구분된다.</td><td>동시 1개만 표시(신규 발생 시 교체). 실패는 붉은(destructive) 톤.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-14</td><td>확인 모달</td><td>되돌릴 수 없는 동작 전 공통 확인 다이얼로그. <b>2가지 톤</b> — ① <b>destructive</b>(게시글·댓글·배송지 삭제, 장바구니 비우기, 멤버십 해지): 빨간 휴지통 서클 + 빨간 확인 버튼 ② <b>primary</b>(구매확정 등 기본): 보라 체크 서클 + 그라데이션 확인 버튼. 버튼은 [취소 · 실행] 2개 필 버튼.</td><td>바깥 영역 클릭으로도 닫힘(취소 처리). 호출부에서 제목·설명·버튼 문구를 지정한다.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>COM-15</td><td>로딩 표준화</td><td>로딩 인디케이터는 공용 Spinner로 통일되어 스크린리더에 “로딩 중”으로 읽힘.</td><td>—</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>COM-16</td><td>다크모드</td><td>헤더의 달/해 토글 버튼으로 라이트 ↔ 다크 전환(데스크톱·모바일 공통 노출). 선택한 테마는 기기에 저장되어 재방문 시 유지. 전환 시 0.3초 색상 페이드 적용.</td><td>기본 라이트, 시스템 테마와 미연동(옵트인 방식). 하이브리드 앱에서는 현재 테마가 네이티브 셸로 전달됨(PUSH-10).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-17</td><td>정렬 셀렉트 (공통)</td><td>목록 화면의 정렬 선택을 공통 컴포넌트로 통일 — 라운드 필 트리거(현재 정렬명 + ▾)를 누르면 드롭다운이 열리고, 선택된 항목은 <b>라벨 앞 체크 + 보라 굵은 글씨</b>로 표시된다. 자유게시판(최신순·인기순·댓글순) · 굿즈샵(인기순·최신순·가격 낮은/높은 순) · 음악(최신순·오래된순)에 적용.</td><td>폼 입력용 셀렉트(배송 요청사항 등)는 별도 컴포넌트를 계속 사용한다.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-18</td><td>공유 시트</td><td>게시글 상세 · 상품 상세의 공유 버튼을 누르면 공유 시트가 열린다: <b>카카오톡</b>(카카오 SDK 스크랩 공유) · <b>링크 복사</b> · <b>더보기</b>(기기 네이티브 공유) 원형 버튼 3종 + 현재 URL 표시 바(우측 “복사” 필).</td><td>“더보기”는 네이티브 공유를 지원하는 기기에서만 노출. 링크 복사 성공 시 <span class="msg">“링크가 복사되었습니다”</span>, 실패 시 <span class="msg">“링크 복사에 실패했습니다”</span>. 카카오 키 미설정 시 <span class="msg">“카카오톡 공유를 사용할 수 없습니다”</span> 경고 토스트.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-19</td><td>수정 · 삭제 액션 (공통)</td><td>본인 리소스에 노출되는 [수정 · 삭제] 필 버튼 쌍을 공통화 — 수정은 중립 아웃라인(연필), 삭제는 붉은 틴트(휴지통)이며 삭제 클릭 시 destructive 확인 모달(COM-14)로 연결된다. 댓글·대댓글(작은 사이즈), 마이페이지 배송지 카드(기본 사이즈)에 사용.</td><td>확인 모달의 제목·설명은 호출부에서 지정(기본값 <span class="msg">“삭제할까요? / 삭제한 내용은 되돌릴 수 없어요.”</span>).</td><td><span class="auth owner">작성자</span></td></tr>
+    <tr><td>COM-20</td><td>빈 상태 (공통 패턴)</td><td>목록이 비었을 때 <b>파스텔 원형 아이콘 + 제목 + 설명 + (선택) CTA 버튼</b> 형태로 통일해 안내. 게시판(글 없음·검색 결과 없음·공지 탭·비로그인), 굿즈샵 리뷰, 장바구니, 마이페이지 4개 목록에 각각 다른 문구로 적용.</td><td>안내·행동 유도는 보라 톤, 검색 결과 없음 같은 중립 상황은 회색 톤.</td><td><span class="auth any">전체</span></td></tr>
   </table>
 </section>
 
 <!-- ══════════ 3. 메인 ══════════ -->
 <section id="main">
-  <h2 class="sec">3. 메인 페이지 · 디스코그래피</h2>
+  <h2 class="sec">3. 메인 페이지 · 음악(디스코그래피)</h2>
   <p class="sec-desc">서비스 첫 화면. 24시간 주기 ISR로 재생성되며 앨범 데이터는 서버에서 미리 조회(prefetch)된다.</p>
 
   <h3>3-1. 메인 <span class="path">/</span></h3>
@@ -225,31 +235,36 @@
     <tr><td>MAIN-03</td><td>수록곡 미리듣기 · 풀버전 링크</td><td>iTunes Search API로 앨범 수록곡 목록(트랙 번호·곡명·재생시간)을 표시하고, 트랙 행 클릭 시 30초 미리듣기 재생(MAIN-08 플레이어 연동). 하단 “풀버전 듣기” 칩으로 멜론 · Apple Music · Spotify · YouTube Music 이동(새 창).</td><td>“수록곡 미리듣기” 토글로 접기 가능(기본 펼침). 멜론·Apple은 DB 앨범 링크 우선, 없으면 검색 링크 폴백. Spotify·YouTube Music은 검색 링크. 미리듣기 없는 곡은 흐림 처리·클릭 불가. iTunes 결과 일주일 캐싱.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>MAIN-04</td><td>Hot Board (인기 게시글)</td><td>인기순 6건 — 1위는 대형 피처드 카드(썸네일 배경·1위 뱃지·제목·작성자·좋아요·댓글), 2~6위는 랭킹 리스트(순위 번호·제목·작성자·통계·미니 썸네일). 클릭 시 게시글 상세 이동, 우측 상단 “전체 보기”.</td><td>정렬: 좋아요 → 댓글 → 최신순. 썸네일 없는 글은 썸네일 영역 미노출(1위는 보라 그라디언트 폴백).</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>MAIN-05</td><td>굿즈샵 프로모 배너 <b>(삭제됨)</b></td><td>2026-08 리디자인에서 제거 — Shop 섹션 “전체 보기”로 이동 경로 단일화.</td><td>—</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>MAIN-06</td><td>상품 캐러셀 (SHOP)</td><td>인기 상품 12개를 좌우 화살표 캐러셀로 표시(데스크톱 4카드 정렬). 카드: 이미지 위 배지 오버레이(무료배송 회색·HOT 오렌지·NEW 보라 예정)와 찜 하트(우상단 흰 원형), 상품명·오렌지 할인율·가격·노란 별점 한 줄. 우측 상단 “전체 보기”.</td><td>리뷰 수 기준 상위 12개. NEW 뱃지 부여 로직은 추후. 찜 동작은 SHOP-04와 동일.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MAIN-06</td><td>상품 캐러셀 (SHOP)</td><td>인기 상품 12개를 좌우 화살표 캐러셀로 표시(데스크톱 4카드 정렬). 카드: 이미지 위 배지 오버레이(무료배송 회색·HOT 오렌지·NEW 보라 예정)와 찜 하트(우상단 흰 원형), 상품명·오렌지 할인율·가격·노란 별점 한 줄. 우측 상단 “전체 보기”.</td><td>리뷰 수 기준 상위 12개. NEW 뱃지 부여 로직은 추후. 찜 동작은 SHOP-05와 동일.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>MAIN-07</td><td>로딩 · 오류 처리</td><td>각 섹션은 로딩 중 스켈레톤 표시, 조회 실패 시 오류 안내(<span class="msg">“Oops! 잠시 후 다시 확인해주세요...”</span>)로 대체.</td><td>재시도 버튼 없음. 상품 캐러셀은 오류 시 별도 안내 없이 미표시.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>MAIN-08</td><td>미니 플레이어 바</td><td>미리듣기 재생 시 화면 하단에 고정 플레이어 표시: 앨범아트·곡명(아이브 · 앨범명), 이전/재생·일시정지/다음 버튼, 드래그 시킹 진행바(현재/전체 시간), 볼륨 슬라이더·음소거, 닫기(✕).</td><td>곡 종료 시 미리듣기 가능한 다음 곡 자동 재생, 마지막 곡이면 정지. 기본 볼륨 50%. 모바일에서는 볼륨 슬라이더 숨김(기기 볼륨 사용). 닫으면 재생 중지·바 제거.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MAIN-08</td><td>플로팅 플레이어 · 미니 디스크</td><td>미리듣기 재생 시 화면 하단 중앙에 <b>떠 있는 라운드 플레이어</b>가 나타난다: 앨범아트·곡명(아이브 · 앨범명), 이전/재생·일시정지/다음, 드래그 시킹 진행바(현재/전체 시간), 볼륨 슬라이더·음소거, 닫기(✕). <b>루트 레이아웃에 전역 마운트</b>되어 메인 · 음악 등 페이지를 이동해도 재생이 끊기지 않는다.</td><td>페이지를 이동하면 콘텐츠를 가리지 않도록 <b>우하단 미니 디스크</b>(회전하는 커버)로 자동 축소되고, 디스크를 누르면 즉시 재생/일시정지 + 보조 버튼(펼치기 · 종료)이 4초간 노출된다(터치 기기 대응). 곡 종료 시 미리듣기 가능한 다음 곡 자동 재생, 마지막 곡이면 정지. 기본 볼륨 50%, 모바일은 볼륨 슬라이더 숨김. 닫으면 재생 중지·플레이어 제거.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>MAIN-09</td><td>일정 · 소식 티저</td><td>앨범 섹션과 게시판 섹션 사이 “News” 섹션: 다가오는 일정 최대 3건(D-day 배지·카테고리·기간·제목·장소) + 최신 소식 카드 4건 + “소식 전체 보기” 버튼(화살표 좌우 왕복 애니메이션).</td><td>일정 D-day 뱃지는 공통 컴포넌트(예정 보라·진행 초록·종료 회색). 종료 일정 제외, 최대 3건. 소식 카드는 소식 페이지와 동일 동작(영상 인라인 재생·기사 요약 오버레이). 로딩 중 스켈레톤.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>MAIN-10</td><td>앨범 자동 등록</td><td>매일 06:30(KST) Vercel Cron이 iTunes 아티스트 룩업으로 새 발매반을 감지해 <code>album</code> 테이블에 자동 추가(제목·커버 600px·구분·발매일·곡 수·Apple 링크). 별도 승인 없이 즉시 캐러셀에 노출.</td><td>4곡 이상 발매반(정규·미니)만 등록 — 1~2곡 싱글·리믹스 제외. 제목 정규화로 기존 행과 중복 방지. <code>CRON_SECRET</code> Bearer 인증. 곡 수 10 이상이면 “정규”, 미만이면 “미니”. 멜론 링크는 수동 보강.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>MAIN-11</td><td>타이틀곡 뱃지</td><td>수록곡 목록에서 활동곡에 보라색 “타이틀” 뱃지 표시.</td><td>판별 기준: 해당 곡이 아이브 싱글(1~2곡 컬렉션)로도 발매되었거나 곡명이 앨범명과 동일한 경우. 싱글 발매 없이 활동한 타이틀곡은 누락될 수 있음.</td><td><span class="auth any">전체</span></td></tr>
   </table>
 
-  <h3>디스코그래피 <span class="path">/discography</span> <span class="tag">v2 신규 · GNB 메뉴</span></h3>
+  <h3>3-2. 음악(디스코그래피) <span class="path">/discography</span> <span class="tag">v2 신규 · GNB “음악” · 2026-08 리디자인</span></h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>DISC-01</td><td>전체 발매 목록</td><td>iTunes에서 아이브 전체 발매(정규·미니·싱글, 일본반 포함)를 실시간 조회해 커버 그리드(2~4열)로 표시: 커버·구분 뱃지·제목·발매일·곡 수. “전체 · 정규 · 미니 · 싱글” 필터 제공.</td><td>DB 미사용(iTunes 직접 조회, 하루 캐싱). 발매일 내림차순, 제목 정규화 중복 제거. 곡 수 10↑ 정규 · 4↑ 미니 · 그 외 싱글로 분류.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>DISC-02</td><td>발매 상세 · 미리듣기</td><td>커버 클릭 시 하단 상세 패널: 커버·구분·발매일·곡 수·Apple Music 링크 + 수록곡 목록(타이틀 뱃지 포함). 트랙 클릭으로 30초 미리듣기 — 메인과 동일한 하단 미니 플레이어(MAIN-08) 사용.</td><td>같은 커버 재클릭 또는 ✕로 패널 닫기. 필터 변경 시 패널 초기화.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>DISC-01</td><td>최신 발매 히어로</td><td>페이지 최상단에 다크 배경 + 오로라 글로우 히어로: 대형 커버, NEW·구분 뱃지, 제목, 발매일 · 구분 · 곡 수, 대표 수록곡 3곡 미리듣기, “수록곡 전체 보기”(상세 시트 열기), 스트리밍 링크 칩.</td><td>히어로는 <b>싱글을 건너뛰고</b> 가장 최근의 발매반(정규·미니)을 노출한다 — 리믹스·디지털 싱글이 더 최신이면 표기를 “최신 앨범”으로 바꾼다(전체 기준 최신이면 “최신 발매”).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>DISC-02</td><td>전체 발매 목록 · 연도 그룹</td><td>아이브 전체 발매(정규·미니·싱글, 일본반 포함)를 커버 그리드(2~4열)로 표시: 커버·구분 뱃지·제목·발매일·곡 수. 목록은 <b>발매 연도별로 그룹</b>되어 “2026 ——— n장” 형태의 구분선이 붙는다.</td><td>DB 미사용(iTunes 직접 조회, 하루 캐싱). 제목 정규화로 중복 제거. 곡 수 10↑ 정규 · 4↑ 미니 · 그 외 싱글로 분류. 모든 연도는 항상 펼쳐진 상태(접기 없음).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>DISC-03</td><td>필터 · 정렬</td><td>“전체 · 정규 · 미니 · 싱글” 필터 필(각 항목에 <b>개수</b> 표기) + 정렬 셀렉트(최신순 · 오래된순, COM-17 공통 컴포넌트).</td><td>필터를 바꾸면 열려 있던 상세 시트는 닫힌다. 정렬은 연도 그룹 순서와 그룹 내 순서에 함께 적용.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>DISC-04</td><td>커버 호버 미리듣기</td><td>그리드 커버에 마우스를 올리면 재생 FAB이 나타나고, 클릭 시 <b>상세를 열지 않고</b> 해당 앨범의 타이틀곡(없으면 첫 미리듣기 가능한 곡)을 바로 재생한다.</td><td>터치 기기에서는 FAB이 상시 노출된다. 수록곡은 클릭 시점에 조회되며 미리듣기 가능한 곡이 없으면 재생되지 않는다.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>DISC-05</td><td>앨범 상세 시트</td><td>커버(또는 히어로의 “수록곡 전체 보기”) 클릭 시 우측에서 상세 시트가 열린다: 큰 커버, 구분 뱃지 + 제목, 발매일 · 곡 수, 스트리밍 링크 칩(멜론 · Apple Music · Spotify · YouTube Music), 수록곡 목록(타이틀 뱃지 포함). 트랙 클릭으로 30초 미리듣기.</td><td>시트를 열거나 닫으면 재생 플레이어는 우하단 <b>미니 디스크</b>로 접힌다(MAIN-08) — 시트와 겹치지 않게 하기 위함. 배경 클릭 · ✕ · Esc로 닫힘.</td><td><span class="auth any">전체</span></td></tr>
   </table>
 </section>
 
 <!-- ══════════ 4. 소식 ══════════ -->
 <section id="news">
   <h2 class="sec">4. 소식 페이지</h2>
-  <p class="sec-desc">2026-08 전면 개편 — 수동 입력 기사·갤러리를 걷어내고 <b>일정(Schedule) · 영상(Video) · 기사(News)</b> 3개 섹션의 자동 수집 허브로 재구성. 피드·일정 모두 30분 주기 ISR. 구 히어로 섹션 · 카테고리 필터 · 사진 갤러리 · 상세 모달은 제거됨.</p>
+  <p class="sec-desc">2026-08 전면 개편 — 수동 입력 기사·갤러리를 걷어내고 <b>일정(Schedule) · 영상(Video) · 기사(News)</b> 3개 섹션의 자동 수집 허브로 재구성. 피드·일정 모두 30분 주기 ISR. 구 사진 갤러리 · 상세 모달은 제거됐고, 2026-08 리디자인으로 <b>블러 사진 히어로 · 캘린더 통합 일정 뷰 · 4열 영상 그리드 · 가로형 기사 로우</b>가 적용됐다.</p>
 
   <h3>4-1. 일정 <span class="path">/news #schedule_section</span></h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>NEWS-01</td><td>일정 목록 (D-day 카드)</td><td>다가오는 순으로 일정 카드 표시: D-day 배지(D-n · D-DAY · 진행중 · 종료), 카테고리 배지(콘서트·컴백·방송·팬미팅·팝업·발매·기타), 기간(요일 포함), 제목, 장소. “다가오는 일정 ↔ 캘린더” 뷰 토글 제공.</td><td>지난 일정(30일 이내)은 “지난 일정”으로 분리·흐림 처리. 캘린더는 월 이동 + 일정 있는 날 점 표시 + 날짜 선택 시 해당일 일정 표시.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-08</td><td>페이지 히어로</td><td>상단에 아이브 사진을 흐리게 깔고 그라데이션 스크림을 덮은 히어로: “NEWS &amp; SCHEDULE” 키커, “소식” 타이틀, 서브카피(“아이브의 일정과 영상, 기사를 한곳에 모아 보여드려요”), <b>“자동 수집” 보라 칩 + “뉴스 · 영상 · 일정을 30분마다 자동으로 업데이트해요”</b> 안내.</td><td>배경 시안은 A(그라데이션)/B(블러 포토)/C/D 비교 후 B 확정. 다크에서는 스크림이 어두운 톤으로 전환.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-01</td><td>일정 — 캘린더 통합 뷰</td><td>좌측 <b>캘린더</b>(월 이동 · 일정 있는 날 점 표시 · 날짜 선택) + 우측 <b>일정 리스트</b>를 한 화면에 나란히 배치. 리스트는 ① 선택한 날짜의 일정(“8월 17일 (일) 일정”) ② 다가오는 일정 ③ 지난 일정 순으로 이어진다. 카드에는 D-day 배지(D-n · D-DAY · 진행중 · 종료), 카테고리 배지, 기간(요일 포함), 제목, 장소가 표시된다.</td><td>v2 초기의 “다가오는 일정 ↔ 캘린더” 토글은 <b>제거</b>되고 통합 뷰로 대체됨. 지난 일정은 흐림 처리. 선택 날짜 기본값은 오늘.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-09</td><td>일정 카테고리 필터</td><td>일정 섹션 상단 필 필터로 카테고리(콘서트 · 컴백 · 방송 · 팬미팅 · 팝업 · 발매 · 기타)를 좁혀 볼 수 있다. 필터는 캘린더와 리스트에 동시에 적용된다.</td><td>수집된 데이터에 <b>실제로 존재하는 카테고리만</b> 필로 노출된다(빈 필터 없음). 기본값 “전체”.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>NEWS-02</td><td>일정 인라인 상세</td><td>카드 클릭 시 그 자리에서 아래로 펼쳐짐(모달·페이지 이동 없음): 대표 사진, 설명, 기간(연도 포함)·장소, “이 일정 관련 소식”(제목 키워드로 피드에서 자동 매칭, 최대 4건), 원문/예매 외부 링크.</td><td>대표 사진은 KOPIS 포스터 → 네이버 이미지 검색 → 관련 영상 썸네일 순 폴백. 자동 수집 일정은 “자동 수집” 배지 표시. 정보가 없으면 <span class="msg">“아직 등록된 상세 정보가 없어요.”</span></td><td><span class="auth any">전체</span></td></tr>
     <tr><td>NEWS-03</td><td>일정 데이터 수집</td><td>3개 소스 병합: ① Supabase <code>schedules</code> 수동 큐레이션 ② KOPIS 공연 자동 수집 ③ 뉴스 일정 자동 추출(매일 06시 KST Vercel Cron이 일정 키워드+명시적 날짜가 있는 기사에서 초안 생성 후 저장).</td><td>KOPIS는 31일 단위로 향후 90일 조회, 공연명에 “아이브”/단어 IVE 포함 공연만 매칭(상세 API로 출연·관람연령·티켓 설명 구성). 동일 제목은 수동 입력 우선. 크론은 <code>CRON_SECRET</code> Bearer 인증, 카테고리+시작일 기준 중복 제거.</td><td><span class="auth any">전체</span></td></tr>
   </table>
@@ -257,10 +272,10 @@
   <h3>4-2. 영상 · 기사 <span class="path">/news #video_section · #article_section</span></h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>NEWS-04</td><td>피드 자동 수집</td><td>네이버 API Hub 뉴스 검색 + 구글 뉴스 RSS + 유튜브 공식 채널 RSS를 서버에서 병합 수집(총 60건 상한). 발행일 내림차순 정렬.</td><td>30분 캐싱(<code>/api/news/feed</code>). 제목 정규화로 소스 간 중복 제거(썸네일 있는 항목 우선). 특정 소스 실패 시 나머지 소스로 응답, 전부 실패 시 오류 안내.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-04</td><td>피드 자동 수집</td><td>네이버 API Hub 뉴스 검색 + 구글 뉴스 RSS + <b>유튜브 RSS(공식 채널 · 공식 재생목록 4종 “IVE STAGE/LOG/minute/WEEK” · 1theK · Mnet K-POP)</b>를 서버에서 병합 수집. 발행일 내림차순 정렬.</td><td>30분 캐싱(<code>/api/news/feed</code>). 제목 정규화로 소스 간 중복 제거(썸네일 있는 항목 우선). 총량 컷을 쓰면 영상이 기사에 밀리므로 <b>영상 30건 · 기사 50건 별도 상한</b>. 1theK·Mnet 등 종합 채널은 제목에 아이브/IVE가 포함된 영상만 통과. 특정 소스 실패 시 나머지 소스로 응답, 전부 실패 시 오류 안내.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>NEWS-05</td><td>기사 대표 이미지 자동 매칭</td><td>썸네일이 없는 기사(네이버·구글 출처)는 기사 제목으로 네이버 이미지 검색을 수행해 대표 이미지를 자동으로 채움.</td><td>검색 결과 썸네일을 400px로 업그레이드해 사용, 하루 캐싱. 결과가 없으면 기본 이미지 유지.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>NEWS-06</td><td>Video 섹션</td><td>유튜브 공식 채널 영상을 1:1 카드 3열 그리드로 표시(“영상” 레드 배지·출처·날짜·제목 1줄 말줄임). 카드 클릭 시 <b>페이지 이탈 없이 카드가 임베드 플레이어로 전환</b>되어 자동 재생, ✕로 썸네일 복귀.</td><td>youtube-nocookie 임베드. 전체화면 해제(ESC) 시 이전 스크롤 위치 복원. 기본 6건, “더 많은 영상 보기”로 6건씩 추가.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>NEWS-07</td><td>News(기사) 섹션</td><td>네이버·구글 수집 기사를 1:1 카드 3열 그리드로 표시(“기사” 파랑 배지·출처·날짜·제목 1줄 말줄임). 클릭 시 <b>페이지 이탈 없이 카드가 요약 오버레이로 전환</b>(제목·요약·“원문 보기” 외부 링크·✕ 닫기).</td><td>구글 수집 기사는 요약 미제공 안내 문구 표시. 기본 6건, “더 많은 기사 보기”로 6건씩 추가.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-06</td><td>Video 섹션</td><td>수집된 유튜브 영상을 <b>4열 카드 그리드</b>로 표시(출처·날짜·제목). 카드 클릭 시 <b>페이지 이탈 없이 카드가 임베드 플레이어로 전환</b>되어 자동 재생, ✕로 썸네일 복귀.</td><td>youtube-nocookie 임베드. 전체화면 해제(ESC) 시 이전 스크롤 위치 복원. 기본 8건, “더 많은 영상 보기”로 8건씩 추가.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>NEWS-07</td><td>News(기사) 섹션</td><td>네이버·구글 수집 기사를 <b>가로형 로우 카드</b>(썸네일 + 출처·날짜 + 제목)로 최대 3열 폭의 리스트에 표시한다. 클릭 시 원문을 <b>새 탭</b>으로 연다.</td><td>기본 6건, “더 많은 기사 보기”로 6건씩 추가. 썸네일이 없으면 자동 매칭된 대표 이미지(NEWS-05) 사용.</td><td><span class="auth any">전체</span></td></tr>
   </table>
 </section>
 
@@ -314,89 +329,111 @@
 <!-- ══════════ 6. 게시판 ══════════ -->
 <section id="board">
   <h2 class="sec">6. 자유게시판</h2>
-  <p class="sec-desc">회원 커뮤니티 게시판. 조회는 누구나 가능하며 작성·좋아요·댓글은 로그인이 필요하다. v2에서 댓글·답글·좋아요에 푸시 알림 발송이 연동됐다.</p>
+  <p class="sec-desc">회원 커뮤니티 게시판. 조회는 누구나 가능하며 작성·좋아요·댓글은 로그인이 필요하다. v2에서 댓글·답글·좋아요에 푸시 알림 발송이 연동됐고, 2026-08 리디자인으로 <b>“라운지”형 화면</b>(사진 히어로 · HOT 3 · 필터/정렬 툴바 · 카드형 로우 · 800px 리딩 칼럼 상세)으로 전면 개편됐다.</p>
 
   <h3>6-1. 게시글 목록 <span class="path">/board</span></h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>BRD-01</td><td>목록 조회</td><td>게시글을 최신순으로 표시. 데스크톱은 표 형식(번호·제목·작성자·작성일·조회·추천), 모바일은 요약 카드 형식. 제목 옆에 댓글 수 표시.</td><td>정렬 변경 기능 없음(최신순 고정).</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>BRD-02</td><td>페이지네이션</td><td>페이지당 10건. 이전/다음 및 페이지 번호(최대 3개 노출, 말줄임 처리)로 이동. 현재 페이지는 URL 쿼리(<code>?page=N</code>)에 유지.</td><td>전체가 1페이지 이하이면 페이저 미노출.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>BRD-03</td><td>제목 검색</td><td>검색어 입력 시 0.5초 디바운스 후 제목 부분일치로 검색. 결과 목록에서 일치 구간을 노란색으로 하이라이트.</td><td>검색 대상은 제목만(본문·작성자 제외). 검색 시 1페이지로 리셋. 결과 없으면 <span class="msg">“검색 결과가 없습니다.”</span></td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>BRD-04</td><td>글쓰기 진입</td><td>“글쓰기” 버튼으로 작성 화면 이동.</td><td>비로그인 시 <span class="msg">“로그인이 필요합니다.”</span> 토스트 후 이동 차단.</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>BRD-05</td><td>상세 진입 · 조회수</td><td>행 클릭 시 상세로 이동하며 이때 조회수 1 증가. 모바일 댓글 수 버튼 클릭 시 상세의 댓글 영역으로 바로 이동.</td><td>같은 글은 기기당 24시간 내 재클릭해도 조회수 중복 증가 없음. 상세 URL 직접 접근으로는 조회수가 증가하지 않음.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-01</td><td>히어로 · 커뮤니티 통계</td><td>상단에 아이브 무대 사진을 흐리게 깔고 스크림을 덮은 히어로: “DIVE COMMUNITY” 보라 칩, “자유게시판” 타이틀, 서브카피(“다이브들의 이야기가 모이는 라운지 — 오늘의 수다에 함께 DIVE 🌊”), 우측에 <b>전체 글 · 오늘 새 글 · 누적 댓글</b> 3개 통계.</td><td>통계는 서버 집계값이며 로딩 중에는 “–”로 표시. 실시간 접속자 표시는 프레즌스 인프라가 필요해 시안 단계에서 제외됨.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-02</td><td>지금 뜨는 글 (HOT 3)</td><td>히어로 아래 “지금 뜨는 글 — 반응이 가장 뜨거웠던 이야기예요” 섹션에 인기 상위 3건을 <b>사진 배경 카드</b>로 표시: 큰 흰색 순위 숫자, 1위 오렌지 “HOT” 배지, 제목, 작성자 아바타·닉네임, 좋아요·댓글·조회 수. 우측 상단 “인기글 전체 보기”는 인기 필터가 적용된 목록으로 이동.</td><td>정렬은 인기순(좋아요 → 댓글 → 최신). 썸네일이 없는 글은 보라 그라데이션 배경으로 폴백. 데이터가 없으면 섹션 자체를 숨김.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-03</td><td>필터 필</td><td>툴바 좌측 필 그룹으로 <b>전체 · 인기 · 공지 · 내가 쓴 글</b> 전환. 선택 상태는 URL 파라미터(<code>?filter=</code>)로 유지되어 HOT 3의 “인기글 전체 보기” 링크와도 자연스럽게 연결된다.</td><td>“인기”를 고르면 정렬이 인기순으로 강제되고, 인기 필터 상태에서 정렬을 바꾸면 전체 필터로 복귀. “내가 쓴 글”은 비로그인 시 <span class="msg">“로그인이 필요합니다.”</span> 토스트 후 차단. 필터 전환 시 스크롤은 유지된다.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-04</td><td>정렬</td><td>최신순(기본) · 인기순 · 댓글순 3종 정렬 셀렉트(COM-17). 선택값은 URL 파라미터(<code>?sort=</code>)로 유지.</td><td>정렬 변경 시 1페이지로 리셋.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-05</td><td>제목 검색</td><td>라운드 검색창에 입력하면 0.5초 디바운스 후 제목 부분일치로 검색. 결과 목록에서 일치 구간을 보라 배경으로 하이라이트.</td><td>검색 대상은 제목만(본문·작성자 제외). 검색 시 1페이지로 리셋. 검색 중에는 로딩 표시.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-06</td><td>공지 로우</td><td>리스트 최상단에 보라 배경의 고정 공지 로우(“공지” 칩 + <span class="msg">“자유게시판 이용 규칙 &amp; 팬 에티켓 안내 (필독)”</span>)를 표시.</td><td>전체 · 공지 필터에서만 노출되고 검색 중에는 숨김. <b>DB에 공지 개념이 없어 정적 문구</b>이며, 공지 탭 자체에는 “등록된 공지는 여기까지예요” 빈 상태가 표시된다.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-07</td><td>게시글 로우 (카드형)</td><td>한 줄 카드형 로우로 표시: 썸네일(56px, 있을 때만) · 제목 · 댓글 수 보라 칩 · 24시간 내 새 글 오렌지 도트 · 작성자 아바타(없으면 이니셜 서클)와 닉네임 · 상대시간(“10분 전”) · 조회수 · 우측 좋아요 필.</td><td>좋아요 50개 이상이면 좋아요 필이 오렌지 강조로 바뀐다. v1의 번호 열·표 헤더는 제거됨. 댓글 칩을 누르면 상세의 댓글 영역으로 바로 이동.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-08</td><td>페이지네이션</td><td>페이지당 10건. 이전/다음 및 페이지 번호(최대 3개 노출, 말줄임 처리)로 이동. 현재 페이지는 URL 쿼리(<code>?page=N</code>)에 유지.</td><td>전체가 1페이지 이하이면 페이저 미노출. 페이지 이동 시 툴바 상단으로 스크롤 복귀.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-09</td><td>빈 상태 (4종)</td><td>상황별로 다른 안내(COM-20): ① 글 없음 <span class="msg">“아직 게시글이 없어요 / 첫 번째 글로 다이브를 시작해보세요!”</span> + 글쓰기 CTA ② 검색 결과 없음 <span class="msg">“검색 결과가 없어요 / 다른 키워드로 다시 검색해보세요”</span> ③ 내가 쓴 글 비로그인 <span class="msg">“로그인 후 내가 쓴 글을 볼 수 있어요”</span> + 로그인 CTA ④ 공지 탭 <span class="msg">“등록된 공지는 여기까지예요”</span> + 전체 글 보기 CTA.</td><td>작성자 필터(<code>?author=</code>)로 진입해 글이 없으면 <span class="msg">“이 다이브가 남긴 글이 아직 없어요”</span>. 어떤 상태에서도 리스트 영역 최소 높이를 확보해 푸터가 딸려 올라오지 않게 한다.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-10</td><td>글쓰기 진입</td><td>툴바 우측 “글쓰기” 필 버튼으로 작성 화면 이동.</td><td>비로그인 시 <span class="msg">“로그인이 필요합니다.”</span> 토스트 후 이동 차단.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>BRD-11</td><td>상세 진입 · 조회수</td><td>로우 클릭 시 상세로 이동하며 이때 조회수 1 증가.</td><td>같은 글은 기기당 24시간 내 재클릭해도 조회수 중복 증가 없음. 상세 URL 직접 접근으로는 조회수가 증가하지 않음.</td><td><span class="auth any">전체</span></td></tr>
   </table>
 
   <h3>6-2. 게시글 작성 · 수정 <span class="path">/board/write</span> <span class="path">/board/edit/[id]</span></h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>BRD-06</td><td>글 작성 폼</td><td>제목(최대 100자 입력 제한) + 리치 텍스트 에디터(제목 크기 3단계 · 굵게 · 기울임 · 밑줄 · 이미지). 두 필드 모두 필수이며 유효할 때만 “등록하기” 활성.</td><td>미입력 시 <span class="msg">“제목을 입력해 주세요.”</span> / <span class="msg">“내용을 입력해 주세요.”</span> 본문 길이 상한 없음.</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>BRD-07</td><td>본문 이미지 업로드</td><td>에디터의 이미지 버튼으로 이미지 1장씩 선택 → 스토리지 업로드 후 커서 위치에 삽입.</td><td>실패 시 <span class="msg">“이미지 업로드 실패”</span> 토스트. 파일 크기·개수 제한 없음(브라우저 이미지 형식 필터만 적용).</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>BRD-08</td><td>썸네일 자동 지정</td><td>본문의 첫 번째 이미지를 목록 썸네일 및 공유(OG) 이미지로 자동 사용.</td><td>이미지가 없으면 기본 이미지 사용.</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>BRD-09</td><td>등록 · 수정 처리</td><td>등록 성공 시 <span class="msg">“게시글 등록이 완료되었습니다.”</span> 후 목록으로, 수정 성공 시 <span class="msg">“게시글 수정이 완료되었습니다.”</span> 후 상세로 이동.</td><td>수정 시 변경 사항이 없으면 저장 없이 <span class="msg">“수정된 내용이 없습니다.”</span> 안내 후 상세로 이동.</td><td><span class="auth owner">작성자</span></td></tr>
+    <tr><td>BRD-12</td><td>작성 화면 구성</td><td>상세와 같은 800px 리딩 칼럼: “목록으로” 필 → “자유게시판” 배지 + 타이틀/서브 → 제목 입력(카운터 <code>n/100</code>) → 에디터 카드(툴바 / 본문 300px / 하단 이미지 힌트 · 글자 수) → 커뮤니티 가이드 카드 → [취소 · 등록하기] 액션 로우.</td><td>제목·본문 모두 필수이며 유효할 때만 “등록하기” 활성. 미입력 시 <span class="msg">“제목을 입력해 주세요.”</span> / <span class="msg">“내용을 입력해 주세요.”</span> 본문 길이 상한 없음.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>BRD-13</td><td>리치 텍스트 에디터 (Tiptap)</td><td>에디터를 <b>react-quill → Tiptap v3</b>로 교체하고 시안대로 커스텀 툴바를 구성: 굵게 · 기울임 · 밑줄 · 취소선 · 목록(글머리/번호) · 인용 · 링크 · 이미지.</td><td>기존 react-quill로 작성된 과거 글은 상세에서 기존 서식 CSS로 계속 정상 렌더된다.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>BRD-14</td><td>본문 이미지 업로드</td><td>에디터의 이미지 버튼으로 이미지 1장씩 선택 → 스토리지 업로드 후 커서 위치에 삽입.</td><td>실패 시 <span class="msg">“이미지 업로드 실패”</span> 토스트. 파일 크기·개수 제한 없음(브라우저 이미지 형식 필터만 적용).</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>BRD-15</td><td>썸네일 자동 지정</td><td>본문의 첫 번째 이미지를 목록 썸네일 및 공유(OG) 이미지로 자동 사용.</td><td>이미지가 없으면 목록에서 썸네일 영역이 표시되지 않는다.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>BRD-16</td><td>커뮤니티 가이드</td><td>폼 하단에 보라 가이드 카드로 작성 규칙 3항목(서로 존중 · 스포일러 주의 · 광고/도배 금지)을 안내.</td><td>정적 안내(동의 절차 없음).</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>BRD-17</td><td>등록 · 수정 처리</td><td>등록 성공 시 <span class="msg">“게시글 등록이 완료되었습니다.”</span> 후 목록으로, 수정 성공 시 <span class="msg">“게시글 수정이 완료되었습니다.”</span> 후 상세로 이동.</td><td>수정 시 변경 사항이 없으면 저장 없이 <span class="msg">“수정된 내용이 없습니다.”</span> 안내 후 상세로 이동. 취소는 목록(수정은 상세)으로 복귀.</td><td><span class="auth owner">작성자</span></td></tr>
   </table>
 
   <h3>6-3. 게시글 상세 <span class="path">/board/[id]</span></h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>BRD-10</td><td>상세 조회</td><td>제목, 작성일, 조회수, 추천 수, 본문(서식·이미지 포함), 작성자 정보(아바타·이름) 표시.</td><td>본문 HTML은 DOMPurify로 소독(sanitize) 후 렌더링(XSS 방어).</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>BRD-11</td><td>게시글 좋아요</td><td>좋아요 버튼 토글. 상태에 따라 아이콘 채움/비움 및 카운트 갱신. <span class="msg">“좋아요를 눌렀습니다.”</span> / <span class="msg">“좋아요가 취소되었습니다.”</span> 토스트.</td><td>비로그인 시 로그인 안내 토스트 후 차단. 좋아요 시 작성자에게 푸시 발송(PUSH-03).</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>BRD-12</td><td>공유 (링크 복사)</td><td>공유 버튼 클릭 시 현재 페이지 URL을 클립보드에 복사, <span class="msg">“링크가 복사되었습니다.”</span> 토스트.</td><td>실패 시 <span class="msg">“링크 복사에 실패했습니다.”</span></td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>BRD-13</td><td>수정 · 삭제 (작성자)</td><td>본인 글에만 수정/삭제 버튼 노출. 삭제는 확인 모달(<span class="msg">“정말로 삭제하시겠습니까? 삭제 후 되돌릴 수 없습니다.”</span>) 통과 시 실행 후 목록 이동 + <span class="msg">“게시글이 삭제 되었습니다.”</span></td><td>타인 글에는 버튼 자체가 미노출. 데이터 권한은 서버(RLS) 정책으로 보호.</td><td><span class="auth owner">작성자</span></td></tr>
+    <tr><td>BRD-18</td><td>상세 조회 (리딩 칼럼)</td><td>본문을 800px 리딩 칼럼으로 배치: 제목 → 작성자 아바타 + 상대시간 · 조회수 → 구분선 → 본문(서식·이미지 포함). 상단 좌측에 “목록으로” 필.</td><td>본문 HTML은 DOMPurify로 소독(sanitize) 후 렌더링(XSS 방어). 본문 이미지는 칼럼 폭에 맞춰 축소된다.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-19</td><td>이전 · 다음 글 이동</td><td>상단 우측 원형 ▲▼ 버튼과 본문 하단의 이전/다음 글 로우로 인접 글로 이동한다(작성일 기준, “이전”이 더 최신).</td><td>인접 글이 없으면 버튼은 비활성 표시.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-20</td><td>추천 (좋아요)</td><td>본문 아래 가운데 그라데이션 <b>“추천 n”</b> 버튼 + 안내 문구(“이 글이 마음에 들었다면 하트로 응원해 주세요”). 누르면 하트가 채워지고 카운트가 갱신되며 <span class="msg">“좋아요를 눌렀습니다.”</span> / <span class="msg">“좋아요가 취소되었습니다.”</span> 토스트.</td><td>비로그인 시 로그인 안내 토스트 후 차단. 좋아요 추가 시 작성자에게 푸시 발송(PUSH-03).</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>BRD-21</td><td>공유</td><td>제목 우측 원형 공유 버튼 → 공유 시트(COM-18, 카카오톡 · 링크 복사 · 더보기).</td><td>—</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-22</td><td>수정 · 삭제 (작성자)</td><td>본인 글에만 원형 <b>⋯ 메뉴</b>가 노출되고, 메뉴에서 [수정하기 · 삭제하기]를 고른다. 삭제는 destructive 확인 모달(<span class="msg">“게시글을 삭제할까요? / 삭제한 글은 되돌릴 수 없고, 달린 댓글도 함께 사라져요.”</span>) 통과 시 실행 후 목록 이동 + <span class="msg">“게시글이 삭제 되었습니다.”</span></td><td>타인 글에는 메뉴 자체가 미노출. 데이터 권한은 서버(RLS) 정책으로 보호. v1의 텍스트형 수정/삭제 버튼은 제거됨.</td><td><span class="auth owner">작성자</span></td></tr>
+    <tr><td>BRD-23</td><td>작성자 카드</td><td>본문 아래 회색 카드로 작성자 아바타 · 닉네임 · <span class="msg">“라운지에 남긴 글 n개”</span> 표시 + “이 다이브의 다른 글” 링크 → 해당 작성자의 글만 필터링된 목록(<code>/board?author=…</code>)으로 이동.</td><td>가입일 표기는 회원 테이블에 가입일이 없어 제공하지 않는다.</td><td><span class="auth any">전체</span></td></tr>
   </table>
 
   <h3>6-4. 댓글 · 대댓글</h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>BRD-14</td><td>댓글 목록</td><td>상세 하단에 “댓글 N개” 헤딩과 전체 댓글을 작성순으로 표시. 대댓글은 들여쓰기로 원댓글 아래에 표시.</td><td>페이지네이션 없이 전체 로드. 댓글 앵커(<code>#comments</code>) 진입 시 자동 스크롤.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>BRD-15</td><td>댓글 작성</td><td>입력창에 내용 입력 후 “등록”. 성공 시 <span class="msg">“댓글 작성에 성공했습니다.”</span> 토스트.</td><td>빈 내용 차단(<span class="msg">“내용을 입력해 주세요.”</span>). 비로그인 제출 시 로그인 안내 토스트. 작성 시 게시글 작성자에게 푸시 발송(PUSH-01).</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>BRD-16</td><td>대댓글 작성</td><td>댓글의 “답변” 버튼으로 인라인 답글 폼 토글(열림 시 “닫기”). 등록 성공 시 폼 자동 닫힘.</td><td>답글 깊이는 2단계까지(대댓글에는 답변 버튼 없음). 작성 시 게시글 작성자·원댓글 작성자에게 푸시 발송(PUSH-02).</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>BRD-17</td><td>댓글 수정 · 삭제</td><td>본인 댓글에만 수정/삭제 버튼 노출. 수정은 인라인 편집(동시에 1개만), 삭제는 확인 모달 후 <span class="msg">“댓글이 삭제 되었습니다.”</span></td><td>내용 변경 없이 저장 시 <span class="msg">“수정된 내용이 없습니다.”</span> 안내.</td><td><span class="auth owner">작성자</span></td></tr>
-    <tr><td>BRD-18</td><td>댓글 좋아요</td><td>최상위 댓글에 좋아요 토글 제공(카운트·강조 표시).</td><td>대댓글에는 좋아요 없음. 비로그인 차단. 푸시 알림 미발송.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>BRD-24</td><td>댓글 목록 · 정렬</td><td>상세 하단에 <b>“댓글 <span style="color:#a94fc0">n</span>개”</b> 헤딩과 전체 댓글 표시. 우측 “등록순 ↔ 최신순” 토글로 정렬 전환. 대댓글은 보라 화살표 + 회색 카드로 들여쓰기 표시.</td><td>서버 조회는 등록순 고정이며 최신순은 클라이언트에서 역순 처리. 페이지네이션 없이 전체 로드. 댓글 앵커(<code>#comments</code>) 진입 시 자동 스크롤.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>BRD-25</td><td>댓글 작성</td><td>아바타 + 라운드 입력 카드 + “등록” 필 폼. 플레이스홀더는 <span class="msg">“따뜻한 댓글로 함께 다이브해요 :)”</span>. 성공 시 <span class="msg">“댓글 작성에 성공했습니다.”</span> 토스트.</td><td>빈 내용 차단(<span class="msg">“내용을 입력해 주세요.”</span>). 비로그인 제출 시 로그인 안내 토스트. 작성 시 게시글 작성자에게 푸시 발송(PUSH-01).</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>BRD-26</td><td>대댓글 작성</td><td>댓글의 “답글 쓰기” 버튼으로 인라인 답글 폼 토글(열림 시 “닫기”). 등록 성공 시 폼 자동 닫힘.</td><td>답글 깊이는 2단계까지(대댓글에는 답글 버튼 없음). 작성 시 게시글 작성자·원댓글 작성자에게 푸시 발송(PUSH-02).</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>BRD-27</td><td>댓글 수정 · 삭제</td><td>본인 댓글에만 [수정 · 삭제] 필 버튼 쌍(COM-19) 노출. 수정은 인라인 편집(동시에 1개만), 삭제는 destructive 확인 모달(<span class="msg">“댓글을 삭제할까요? / 삭제한 댓글은 되돌릴 수 없어요.”</span>) 후 <span class="msg">“댓글이 삭제 되었습니다.”</span></td><td>내용 변경 없이 저장 시 <span class="msg">“수정된 내용이 없습니다.”</span> 안내.</td><td><span class="auth owner">작성자</span></td></tr>
+    <tr><td>BRD-28</td><td>댓글 좋아요 · 작성자 뱃지</td><td>댓글·대댓글에 하트 좋아요 토글(카운트 표시). 게시글 작성자가 남긴 댓글에는 닉네임 옆에 <b>“작성자”</b> 뱃지가 붙는다.</td><td>비로그인 차단. 댓글 좋아요는 푸시 알림 미발송.</td><td><span class="auth login">로그인</span></td></tr>
   </table>
 </section>
 
 <!-- ══════════ 7. 굿즈샵 ══════════ -->
 <section id="shop">
   <h2 class="sec">7. 굿즈샵</h2>
-  <p class="sec-desc">굿즈 상품 탐색·찜·구매 진입. 가격은 할인율 적용 후 10원 단위 내림으로 계산해 표시한다.</p>
+  <p class="sec-desc">굿즈 상품 탐색·찜·구매 진입. 가격은 할인율 적용 후 10원 단위 내림으로 계산해 표시한다. 2026-08 리디자인으로 목록은 페이지 헤드 + 정렬 필로, 상세는 <b>V2 레이아웃</b>(갤러리 + 플로팅 구매 카드 + 세그먼트 탭 + 추천 섹션 + FAQ)으로 개편됐다.</p>
 
   <h3>7-1. 상품 목록 <span class="path">/shop</span></h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>SHOP-01</td><td>목록 조회 · 무한 스크롤</td><td>상품 카드를 12개 단위로 표시하고, 스크롤이 하단에 도달하면 다음 12개 자동 로드.</td><td>마지막 페이지에서 <span class="msg">“더 이상 표시할 상품이 없습니다.”</span> 표시.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>SHOP-02</td><td>정렬</td><td>인기순(기본) · 최신순 · 가격 낮은 순 · 가격 높은 순 4종 셀렉트 제공.</td><td>인기순은 리뷰 수 기준, 가격 정렬은 할인 적용가 기준. 카테고리·검색 기능 없음.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>SHOP-03</td><td>상품 카드</td><td>썸네일 · 배지 · 상품명 · 할인율(%) · 할인가 · 평균 별점 표시. 클릭(또는 Enter/Space) 시 상세 이동.</td><td>배지 규칙: 무료배송 상품 → “무료배송”, 리뷰 10개 이상 &amp; 평점 4.0 이상 → “Best👍”.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>SHOP-04</td><td>찜(위시리스트) 토글</td><td>카드의 하트 버튼으로 찜 추가/해제. <span class="msg">“찜하기가 추가되었습니다.”</span> / <span class="msg">“찜하기가 취소되었습니다.”</span> 토스트.</td><td>비로그인은 기기(로컬)에 저장되며, 로그인 시 계정으로 자동 이관. 로그인 사용자는 계정에 저장.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-01</td><td>페이지 헤드 · 전체 개수</td><td>“OFFICIAL MD” 오렌지 키커 + “Goods Shop” 타이틀 + 서브카피(“아이브의 공식 굿즈를 한자리에서 만나보세요”)와 좌측 <b>“전체 n개”</b> 표기.</td><td>개수는 서버 집계값.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-02</td><td>목록 조회 · 무한 스크롤</td><td>상품 카드를 12개 단위로 표시하고, 스크롤이 하단에 도달하면 다음 12개 자동 로드.</td><td>마지막 페이지에서 <span class="msg">“더 이상 표시할 상품이 없습니다.”</span> 표시.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-03</td><td>정렬</td><td>인기순(기본) · 최신순 · 가격 낮은 순 · 가격 높은 순 4종 — 공통 정렬 셀렉트(COM-17)로 통일.</td><td>인기순은 리뷰 수 기준, 가격 정렬은 할인 적용가 기준. 카테고리·검색 기능 없음.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-04</td><td>상품 카드</td><td>썸네일 위 배지 오버레이 · 우상단 찜 하트(흰 원형) · 상품명 · 오렌지 할인율 · 할인가 · 별점 한 줄. 클릭(또는 Enter/Space) 시 상세 이동.</td><td>배지 규칙: 무료배송 상품 → 회색 “무료배송”, 리뷰 10개 이상 &amp; 평점 4.0 이상 → 오렌지 “HOT”. 보라 “NEW” 배지는 디자인만 정의됐고 부여 로직은 미구현(TODO).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-05</td><td>찜(위시리스트) 토글</td><td>카드의 하트 버튼으로 찜 추가/해제. <span class="msg">“찜하기가 추가되었습니다.”</span> / <span class="msg">“찜하기가 취소되었습니다.”</span> 토스트.</td><td>비로그인은 기기(로컬)에 저장되며, 로그인 시 계정으로 자동 이관. 로그인 사용자는 계정에 저장.</td><td><span class="auth any">전체</span></td></tr>
   </table>
 
-  <h3>7-2. 상품 상세 <span class="path">/shop/[id]</span></h3>
+  <h3>7-2. 상품 상세 <span class="path">/shop/[id]</span> <span class="tag">2026-08 V2 리디자인</span></h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>SHOP-05</td><td>상품 정보</td><td>이미지, 상품명, 배송 정보, 사이즈/색상, 원가·할인율·할인가, 평균 별점 표시. 공유(링크 복사) 버튼 제공.</td><td>사이즈·색상은 정보 표시 전용(옵션 선택 기능 없음).</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>SHOP-06</td><td>수량 선택</td><td>+/− 버튼으로 수량 조절, “총 상품금액(할인가 × 수량)” 실시간 표시.</td><td>최소 1개 ~ 최대 5개. 초과 시 <span class="msg">“최대 5개 까지 구매 가능합니다.”</span> 토스트.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>SHOP-07</td><td>장바구니 담기</td><td>선택 수량을 장바구니에 추가하고 하단 드로어로 안내(<span class="msg">“장바구니에 상품이 담겼습니다.”</span> + “장바구니 보기 / 계속 쇼핑하기”).</td><td>이미 담긴 수량과 합산해 상품당 5개 초과 시 차단(현재 수량 안내). 비로그인도 가능(기기 저장).</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>SHOP-08</td><td>바로 구매</td><td>“구매하기” 클릭 시 장바구니를 거치지 않고 곧바로 토스페이먼츠 결제창 호출.</td><td>검증: ① 로그인 ② 주문자 정보 · 기본 배송지 존재(누락된 항목을 묶어 하나의 토스트로 안내). 미충족 시 중단.</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>SHOP-09</td><td>상세정보 · 리뷰 탭</td><td>“상세정보” 탭(상품 설명)과 “리뷰” 탭(개수 표시) 전환. 리뷰 탭은 평균 별점(소수 1자리/5.0, 현재 페이지에 로드된 리뷰 기준)과 리뷰 목록을 페이지당 5개 페이지네이션으로 제공.</td><td>리뷰 작성은 구매확정 후 마이페이지 주문 상세에서만 가능(MY-10).</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>SHOP-10</td><td>구매 안내 아코디언</td><td>판매자 고객센터 / 배송 정보 / 교환·반품 정책 3개 접이식 안내(정적 텍스트).</td><td>—</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-06</td><td>브레드크럼</td><td>상단에 “굿즈샵 › {상품명}” 경로 표시, “굿즈샵”은 목록으로 이동.</td><td>—</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-07</td><td>이미지 갤러리</td><td>보라 단색 히어로 위에 갤러리를 배치: 큰 이미지 + 좌우 화살표 + <b>인덱스 필(n / m)</b> + 하단 썸네일 스트립. 모바일은 스와이프로 넘긴다.</td><td>썸네일과 상세 이미지를 합쳐 구성하며 <b>같은 URL은 중복 제거</b>. 히어로 배경에는 장식 스파클이 얹힌다.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-08</td><td>구매 카드 (플로팅)</td><td>갤러리 우측에 떠 있는 흰 카드: “OFFICIAL MD” 키커 + 공유 버튼(COM-18), 배지 필, 상품명, 별점·리뷰 수(누르면 리뷰 탭으로 이동), 원가·할인율·할인가, 배송/포장 아이콘 정보 2줄, 필 스테퍼(수량), 총 상품금액, [장바구니 담기 · 바로 구매] CTA.</td><td>사이즈·색상은 정보 표시 전용(옵션 선택 기능 없음). 시안의 한정수량 게이지는 재고 데이터가 없어 구현 보류.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-09</td><td>수량 선택</td><td>필 스테퍼의 +/− 로 수량 조절, “총 상품금액(할인가 × 수량)” 실시간 표시.</td><td>최소 1개 ~ 최대 5개. 초과 시 <span class="msg">“최대 5개 까지 구매 가능합니다.”</span> 토스트.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-10</td><td>장바구니 담기 · 드로어</td><td>담으면 하단 드로어로 안내: 보라 체크 서클 + <span class="msg">“장바구니에 담았어요!”</span> + 보조 문구(당일배송 상품이면 “지금 주문하면 오늘 바로 출발해요”, 아니면 “담은 상품은 장바구니에서 확인할 수 있어요”), 담긴 상품 요약 카드(썸네일 · 상품명 · 수량 · 금액), [장바구니 보기](그라데이션) · [계속 쇼핑하기].</td><td>이미 담긴 수량과 합산해 상품당 5개 초과 시 차단(현재 수량 안내). 비로그인도 가능(기기 저장).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-11</td><td>바로 구매</td><td>“구매하기” 클릭 시 장바구니를 거치지 않고 곧바로 토스페이먼츠 결제창 호출.</td><td>검증: ① 로그인 ② 주문자 정보 · 기본 배송지 존재(누락된 항목을 묶어 하나의 토스트로 안내). 미충족 시 중단.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>SHOP-12</td><td>세그먼트 탭</td><td>본문 상단에 <b>[상세정보 · 리뷰 n]</b> 세그먼트 필 탭(스티키). 활성 탭은 흰 필 + 그림자, 리뷰 개수는 보라 강조.</td><td>탭 전환 시 콘텐츠 높이 변화로 스크롤이 아래 섹션에 떨어지지 않도록 탭 상단으로 스크롤 복귀.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-13</td><td>리뷰 탭</td><td>상단 요약 카드(큰 평균 별점 · 별 · “리뷰 n개” + 5~1점 <b>분포 게이지</b>) + 리뷰 목록(이니셜 아바타 · 작성자 · 별점 · 날짜 · 내용) + 원형 페이지네이션(페이지당 5개).</td><td>분포는 현재 페이지가 아닌 <b>전체 리뷰</b> 기준. 리뷰가 없으면 빈 상태(<span class="msg">“아직 리뷰가 없어요 / 이 상품의 첫 번째 리뷰를 남겨보세요!”</span> + <span class="msg">“구매 후 마이페이지 &gt; 주문/배송에서 작성할 수 있어요”</span> 힌트). 리뷰 작성은 구매확정 후 마이페이지 주문 상세에서만 가능(MY-10).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-14</td><td>추천 섹션</td><td>탭 콘텐츠와 FAQ 사이에 보라 밴드로 <b>“이런 굿즈는 어때요? — 지금 인기 있는 굿즈를 모았어요”</b> 섹션을 배치(인기순 6개, 우측 “굿즈샵 더보기”).</td><td>현재 보고 있는 상품은 제외. 추천할 상품이 없으면 섹션 숨김.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>SHOP-15</td><td>FAQ (구매 안내)</td><td>페이지 하단 <span class="msg">“궁금한 점이 있나요?”</span> 스플릿 레이아웃 — 좌측 제목/안내, 우측 아코디언(판매자 고객센터 · 배송 정보 · 교환/반품 정책).</td><td>정적 텍스트. 구 아코디언 컴포넌트는 대체·제거됨.</td><td><span class="auth any">전체</span></td></tr>
+  </table>
+
+  <h3>7-3. 상품 데이터 수집</h3>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>SHOP-16</td><td>상품 자동 수집</td><td>매일 06:15(KST) GitHub Actions가 공식 스토어에서 아이브 신상품을 감지해 <code>goods</code> 테이블에 등록하고, 이어서 상세 갤러리 이미지를 채운다(수집 → 이미지 보강 2단계).</td><td>수동 실행(workflow_dispatch)도 가능하며 동시 실행은 1건으로 제한. 서비스 롤 키는 저장소 시크릿으로 주입.</td><td><span class="auth any">전체</span></td></tr>
   </table>
 </section>
 
 <!-- ══════════ 8. 장바구니 ══════════ -->
 <section id="cart">
   <h2 class="sec">8. 장바구니 · 주문서</h2>
-  <p class="sec-desc">별도 결제 페이지 없이 <b>장바구니 화면이 곧 주문서(체크아웃)</b> 역할을 한다. 좌측 상품 목록 + 우측 주문 요약(금액·주문자·배송지·약관·결제 버튼) 2단 구성. 장바구니 데이터는 기기(localStorage)에 저장되며 서버 동기화는 없다.</p>
+  <p class="sec-desc">별도 결제 페이지 없이 <b>장바구니 화면이 곧 주문서(체크아웃)</b> 역할을 한다. 좌측 상품 목록 + 우측 주문 요약(금액·주문자·배송지·약관·결제 버튼) 2단 구성. 장바구니 데이터는 기기(localStorage)에 저장되며 서버 동기화는 없다. 2026-08 리디자인으로 <b>진행 단계 인디케이터 · 상품별 개별 카드 · 요약 3분할</b>이 적용됐다.</p>
 
   <h3>8-1. 장바구니 <span class="path">/cart</span></h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>CART-01</td><td>담긴 상품 목록</td><td>썸네일 · 상품명 · 배송 정보 · 사이즈/색상 · 수량 · 할인율 · 원가(취소선) · 할인 적용 합계 표시. 썸네일 클릭 시 상품 상세 이동.</td><td>비어 있으면 <span class="msg">“장바구니가 비어있습니다. 원하는 상품을 담아보세요!”</span> + 쇼핑하기 링크.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>CART-02</td><td>선택 관리</td><td>전체선택 체크박스와 개별 체크박스, “선택 n/전체 m” 카운트 제공. 결제·금액 계산은 선택된 상품만 대상.</td><td>진입 시 전체 자동 선택(장바구니 내용이 변경되면 전체 선택으로 재설정). 결제 실패 후 복귀 시 이전 선택 상태 복원.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>CART-03</td><td>수량 변경</td><td>아이템별 +/− 버튼으로 수량 조절, 합계 즉시 반영.</td><td>1~5개 제한(초과 시 토스트).</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>CART-04</td><td>삭제 (3종)</td><td>① 개별 삭제(× 버튼) ② 선택삭제 ③ 전체삭제.</td><td>선택 0개로 선택삭제 시 <span class="msg">“선택한 내용이 없습니다.”</span> 전체삭제는 확인 모달(<span class="msg">“장바구니의 모든 상품이 삭제됩니다. 정말 비우시겠습니까?”</span>) 필요.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>CART-05</td><td>결제 금액 요약</td><td>선택 상품 기준으로 총 결제 금액(상단 강조) / 상품 금액 / 총 할인 금액(− 표시) 순으로 표시.</td><td>배송비 항목 없음(전 상품 배송비 0원 정책, 부록 참고).</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>CART-06</td><td>주문자 정보</td><td>로그인 시 [정보 입력/정보 변경] 버튼으로 인라인 폼 오픈: 이름(최대 25자) · 휴대폰(하이픈 없이 숫자 11자리 입력, 저장 시 자동 포맷) · 이메일. 계정당 1건 저장(이후 자동 표시).</td><td>비로그인 시 <span class="msg">“주문자 정보가 없습니다. 로그인 후 정보를 입력해주세요.”</span> 변경 없이 저장 시 <span class="msg">“변경된 내용이 없습니다.”</span></td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>CART-07</td><td>배송 정보</td><td>기본 배송지(받는 분 · 휴대폰 · 우편번호+주소 · 요청사항)를 표시. [배송지 변경] 또는 [배송지 추가] 버튼으로 마이페이지 배송지 관리로 이동.</td><td>주문서에서 배송지 직접 입력은 불가(마이페이지에서 관리).</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>CART-08</td><td>주문 약관 동의</td><td>“[필수] 주문 내역에 대한 필수 동의” 부모 체크 + 자식 2개(개인정보 수집·제3자 제공 / 결제 이후 환불·취소 불가). 부모 체크 시 일괄 동의, 자식 모두 체크 시 부모 자동 체크. 각 항목 상세는 모달로 열람.</td><td>자식 항목은 기본 접힘 상태(화살표로 펼침). “본인은 만 14세 이상이며 주문내용을 확인하였습니다.” 문구 상시 노출.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>CART-10</td><td>페이지 헤드 · 진행 단계</td><td>“SHOPPING CART” 오렌지 키커 + “장바구니” 타이틀 + 서브카피(“담아둔 굿즈를 확인하고 바로 결제까지 진행해요”), 우측에 <b>3단계 인디케이터</b>(01 장바구니 → 02 주문·결제 → 03 주문완료). 현재 단계는 보라 원, 지난 단계는 체크 표시.</td><td>같은 인디케이터를 주문완료 화면(9장)에서도 3단계 상태로 재사용.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>CART-01</td><td>담긴 상품 목록</td><td>상품마다 <b>개별 카드</b>로 표시: 체크박스 · 썸네일 · 상품명 · 사이즈/색상 · 배송 정보 · 필 스테퍼(수량) · 할인율 · 원가(취소선) · 할인 적용 합계 · 삭제(×). 썸네일 클릭 시 상품 상세 이동. 목록 아래에는 보라 <b>무료배송 스트립</b>(“전 상품 무료배송 · 지금 주문하면 오늘 바로 출발해요”).</td><td>비어 있으면 원형 카트 아이콘 + <span class="msg">“장바구니가 비어 있어요 / 마음에 드는 굿즈를 담아보세요!”</span> + [굿즈샵 구경하러 가기] 버튼.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>CART-02</td><td>선택 관리 툴바</td><td>목록 상단 툴바에 전체선택 체크박스와 “선택 n/전체 m” 카운트, 우측에 [선택삭제 · 전체 비우기] 버튼. 결제·금액 계산은 선택된 상품만 대상.</td><td>진입 시 전체 자동 선택(장바구니 내용이 변경되면 전체 선택으로 재설정). 결제 실패 후 복귀 시 이전 선택 상태 복원.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>CART-03</td><td>수량 변경</td><td>카드의 필 스테퍼 +/− 로 수량 조절, 합계 즉시 반영.</td><td>1~5개 제한(초과 시 토스트).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>CART-04</td><td>삭제 (3종)</td><td>① 개별 삭제(× 버튼) ② 선택삭제 — 중립 아웃라인 버튼, 확인 없이 즉시 삭제 후 <span class="msg">“선택한 내용이 삭제 되었습니다.”</span> ③ 전체 비우기 — 붉은 틴트 버튼 + destructive 확인 모달(<span class="msg">“장바구니를 비울까요? / 담아둔 상품이 모두 삭제돼요. 이 작업은 되돌릴 수 없어요.”</span> · [취소 · 비우기]).</td><td>선택 0개로 선택삭제 시 <span class="msg">“선택한 내용이 없습니다.”</span> 오류 토스트.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>CART-05</td><td>결제 금액 요약 (플로팅 카드)</td><td>우측에 스크롤을 따라오는 카드로 총 결제 금액(상단 강조) / 상품 금액 / 총 할인 금액(− 표시)을 표시하고, 약관 동의와 결제 버튼, 하단 안내(“본인은 만 14세 이상이며 주문 내용을 확인했어요”)까지 한 카드에 모은다. 주문자 정보 · 배송 정보는 그 아래 별도 카드로 분리.</td><td>배송비 항목 없음(전 상품 배송비 0원 정책, 부록 참고).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>CART-06</td><td>주문자 정보</td><td>로그인 시 [정보 입력/정보 변경] 버튼으로 <b>인라인 폼</b> 오픈: 이름(최대 25자) · 휴대폰(하이픈 없이 숫자 11자리 입력, 저장 시 자동 포맷) · 이메일. 계정당 1건 저장(이후 자동 표시).</td><td>비로그인 시 <span class="msg">“주문자 정보가 없습니다. 로그인 후 정보를 입력해주세요.”</span> 변경 없이 저장 시 <span class="msg">“변경된 내용이 없습니다.”</span></td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>CART-07</td><td>배송 정보 · 배송지 선택</td><td>기본 배송지(받는 분 · 휴대폰 · 우편번호+주소 · 요청사항)를 표시하고, [변경]을 누르면 <b>저장된 배송지를 라디오 카드로 인라인 선택</b>할 수 있다(선택된 카드는 보라 보더 + “기본 배송지” 뱃지). 목록 아래 [새 배송지 추가]는 마이페이지 배송지 등록으로 이동하며, “배송지 추가·수정은 마이페이지 배송지 관리에서 진행돼요” 안내가 붙는다.</td><td>라디오 선택은 곧 <b>기본 배송지 변경</b>이며 성공 시 <span class="msg">“기본 배송지가 변경되었습니다.”</span> 토스트(실패 시 <span class="msg">“배송지 변경에 실패했습니다.”</span>). 목록은 기본 배송지 우선 정렬이라 선택한 배송지가 맨 위로 올라온다. 주문서에서 배송지 직접 입력은 불가.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>CART-08</td><td>주문 약관 동의</td><td>요약 카드 안에 한 줄로 배치된 “[필수] 주문 내역에 대한 필수 동의” 부모 체크 + [약관 보기] 토글로 펼치는 자식 2개(개인정보 수집·제3자 제공 / 결제 이후 환불·취소 불가). 부모 체크 시 일괄 동의, 자식 모두 체크 시 부모 자동 체크. 각 항목 상세는 모달로 열람.</td><td>검증 로직은 리디자인 전과 동일(필수 2건 동의 필요).</td><td><span class="auth login">로그인</span></td></tr>
     <tr><td>CART-09</td><td>주문하기 (결제 요청)</td><td>검증 통과 시 토스페이먼츠 결제창 호출. 주문명은 “{첫 상품명} 외 N건” 형식, 주문번호는 <code>YYYYMMDD-랜덤8자리</code> 자동 생성.</td><td>검증 순서: ① 로그인(<span class="msg">“로그인이 필요합니다.”</span>) ② 결제 금액 0원(<span class="msg">“결제할 내용이 없습니다.”</span>) ③ 약관 동의(<span class="msg">“약관 동의가 필요합니다”</span>) ④ 주문자 정보(<span class="msg">“주문자 정보가 없습니다.”</span>) ⑤ 배송 정보(<span class="msg">“배송 정보가 없습니다.”</span>). 하나라도 미충족 시 토스트 후 중단.</td><td><span class="auth login">로그인</span></td></tr>
   </table>
 </section>
@@ -418,7 +455,7 @@
     <tr><td>PAY-02</td><td>접근 가드</td><td><code>orderId</code> 쿼리 없이 접근하면 서버에서 메인으로 리다이렉트. 비로그인 상태면 클라이언트에서 <span class="msg">“로그인 후 이용 가능합니다.”</span> 토스트 후 로그인 페이지로 이동.</td><td>PG(토스) 복귀는 크로스사이트 리다이렉트라 세션 쿠키가 실리지 않으므로, 서버는 로그인 검사를 하지 않고 클라이언트 가드가 담당한다 — v1의 “결제 복귀 시 로그인 페이지로 튕김” 문제를 수정한 지점 (E2E로 검증).</td><td><span class="auth login">로그인</span></td></tr>
     <tr><td>PAY-03</td><td>결제 승인 · 주문 저장</td><td>페이지 진입 시 자동으로 ① 승인 API 호출 ② 승인 완료(DONE) 확인 ③ 결제 정보(payments) + 주문 상품(order_items) 저장. 상태는 “결제 완료 / 배송전”으로 기록되고 배송지 정보는 결제 시점 스냅샷으로 함께 저장.</td><td>동일 주문번호가 이미 저장돼 있으면 승인·저장을 건너뜀(새로고침 중복 방지). 승인 결과가 DONE이 아니면 실패 페이지로 이동.</td><td><span class="auth login">로그인</span></td></tr>
     <tr><td>PAY-04</td><td>장바구니 정리</td><td>결제된 상품만 장바구니에서 자동 제거(미선택 상품은 유지).</td><td>—</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>PAY-05</td><td>완료 화면</td><td>“주문이 완료되었습니다.” + 주문번호, 주문 상품 목록(총 N개), 배송 정보 / 결제 정보(총 주문 금액·배송비·총 결제 금액) / 결제 수단(방법·일시불/할부·결제 일시·주문 상태) 카드 표시. [주문상세 보기 → 마이페이지] / [쇼핑 계속하기 → 굿즈샵] 버튼.</td><td>결제 조회 실패 시 1초 간격 3회 재시도 후 오류 표시.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>PAY-05</td><td>완료 화면 <span class="tag">2026-08 리디자인</span></td><td>상단에 3단계 인디케이터(03 주문완료 활성) → 그라데이션 체크 서클 → <span class="msg">“주문이 완료되었어요!”</span> + <span class="msg">“주문하신 굿즈를 정성껏 포장해서 보내드릴게요”</span> → <b>주문번호 복사 칩</b>(누르면 클립보드 복사 + <span class="msg">“주문번호를 복사했어요.”</span>) → [주문상세 보기 → 마이페이지] · [쇼핑 계속하기 → 굿즈샵] 버튼 → 주문 상품 목록 → 배송 정보 / 결제 정보 / 결제 수단 카드 3분할.</td><td>결제 조회 실패 시 1초 간격 3회 재시도 후 오류 표시. 결제 진행 중에는 스피너 + “창을 닫지 말아주세요” 안내 화면이 표시된다.</td><td><span class="auth login">로그인</span></td></tr>
   </table>
 
   <h3>9-3. 결제 실패 <span class="path">/payment/fail</span></h3>
@@ -432,47 +469,61 @@
 <!-- ══════════ 10. 마이페이지 ══════════ -->
 <section id="mypage">
   <h2 class="sec">10. 마이페이지</h2>
-  <p class="sec-desc">좌측 프로필 + 메뉴(찜 목록 · 결제 목록 · 내가 쓴 글 · 배송지 관리), 우측 콘텐츠 2단 구성. <code>/mypage</code> 진입 시 찜 목록으로 자동 이동. 전 영역 로그인 필수(서버·클라이언트 이중 가드).</p>
+  <p class="sec-desc">상단 프로필 밴드 + 좌측 사이드 내비(멤버십 · 찜 목록 · 결제 내역 · 내가 쓴 글 · 배송지 관리) + 우측 콘텐츠 구성. <code>/mypage</code> 진입 시 찜 목록으로 자동 이동. 전 영역 로그인 필수(서버·클라이언트 이중 가드).</p>
+  <div class="note"><b>구현 상태</b> — 마이페이지 리디자인과 DIVE 멤버십(10-6절)은 기준 커밋(<code>595e08c</code>)에 반영 완료. 다만 멤버십은 <b>Supabase에 <code>memberships</code> 테이블 마이그레이션(<code>supabase/memberships.sql</code>)을 먼저 실행해야</b> 구독이 동작하며, 미실행 상태에서는 결제 전에 서버가 차단한다(MY-20).</div>
 
-  <h3>10-1. 프로필 (공통 사이드)</h3>
+  <h3>10-1. 프로필 밴드 · 사이드 내비 (공통)</h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>MY-01</td><td>프로필 표시</td><td>프로필 이미지, 닉네임, 활동 통계(글 작성수 · 찜 수) 표시.</td><td>—</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>MY-02</td><td>프로필 이미지 변경</td><td>아바타 클릭 → 이미지 선택 → 크롭 모달(원형, 확대/축소 슬라이더)에서 편집 후 저장. 성공 시 <span class="msg">“프로필 이미지가 변경되었습니다.”</span> 헤더 아바타에도 즉시 반영.</td><td>250×250 원형으로 저장. 파일 용량·형식 별도 제한 없음(이미지 파일 필터만).</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>MY-03</td><td>닉네임 변경</td><td>“수정” 클릭 → 인라인 편집 → “수정완료”로 저장. 성공 시 <span class="msg">“닉네임이 변경 되었습니다.”</span></td><td>2글자 이상(<span class="msg">“2글자 이상 입력해 주세요.”</span>), 입력창 최대 6자. 동일 닉네임 저장 시 <span class="msg">“변경된 닉네임이 없습니다.”</span></td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>MY-04</td><td>푸시 알림 수신 설정</td><td>“푸시 알림” 스위치로 앱 푸시 수신 on/off. <span class="msg">“푸시 알림을 켰습니다/껐습니다.”</span> 토스트.</td><td>앱에서 로그인해 기기가 등록된 경우에만 조작 가능(미등록 시 “앱에서 로그인하면 받을 수 있어요” + 비활성). 설정은 등록된 모든 기기에 일괄 적용.</td><td><span class="auth app">앱</span></td></tr>
+    <tr><td>MY-17</td><td>프로필 밴드</td><td>페이지 상단 연보라 밴드: 88px 아바타(우하단 카메라 뱃지) + 닉네임(구독 시 티어 뱃지) + [프로필 수정] 필 + 이메일, 우측에 <b>찜한 굿즈 · 주문 내역 · 작성한 글</b> 3개 통계.</td><td>통계는 각 목록의 실제 개수와 동일.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-18</td><td>사이드 내비</td><td>좌측 240px 내비: 아이콘 + 라벨 + 개수 배지 형태의 메뉴(멤버십<span class="tag">NEW</span> · 찜 목록 · 결제 내역 · 내가 쓴 글 · 배송지 관리), 활성 항목은 연보라 필 + 보라 텍스트. 하단에 푸시 알림 토글 카드, 그 아래 [로그아웃] · [회원탈퇴].</td><td>하위 경로(주문 상세 · 배송지 추가 등)에 있어도 상위 메뉴가 활성 표시된다. 회원탈퇴는 화면에만 존재하고 기능은 미구현(부록 참고).</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-01</td><td>콘텐츠 헤더 · 정렬</td><td>각 목록 화면 상단에 타이틀 + 보라 개수 + (해당 목록의) 정렬 셀렉트(COM-17)를 배치. 배송지 관리 화면은 정렬 대신 [새 배송지 추가] 버튼.</td><td>—</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-02</td><td>프로필 수정 (모달)</td><td>[프로필 수정]을 누르면 모달이 열린다: 아바타 + 카메라 뱃지(사진을 눌러 변경 · 업로드 후 크롭), 닉네임 입력(카운터 <code>n / 6</code> · 안내 “2~6자, 공백 없이 입력해주세요”), 읽기 전용 이메일, [취소 · 저장하기].</td><td>이미지는 기존 크롭 모달(원형, 확대/축소)을 재사용해 250×250으로 저장하고 헤더 아바타에도 즉시 반영. 성공 시 <span class="msg">“프로필 이미지가 변경되었습니다.”</span></td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-03</td><td>닉네임 변경</td><td>프로필 수정 모달에서 닉네임을 바꾸고 저장. 성공 시 <span class="msg">“닉네임이 변경 되었습니다.”</span></td><td>2글자 이상(<span class="msg">“2글자 이상 입력해 주세요.”</span>), 최대 6자. 동일 닉네임 저장 시 <span class="msg">“변경된 닉네임이 없습니다.”</span> (구 인라인 편집 방식은 모달로 대체)</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-04</td><td>푸시 알림 수신 설정</td><td>사이드 내비 하단 카드의 스위치로 앱 푸시 수신 on/off(“댓글·답글 알림을 앱으로 받아요”). <span class="msg">“푸시 알림을 켰습니다/껐습니다.”</span> 토스트.</td><td>앱에서 로그인해 기기가 등록된 경우에만 조작 가능(미등록 시 “앱에서 로그인하면 받을 수 있어요” + 비활성). 설정은 등록된 모든 기기에 일괄 적용.</td><td><span class="auth app">앱</span></td></tr>
   </table>
 
   <h3>10-2. 찜 목록 <span class="path">/mypage/wishlist</span></h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>MY-05</td><td>찜 목록 조회</td><td>찜한 상품을 카드 그리드(3열)로 표시: 썸네일 · 배지 · 상품명 · 할인율 · 할인가 · 평균 별점. 카드 클릭 시 상품 상세 이동.</td><td>최신 찜 순. 비어 있으면 <span class="msg">“찜 목록이 없습니다.”</span></td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>MY-06</td><td>찜 해제</td><td>카드의 하트 버튼 클릭 시 즉시 해제, <span class="msg">“찜하기가 취소되었습니다.”</span> 토스트.</td><td>확인 절차 없이 즉시 삭제.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-05</td><td>찜 목록 조회</td><td>찜한 상품을 굿즈샵과 동일한 상품 카드(SHOP-04)로 그리드 표시 — 썸네일 · 배지 · 상품명 · 할인율 · 할인가 · 별점. 카드 클릭 시 상품 상세 이동.</td><td>최신 찜 순. 비어 있으면 <span class="msg">“아직 찜한 굿즈가 없어요 / 굿즈샵에서 마음에 드는 굿즈를 담아보세요”</span> + [굿즈샵 구경 가기].</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-06</td><td>찜 해제</td><td>카드 우상단 하트(채워진 상태)를 누르면 즉시 해제, <span class="msg">“찜하기가 취소되었습니다.”</span> 토스트.</td><td>확인 절차 없이 즉시 삭제.</td><td><span class="auth login">로그인</span></td></tr>
   </table>
 
-  <h3>10-3. 결제 목록 · 주문 상세 <span class="path">/mypage/orders</span> <span class="path">/mypage/orders/[orderId]</span></h3>
+  <h3>10-3. 결제 내역 · 주문 상세 <span class="path">/mypage/orders</span> <span class="path">/mypage/orders/[orderId]</span></h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>MY-07</td><td>결제 목록</td><td>주문 단위 카드로 표시: 주문번호, 첫 상품 썸네일, “{첫 상품명} 외 N건”, 총 수량, 주문일시, 총 결제 금액. 카드 또는 “주문상세” 버튼으로 상세 이동.</td><td>주문일 내림차순. 없으면 <span class="msg">“결제한 목록이 없습니다.”</span></td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>MY-08</td><td>주문 상세</td><td>주문일시·주문번호, 주문 상품 리스트(썸네일·상품명·색상/사이즈/수량·원가·할인가), 주문자 정보, 배송 정보, 결제 정보(총 주문 금액·배송비·총 결제 금액), 결제 수단(방법·일시불/할부·결제 일시·주문 상태) 표시.</td><td>존재하지 않는 주문번호면 <span class="msg">“주문을 찾을 수 없습니다.”</span> 상품 클릭 시 상품 상세 이동.</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>MY-09</td><td>구매확정</td><td>미확정 상품의 “구매확정” 버튼 → 확인 모달(<span class="msg">“구매를 확정하시겠습니까? 구매 확정 후에는 취소나 변경이 불가능합니다.”</span>) → 확정 시 <span class="msg">“구매가 확정되었습니다.”</span> + 초록 “구매확정” 배지 표시.</td><td>확정 후 되돌리기 불가. 주문 취소/환불 기능은 미제공(부록 참고).</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>MY-10</td><td>리뷰 작성 · 수정</td><td>구매확정된 상품에 “리뷰쓰기”(작성 후엔 “리뷰수정”) 버튼 노출. 모달에서 별점(1~5) + 내용(10~200자) 작성. 작성된 리뷰는 상품 상세 리뷰 탭에 반영.</td><td>별점 미선택 시 <span class="msg">“별점을 선택해주세요.”</span> 내용 10자 미만/200자 초과 차단. 수정 시 변경 없으면 <span class="msg">“변경된 내용이 없습니다.”</span></td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-07</td><td>결제 내역</td><td>주문 단위 카드로 표시: <b>상태 뱃지</b>(결제 완료 · 배송 중 · 배송 완료), “YYYY.MM.DD 주문”, 72px 썸네일, “{첫 상품명} 외 N건”, 총 결제 금액, 우측 [주문 상세] · [리뷰 쓰기] 버튼.</td><td>주문일 내림차순. 없으면 <span class="msg">“결제한 내역이 없습니다 / 첫 주문을 기다리고 있어요”</span> 빈 상태.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-08</td><td>주문 상세</td><td>[결제 내역으로] 백 필 → 타이틀 + 상태 뱃지 → “결제 일시 · 주문번호” 메타 → 주문 상품 박스(썸네일 · 상품명 · 옵션/수량 · 금액 · 구매확정 칩 · [리뷰 쓰기/수정] · [구매확정]) → <b>배송 정보 / 결제 수단</b> 2단 카드 → 결제 정보 합계(상품 금액 · 상품 할인 · 배송비 · <b>총 결제 금액</b> 보라 강조).</td><td>존재하지 않는 주문번호면 <span class="msg">“주문을 찾을 수 없습니다.”</span> 상품 클릭 시 상품 상세 이동. 결제 정보 카드는 주문완료 화면(PAY-05)과 공용.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-09</td><td>구매확정</td><td>미확정 상품의 [구매확정] 버튼 → 확인 모달(primary 톤, <span class="msg">“구매를 확정하시겠습니까? 구매 확정 후에는 취소나 변경이 불가능합니다.”</span>) → 확정 시 <span class="msg">“구매가 확정되었습니다.”</span> + “구매확정” 칩 표시.</td><td>확정 후 되돌리기 불가. 주문 취소/환불 기능은 미제공(부록 참고).</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-10</td><td>리뷰 작성 · 수정</td><td>구매확정된 상품의 [리뷰 쓰기](작성 후엔 [리뷰 수정])로 리뷰 모달을 연다: 상품 요약(썸네일 · 상품명 · 옵션) → <span class="msg">“굿즈는 만족하셨나요?”</span> 별점 5개(선택 시 “4점 · 마음에 들어요” 등 라벨) → 내용 입력(플레이스홀더 “좋았던 점을 다이브들과 나눠보세요 (최소 10자)” · 카운터 <code>n / 500</code>) → [취소 · 등록하기]. 작성된 리뷰는 상품 상세 리뷰 탭(SHOP-13)에 반영.</td><td>별점 미선택 시 <span class="msg">“별점을 선택해주세요.”</span> 최소 글자 수 미만 차단. 수정 시 변경 없으면 <span class="msg">“변경된 내용이 없습니다.”</span></td><td><span class="auth login">로그인</span></td></tr>
   </table>
 
   <h3>10-4. 내가 쓴 글 <span class="path">/mypage/posts</span></h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>MY-11</td><td>내 게시글 목록</td><td>내가 작성한 글을 최신순으로 표시: 제목 · 작성자 · 조회수 · 추천 수 · 작성일 · 댓글 수. 클릭 시 게시글 상세, 댓글 수 버튼 클릭 시 댓글 영역으로 이동.</td><td>없으면 <span class="msg">“작성한 게시글이 없습니다.”</span> 수정·삭제는 게시글 상세에서 수행.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-11</td><td>내 게시글 목록</td><td>내가 작성한 글을 로우 카드로 표시: 제목 + “작성일 · 조회 n · 댓글 n” 메타. 클릭 시 게시글 상세로 이동.</td><td>정렬 셀렉트 제공(최신순 · 인기순). 없으면 <span class="msg">“작성한 게시글이 없습니다 / 팬 게시판에 첫 글을 남겨보세요”</span>. 수정·삭제는 게시글 상세에서 수행. 시안에 있던 카테고리 뱃지는 게시판에 카테고리 기능이 없어 제외됨.</td><td><span class="auth login">로그인</span></td></tr>
   </table>
 
   <h3>10-5. 배송지 관리 <span class="path">/mypage/address</span> <span class="path">/mypage/address/new</span></h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>MY-12</td><td>배송지 목록</td><td>받는 사람 · 우편번호 · 주소 · 휴대폰 · 요청사항 표시. 기본 배송지는 배지로 구분되어 항상 최상단.</td><td>없으면 <span class="msg">“배송지가 없습니다.”</span> + 추가 버튼.</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>MY-13</td><td>배송지 추가</td><td>받는 분 · 우편번호/주소(다음(Daum) 우편번호 검색 연동, 직접 입력 불가) · 나머지 주소 · 휴대폰(앞자리 셀렉트 + 숫자 3~4자리/4자리) · 배송 요청사항(선택지 5종 + 직접 입력) · 기본 배송지 여부 입력. 모두 유효해야 “저장하기” 활성. 성공 시 <span class="msg">“배송지 정보가 저장되었습니다.”</span></td><td>필수 미입력 시 필드별 안내(<span class="msg">“받는 사람을 입력해 주세요.”</span> 등). 첫 배송지는 자동으로 기본 배송지 지정.</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>MY-14</td><td>배송지 수정</td><td>목록의 “수정” → 모달에서 동일 폼으로 수정. 성공 시 <span class="msg">“배송지가 수정되었습니다.”</span></td><td>이미 기본 배송지면 “현재 기본 배송지로 설정되어 있습니다.” 안내로 대체.</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>MY-15</td><td>배송지 삭제</td><td>“삭제” → 확인 모달(<span class="msg">“배송지를 삭제하시겠습니까?”</span>) → 성공 시 <span class="msg">“배송지가 삭제 되었습니다.”</span></td><td>기본 배송지를 삭제하면 남은 배송지 중에서 기본 배송지가 자동 재지정.</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>MY-16</td><td>기본 배송지 설정</td><td>“기본 배송지로 설정” 버튼으로 변경, <span class="msg">“기본 배송지가 변경 되었습니다.”</span> 토스트. 기본 배송지는 주문서(CART-07)의 배송 정보로 사용.</td><td>기본 배송지는 계정당 1개.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-12</td><td>배송지 목록</td><td>배송지마다 카드로 표시: 별칭(우리집 · 회사 등) + <b>“기본 배송지” 뱃지</b>(기본 배송지 카드만 보라 보더) 또는 [기본 배송지로 설정] 아웃라인 필, 받는 분 · 연락처, 주소(우편번호 포함), 우측 [수정 · 삭제] 버튼 쌍(COM-19).</td><td>기본 배송지가 항상 최상단. 없으면 <span class="msg">“등록된 배송지가 없습니다 / 배송지를 등록하면 주문이 빨라져요”</span> + [새 배송지 추가].</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-13</td><td>배송지 추가</td><td>별도 페이지에서 폼 입력: 받는 분 · 연락처(앞자리 셀렉트 + 번호) · 주소(우편번호 + [주소 검색] 버튼으로 다음(Daum) 우편번호 연동, 직접 입력 불가) · 상세 주소 · 배송 요청사항(선택지 + 직접 입력) · <b>기본 배송지로 저장</b> 체크(안내: “첫 배송지는 자동으로 기본 배송지로 저장돼요”). 모두 유효해야 [배송지 저장] 활성. 성공 시 <span class="msg">“배송지 정보가 저장되었습니다.”</span></td><td>필수 미입력 시 필드별 안내(<span class="msg">“받는 사람을 입력해 주세요.”</span> 등). 첫 배송지는 자동으로 기본 배송지 지정. 상단 [배송지 관리로] 백 필로 복귀.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-14</td><td>배송지 수정</td><td>카드의 [수정] → 값이 채워진 모달에서 동일 폼으로 수정 후 [수정 완료]. 성공 시 <span class="msg">“배송지가 수정되었습니다.”</span></td><td>이미 기본 배송지면 “현재 기본 배송지로 설정되어 있습니다.” 안내로 대체.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-15</td><td>배송지 삭제</td><td>카드의 [삭제] → destructive 확인 모달(<span class="msg">“배송지를 삭제할까요? / 삭제한 배송지는 복구할 수 없어요.”</span> · [취소 · 삭제하기]) → 성공 시 <span class="msg">“배송지가 삭제 되었습니다.”</span></td><td>기본 배송지를 삭제하면 남은 배송지 중에서 기본 배송지가 자동 재지정. 게시글 삭제 모달과 동일한 공용 컴포넌트를 사용한다.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-16</td><td>기본 배송지 설정</td><td>비기본 배송지 카드의 [기본 배송지로 설정]으로 변경, <span class="msg">“기본 배송지가 변경 되었습니다.”</span> 토스트. 기본 배송지는 주문서(CART-07)의 배송 정보로 사용된다.</td><td>기본 배송지는 계정당 1개.</td><td><span class="auth login">로그인</span></td></tr>
+  </table>
+
+  <h3>10-6. DIVE 멤버십 <span class="path">/mypage/membership</span> <span class="path">/mypage/membership/billing</span> <span class="tag">v2 신규</span></h3>
+  <div class="note"><b>운영 전제</b> — 결제는 토스페이먼츠 <b>빌링키(정기결제)</b> 기반이며, 구독 정보는 <code>memberships</code> 테이블(유저당 1행, RLS로 본인 조회만 허용 · 쓰기는 서버 전용)에 저장된다. 커뮤니티 뱃지용으로는 민감 컬럼을 제외한 공개 뷰만 노출한다. 가격은 초기가이며 혜택 문구는 조정될 수 있다.</div>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>MY-19</td><td>멤버십 플랜 (미구독)</td><td>“DIVE MEMBERSHIP — 최애 활동을 업그레이드해보세요” 히어로 + <b>3단 플랜 카드</b>: ① <b>베이직</b> 무료(찜·게시판·리뷰 작성, 댓글·답글 푸시 알림 — “현재 이용 중” 아웃라인) ② <b>DIVE+</b> 월 1,900원(DIVE+ 뱃지 · 아바타 퍼플 링, 신보·공연 소식 우선 알림, 굿즈샵 상시 5% 할인 — 솔리드 CTA) ③ <b>DIVE VIP</b> 월 5,900원 · BEST 강조(DIVE+ 혜택 전부 + VIP 골드 뱃지, 굿즈샵 상시 10% 할인, 전 주문 무료배송, 신상 굿즈 24시간 우선 구매 — 그라데이션 CTA). 하단 안내 “구독은 매월 자동 결제 · 언제든 해지 가능 · 무료로도 기본 기능은 계속 쓸 수 있어요.”</td><td>기수제가 아닌 <b>구독 멤버십</b>(유튜브 프리미엄식). 강조 카드는 VIP 하나뿐이며 그라데이션 CTA도 VIP 전용.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-20</td><td>구독 결제 (토스 빌링)</td><td>플랜 CTA → 구독 모달: 크라운 플랜 카드(플랜명 · 월 요금), “오늘 결제 후 매월 N일 자동 결제” 안내, 필수 약관 2건(정기결제 이용약관 · 멤버십 이용약관) 동의 체크, 오늘 결제 금액, [결제하고 시작하기] + “토스페이먼츠 빌링으로 안전하게 결제돼요”. 카드 등록 창에서 카드 정보를 입력하면 결과 페이지(<code>/mypage/membership/billing</code>)가 <b>빌링키 발급 → 첫 결제 → 구독 저장</b>을 처리하고 <span class="msg">“DIVE 멤버십 구독을 시작했어요!”</span> 토스트와 함께 멤버십 화면으로 돌아온다.</td><td>필수 약관 2건 동의 시에만 진행. 결제 수단은 카드(빌링) 전용. <b>결제 전에 서버가 구독 테이블 존재를 확인</b>해, 마이그레이션 전이면 결제하지 않고 <span class="msg">“멤버십 테이블이 없습니다…”</span> 오류를 반환한다(카드만 결제되는 사고 방지). 실패·취소 시 <span class="msg">“카드 등록이 완료되지 않았습니다.”</span></td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-21</td><td>구독 관리 · 결제 수단 변경 · 해지</td><td>구독 중이면 상태 카드(플랜 뱃지 · 구독 중 표기)와 <b>결제 정보</b>(다음 결제일 · 월 요금 · 결제 수단(카드사 + 마스킹 번호) · 구독 시작일), <b>혜택 이용 현황</b>이 표시된다. [결제 수단 변경] → 카드 목록 모달(선택 카드는 보라 보더 + “사용 중” 뱃지, [새 카드 등록하기]) → 토스 카드 등록 후 <span class="msg">“결제 수단이 변경되었습니다. / 다음 결제일부터 새 카드로 결제돼요.”</span> 하단 [멤버십 해지하기] → destructive 모달(<span class="msg">“DIVE 멤버십을 해지할까요? / 다음 결제일(N월 N일)까지 혜택은 그대로 유지돼요.”</span> · [유지하기 · 해지하기]) → <span class="msg">“멤버십이 해지되었습니다.”</span></td><td>해지해도 다음 결제일까지 혜택 유지되며, 그 화면에서는 다음 결제일이 “(혜택 종료)”로 표기된다.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-23</td><td>월 자동 결제 (크론)</td><td>매일 07시(KST) Vercel Cron이 <b>결제일이 지난 활성 구독</b>을 빌링키로 자동 결제하고 다음 결제일을 한 달 뒤로 갱신한다.</td><td><code>CRON_SECRET</code> Bearer 인증. 결제에 실패하면 해당 구독을 해지 상태로 전환한다(결제일이 이미 지났으므로 혜택도 즉시 종료). 재시도 로직·실패 알림은 없다.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MY-22</td><td>커뮤니티 구독자 표시</td><td>구독자는 <b>티어 뱃지</b>(DIVE+ 보라 / VIP 골드 그라데이션)와 <b>아바타 퍼플 링</b>으로 표시된다. 뱃지는 공용 컴포넌트로 3가지 크기(프로필 밴드 12px · 게시판 닉네임 옆 10px · 댓글 9px)를 제공하며, 댓글에서는 “작성자” 뱃지와 함께 표시될 수 있다.</td><td>무료(베이직) 사용자는 뱃지가 표시되지 않는다.</td><td><span class="auth login">로그인</span></td></tr>
   </table>
 </section>
 
@@ -509,9 +560,11 @@
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">항목</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">적용</th></tr>
     <tr><td>DS-01</td><td>색상 토큰</td><td>브랜드 Purple 6단계 램프(기준색 <code>#DB97E9</code> = purple-300) + Orange 3단계 + Neutral gray 9단계 + 상태색(success · warning · info · error · kakao). shadcn 시맨틱 토큰(<code>--primary</code> · <code>--ring</code>)을 브랜드 보라로 재정의해 버튼·포커스 링·에러 상태가 브랜드색을 따름. 다크모드용 팔레트 별도 정의 — 배경 <code>#1B1B1F</code> · 카드 <code>#1E1E21</code> · 보더 <code>#2E2E33</code>(zinc 쿨톤) + 다크용 purple 램프.</td><td>레거시 토큰과 하드코딩 hex 전면 제거. JS 코드(별점·컨페티 등)는 <code>COLORS</code> 상수, Tailwind 밖 CSS는 <code>var(--gray-*)</code> 참조.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>DS-02</td><td>타이포 · 간격</td><td>Noto Sans KR 기준 7단계 타입 스케일(Display 36 / H1 24 / H2 20 / H3 18 / Body 16·14 / Caption 12), 간격은 4px 배수, 라운드 4/6/8/16/full, 그림자 3단계. 컨테이너 폭은 <code>max-w-container/content</code> 토큰으로 통일.</td><td>—</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>DS-02</td><td>타이포 · 간격</td><td>Pretendard 단일 서체 기준 7단계 타입 스케일(Display 36 / H1 24 / H2 20 / H3 18 / Body 16·14 / Caption 12), 간격은 4px 배수, 라운드 4/6/8/16/full, 그림자 3단계. 컨테이너 폭은 <code>max-w-container/content</code> 토큰으로 통일.</td><td>—</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>DS-03</td><td>컴포넌트 단일화</td><td><code>ui/button</code> variant 9종(브랜드 primary · kakao · outlineBrand · plain 등) + size 5종으로 모든 버튼 통일. <code>ui/input</code>은 h-12 · rounded-lg · 브랜드 포커스 링으로 통일. 아이콘은 lucide-react 단일, 로딩은 공용 Spinner(접근성 role 부여) 단일.</td><td>react-icons · react-spinners · framer-motion 의존성 제거.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>DS-04</td><td>적용 현황</td><td>토큰·버튼·아이콘·로딩·다크 팔레트는 전 화면 적용 완료. 캐러셀은 swiper로 단일화(embla 제거). 화면 단위 리디자인은 로그인 · 회원가입부터 적용(AUTH-01~12).</td><td>잔여 작업: 공용 SectionTitle 미도입, card/badge/tabs 수제 구현 산재.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>DS-04</td><td>적용 현황</td><td>토큰·버튼·아이콘·로딩·다크 팔레트는 전 화면 적용 완료. 캐러셀은 swiper로 단일화(embla 제거). <b>화면 단위 리디자인</b>은 로그인 · 회원가입 → 메인 → 음악 → 소식 → 굿즈샵(목록·상세) → 자유게시판(목록·글쓰기·상세) → 장바구니·결제 → 404 순으로 적용 완료, <b>마이페이지는 구현 진행 중</b>이며 모바일 최적화는 마지막에 일괄 진행한다.</td><td>공용화된 컴포넌트: SectionTitle · MoreLink · DdayBadge · StreamingLinkChips · SortDropdown(COM-17) · ConfirmModal(variant, COM-14) · ShareSheet(COM-18) · EditDeleteActions(COM-19) · 빈 상태 패턴(COM-20) · MembershipBadge(MY-22). 잔여: card/tabs 수제 구현 산재.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>DS-05</td><td>리디자인 사용 규칙</td><td>① <b>버튼은 rounded-full 필</b>이 기본(입력 필드는 rounded-lg 유지) ② <b>그라데이션은 결제 CTA·게시글 추천 등 최상위 액션 전용</b>, 나머지 주요 CTA는 솔리드 브랜드 보라 ③ 파괴적 액션은 붉은 틴트 버튼 + destructive 모달 ④ 상태·강조 색은 팔레트 토큰만 사용(purple 50~500 · orange 100/300/500 · gray 50~900).</td><td>팔레트에 없는 단계(purple-700 등)는 클래스가 생성되지 않는다. CSS 변수 기반 색은 <b>Tailwind 불투명도 변형</b>(<code>bg-purple-500/90</code>)이 동작하지 않으므로 솔리드로 쓰거나 <code>opacity</code> 유틸을 쓴다. 삭제(destructive) 색은 팔레트에 없어 고정 hex(<code>#E72424</code>)를 사용한다. 구 DS Button 컴포넌트(radius-lg)는 현행 규칙보다 이전 버전이다.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>DS-06</td><td>스토리북</td><td>Storybook 10(<code>@storybook/nextjs-vite</code>)을 도입해 공용 컴포넌트와 파운데이션 문서를 카탈로그로 제공한다. 라이트/다크 테마 전환 애드온을 붙여 두 모드를 한 화면에서 확인할 수 있다.</td><td>스토리는 컴포넌트 옆에 함께 두고, 파운데이션 문서만 별도 디렉터리에 모은다. 배포는 메인 앱과 <b>분리된 Vercel 프로젝트</b>로 정적 산출물을 업로드한다(<code>pnpm storybook:deploy</code>).</td><td><span class="auth any">전체</span></td></tr>
   </table>
 </section>
 
@@ -539,7 +592,7 @@
   <h3>14-1. 데이터 저장소 (Supabase)</h3>
   <table class="spec">
     <tr><th>구분</th><th>이름</th><th>용도</th></tr>
-    <tr><td rowspan="16" style="font-weight:600;">테이블</td>
+    <tr><td rowspan="17" style="font-weight:600;">테이블</td>
         <td><code>user</code></td><td>회원 프로필(닉네임 · 아바타), Auth 계정과 연동</td></tr>
     <tr><td><code>album</code></td><td>메인 앨범 캐러셀(발매 정보 · 음원 플랫폼 링크)</td></tr>
     <tr><td><code>schedules</code></td><td>일정(제목 · 카테고리 · 기간 · 장소 · 설명 · 링크 · 출처 manual/auto) — 수동 큐레이션 + 크론 자동 추출 초안, 공개 읽기 전용 RLS — v2 신규</td></tr>
@@ -556,6 +609,7 @@
     <tr><td><code>payments</code></td><td>결제 레코드(주문번호 · 결제수단 · 상태 · 배송지 스냅샷)</td></tr>
     <tr><td><code>order_items</code></td><td>주문 상품(수량 · 구매확정 여부)</td></tr>
     <tr><td><code>push_tokens</code></td><td>앱 푸시 토큰(기기당 1건 · 수신 on/off) — v2 신규</td></tr>
+    <tr><td><code>memberships</code> + <code>memberships_public</code>(뷰)</td><td>DIVE 멤버십 구독(유저당 1행 — 등급 · 상태 · 요금 · 빌링키 · 카드 정보 · 다음 결제일). 본인 조회만 허용하는 RLS + 쓰기는 서버 전용, 커뮤니티 뱃지용 공개 뷰는 민감 컬럼 제외 — v2 신규(<code>supabase/memberships.sql</code> 실행 필요)</td></tr>
     <tr><td style="font-weight:600;">스토리지</td><td><code>boards</code> / <code>avatars</code></td><td>게시글 본문 이미지 / 프로필 이미지</td></tr>
     <tr><td style="font-weight:600;">DB 함수</td><td><code>increment_view_count</code> 외</td><td>조회수 증가, 기본 배송지 지정·재지정(<code>set_default_address</code>, <code>update_default_address</code>)</td></tr>
   </table>
@@ -572,7 +626,18 @@
     <tr><td><code>redirectUrl</code></td><td>sessionStorage</td><td>로그인 후 원래 페이지 복귀 경로(내부 경로만 허용) — v2 신규</td></tr>
   </table>
 
-  <h3>14-3. 미구현 · 알려진 한계</h3>
+  <h3>14-3. 자동화 스케줄</h3>
+  <table class="spec">
+    <tr><th>작업</th><th>실행 주기 (KST)</th><th>내용</th></tr>
+    <tr><td>일정 자동 추출 <span class="path">Vercel Cron</span></td><td>매일 06:00</td><td>수집된 기사에서 명시적 날짜가 있는 일정을 초안으로 저장 (NEWS-03)</td></tr>
+    <tr><td>앨범 자동 등록 <span class="path">Vercel Cron</span></td><td>매일 06:30</td><td>iTunes 신규 발매반 감지 후 <code>album</code> 등록 (MAIN-10)</td></tr>
+    <tr><td>멤버십 자동 결제 <span class="path">Vercel Cron</span></td><td>매일 07:00</td><td>결제일이 지난 활성 구독을 빌링키로 결제하고 다음 결제일 갱신 (MY-23)</td></tr>
+    <tr><td>굿즈 자동 수집 <span class="path">GitHub Actions</span></td><td>매일 06:15</td><td>공식 스토어 신상품 수집 + 갤러리 이미지 보강 (SHOP-16)</td></tr>
+    <tr><td>소식 · 일정 피드</td><td>30분 캐싱(ISR)</td><td>뉴스·영상·일정 수집 결과 재생성 (NEWS-04)</td></tr>
+  </table>
+  <p class="sec-desc">Vercel Cron 경로는 <code>CRON_SECRET</code> Bearer 인증으로 보호된다.</p>
+
+  <h3>14-4. 미구현 · 알려진 한계</h3>
   <div class="note"><b>참고</b> — 아래는 기준 시점 코드에서 확인된 사실로, 이후 고도화 후보 목록으로 활용할 수 있다.</div>
   <ul class="tight">
     <li><b>회원 탈퇴 미구현</b> — 버튼이 주석 처리된 상태로만 존재.</li>
@@ -589,18 +654,22 @@
     <li>자동 등록 앨범은 멜론 직링크가 없어 검색 링크로 폴백됨(수동 보강 가능), 장르는 “K-POP” 고정.</li>
     <li>게시글 조회수는 목록 클릭 경유 시에만 증가(공유 링크 직접 진입 시 미증가).</li>
     <li>결제 승인 API에 세션·금액 대조 검증 없음(토스 측 검증 및 클라이언트 중복 확인에 의존), 결제·주문 저장이 트랜잭션이 아님.</li>
-    <li>에디터 의존성 quill 2.0.3에 낮은 심각도 XSS 취약점(CVE-2025-15056)이 있으나 상위 버전 미출시로 업그레이드 불가 — 본문 렌더링이 DOMPurify로 소독되고 있어 실질 영향은 제한적(Dependabot #246 모니터링 중).</li>
+    <li>에디터는 Tiptap v3로 교체됐지만, <b>과거 글 렌더링용</b>으로 quill 계열 패키지·서식 CSS를 유지하고 있다(신규 작성 경로에서는 미사용).</li>
+    <li><b>멤버십 운영 전 필요 작업</b> — <code>supabase/memberships.sql</code> 마이그레이션 실행이 선행돼야 하며(미실행 시 구독 요청은 결제 전에 차단), 정기결제 실패 시 재시도·안내 알림이 없다(1회 실패 = 해지 처리). 등급 혜택 중 <b>굿즈 할인 · 무료배송 · 우선 구매</b>의 실제 적용 로직은 커머스 쪽에 아직 연결되지 않았다.</li>
+    <li>공지 게시글은 DB 개념이 없어 <b>정적 문구 1건</b>으로만 노출된다(공지 탭도 안내 빈 상태만 표시).</li>
+    <li>게시판에 카테고리 개념이 없어 “내가 쓴 글” 시안의 카테고리 뱃지는 제외됐고, 실시간 접속자 표시도 프레즌스 인프라가 없어 제외됐다.</li>
+    <li>상품 상세 시안의 <b>한정수량 게이지</b>는 재고 데이터가 없어 구현 보류.</li>
     <li>비밀번호 20자 상한, 닉네임 6자 상한이 입력창 속성으로만 강제되고 검증 스키마에는 없음.</li>
     <li>장바구니는 기기 저장 전용 — 로그인해도 서버 동기화되지 않고 기기 간 공유 불가.</li>
     <li>상품 목록 무한 스크롤이 매 페이지 전체 상품을 조회한 뒤 잘라내는 방식(서버 페이지네이션 없음).</li>
     <li>바로 구매로 결제하면 주문명이 기본값(“주문상품”)으로 저장될 수 있음 — 주문명 임시 저장이 장바구니 결제 경로에만 존재.</li>
     <li>알림 종류별 수신 설정 세분화 없음, 좋아요 재발송 방지(발송 이력) 없음, 웹 인앱 알림함 없음.</li>
-    <li>디자인 시스템 잔여 작업 — SectionTitle 공용화, card/badge/tabs 컴포넌트화 (DS-04).</li>
+    <li>디자인 시스템 잔여 작업 — card/tabs 컴포넌트화, 모바일 최적화 일괄 작업 (DS-04).</li>
   </ul>
 </section>
 
 <footer class="foot">
-  IVE로 DIVE 기능명세서 v2 (Draft) · 기준 커밋 <code>5c24829</code> (2026 리뉴얼 진행 중) · 2026-07-29 생성 · 2026-08-17 갱신 · <a href="./index.html">기능명세서 아카이브</a> · <a href="./spec-v1.html">v1 보기</a>
+  IVE로 DIVE 기능명세서 v2 (Draft) · 기준 커밋 <code>595e08c</code> (2026 리뉴얼 진행 중) · 2026-07-29 생성 · 2026-08-17 갱신 · <a href="./index.html">기능명세서 아카이브</a> · <a href="./spec-v1.html">v1 보기</a> · <a href="./design.html">디자인 시스템 · 시안</a>
 </footer>
 
 </div>

@@ -28,12 +28,13 @@ const PushSettingRow = () => {
     });
   };
 
+  //시안 기준: bg-gray-50 라운드 카드 + 퍼플 토글
   return (
-    <div className="flex items-center justify-between border-b pb-5 mb-5 px-5 lg:px-0">
-      <div>
-        <p className="text-sm font-medium">푸시 알림</p>
-        <p className="text-xs text-gray-600 mt-1">
-          {hasToken ? "댓글·답글 알림을 앱으로 받습니다" : "앱에서 로그인하면 받을 수 있어요"}
+    <div className="flex items-center justify-between gap-3 rounded-2xl bg-gray-50 p-4">
+      <div className="min-w-0">
+        <p className="text-[13px] font-semibold">푸시 알림</p>
+        <p className="mt-1 text-xs text-gray-400">
+          {hasToken ? "댓글·답글 알림을 앱으로 받아요" : "앱에서 로그인하면 받을 수 있어요"}
         </p>
       </div>
       <button
@@ -43,13 +44,13 @@ const PushSettingRow = () => {
         aria-label="푸시 알림 수신 설정"
         disabled={!hasToken || isPending}
         onClick={handleToggle}
-        className={`relative w-11 h-6 rounded-full transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed ${
-          enabled ? "bg-black" : "bg-gray-300"
+        className={`relative w-10 h-[22px] rounded-full transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed ${
+          enabled ? "bg-purple-300" : "bg-gray-300"
         }`}
       >
         <span
-          className={`absolute top-1 left-0 w-4 h-4 bg-white rounded-full transition-transform ${
-            enabled ? "translate-x-6" : "translate-x-1"
+          className={`absolute top-0.5 left-0 w-[18px] h-[18px] bg-white rounded-full shadow-sm transition-transform ${
+            enabled ? "translate-x-[20px]" : "translate-x-0.5"
           }`}
         />
       </button>

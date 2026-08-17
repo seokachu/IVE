@@ -7,7 +7,7 @@ const ContactInfo = () => {
   return (
     <div className="mb-10">
       <fieldset>
-        <legend className="block mb-2 text-sm">
+        <legend className="mb-2 block text-[13px] font-semibold">
           휴대폰 번호
           <span className="translate-y-[3px] inline-block text-red ml-1">*</span>
         </legend>
@@ -26,7 +26,7 @@ const ContactInfo = () => {
               <RHFInput
                 type="tel"
                 name="phoneMiddle"
-                className="rounded-sm py-2 px-3 w-full"
+                className="w-full"
                 messageClassName="p-1 pt-1"
                 pattern="[0-9]*"
                 inputMode="numeric"
@@ -44,7 +44,7 @@ const ContactInfo = () => {
                 id="phone-last"
                 pattern="[0-9]*"
                 inputMode="numeric"
-                className="rounded-sm py-2 px-3 w-full"
+                className="w-full"
                 messageClassName="p-1 pt-1"
                 maxLength={4}
               />

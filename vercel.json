@@ -7,6 +7,10 @@
     {
       "path": "/api/cron/album-sync",
       "schedule": "30 21 * * *"
+    },
+    {
+      "path": "/api/cron/membership-billing",
+      "schedule": "0 22 * * *"
     }
   ]
 }
