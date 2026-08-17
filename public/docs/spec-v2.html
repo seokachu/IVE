@@ -122,9 +122,9 @@
   <table class="meta-table">
     <tr><th>문서 버전</th><td>v2 — Draft (리뉴얼 진행 중)</td></tr>
     <tr><th>서비스명</th><td>IVE로 DIVE (<a href="https://ive-three.vercel.app">ive-three.vercel.app</a>) · Expo 하이브리드 앱(Android WebView, <code>seokachu/ive-app</code>) 병행</td></tr>
-    <tr><th>문서 기준</th><td>2026 리뉴얼 진행 중 — dev 브랜치 커밋 <code>595e08c</code> (2026-08-17) · 마이페이지 · DIVE 멤버십 반영 (남은 작업: 모바일 최적화 일괄)</td></tr>
-    <tr><th>작성일</th><td>2026-07-29 생성 · 2026-08-17 갱신 (음악 · 소식 · 굿즈샵 상세 · 자유게시판 · 장바구니/결제 · 404 · 마이페이지 리디자인 + DIVE 멤버십 신규 반영)</td></tr>
-    <tr><th>범위</th><td>메인 · 음악 · 소식 · 인증 · 자유게시판 · 굿즈샵 · 장바구니/결제 · 마이페이지 · DIVE 멤버십 · 푸시 알림 · 디자인 시스템 · 공통 UI</td></tr>
+    <tr><th>문서 기준</th><td>2026 리뉴얼 진행 중 — dev 브랜치 커밋 <code>f7f3353</code> (2026-08-17) · 마이페이지 · DIVE 멤버십 · <b>모바일 대응(반응형 · 드로어 메뉴)</b> 반영</td></tr>
+    <tr><th>작성일</th><td>2026-07-29 생성 · 2026-08-17 갱신 (음악 · 소식 · 굿즈샵 상세 · 자유게시판 · 장바구니/결제 · 404 · 마이페이지 리디자인 + DIVE 멤버십 + 모바일 대응 반영)</td></tr>
+    <tr><th>범위</th><td>메인 · 음악 · 소식 · 인증 · 자유게시판 · 굿즈샵 · 장바구니/결제 · 마이페이지 · DIVE 멤버십 · 푸시 알림 · 디자인 시스템 · 공통 UI · 모바일 대응</td></tr>
     <tr><th>기술 스택</th><td>Next.js 16 (App Router, proxy) · React 19 · Supabase(<code>@supabase/ssr</code>) · Zustand · TanStack Query · Tailwind CSS · lucide-react · Tiptap v3(에디터) · 토스페이먼츠 · Expo Push · pnpm · Playwright E2E · 외부 API(네이버 API Hub 검색 · KOPIS · iTunes Search · Google News RSS · YouTube RSS) · Vercel Cron · GitHub Actions</td></tr>
     <tr><th>권한 표기</th><td><span class="auth any">전체</span> 비로그인 포함 누구나 · <span class="auth login">로그인</span> 로그인 필요 · <span class="auth owner">작성자</span> 본인 리소스만 · <span class="auth app">앱</span> 하이브리드 앱 환경 필요</td></tr>
   </table>
@@ -147,6 +147,7 @@
     <li><a href="#push">푸시 알림 · 하이브리드 연동</a></li>
     <li><a href="#design">디자인 시스템</a></li>
     <li><a href="#access">접근 제어 정책 요약</a></li>
+    <li><a href="#mobile">모바일 대응 (반응형)</a></li>
     <li><a href="#appendix">부록 (데이터 · 저장소 · 알려진 한계)</a></li>
   </ol>
 </nav>
@@ -168,11 +169,12 @@
     <tr><td>회원가입</td><td>약관 동의 없음</td><td><b>필수 약관 2건</b>(이용약관 · 개인정보 수집·이용) 동의 시에만 가입 가능 + 약관 전문 모달 — AUTH-10</td></tr>
     <tr><td>테마</td><td>라이트 고정</td><td><b>다크모드 지원</b> — 헤더 토글(기본 라이트, 시스템 미연동), 다크 전용 팔레트, 하이브리드 앱 테마 연동 — COM-16 · PUSH-10</td></tr>
     <tr><td>UI 기반</td><td>하드코딩 hex · 컴포넌트별 개별 버튼/아이콘/스피너</td><td>디자인 토큰(색상 램프·타이포·스페이싱) + <code>ui/button</code>·<code>ui/input</code> 단일화 + lucide 아이콘 · 공용 Spinner(접근성 role 부여) — 12장</td></tr>
-    <tr><td>화면 리디자인</td><td>—</td><td>디자인 파일(<code>design/ive-design-system.pen</code>)의 화면 시안을 기준으로 페이지별 전면 리디자인 — 로그인 · 회원가입 · 메인 · 음악 · 소식 · 굿즈샵(목록/상세) · 자유게시판(목록 · 글쓰기 · 상세 · 댓글) · 장바구니 · 결제 · 404 · 마이페이지까지 <b>완료</b>. 남은 작업은 모바일 최적화 일괄 진행. 시안 목록은 <a href="./design.html">디자인 시스템 · 시안 문서</a> 참고.</td></tr>
+    <tr><td>화면 리디자인</td><td>—</td><td>디자인 파일(<code>design/ive-design-system.pen</code>)의 화면 시안을 기준으로 페이지별 전면 리디자인 — 로그인 · 회원가입 · 메인 · 음악 · 소식 · 굿즈샵(목록/상세) · 자유게시판(목록 · 글쓰기 · 상세 · 댓글) · 장바구니 · 결제 · 404 · 마이페이지 · <b>모바일 대응(14장)</b>까지 <b>완료</b>. 시안 목록은 <a href="./design.html">디자인 시스템 · 시안 문서</a> 참고.</td></tr>
     <tr><td>커뮤니티(게시판)</td><td>번호 중심 표 목록 · 최신순 고정 · 텍스트 수정/삭제 버튼</td><td><b>라운지형 리디자인</b> — 무대 사진 히어로 + 커뮤니티 통계, HOT 3 사진 카드, 필터 필(전체·인기·공지·내가 쓴 글) + 정렬 3종 + 검색 + 글쓰기 툴바, 썸네일·아바타 카드형 로우, 800px 리딩 칼럼 상세(이전/다음 · ⋯ 메뉴 · 그라데이션 추천 · 작성자 카드) — 6장</td></tr>
     <tr><td>본문 에디터</td><td>react-quill</td><td><b>Tiptap v3로 교체</b> — 커스텀 툴바(굵게·기울임·밑줄·취소선·목록·인용·링크·이미지) + 글자 수 카운터. 구 글은 기존 서식 CSS로 계속 렌더 — BRD-13</td></tr>
     <tr><td>굿즈샵</td><td>상품 그리드 + 상세(이미지 나열 · 아코디언 안내)</td><td><b>상세 V2</b> — 브레드크럼, 갤러리(화살표·인덱스·썸네일·모바일 스와이프), 플로팅 구매 카드, 세그먼트 필 탭(상세정보/리뷰 n), 별점 분포 리뷰 탭, 추천 섹션, FAQ 스플릿, 담기 드로어 개편 + <b>상품 자동 수집</b>(매일 06:15 KST GitHub Actions) — 7장</td></tr>
     <tr><td>장바구니 · 결제</td><td>단일 목록 + 우측 요약, 완료 화면 텍스트 위주</td><td><b>주문 플로우 리디자인</b> — 3단계 진행 인디케이터(01 장바구니 → 02 주문·결제 → 03 주문완료), 상품별 개별 카드 + 필 스테퍼, 결제 금액 플로팅 카드, 주문자 인라인 편집 · 배송지 라디오 선택, 주문번호 복사 칩이 있는 완료 화면 — 8·9장</td></tr>
+    <tr><td>모바일</td><td>기본 반응형 + 3분할 시트 메뉴</td><td><b>모바일 정비 완료</b> — 좌측 드로어 메뉴 리디자인(프로필 카드 · 퀵 타일 · 아이콘 GNB · 다크 모드 스위치), 마이페이지 모바일 IA 재배치(가로 필 탭), 브레이크포인트 정책 문서화와 페이지별 반응형 QA — 2-2 · 14장</td></tr>
     <tr><td>유료 멤버십</td><td>—</td><td><b>DIVE 멤버십 신규</b> — 3단 플랜(베이직 무료 / DIVE+ 월 1,900원 / DIVE VIP 월 5,900원), 토스페이먼츠 <b>빌링키 정기결제</b>(구독 · 해지 · 카드 변경 + 매일 자동결제 크론), 티어 뱃지 · 아바타 퍼플 링 — 10-6절</td></tr>
     <tr><td>마이페이지</td><td>좌측 프로필 + 메뉴 리스트, 인라인 닉네임 편집</td><td><b>리디자인 완료</b> — 프로필 밴드(아바타 · 멤버십 뱃지 · 스탯 3종) + 240px 사이드 내비(카운트 · 푸시 카드 · 계정 링크), 카드형 결제 내역 · 주문 상세, 프로필 수정 모달(크롭 재사용), 배송지 카드 + 공용 수정/삭제 버튼 — 10장</td></tr>
     <tr><td>소식</td><td>Supabase 수동 입력 기사(<code>news_gallery</code>) + 사진 갤러리</td><td><b>자동 수집 피드</b>(네이버 API Hub 뉴스 · 구글 뉴스 RSS · 유튜브 공식 채널 RSS) + <b>일정 허브</b>(수동 큐레이션 · KOPIS 공연 자동 수집 · 뉴스 일정 자동 추출 크론) — 갤러리·히어로 제거, 4장</td></tr>
@@ -195,13 +197,13 @@
     <tr><td>COM-05</td><td>유저 메뉴 분기</td><td>비로그인: “로그인” 링크 → 로그인 페이지로 이동(현재 경로를 <code>?redirect</code>로 첨부, AUTH-07). 로그인: 아바타 → 드롭다운(닉네임 표시, 마이페이지, 로그아웃).</td><td>세션 상태에 따라 실시간 전환. <b>v1의 로그인 모달은 제거됨.</b></td><td><span class="auth any">전체</span></td></tr>
   </table>
 
-  <h3>2-2. 헤더 (모바일)</h3>
+  <h3>2-2. 헤더 (모바일) — 드로어 메뉴 <span class="tag">2026-08 리디자인</span></h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>COM-06</td><td>햄버거 사이드 메뉴</td><td>햄버거 버튼 → 좌측 슬라이드 시트 오픈. 로고 클릭 시 홈 이동과 함께 시트 닫힘.</td><td>lg 미만 화면 전용.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>COM-07</td><td>시트 내 프로필</td><td>로그인 시 아바타 + 닉네임 + 로그아웃 버튼 노출. 로그아웃 성공 시 시트 자동 닫힘.</td><td>비로그인 시 프로필 영역 미노출.</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>COM-08</td><td>3분할 퀵 메뉴</td><td>① 장바구니 ② 로그인(로그인 페이지 링크) 또는 마이페이지 ③ 회원가입 링크.</td><td>회원가입 링크는 비로그인 시에만 노출.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>COM-09</td><td>모바일 GNB</td><td>GNB 3개 메뉴를 세로 리스트로 제공. 항목 이동 시 시트 닫힘.</td><td>—</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-06</td><td>드로어 열기 · 닫기</td><td>햄버거 버튼 → <b>좌측 드로어</b>(너비 320px · 최대 화면 85%) 오픈. 로고/메뉴 항목 이동, 우상단 ✕, 딤 영역 클릭으로 닫힘.</td><td>lg 미만 화면 전용. 구 3분할 퀵 메뉴 · 보더 리스트 UI는 대체됨(<code>.pen</code> “모바일 메뉴 · 라이트/다크/비로그인”).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-07</td><td>프로필 카드 / 로그인 카드</td><td>로그인 시 연보라 카드에 아바타(구독자는 퍼플 링) · 닉네임 + 멤버십 뱃지 · 이메일을 표시하고, 카드를 누르면 마이페이지로 이동. 비로그인 시 <span class="msg">“로그인하고 다이브를 시작해보세요”</span> 카드 — [로그인] 필 버튼 + “아직 계정이 없나요? 회원가입” 링크.</td><td>로그인 버튼은 현재 경로를 <code>?redirect</code>로 첨부(AUTH-07). 이동 시 드로어 자동 닫힘.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-08</td><td>퀵 타일</td><td>2열 타일 — ① <b>장바구니</b>(담긴 품목 수를 보라 원형 뱃지로 표시) ② <b>멤버십</b>(<span class="tag">NEW</span> 라벨, 멤버십 페이지로 이동).</td><td>장바구니 뱃지는 0개면 숨김(COM-04와 동일 기준).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-09</td><td>드로어 GNB · 하단 유틸</td><td>“메뉴” 캡션 아래 GNB 4개(소식 · 음악 · 굿즈샵 · 자유게시판)를 아이콘 + 라벨 + › 리스트로 제공하고, 현재 경로는 연보라 필로 활성 표시. 하단 고정 영역에 <b>다크 모드 스위치</b>와 <b>로그아웃</b>(로그인 시).</td><td>다크 모드 동작은 COM-16과 동일. 항목 이동 시 드로어 닫힘.</td><td><span class="auth any">전체</span></td></tr>
   </table>
 
   <h3>2-3. 푸터 · 404 · 전역 UI</h3>
@@ -562,7 +564,7 @@
     <tr><td>DS-01</td><td>색상 토큰</td><td>브랜드 Purple 6단계 램프(기준색 <code>#DB97E9</code> = purple-300) + Orange 3단계 + Neutral gray 9단계 + 상태색(success · warning · info · error · kakao). shadcn 시맨틱 토큰(<code>--primary</code> · <code>--ring</code>)을 브랜드 보라로 재정의해 버튼·포커스 링·에러 상태가 브랜드색을 따름. 다크모드용 팔레트 별도 정의 — 배경 <code>#1B1B1F</code> · 카드 <code>#1E1E21</code> · 보더 <code>#2E2E33</code>(zinc 쿨톤) + 다크용 purple 램프.</td><td>레거시 토큰과 하드코딩 hex 전면 제거. JS 코드(별점·컨페티 등)는 <code>COLORS</code> 상수, Tailwind 밖 CSS는 <code>var(--gray-*)</code> 참조.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>DS-02</td><td>타이포 · 간격</td><td>Pretendard 단일 서체 기준 7단계 타입 스케일(Display 36 / H1 24 / H2 20 / H3 18 / Body 16·14 / Caption 12), 간격은 4px 배수, 라운드 4/6/8/16/full, 그림자 3단계. 컨테이너 폭은 <code>max-w-container/content</code> 토큰으로 통일.</td><td>—</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>DS-03</td><td>컴포넌트 단일화</td><td><code>ui/button</code> variant 9종(브랜드 primary · kakao · outlineBrand · plain 등) + size 5종으로 모든 버튼 통일. <code>ui/input</code>은 h-12 · rounded-lg · 브랜드 포커스 링으로 통일. 아이콘은 lucide-react 단일, 로딩은 공용 Spinner(접근성 role 부여) 단일.</td><td>react-icons · react-spinners · framer-motion 의존성 제거.</td><td><span class="auth any">전체</span></td></tr>
-    <tr><td>DS-04</td><td>적용 현황</td><td>토큰·버튼·아이콘·로딩·다크 팔레트는 전 화면 적용 완료. 캐러셀은 swiper로 단일화(embla 제거). <b>화면 단위 리디자인</b>은 로그인 · 회원가입 → 메인 → 음악 → 소식 → 굿즈샵(목록·상세) → 자유게시판(목록·글쓰기·상세) → 장바구니·결제 → 404 순으로 적용 완료, <b>마이페이지는 구현 진행 중</b>이며 모바일 최적화는 마지막에 일괄 진행한다.</td><td>공용화된 컴포넌트: SectionTitle · MoreLink · DdayBadge · StreamingLinkChips · SortDropdown(COM-17) · ConfirmModal(variant, COM-14) · ShareSheet(COM-18) · EditDeleteActions(COM-19) · 빈 상태 패턴(COM-20) · MembershipBadge(MY-22). 잔여: card/tabs 수제 구현 산재.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>DS-04</td><td>적용 현황</td><td>토큰·버튼·아이콘·로딩·다크 팔레트는 전 화면 적용 완료. 캐러셀은 swiper로 단일화(embla 제거). <b>화면 단위 리디자인</b>은 로그인 · 회원가입 → 메인 → 음악 → 소식 → 굿즈샵(목록·상세) → 자유게시판(목록·글쓰기·상세) → 장바구니·결제 → 404 → 마이페이지 · DIVE 멤버십 → <b>모바일 대응(14장)</b>까지 적용 완료.</td><td>공용화된 컴포넌트: SectionTitle · MoreLink · DdayBadge · StreamingLinkChips · SortDropdown(COM-17) · ConfirmModal(variant, COM-14) · ShareSheet(COM-18) · EditDeleteActions(COM-19) · 빈 상태 패턴(COM-20) · MembershipBadge(MY-22). 잔여: card/tabs 수제 구현 산재.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>DS-05</td><td>리디자인 사용 규칙</td><td>① <b>버튼은 rounded-full 필</b>이 기본(입력 필드는 rounded-lg 유지) ② <b>그라데이션은 결제 CTA·게시글 추천 등 최상위 액션 전용</b>, 나머지 주요 CTA는 솔리드 브랜드 보라 ③ 파괴적 액션은 붉은 틴트 버튼 + destructive 모달 ④ 상태·강조 색은 팔레트 토큰만 사용(purple 50~500 · orange 100/300/500 · gray 50~900).</td><td>팔레트에 없는 단계(purple-700 등)는 클래스가 생성되지 않는다. CSS 변수 기반 색은 <b>Tailwind 불투명도 변형</b>(<code>bg-purple-500/90</code>)이 동작하지 않으므로 솔리드로 쓰거나 <code>opacity</code> 유틸을 쓴다. 삭제(destructive) 색은 팔레트에 없어 고정 hex(<code>#E72424</code>)를 사용한다. 구 DS Button 컴포넌트(radius-lg)는 현행 규칙보다 이전 버전이다.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>DS-06</td><td>스토리북</td><td>Storybook 10(<code>@storybook/nextjs-vite</code>)을 도입해 공용 컴포넌트와 파운데이션 문서를 카탈로그로 제공한다. 라이트/다크 테마 전환 애드온을 붙여 두 모드를 한 화면에서 확인할 수 있다.</td><td>스토리는 컴포넌트 옆에 함께 두고, 파운데이션 문서만 별도 디렉터리에 모은다. 배포는 메인 앱과 <b>분리된 Vercel 프로젝트</b>로 정적 산출물을 업로드한다(<code>pnpm storybook:deploy</code>).</td><td><span class="auth any">전체</span></td></tr>
   </table>
@@ -585,11 +587,28 @@
   </table>
 </section>
 
-<!-- ══════════ 14. 부록 ══════════ -->
-<section id="appendix">
-  <h2 class="sec">14. 부록</h2>
+<!-- ══════════ 14. 모바일 대응 ══════════ -->
+<section id="mobile">
+  <h2 class="sec">14. 모바일 대응 (반응형)</h2>
+  <p class="sec-desc">별도 모바일 라우트 없이 전 페이지를 반응형으로 대응한다. 기준 뷰포트는 390px(Expo 하이브리드 앱 WebView와 동일)이며, 시안은 마이페이지 · 드로어 메뉴 수작업 시안과 페이지별 390px 실화면 캡처(<code>.pen</code> “모바일 · *” 프레임 8종)를 기준으로 한다. 드로어 메뉴 상세는 2-2 참고.</p>
+  <table class="spec">
+    <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
+    <tr><td>MOB-01</td><td>브레이크포인트 정책</td><td>커스텀 스케일 — <code>sm 375</code> · <code>md 768</code> · <code>lg 1024</code> · <code>xl 1320</code>, 컨테이너 1320px · 콘텐츠 1280px. 데스크톱 전용 UI(사이드 내비 · GNB 등)는 lg, “모바일은 세로 스택 → 태블릿부터 가로” 분기는 md를 기준으로 한다.</td><td><b>sm이 Tailwind 기본(640px)과 달리 375px</b>이므로 세로 스택 의도에 sm을 쓰면 폰에서도 가로로 풀린다 — md 사용이 규칙(2026-08-17 QA에서 오용 4건 교정).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MOB-02</td><td>마이페이지 모바일 IA</td><td>lg 미만에서 세로 재배치 — <b>컴팩트 프로필 밴드</b>(아바타 72px · “수정” 축약 버튼 · 스탯 3종 균등 배치) → <b>가로 스크롤 필 탭</b>(멤버십 <span class="tag">NEW</span> · 찜/결제/글/배송지 + 카운트, 활성 탭 자동 스크롤) → 콘텐츠 → 푸시 알림 카드 · 로그아웃/회원탈퇴. 데스크톱은 240px 사이드 내비 유지(MY-18).</td><td>탭 활성 스타일은 연보라 필 + 보라 텍스트로 데스크톱과 동일.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MOB-03</td><td>목록 그리드 열 규칙</td><td>굿즈샵 목록 2열 → 3열(md) → 4열(lg) · 상세 추천 2열 → 3열(md) → 6열(lg) · 소식 영상 1열 → 2열(md) → 4열(lg) · 찜 목록 2열 → 3열(md) · 멤버십 플랜 1열 → 3열(lg). 게시판 목록은 전 구간 단일 칼럼 카드 로우.</td><td>모바일 3열은 카드 폭 부족으로 뱃지가 깨져 금지(추천 섹션에서 2열로 교정).</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MOB-04</td><td>가로 스크롤 패턴</td><td>마이페이지 필 탭 · 게시판 필터 필 · Tiptap 에디터 툴바는 좁은 폭에서 <b>가로 스크롤</b>로 전체 항목을 유지한다(스크롤바 숨김).</td><td>우측에 잘린 항목이 스크롤 가능함을 암시한다.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MOB-05</td><td>터치 대응</td><td>앨범 미리듣기 FAB는 터치 기기에서 상시 노출(<code>pointer: coarse</code>), 미니 디스크는 탭 시 보조 버튼 4초 노출(MAIN-08), 상품 갤러리는 스와이프 넘김(SHOP-07), 플로팅 플레이어의 볼륨 슬라이더는 모바일에서 숨김.</td><td>hover에만 의존하는 조작 없음.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MOB-06</td><td>도킹 더보기 버튼</td><td>소식의 “더 많은 영상/기사 보기” 버튼은 목록 스크롤 중 화면 하단에 도킹(sticky)되어 항상 접근 가능하다.</td><td>실사용 동작이며, 풀페이지 캡처에서는 겹쳐 보일 수 있음.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MOB-07</td><td>좁은 폭 안정화</td><td>일정 카드의 카테고리 · “자동 수집” 뱃지는 줄바꿈 없이 유지되고 날짜만 다음 행으로 내려간다. 주문 상품 로우의 액션 버튼은 폭이 부족하면 아래 행으로 랩핑된다.</td><td>2026-08-17 모바일 QA에서 발견된 깨짐(뱃지 두 줄 분리 · 하트 겹침) 수정 반영.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>MOB-08</td><td>모바일 시안 소스</td><td><code>.pen</code> 수작업 시안 — “마이페이지 · 모바일 · 라이트/다크”, “모바일 메뉴 · 라이트/다크/비로그인”. 캡처 시안 — “모바일 · 메인/소식/음악/굿즈샵/굿즈샵 상세/게시판/게시판 상세/장바구니” 8프레임(프로덕션 빌드 390px 풀페이지 캡처).</td><td>캡처 갱신 시 파일명을 바꿔야 캔버스에 반영된다(디자인 도구가 이미지 URL을 캐시).</td><td><span class="auth any">전체</span></td></tr>
+  </table>
+</section>
 
-  <h3>14-1. 데이터 저장소 (Supabase)</h3>
+<!-- ══════════ 15. 부록 ══════════ -->
+<section id="appendix">
+  <h2 class="sec">15. 부록</h2>
+
+  <h3>15-1. 데이터 저장소 (Supabase)</h3>
   <table class="spec">
     <tr><th>구분</th><th>이름</th><th>용도</th></tr>
     <tr><td rowspan="17" style="font-weight:600;">테이블</td>
@@ -614,7 +633,7 @@
     <tr><td style="font-weight:600;">DB 함수</td><td><code>increment_view_count</code> 외</td><td>조회수 증가, 기본 배송지 지정·재지정(<code>set_default_address</code>, <code>update_default_address</code>)</td></tr>
   </table>
 
-  <h3>14-2. 클라이언트 저장소 키</h3>
+  <h3>15-2. 클라이언트 저장소 키</h3>
   <table class="spec">
     <tr><th>키</th><th>저장소</th><th>용도</th></tr>
     <tr><td><code>shopping_cart</code></td><td>localStorage</td><td>장바구니(서버 미저장). 로그아웃 시 삭제</td></tr>
@@ -626,7 +645,7 @@
     <tr><td><code>redirectUrl</code></td><td>sessionStorage</td><td>로그인 후 원래 페이지 복귀 경로(내부 경로만 허용) — v2 신규</td></tr>
   </table>
 
-  <h3>14-3. 자동화 스케줄</h3>
+  <h3>15-3. 자동화 스케줄</h3>
   <table class="spec">
     <tr><th>작업</th><th>실행 주기 (KST)</th><th>내용</th></tr>
     <tr><td>일정 자동 추출 <span class="path">Vercel Cron</span></td><td>매일 06:00</td><td>수집된 기사에서 명시적 날짜가 있는 일정을 초안으로 저장 (NEWS-03)</td></tr>
@@ -637,7 +656,7 @@
   </table>
   <p class="sec-desc">Vercel Cron 경로는 <code>CRON_SECRET</code> Bearer 인증으로 보호된다.</p>
 
-  <h3>14-4. 미구현 · 알려진 한계</h3>
+  <h3>15-4. 미구현 · 알려진 한계</h3>
   <div class="note"><b>참고</b> — 아래는 기준 시점 코드에서 확인된 사실로, 이후 고도화 후보 목록으로 활용할 수 있다.</div>
   <ul class="tight">
     <li><b>회원 탈퇴 미구현</b> — 버튼이 주석 처리된 상태로만 존재.</li>
@@ -664,12 +683,13 @@
     <li>상품 목록 무한 스크롤이 매 페이지 전체 상품을 조회한 뒤 잘라내는 방식(서버 페이지네이션 없음).</li>
     <li>바로 구매로 결제하면 주문명이 기본값(“주문상품”)으로 저장될 수 있음 — 주문명 임시 저장이 장바구니 결제 경로에만 존재.</li>
     <li>알림 종류별 수신 설정 세분화 없음, 좋아요 재발송 방지(발송 이력) 없음, 웹 인앱 알림함 없음.</li>
-    <li>디자인 시스템 잔여 작업 — card/tabs 컴포넌트화, 모바일 최적화 일괄 작업 (DS-04).</li>
+    <li>디자인 시스템 잔여 작업 — card/tabs 컴포넌트화 (DS-04).</li>
+    <li>굿즈샵 상세 모바일에 하단 고정 구매 바 없음 — 구매 카드는 갤러리 아래 인라인 배치(구매하려면 스크롤 복귀 필요).</li>
   </ul>
 </section>
 
 <footer class="foot">
-  IVE로 DIVE 기능명세서 v2 (Draft) · 기준 커밋 <code>595e08c</code> (2026 리뉴얼 진행 중) · 2026-07-29 생성 · 2026-08-17 갱신 · <a href="./index.html">기능명세서 아카이브</a> · <a href="./spec-v1.html">v1 보기</a> · <a href="./design.html">디자인 시스템 · 시안</a>
+  IVE로 DIVE 기능명세서 v2 (Draft) · 기준 커밋 <code>f7f3353</code> (2026 리뉴얼 진행 중) · 2026-07-29 생성 · 2026-08-17 갱신 · <a href="./index.html">기능명세서 아카이브</a> · <a href="./spec-v1.html">v1 보기</a> · <a href="./design.html">디자인 시스템 · 시안</a>
 </footer>
 
 </div>
