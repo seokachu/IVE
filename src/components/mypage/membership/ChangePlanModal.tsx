@@ -31,6 +31,8 @@ const ChangePlanModal = ({ membership, onClose }: ChangePlanModalProps) => {
   const invalidateMembership = useInvalidateMembership();
 
   const selectedPlan = PAID_PLANS.find((plan) => plan.tier === selectedTier)!;
+  //변경 예약 중엔 현재 플랜도 선택될 수 있다 — 이때는 변경 안내 대신 이용 중 안내 + 버튼 비활성
+  const isCurrentSelected = selectedTier === membership.tier;
   const isUpgrade = selectedPlan.price > membership.price;
   const nextBillingDate = formatDate(membership.next_billing_at);
   const chargeAmount = getProratedUpgradeAmount(membership.price, selectedPlan.price, membership.next_billing_at);
@@ -154,28 +156,41 @@ const ChangePlanModal = ({ membership, onClose }: ChangePlanModalProps) => {
           })}
         </div>
         {/* 변경 안내 */}
-        <div className={cn("flex flex-col gap-1.5 rounded-xl p-3.5", isVipSelected ? VIP_GOLD.soft : "bg-purple-50")}>
-          <p
-            className={cn(
-              "flex items-center gap-2 text-[13px] font-bold",
-              isVipSelected ? VIP_GOLD.text : "text-purple-500 dark:text-purple-300",
-            )}
-          >
-            {isUpgrade ? (
-              <Zap size={14} className="shrink-0" aria-hidden="true" />
-            ) : (
-              <CalendarClock size={14} className="shrink-0" aria-hidden="true" />
-            )}
-            {isUpgrade
-              ? `오늘 ${formatPrice(chargeAmount)}원만 결제하면 바로 적용돼요`
-              : `다음 결제일부터 ${selectedPlan.name}로 변경돼요`}
-          </p>
-          <p className="text-xs leading-relaxed text-gray-500">
-            {isUpgrade
-              ? `남은 ${remainingDays}일치 차액이에요. 다음 결제일(${nextBillingDate})부터는 월 ${formatPrice(selectedPlan.price)}원이 결제되고, 혜택은 결제 즉시 시작돼요.`
-              : `${nextBillingDate}까지는 현재 혜택이 그대로 유지되고, 추가 결제나 환불은 없어요. 그 전까지 언제든 변경을 취소할 수 있어요.`}
-          </p>
-        </div>
+        {isCurrentSelected ? (
+          //현재 플랜을 고른 상태 — 변경 안내 대신 이용 중 안내 (변경 예약 중 현재 플랜 재선택 시)
+          <div className="flex flex-col gap-1.5 rounded-xl bg-gray-100 p-3.5">
+            <p className="flex items-center gap-2 text-[13px] font-bold text-gray-500">
+              <Crown size={14} className="shrink-0" aria-hidden="true" />
+              이미 이용 중인 플랜이에요
+            </p>
+            <p className="text-xs leading-relaxed text-gray-500">
+              다른 플랜을 선택하면 변경 방법과 결제 안내를 알려드려요.
+            </p>
+          </div>
+        ) : (
+          <div className={cn("flex flex-col gap-1.5 rounded-xl p-3.5", isVipSelected ? VIP_GOLD.soft : "bg-purple-50")}>
+            <p
+              className={cn(
+                "flex items-center gap-2 text-[13px] font-bold",
+                isVipSelected ? VIP_GOLD.text : "text-purple-500 dark:text-purple-300",
+              )}
+            >
+              {isUpgrade ? (
+                <Zap size={14} className="shrink-0" aria-hidden="true" />
+              ) : (
+                <CalendarClock size={14} className="shrink-0" aria-hidden="true" />
+              )}
+              {isUpgrade
+                ? `오늘 ${formatPrice(chargeAmount)}원만 결제하면 바로 적용돼요`
+                : `다음 결제일부터 ${selectedPlan.name}로 변경돼요`}
+            </p>
+            <p className="text-xs leading-relaxed text-gray-500">
+              {isUpgrade
+                ? `남은 ${remainingDays}일치 차액이에요. 다음 결제일(${nextBillingDate})부터는 월 ${formatPrice(selectedPlan.price)}원이 결제되고, 혜택은 결제 즉시 시작돼요.`
+                : `${nextBillingDate}까지는 현재 혜택이 그대로 유지되고, 추가 결제나 환불은 없어요. 그 전까지 언제든 변경을 취소할 수 있어요.`}
+            </p>
+          </div>
+        )}
         <div className="flex gap-2.5">
           <button
             type="button"
@@ -187,7 +202,7 @@ const ChangePlanModal = ({ membership, onClose }: ChangePlanModalProps) => {
           <button
             type="button"
             onClick={handleSubmit}
-            disabled={isProcessing}
+            disabled={isProcessing || isCurrentSelected}
             className={cn(
               "h-[46px] flex-1 rounded-full text-sm font-bold text-white disabled:opacity-50",
               //둘 다 결제로 이어지는 액션 — VIP 업그레이드는 골드, 다운그레이드 예약은 결제 버튼과 같은 그라데이션
@@ -196,7 +211,7 @@ const ChangePlanModal = ({ membership, onClose }: ChangePlanModalProps) => {
                 : "bg-gradient-to-r from-purple-400 to-orange-300 shadow-[0_4px_14px_rgba(219,151,233,0.35)] transition-opacity hover:opacity-90",
             )}
           >
-            {isProcessing ? "변경 중..." : isUpgrade ? "업그레이드하기" : "다음 결제일부터 변경"}
+            {isProcessing ? "변경 중..." : isCurrentSelected ? "이용 중인 플랜" : isUpgrade ? "업그레이드하기" : "다음 결제일부터 변경"}
           </button>
         </div>
       </DialogContent>
