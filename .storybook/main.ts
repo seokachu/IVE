@@ -1,9 +1,18 @@
 import path from "node:path";
+import remarkGfm from "remark-gfm";
 import type { StorybookConfig } from "@storybook/nextjs-vite";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(ts|tsx)"],
-  addons: ["@storybook/addon-docs", "@storybook/addon-themes", "@storybook/addon-a11y"],
+  addons: [
+    //MDX 문서의 표·취소선은 GFM 확장이라 remark 플러그인을 따로 붙여야 렌더된다
+    {
+      name: "@storybook/addon-docs",
+      options: { mdxPluginOptions: { mdxCompileOptions: { remarkPlugins: [remarkGfm] } } },
+    },
+    "@storybook/addon-themes",
+    "@storybook/addon-a11y",
+  ],
   framework: {
     name: "@storybook/nextjs-vite",
     options: {},

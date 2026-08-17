@@ -7,6 +7,8 @@ import "../src/app/globals.css";
 import "./preview.css";
 
 const preview: Preview = {
+  //모든 컴포넌트에 Docs 탭 자동 생성 — 프롭 테이블·설명·스토리 목록이 한 페이지에 모인다
+  tags: ["autodocs"],
   parameters: {
     controls: {
       matchers: { color: /(background|color)$/i, date: /Date$/i },
@@ -20,6 +22,7 @@ const preview: Preview = {
       storySort: {
         order: [
           "소개",
+          "가이드",
           "Foundations",
           ["Colors", "Typography", "Tokens"],
           "UI",
