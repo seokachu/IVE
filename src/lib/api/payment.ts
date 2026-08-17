@@ -95,7 +95,7 @@ export const cartListItemsToOrderItems = (
     product_image: item.thumbnail,
     price: Number(item.price),
     quantity: item.quantity,
-    shipping_type: item.shipping_type ?? "무료배송",
+    shipping_type: item.shipping_type ?? "일반배송",
     discount_rate: item.discount_rate ?? 0,
     review_count: item.review_count ?? 0,
     color: item.color,
@@ -112,12 +112,15 @@ export const createPaymentData = (
   orderId: string,
   amount: string,
   orderName: string | null,
-  address: Tables<"shipping_addresses">
+  address: Tables<"shipping_addresses">,
+  shippingFee = 0
 ): Partial<Tables<"payments">> => {
   return {
     user_id: userId,
     order_id: orderId,
     amount: amount,
+    //amount에 이미 포함된 값 — 주문 상세에서 배송비를 분리해 보여주기 위해 따로 남긴다
+    shipping_fee: shippingFee,
     order_name: orderName || "",
     payment_method: paymentInfo.easyPay
       ? `${paymentInfo.easyPay.provider} 간편결제`

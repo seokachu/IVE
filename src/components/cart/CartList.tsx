@@ -8,6 +8,8 @@ import { toast } from "@/hooks/use-toast";
 import { ShoppingCart, Truck } from "lucide-react";
 import SelectionControl from "../common/select/SelectionControl";
 import { useCartActions, useCartItems, useCheckoutActions, useSelectedItemIds } from "@/store/zustand";
+import { formatPrice } from "@/utils/calculateDiscount";
+import { SHIPPING_POLICY } from "@/utils/constants";
 
 const CartList = () => {
   const [mounted, setMounted] = useState(false);
@@ -87,7 +89,9 @@ const CartList = () => {
           </ul>
           <div className="mt-3.5 flex items-center gap-2.5 rounded-xl bg-purple-50 px-4 py-3">
             <Truck size={18} className="shrink-0 text-purple-400" aria-hidden />
-            <p className="text-[13px] text-gray-500">전 상품 무료배송 · 지금 주문하면 오늘 바로 출발해요</p>
+            <p className="text-[13px] text-gray-500">
+              {formatPrice(SHIPPING_POLICY.FREE_THRESHOLD)}원 이상 무료배송 · 지금 주문하면 오늘 바로 출발해요
+            </p>
           </div>
         </>
       ) : (

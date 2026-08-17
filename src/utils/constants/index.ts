@@ -64,8 +64,17 @@ export const SORT_OPTIONS: Record<SortOptionList, SortOption> = {
 export const BADGE_TYPES = {
   FREE_DELIVERY: "무료배송",
   HOT: "HOT",
-  //신상품 뱃지 — 부여 로직은 추후 추가 예정 (calculateBadge 참고)
   NEW: "NEW",
+} as const;
+
+//등록 후 이 기간(일) 이내면 NEW 뱃지 — goods.created_at 기준
+export const GOODS_NEW_DAYS = 30;
+
+//배송 정책 — 기본 3,000원, 상품 금액이 기준을 넘으면 무료
+//(상품 자체가 무료배송이거나 VIP 멤버십이면 금액과 무관하게 무료 — calculateShipping 참고)
+export const SHIPPING_POLICY = {
+  BASE_FEE: 3000,
+  FREE_THRESHOLD: 30000,
 } as const;
 
 //자유게시판 필터 필

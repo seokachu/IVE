@@ -57,6 +57,9 @@ export interface UseCartCleanupParams {
 }
 
 export interface PaymentButtonProps {
+  /** 배송비까지 포함한 최종 결제 금액 */
   amount: number;
   orderName: string;
+  /** amount에 포함된 배송비 — 결제 레코드에 분리 보관하기 위해 넘긴다 */
+  shippingFee?: number;
 }
