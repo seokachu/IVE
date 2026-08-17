@@ -1,6 +1,6 @@
 import UserAvatar from "@/components/common/UserAvatar";
 import MoreLink from "@/components/common/MoreLink";
-import MembershipBadge, { getMembershipRingClass } from "@/components/mypage/MembershipBadge";
+import MembershipBadge from "@/components/mypage/MembershipBadge";
 import { useAuthorPostCount } from "@/hooks/queries/useBoard";
 import { useMembershipTier } from "@/hooks/queries/useMembership";
 import type { BoardDetailProps } from "@/types/board";
@@ -17,11 +17,7 @@ const BoardDetailUserInfo = ({ item }: BoardDetailProps) => {
         userId={item.user_id}
         avatarUrl={item.user?.avatar_url}
         userName={item.user?.name}
-        className={
-          membershipTier !== "free"
-            ? `${getMembershipRingClass(membershipTier, "thick")} ring-offset-2 ring-offset-gray-50`
-            : undefined
-        }
+        className={membershipTier !== "free" ? "ring-offset-2 ring-offset-gray-50" : undefined}
       />
       <div className="flex-1 min-w-0 flex flex-col gap-0.5">
         <span className="flex items-center gap-1.5 min-w-0">

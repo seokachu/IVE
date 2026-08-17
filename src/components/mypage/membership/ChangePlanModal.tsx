@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { CalendarClock, Crown, Sparkles, Zap } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import MembershipBadge, { VIP_GOLD } from "@/components/mypage/MembershipBadge";
 import { useInvalidateMembership } from "@/hooks/queries/useMembership";
 import { toast } from "@/hooks/use-toast";
 import { MEMBERSHIP_DISCOUNT_RATES } from "@/lib/supabase/membership";
@@ -30,10 +31,14 @@ const ChangePlanModal = ({ membership, onClose }: ChangePlanModalProps) => {
   const invalidateMembership = useInvalidateMembership();
 
   const selectedPlan = PAID_PLANS.find((plan) => plan.tier === selectedTier)!;
+  //변경 예약 중엔 현재 플랜도 선택될 수 있다 — 이때는 변경 안내 대신 이용 중 안내 + 버튼 비활성
+  const isCurrentSelected = selectedTier === membership.tier;
   const isUpgrade = selectedPlan.price > membership.price;
   const nextBillingDate = formatDate(membership.next_billing_at);
   const chargeAmount = getProratedUpgradeAmount(membership.price, selectedPlan.price, membership.next_billing_at);
   const remainingDays = getRemainingDays(membership.next_billing_at);
+  //VIP를 고르면 안내·CTA까지 골드 톤으로 — 티어가 바뀐다는 걸 색으로 먼저 알린다
+  const isVipSelected = selectedTier === "vip";
 
   const handleSubmit = async () => {
     try {
@@ -77,6 +82,7 @@ const ChangePlanModal = ({ membership, onClose }: ChangePlanModalProps) => {
           {PAID_PLANS.map((plan) => {
             const isCurrent = plan.tier === membership.tier;
             const isSelected = plan.tier === selectedTier;
+            const isVipRow = plan.tier === "vip";
             const PlanIcon = PLAN_ICONS[plan.tier as PaidTier];
 
             return (
@@ -87,23 +93,44 @@ const ChangePlanModal = ({ membership, onClose }: ChangePlanModalProps) => {
                 aria-pressed={isSelected}
                 className={cn(
                   "flex items-center gap-3 rounded-xl p-3.5 text-left transition-colors",
-                  isSelected ? "border-2 border-purple-300" : "border border-gray-200 hover:bg-gray-50",
+                  isSelected
+                    ? cn("border-2", isVipRow ? `${VIP_GOLD.border} ${VIP_GOLD.soft}` : "border-purple-300")
+                    : "border border-gray-200 hover:bg-gray-50",
                 )}
               >
                 <span
                   className={cn(
                     "size-[18px] shrink-0 rounded-full border",
-                    isSelected ? "border-[5px] border-purple-300" : "border-gray-300",
+                    isSelected
+                      ? cn("border-[5px]", isVipRow ? VIP_GOLD.border : "border-purple-300")
+                      : "border-gray-300",
                   )}
                   aria-hidden="true"
                 />
                 <PlanIcon
                   size={18}
-                  className={cn("shrink-0", isSelected ? "text-purple-500 dark:text-purple-300" : "text-gray-400")}
+                  className={cn(
+                    "shrink-0",
+                    !isSelected
+                      ? "text-gray-400"
+                      : isVipRow
+                        ? VIP_GOLD.icon
+                        : "text-purple-500 dark:text-purple-300",
+                  )}
                   aria-hidden="true"
                 />
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-sm font-semibold">{plan.name}</span>
+                  <span className="flex items-center gap-1.5">
+                    <span
+                      className={cn(
+                        "truncate text-sm font-semibold",
+                        isVipRow ? VIP_GOLD.text : "text-purple-500 dark:text-purple-300",
+                      )}
+                    >
+                      {plan.name}
+                    </span>
+                    {isVipRow && <MembershipBadge tier="vip" size="sm" />}
+                  </span>
                   <span className="mt-0.5 block truncate text-[11px] text-gray-400">
                     월 {formatPrice(plan.price)}원 · 굿즈샵 상시 {MEMBERSHIP_DISCOUNT_RATES[plan.tier] * 100}% 할인
                   </span>
@@ -113,7 +140,14 @@ const ChangePlanModal = ({ membership, onClose }: ChangePlanModalProps) => {
                     현재 플랜
                   </span>
                 ) : (
-                  <span className="shrink-0 rounded-full bg-purple-50 px-2.5 py-1 text-[10px] font-bold text-purple-500 dark:text-purple-300">
+                  <span
+                    className={cn(
+                      "shrink-0 rounded-full px-2.5 py-1 text-[10px] font-bold",
+                      isVipRow
+                        ? `${VIP_GOLD.soft} ${VIP_GOLD.text}`
+                        : "bg-purple-50 text-purple-500 dark:text-purple-300",
+                    )}
+                  >
                     {plan.price > membership.price ? "업그레이드" : "변경 예정"}
                   </span>
                 )}
@@ -122,23 +156,41 @@ const ChangePlanModal = ({ membership, onClose }: ChangePlanModalProps) => {
           })}
         </div>
         {/* 변경 안내 */}
-        <div className="flex flex-col gap-1.5 rounded-xl bg-purple-50 p-3.5">
-          <p className="flex items-center gap-2 text-[13px] font-bold text-purple-500 dark:text-purple-300">
-            {isUpgrade ? (
-              <Zap size={14} className="shrink-0" aria-hidden="true" />
-            ) : (
-              <CalendarClock size={14} className="shrink-0" aria-hidden="true" />
-            )}
-            {isUpgrade
-              ? `오늘 ${formatPrice(chargeAmount)}원만 결제하면 바로 적용돼요`
-              : `다음 결제일부터 ${selectedPlan.name}로 변경돼요`}
-          </p>
-          <p className="text-xs leading-relaxed text-gray-500">
-            {isUpgrade
-              ? `남은 ${remainingDays}일치 차액이에요. 다음 결제일(${nextBillingDate})부터는 월 ${formatPrice(selectedPlan.price)}원이 결제되고, 혜택은 결제 즉시 시작돼요.`
-              : `${nextBillingDate}까지는 현재 혜택이 그대로 유지되고, 추가 결제나 환불은 없어요. 그 전까지 언제든 변경을 취소할 수 있어요.`}
-          </p>
-        </div>
+        {isCurrentSelected ? (
+          //현재 플랜을 고른 상태 — 변경 안내 대신 이용 중 안내 (변경 예약 중 현재 플랜 재선택 시)
+          <div className="flex flex-col gap-1.5 rounded-xl bg-gray-100 p-3.5">
+            <p className="flex items-center gap-2 text-[13px] font-bold text-gray-500">
+              <Crown size={14} className="shrink-0" aria-hidden="true" />
+              이미 이용 중인 플랜이에요
+            </p>
+            <p className="text-xs leading-relaxed text-gray-500">
+              다른 플랜을 선택하면 변경 방법과 결제 안내를 알려드려요.
+            </p>
+          </div>
+        ) : (
+          <div className={cn("flex flex-col gap-1.5 rounded-xl p-3.5", isVipSelected ? VIP_GOLD.soft : "bg-purple-50")}>
+            <p
+              className={cn(
+                "flex items-center gap-2 text-[13px] font-bold",
+                isVipSelected ? VIP_GOLD.text : "text-purple-500 dark:text-purple-300",
+              )}
+            >
+              {isUpgrade ? (
+                <Zap size={14} className="shrink-0" aria-hidden="true" />
+              ) : (
+                <CalendarClock size={14} className="shrink-0" aria-hidden="true" />
+              )}
+              {isUpgrade
+                ? `오늘 ${formatPrice(chargeAmount)}원만 결제하면 바로 적용돼요`
+                : `다음 결제일부터 ${selectedPlan.name}로 변경돼요`}
+            </p>
+            <p className="text-xs leading-relaxed text-gray-500">
+              {isUpgrade
+                ? `남은 ${remainingDays}일치 차액이에요. 다음 결제일(${nextBillingDate})부터는 월 ${formatPrice(selectedPlan.price)}원이 결제되고, 혜택은 결제 즉시 시작돼요.`
+                : `${nextBillingDate}까지는 현재 혜택이 그대로 유지되고, 추가 결제나 환불은 없어요. 그 전까지 언제든 변경을 취소할 수 있어요.`}
+            </p>
+          </div>
+        )}
         <div className="flex gap-2.5">
           <button
             type="button"
@@ -150,16 +202,16 @@ const ChangePlanModal = ({ membership, onClose }: ChangePlanModalProps) => {
           <button
             type="button"
             onClick={handleSubmit}
-            disabled={isProcessing}
+            disabled={isProcessing || isCurrentSelected}
             className={cn(
               "h-[46px] flex-1 rounded-full text-sm font-bold text-white disabled:opacity-50",
-              //그라데이션은 실제 결제가 일어나는 버튼 전용 — 예약만 하는 다운그레이드는 솔리드
+              //둘 다 결제로 이어지는 액션 — VIP 업그레이드는 골드, 다운그레이드 예약은 결제 버튼과 같은 그라데이션
               isUpgrade
-                ? "bg-gradient-to-r from-purple-400 to-orange-300 shadow-[0_4px_14px_rgba(219,151,233,0.35)] transition-opacity hover:opacity-90"
-                : "bg-purple-300 transition-colors hover:bg-purple-400",
+                ? `${VIP_GOLD.gradient} ${VIP_GOLD.glow} !text-gray-900 transition-opacity hover:opacity-90`
+                : "bg-gradient-to-r from-purple-400 to-orange-300 shadow-[0_4px_14px_rgba(219,151,233,0.35)] transition-opacity hover:opacity-90",
             )}
           >
-            {isProcessing ? "변경 중..." : isUpgrade ? "업그레이드하기" : "다음 결제일부터 변경"}
+            {isProcessing ? "변경 중..." : isCurrentSelected ? "이용 중인 플랜" : isUpgrade ? "업그레이드하기" : "다음 결제일부터 변경"}
           </button>
         </div>
       </DialogContent>

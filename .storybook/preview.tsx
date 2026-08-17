@@ -1,6 +1,7 @@
 import * as React from "react";
 import type { Preview } from "@storybook/nextjs-vite";
 import { withThemeByClassName } from "@storybook/addon-themes";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import "pretendard/dist/web/variable/pretendardvariable.css";
 import "../src/app/globals.css";
@@ -37,6 +38,12 @@ const preview: Preview = {
       themes: { light: "", dark: "dark" },
       defaultTheme: "light",
     }),
+    //UserAvatar 등 react-query 훅을 쓰는 컴포넌트용 — 스토리에서는 네트워크 없이 캐시만 제공
+    (Story) => (
+      <QueryClientProvider client={new QueryClient({ defaultOptions: { queries: { retry: false, enabled: false } } })}>
+        <Story />
+      </QueryClientProvider>
+    ),
     (Story) => (
       <div className="min-h-[120px] bg-background p-6 text-foreground">
         <Story />

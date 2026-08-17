@@ -19,7 +19,12 @@ function extractDefaultValues<T extends z.ZodTypeAny>(schema: T): Partial<z.infe
 //스키마 정의 설정
 const emailSchema = z.string().email("올바른 이메일을 입력해 주세요.");
 
-const nicknameSchema = z.string().min(2, { message: "2글자 이상 입력해 주세요." });
+//안내 문구("2~6자, 공백 없이")와 동일 기준 — maxLength 속성만 믿으면 공백·붙여넣기가 그대로 저장된다
+const nicknameSchema = z
+  .string()
+  .min(2, { message: "2글자 이상 입력해 주세요." })
+  .max(6, { message: "6글자 이하로 입력해 주세요." })
+  .regex(/^\S+$/, { message: "공백 없이 입력해 주세요." });
 
 const passwordSchema = z
   .string()

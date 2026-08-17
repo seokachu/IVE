@@ -30,7 +30,8 @@ import {
 import LogoImage from "@/assets/images/logo_black.svg";
 import WhiteLogoImage from "@/assets/images/logo.svg";
 import UserAvatar from "@/components/common/UserAvatar";
-import MembershipBadge, { getMembershipRingClass } from "@/components/mypage/MembershipBadge";
+import MembershipBadge from "@/components/mypage/MembershipBadge";
+import ProviderBadge, { getSigninProvider } from "@/components/auth/ProviderMark";
 import LoginLink from "@/components/auth/login/LoginLink";
 import { GNB_ARRAY } from "@/utils/constants";
 import { useMyMembership } from "@/hooks/queries/useMembership";
@@ -96,16 +97,18 @@ const HeaderAside = () => {
                   href="/mypage"
                   className="flex items-center gap-3 rounded-2xl bg-purple-50 p-3.5 transition-colors hover:bg-purple-100"
                 >
-                  <UserAvatar
-                    size="md"
-                    className={cn("!h-11 !w-11", getMembershipRingClass(tier))}
-                  />
+                  <UserAvatar size="md" className="!h-11 !w-11" />
                   <span className="min-w-0 flex-1">
                     <span className="flex items-center gap-1.5">
                       <span className="truncate text-sm font-bold">{getDisplayName(session.user)}</span>
                       <MembershipBadge tier={tier} size="sm" />
                     </span>
-                    <span className="mt-0.5 block truncate text-[11px] text-gray-400">{session.user.email}</span>
+                    <span className="mt-0.5 flex items-center gap-1.5 text-[11px] text-gray-400">
+                      {getSigninProvider(session.user) && (
+                        <ProviderBadge provider={getSigninProvider(session.user)!} />
+                      )}
+                      <span className="truncate">{session.user.email}</span>
+                    </span>
                   </span>
                   <ChevronRight size={16} className="shrink-0 text-gray-400" aria-hidden="true" />
                 </Link>

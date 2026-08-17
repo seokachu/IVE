@@ -9,7 +9,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        //hover에 투명도(/90)를 쓰면 밝은 배경이 비쳐 흐려 보인다 — 다른 버튼처럼 한 단계 진하게
+        default: "bg-primary text-primary-foreground hover:bg-purple-400",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         outlineBrand: "border border-purple bg-background text-purple-500 hover:bg-purple-50",
