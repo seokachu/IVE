@@ -89,6 +89,22 @@
   .note b { color: #9a6b00; }
   ul.tight { margin: 6px 0; padding-left: 20px; }
   ul.tight li { margin: 2px 0; }
+
+  /* ── v1 화면 기록 (GIF) ── */
+  .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px 16px; margin: 16px 0 8px; }
+  .shots figure { margin: 0; }
+  .shots a.shot {
+    display: block; height: 230px; overflow: hidden;
+    border: 1px solid var(--line); border-radius: 12px; background: var(--soft);
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .shots a.shot:hover { border-color: var(--accent); box-shadow: 0 6px 18px rgba(124, 58, 237, .10); }
+  .shots img { display: block; width: 100%; height: auto; }
+  .shots figcaption { margin-top: 8px; font-size: 12.5px; color: var(--ink); }
+  .shots figcaption b { color: var(--accent); font-size: 11.5px; margin-right: 6px; }
+  .shots figcaption span { display: block; margin-top: 1px; font-size: 12px; color: var(--sub); line-height: 1.5; }
+  .shots-cap { font-size: 12px; color: var(--sub); margin: 0 0 22px; }
+
   .foot { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--sub); font-size: 12px; }
 
   @media (max-width: 720px) {
@@ -121,6 +137,7 @@
     <tr><th>범위</th><td>메인 · 소식 · 인증 · 자유게시판 · 굿즈샵 · 장바구니/결제 · 마이페이지 · 공통 UI</td></tr>
     <tr><th>기술 스택</th><td>Next.js 14 (App Router, middleware) · React 18 · Supabase(Auth/DB/Storage) · Recoil · TanStack Query · Tailwind CSS · 토스페이먼츠</td></tr>
     <tr><th>권한 표기</th><td><span class="auth any">전체</span> 비로그인 포함 누구나 · <span class="auth login">로그인</span> 로그인 필요 · <span class="auth owner">작성자</span> 본인 리소스만</td></tr>
+    <tr><th>화면 기록</th><td>각 장에 <b>v1 운영 당시 직접 캡처한 화면 기록(GIF)</b>을 함께 실었다. 리뉴얼 이후 화면은 <a href="./design.html">디자인 시스템 · 화면 시안</a>에서 비교할 수 있다.</td></tr>
   </table>
 </header>
 
@@ -182,6 +199,17 @@
 <section id="main">
   <h2 class="sec">2. 메인 페이지</h2>
   <p class="sec-desc">서비스 첫 화면. 24시간 주기 ISR로 재생성되며 앨범 데이터는 서버에서 미리 조회(prefetch)된다.</p>
+  <div class="shots">
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/4b18024f-5e03-4869-b0df-20cbf93cc221" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/4b18024f-5e03-4869-b0df-20cbf93cc221" alt="v1 PC" loading="lazy" /></a>
+        <figcaption><b>v1</b>PC<span>메인 — 데스크톱 전체 화면</span></figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/bb6fee32-53f4-4f27-a96b-c039af8878a5" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/bb6fee32-53f4-4f27-a96b-c039af8878a5" alt="v1 Mobile" loading="lazy" /></a>
+        <figcaption><b>v1</b>Mobile<span>메인 — 모바일(햄버거 사이드바 포함)</span></figcaption>
+      </figure>
+  </div>
+  <p class="shots-cap">실제 v1 운영 화면 기록 — 이미지를 누르면 원본으로 열린다. (2026 리뉴얼 이후 화면은 <a href="./design.html">디자인 시스템 · 화면 시안</a>과 <a href="./spec-v2.html">기능명세서 v2</a> 참고)</p>
 
   <h3>2-1. 메인 <span class="path">/</span></h3>
   <table class="spec">
@@ -200,6 +228,13 @@
 <section id="news">
   <h2 class="sec">3. 소식 페이지</h2>
   <p class="sec-desc">아티스트 최신 소식과 사진 갤러리를 제공. 24시간 주기 ISR.</p>
+  <div class="shots">
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/9db11f54-4afb-4c2c-bd21-6885896f9a39" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/9db11f54-4afb-4c2c-bd21-6885896f9a39" alt="v1 소식" loading="lazy" /></a>
+        <figcaption><b>v1</b>소식<span>카테고리 필터 · 갤러리 · 상세 모달</span></figcaption>
+      </figure>
+  </div>
+  <p class="shots-cap">실제 v1 운영 화면 기록 — 이미지를 누르면 원본으로 열린다. (2026 리뉴얼 이후 화면은 <a href="./design.html">디자인 시스템 · 화면 시안</a>과 <a href="./spec-v2.html">기능명세서 v2</a> 참고)</p>
 
   <h3>3-1. 소식 <span class="path">/news</span></h3>
   <table class="spec">
@@ -218,6 +253,21 @@
 <section id="auth">
   <h2 class="sec">4. 인증 (로그인 · 회원가입)</h2>
   <p class="sec-desc">이메일/비밀번호 및 소셜 로그인(카카오·구글·깃허브)을 지원. 로그인 UI는 전용 페이지와 모달 2가지 경로로 제공된다.</p>
+  <div class="shots">
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/ce09089a-267f-47bb-9336-4e65fcf6d68e" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/ce09089a-267f-47bb-9336-4e65fcf6d68e" alt="v1 로그인 모달" loading="lazy" /></a>
+        <figcaption><b>v1</b>로그인 모달<span>헤더에서 여는 2단계 로그인 모달</span></figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/0c1aadee-a1f0-4a63-97e2-bc3c470cc361" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/0c1aadee-a1f0-4a63-97e2-bc3c470cc361" alt="v1 로그인 페이지" loading="lazy" /></a>
+        <figcaption><b>v1</b>로그인 페이지<span>기존 회원용 로그인 화면</span></figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/f433fe28-347e-4e1a-b2bf-b64b0221f1cb" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/f433fe28-347e-4e1a-b2bf-b64b0221f1cb" alt="v1 회원가입" loading="lazy" /></a>
+        <figcaption><b>v1</b>회원가입<span>가입 후 첫 로그인 폭죽 효과</span></figcaption>
+      </figure>
+  </div>
+  <p class="shots-cap">실제 v1 운영 화면 기록 — 이미지를 누르면 원본으로 열린다. (2026 리뉴얼 이후 화면은 <a href="./design.html">디자인 시스템 · 화면 시안</a>과 <a href="./spec-v2.html">기능명세서 v2</a> 참고)</p>
 
   <h3>4-1. 로그인 페이지 <span class="path">/login</span></h3>
   <table class="spec">
@@ -271,6 +321,25 @@
 <section id="board">
   <h2 class="sec">5. 자유게시판</h2>
   <p class="sec-desc">회원 커뮤니티 게시판. 조회는 누구나 가능하며 작성·좋아요·댓글은 로그인이 필요하다.</p>
+  <div class="shots">
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/c423bc33-333e-4c7c-a430-a36b42fa6abb" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/c423bc33-333e-4c7c-a430-a36b42fa6abb" alt="v1 목록 ①" loading="lazy" /></a>
+        <figcaption><b>v1</b>목록 ①<span>표 형식 목록 · 페이지네이션</span></figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/e3cc78f0-1722-4b69-83fa-2b9bd2157446" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/e3cc78f0-1722-4b69-83fa-2b9bd2157446" alt="v1 목록 ②" loading="lazy" /></a>
+        <figcaption><b>v1</b>목록 ②<span>검색 디바운싱 · 하이라이트</span></figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/81919716-7891-4fd2-a6d2-5378852621cb" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/81919716-7891-4fd2-a6d2-5378852621cb" alt="v1 글쓰기" loading="lazy" /></a>
+        <figcaption><b>v1</b>글쓰기<span>react-quill 에디터</span></figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/cff95a6d-cfe4-4e18-8e0f-718d744dadc9" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/cff95a6d-cfe4-4e18-8e0f-718d744dadc9" alt="v1 상세" loading="lazy" /></a>
+        <figcaption><b>v1</b>상세<span>좋아요 · 댓글 · 대댓글 · 수정/삭제</span></figcaption>
+      </figure>
+  </div>
+  <p class="shots-cap">실제 v1 운영 화면 기록 — 이미지를 누르면 원본으로 열린다. (2026 리뉴얼 이후 화면은 <a href="./design.html">디자인 시스템 · 화면 시안</a>과 <a href="./spec-v2.html">기능명세서 v2</a> 참고)</p>
 
   <h3>5-1. 게시글 목록 <span class="path">/board</span></h3>
   <table class="spec">
@@ -315,6 +384,17 @@
 <section id="shop">
   <h2 class="sec">6. 굿즈샵</h2>
   <p class="sec-desc">굿즈 상품 탐색·찜·구매 진입. 가격은 할인율 적용 후 10원 단위 내림으로 계산해 표시한다.</p>
+  <div class="shots">
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/096f2bcc-dc1b-4719-921c-101dc4999323" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/096f2bcc-dc1b-4719-921c-101dc4999323" alt="v1 상품 목록" loading="lazy" /></a>
+        <figcaption><b>v1</b>상품 목록<span>정렬 · 무한 스크롤 · 찜</span></figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/572054fa-0842-4e41-bcd7-01c03f6d86f3" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/572054fa-0842-4e41-bcd7-01c03f6d86f3" alt="v1 상품 상세" loading="lazy" /></a>
+        <figcaption><b>v1</b>상품 상세<span>수량 선택 · 탭 · FAQ 아코디언</span></figcaption>
+      </figure>
+  </div>
+  <p class="shots-cap">실제 v1 운영 화면 기록 — 이미지를 누르면 원본으로 열린다. (2026 리뉴얼 이후 화면은 <a href="./design.html">디자인 시스템 · 화면 시안</a>과 <a href="./spec-v2.html">기능명세서 v2</a> 참고)</p>
 
   <h3>6-1. 상품 목록 <span class="path">/shop</span></h3>
   <table class="spec">
@@ -341,6 +421,17 @@
 <section id="cart">
   <h2 class="sec">7. 장바구니 · 주문서</h2>
   <p class="sec-desc">별도 결제 페이지 없이 <b>장바구니 화면이 곧 주문서(체크아웃)</b> 역할을 한다. 좌측 상품 목록 + 우측 주문 요약(금액·주문자·배송지·약관·결제 버튼) 2단 구성. 장바구니 데이터는 기기(localStorage)에 저장되며 서버 동기화는 없다.</p>
+  <div class="shots">
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/80205a66-8d13-4b39-9043-86ff5d3445dc" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/80205a66-8d13-4b39-9043-86ff5d3445dc" alt="v1 장바구니 ①" loading="lazy" /></a>
+        <figcaption><b>v1</b>장바구니 ①<span>선택 · 삭제 · 금액 계산</span></figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/dd6488ac-99fd-46f5-9435-1a009e274068" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/dd6488ac-99fd-46f5-9435-1a009e274068" alt="v1 장바구니 ②" loading="lazy" /></a>
+        <figcaption><b>v1</b>장바구니 ②<span>주문자/배송지 변경 · 약관 모달</span></figcaption>
+      </figure>
+  </div>
+  <p class="shots-cap">실제 v1 운영 화면 기록 — 이미지를 누르면 원본으로 열린다. (2026 리뉴얼 이후 화면은 <a href="./design.html">디자인 시스템 · 화면 시안</a>과 <a href="./spec-v2.html">기능명세서 v2</a> 참고)</p>
 
   <h3>7-1. 장바구니 <span class="path">/cart</span></h3>
   <table class="spec">
@@ -361,6 +452,13 @@
 <section id="payment">
   <h2 class="sec">8. 결제</h2>
   <p class="sec-desc">PG는 토스페이먼츠 단일 연동(결제수단 “카드” 고정, 카드사 간편결제 포함). 결제 완료 후 성공 페이지에서 승인·주문 저장이 이루어진다.</p>
+  <div class="shots">
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/4a536b0e-1100-4bbb-8ee7-2b410f3c4d9a" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/4a536b0e-1100-4bbb-8ee7-2b410f3c4d9a" alt="v1 결제 완료" loading="lazy" /></a>
+        <figcaption><b>v1</b>결제 완료<span>주문 번호 · 결제 상세</span></figcaption>
+      </figure>
+  </div>
+  <p class="shots-cap">실제 v1 운영 화면 기록 — 이미지를 누르면 원본으로 열린다. (2026 리뉴얼 이후 화면은 <a href="./design.html">디자인 시스템 · 화면 시안</a>과 <a href="./spec-v2.html">기능명세서 v2</a> 참고)</p>
 
   <h3>8-1. 결제 승인 API <span class="path">POST /api/payment/confirm</span></h3>
   <table class="spec">
@@ -389,6 +487,33 @@
 <section id="mypage">
   <h2 class="sec">9. 마이페이지</h2>
   <p class="sec-desc">좌측 프로필 + 메뉴(찜 목록 · 결제 목록 · 내가 쓴 글 · 배송지 관리), 우측 콘텐츠 2단 구성. <code>/mypage</code> 진입 시 찜 목록으로 자동 이동. 전 영역 로그인 필수(서버·클라이언트 이중 가드).</p>
+  <div class="shots">
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/c4ab8057-926c-43d5-af15-a613be32cbea" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/c4ab8057-926c-43d5-af15-a613be32cbea" alt="v1 프로필" loading="lazy" /></a>
+        <figcaption><b>v1</b>프로필<span>아바타 크롭 · 닉네임 수정</span></figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/7394ccb1-3384-4f1c-a6af-99b2bba4df11" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/7394ccb1-3384-4f1c-a6af-99b2bba4df11" alt="v1 찜 목록" loading="lazy" /></a>
+        <figcaption><b>v1</b>찜 목록<span>찜한 상품 그리드</span></figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/6d773195-582c-4a0a-8332-9ed16525cb71" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/6d773195-582c-4a0a-8332-9ed16525cb71" alt="v1 결제 목록" loading="lazy" /></a>
+        <figcaption><b>v1</b>결제 목록<span>주문 상세 · 구매확정 · 리뷰</span></figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/5f669838-9433-4a45-9ead-b5798471ebbc" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/5f669838-9433-4a45-9ead-b5798471ebbc" alt="v1 내가 쓴 글" loading="lazy" /></a>
+        <figcaption><b>v1</b>내가 쓴 글<span>작성 글 목록</span></figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/c6765b4b-3bc7-4dc8-bd72-9d3a6b417847" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/c6765b4b-3bc7-4dc8-bd72-9d3a6b417847" alt="v1 배송지 ①" loading="lazy" /></a>
+        <figcaption><b>v1</b>배송지 ①<span>목록 · 기본 배송지 설정</span></figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="https://github.com/user-attachments/assets/32694ed4-a066-47fa-8dcd-81b6b30e473a" target="_blank" rel="noreferrer"><img src="https://github.com/user-attachments/assets/32694ed4-a066-47fa-8dcd-81b6b30e473a" alt="v1 배송지 ②" loading="lazy" /></a>
+        <figcaption><b>v1</b>배송지 ②<span>추가 · 수정 · 삭제</span></figcaption>
+      </figure>
+  </div>
+  <p class="shots-cap">실제 v1 운영 화면 기록 — 이미지를 누르면 원본으로 열린다. (2026 리뉴얼 이후 화면은 <a href="./design.html">디자인 시스템 · 화면 시안</a>과 <a href="./spec-v2.html">기능명세서 v2</a> 참고)</p>
 
   <h3>9-1. 프로필 (공통 사이드) </h3>
   <table class="spec">
