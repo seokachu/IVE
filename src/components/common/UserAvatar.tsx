@@ -1,29 +1,39 @@
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getMembershipRingClass } from "@/components/mypage/MembershipBadge";
+import { useMembershipTier, useMyMembership } from "@/hooks/queries/useMembership";
 import { useSession } from "@/store/zustand";
+import { cn } from "@/utils/utils";
 import { getAvatarUrl, getDisplayName } from "@/utils/userProfile";
+
+type AvatarSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 interface AvatarProps {
   userId?: string | null;
   avatarUrl?: string | null;
   userName?: string | null;
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  size?: AvatarSize;
+  /** 멤버십 링 — 링을 직접 그리는 곳(프로필 밴드 VIP 그라데이션)에서만 끈다 */
+  ring?: boolean;
   className?: string;
 }
 
-const UserAvatar = ({ userId, avatarUrl, userName, size = "md", className }: AvatarProps) => {
+const UserAvatar = ({ userId, avatarUrl, userName, size = "md", ring = true, className }: AvatarProps) => {
   const session = useSession();
+  //userId가 없거나 나 자신이면 내 세션 기준 — 남의 아바타만 공개 뷰에서 티어를 조회한다
+  const isMe = !userId || session?.user.id === userId;
+  const { tier: myTier } = useMyMembership();
+  const otherTier = useMembershipTier(isMe ? null : userId);
+  const tier = isMe ? myTier : otherTier;
 
   const getUserImage = () => {
-    if (!userId) return getAvatarUrl(session?.user);
-    if (session?.user.id === userId) return getAvatarUrl(session?.user);
+    if (isMe) return getAvatarUrl(session?.user);
     return avatarUrl || undefined;
   };
 
   const getUserName = () => {
-    if (!userId) return getDisplayName(session?.user);
-    if (session?.user.id === userId) return getDisplayName(session?.user);
+    if (isMe) return getDisplayName(session?.user);
     return userName || undefined;
   };
 
@@ -46,6 +56,15 @@ const UserAvatar = ({ userId, avatarUrl, userName, size = "md", className }: Ava
     xl: "text-xl",
   };
 
+  //링 두께는 아바타 크기를 따라간다 — 작은 아바타에 굵은 링이 붙으면 원이 커 보인다
+  const ringWidth: Record<AvatarSize, "thin" | "thick"> = {
+    xs: "thin",
+    sm: "thin",
+    md: "thin",
+    lg: "thick",
+    xl: "thick",
+  };
+
   //시안 기준: 이미지 없으면 이름 첫 글자 파스텔 이니셜 서클 — 이름 해시로 색 고정 (리뷰 아바타와 동일 규칙)
   const fallbackPalette = [
     "bg-purple-100 text-purple-500",
@@ -58,7 +77,9 @@ const UserAvatar = ({ userId, avatarUrl, userName, size = "md", className }: Ava
   const fallbackStyle = fallbackPalette[nameHash % fallbackPalette.length];
 
   return (
-    <Avatar className={`border ${sizeStyles[size]} ${className || ""}`}>
+    <Avatar
+      className={cn("border", sizeStyles[size], ring && getMembershipRingClass(tier, ringWidth[size]), className)}
+    >
       <AvatarImage src={imageUrl} alt={displayName || "유저 프로필"} key={imageUrl} />
       {/* 크기는 부모(Avatar)를 꽉 채움 — 고정 px를 주면 !w-5 같은 축소 오버라이드와 어긋나 글자가 밀림 */}
       <AvatarFallback className={`h-full w-full font-bold leading-none ${fallbackTextStyles[size]} ${fallbackStyle}`}>

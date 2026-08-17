@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Eye, Flame, Heart, MessageCircle } from "lucide-react";
 import UserAvatar from "@/components/common/UserAvatar";
 import MoreLink from "@/components/common/MoreLink";
+import LogoImage from "@/assets/images/logo.svg";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useHotBoards } from "@/hooks/queries/useBoard";
 import type { BoardSummary } from "@/types/board";
@@ -55,27 +56,34 @@ const HotBoardCards = () => {
           <li key={item.id}>
             <Link
               href={`/board/${item.id}`}
-              className={`group relative block h-44 lg:h-[220px] rounded-2xl overflow-hidden ${
-                item.thumbnail
-                  ? "bg-white border border-gray-200"
-                  : "bg-gradient-to-br from-purple-300 to-purple-500"
-              }`}
+              className="group relative block h-44 lg:h-[220px] rounded-2xl overflow-hidden bg-white border border-gray-200"
             >
-              {item.thumbnail && (
-                <>
+              {item.thumbnail ? (
+                <Image
+                  src={item.thumbnail}
+                  alt=""
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                />
+              ) : (
+                //썸네일 없는 글 — 딥 퍼플 브랜드 카드: 어두운 그라데이션 + 로고 워터마크 (사진 도배·랭크 숫자 가독성 문제 회피)
+                <span
+                  className="absolute inset-0 bg-gradient-to-br from-[#3B2547] via-[#57346B] to-[#1E1526]"
+                  aria-hidden="true"
+                >
                   <Image
-                    src={item.thumbnail}
+                    src={LogoImage}
                     alt=""
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="absolute -right-6 -bottom-8 h-[135%] w-auto rotate-[10deg] opacity-[0.08] transition-transform duration-700 group-hover:scale-105"
                   />
-                  <span
-                    className="absolute inset-x-0 top-0 h-14 lg:h-16 bg-gradient-to-b from-black/35 to-transparent"
-                    aria-hidden="true"
-                  />
-                </>
+                </span>
               )}
+              {/* 랭크 숫자 가독용 상단 스크림 — 밝은 썸네일에서도 흰 숫자가 묻히지 않게 */}
+              <span
+                className="absolute inset-x-0 top-0 h-14 lg:h-16 bg-gradient-to-b from-black/45 to-transparent"
+                aria-hidden="true"
+              />
               <span
                 className="absolute top-1 left-3.5 text-[40px] font-extrabold text-white leading-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)]"
                 aria-label={`${index + 1}위`}

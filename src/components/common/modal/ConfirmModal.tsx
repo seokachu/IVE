@@ -78,7 +78,7 @@ const ConfirmModal = ({
               className={`flex-1 h-[46px] rounded-full flex items-center justify-center gap-1.5 text-sm font-bold text-white transition-all ${
                 isDestructive
                   ? "bg-[#E72424] shadow-[0_4px_14px_rgba(231,36,36,0.25)] hover:bg-[#c81f1f]"
-                  : "bg-gradient-to-b from-purple-400 to-purple-300 shadow-[0_4px_14px_rgba(219,151,233,0.35)] hover:from-purple-500 hover:to-purple-400"
+                  : "bg-purple-300 hover:bg-purple-400"
               }`}
             >
               {isDestructive && <Trash2 size={15} />}

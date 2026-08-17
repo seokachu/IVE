@@ -5,6 +5,7 @@ import _ from "lodash";
 import { Camera, Pencil } from "lucide-react";
 import UserAvatar from "@/components/common/UserAvatar";
 import MembershipBadge from "@/components/mypage/MembershipBadge";
+import ProviderBadge, { getSigninProvider } from "@/components/auth/ProviderMark";
 import ProfileEditModal from "@/components/mypage/ProfileEditModal";
 import { useWishLists } from "@/hooks/queries/useWishList";
 import { useMyBoards } from "@/hooks/queries/useBoard";
@@ -46,7 +47,8 @@ const ProfileBand = () => {
               //VIP 뱃지와 같은 골드 그라데이션 — ring 유틸은 단색만 지원해 패딩 래퍼로 그라데이션 테두리를 만든다
               <span className="block rounded-full bg-gradient-to-tr from-[#FDE68A] via-[#FACC15] to-[#F59E0B] p-[2.5px] shadow-[0_2px_12px_rgba(250,204,21,0.45)]">
                 <span className="block rounded-full bg-purple-50 p-[2px]">
-                  <UserAvatar size="xl" className="!w-[72px] !h-[72px] lg:!w-[88px] lg:!h-[88px]" />
+                  {/* 그라데이션 링을 래퍼가 그리므로 아바타 자체 링은 끈다 */}
+                  <UserAvatar size="xl" ring={false} className="!w-[72px] !h-[72px] lg:!w-[88px] lg:!h-[88px]" />
                 </span>
               </span>
             ) : (
@@ -54,7 +56,7 @@ const ProfileBand = () => {
                 size="xl"
                 className={cn(
                   "!w-[72px] !h-[72px] lg:!w-[88px] lg:!h-[88px]",
-                  tier === "plus" && "ring-2 ring-purple-300 ring-offset-2 ring-offset-purple-50",
+                  tier === "plus" && "ring-offset-2 ring-offset-purple-50",
                 )}
               />
             )}
@@ -87,7 +89,13 @@ const ProfileBand = () => {
                 <span className="hidden sm:inline">프로필 </span>수정
               </button>
             </div>
-            <p className="text-[13px] text-gray-400">{session?.user.email}</p>
+            <p className="flex items-center gap-1.5 text-[13px] text-gray-400">
+              {/* 소셜 로그인 표시 — 일반 이메일 가입이면 아무것도 안 붙는다 */}
+              {getSigninProvider(session?.user) && (
+                <ProviderBadge provider={getSigninProvider(session?.user)!} size="md" />
+              )}
+              <span className="truncate">{session?.user.email}</span>
+            </p>
           </div>
         </div>
         {/* 스탯 3종 — 모바일은 밴드 전체 폭에 균등 배치 (.pen 모바일 시안) */}

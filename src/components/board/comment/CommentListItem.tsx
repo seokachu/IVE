@@ -10,7 +10,7 @@ import CommentForm from "./CommentForm";
 import useAuthGuard from "@/hooks/useAuthGuard";
 import { useCommentLikeStatus, useToggleCommentLike } from "@/hooks/queries/useLike";
 import { useMembershipTier } from "@/hooks/queries/useMembership";
-import MembershipBadge, { getMembershipRingClass } from "@/components/mypage/MembershipBadge";
+import MembershipBadge from "@/components/mypage/MembershipBadge";
 import type { CommentListItemProps } from "@/types/board";
 import { useSession } from "@/store/zustand";
 
@@ -67,7 +67,7 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange, boardA
           avatarUrl={item?.user?.avatar_url}
           userName={item?.user?.name}
           size={isReply ? "sm" : "md"}
-          className={`shrink-0 ${isReply ? "" : "w-9 h-9"} ${getMembershipRingClass(membershipTier)}`}
+          className={`shrink-0 ${isReply ? "" : "!w-9 !h-9"}`}
         />
         <div className="w-full min-w-0">
           <div className="flex justify-between items-center gap-2">
@@ -76,7 +76,7 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange, boardA
               <MembershipBadge tier={membershipTier} size="sm" />
               {/* 시안(OpChip)은 다크에서도 라이트 색 고정 — 테마 따라 뒤집히는 purple 토큰 대신 리터럴 사용 */}
               {isBoardAuthor && (
-                <span className="shrink-0 px-[7px] py-0.5 rounded-full bg-[#F5E3F8] text-[10px] font-bold text-[#A94FC0]">
+                <span className="shrink-0 inline-flex items-center px-[7px] py-[2px] rounded-full bg-[#F5E3F8] text-[9px] font-bold leading-none text-[#A94FC0]">
                   작성자
                 </span>
               )}

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { CalendarClock, Crown, Sparkles, Zap } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import MembershipBadge, { VIP_GOLD } from "@/components/mypage/MembershipBadge";
 import { useInvalidateMembership } from "@/hooks/queries/useMembership";
 import { toast } from "@/hooks/use-toast";
 import { MEMBERSHIP_DISCOUNT_RATES } from "@/lib/supabase/membership";
@@ -34,6 +35,8 @@ const ChangePlanModal = ({ membership, onClose }: ChangePlanModalProps) => {
   const nextBillingDate = formatDate(membership.next_billing_at);
   const chargeAmount = getProratedUpgradeAmount(membership.price, selectedPlan.price, membership.next_billing_at);
   const remainingDays = getRemainingDays(membership.next_billing_at);
+  //VIP를 고르면 안내·CTA까지 골드 톤으로 — 티어가 바뀐다는 걸 색으로 먼저 알린다
+  const isVipSelected = selectedTier === "vip";
 
   const handleSubmit = async () => {
     try {
@@ -77,6 +80,7 @@ const ChangePlanModal = ({ membership, onClose }: ChangePlanModalProps) => {
           {PAID_PLANS.map((plan) => {
             const isCurrent = plan.tier === membership.tier;
             const isSelected = plan.tier === selectedTier;
+            const isVipRow = plan.tier === "vip";
             const PlanIcon = PLAN_ICONS[plan.tier as PaidTier];
 
             return (
@@ -87,23 +91,44 @@ const ChangePlanModal = ({ membership, onClose }: ChangePlanModalProps) => {
                 aria-pressed={isSelected}
                 className={cn(
                   "flex items-center gap-3 rounded-xl p-3.5 text-left transition-colors",
-                  isSelected ? "border-2 border-purple-300" : "border border-gray-200 hover:bg-gray-50",
+                  isSelected
+                    ? cn("border-2", isVipRow ? `${VIP_GOLD.border} ${VIP_GOLD.soft}` : "border-purple-300")
+                    : "border border-gray-200 hover:bg-gray-50",
                 )}
               >
                 <span
                   className={cn(
                     "size-[18px] shrink-0 rounded-full border",
-                    isSelected ? "border-[5px] border-purple-300" : "border-gray-300",
+                    isSelected
+                      ? cn("border-[5px]", isVipRow ? VIP_GOLD.border : "border-purple-300")
+                      : "border-gray-300",
                   )}
                   aria-hidden="true"
                 />
                 <PlanIcon
                   size={18}
-                  className={cn("shrink-0", isSelected ? "text-purple-500 dark:text-purple-300" : "text-gray-400")}
+                  className={cn(
+                    "shrink-0",
+                    !isSelected
+                      ? "text-gray-400"
+                      : isVipRow
+                        ? VIP_GOLD.icon
+                        : "text-purple-500 dark:text-purple-300",
+                  )}
                   aria-hidden="true"
                 />
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-sm font-semibold">{plan.name}</span>
+                  <span className="flex items-center gap-1.5">
+                    <span
+                      className={cn(
+                        "truncate text-sm font-semibold",
+                        isVipRow ? VIP_GOLD.text : "text-purple-500 dark:text-purple-300",
+                      )}
+                    >
+                      {plan.name}
+                    </span>
+                    {isVipRow && <MembershipBadge tier="vip" size="sm" />}
+                  </span>
                   <span className="mt-0.5 block truncate text-[11px] text-gray-400">
                     월 {formatPrice(plan.price)}원 · 굿즈샵 상시 {MEMBERSHIP_DISCOUNT_RATES[plan.tier] * 100}% 할인
                   </span>
@@ -113,7 +138,14 @@ const ChangePlanModal = ({ membership, onClose }: ChangePlanModalProps) => {
                     현재 플랜
                   </span>
                 ) : (
-                  <span className="shrink-0 rounded-full bg-purple-50 px-2.5 py-1 text-[10px] font-bold text-purple-500 dark:text-purple-300">
+                  <span
+                    className={cn(
+                      "shrink-0 rounded-full px-2.5 py-1 text-[10px] font-bold",
+                      isVipRow
+                        ? `${VIP_GOLD.soft} ${VIP_GOLD.text}`
+                        : "bg-purple-50 text-purple-500 dark:text-purple-300",
+                    )}
+                  >
                     {plan.price > membership.price ? "업그레이드" : "변경 예정"}
                   </span>
                 )}
@@ -122,8 +154,13 @@ const ChangePlanModal = ({ membership, onClose }: ChangePlanModalProps) => {
           })}
         </div>
         {/* 변경 안내 */}
-        <div className="flex flex-col gap-1.5 rounded-xl bg-purple-50 p-3.5">
-          <p className="flex items-center gap-2 text-[13px] font-bold text-purple-500 dark:text-purple-300">
+        <div className={cn("flex flex-col gap-1.5 rounded-xl p-3.5", isVipSelected ? VIP_GOLD.soft : "bg-purple-50")}>
+          <p
+            className={cn(
+              "flex items-center gap-2 text-[13px] font-bold",
+              isVipSelected ? VIP_GOLD.text : "text-purple-500 dark:text-purple-300",
+            )}
+          >
             {isUpgrade ? (
               <Zap size={14} className="shrink-0" aria-hidden="true" />
             ) : (
@@ -153,10 +190,10 @@ const ChangePlanModal = ({ membership, onClose }: ChangePlanModalProps) => {
             disabled={isProcessing}
             className={cn(
               "h-[46px] flex-1 rounded-full text-sm font-bold text-white disabled:opacity-50",
-              //그라데이션은 실제 결제가 일어나는 버튼 전용 — 예약만 하는 다운그레이드는 솔리드
+              //둘 다 결제로 이어지는 액션 — VIP 업그레이드는 골드, 다운그레이드 예약은 결제 버튼과 같은 그라데이션
               isUpgrade
-                ? "bg-gradient-to-r from-purple-400 to-orange-300 shadow-[0_4px_14px_rgba(219,151,233,0.35)] transition-opacity hover:opacity-90"
-                : "bg-purple-300 transition-colors hover:bg-purple-400",
+                ? `${VIP_GOLD.gradient} ${VIP_GOLD.glow} !text-gray-900 transition-opacity hover:opacity-90`
+                : "bg-gradient-to-r from-purple-400 to-orange-300 shadow-[0_4px_14px_rgba(219,151,233,0.35)] transition-opacity hover:opacity-90",
             )}
           >
             {isProcessing ? "변경 중..." : isUpgrade ? "업그레이드하기" : "다음 결제일부터 변경"}

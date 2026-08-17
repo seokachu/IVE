@@ -9,7 +9,11 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 import LogoutConfirmModal from "@/components/common/modal/LogoutConfirmModal";
+import MembershipBadge from "@/components/mypage/MembershipBadge";
+import ProviderBadge, { getSigninProvider } from "@/components/auth/ProviderMark";
+import { useMyMembership } from "@/hooks/queries/useMembership";
 import { useSession } from "@/store/zustand";
+import { getDisplayName } from "@/utils/userProfile";
 import { Heart, LogOut, PencilLine, User } from "lucide-react";
 
 //시안 기준: 프로필 로우(아바타·이름·이메일) + 아이콘 메뉴 + 로그아웃 분리
@@ -21,6 +25,8 @@ const MENU_ITEMS = [
 
 const UserDropdownMenu = () => {
   const session = useSession();
+  const { tier } = useMyMembership();
+  const signinProvider = getSigninProvider(session?.user);
   //모달은 드롭다운 밖에 렌더 — 메뉴가 닫히며 언마운트돼도 유지되도록
   const [logoutOpen, setLogoutOpen] = useState(false);
 
@@ -28,14 +34,22 @@ const UserDropdownMenu = () => {
     <>
     <DropdownMenu>
       <DropdownMenuTrigger aria-label="내 계정 메뉴">
-        <UserAvatar size="sm" className="border-[1.5px] border-purple" />
+        {/* 링은 UserAvatar가 티어에 맞춰 그린다 — 무료 없음 · DIVE+ 퍼플 · VIP 골드 */}
+        <UserAvatar size="sm" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-60 rounded-2xl p-2 shadow-[0_12px_32px_rgba(10,10,10,0.12)]">
         <div className="flex items-center gap-2.5 p-2.5">
           <UserAvatar size="md" />
           <div className="min-w-0">
-            <p className="truncate text-sm font-bold">{session?.user.user_metadata?.name}</p>
-            <p className="truncate text-[11px] text-gray-400">{session?.user.email}</p>
+            <p className="flex items-center gap-1.5 text-sm font-bold">
+              <span className="truncate">{getDisplayName(session?.user)}</span>
+              <MembershipBadge tier={tier} size="sm" />
+            </p>
+            <p className="flex items-center gap-1.5 text-[11px] text-gray-400">
+              {/* 소셜 로그인 표시 — 일반 이메일 가입이면 아무것도 안 붙는다 */}
+              {signinProvider && <ProviderBadge provider={signinProvider} />}
+              <span className="truncate">{session?.user.email}</span>
+            </p>
           </div>
         </div>
         <DropdownMenuSeparator />

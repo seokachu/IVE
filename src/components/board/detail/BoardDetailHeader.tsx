@@ -4,6 +4,8 @@ import { formatRelativeTime } from "@/utils/formatDate";
 import ShareButton from "@/components/common/button/ShareButton";
 import UserAvatar from "@/components/common/UserAvatar";
 import ConfirmModal from "@/components/common/modal/ConfirmModal";
+import MembershipBadge from "@/components/mypage/MembershipBadge";
+import { useMembershipTier } from "@/hooks/queries/useMembership";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,6 +22,7 @@ const BoardDetailHeader = ({
   onClickEdit,
 }: BoardDetailHeaderProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const membershipTier = useMembershipTier(item.user_id);
 
   return (
     <div className="w-full flex flex-col gap-4">
@@ -35,8 +38,9 @@ const BoardDetailHeader = ({
             avatarUrl={item.user?.avatar_url}
           />
           <div className="flex flex-col gap-0.5 min-w-0">
-            <span className="text-sm font-semibold truncate">
-              {item?.user?.name}
+            <span className="flex items-center gap-1.5 min-w-0">
+              <span className="text-sm font-semibold truncate">{item?.user?.name}</span>
+              <MembershipBadge tier={membershipTier} size="sm" />
             </span>
             <span className="text-xs text-gray-400">
               {formatRelativeTime(item?.created_at)} · 조회 {item?.views || 0}

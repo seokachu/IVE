@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import UserAvatar from "@/components/common/UserAvatar";
 import ImageCropper from "@/components/common/ImageCropper";
+import ProviderBadge, { getSigninProvider } from "@/components/auth/ProviderMark";
 import { NicknameType, userSchemas } from "@/hooks/user";
 import { updateNickname } from "@/lib/supabase/auth";
 import { uploadAvatar } from "@/lib/supabase/storage";
@@ -41,6 +42,7 @@ const ProfileEditModal = ({ isOpen, onClose }: ProfileEditModalProps) => {
   } = form;
 
   const nickname = watch("nickname") || "";
+  const signinProvider = getSigninProvider(session?.user);
 
   //아바타 클릭 → 파일 선택 → 크롭 모달
   const handleAvatarClick = () => {
@@ -154,9 +156,13 @@ const ProfileEditModal = ({ isOpen, onClose }: ProfileEditModalProps) => {
           {/* 이메일 (읽기 전용) */}
           <div className="flex flex-col gap-1.5">
             <span className="text-[13px] font-semibold">이메일</span>
-            <div className="flex h-11 items-center justify-between rounded-lg bg-gray-100 px-3.5">
-              <span className="text-sm text-gray-400">{session?.user.email}</span>
-              <Lock size={14} className="text-gray-300" aria-hidden="true" />
+            <div className="flex h-11 items-center justify-between gap-2 rounded-lg bg-gray-100 px-3.5">
+              <span className="flex min-w-0 items-center gap-2">
+                {/* 소셜 로그인 표시 — 일반 이메일 가입이면 아무것도 안 붙는다 */}
+                {signinProvider && <ProviderBadge provider={signinProvider} />}
+                <span className="truncate text-sm text-gray-400">{session?.user.email}</span>
+              </span>
+              <Lock size={14} className="shrink-0 text-gray-300" aria-hidden="true" />
             </div>
           </div>
           {/* 액션 */}
