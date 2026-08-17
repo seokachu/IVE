@@ -7,8 +7,6 @@ export type CommentType = "comment" | "reply";
 export type BoardWriteFormProps =
   | CreateBoardWriteFormProps
   | EditBoardWriteFormProps;
-export type ButtonMode = "default" | "edit";
-
 export interface BoardComment {
   id: number;
   title: string;
@@ -54,6 +52,8 @@ export interface BoardWithRelations extends Tables<"board"> {
 export interface BoardListItemProps {
   item: BoardSummary;
   keyword?: string;
+  /** 작성자 멤버십 티어 — BoardList에서 일괄 조회해 내려줌 */
+  membershipTier?: import("@/types/mypage").MembershipTier;
 }
 
 export interface BoardListProps {
@@ -158,12 +158,6 @@ export interface CommentFormProps {
   onCancel?: () => void;
 }
 
-export interface BoardActionButtonProps {
-  mode: ButtonMode;
-  onEdit: () => void;
-  onDelete: () => void;
-}
-
 export interface ThreadViewProps {
   form: UseFormReturn<BoardCommentType>;
   onSubmit: (e: React.FormEvent) => void;
@@ -171,6 +165,7 @@ export interface ThreadViewProps {
   submitButtonLabel: string;
   onContentChange?: () => void;
   showAvatar?: boolean;
+  onCancel?: () => void;
 }
 
 export type UpdateBoardParams = {

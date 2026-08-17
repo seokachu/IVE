@@ -9,7 +9,7 @@ import ThreadView from "./ThreadView";
 import type { CommentFormProps } from "@/types/board";
 import { useSession } from "@/store/zustand";
 
-const CommentForm = ({ mode, type, initialContent, commentId, onSuccess, parentId }: CommentFormProps) => {
+const CommentForm = ({ mode, type, initialContent, commentId, onSuccess, onCancel, parentId }: CommentFormProps) => {
   const { id: boardId } = useParams();
   const session = useSession();
   const { checkAuth } = useAuthGuard();
@@ -118,6 +118,7 @@ const CommentForm = ({ mode, type, initialContent, commentId, onSuccess, parentI
       submitButtonLabel="등록"
       onContentChange={handleContentChange}
       showAvatar={mode === "create" && type === "comment"}
+      onCancel={onCancel}
     />
   );
 };

@@ -7,7 +7,7 @@ import { User } from "lucide-react";
 import { useSession } from "@/store/zustand";
 import type { ThreadViewProps } from "@/types/board";
 
-const ThreadView = ({ onSubmit, form, placeholder, submitButtonLabel, onContentChange, showAvatar }: ThreadViewProps) => {
+const ThreadView = ({ onSubmit, form, placeholder, submitButtonLabel, onContentChange, showAvatar, onCancel }: ThreadViewProps) => {
   const session = useSession();
   const {
     formState: { errors, isSubmitting },
@@ -36,7 +36,18 @@ const ThreadView = ({ onSubmit, form, placeholder, submitButtonLabel, onContentC
                 onChange: onContentChange,
               })}
             />
-            <div className="flex justify-end mt-1.5">
+            <div className="flex justify-end items-center gap-2 mt-1.5">
+              {onCancel && (
+                <Button
+                  type="button"
+                  variant="plain"
+                  size="auto"
+                  onClick={onCancel}
+                  className="rounded-full border border-gray-300 text-[13px] font-semibold text-gray-500 px-4 py-1.5 hover:bg-gray-50"
+                >
+                  취소
+                </Button>
+              )}
               <Button
                 type="submit"
                 size="auto"
