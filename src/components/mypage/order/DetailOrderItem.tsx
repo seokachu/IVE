@@ -47,7 +47,7 @@ const DetailOrderItem = ({ item, onConfirm, isLast = false }: DetailOrderItemPro
   };
 
   return (
-    <li className={`flex items-center gap-4 p-5 ${isLast ? "" : "border-b border-gray-200"}`}>
+    <li className={`flex flex-wrap items-center gap-4 p-5 ${isLast ? "" : "border-b border-gray-200"}`}>
       {item.product_image && (
         <button
           type="button"

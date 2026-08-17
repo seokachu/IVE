@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import _ from "lodash";
 import { Crown, FileText, Heart, MapPin, ShoppingBag, type LucideIcon } from "lucide-react";
@@ -22,12 +23,11 @@ const NAV_ICONS: Record<string, LucideIcon> = {
   address: MapPin,
 };
 
-//마이페이지 사이드 내비 — 아이콘·카운트·활성 필 + 푸시 알림 카드 + 계정 링크 (.pen 시안의 SideNav)
+//마이페이지 내비 — 데스크톱: 세로 리스트, 모바일: 가로 스크롤 필 탭 (.pen "마이페이지 · 모바일" 시안)
 const SideNav = () => {
   const session = useSession();
   const pathname = usePathname();
-  const router = useRouter();
-  const { handleSignOut } = useSignOut(() => router.push("/"));
+  const activeRef = useRef<HTMLLIElement | null>(null);
   const { data: wishlists } = useWishLists(session?.user.id);
   const { data: myBoards } = useMyBoards(session?.user.id);
   const { data: orderItems } = useOrderItems(session?.user.id);
@@ -43,36 +43,40 @@ const SideNav = () => {
 
   const isActivePath = (path: string, exact: boolean) => (exact ? pathname === path : pathname.startsWith(path));
 
-  const onClickWithdraw = () => {
-    toast({ title: "회원탈퇴는 준비 중이에요.", description: "필요하시면 문의로 요청해주세요." });
-  };
+  //모바일 가로 탭에서 활성 탭이 보이도록 자동 스크롤
+  useEffect(() => {
+    if (window.innerWidth >= 1024) return;
+    activeRef.current?.scrollIntoView({ inline: "center", block: "nearest" });
+  }, [pathname]);
 
   return (
-    <nav className="flex flex-col gap-5" aria-label="마이페이지 메뉴">
-      <ul className="flex flex-row gap-1 overflow-x-auto lg:flex-col lg:overflow-visible">
+    <nav aria-label="마이페이지 메뉴">
+      <ul className="scrollbar-hide -mx-5 flex flex-row gap-1.5 overflow-x-auto px-5 lg:mx-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0">
         {MYPAGE_GNB_ARRAY.map((menu) => {
           const Icon = NAV_ICONS[menu.key];
           const active = isActivePath(menu.path, menu.exact);
           const count = counts[menu.key];
 
           return (
-            <li key={menu.key} className="shrink-0 lg:shrink">
+            <li key={menu.key} className="shrink-0 lg:shrink" ref={active ? activeRef : undefined}>
               <Link
                 href={menu.path}
                 className={cn(
-                  "flex items-center justify-between gap-3 rounded-lg px-3.5 py-3 transition-colors",
-                  active ? "bg-purple-50 dark:bg-purple-50" : "hover:bg-gray-50",
+                  "flex items-center gap-2 whitespace-nowrap rounded-full border px-3.5 py-2 transition-colors lg:justify-between lg:gap-3 lg:rounded-lg lg:border-0 lg:px-3.5 lg:py-3",
+                  active
+                    ? "border-transparent bg-purple-50 dark:bg-purple-50"
+                    : "border-gray-200 lg:hover:bg-gray-50",
                 )}
               >
-                <span className="flex items-center gap-2.5">
+                <span className="flex items-center gap-2 lg:gap-2.5">
                   <Icon
-                    size={18}
-                    className={active ? "text-purple-500 dark:text-purple-300" : "text-gray-400"}
+                    size={16}
+                    className={cn("lg:w-[18px] lg:h-[18px]", active ? "text-purple-500 dark:text-purple-300" : "text-gray-400")}
                     aria-hidden="true"
                   />
                   <span
                     className={cn(
-                      "text-sm",
+                      "text-[13px] lg:text-sm",
                       active ? "font-semibold text-purple-500 dark:text-purple-300" : "text-gray-500",
                     )}
                   >
@@ -82,12 +86,7 @@ const SideNav = () => {
                 {menu.isNew ? (
                   <span className="text-[10px] font-bold text-orange-500">NEW</span>
                 ) : (
-                  <span
-                    className={cn(
-                      "text-[13px]",
-                      active ? "font-bold text-purple-400" : "text-gray-400",
-                    )}
-                  >
+                  <span className={cn("text-xs lg:text-[13px]", active ? "font-bold text-purple-400" : "text-gray-400")}>
                     {count}
                   </span>
                 )}
@@ -96,9 +95,24 @@ const SideNav = () => {
           );
         })}
       </ul>
-      <hr className="hidden border-gray-200 lg:block" />
+    </nav>
+  );
+};
+
+//푸시 알림 카드 + 계정 링크 — 데스크톱은 사이드바 하단, 모바일은 콘텐츠 아래 (.pen 모바일 시안 IA)
+export const MyPageAccountSection = () => {
+  const router = useRouter();
+  const { handleSignOut } = useSignOut(() => router.push("/"));
+
+  const onClickWithdraw = () => {
+    toast({ title: "회원탈퇴는 준비 중이에요.", description: "필요하시면 문의로 요청해주세요." });
+  };
+
+  return (
+    <div className="flex flex-col gap-5">
+      <hr className="border-gray-200" />
       <PushSettingRow />
-      <div className="flex items-center gap-3 px-3.5 pb-2 text-[13px]">
+      <div className="flex items-center gap-3 px-1 pb-2 text-[13px] lg:px-3.5">
         <button type="button" onClick={handleSignOut} className="text-gray-500 hover:text-purple-500 transition-colors">
           로그아웃
         </button>
@@ -107,7 +121,7 @@ const SideNav = () => {
           회원탈퇴
         </button>
       </div>
-    </nav>
+    </div>
   );
 };
 

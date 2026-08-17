@@ -193,6 +193,15 @@ body,
   animation: marquee 28s linear infinite;
 }
 
+/* 모바일 가로 스크롤 탭 등에서 스크롤바 숨김 (마이페이지 내비 · Tiptap 툴바) */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* 다크모드 전환 페이드 — 토글 순간에만 .theme-transition을 붙여 색상 변화를 부드럽게 */
 html.theme-transition,
 html.theme-transition *,

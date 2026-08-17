@@ -16,7 +16,7 @@ const BoardActions = ({
 }: BoardActionsProps) => {
   return (
     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
-      <ul className="flex items-center gap-0.5 p-1 rounded-full bg-gray-100 self-start overflow-x-auto max-w-full">
+      <ul className="scrollbar-hide flex items-center gap-0.5 p-1 rounded-full bg-gray-100 self-start overflow-x-auto max-w-full">
         {BOARD_FILTER_PILLS.map((pill) => (
           <li key={pill.value} className="shrink-0">
             <button
