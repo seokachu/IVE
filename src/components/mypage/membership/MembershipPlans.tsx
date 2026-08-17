@@ -21,7 +21,7 @@ const MembershipPlans = () => {
     <div>
       <MyPageTitle title="멤버십" />
       {/* 히어로 */}
-      <div className="flex flex-col gap-4 rounded-2xl bg-purple-50 p-6 sm:flex-row sm:items-center sm:justify-between lg:p-7">
+      <div className="flex flex-col gap-4 rounded-2xl bg-purple-50 p-6 md:flex-row md:items-center md:justify-between lg:p-7">
         <div>
           <p className="text-[11px] font-bold tracking-[0.2em] text-orange-500">DIVE MEMBERSHIP</p>
           <h3 className="mt-2 text-xl font-bold">최애 활동을 업그레이드해보세요</h3>

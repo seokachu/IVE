@@ -30,7 +30,8 @@ const RecommendedGoods = () => {
           </div>
           <MoreLink href="/shop" label="굿즈샵 더보기" />
         </div>
-        <ul className="mt-6 grid grid-cols-3 gap-x-3 gap-y-6 lg:grid-cols-6 lg:gap-4">
+        {/* 모바일 3열은 카드가 너무 좁아 뱃지가 깨짐 — 2열로 시작 */}
+        <ul className="mt-6 grid grid-cols-2 gap-x-3 gap-y-6 md:grid-cols-3 lg:grid-cols-6 lg:gap-4">
           {recommended.map((item) => (
             <ShopListItem key={item.id} item={item} variant="shop" />
           ))}

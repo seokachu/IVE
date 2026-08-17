@@ -15,7 +15,7 @@ const OrderSummary = ({ order }: OrderSummaryProps) => {
   return (
     <li
       onClick={onClickDetail}
-      className="flex cursor-pointer flex-col gap-4 rounded-2xl border border-gray-200 p-5 transition-colors hover:bg-gray-50 sm:flex-row sm:items-center"
+      className="flex cursor-pointer flex-col gap-4 rounded-2xl border border-gray-200 p-5 transition-colors hover:bg-gray-50 md:flex-row md:items-center"
     >
       <div className="relative h-[72px] w-[72px] shrink-0 overflow-hidden rounded-lg border border-gray-200">
         <Image

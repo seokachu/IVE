@@ -115321,6 +115321,168 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "LrqIP",
+      "x": 11400,
+      "y": 26600,
+      "name": "모바일 · 메인",
+      "theme": {
+        "mode": "light"
+      },
+      "clip": true,
+      "width": 390,
+      "height": 4740,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "assets/mobile/mobile-main-2.png",
+        "mode": "fill"
+      }
+    },
+    {
+      "type": "frame",
+      "id": "Z3KqH",
+      "x": 11850,
+      "y": 26600,
+      "name": "모바일 · 소식",
+      "theme": {
+        "mode": "light"
+      },
+      "clip": true,
+      "width": 390,
+      "height": 6106,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "assets/mobile/mobile-news-2.png",
+        "mode": "fill"
+      }
+    },
+    {
+      "type": "frame",
+      "id": "Zm3Sp",
+      "x": 12300,
+      "y": 26600,
+      "name": "모바일 · 음악",
+      "theme": {
+        "mode": "light"
+      },
+      "clip": true,
+      "width": 390,
+      "height": 4044,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "assets/mobile/mobile-discography-2.png",
+        "mode": "fill"
+      }
+    },
+    {
+      "type": "frame",
+      "id": "rqDMU",
+      "x": 12750,
+      "y": 26600,
+      "name": "모바일 · 굿즈샵",
+      "theme": {
+        "mode": "light"
+      },
+      "clip": true,
+      "width": 390,
+      "height": 9578,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "assets/mobile/mobile-shop-2.png",
+        "mode": "fill"
+      }
+    },
+    {
+      "type": "frame",
+      "id": "UD7oU",
+      "x": 13200,
+      "y": 26600,
+      "name": "모바일 · 굿즈샵 상세",
+      "theme": {
+        "mode": "light"
+      },
+      "clip": true,
+      "width": 390,
+      "height": 4723,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "assets/mobile/mobile-shop-detail-2.png",
+        "mode": "fill"
+      }
+    },
+    {
+      "type": "frame",
+      "id": "KfOOK",
+      "x": 13650,
+      "y": 26600,
+      "name": "모바일 · 게시판",
+      "theme": {
+        "mode": "light"
+      },
+      "clip": true,
+      "width": 390,
+      "height": 2455,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "assets/mobile/mobile-board-2.png",
+        "mode": "fill"
+      }
+    },
+    {
+      "type": "frame",
+      "id": "q1bzlX",
+      "x": 14100,
+      "y": 26600,
+      "name": "모바일 · 게시판 상세",
+      "theme": {
+        "mode": "light"
+      },
+      "clip": true,
+      "width": 390,
+      "height": 1769,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "assets/mobile/mobile-board-detail-2.png",
+        "mode": "fill"
+      }
+    },
+    {
+      "type": "frame",
+      "id": "ONIdQ",
+      "x": 14550,
+      "y": 26600,
+      "name": "모바일 · 장바구니",
+      "theme": {
+        "mode": "light"
+      },
+      "clip": true,
+      "width": 390,
+      "height": 1917,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "assets/mobile/mobile-cart-2.png",
+        "mode": "fill"
+      }
+    },
+    {
+      "type": "note",
+      "id": "n5NxC",
+      "x": 11400,
+      "y": 26440,
+      "name": "모바일 시안 노트",
+      "width": 1400,
+      "height": 40,
+      "content": "모바일(390px) 시안 — 반응형 구현 실화면 캡처 기반 (기능명세서 모바일 버전 참조용). 마이페이지·드로어 메뉴는 왼쪽의 수작업 시안 프레임 참고. 다크 모드는 토큰 플립으로 동일 레이아웃."
     }
   ],
   "themes": {

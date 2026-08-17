@@ -55,7 +55,7 @@ const AddressListItem = ({ item }: AddressListItems) => {
 
   return (
     <div
-      className={`flex flex-col gap-3 rounded-2xl border p-5 sm:flex-row sm:items-start sm:justify-between ${
+      className={`flex flex-col gap-3 rounded-2xl border p-5 md:flex-row md:items-start md:justify-between ${
         item.is_default ? "border-purple-300" : "border-gray-200"
       }`}
     >
