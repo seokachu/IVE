@@ -1,0 +1,63 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="가이드/컴포넌트 사용 규칙" />
+
+# 컴포넌트 사용 규칙
+
+같은 일을 하는 컴포넌트를 두 번 만들지 않기 위한 기준입니다.
+새 화면을 만들 때 **먼저 아래 표에서 찾고**, 없을 때만 새로 만듭니다.
+
+## 무엇을 쓸까
+
+| 필요한 것 | 쓰는 것 | 쓰지 않는 것 |
+| --- | --- | --- |
+| 버튼 (모든 종류) | `ui/button`의 `Button` | 날 `<button>`, 별도 ActionButton |
+| 아이콘만 있는 버튼 | `Button variant="plain" size="auto"` + `aria-label` | `<button>` + 직접 스타일 |
+| 목록 정렬 선택 | `common/select/SortDropdown` | `ui/select` (폼 전용) |
+| 폼 안의 선택 | `ui/select`, `common/select/RHFSelect` | SortDropdown |
+| 확인/취소 모달 | `common/modal/ConfirmModal` | 개별 Dialog 조합 |
+| 수정·삭제 버튼 쌍 | `common/EditDeleteActions` | 페이지마다 만든 텍스트 버튼 |
+| 로딩 표시 | `common/Spinner` | 외부 스피너 라이브러리 |
+| 목록 자리표시자 | `ui/skeleton` + `common/loading/*` | 스피너로 전체 화면 덮기 |
+| 사용자 아바타 | `common/UserAvatar` | `ui/avatar` 직접 조합 |
+| 섹션 제목 | `common/SectionTitle` | `h2` + 인라인 클래스 반복 |
+| 목록 페이지 이동 | `common/PaginationControl` | `ui/pagination` 직접 조합 |
+
+## 버튼 variant 고르기
+
+| variant | 언제 |
+| --- | --- |
+| `default` | 화면의 주요 행동 (등록·저장·결제) |
+| `outlineBrand` | 주요 행동의 짝이 되는 보조 행동 |
+| `outline` · `secondary` | 중립 행동 (취소·닫기·필터) |
+| `ghost` · `plain` | 아이콘·인라인 유틸리티 |
+| `destructive` | 되돌릴 수 없는 삭제 |
+| `kakao` | 카카오 로그인 전용 |
+
+- 결제 CTA의 **그라데이션은 결제 흐름에서만** 씁니다. 그 외 주요 버튼은 솔리드 `primary`.
+- 액션 버튼의 라운드는 `rounded-full`(필)을 기본으로 합니다. 인풋·카드는 `rounded-lg`.
+- `Button`의 기본 `type`은 `button`이라 폼 안에서 의도치 않게 submit되지 않습니다.
+
+## 토큰 규칙
+
+- 색은 반드시 토큰으로 — `bg-primary`, `text-gray-500`, `border-border`.
+  새 hex 리터럴을 만들지 않습니다. ([Foundations/Colors](?path=/docs/foundations-colors--docs))
+- `gray` 램프는 다크에서 값이 뒤집히므로 `dark:` 오버라이드가 필요 없습니다.
+- CSS 변수 기반 색은 **불투명도 변형(`bg-purple-500/90`)을 지원하지 않습니다.** 솔리드로 쓰거나
+  오버레이는 `black/white`로 얹습니다.
+- 간격은 4px 배수, 웨이트는 400/600/700 세 단계만. ([Foundations/Tokens](?path=/docs/foundations-tokens--docs))
+
+## 스토리 작성 규칙
+
+1. 파일은 컴포넌트 옆에 `Component.stories.tsx`로 둡니다. (Foundations 문서만 `src/stories/`)
+2. `title`은 `UI/…` 또는 `Common/…` — 폴더 구조가 아니라 **성격**으로 나눕니다.
+3. 콜백 props는 `fn()`(`storybook/test`)을 기본 args로 넘겨 Actions 탭에서 확인합니다.
+4. 상태를 가진 컴포넌트는 `Interactive` 스토리에 래퍼 컴포넌트를 만들어 실제 동작을 보여 줍니다.
+5. 컴포넌트 설명은 `parameters.docs.description.component`에 한 문단으로 씁니다 — 이 글이 Docs 탭 상단에 붙습니다.
+6. 올리기 전에 **툴바에서 다크 테마와 Accessibility 탭을 확인**합니다.
+
+## 확인 순서
+
+- **Docs** 탭 — 설명 + 프롭 테이블 + 스토리 전체를 한 번에 훑기
+- **Controls** — props를 바꿔 경계값(긴 텍스트, 빈 값, disabled) 확인
+- **Accessibility** — 대비·라벨 위반 확인, 아이콘 버튼에는 `aria-label` 필수
