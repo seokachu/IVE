@@ -3,8 +3,7 @@ import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 import { createClient } from "@supabase/supabase-js";
 import { truncate } from "lodash";
-
-const EXPO_PUSH_URL = "https://exp.host/--/api/v2/push/send";
+import { sendPushMessages } from "@/lib/push/sender";
 
 //게시글 좋아요 시 글 작성자에게 푸시 알림 발송
 export async function POST(request: Request) {
@@ -60,7 +59,7 @@ export async function POST(request: Request) {
 
     const { data: tokens } = await admin
       .from("push_tokens")
-      .select("token")
+      .select("token, user_id, platform")
       .eq("user_id", board.user_id)
       .eq("enabled", true);
     if (!tokens || tokens.length === 0) {
@@ -72,31 +71,19 @@ export async function POST(request: Request) {
     const boardTitle = truncate(board.title ?? "게시글", { length: 15, omission: "..." });
     const origin = new URL(request.url).origin;
 
-    const messages = tokens.map(({ token }) => ({
-      to: token,
+    //Expo(앱)·web-push(브라우저) 채널로 함께 발송
+    const { sent, staleTokens } = await sendPushMessages(tokens, () => ({
       title: `"${boardTitle}" 글에 좋아요를 받았습니다`,
       body: `${likerName}님이 회원님의 글을 좋아합니다. ❤️`,
-      data: { url: `${origin}/board/${boardId}` },
+      url: `${origin}/board/${boardId}`,
     }));
 
-    const expoResponse = await fetch(EXPO_PUSH_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(messages),
-    });
-    const expoResult = await expoResponse.json();
-
     //만료된 토큰 정리
-    const staleTokens = (expoResult.data ?? [])
-      .map((ticket: { status: string; details?: { error?: string } }, index: number) =>
-        ticket.status === "error" && ticket.details?.error === "DeviceNotRegistered" ? tokens[index].token : null,
-      )
-      .filter(Boolean);
     if (staleTokens.length > 0) {
       await admin.from("push_tokens").delete().in("token", staleTokens);
     }
 
-    return NextResponse.json({ sent: messages.length - staleTokens.length });
+    return NextResponse.json({ sent });
   } catch (error) {
     console.error("좋아요 푸시 발송 실패:", error);
     return NextResponse.json({ error: "푸시 발송에 실패했습니다." }, { status: 500 });
