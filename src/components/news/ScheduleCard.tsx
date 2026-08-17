@@ -24,10 +24,15 @@ const ScheduleCard = ({ item }: ScheduleCardProps) => {
       >
         <DdayBadge item={item} />
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2 mb-1">
-            <span className={`px-2 py-0.5 rounded-full text-xs ${category.badgeClass}`}>{category.label}</span>
+          {/* 모바일 좁은 폭에서 뱃지가 두 줄로 깨지지 않도록 nowrap, 대신 행 단위로 랩핑 */}
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1">
+            <span className={`shrink-0 whitespace-nowrap px-2 py-0.5 rounded-full text-xs ${category.badgeClass}`}>
+              {category.label}
+            </span>
             {item.source === "auto" && (
-              <span className="px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-500">자동 수집</span>
+              <span className="shrink-0 whitespace-nowrap px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-500">
+                자동 수집
+              </span>
             )}
             <time className="text-xs text-gray-400">{formatScheduleDate(item)}</time>
           </div>

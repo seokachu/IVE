@@ -57,7 +57,7 @@ const MembershipManage = ({ membership }: MembershipManageProps) => {
     <div>
       <MyPageTitle title="멤버십" />
       {/* 구독 상태 카드 */}
-      <div className="flex flex-col gap-4 rounded-2xl bg-purple-50 p-6 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-4 rounded-2xl bg-purple-50 p-6 md:flex-row md:items-center md:justify-between">
         <div>
           <div className="flex flex-wrap items-center gap-2">
             <Crown size={18} className="text-purple-500 dark:text-purple-300" aria-hidden="true" />
