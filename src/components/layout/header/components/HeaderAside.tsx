@@ -30,7 +30,7 @@ import {
 import LogoImage from "@/assets/images/logo_black.svg";
 import WhiteLogoImage from "@/assets/images/logo.svg";
 import UserAvatar from "@/components/common/UserAvatar";
-import MembershipBadge from "@/components/mypage/MembershipBadge";
+import MembershipBadge, { getMembershipRingClass } from "@/components/mypage/MembershipBadge";
 import LoginLink from "@/components/auth/login/LoginLink";
 import { GNB_ARRAY } from "@/utils/constants";
 import { useMyMembership } from "@/hooks/queries/useMembership";
@@ -98,7 +98,7 @@ const HeaderAside = () => {
                 >
                   <UserAvatar
                     size="md"
-                    className={cn("!h-11 !w-11", tier !== "free" && "ring-[1.5px] ring-purple-300")}
+                    className={cn("!h-11 !w-11", getMembershipRingClass(tier))}
                   />
                   <span className="min-w-0 flex-1">
                     <span className="flex items-center gap-1.5">

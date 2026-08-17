@@ -35,20 +35,29 @@ const ProfileBand = () => {
     <div className="border-b border-gray-200 bg-purple-50">
       <div className="mx-auto flex w-full max-w-container flex-col gap-5 px-5 py-6 lg:flex-row lg:items-center lg:justify-between lg:gap-6 lg:px-8 lg:py-9">
         <div className="flex items-center gap-4 lg:gap-5">
-          {/* 아바타 + 카메라 뱃지 → 프로필 수정 모달 (구독자는 퍼플 링) */}
+          {/* 아바타 + 카메라 뱃지 → 프로필 수정 모달 (DIVE+는 퍼플 링, VIP는 골드 그라데이션 링) */}
           <button
             type="button"
             onClick={() => setIsEditOpen(true)}
             className="relative shrink-0 rounded-full"
             aria-label="프로필 수정"
           >
-            <UserAvatar
-              size="xl"
-              className={cn(
-                "!w-[72px] !h-[72px] lg:!w-[88px] lg:!h-[88px]",
-                tier !== "free" && "ring-2 ring-purple-300 ring-offset-2 ring-offset-purple-50",
-              )}
-            />
+            {tier === "vip" ? (
+              //VIP 뱃지와 같은 골드 그라데이션 — ring 유틸은 단색만 지원해 패딩 래퍼로 그라데이션 테두리를 만든다
+              <span className="block rounded-full bg-gradient-to-tr from-[#FDE68A] via-[#FACC15] to-[#F59E0B] p-[2.5px] shadow-[0_2px_12px_rgba(250,204,21,0.45)]">
+                <span className="block rounded-full bg-purple-50 p-[2px]">
+                  <UserAvatar size="xl" className="!w-[72px] !h-[72px] lg:!w-[88px] lg:!h-[88px]" />
+                </span>
+              </span>
+            ) : (
+              <UserAvatar
+                size="xl"
+                className={cn(
+                  "!w-[72px] !h-[72px] lg:!w-[88px] lg:!h-[88px]",
+                  tier === "plus" && "ring-2 ring-purple-300 ring-offset-2 ring-offset-purple-50",
+                )}
+              />
+            )}
             <span
               className="absolute -bottom-0.5 -right-0.5 flex h-7 w-7 items-center justify-center rounded-full border-2 border-card bg-gray-900"
               aria-hidden="true"

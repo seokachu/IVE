@@ -7,12 +7,16 @@ import { Heart, Star } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
+import { useMyMembership } from "@/hooks/queries/useMembership";
+import { getMembershipDiscount } from "@/lib/supabase/membership";
+import MembershipBadge from "@/components/mypage/MembershipBadge";
 import type { ShopListItemProps } from "@/types/shop";
 
 //시안 기준: 목록·캐러셀 공통 카드 — 보더 없는 카드, 배지·하트는 이미지 위 오버레이
 const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) => {
   const { push } = useRouter();
   const { isWished, toggleWishList } = useWishListWithLocal(item.id);
+  const { tier } = useMyMembership();
 
   //리뷰 수·평균 별점은 목록 조회에 포함되어 상품별 추가 요청이 없다
   const averageRating = item.average_rating;
@@ -29,6 +33,8 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
 
   //할인율 적용
   const price = getDiscountedPrice(item);
+  //구독자에게는 멤버십 상시 할인가를 함께 표시 (결제 시 실제 적용되는 금액과 동일 계산)
+  const memberPrice = price - getMembershipDiscount(tier, price);
 
   //찜하기 버튼
   const onClickHeart = (e: React.MouseEvent) => {
@@ -86,6 +92,14 @@ const ShopListItem = ({ item, variant = "shop", index = 0 }: ShopListItemProps) 
             {averageRating}
           </span>
         </div>
+        {tier !== "free" && (
+          <div className="flex items-center gap-1.5">
+            <MembershipBadge tier={tier} size="sm" />
+            <span className="text-[13px] font-bold text-purple-500 dark:text-purple-300">
+              {formatPrice(memberPrice)}원
+            </span>
+          </div>
+        )}
       </div>
     </Tag>
   );
