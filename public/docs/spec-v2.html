@@ -123,7 +123,7 @@
   <table class="meta-table">
     <tr><th>문서 버전</th><td>v2 — Draft (리뉴얼 진행 중)</td></tr>
     <tr><th>서비스명</th><td>IVE로 DIVE (<a href="https://ive-three.vercel.app">ive-three.vercel.app</a>) · Expo 하이브리드 앱(Android WebView, <code>seokachu/ive-app</code>) 병행</td></tr>
-    <tr><th>문서 기준</th><td>2026 리뉴얼 진행 중 — dev 브랜치 커밋 <code>a722bd0</code> (2026-08-17) · 마이페이지 · DIVE 멤버십 · 모바일 대응(반응형 · 드로어 메뉴) · <b>2026 로고 리브랜딩(REVIVE+) · 테마 반응형 파비콘</b> 반영</td></tr>
+    <tr><th>문서 기준</th><td>2026 리뉴얼 진행 중 — dev 브랜치 커밋 <code>1f834c6</code> (2026-08-18) · 마이페이지 · DIVE 멤버십 · 모바일 대응(반응형 · 드로어 메뉴) · 2026 로고 리브랜딩(REVIVE+) · 테마 반응형 파비콘 · <b>프로필 수정 안정화(소셜 재로그인 원복 수정) · 이미지 크롭 모달 리뉴얼</b> 반영</td></tr>
     <tr><th>작성일</th><td>2026-07-29 생성 · 2026-08-17 갱신 (음악 · 소식 · 굿즈샵 상세 · 자유게시판 · 장바구니/결제 · 404 · 마이페이지 리디자인 + DIVE 멤버십 + 모바일 대응 반영)</td></tr>
     <tr><th>범위</th><td>메인 · 음악 · 소식 · 인증 · 자유게시판 · 굿즈샵 · 장바구니/결제 · 마이페이지 · DIVE 멤버십 · 푸시 알림 · 디자인 시스템 · 공통 UI · 모바일 대응</td></tr>
     <tr><th>기술 스택</th><td>Next.js 16 (App Router, proxy) · React 19 · Supabase(<code>@supabase/ssr</code>) · Zustand · TanStack Query · Tailwind CSS · lucide-react · Tiptap v3(에디터) · 토스페이먼츠 · Expo Push · pnpm · Playwright E2E · 외부 API(네이버 API Hub 검색 · KOPIS · iTunes Search · Google News RSS · YouTube RSS) · Vercel Cron · GitHub Actions</td></tr>
@@ -177,7 +177,7 @@
     <tr><td>장바구니 · 결제</td><td>단일 목록 + 우측 요약, 완료 화면 텍스트 위주</td><td><b>주문 플로우 리디자인</b> — 3단계 진행 인디케이터(01 장바구니 → 02 주문·결제 → 03 주문완료), 상품별 개별 카드 + 필 스테퍼, 결제 금액 플로팅 카드, 주문자 인라인 편집 · 배송지 라디오 선택, 주문번호 복사 칩이 있는 완료 화면 — 8·9장</td></tr>
     <tr><td>모바일</td><td>기본 반응형 + 3분할 시트 메뉴</td><td><b>모바일 정비 완료</b> — 좌측 드로어 메뉴 리디자인(프로필 카드 · 퀵 타일 · 아이콘 GNB · 다크 모드 스위치), 마이페이지 모바일 IA 재배치(가로 필 탭), 브레이크포인트 정책 문서화와 페이지별 반응형 QA — 2-2 · 14장</td></tr>
     <tr><td>유료 멤버십</td><td>—</td><td><b>DIVE 멤버십 신규</b> — 3단 플랜(베이직 무료 / DIVE+ 월 1,900원 / DIVE VIP 월 5,900원), 토스페이먼츠 <b>빌링키 정기결제</b>(구독 · 해지 · 카드 변경 + 매일 자동결제 크론), 티어 뱃지 · 아바타 퍼플 링 — 10-6절</td></tr>
-    <tr><td>마이페이지</td><td>좌측 프로필 + 메뉴 리스트, 인라인 닉네임 편집</td><td><b>리디자인 완료</b> — 프로필 밴드(아바타 · 멤버십 뱃지 · 스탯 3종) + 240px 사이드 내비(카운트 · 푸시 카드 · 계정 링크), 카드형 결제 내역 · 주문 상세, 프로필 수정 모달(크롭 재사용), 배송지 카드 + 공용 수정/삭제 버튼 — 10장</td></tr>
+    <tr><td>마이페이지</td><td>좌측 프로필 + 메뉴 리스트, 인라인 닉네임 편집</td><td><b>리디자인 완료</b> — 프로필 밴드(아바타 · 멤버십 뱃지 · 스탯 3종) + 240px 사이드 내비(카운트 · 푸시 카드 · 계정 링크), 카드형 결제 내역 · 주문 상세, 프로필 수정 모달(전용 크롭 모달 — 원형 마스크 · 드래그/줌), 배송지 카드 + 공용 수정/삭제 버튼 — 10장</td></tr>
     <tr><td>소식</td><td>Supabase 수동 입력 기사(<code>news_gallery</code>) + 사진 갤러리</td><td><b>자동 수집 피드</b>(네이버 API Hub 뉴스 · 구글 뉴스 RSS · 유튜브 공식 채널 RSS) + <b>일정 허브</b>(수동 큐레이션 · KOPIS 공연 자동 수집 · 뉴스 일정 자동 추출 크론) — 갤러리·히어로 제거, 4장</td></tr>
     <tr><td>앨범 · 메인</td><td>앨범 정보 + 음원 플랫폼 링크 5종</td><td><b>iTunes 30초 미리듣기</b> + 하단 미니 플레이어 바 + 풀버전 칩(멜론 · Apple Music · Spotify · YouTube Music) + 메인 일정·소식 티저 섹션 — MAIN-03 · 08 · 09</td></tr>
   </table>
@@ -482,8 +482,8 @@
     <tr><td>MY-17</td><td>프로필 밴드</td><td>페이지 상단 연보라 밴드: 88px 아바타(우하단 카메라 뱃지) + 닉네임(구독 시 티어 뱃지) + [프로필 수정] 필 + 이메일, 우측에 <b>찜한 굿즈 · 주문 내역 · 작성한 글</b> 3개 통계.</td><td>통계는 각 목록의 실제 개수와 동일.</td><td><span class="auth login">로그인</span></td></tr>
     <tr><td>MY-18</td><td>사이드 내비</td><td>좌측 240px 내비: 아이콘 + 라벨 + 개수 배지 형태의 메뉴(멤버십<span class="tag">NEW</span> · 찜 목록 · 결제 내역 · 내가 쓴 글 · 배송지 관리), 활성 항목은 연보라 필 + 보라 텍스트. 하단에 푸시 알림 토글 카드, 그 아래 [로그아웃] · [회원탈퇴].</td><td>하위 경로(주문 상세 · 배송지 추가 등)에 있어도 상위 메뉴가 활성 표시된다. 회원탈퇴는 화면에만 존재하고 기능은 미구현(부록 참고).</td><td><span class="auth login">로그인</span></td></tr>
     <tr><td>MY-01</td><td>콘텐츠 헤더 · 정렬</td><td>각 목록 화면 상단에 타이틀 + 보라 개수 + (해당 목록의) 정렬 셀렉트(COM-17)를 배치. 배송지 관리 화면은 정렬 대신 [새 배송지 추가] 버튼.</td><td>—</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>MY-02</td><td>프로필 수정 (모달)</td><td>[프로필 수정]을 누르면 모달이 열린다: 아바타 + 카메라 뱃지(사진을 눌러 변경 · 업로드 후 크롭), 닉네임 입력(카운터 <code>n / 6</code> · 안내 “2~6자, 공백 없이 입력해주세요”), 읽기 전용 이메일, [취소 · 저장하기].</td><td>이미지는 기존 크롭 모달(원형, 확대/축소)을 재사용해 250×250으로 저장하고 헤더 아바타에도 즉시 반영. 성공 시 <span class="msg">“프로필 이미지가 변경되었습니다.”</span></td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>MY-03</td><td>닉네임 변경</td><td>프로필 수정 모달에서 닉네임을 바꾸고 저장. 성공 시 <span class="msg">“닉네임이 변경 되었습니다.”</span></td><td>2글자 이상(<span class="msg">“2글자 이상 입력해 주세요.”</span>), 최대 6자. 동일 닉네임 저장 시 <span class="msg">“변경된 닉네임이 없습니다.”</span> (구 인라인 편집 방식은 모달로 대체)</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-02</td><td>프로필 수정 (모달)</td><td>[프로필 수정]을 누르면 모달이 열린다: 아바타 + 카메라 뱃지(사진을 눌러 변경 · 업로드 후 크롭), 닉네임 입력(카운터 <code>n / 6</code> · 안내 “2~6자, 공백 없이 입력해주세요”), 읽기 전용 이메일, [취소 · 저장하기]. 사진 선택 시 <b>크롭 모달</b>이 열린다: 원형 마스크 · 드래그 이동 · 휠/핀치/슬라이더 줌(1~3배), 안내 <span class="msg">“드래그로 위치를, 휠·핀치나 슬라이더로 배율을 조정하세요.”</span></td><td>크롭 모달은 <code>react-easy-crop</code> 기반으로 재작성(구 react-avatar-editor 대체). 크롭 결과는 최대 512px WebP로 저장하고 헤더 아바타에도 즉시 반영, 업로드 실패 시 크롭 모달을 유지해 재시도할 수 있다. 업로드 이미지는 커스텀 메타데이터 키(<code>custom_avatar_url</code>) + <code>user</code> 테이블에 저장해 <b>소셜 재로그인 시에도 유지</b>(소셜 이미지로 원복되던 버그 수정). 성공 시 <span class="msg">“프로필 이미지가 변경되었습니다.”</span></td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-03</td><td>닉네임 변경</td><td>프로필 수정 모달에서 닉네임을 바꾸고 저장. 성공 시 <span class="msg">“닉네임이 변경 되었습니다.”</span></td><td>2글자 이상(<span class="msg">“2글자 이상 입력해 주세요.”</span>), 최대 6자. 동일 닉네임 저장 시 <span class="msg">“변경된 닉네임이 없습니다.”</span> (구 인라인 편집 방식은 모달로 대체) 닉네임은 커스텀 메타데이터 키(<code>nickname</code>) + <code>user</code> 테이블에 저장해 <b>소셜 재로그인 시에도 유지</b>(소셜 이름으로 원복되던 버그 수정).</td><td><span class="auth login">로그인</span></td></tr>
     <tr><td>MY-04</td><td>푸시 알림 수신 설정</td><td>사이드 내비 하단 카드의 스위치로 앱 푸시 수신 on/off(“댓글·답글 알림을 앱으로 받아요”). <span class="msg">“푸시 알림을 켰습니다/껐습니다.”</span> 토스트.</td><td>앱에서 로그인해 기기가 등록된 경우에만 조작 가능(미등록 시 “앱에서 로그인하면 받을 수 있어요” + 비활성). 설정은 등록된 모든 기기에 일괄 적용.</td><td><span class="auth app">앱</span></td></tr>
   </table>
 
@@ -691,7 +691,7 @@
 </section>
 
 <footer class="foot">
-  IVE로 DIVE 기능명세서 v2 (Draft) · 기준 커밋 <code>a722bd0</code> (2026 리뉴얼 진행 중) · 2026-07-29 생성 · 2026-08-17 갱신 · <a href="./index.html">기능명세서 아카이브</a> · <a href="./spec-v1.html">v1 보기</a> · <a href="./design.html">디자인 시스템 · 시안</a>
+  IVE로 DIVE 기능명세서 v2 (Draft) · 기준 커밋 <code>1f834c6</code> (2026 리뉴얼 진행 중) · 2026-07-29 생성 · 2026-08-18 갱신 · <a href="./index.html">기능명세서 아카이브</a> · <a href="./spec-v1.html">v1 보기</a> · <a href="./design.html">디자인 시스템 · 시안</a>
 </footer>
 
 </div>

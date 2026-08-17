@@ -104623,7 +104623,7 @@
       "type": "frame",
       "id": "Vc4Rp",
       "x": 18180,
-      "y": 24800,
+      "y": 25600,
       "name": "DIVE+ 커뮤니티 표시 · 라이트",
       "theme": {
         "mode": "light"
@@ -108192,7 +108192,7 @@
       "type": "frame",
       "id": "EHekU",
       "x": 18720,
-      "y": 24800,
+      "y": 25600,
       "name": "DIVE+ 커뮤니티 표시 · 다크",
       "theme": {
         "mode": "dark"
@@ -120877,6 +120877,502 @@
       "width": 900,
       "height": 0,
       "content": "멤버십 플랜 변경 플로우(신규): 구독 중 화면 상태 카드에 [플랜 변경] 버튼을 추가 → 플랜 변경 모달에서 티어 선택. 업그레이드(DIVE+→VIP)는 저장된 billing_key로 남은 기간 차액만 즉시 결제하고 티어를 바로 반영(다음 결제일은 그대로 유지). 다운그레이드(VIP→DIVE+)는 즉시 결제·환불 없이 pending_tier로 예약만 하고, 다음 결제일에 크론(membership-billing)이 tier·price를 교체해 결제. 예약 상태에서는 구독 중 화면에 예약 배너와 [변경 취소]를 노출. 카드 재등록은 필요 없고 기존 빌링키를 그대로 재사용한다."
+    },
+    {
+      "type": "frame",
+      "id": "zn9N6",
+      "x": 18180,
+      "y": 24800,
+      "name": "프로필 이미지 크롭 모달 · 라이트",
+      "theme": {
+        "mode": "light"
+      },
+      "width": 480,
+      "fill": "$bg-page",
+      "layout": "vertical",
+      "padding": 28,
+      "children": [
+        {
+          "type": "frame",
+          "id": "mD00I",
+          "name": "ImageCropper",
+          "width": "fill_container",
+          "fill": "$bg-surface",
+          "cornerRadius": 24,
+          "stroke": "$border-default",
+          "strokeWidth": 1,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 12
+            },
+            "blur": 32
+          },
+          "layout": "vertical",
+          "gap": 16,
+          "padding": 28,
+          "children": [
+            {
+              "type": "frame",
+              "id": "ntjvE",
+              "name": "ICHead",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "mSosC",
+                  "name": "ICTitle",
+                  "fill": "$text-primary",
+                  "content": "프로필 이미지 편집",
+                  "fontFamily": "$font-family",
+                  "fontSize": 18,
+                  "fontWeight": "$font-weight-bold"
+                },
+                {
+                  "type": "icon",
+                  "id": "W5opDA",
+                  "name": "ICClose",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "x",
+                  "library": "lucide",
+                  "fill": "$text-tertiary"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "ogHYj",
+              "name": "ICDesc",
+              "fill": "$text-tertiary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "드래그로 위치를, 휠·핀치나 슬라이더로 배율을 조정하세요.",
+              "fontFamily": "$font-family",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "iPO7d",
+              "name": "ICCropArea",
+              "clip": true,
+              "width": "fill_container",
+              "height": 368,
+              "fill": "$gray-900",
+              "cornerRadius": 16,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "WuByt",
+                  "name": "ICMaskCircle",
+                  "metadata": {
+                    "type": "unsplash",
+                    "username": "grakozy",
+                    "link": "https://unsplash.com/@grakozy",
+                    "author": "Greg Rakozy"
+                  },
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1509143382-48811e579888?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODY5ODE2NzB8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  },
+                  "width": 312,
+                  "height": 312,
+                  "stroke": "#FFFFFF66",
+                  "strokeWidth": 2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "nyy2u",
+              "name": "ICZoomRow",
+              "width": "fill_container",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "fKlYY",
+                  "name": "ICZoomOut",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "zoom-out",
+                  "library": "lucide",
+                  "fill": "$text-tertiary"
+                },
+                {
+                  "type": "frame",
+                  "id": "ZWCM3",
+                  "name": "ICSlider",
+                  "width": 312,
+                  "height": 16,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": "$radius-full",
+                      "id": "Plqak",
+                      "x": 0,
+                      "y": 5,
+                      "name": "ICTrack",
+                      "fill": "$bg-muted",
+                      "width": 312,
+                      "height": 6
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": "$radius-full",
+                      "id": "VO1Pu",
+                      "x": 0,
+                      "y": 5,
+                      "name": "ICTrackFill",
+                      "fill": "$primary",
+                      "width": 140,
+                      "height": 6
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "x2KUX3",
+                      "x": 132,
+                      "y": 0,
+                      "name": "ICThumb",
+                      "fill": "$purple-400",
+                      "width": 16,
+                      "height": 16,
+                      "stroke": "$bg-surface",
+                      "strokeWidth": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "icon",
+                  "id": "VBSiM",
+                  "name": "ICZoomIn",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "zoom-in",
+                  "library": "lucide",
+                  "fill": "$text-tertiary"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "r3W1f",
+              "name": "ICBtns",
+              "width": "fill_container",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "z247H",
+                  "name": "ICCancel",
+                  "width": "fill_container",
+                  "height": 46,
+                  "cornerRadius": "$radius-full",
+                  "stroke": "$border-strong",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "WmNkf",
+                      "name": "ICCancelL",
+                      "fill": "$text-secondary",
+                      "content": "취소",
+                      "fontFamily": "$font-family",
+                      "fontSize": 14,
+                      "fontWeight": "$font-weight-semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "NFQmx",
+                  "name": "ICSave",
+                  "width": "fill_container",
+                  "height": 46,
+                  "fill": "$primary",
+                  "cornerRadius": "$radius-full",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "U2GrQy",
+                      "name": "ICSaveL",
+                      "fill": "$white",
+                      "content": "저장하기",
+                      "fontFamily": "$font-family",
+                      "fontSize": 14,
+                      "fontWeight": "$font-weight-bold"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "h4tQN",
+      "x": 18720,
+      "y": 24800,
+      "name": "프로필 이미지 크롭 모달 · 다크",
+      "theme": {
+        "mode": "dark"
+      },
+      "width": 480,
+      "fill": "$bg-page",
+      "layout": "vertical",
+      "padding": 28,
+      "children": [
+        {
+          "type": "frame",
+          "id": "phVQl",
+          "name": "ImageCropper",
+          "width": "fill_container",
+          "fill": "$bg-surface",
+          "cornerRadius": 24,
+          "stroke": "$border-default",
+          "strokeWidth": 1,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 12
+            },
+            "blur": 32
+          },
+          "layout": "vertical",
+          "gap": 16,
+          "padding": 28,
+          "children": [
+            {
+              "type": "frame",
+              "id": "Hvsdb",
+              "name": "ICHead",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Hj44A",
+                  "name": "ICTitle",
+                  "fill": "$text-primary",
+                  "content": "프로필 이미지 편집",
+                  "fontFamily": "$font-family",
+                  "fontSize": 18,
+                  "fontWeight": "$font-weight-bold"
+                },
+                {
+                  "type": "icon",
+                  "id": "pJ8FF",
+                  "name": "ICClose",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "x",
+                  "library": "lucide",
+                  "fill": "$text-tertiary"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "aQl1U",
+              "name": "ICDesc",
+              "fill": "$text-tertiary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "드래그로 위치를, 휠·핀치나 슬라이더로 배율을 조정하세요.",
+              "fontFamily": "$font-family",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "M8T2K",
+              "name": "ICCropArea",
+              "clip": true,
+              "width": "fill_container",
+              "height": 368,
+              "fill": "$gray-900",
+              "cornerRadius": 16,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "bXY2e",
+                  "name": "ICMaskCircle",
+                  "metadata": {
+                    "type": "unsplash",
+                    "username": "grakozy",
+                    "link": "https://unsplash.com/@grakozy",
+                    "author": "Greg Rakozy"
+                  },
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1509143382-48811e579888?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODY5ODE2NzB8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  },
+                  "width": 312,
+                  "height": 312,
+                  "stroke": "#FFFFFF66",
+                  "strokeWidth": 2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "c2Pew",
+              "name": "ICZoomRow",
+              "width": "fill_container",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "SwTwB",
+                  "name": "ICZoomOut",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "zoom-out",
+                  "library": "lucide",
+                  "fill": "$text-tertiary"
+                },
+                {
+                  "type": "frame",
+                  "id": "TzpAK",
+                  "name": "ICSlider",
+                  "width": 312,
+                  "height": 16,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": "$radius-full",
+                      "id": "m3oAc",
+                      "x": 0,
+                      "y": 5,
+                      "name": "ICTrack",
+                      "fill": "$bg-muted",
+                      "width": 312,
+                      "height": 6
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": "$radius-full",
+                      "id": "fjKNa",
+                      "x": 0,
+                      "y": 5,
+                      "name": "ICTrackFill",
+                      "fill": "$primary",
+                      "width": 140,
+                      "height": 6
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "D4TER",
+                      "x": 132,
+                      "y": 0,
+                      "name": "ICThumb",
+                      "fill": "$purple-400",
+                      "width": 16,
+                      "height": 16,
+                      "stroke": "$bg-surface",
+                      "strokeWidth": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "icon",
+                  "id": "eP4xR",
+                  "name": "ICZoomIn",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "zoom-in",
+                  "library": "lucide",
+                  "fill": "$text-tertiary"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "XC65r",
+              "name": "ICBtns",
+              "width": "fill_container",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "awh30",
+                  "name": "ICCancel",
+                  "width": "fill_container",
+                  "height": 46,
+                  "cornerRadius": "$radius-full",
+                  "stroke": "$border-strong",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Sa4MU",
+                      "name": "ICCancelL",
+                      "fill": "$text-secondary",
+                      "content": "취소",
+                      "fontFamily": "$font-family",
+                      "fontSize": 14,
+                      "fontWeight": "$font-weight-semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Ozcl6",
+                  "name": "ICSave",
+                  "width": "fill_container",
+                  "height": 46,
+                  "fill": "$primary",
+                  "cornerRadius": "$radius-full",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ZfYwg",
+                      "name": "ICSaveL",
+                      "fill": "$white",
+                      "content": "저장하기",
+                      "fontFamily": "$font-family",
+                      "fontSize": 14,
+                      "fontWeight": "$font-weight-bold"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "themes": {
