@@ -61,7 +61,7 @@ const Header = () => {
       >
         <HeaderAside />
         <h1 className="cursor-pointer absolute top-[20px] left-2/4 -translate-x-2/4 lg:static lg:translate-x-0">
-          <Link href="/" className="relative w-[80px] h-auto block">
+          <Link href="/" className="relative w-[30px] h-auto block">
             <Image src={PinkLogoImage} alt="logo" className="fill" priority />
           </Link>
         </h1>

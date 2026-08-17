@@ -8,7 +8,7 @@ const RegularLogin = ({ redirectPath = "/" }: { redirectPath?: string }) => {
   return (
     <div className="flex flex-col gap-6 w-full">
       <div className="flex flex-col gap-2">
-        <h2 className="relative w-20 h-auto">
+        <h2 className="relative w-9 h-auto">
           <Image src={LogoImage} alt="logo image" className="fill" />
         </h2>
         <h3 className="text-2xl font-bold">로그인</h3>

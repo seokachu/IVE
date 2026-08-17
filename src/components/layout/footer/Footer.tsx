@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-50 border-t border-gray-200 relative z-10">
       <div className="max-w-container m-auto py-10 px-5 flex flex-col items-center gap-5">
-        <h1 className="relative w-[80px] h-auto">
+        <h1 className="relative w-[36px] h-auto">
           <Image src={PinkLogoImage} alt="logo" className="fill" />
         </h1>
         <div className="flex flex-col items-center gap-1.5 text-center text-xs text-gray-400">
