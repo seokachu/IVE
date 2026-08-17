@@ -94,13 +94,11 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
   return (
     <Button
       onClick={handlePayment}
+      variant="plain"
       size="auto"
-      className="flex items-baseline justify-center text-center w-full py-2"
+      className="mt-5 h-14 w-full rounded-full bg-gradient-to-r from-purple-400 to-orange-300 text-base font-bold text-white transition-opacity hover:opacity-90"
     >
-      <strong className="text-lg lg:text-xl mr-[2px]">
-        {formatPrice(amount)}
-      </strong>
-      원 결제하기
+      {formatPrice(amount)}원 결제하기
     </Button>
   );
 };

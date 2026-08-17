@@ -5,6 +5,7 @@ import Link from "next/link";
 import useLoading from "@/hooks/useLoading";
 import CartListLoading from "../common/loading/CartListLoading";
 import { toast } from "@/hooks/use-toast";
+import { ShoppingCart, Truck } from "lucide-react";
 import SelectionControl from "../common/select/SelectionControl";
 import { useCartActions, useCartItems, useCheckoutActions, useSelectedItemIds } from "@/store/zustand";
 
@@ -39,7 +40,7 @@ const CartList = () => {
     }
   };
 
-  //선택삭제 버튼
+  //선택삭제 버튼 — 확인 없이 즉시 삭제 (시안 기준)
   const handleDeleteSelected = () => {
     if (selectedItems.length === 0) {
       toast({
@@ -57,7 +58,7 @@ const CartList = () => {
     });
   };
 
-  //전체삭제 확인 액션
+  //전체 비우기 확인 액션
   const handleConfirmDeleteAll = () => {
     localStorage.setItem("shopping_cart", JSON.stringify([]));
     setCartItems([]);
@@ -65,8 +66,7 @@ const CartList = () => {
   };
 
   return (
-    <div className="flex-[2] p-5 lg:p-10 border rounded-md bg-card shadow-sm h-fit">
-      <h2 className="font-bold text-lg lg:text-xl">장바구니</h2>
+    <div className="min-w-0 flex-1">
       {mounted && cartItems.length > 0 ? (
         <>
           <SelectionControl
@@ -75,27 +75,34 @@ const CartList = () => {
             onSelectAll={handleSelectAll}
             onDeleteSelected={handleDeleteSelected}
             onConfirm={handleConfirmDeleteAll}
-            title="장바구니 비우기"
-            description="장바구니의 모든 상품이 삭제됩니다. 정말 비우시겠습니까?"
+            title="장바구니를 비울까요?"
+            description="담아둔 상품이 모두 삭제돼요. 이 작업은 되돌릴 수 없어요."
             cancelText="취소"
             confirmText="비우기"
           />
-          <ul>
+          <ul className="mt-3 flex flex-col gap-3.5">
             {cartItems.map((item) => (
               <CartListItem key={item.id} item={item} />
             ))}
           </ul>
+          <div className="mt-3.5 flex items-center gap-2.5 rounded-xl bg-purple-50 px-4 py-3">
+            <Truck size={18} className="shrink-0 text-purple-400" aria-hidden />
+            <p className="text-[13px] text-gray-500">전 상품 무료배송 · 지금 주문하면 오늘 바로 출발해요</p>
+          </div>
         </>
       ) : (
-        <div className="flex items-center justify-center min-h-[500px]">
-          <div className="flex items-center justify-center flex-col gap-2">
-            <h3>장바구니가 비어있습니다.</h3>
-            <p className="text-gray-500 text-sm mb-5">원하는 상품을 담아보세요!</p>
+        <div className="flex min-h-[480px] items-center justify-center rounded-2xl border border-gray-200 bg-card">
+          <div className="flex flex-col items-center">
+            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-purple-50" aria-hidden>
+              <ShoppingCart size={26} className="text-purple-400" />
+            </span>
+            <h3 className="mt-5 text-lg font-bold">장바구니가 비어 있어요</h3>
+            <p className="mt-1.5 text-sm text-gray-500">마음에 드는 굿즈를 담아보세요!</p>
             <Link
               href="/shop"
-              className="border text-sm py-2 px-5 rounded-md border-purple text-purple hover:text-white hover:bg-purple transition-all ease-out duration-300"
+              className="mt-6 flex h-12 items-center rounded-full bg-purple-300 px-7 text-sm font-bold text-white transition-colors hover:bg-purple-400"
             >
-              쇼핑하기
+              굿즈샵 구경하러 가기
             </Link>
           </div>
         </div>

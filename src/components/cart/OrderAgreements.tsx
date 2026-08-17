@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { ChevronUp } from "lucide-react";
 import AgreementModal from "./AgreementModal";
 import AgreementCheckbox from "./AgreementCheckbox";
 import { useAgreements, useCheckoutActions } from "@/store/zustand";
@@ -44,7 +43,7 @@ const OrderAgreements = () => {
     }
   };
 
-  //모달창 열기
+  //약관 목록 펼치기/접기
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -60,45 +59,37 @@ const OrderAgreements = () => {
   };
 
   return (
-    <div>
-      <h2 className="font-bold border-b pb-4 mb-5">주문동의</h2>
-      <div className="text-sm space-y-2">
-        <div>
-          <div className="flex items-center justify-between cursor-pointer" onClick={handleToggle}>
-            <label className="flex items-center" onClick={(e) => e.stopPropagation()}>
-              <input
-                type="checkbox"
-                className="mr-2"
-                checked={agreements.main}
-                onChange={handleAgreementChange("main")}
-              />
-              &#91;필수&#93; 주문 내역에 대한 필수 동의
-            </label>
-            <Button variant="plain" size="auto" type="button" className="text-gray-500" aria-label={isOpen ? "접기" : "펼치기"}>
-              <ChevronUp
-                className={`transition-transform duration-300 ease-in-out ${isOpen ? "rotate-0" : "rotate-180"}`}
-              />
-            </Button>
-          </div>
-          {isOpen && (
-            <div className="pl-6 mt-3 space-y-2">
-              <AgreementCheckbox
-                modalType={() => handleOpenModal("privacy")}
-                onChange={handleAgreementChange("privacy")}
-                checked={agreements.privacy}
-                labelText="&#91;필수&#93; 개인정보 수집 및 이용 및 제 3자 제공 동의"
-              />
-              <AgreementCheckbox
-                modalType={() => handleOpenModal("refund")}
-                onChange={handleAgreementChange("refund")}
-                checked={agreements.refund}
-                labelText="&#91;필수&#93; 결제 이후 환불 및 취소 불가 동의"
-              />
-            </div>
-          )}
-        </div>
+    <div className="mt-5">
+      <div className="flex items-center justify-between">
+        <label className="flex cursor-pointer items-center gap-2 text-[13px] text-gray-500">
+          <input type="checkbox" checked={agreements.main} onChange={handleAgreementChange("main")} />
+          &#91;필수&#93; 주문 내역 확인 및 결제 동의
+        </label>
+        <Button
+          variant="plain"
+          size="auto"
+          onClick={handleToggle}
+          className="text-xs text-gray-400 underline underline-offset-2 hover:text-gray-500"
+        >
+          {isOpen ? "접기" : "약관 보기"}
+        </Button>
       </div>
-      <h3 className="text-gray-400 text-sm text-center my-3">본인은 만 14세 이상이며 주문내용을 확인하였습니다.</h3>
+      {isOpen && (
+        <div className="mt-2.5 flex flex-col gap-2 rounded-xl bg-gray-50 p-3.5">
+          <AgreementCheckbox
+            modalType={() => handleOpenModal("privacy")}
+            onChange={handleAgreementChange("privacy")}
+            checked={agreements.privacy}
+            labelText="&#91;필수&#93; 개인정보 수집 및 이용 및 제 3자 제공 동의"
+          />
+          <AgreementCheckbox
+            modalType={() => handleOpenModal("refund")}
+            onChange={handleAgreementChange("refund")}
+            checked={agreements.refund}
+            labelText="&#91;필수&#93; 결제 이후 환불 및 취소 불가 동의"
+          />
+        </div>
+      )}
       <AgreementModal type={selectedAgreement} isOpen={selectedAgreement !== null} onClose={handleCloseModal} />
     </div>
   );

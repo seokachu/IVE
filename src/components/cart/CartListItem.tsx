@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import DefaultImage from "@/assets/images/default_image.avif";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import Image from "next/image";
+import { X } from "lucide-react";
 import { useEffect, useId } from "react";
 import QuantitySelector from "../common/QuantitySelector";
 import { toast } from "@/hooks/use-toast";
@@ -106,54 +107,56 @@ const CartListItem = ({ item }: CartListItemProps) => {
   };
 
   return (
-    <li className="px-2 py-4 relative border-b">
-      <label htmlFor={`${item.id}-${id}`} className="flex">
-        <input
-          onChange={handleCheck}
-          checked={isChecked}
-          type="checkbox"
-          id={`${item.id}-${id}`}
-          className="w-4 h-4 flex-shrink-0"
-        />
+    <li className="relative rounded-2xl border border-gray-200 bg-card p-5">
+      <label htmlFor={`${item.id}-${id}`} className="flex items-center gap-4">
+        <input onChange={handleCheck} checked={isChecked} type="checkbox" id={`${item.id}-${id}`} className="shrink-0" />
         <div
           onClick={onClickDetailPage}
-          className="relative w-[80px] h-[80px] overflow-hidden rounded-md mx-5 flex-shrink-0 border cursor-pointer"
+          className="relative h-[88px] w-[88px] shrink-0 cursor-pointer overflow-hidden rounded-xl border border-gray-200"
         >
           <Image
             src={item.thumbnail || DefaultImage}
             alt={item.title}
-            className="object-cover fill"
-            width={80}
-            height={80}
+            className="h-full w-full object-cover"
+            width={88}
+            height={88}
           />
         </div>
-        <div className="flex w-full lg:gap-3 lg:flex-row flex-col lg:items-center lg:justify-between">
-          <div className="flex-[4] mr-9 flex flex-col justify-between">
-            <h3 className="flex flex-wrap gap-1 lg:items-center flex-col lg:flex-row">
-              <span className="font-bold shrink-0">{item.title}</span>
-              <span className="text-sm lg:text-xs text-gray-500 shrink-0">{item.delivery_info}</span>
-            </h3>
-            <p className="text-gray-500 text-sm flex flex-wrap flex-col lg:flex-row gap-1 my-1 uppercase">
-              <span className="shrink-0">사이즈 : {item.size}</span>
-              <span className="hidden lg:block">&#47;</span>
-              <span className="shrink-0">색상 : {item.color}</span>
-            </p>
-            <QuantitySelector
-              className="text-sm text-gray-400 mr-3"
-              quantity={item.quantity}
-              increase={handleIncrease}
-              decrease={handleDecrease}
-            />
-          </div>
-          <div className="lg:text-right flex-1">
-            <span className="mr-1 text-purple font-bold">{item.discount_rate}%</span>
-            <s className="text-gray-300 text-sm mr-1 lg:mr-0 text-nowrap">{formatPrice(price)}원</s>
-            <strong>{formatPrice(totalDiscountPrice)}원</strong>
-          </div>
+        <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+          <h3 className="flex flex-wrap items-center gap-2 pr-6">
+            <span className="text-[15px] font-bold">{item.title}</span>
+            {item.delivery_info && (
+              <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">
+                {item.delivery_info}
+              </span>
+            )}
+          </h3>
+          <p className="text-[13px] uppercase text-gray-400">
+            사이즈 {item.size} · 색상 {item.color}
+          </p>
+          <QuantitySelector
+            className="mt-1"
+            quantity={item.quantity}
+            increase={handleIncrease}
+            decrease={handleDecrease}
+          />
+        </div>
+        <div className="flex shrink-0 flex-col items-end gap-0.5 pr-1 lg:pr-4">
+          <span className="flex items-center gap-1.5 text-[13px]">
+            <strong className="font-bold text-orange-500">{item.discount_rate}%</strong>
+            <s className="text-gray-300">{formatPrice(price)}원</s>
+          </span>
+          <strong className="text-lg font-bold">{formatPrice(totalDiscountPrice)}원</strong>
         </div>
       </label>
-      <Button variant="plain" size="auto" onClick={handleDeleteItem} className="absolute right-2 top-[10px] hover:text-purple">
-        &times;
+      <Button
+        variant="plain"
+        size="auto"
+        onClick={handleDeleteItem}
+        className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full text-gray-400 hover:bg-gray-50 hover:text-gray-500"
+        aria-label={`${item.title} 삭제`}
+      >
+        <X size={15} />
       </Button>
     </li>
   );

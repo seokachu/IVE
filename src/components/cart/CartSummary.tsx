@@ -36,20 +36,23 @@ const CartSummary = () => {
   const totalDiscountAmount = totalOriginalPrice - totalDiscountedPrice;
 
   return mounted ? (
-    <div className="lg:sticky lg:top-5 flex-1 border rounded-md bg-card shadow-sm p-5 lg:p-10 h-fit">
-      <OrderPriceSummary
-        totalDiscountedPrice={totalDiscountedPrice}
-        totalOriginalPrice={totalOriginalPrice}
-        totalDiscountAmount={totalDiscountAmount}
-      />
+    <aside className="flex w-full flex-col gap-4 lg:sticky lg:top-24 lg:w-[400px] lg:shrink-0">
+      <div className="rounded-[20px] border border-gray-200 bg-card p-7 shadow-[0_12px_32px_rgba(169,79,192,0.10)]">
+        <OrderPriceSummary
+          totalDiscountedPrice={totalDiscountedPrice}
+          totalOriginalPrice={totalOriginalPrice}
+          totalDiscountAmount={totalDiscountAmount}
+        />
+        <OrderAgreements />
+        <PaymentButton
+          amount={totalDiscountedPrice}
+          orderName={`${selectedCartItems[0]?.title} 외 ${selectedCartItems.length - 1}건`}
+        />
+        <p className="mt-3.5 text-center text-xs text-gray-400">본인은 만 14세 이상이며 주문 내용을 확인했어요</p>
+      </div>
       <OrderCustomerInfo />
       <OrderShippingInfo />
-      <OrderAgreements />
-      <PaymentButton
-        amount={totalDiscountedPrice}
-        orderName={`${selectedCartItems[0]?.title} 외 ${selectedCartItems.length - 1}건`}
-      />
-    </div>
+    </aside>
   ) : (
     <CartSummarySkeleton />
   );

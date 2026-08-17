@@ -5,17 +5,18 @@ const OrderPaymentInfo = ({ item }: PaymentDetailsProps) => {
   return (
     <>
       <li className="flex justify-between">
-        <span className="text-gray-500">총 주문 금액 :</span>
-        <span>{formatPrice(Number(item?.amount))} 원</span>
+        <span className="text-gray-400">총 주문 금액</span>
+        <span className="font-semibold">{formatPrice(Number(item?.amount))}원</span>
       </li>
-      <li className="flex justify-between border-b pb-2">
-        <span className="text-gray-500">총 배송비 :</span>
-        {/* 추후 수정필요 */}
-        <span>0 원</span>
+      <li className="flex justify-between">
+        <span className="text-gray-400">배송비</span>
+        <span className="font-semibold">무료</span>
       </li>
-      <li className="flex justify-between font-medium items-center">
-        <span className="text-gray-500">총 결제 금액 :</span>
-        <span className="font-bold text-base">{formatPrice(Number(item?.amount))} 원</span>
+      <li className="flex items-end justify-between border-t border-gray-200 pt-2.5 font-medium">
+        <span className="text-gray-400">총 결제 금액</span>
+        <span className="text-base font-bold text-purple-500 dark:text-purple-300">
+          {formatPrice(Number(item?.amount))}원
+        </span>
       </li>
     </>
   );

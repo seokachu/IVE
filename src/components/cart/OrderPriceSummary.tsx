@@ -7,23 +7,30 @@ const OrderPriceSummary = ({
   totalDiscountAmount,
 }: OrderPriceSummaryProps) => {
   return (
-    <div className="mb-12">
-      <h2 className="font-bold text-lg lg:text-xl mb-5">결제 금액</h2>
-      <div className="border-b pb-3 flex justify-between items-center">
-        <p>총 결제 금액</p>
-        <p>
-          <strong className="text-lg lg:text-xl mr-1 text-purple">{formatPrice(totalDiscountedPrice)}</strong>원
-        </p>
-      </div>
-      <div className="pt-5">
-        <p className="mb-1 flex justify-between items-center">
-          상품 금액
-          <span>{formatPrice(totalOriginalPrice)}원</span>
-        </p>
-        <p className="flex justify-between items-center">
-          총 할인 금액
-          <span className="text-orange-500">-{formatPrice(totalDiscountAmount)}원</span>
-        </p>
+    <div>
+      <h2 className="text-lg font-bold">결제 금액</h2>
+      <dl className="mt-4 flex flex-col gap-2.5 text-sm">
+        <div className="flex items-center justify-between">
+          <dt className="text-gray-500">상품 금액</dt>
+          <dd className="font-semibold">{formatPrice(totalOriginalPrice)}원</dd>
+        </div>
+        <div className="flex items-center justify-between">
+          <dt className="text-gray-500">할인 금액</dt>
+          <dd className="font-semibold text-orange-500">-{formatPrice(totalDiscountAmount)}원</dd>
+        </div>
+        <div className="flex items-center justify-between">
+          <dt className="text-gray-500">배송비</dt>
+          <dd className="font-semibold">무료</dd>
+        </div>
+      </dl>
+      <div className="mt-4 flex items-end justify-between border-t border-gray-200 pt-4">
+        <span className="text-sm font-semibold">총 결제 금액</span>
+        <span className="flex items-end gap-0.5">
+          <strong className="text-[26px] font-bold leading-none text-purple-500 dark:text-purple-300">
+            {formatPrice(totalDiscountedPrice)}
+          </strong>
+          <span className="text-[15px] font-semibold leading-tight">원</span>
+        </span>
       </div>
     </div>
   );

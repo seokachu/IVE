@@ -1,5 +1,6 @@
 "use client";
 import { useId, useState } from "react";
+import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ConfirmModal from "../modal/ConfirmModal";
 
@@ -35,37 +36,43 @@ const SelectionControl = ({
   };
 
   return (
-    <div className="flex text-sm items-center justify-between mt-5 pb-5 border-b border-gray-300">
-      <label htmlFor={`selectAll-${id}`} className="cursor-pointer">
+    <div className="flex items-center justify-between px-1 pb-1 text-sm">
+      <label htmlFor={`selectAll-${id}`} className="flex cursor-pointer items-center gap-2">
         <input
           type="checkbox"
           id={`selectAll-${id}`}
-          className="mr-[6px] w-4 h-4 translate-y-[3px]"
           checked={selectedCount === totalItems}
           onChange={onSelectAll}
         />
-        전체선택 {selectedCount}/{totalItems}
+        <span className="font-semibold">전체선택</span>
+        <span className="text-gray-400">
+          {selectedCount}/{totalItems}
+        </span>
       </label>
       <div className="flex gap-2">
         <Button
-          variant="outlineBrand" size="auto"
-          className="px-2 py-1 border rounded-md text-xs lg:text-sm"
+          variant="plain"
+          size="auto"
+          className="rounded-full border border-gray-300 px-3.5 py-1.5 text-[13px] text-gray-500 hover:bg-gray-50"
           onClick={onDeleteSelected}
         >
           선택삭제
         </Button>
         <Button
+          variant="plain"
           size="auto"
-          className="px-2 py-1 rounded-md text-xs lg:text-sm"
+          className="flex items-center gap-1.5 rounded-full bg-[#e7242417] px-3.5 py-1.5 text-[13px] font-semibold text-[#E72424] hover:bg-[#e7242429]"
           onClick={handleDeleteAll}
         >
-          전체삭제
+          <Trash2 size={13} />
+          전체 비우기
         </Button>
       </div>
       {isModal && (
         <ConfirmModal
           isOpen={setIsModal}
           onConfirm={onConfirm}
+          variant="destructive"
           title={title}
           description={description}
           cancelText={cancelText}
