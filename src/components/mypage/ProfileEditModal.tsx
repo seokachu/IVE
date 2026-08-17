@@ -12,6 +12,7 @@ import { uploadAvatar } from "@/lib/supabase/storage";
 import { useUpdateUserSession } from "@/hooks/useUpdateUserSession";
 import { toast } from "@/hooks/use-toast";
 import { useSession } from "@/store/zustand";
+import { getAvatarUrl, getDisplayName } from "@/utils/userProfile";
 
 interface ProfileEditModalProps {
   isOpen: boolean;
@@ -29,7 +30,7 @@ const ProfileEditModal = ({ isOpen, onClose }: ProfileEditModalProps) => {
   const form = useForm<NicknameType>({
     mode: "onChange",
     resolver: zodResolver(userSchemas.myPageNicknameSchema),
-    defaultValues: { nickname: session?.user.user_metadata.name || "" },
+    defaultValues: { nickname: getDisplayName(session?.user) },
   });
 
   const {
@@ -55,12 +56,19 @@ const ProfileEditModal = ({ isOpen, onClose }: ProfileEditModalProps) => {
     e.target.value = "";
   };
 
-  //크롭 저장 → 즉시 업로드
+  const closeCropper = () => {
+    setIsCropperOpen(false);
+    if (src) URL.revokeObjectURL(src);
+    setSrc(null);
+  };
+
+  //크롭 저장 → 즉시 업로드 (커스텀 키에 저장해야 소셜 재로그인 시 프로바이더 이미지로 원복되지 않음)
+  //실패 시 크로퍼를 열어 둬 재시도할 수 있게 한다
   const handleSaveImage = async (blob: Blob) => {
     try {
       const avatarUrl = await uploadAvatar(blob);
-      await updateUserAndRefresh({ data: { avatar_url: avatarUrl } });
-      setIsCropperOpen(false);
+      await updateUserAndRefresh({ data: { custom_avatar_url: avatarUrl } });
+      closeCropper();
       toast({ title: "프로필 이미지가 변경되었습니다." });
     } catch (error) {
       if (error instanceof Error) {
@@ -69,16 +77,16 @@ const ProfileEditModal = ({ isOpen, onClose }: ProfileEditModalProps) => {
     }
   };
 
-  //저장 → 닉네임이 바뀌었을 때만 업데이트
+  //저장 → 닉네임이 바뀌었을 때만 업데이트 (커스텀 키에 저장해야 소셜 재로그인 시 프로바이더 이름으로 원복되지 않음)
   const onSubmit = async (data: NicknameType) => {
-    if (data.nickname === session?.user.user_metadata.name) {
+    if (data.nickname === getDisplayName(session?.user)) {
       onClose();
       return;
     }
 
     try {
       await updateNickname(data.nickname);
-      await updateUserAndRefresh({ data: { name: data.nickname } });
+      await updateUserAndRefresh({ data: { nickname: data.nickname } });
       toast({ title: "닉네임이 변경 되었습니다." });
       onClose();
     } catch (error) {
@@ -117,11 +125,8 @@ const ProfileEditModal = ({ isOpen, onClose }: ProfileEditModalProps) => {
             <ImageCropper
               imageSrc={src}
               isOpen={isCropperOpen}
-              defaultImage={session?.user.user_metadata.avatar_url}
-              onClose={() => {
-                setIsCropperOpen(false);
-                setSrc(null);
-              }}
+              defaultImage={getAvatarUrl(session?.user)}
+              onClose={closeCropper}
               onSave={handleSaveImage}
             />
           </div>

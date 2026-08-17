@@ -1,5 +1,6 @@
 "use client";
 import { getDiscountedPrice } from "@/utils/calculateDiscount";
+import { calculateShipping } from "@/utils/calculateShipping";
 import { useEffect, useState } from "react";
 import CartSummarySkeleton from "../common/loading/CartSummarySkeleton";
 import PaymentButton from "../payment/PaymentButton";
@@ -40,7 +41,15 @@ const CartSummary = () => {
 
   //멤버십 상시 할인 (DIVE+ 5% / VIP 10%) — 최종 결제 금액에 반영
   const membershipDiscount = getMembershipDiscount(tier, totalDiscountedPrice);
-  const finalAmount = totalDiscountedPrice - membershipDiscount;
+
+  //배송비는 상품 할인까지 적용한 금액을 기준으로 판단 (멤버십 할인으로 기준선이 흔들리지 않게)
+  const shipping = calculateShipping({
+    items: selectedCartItems,
+    orderAmount: totalDiscountedPrice,
+    tier,
+  });
+
+  const finalAmount = totalDiscountedPrice - membershipDiscount + shipping.fee;
 
   return mounted ? (
     <aside className="flex w-full flex-col gap-4 lg:sticky lg:top-24 lg:w-[400px] lg:shrink-0">
@@ -51,10 +60,12 @@ const CartSummary = () => {
           totalDiscountAmount={totalDiscountAmount}
           membershipDiscount={membershipDiscount}
           membershipTier={tier}
+          shipping={shipping}
         />
         <OrderAgreements />
         <PaymentButton
           amount={finalAmount}
+          shippingFee={shipping.fee}
           orderName={`${selectedCartItems[0]?.title} 외 ${selectedCartItems.length - 1}건`}
         />
         <p className="mt-3.5 text-center text-xs text-gray-400">본인은 만 14세 이상이며 주문 내용을 확인했어요</p>

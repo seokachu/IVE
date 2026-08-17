@@ -20,6 +20,8 @@ export interface OrderPriceSummaryProps {
   /** 멤버십 상시 할인 (DIVE+ 5% / VIP 10%) — 무료 회원은 0 */
   membershipDiscount?: number;
   membershipTier?: import("@/types/mypage").MembershipTier;
+  /** 조건부 무료배송 계산 결과 — 없으면 배송비 0원으로 표시 */
+  shipping?: import("@/utils/calculateShipping").ShippingResult;
 }
 
 export interface OrderCustomerInfoItemProps {

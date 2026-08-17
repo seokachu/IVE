@@ -2,7 +2,8 @@ import { supabase } from "@/lib/supabase/client";
 import type { MembershipRow, MembershipTier } from "@/types/mypage";
 
 //클라이언트에 내려도 되는 컬럼만 — billing_key·customer_key는 서버(API 라우트) 전용
-const SAFE_COLUMNS = "id, user_id, tier, status, price, card_company, card_number, started_at, next_billing_at, canceled_at, created_at";
+const SAFE_COLUMNS =
+  "id, user_id, tier, status, price, card_company, card_number, pending_tier, started_at, next_billing_at, canceled_at, created_at";
 
 //내 멤버십 조회 — 행이 없거나 테이블 미생성이면 null(무료 회원)로 폴백
 export const getMyMembership = async (userId: string): Promise<MembershipRow | null> => {

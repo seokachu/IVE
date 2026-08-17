@@ -26,6 +26,8 @@ export interface OrderSummaryProps {
     firstItemName: string;
     firstOrderImage: string;
     isAllConfirmed: boolean;
+    /** payments.delivery_status — 구매확정 전 단계 표기용 */
+    deliveryStatus?: string | null;
   };
 }
 
@@ -152,6 +154,8 @@ export interface MembershipRow {
   price: number;
   card_company: string | null;
   card_number: string | null;
+  //다운그레이드 예약 티어 — 다음 결제일에 반영되고, 없으면 null
+  pending_tier: Exclude<MembershipTier, "free"> | null;
   started_at: string;
   next_billing_at: string;
   canceled_at: string | null;

@@ -93,14 +93,16 @@ export const usePaymentConfirmation = ({
           return;
         }
 
-        //결제 데이터 생성
+        //결제 데이터 생성 — 배송비는 결제 요청 시 저장해둔 값을 그대로 옮긴다
+        const storedShippingFee = Number(localStorage.getItem("shipping_fee") ?? 0);
         const paymentData = createPaymentData(
           paymentInfo,
           session.user.id,
           orderId,
           amount,
           orderName,
-          address
+          address,
+          Number.isFinite(storedShippingFee) ? storedShippingFee : 0
         );
 
         //체크아웃 아이템 ID 목록
@@ -177,10 +179,11 @@ export const usePaymentConfirmation = ({
     setCheckoutItemsProcessed([]);
   }, [checkoutItemsProcessed, cleanupCart]);
 
-  //결제 성공 시 order_name 정리
+  //결제 성공 시 order_name·배송비 정리
   useEffect(() => {
     if (isPaymentProcessed) {
       localStorage.removeItem("order_name");
+      localStorage.removeItem("shipping_fee");
     }
   }, [isPaymentProcessed]);
 

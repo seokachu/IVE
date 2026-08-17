@@ -9,7 +9,7 @@ import useAuthGuard from "@/hooks/useAuthGuard";
 import { useAgreements, useSelectedItemIds, useSession } from "@/store/zustand";
 import type { PaymentButtonProps } from "@/types/payment";
 
-const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
+const PaymentButton = ({ amount, orderName, shippingFee = 0 }: PaymentButtonProps) => {
   const session = useSession();
   const agreements = useAgreements();
   const selectedItems = useSelectedItemIds();
@@ -66,6 +66,8 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
     try {
       localStorage.setItem("checkout_items", JSON.stringify(selectedItems));
       localStorage.setItem("order_name", orderName);
+      //결제 성공 페이지에서 결제 레코드에 남길 배송비 — 티어·구성이 바뀌면 사후 재계산이 불가능하다
+      localStorage.setItem("shipping_fee", String(shippingFee));
 
       const tossPayments = await loadTossPayments(
         process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY!
@@ -80,6 +82,7 @@ const PaymentButton = ({ amount, orderName }: PaymentButtonProps) => {
       });
     } catch (error) {
       localStorage.removeItem("checkout_items");
+      localStorage.removeItem("shipping_fee");
 
       if (error instanceof Error) {
         toast({

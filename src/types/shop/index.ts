@@ -12,6 +12,8 @@ export type ShopMenuProps = Pick<ShopListItem, "id">;
 //목록·캐러셀 공용 상품 타입 — 리뷰 수·평균 별점을 목록 조회 시 함께 계산해 담는다
 export interface GoodsItem extends Omit<ShopListItem, "review_count"> {
   review_count: number;
+  /** 최근 GOODS_HOT.WINDOW_DAYS일 안에 달린 리뷰 수 — HOT 뱃지 판정용 */
+  recent_review_count: number;
   average_rating: number;
 }
 

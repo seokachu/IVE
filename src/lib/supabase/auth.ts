@@ -83,15 +83,9 @@ export const signOut = async () => {
   }
 };
 
-//닉네임 수정
+//닉네임 수정 — public.user 테이블만 갱신 (세션 metadata는 호출부에서 nickname 커스텀 키로 갱신)
 export const updateNickname = async (name: string) => {
   try {
-    const { data: authData, error: authError } = await supabase.auth.updateUser({
-      data: { name },
-    });
-
-    if (authError) throw authError;
-
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -100,8 +94,6 @@ export const updateNickname = async (name: string) => {
     const { error: userError } = await supabase.from("user").update({ name: name }).eq("id", user.id);
 
     if (userError) throw userError;
-
-    return authData;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`닉네임 변경에 실패했습니다. ${error.message}`);

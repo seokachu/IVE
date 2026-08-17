@@ -13,6 +13,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
+import { getDisplayName } from "@/utils/userProfile";
 import {
   ChevronRight,
   Crown,
@@ -101,7 +102,7 @@ const HeaderAside = () => {
                   />
                   <span className="min-w-0 flex-1">
                     <span className="flex items-center gap-1.5">
-                      <span className="truncate text-sm font-bold">{session.user.user_metadata.name}</span>
+                      <span className="truncate text-sm font-bold">{getDisplayName(session.user)}</span>
                       <MembershipBadge tier={tier} size="sm" />
                     </span>
                     <span className="mt-0.5 block truncate text-[11px] text-gray-400">{session.user.email}</span>

@@ -24,7 +24,9 @@ export async function GET(request: NextRequest) {
   let failed = 0;
 
   for (const membership of due || []) {
-    const plan = MEMBERSHIP_PRICES[membership.tier];
+    //다운그레이드 예약이 있으면 이번 주기부터 그 플랜으로 결제한다
+    const tier = membership.pending_tier ?? membership.tier;
+    const plan = MEMBERSHIP_PRICES[tier];
     try {
       await chargeBilling({
         billingKey: membership.billing_key,
@@ -34,7 +36,12 @@ export async function GET(request: NextRequest) {
       });
       await admin
         .from("memberships")
-        .update({ next_billing_at: getNextBillingDate(new Date(membership.next_billing_at)).toISOString() })
+        .update({
+          tier,
+          price: plan.price,
+          pending_tier: null,
+          next_billing_at: getNextBillingDate(new Date(membership.next_billing_at)).toISOString(),
+        })
         .eq("id", membership.id);
       charged += 1;
     } catch {

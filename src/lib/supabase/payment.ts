@@ -17,14 +17,26 @@ export const getPaymentByOrderId = async (orderId: string) => {
   }
 };
 
-//주문 id 목록의 실제 결제 금액 맵 — 결제 내역 요약이 멤버십 할인 반영액과 일치하도록
-export const getPaymentAmountsByOrderIds = async (orderIds: string[]): Promise<Record<string, number>> => {
+export interface OrderPaymentSummary {
+  amount: number;
+  deliveryStatus: string | null;
+}
+
+//주문 id 목록의 실제 결제 금액·배송 상태 맵 — 결제 내역 요약이 멤버십 할인 반영액과 일치하도록
+export const getPaymentSummariesByOrderIds = async (
+  orderIds: string[]
+): Promise<Record<string, OrderPaymentSummary>> => {
   if (orderIds.length === 0) return {};
 
-  const { data, error } = await supabase.from("payments").select("order_id, amount").in("order_id", orderIds);
+  const { data, error } = await supabase
+    .from("payments")
+    .select("order_id, amount, delivery_status")
+    .in("order_id", orderIds);
 
   if (error) return {};
-  return Object.fromEntries((data || []).map((row) => [row.order_id, Number(row.amount)]));
+  return Object.fromEntries(
+    (data || []).map((row) => [row.order_id, { amount: Number(row.amount), deliveryStatus: row.delivery_status }])
+  );
 };
 
 //결제데이터 저장하기

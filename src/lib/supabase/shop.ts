@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase/client";
 import { getDiscountedPrice } from "@/utils/calculateDiscount";
+import { countRecentReviews } from "@/utils/calculateBadge";
 import type { GoodsItem, SortOptionList } from "@/types/shop";
 
 const CAROUSEL_ITEM_COUNT = 12;
@@ -9,7 +10,7 @@ const CAROUSEL_ITEM_COUNT = 12;
 export const getGoodsShop = async (): Promise<GoodsItem[]> => {
   const { data, error } = await supabase.from("goods").select(`
       *,
-      goods_reviews(rating)
+      goods_reviews(rating, created_at)
     `);
 
   if (error) {
@@ -17,7 +18,7 @@ export const getGoodsShop = async (): Promise<GoodsItem[]> => {
   }
 
   return (data ?? []).map(({ goods_reviews, ...item }) => {
-    const reviews: { rating: number | null }[] = goods_reviews ?? [];
+    const reviews: { rating: number | null; created_at: string | null }[] = goods_reviews ?? [];
     const ratings = reviews
       .map((review) => review.rating)
       .filter((rating): rating is number => typeof rating === "number");
@@ -26,7 +27,13 @@ export const getGoodsShop = async (): Promise<GoodsItem[]> => {
         ? Math.round((ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length) * 10) / 10
         : 0;
 
-    return { ...item, review_count: reviews.length, average_rating: average };
+    //HOT 뱃지는 누적이 아니라 최근 반응으로 판단한다 (calculateBadge 참고)
+    return {
+      ...item,
+      review_count: reviews.length,
+      recent_review_count: countRecentReviews(reviews),
+      average_rating: average,
+    };
   });
 };
 

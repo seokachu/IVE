@@ -18,7 +18,7 @@ export const uploadAvatar = async (file: Blob) => {
     });
 
     if (uploadError) {
-      throw new Error("이미지 업로드에 실패했습니다.");
+      throw new Error(`이미지 업로드에 실패했습니다. ${uploadError.message}`);
     }
 
     const {

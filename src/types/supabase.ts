@@ -522,6 +522,7 @@ export type Database = {
           postal_code: string | null;
           recipient_name: string | null;
           recipient_phone: string | null;
+          shipping_fee: number;
           status: string | null;
           user_id: string | null;
         };
@@ -539,6 +540,7 @@ export type Database = {
           postal_code?: string | null;
           recipient_name?: string | null;
           recipient_phone?: string | null;
+          shipping_fee?: number;
           status?: string | null;
           user_id?: string | null;
         };
@@ -556,6 +558,7 @@ export type Database = {
           postal_code?: string | null;
           recipient_name?: string | null;
           recipient_phone?: string | null;
+          shipping_fee?: number;
           status?: string | null;
           user_id?: string | null;
         };
