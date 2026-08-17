@@ -11,7 +11,7 @@ const SignUp = () => {
     <main className="w-full h-[100dvh] lg:h-screen flex items-center justify-center">
       <section className="w-[375px] max-w-[375px] px-5">
         <div className="flex flex-col gap-2 mb-6">
-          <h2 className="relative w-20 h-auto">
+          <h2 className="relative w-9 h-auto">
             <Image src={LogoImage} alt="logo image" className="fill" />
           </h2>
           <h3 className="text-2xl font-bold">회원가입</h3>

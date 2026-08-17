@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 <title>IVE로 DIVE — 기능명세서 v2</title>
 <style>
   :root {
@@ -122,7 +123,7 @@
   <table class="meta-table">
     <tr><th>문서 버전</th><td>v2 — Draft (리뉴얼 진행 중)</td></tr>
     <tr><th>서비스명</th><td>IVE로 DIVE (<a href="https://ive-three.vercel.app">ive-three.vercel.app</a>) · Expo 하이브리드 앱(Android WebView, <code>seokachu/ive-app</code>) 병행</td></tr>
-    <tr><th>문서 기준</th><td>2026 리뉴얼 진행 중 — dev 브랜치 커밋 <code>f7f3353</code> (2026-08-17) · 마이페이지 · DIVE 멤버십 · <b>모바일 대응(반응형 · 드로어 메뉴)</b> 반영</td></tr>
+    <tr><th>문서 기준</th><td>2026 리뉴얼 진행 중 — dev 브랜치 커밋 <code>a722bd0</code> (2026-08-17) · 마이페이지 · DIVE 멤버십 · 모바일 대응(반응형 · 드로어 메뉴) · <b>2026 로고 리브랜딩(REVIVE+) · 테마 반응형 파비콘</b> 반영</td></tr>
     <tr><th>작성일</th><td>2026-07-29 생성 · 2026-08-17 갱신 (음악 · 소식 · 굿즈샵 상세 · 자유게시판 · 장바구니/결제 · 404 · 마이페이지 리디자인 + DIVE 멤버십 + 모바일 대응 반영)</td></tr>
     <tr><th>범위</th><td>메인 · 음악 · 소식 · 인증 · 자유게시판 · 굿즈샵 · 장바구니/결제 · 마이페이지 · DIVE 멤버십 · 푸시 알림 · 디자인 시스템 · 공통 UI · 모바일 대응</td></tr>
     <tr><th>기술 스택</th><td>Next.js 16 (App Router, proxy) · React 19 · Supabase(<code>@supabase/ssr</code>) · Zustand · TanStack Query · Tailwind CSS · lucide-react · Tiptap v3(에디터) · 토스페이먼츠 · Expo Push · pnpm · Playwright E2E · 외부 API(네이버 API Hub 검색 · KOPIS · iTunes Search · Google News RSS · YouTube RSS) · Vercel Cron · GitHub Actions</td></tr>
@@ -190,7 +191,7 @@
   <h3>2-1. 헤더 (데스크톱)</h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
-    <tr><td>COM-01</td><td>로고 / 홈 이동</td><td>좌측 로고 클릭 시 메인(<code>/</code>)으로 이동.</td><td>2026-08 리디자인: 테마·스크롤 상태와 무관하게 브랜드 핑크(<code>#f465a5</code>) 로고로 통일.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-01</td><td>로고 / 홈 이동</td><td>좌측 로고 클릭 시 메인(<code>/</code>)으로 이동.</td><td>2026-08 리디자인: 테마·스크롤 상태와 무관하게 브랜드 핑크(<code>#f465a5</code>) 로고로 통일. 2026-08-17 마크를 <b>2026 공식 리브랜딩(REVIVE+) 세로형 로고</b>(V 안 별 커팅)로 교체 — 헤더 30px · 푸터 36px · 드로어 34px 폭.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>COM-02</td><td>스크롤 반응 헤더</td><td>메인 페이지에서는 투명 배경으로 고정(fixed)되며, 앨범 섹션에 도달하면 흰 배경 + 그림자 스타일로 전환.</td><td>스크롤 감지는 100ms 스로틀. 메인 외 페이지는 항상 흰 배경(relative).</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>COM-03</td><td>GNB 메뉴</td><td>소식(<code>/news</code>) · 음악(<code>/discography</code>) · 굿즈샵(<code>/shop</code>) · 자유게시판(<code>/board</code>) 4개 메뉴. 데스크톱(lg 이상)에서만 노출.</td><td>현재 경로가 해당 메뉴로 시작하면(하위 경로 포함) 굵은 글씨로 활성 표시. 우측 로그인은 보라 pill 버튼(비로그인 시).</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>COM-04</td><td>장바구니 아이콘 · 뱃지</td><td>장바구니(<code>/cart</code>) 이동 아이콘. 담긴 <b>상품 종류 수</b>를 브랜드 오렌지 원형 뱃지로 표시. 장바구니 페이지에서는 아이콘이 보라로 활성 표시.</td><td>수량 합계가 아닌 고유 품목 수. 0개면 뱃지 숨김. 하이드레이션 전에는 미표시. (2026-08 리디자인에서 빨강 → 오렌지)</td><td><span class="auth any">전체</span></td></tr>
@@ -220,6 +221,7 @@
     <tr><td>COM-18</td><td>공유 시트</td><td>게시글 상세 · 상품 상세의 공유 버튼을 누르면 공유 시트가 열린다: <b>카카오톡</b>(카카오 SDK 스크랩 공유) · <b>링크 복사</b> · <b>더보기</b>(기기 네이티브 공유) 원형 버튼 3종 + 현재 URL 표시 바(우측 “복사” 필).</td><td>“더보기”는 네이티브 공유를 지원하는 기기에서만 노출. 링크 복사 성공 시 <span class="msg">“링크가 복사되었습니다”</span>, 실패 시 <span class="msg">“링크 복사에 실패했습니다”</span>. 카카오 키 미설정 시 <span class="msg">“카카오톡 공유를 사용할 수 없습니다”</span> 경고 토스트.</td><td><span class="auth any">전체</span></td></tr>
     <tr><td>COM-19</td><td>수정 · 삭제 액션 (공통)</td><td>본인 리소스에 노출되는 [수정 · 삭제] 필 버튼 쌍을 공통화 — 수정은 중립 아웃라인(연필), 삭제는 붉은 틴트(휴지통)이며 삭제 클릭 시 destructive 확인 모달(COM-14)로 연결된다. 댓글·대댓글(작은 사이즈), 마이페이지 배송지 카드(기본 사이즈)에 사용.</td><td>확인 모달의 제목·설명은 호출부에서 지정(기본값 <span class="msg">“삭제할까요? / 삭제한 내용은 되돌릴 수 없어요.”</span>).</td><td><span class="auth owner">작성자</span></td></tr>
     <tr><td>COM-20</td><td>빈 상태 (공통 패턴)</td><td>목록이 비었을 때 <b>파스텔 원형 아이콘 + 제목 + 설명 + (선택) CTA 버튼</b> 형태로 통일해 안내. 게시판(글 없음·검색 결과 없음·공지 탭·비로그인), 굿즈샵 리뷰, 장바구니, 마이페이지 4개 목록에 각각 다른 문구로 적용.</td><td>안내·행동 유도는 보라 톤, 검색 결과 없음 같은 중립 상황은 회색 톤.</td><td><span class="auth any">전체</span></td></tr>
+    <tr><td>COM-21</td><td>파비콘 · 브랜드 아이콘</td><td>REVIVE+ 마크를 담은 스쿼클 파비콘(<code>src/app/icon.svg</code>)이 브라우저 테마에 따라 자동 전환 — 라이트: 핑크→보라 그라데이션 + 화이트 마크, 다크: 다크 배경 + 핑크 마크. 구형 브라우저는 <code>favicon.ico</code>(16/32/48 멀티 사이즈) 폴백.</td><td>기능명세서 문서(<code>/docs</code>)와 스토리북(manager-head)도 동일 파비콘 사용. 카카오·구글 OAuth 동의 화면 앱 로고도 같은 아이콘으로 등록.</td><td><span class="auth any">전체</span></td></tr>
   </table>
 </section>
 
@@ -689,7 +691,7 @@
 </section>
 
 <footer class="foot">
-  IVE로 DIVE 기능명세서 v2 (Draft) · 기준 커밋 <code>f7f3353</code> (2026 리뉴얼 진행 중) · 2026-07-29 생성 · 2026-08-17 갱신 · <a href="./index.html">기능명세서 아카이브</a> · <a href="./spec-v1.html">v1 보기</a> · <a href="./design.html">디자인 시스템 · 시안</a>
+  IVE로 DIVE 기능명세서 v2 (Draft) · 기준 커밋 <code>a722bd0</code> (2026 리뉴얼 진행 중) · 2026-07-29 생성 · 2026-08-17 갱신 · <a href="./index.html">기능명세서 아카이브</a> · <a href="./spec-v1.html">v1 보기</a> · <a href="./design.html">디자인 시스템 · 시안</a>
 </footer>
 
 </div>

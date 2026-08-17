@@ -77,7 +77,7 @@ const HeaderAside = () => {
         </SheetTrigger>
         <SheetContent side="left" className="flex w-[320px] max-w-[85vw] flex-col p-0">
           <SheetHeader className="px-5 pb-2 pt-4">
-            <SheetTitle className="relative h-auto w-[92px]">
+            <SheetTitle className="relative h-auto w-[34px]">
               <SheetClose asChild>
                 <Link href="/" aria-label="홈으로 이동">
                   <Image src={LogoImage} alt="IVE DIVE" className="fill dark:hidden" />
