@@ -21,7 +21,7 @@ const ProfileBand = () => {
   const { data: wishlists } = useWishLists(session?.user.id);
   const { data: myBoards } = useMyBoards(session?.user.id);
   const { data: orderItems } = useOrderItems(session?.user.id);
-  const { tier } = useMyMembership();
+  const { tier, isCancelScheduled } = useMyMembership();
 
   const orderCount = Object.keys(_.groupBy(orderItems || [], "order_id")).length;
 
@@ -60,6 +60,15 @@ const ProfileBand = () => {
             <div className="flex flex-wrap items-center gap-2.5">
               <h1 className="text-lg font-bold leading-tight lg:text-[22px]">{getDisplayName(session?.user)}</h1>
               <MembershipBadge tier={tier} size="lg" />
+              {/* 해지 예정 — 혜택은 남아 있지만 곧 끝난다는 신호 */}
+              {isCancelScheduled && (
+                <Link
+                  href="/mypage/membership"
+                  className="rounded-full bg-orange-100 px-2.5 py-1 text-[11px] font-bold text-orange-500 transition-opacity hover:opacity-80"
+                >
+                  해지 예정
+                </Link>
+              )}
               <button
                 type="button"
                 onClick={() => setIsEditOpen(true)}

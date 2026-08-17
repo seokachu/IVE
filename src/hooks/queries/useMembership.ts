@@ -1,5 +1,11 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getEffectiveTier, getMembershipTiers, getMyMembership, isMembershipBenefitActive } from "@/lib/supabase/membership";
+import {
+  getEffectiveTier,
+  getMembershipTiers,
+  getMyMembership,
+  isCancelScheduled,
+  isMembershipBenefitActive,
+} from "@/lib/supabase/membership";
 import { useSession } from "@/store/zustand";
 
 //내 멤버십 구독 정보 — 테이블 미생성·미구독이면 null(무료)
@@ -18,6 +24,7 @@ export const useMyMembership = () => {
     membership: query.data ?? null,
     tier: getEffectiveTier(query.data ?? null),
     isBenefitActive: isMembershipBenefitActive(query.data ?? null),
+    isCancelScheduled: isCancelScheduled(query.data ?? null),
   };
 };
 
