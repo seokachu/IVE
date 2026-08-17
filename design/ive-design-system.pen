@@ -115483,6 +115483,396 @@
       "width": 1400,
       "height": 40,
       "content": "모바일(390px) 시안 — 반응형 구현 실화면 캡처 기반 (기능명세서 모바일 버전 참조용). 마이페이지·드로어 메뉴는 왼쪽의 수작업 시안 프레임 참고. 다크 모드는 토큰 플립으로 동일 레이아웃."
+    },
+    {
+      "type": "rectangle",
+      "id": "WWhrS",
+      "x": 411.72928495042515,
+      "y": 5505.0319023726815,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "ive-dive-app-icon.png",
+        "mode": "fill"
+      },
+      "width": 512,
+      "height": 512
+    },
+    {
+      "type": "frame",
+      "id": "C2Glg",
+      "x": 16020,
+      "y": 25169,
+      "name": "로그아웃 확인 모달 · 라이트",
+      "theme": {
+        "mode": "light"
+      },
+      "width": 480,
+      "fill": "$bg-page",
+      "layout": "vertical",
+      "padding": 28,
+      "children": [
+        {
+          "type": "frame",
+          "id": "juZKy",
+          "name": "LogoutModal",
+          "width": "fill_container",
+          "fill": "$bg-surface",
+          "cornerRadius": 24,
+          "stroke": "$border-default",
+          "strokeWidth": 1,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 12
+            },
+            "blur": 32
+          },
+          "layout": "vertical",
+          "padding": [
+            32,
+            28,
+            28,
+            28
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "nN766",
+              "name": "IconCircle",
+              "width": 52,
+              "height": 52,
+              "fill": "$primary-subtle",
+              "cornerRadius": "$radius-full",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "ItENK",
+                  "name": "LogoutIcon",
+                  "width": 22,
+                  "height": 22,
+                  "icon": "log-out",
+                  "library": "lucide",
+                  "fill": "$primary"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "V58hN",
+              "name": "Sp1",
+              "width": 8,
+              "height": 18
+            },
+            {
+              "type": "text",
+              "id": "jwgBi",
+              "name": "ModalTitle",
+              "fill": "$text-primary",
+              "content": "로그아웃 하시겠습니까?",
+              "fontFamily": "$font-family",
+              "fontSize": 18,
+              "fontWeight": "$font-weight-bold"
+            },
+            {
+              "type": "frame",
+              "id": "nfkya",
+              "name": "Sp2",
+              "width": 8,
+              "height": 8
+            },
+            {
+              "type": "text",
+              "id": "fWndR",
+              "name": "ModalDesc",
+              "fill": "$text-secondary",
+              "content": "언제든 다시 로그인할 수 있어요.",
+              "textAlign": "center",
+              "fontFamily": "$font-family",
+              "fontSize": 13,
+              "fontWeight": "$font-weight-regular"
+            },
+            {
+              "type": "frame",
+              "id": "R5gvn",
+              "name": "Sp3",
+              "width": 8,
+              "height": 24
+            },
+            {
+              "type": "frame",
+              "id": "hPtPZ",
+              "name": "ModalBtns",
+              "width": "fill_container",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "avkl8",
+                  "name": "ModalCancel",
+                  "width": "fill_container",
+                  "height": 46,
+                  "cornerRadius": "$radius-full",
+                  "stroke": "$border-strong",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "oc3J5",
+                      "name": "CancelLabel",
+                      "fill": "$text-secondary",
+                      "content": "취소",
+                      "fontFamily": "$font-family",
+                      "fontSize": 14,
+                      "fontWeight": "$font-weight-semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "gtKRA",
+                  "name": "ModalConfirm",
+                  "width": "fill_container",
+                  "height": 46,
+                  "fill": "$primary",
+                  "cornerRadius": "$radius-full",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#DB97E959",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 14
+                  },
+                  "gap": 6,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "OgY9o",
+                      "name": "ConfirmIcon",
+                      "width": 15,
+                      "height": 15,
+                      "icon": "log-out",
+                      "library": "lucide",
+                      "fill": "$white"
+                    },
+                    {
+                      "type": "text",
+                      "id": "p2Egbp",
+                      "name": "ConfirmLabel",
+                      "fill": "$white",
+                      "content": "로그아웃",
+                      "fontFamily": "$font-family",
+                      "fontSize": 14,
+                      "fontWeight": "$font-weight-bold"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Ydrdq",
+      "x": 16540,
+      "y": 25169,
+      "name": "로그아웃 확인 모달 · 다크",
+      "theme": {
+        "mode": "dark"
+      },
+      "width": 480,
+      "fill": "$bg-page",
+      "layout": "vertical",
+      "padding": 28,
+      "children": [
+        {
+          "type": "frame",
+          "id": "M8go7M",
+          "name": "LogoutModal",
+          "width": "fill_container",
+          "fill": "$bg-surface",
+          "cornerRadius": 24,
+          "stroke": "$border-default",
+          "strokeWidth": 1,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 12
+            },
+            "blur": 32
+          },
+          "layout": "vertical",
+          "padding": [
+            32,
+            28,
+            28,
+            28
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "EbnR2",
+              "name": "IconCircle",
+              "width": 52,
+              "height": 52,
+              "fill": "$primary-subtle",
+              "cornerRadius": "$radius-full",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "CFxNx",
+                  "name": "LogoutIcon",
+                  "width": 22,
+                  "height": 22,
+                  "icon": "log-out",
+                  "library": "lucide",
+                  "fill": "$primary"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "FqWPi",
+              "name": "Sp1",
+              "width": 8,
+              "height": 18
+            },
+            {
+              "type": "text",
+              "id": "NQZfP",
+              "name": "ModalTitle",
+              "fill": "$text-primary",
+              "content": "로그아웃 하시겠습니까?",
+              "fontFamily": "$font-family",
+              "fontSize": 18,
+              "fontWeight": "$font-weight-bold"
+            },
+            {
+              "type": "frame",
+              "id": "j4eK6c",
+              "name": "Sp2",
+              "width": 8,
+              "height": 8
+            },
+            {
+              "type": "text",
+              "id": "n6ykpQ",
+              "name": "ModalDesc",
+              "fill": "$text-secondary",
+              "content": "언제든 다시 로그인할 수 있어요.",
+              "textAlign": "center",
+              "fontFamily": "$font-family",
+              "fontSize": 13,
+              "fontWeight": "$font-weight-regular"
+            },
+            {
+              "type": "frame",
+              "id": "Q9Fm5J",
+              "name": "Sp3",
+              "width": 8,
+              "height": 24
+            },
+            {
+              "type": "frame",
+              "id": "hndLA",
+              "name": "ModalBtns",
+              "width": "fill_container",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "pYjcv",
+                  "name": "ModalCancel",
+                  "width": "fill_container",
+                  "height": 46,
+                  "cornerRadius": "$radius-full",
+                  "stroke": "$border-strong",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "zF9kK",
+                      "name": "CancelLabel",
+                      "fill": "$text-secondary",
+                      "content": "취소",
+                      "fontFamily": "$font-family",
+                      "fontSize": 14,
+                      "fontWeight": "$font-weight-semibold"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "T5y8NA",
+                  "name": "ModalConfirm",
+                  "width": "fill_container",
+                  "height": 46,
+                  "fill": "$primary",
+                  "cornerRadius": "$radius-full",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#DB97E959",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 14
+                  },
+                  "gap": 6,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "XUU97",
+                      "name": "ConfirmIcon",
+                      "width": 15,
+                      "height": 15,
+                      "icon": "log-out",
+                      "library": "lucide",
+                      "fill": "$white"
+                    },
+                    {
+                      "type": "text",
+                      "id": "gdNpG",
+                      "name": "ConfirmLabel",
+                      "fill": "$white",
+                      "content": "로그아웃",
+                      "fontFamily": "$font-family",
+                      "fontSize": 14,
+                      "fontWeight": "$font-weight-bold"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "themes": {

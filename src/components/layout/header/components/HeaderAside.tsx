@@ -33,7 +33,7 @@ import MembershipBadge from "@/components/mypage/MembershipBadge";
 import LoginLink from "@/components/auth/login/LoginLink";
 import { GNB_ARRAY } from "@/utils/constants";
 import { useMyMembership } from "@/hooks/queries/useMembership";
-import useSignOut from "@/hooks/useSignOut";
+import LogoutConfirmModal from "@/components/common/modal/LogoutConfirmModal";
 import { useCartItems, useSession } from "@/store/zustand";
 import { cn } from "@/utils/utils";
 
@@ -53,7 +53,7 @@ const HeaderAside = () => {
   const { resolvedTheme, setTheme } = useTheme();
   const closeRef = useRef<HTMLButtonElement>(null);
   const [mounted, setMounted] = useState(false);
-  const { handleSignOut } = useSignOut(() => closeRef.current?.click());
+  const [logoutOpen, setLogoutOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -232,7 +232,7 @@ const HeaderAside = () => {
             {session && (
               <button
                 type="button"
-                onClick={handleSignOut}
+                onClick={() => setLogoutOpen(true)}
                 className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2.5 text-left transition-colors hover:bg-gray-50"
               >
                 <LogOut size={16} className="text-gray-400" aria-hidden="true" />
@@ -240,6 +240,7 @@ const HeaderAside = () => {
               </button>
             )}
           </div>
+          {logoutOpen && <LogoutConfirmModal isOpen={setLogoutOpen} onSuccess={() => closeRef.current?.click()} />}
           <SheetClose ref={closeRef} className="hidden" />
         </SheetContent>
       </Sheet>
