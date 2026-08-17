@@ -1,6 +1,10 @@
 "use client";
+import { FileText } from "lucide-react";
+import Link from "next/link";
 import Error from "@/components/common/error/Error";
 import MyPageLoading from "@/components/common/loading/MyPageLoading";
+import MyPageEmptyState from "@/components/mypage/MyPageEmptyState";
+import MyPageTitle from "@/components/mypage/MyPageTitle";
 import PostList from "@/components/mypage/posts/PostList";
 import { useMyBoards } from "@/hooks/queries/useBoard";
 import { useSession } from "@/store/zustand";
@@ -15,16 +19,19 @@ const PostPage = () => {
   const isEmpty = data?.length === 0;
 
   return (
-    <div className="px-5 lg:pt-14 pb-28 lg:px-8">
-      <div className="flex justify-between items-center mt-5 lg:mt-0">
-        <h2 className="font-bold text-xl mb-5 hidden lg:block">내가 쓴 글</h2>
-      </div>
-      {!isEmpty ? (
-        <PostList posts={data} />
+    <div>
+      <MyPageTitle title="내가 쓴 글" count={data?.length ?? 0} />
+      {isEmpty ? (
+        <MyPageEmptyState icon={FileText} title="작성한 게시글이 없습니다" description="팬 게시판에 첫 글을 남겨보세요">
+          <Link
+            href="/board/write"
+            className="inline-flex h-10 items-center rounded-full bg-purple-300 px-5 text-[13px] font-bold text-white transition-colors hover:bg-purple-400"
+          >
+            첫 글 쓰러 가기
+          </Link>
+        </MyPageEmptyState>
       ) : (
-        <div className="flex flex-col gap-3 items-center justify-center w-full h-[500px]">
-          <h3>작성한 게시글이 없습니다.</h3>
-        </div>
+        <PostList posts={data} />
       )}
     </div>
   );

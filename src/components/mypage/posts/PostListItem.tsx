@@ -1,58 +1,46 @@
-import { Button } from "@/components/ui/button";
-import UserAvatar from "@/components/common/UserAvatar";
-import { formatDate } from "@/utils/formatDate";
+import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { formatDate } from "@/utils/formatDate";
 import type { PostListItemProps } from "@/types/mypage";
 
-const PostListItem = ({ item }: PostListItemProps) => {
+//내가 쓴 글 로우 — 제목 + 날짜·조회·댓글 메타 + 셰브런 (.pen "마이페이지 · 내가 쓴 글" 시안의 PostRow)
+const PostListItem = ({ item, isLast = false }: PostListItemProps) => {
   const { push } = useRouter();
 
   const onClickBoardDetail = () => {
     push(`/board/${item.id}`);
   };
 
-  const stopPropagation = (e: React.MouseEvent) => {
-    e.stopPropagation();
-  };
-
-  const onClickCommentDetail = () => {
-    push(`/board/${item.id}#comments`);
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      onClickBoardDetail();
+    }
   };
 
   return (
     <li
       onClick={onClickBoardDetail}
-      className="cursor-pointer text-center border rounded-sm py-3 lg:py-4 px-3 lg:px-6 hover:bg-gray-50"
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      className={`flex cursor-pointer items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-gray-50 ${
+        isLast ? "" : "border-b border-gray-200"
+      }`}
     >
-      <div className="flex items-center justify-between gap-5">
-        <div className="flex flex-col gap-2 flex-1 min-w-0">
-          <p className="w-full truncate text-left">{item.title}</p>
-          <div className="text-gray-500 text-xs flex gap-2 items-center">
-            <h3 className="shrink-0 flex items-center gap-[2px]">
-              <UserAvatar
-                userId={item.user_id}
-                userName={item.user.name}
-                avatarUrl={item.user.avatar_url}
-                className="w-[20px] h-[20px]"
-              />
-              <span>{item.user.name}</span>
-            </h3>
-            <p className="shrink-0">조회 {item.views}</p>
-            <p className="shrink-0">추천 {item.board_likes[0]?.count || 0}</p>
-            <time className="shrink-0">{formatDate(item.created_at, "dash")}</time>
-          </div>
-        </div>
-        <div onClick={stopPropagation}>
-          <Button
-            onClick={onClickCommentDetail}
-            variant="outline" size="auto" 
-            className="px-3 py-2 flex flex-col items-center gap-1 bg-background group"
-          >
-            <strong className="font-bold">{item.board_comments[0]?.count || 0}</strong>
-            <span className="text-xs text-gray-500 group-hover:text-purple">댓글</span>
-          </Button>
-        </div>
+      <div className="min-w-0">
+        <p className="truncate text-[15px] font-semibold">{item.title}</p>
+        <p className="mt-1.5 text-xs text-gray-400">
+          <time>{formatDate(item.created_at, "dash")}</time>
+          <span className="mx-1.5" aria-hidden="true">
+            ·
+          </span>
+          조회 {item.views}
+          <span className="mx-1.5" aria-hidden="true">
+            ·
+          </span>
+          댓글 {item.board_comments[0]?.count || 0}
+        </p>
       </div>
+      <ChevronRight size={16} className="shrink-0 text-gray-400" aria-hidden="true" />
     </li>
   );
 };

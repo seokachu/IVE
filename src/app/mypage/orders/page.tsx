@@ -1,8 +1,12 @@
 "use client";
+import { ShoppingBag } from "lucide-react";
+import Link from "next/link";
+import _ from "lodash";
 import { useOrderItems } from "@/hooks/queries/useOrderItems";
 import { useSession } from "@/store/zustand";
-import _ from "lodash";
 import OrderSummary from "@/components/mypage/order/OrderSummary";
+import MyPageEmptyState from "@/components/mypage/MyPageEmptyState";
+import MyPageTitle from "@/components/mypage/MyPageTitle";
 import { getDiscountedPrice } from "@/utils/calculateDiscount";
 import MyPageLoading from "@/components/common/loading/MyPageLoading";
 
@@ -11,7 +15,7 @@ const OrderListPage = () => {
   const { data: orderItems, isLoading, isSuccess } = useOrderItems(session?.user?.id);
 
   if (isLoading || !isSuccess) {
-    return <MyPageLoading title="결제 목록" />;
+    return <MyPageLoading title="결제 내역" />;
   }
 
   const isEmpty = !orderItems || orderItems.length === 0;
@@ -27,21 +31,23 @@ const OrderListPage = () => {
     orderDate: items[0]?.created_at,
     firstItemName: items[0]?.product_name,
     firstOrderImage: items[0]?.product_image,
+    isAllConfirmed: items.every((item) => item.is_confirmed),
   }));
 
   return (
-    <div className="px-5 lg:pt-14 pb-28 lg:pl-8 lg:pr-5">
-      {!isEmpty && (
-        <div className="flex justify-between items-center mt-5 lg:mt-0">
-          <h2 className="font-bold text-xl mb-5 hidden lg:block">결제 목록</h2>
-        </div>
-      )}
+    <div>
+      <MyPageTitle title="결제 내역" count={orderSummaries.length} />
       {isEmpty ? (
-        <div className="flex flex-col gap-3 items-center justify-center w-full h-[250px] lg:h-[500px]">
-          <h3>결제한 목록이 없습니다.</h3>
-        </div>
+        <MyPageEmptyState icon={ShoppingBag} title="결제한 내역이 없습니다" description="첫 주문을 기다리고 있어요">
+          <Link
+            href="/shop"
+            className="inline-flex h-10 items-center rounded-full bg-purple-300 px-5 text-[13px] font-bold text-white transition-colors hover:bg-purple-400"
+          >
+            굿즈샵 구경 가기
+          </Link>
+        </MyPageEmptyState>
       ) : (
-        <ul className="space-y-4 mt-5">
+        <ul className="space-y-4">
           {orderSummaries.map((order) => (
             <OrderSummary key={order.orderId} order={order} />
           ))}

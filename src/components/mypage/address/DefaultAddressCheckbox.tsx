@@ -6,9 +6,9 @@ import type { DefaultAddressCheckboxProps } from "@/types/mypage";
 const DefaultAddressCheckbox = ({ isDefaultAddress }: DefaultAddressCheckboxProps) => {
   if (isDefaultAddress) {
     return (
-      <div className="my-5">
-        <Label className="text-sm text-gray-600 flex items-center gap-2">
-          <Check className="text-success" />
+      <div className="my-6">
+        <Label className="flex items-center gap-2 text-[13px] text-gray-500">
+          <Check size={16} className="text-success" />
           <span>현재 기본 배송지로 설정되어 있습니다.</span>
         </Label>
       </div>
@@ -16,17 +16,12 @@ const DefaultAddressCheckbox = ({ isDefaultAddress }: DefaultAddressCheckboxProp
   }
 
   return (
-    <div className="my-5 flex flex-wrap items-center gap-1">
-      <RHFInput
-        type="checkbox"
-        name="isDefault"
-        id="defaultDelivery"
-        className="w-4 h-4 translate-y-[1px] lg:translate-y-[2px]"
-      />
-      <Label htmlFor="defaultDelivery" className="text-sm">
+    <div className="my-6 flex flex-wrap items-center gap-2">
+      <RHFInput type="checkbox" name="isDefault" id="defaultDelivery" />
+      <Label htmlFor="defaultDelivery" className="text-[13px]">
         기본 배송지로 저장
       </Label>
-      <span className="text-gray-500 text-xs">&#40;첫 배송지는 자동으로 기본 배송지로 저장됩니다.&#41;</span>
+      <span className="text-xs text-gray-400">&#40;첫 배송지는 자동으로 기본 배송지로 저장돼요&#41;</span>
     </div>
   );
 };

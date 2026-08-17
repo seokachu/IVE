@@ -21,11 +21,7 @@ const OrderDetailPage = ({ params }: OrderDetailPageProps) => {
 
   if (!currentOrderItems) return <div>주문을 찾을 수 없습니다.</div>;
 
-  return (
-    <div className="px-5 lg:pt-14 pb-28 lg:px-8">
-      <OrderDetail orderItems={currentOrderItems} onBack={() => router.back()} />
-    </div>
-  );
+  return <OrderDetail orderItems={currentOrderItems} onBack={() => router.back()} />;
 };
 
 export default OrderDetailPage;

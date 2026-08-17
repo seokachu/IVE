@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+
+//새 배송지 추가 — 솔리드 primary 필 + 좌측 플러스 아이콘 (빈 상태·헤더 공용 스펙)
 const AddressAddButton = () => {
   const { push } = useRouter();
   const onClickAddAddress = () => {
@@ -8,15 +9,13 @@ const AddressAddButton = () => {
   };
 
   return (
-    <>
-      <Button
-        onClick={onClickAddAddress}
-        variant="outline" size="auto"
-        className="text-sm w-full lg:w-fit flex items-center justify-center gap-1 border py-2 px-5 rounded-md hover:bg-gray-200"
-      >
-        <Plus size={20} />새 배송지 추가
-      </Button>
-    </>
+    <button
+      type="button"
+      onClick={onClickAddAddress}
+      className="inline-flex h-10 items-center gap-1.5 rounded-full bg-purple-300 px-4 text-[13px] font-bold text-white transition-colors hover:bg-purple-400"
+    >
+      <Plus size={14} aria-hidden="true" />새 배송지 추가
+    </button>
   );
 };
 
