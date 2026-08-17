@@ -1,11 +1,13 @@
 "use client";
 import { useState } from "react";
-import { Check } from "lucide-react";
+import { Check, RotateCcw } from "lucide-react";
 import MembershipBadge from "@/components/mypage/MembershipBadge";
 import MyPageTitle from "@/components/mypage/MyPageTitle";
 import SubscribeModal from "@/components/mypage/membership/SubscribeModal";
+import { useMyMembership } from "@/hooks/queries/useMembership";
 import { MEMBERSHIP_PLANS } from "@/utils/constants";
 import { formatPrice } from "@/utils/calculateDiscount";
+import { formatDate } from "@/utils/formatDate";
 import { cn } from "@/utils/utils";
 import type { MembershipTier } from "@/types/mypage";
 
@@ -14,12 +16,29 @@ type PaidTier = Exclude<MembershipTier, "free">;
 //멤버십 플랜 — 무료/DIVE+/VIP 3장, VIP가 강조 카드 (.pen "마이페이지 · 멤버십" 시안)
 const MembershipPlans = () => {
   const [subscribeTier, setSubscribeTier] = useState<PaidTier | null>(null);
+  //혜택이 끝난 이전 구독 — 재구독 안내와 "이전 플랜" 표시에 쓴다
+  const { membership } = useMyMembership();
 
   const subscribePlan = MEMBERSHIP_PLANS.find((plan) => plan.tier === subscribeTier);
+  const previousPlan = membership ? MEMBERSHIP_PLANS.find((plan) => plan.tier === membership.tier) : undefined;
 
   return (
     <div>
       <MyPageTitle title="멤버십" />
+      {/* 이전 구독 종료 안내 — 다시 시작하는 길을 명확히 */}
+      {membership && previousPlan && (
+        <div className="mb-4 flex items-start gap-2.5 rounded-xl border border-orange-300 px-4 py-3.5">
+          <RotateCcw size={15} className="mt-0.5 shrink-0 text-orange-500" aria-hidden="true" />
+          <div>
+            <p className="text-[13px] font-semibold">
+              {previousPlan.name} 혜택이 {formatDate(membership.next_billing_at)}에 종료됐어요
+            </p>
+            <p className="mt-1 text-[13px] text-gray-500">
+              아래에서 플랜을 고르면 바로 다시 시작할 수 있어요 · 뱃지와 할인 혜택도 결제 즉시 복구돼요
+            </p>
+          </div>
+        </div>
+      )}
       {/* 히어로 */}
       <div className="flex flex-col gap-4 rounded-2xl bg-purple-50 p-6 md:flex-row md:items-center md:justify-between lg:p-7">
         <div>
@@ -37,6 +56,7 @@ const MembershipPlans = () => {
         {MEMBERSHIP_PLANS.map((plan) => {
           const isVip = plan.tier === "vip";
           const isFree = plan.tier === "free";
+          const isPrevious = !isFree && previousPlan?.tier === plan.tier;
 
           return (
             <div
@@ -55,9 +75,16 @@ const MembershipPlans = () => {
                 >
                   {plan.name}
                 </h3>
-                {isVip && (
-                  <span className="rounded bg-orange-500 px-2 py-0.5 text-[10px] font-bold text-white">BEST</span>
-                )}
+                <div className="flex items-center gap-1.5">
+                  {isPrevious && (
+                    <span className="rounded bg-gray-100 px-2 py-0.5 text-[10px] font-bold text-gray-500">
+                      이전 플랜
+                    </span>
+                  )}
+                  {isVip && (
+                    <span className="rounded bg-orange-500 px-2 py-0.5 text-[10px] font-bold text-white">BEST</span>
+                  )}
+                </div>
               </div>
               <div className="flex items-end gap-2">
                 <strong className="text-2xl font-bold leading-none">
@@ -89,7 +116,7 @@ const MembershipPlans = () => {
                       : "bg-purple-300 hover:bg-purple-400",
                   )}
                 >
-                  {plan.name} 시작하기
+                  {plan.name} {isPrevious ? "다시 시작하기" : "시작하기"}
                 </button>
               )}
             </div>

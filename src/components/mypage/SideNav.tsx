@@ -10,6 +10,7 @@ import { useWishLists } from "@/hooks/queries/useWishList";
 import { useMyBoards } from "@/hooks/queries/useBoard";
 import { useOrderItems } from "@/hooks/queries/useOrderItems";
 import { useShippingAddresses } from "@/hooks/queries/useShippingAddress";
+import { useMyMembership } from "@/hooks/queries/useMembership";
 import LogoutConfirmModal from "@/components/common/modal/LogoutConfirmModal";
 import { toast } from "@/hooks/use-toast";
 import { useSession } from "@/store/zustand";
@@ -32,6 +33,14 @@ const SideNav = () => {
   const { data: myBoards } = useMyBoards(session?.user.id);
   const { data: orderItems } = useOrderItems(session?.user.id);
   const { data: addresses } = useShippingAddresses(session?.user.id);
+  const { tier, isCancelScheduled } = useMyMembership();
+
+  //멤버십 메뉴는 개수 대신 현재 구독 상태를 표기 (미구독이면 NEW 유지)
+  const membershipStatus = isCancelScheduled
+    ? { label: "해지 예정", className: "text-orange-500" }
+    : tier === "free"
+      ? null
+      : { label: tier === "vip" ? "VIP" : "DIVE+", className: "text-purple-400" };
 
   const counts: Record<string, number | null> = {
     membership: null,
@@ -83,7 +92,11 @@ const SideNav = () => {
                     {menu.label}
                   </span>
                 </span>
-                {menu.isNew ? (
+                {menu.key === "membership" && membershipStatus ? (
+                  <span className={cn("text-[10px] font-bold", membershipStatus.className)}>
+                    {membershipStatus.label}
+                  </span>
+                ) : menu.isNew ? (
                   <span className="text-[10px] font-bold text-orange-500">NEW</span>
                 ) : (
                   <span className={cn("text-xs lg:text-[13px]", active ? "font-bold text-purple-400" : "text-gray-400")}>

@@ -20,6 +20,17 @@ export const isMembershipBenefitActive = (membership: MembershipRow | null): boo
   return new Date(membership.next_billing_at).getTime() > Date.now();
 };
 
+//해지 예정 — 해지했지만 다음 결제일 전이라 혜택은 아직 남아 있는 상태
+export const isCancelScheduled = (membership: MembershipRow | null): boolean => {
+  return !!membership && membership.status === "canceled" && isMembershipBenefitActive(membership);
+};
+
+//혜택 종료까지 남은 일수 — 당일이면 0
+export const getRemainingDays = (dateString: string): number => {
+  const diff = new Date(dateString).getTime() - Date.now();
+  return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
+};
+
 //혜택 기준 현재 티어
 export const getEffectiveTier = (membership: MembershipRow | null): MembershipTier => {
   return isMembershipBenefitActive(membership) ? membership!.tier : "free";
