@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { useShippingAddress } from "@/hooks/queries/useShippingAddress";
 import useAuthGuard from "@/hooks/useAuthGuard";
 import { useSession } from "@/store/zustand";
+import { useMyMembership } from "@/hooks/queries/useMembership";
+import { getMembershipDiscount } from "@/lib/supabase/membership";
 import type { DirectPaymentButtonProps } from "@/types/shop";
 
 const DirectPaymentButton = ({
@@ -18,6 +20,7 @@ const DirectPaymentButton = ({
   const session = useSession();
   const { data: customerInfo } = useCustomerInfo(session?.user.id);
   const { data: userAddress } = useShippingAddress(session?.user.id);
+  const { tier } = useMyMembership();
   const { checkAuth } = useAuthGuard({
     title: "로그인이 필요합니다.",
     description: "로그인 후 결제할 수 있습니다.",
@@ -43,7 +46,9 @@ const DirectPaymentButton = ({
     //결제 처리
     try {
       const discountedPrice = getDiscountedPrice(product);
-      const amount = discountedPrice * quantity;
+      const itemsTotal = discountedPrice * quantity;
+      //멤버십 상시 할인 (DIVE+ 5% / VIP 10%)
+      const amount = itemsTotal - getMembershipDiscount(tier, itemsTotal);
       const orderId = generateRandomOrderId();
 
       // 단일 상품 결제 정보 저장(성공 페이지에 넘겨줘야 함)

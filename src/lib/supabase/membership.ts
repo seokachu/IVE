@@ -24,6 +24,17 @@ export const getEffectiveTier = (membership: MembershipRow | null): MembershipTi
   return isMembershipBenefitActive(membership) ? membership!.tier : "free";
 };
 
+//멤버십 상시 할인율 — DIVE+ 5%, VIP 10% (결제 금액에 적용)
+export const MEMBERSHIP_DISCOUNT_RATES: Record<MembershipTier, number> = {
+  free: 0,
+  plus: 0.05,
+  vip: 0.1,
+};
+
+export const getMembershipDiscount = (tier: MembershipTier, amount: number): number => {
+  return Math.floor(amount * MEMBERSHIP_DISCOUNT_RATES[tier]);
+};
+
 //커뮤니티 뱃지용 — 작성자 유저 id 목록의 티어를 한 번에 조회 (memberships_public 뷰)
 export const getMembershipTiers = async (userIds: string[]): Promise<Record<string, MembershipTier>> => {
   if (userIds.length === 0) return {};

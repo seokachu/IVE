@@ -5,13 +5,14 @@ import { formatRelativeTime, isWithinHours } from "@/utils/formatDate";
 import { useIncrementViewCount } from "@/hooks/queries/useBoard";
 import { hasViewedPost, markPostAsViewed } from "@/utils/viewCount";
 import UserAvatar from "@/components/common/UserAvatar";
+import MembershipBadge from "@/components/mypage/MembershipBadge";
 import {
   BOARD_HOT_LIKE_THRESHOLD,
   BOARD_NEW_POST_HOURS,
 } from "@/utils/constants";
 import type { BoardListItemProps } from "@/types/board";
 
-const BoardListItem = ({ item, keyword }: BoardListItemProps) => {
+const BoardListItem = ({ item, keyword, membershipTier = "free" }: BoardListItemProps) => {
   const { push } = useRouter();
 
   const incrementViewCount = useIncrementViewCount();
@@ -103,9 +104,10 @@ const BoardListItem = ({ item, keyword }: BoardListItemProps) => {
               userId={item.user_id}
               userName={item.name}
               avatarUrl={item.avatar_url}
-              className="!w-5 !h-5 shrink-0"
+              className={`!w-5 !h-5 shrink-0 ${membershipTier !== "free" ? "ring-[1.5px] ring-purple-300" : ""}`}
             />
             <span className="text-gray-500 font-medium shrink-0">{item.name}</span>
+            <MembershipBadge tier={membershipTier} size="md" />
             <span className="truncate">
               · {formatRelativeTime(item.created_at)} · 조회 {item.views ?? 0}
             </span>

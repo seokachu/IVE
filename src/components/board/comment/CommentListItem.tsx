@@ -10,6 +10,8 @@ import { useState } from "react";
 import CommentForm from "./CommentForm";
 import useAuthGuard from "@/hooks/useAuthGuard";
 import { useCommentLikeStatus, useToggleCommentLike } from "@/hooks/queries/useLike";
+import { useMembershipTier } from "@/hooks/queries/useMembership";
+import MembershipBadge from "@/components/mypage/MembershipBadge";
 import type { CommentListItemProps } from "@/types/board";
 import { useSession } from "@/store/zustand";
 
@@ -21,6 +23,8 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange, boardA
   const { data: replies } = useRepliesCommentList(item.id);
   const { data: isCommentLiked } = useCommentLikeStatus(item.id, session?.user?.id);
   const { mutate: toggleCommentLike, isPending } = useToggleCommentLike(item.id, session?.user?.id);
+
+  const membershipTier = useMembershipTier(item?.user_id);
 
   const isAuthor = session?.user?.id === item?.user_id;
   const isBoardAuthor = !!item.user_id && item.user_id === boardAuthorId;
@@ -61,7 +65,7 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange, boardA
         <span
           className={`relative shrink-0 rounded-full border overflow-hidden ${
             isReply ? "w-[30px] h-[30px]" : "w-9 h-9"
-          }`}
+          } ${membershipTier !== "free" ? "ring-[1.5px] ring-purple-300" : ""}`}
         >
           <Image
             src={item?.user?.avatar_url || DefaultImage}
@@ -75,6 +79,7 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange, boardA
           <div className="flex justify-between items-center gap-2">
             <div className="flex items-center gap-2 min-w-0">
               <h2 className="text-sm font-semibold truncate">{item?.user?.name}</h2>
+              <MembershipBadge tier={membershipTier} size="sm" />
               {/* 시안(OpChip)은 다크에서도 라이트 색 고정 — 테마 따라 뒤집히는 purple 토큰 대신 리터럴 사용 */}
               {isBoardAuthor && (
                 <span className="shrink-0 px-[7px] py-0.5 rounded-full bg-[#F5E3F8] text-[10px] font-bold text-[#A94FC0]">

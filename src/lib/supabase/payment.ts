@@ -17,6 +17,16 @@ export const getPaymentByOrderId = async (orderId: string) => {
   }
 };
 
+//주문 id 목록의 실제 결제 금액 맵 — 결제 내역 요약이 멤버십 할인 반영액과 일치하도록
+export const getPaymentAmountsByOrderIds = async (orderIds: string[]): Promise<Record<string, number>> => {
+  if (orderIds.length === 0) return {};
+
+  const { data, error } = await supabase.from("payments").select("order_id, amount").in("order_id", orderIds);
+
+  if (error) return {};
+  return Object.fromEntries((data || []).map((row) => [row.order_id, Number(row.amount)]));
+};
+
 //결제데이터 저장하기
 export const savePayment = async (paymentData: PaymentInsert) => {
   try {

@@ -8,10 +8,13 @@ import OrderCustomerInfo from "./OrderCustomerInfo";
 import OrderShippingInfo from "./OrderShippingInfo";
 import OrderAgreements from "./OrderAgreements";
 import { useCartItems, useSelectedItemIds } from "@/store/zustand";
+import { useMyMembership } from "@/hooks/queries/useMembership";
+import { getMembershipDiscount } from "@/lib/supabase/membership";
 
 const CartSummary = () => {
   const cartItems = useCartItems();
   const selectedItems = useSelectedItemIds();
+  const { tier } = useMyMembership();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -35,6 +38,10 @@ const CartSummary = () => {
   //총 할인 금액
   const totalDiscountAmount = totalOriginalPrice - totalDiscountedPrice;
 
+  //멤버십 상시 할인 (DIVE+ 5% / VIP 10%) — 최종 결제 금액에 반영
+  const membershipDiscount = getMembershipDiscount(tier, totalDiscountedPrice);
+  const finalAmount = totalDiscountedPrice - membershipDiscount;
+
   return mounted ? (
     <aside className="flex w-full flex-col gap-4 lg:sticky lg:top-24 lg:w-[400px] lg:shrink-0">
       <div className="rounded-[20px] border border-gray-200 bg-card p-7 shadow-[0_12px_32px_rgba(169,79,192,0.10)]">
@@ -42,10 +49,12 @@ const CartSummary = () => {
           totalDiscountedPrice={totalDiscountedPrice}
           totalOriginalPrice={totalOriginalPrice}
           totalDiscountAmount={totalDiscountAmount}
+          membershipDiscount={membershipDiscount}
+          membershipTier={tier}
         />
         <OrderAgreements />
         <PaymentButton
-          amount={totalDiscountedPrice}
+          amount={finalAmount}
           orderName={`${selectedCartItems[0]?.title} 외 ${selectedCartItems.length - 1}건`}
         />
         <p className="mt-3.5 text-center text-xs text-gray-400">본인은 만 14세 이상이며 주문 내용을 확인했어요</p>

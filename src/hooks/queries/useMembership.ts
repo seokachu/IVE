@@ -33,6 +33,12 @@ export const useMembershipTiers = (userIds: string[]) => {
   });
 };
 
+//단일 유저 티어 — 댓글처럼 리스트 컨텍스트가 없는 곳용 (같은 유저는 쿼리 키로 dedupe)
+export const useMembershipTier = (userId?: string | null) => {
+  const { data } = useMembershipTiers(userId ? [userId] : []);
+  return userId ? (data?.[userId] ?? "free") : "free";
+};
+
 //구독 상태 변경 후 캐시 갱신
 export const useInvalidateMembership = () => {
   const queryClient = useQueryClient();
