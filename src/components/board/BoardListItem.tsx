@@ -5,7 +5,7 @@ import { formatRelativeTime, isWithinHours } from "@/utils/formatDate";
 import { useIncrementViewCount } from "@/hooks/queries/useBoard";
 import { hasViewedPost, markPostAsViewed } from "@/utils/viewCount";
 import UserAvatar from "@/components/common/UserAvatar";
-import MembershipBadge from "@/components/mypage/MembershipBadge";
+import MembershipBadge, { getMembershipRingClass } from "@/components/mypage/MembershipBadge";
 import {
   BOARD_HOT_LIKE_THRESHOLD,
   BOARD_NEW_POST_HOURS,
@@ -104,7 +104,7 @@ const BoardListItem = ({ item, keyword, membershipTier = "free" }: BoardListItem
               userId={item.user_id}
               userName={item.name}
               avatarUrl={item.avatar_url}
-              className={`!w-5 !h-5 shrink-0 ${membershipTier !== "free" ? "ring-[1.5px] ring-purple-300" : ""}`}
+              className={`!w-5 !h-5 shrink-0 ${getMembershipRingClass(membershipTier)}`}
             />
             <span className="text-gray-500 font-medium shrink-0">{item.name}</span>
             <MembershipBadge tier={membershipTier} size="md" />

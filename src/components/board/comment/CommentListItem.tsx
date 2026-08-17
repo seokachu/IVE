@@ -10,7 +10,7 @@ import CommentForm from "./CommentForm";
 import useAuthGuard from "@/hooks/useAuthGuard";
 import { useCommentLikeStatus, useToggleCommentLike } from "@/hooks/queries/useLike";
 import { useMembershipTier } from "@/hooks/queries/useMembership";
-import MembershipBadge from "@/components/mypage/MembershipBadge";
+import MembershipBadge, { getMembershipRingClass } from "@/components/mypage/MembershipBadge";
 import type { CommentListItemProps } from "@/types/board";
 import { useSession } from "@/store/zustand";
 
@@ -67,9 +67,7 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange, boardA
           avatarUrl={item?.user?.avatar_url}
           userName={item?.user?.name}
           size={isReply ? "sm" : "md"}
-          className={`shrink-0 ${isReply ? "" : "w-9 h-9"} ${
-            membershipTier !== "free" ? "ring-[1.5px] ring-purple-300" : ""
-          }`}
+          className={`shrink-0 ${isReply ? "" : "w-9 h-9"} ${getMembershipRingClass(membershipTier)}`}
         />
         <div className="w-full min-w-0">
           <div className="flex justify-between items-center gap-2">

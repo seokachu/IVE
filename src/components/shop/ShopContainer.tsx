@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import SortDropdown from "@/components/common/select/SortDropdown";
+import MembershipShopBanner from "@/components/shop/MembershipShopBanner";
 import ShopList from "@/components/shop/ShopList";
 import { useShopsCount } from "@/hooks/queries/useShops";
 import { PRODUCT_SORT_OPTIONS } from "@/utils/constants";
@@ -29,6 +30,7 @@ const ShopContainer = () => {
         <h2 className="text-2xl font-bold lg:text-[2rem]">Goods Shop</h2>
         <p className="text-sm text-gray-500">아이브의 공식 굿즈를 한자리에서 만나보세요</p>
       </div>
+      <MembershipShopBanner />
       <div className="mt-7 mb-6 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <span className="text-sm text-gray-500">{typeof totalCount === "number" && `전체 ${totalCount}개`}</span>
         <SortDropdown

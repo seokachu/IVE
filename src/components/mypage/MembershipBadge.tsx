@@ -14,6 +14,14 @@ const sizeStyles = {
   lg: "px-3 py-1 text-xs",
 };
 
+//멤버십 아바타 링 공통 규칙 — 일반 없음 · DIVE+ 퍼플 · VIP 골드(VIP 뱃지와 같은 골드 톤)
+export const getMembershipRingClass = (tier: MembershipTier, width: "thin" | "thick" = "thin"): string => {
+  if (tier === "free") return "";
+  const ringWidth = width === "thin" ? "ring-[1.5px]" : "ring-2";
+  const ringColor = tier === "vip" ? "ring-[#FACC15]" : "ring-purple-300";
+  return `${ringWidth} ${ringColor}`;
+};
+
 //구독 티어 뱃지 — 목록·상세·댓글·프로필 밴드 공용
 const MembershipBadge = ({ tier, size = "md", className }: MembershipBadgeProps) => {
   if (tier === "free") return null;

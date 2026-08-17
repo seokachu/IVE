@@ -1,6 +1,10 @@
+import Link from "next/link";
 import ProductActions from "./ProductActions";
 import ProductGallery from "./ProductGallery";
 import Badge from "@/components/common/Badge";
+import MembershipBadge from "@/components/mypage/MembershipBadge";
+import { useMyMembership } from "@/hooks/queries/useMembership";
+import { MEMBERSHIP_DISCOUNT_RATES, getMembershipDiscount } from "@/lib/supabase/membership";
 import ShareButton from "@/components/common/button/ShareButton";
 import Error from "@/components/common/error/Error";
 import ProductInfoSkeleton from "@/components/common/loading/ProductInfoSkeleton";
@@ -10,7 +14,7 @@ import { useAverageRating, useReviewCount } from "@/hooks/queries/useReviews";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
 import { countRecentReviews } from "@/utils/calculateBadge";
 import { toast } from "@/hooks/use-toast";
-import { Minus, Package, Plus, Sparkles, Star, Truck } from "lucide-react";
+import { ArrowRight, Minus, Package, Plus, Sparkles, Star, Truck } from "lucide-react";
 import { useState } from "react";
 import type { ShopMenuProps } from "@/types/shop";
 
@@ -24,11 +28,15 @@ const ProductInfo = ({ id, onClickReview }: ProductInfoProps) => {
   const { data, isLoading, isError } = useShopDetail(id);
   const { data: averageRating } = useAverageRating(id);
   const { data: reviews } = useReviewCount(id);
+  const { tier } = useMyMembership();
 
   if (isLoading) return <ProductInfoSkeleton />;
   if (isError) return <Error />;
 
   const price = getDiscountedPrice(data);
+  //멤버십 상시 할인가 — 구독자는 본인 티어 적용가, 미구독자는 DIVE+ 가입 시 가격으로 유도
+  const memberPrice = price - getMembershipDiscount(tier, price);
+  const plusPrice = price - getMembershipDiscount("plus", price);
   const totalPrice = price * count;
   const reviewCount = reviews?.length ?? 0;
   const rating = averageRating ?? 0;
@@ -99,6 +107,31 @@ const ProductInfo = ({ id, onClickReview }: ProductInfoProps) => {
               {(data.discount_rate ?? 0) > 0 && <span className="text-orange-500">{data.discount_rate}%</span>}
               <span>{formatPrice(price)}원</span>
             </div>
+            {tier !== "free" ? (
+              <div className="mt-2 flex flex-wrap items-center gap-2">
+                <MembershipBadge tier={tier} size="sm" />
+                <span className="text-lg font-bold text-purple-500 dark:text-purple-300">
+                  {formatPrice(memberPrice)}원
+                </span>
+                <span className="text-xs text-gray-400">
+                  멤버십 상시 {Math.round(MEMBERSHIP_DISCOUNT_RATES[tier] * 100)}% 할인가
+                </span>
+              </div>
+            ) : (
+              <Link
+                href="/mypage/membership"
+                className="group mt-2.5 flex items-center justify-between gap-2 rounded-xl bg-purple-50 px-3.5 py-2.5 text-[13px] transition-colors hover:bg-purple-100"
+              >
+                <span className="text-gray-600">
+                  <b className="text-purple-500 dark:text-purple-300">DIVE+ 가입 시 {formatPrice(plusPrice)}원</b> ·
+                  굿즈샵 상시 5% 할인
+                </span>
+                <span className="flex shrink-0 items-center gap-0.5 font-semibold text-purple-500 dark:text-purple-300">
+                  월 1,900원
+                  <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" aria-hidden />
+                </span>
+              </Link>
+            )}
           </div>
           <ul className="mt-6 flex flex-col gap-2.5 text-[13px]">
             <li className="flex items-center gap-2">
