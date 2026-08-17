@@ -70,6 +70,14 @@ export const BADGE_TYPES = {
 //등록 후 이 기간(일) 이내면 NEW 뱃지 — goods.created_at 기준
 export const GOODS_NEW_DAYS = 30;
 
+//HOT 뱃지 — 누적 리뷰가 아니라 "최근에 반응이 뜨거운지"로 판단한다.
+//누적으로 보면 오래 팔린 상품이 영구히 HOT을 점유해 신보가 절대 올라오지 못한다.
+export const GOODS_HOT = {
+  WINDOW_DAYS: 90,
+  MIN_RECENT_REVIEWS: 5,
+  MIN_RATING: 4,
+} as const;
+
 //주문 배송 단계 — payments.delivery_status에 저장되는 값
 export const DELIVERY_STATUS = {
   READY: "배송전",

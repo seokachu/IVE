@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useShopDetail } from "@/hooks/queries/useShops";
 import { useAverageRating, useReviewCount } from "@/hooks/queries/useReviews";
 import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
+import { countRecentReviews } from "@/utils/calculateBadge";
 import { toast } from "@/hooks/use-toast";
 import { Minus, Package, Plus, Sparkles, Star, Truck } from "lucide-react";
 import { useState } from "react";
@@ -31,6 +32,8 @@ const ProductInfo = ({ id, onClickReview }: ProductInfoProps) => {
   const totalPrice = price * count;
   const reviewCount = reviews?.length ?? 0;
   const rating = averageRating ?? 0;
+  //HOT은 최근 반응 기준이라 목록과 동일하게 최근 리뷰 수로 판정한다
+  const recentReviewCount = countRecentReviews(reviews);
 
   //갤러리: 썸네일 + 상세 이미지 목록 (같은 URL 중복 제거 — 슬라이드에 같은 사진이 두 번 나오지 않도록)
   const detailImages = Array.isArray(data.images) ? (data.images as string[]) : [];
@@ -73,7 +76,7 @@ const ProductInfo = ({ id, onClickReview }: ProductInfoProps) => {
             />
           </div>
           <div className="mt-4">
-            <Badge item={{ ...data, review_count: reviewCount }} averageRating={rating} shape="pill" />
+            <Badge item={{ ...data, recent_review_count: recentReviewCount }} averageRating={rating} shape="pill" />
           </div>
           <h2 className="mt-3 break-all text-2xl font-bold lg:text-[1.75rem]">{data.title}</h2>
           <div className="mt-2.5 flex items-center gap-1.5 text-[13px]">

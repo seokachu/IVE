@@ -5,11 +5,11 @@ import type { BadgeFields } from "@/utils/calculateBadge";
 //NEW는 "지금"을 기준으로 판정되므로 스토리에서는 상대 날짜로 만든다 (캡처 시점과 무관하게 동일)
 const daysAgo = (days: number) => new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
 
-//뱃지는 상품 데이터에서 파생된다 — NEW(등록 30일 이내) > HOT(리뷰 10개 이상 & 평점 4.0 이상) > 무료배송
+//뱃지는 상품 데이터에서 파생된다 — NEW(등록 30일 이내) > HOT(최근 90일 리뷰 5건 이상 & 평점 4.0 이상) > 무료배송
 const goods = (overrides: Partial<BadgeFields> = {}): BadgeFields => ({
   id: "goods-1",
   shipping_type: "무료배송",
-  review_count: 24,
+  recent_review_count: 12,
   created_at: daysAgo(200),
   ...overrides,
 });
@@ -46,28 +46,28 @@ export const Conditions: Story = {
   render: (args) => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-3">
-        <span className="w-64 text-xs text-gray-500">등록 5일 · 무료배송 · 리뷰 24 · 평점 4.6</span>
+        <span className="w-64 text-xs text-gray-500">등록 5일 · 무료배송 · 최근 리뷰 12 · 평점 4.6</span>
         <Badge {...args} item={goods({ created_at: daysAgo(5) })} averageRating={4.6} />
       </div>
       <div className="flex items-center gap-3">
-        <span className="w-64 text-xs text-gray-500">무료배송 + HOT (등록 200일)</span>
+        <span className="w-64 text-xs text-gray-500">무료배송 + HOT — 최근 리뷰 12건</span>
         <Badge {...args} item={goods()} averageRating={4.6} />
       </div>
       <div className="flex items-center gap-3">
-        <span className="w-64 text-xs text-gray-500">NEW만 — 일반배송 · 리뷰 3건</span>
+        <span className="w-64 text-xs text-gray-500">NEW만 — 일반배송 · 최근 리뷰 3건</span>
         <Badge
           {...args}
-          item={goods({ created_at: daysAgo(2), shipping_type: "일반배송", review_count: 3 })}
+          item={goods({ created_at: daysAgo(2), shipping_type: "일반배송", recent_review_count: 3 })}
           averageRating={4.9}
         />
       </div>
       <div className="w-64 flex items-center gap-3">
-        <span className="w-64 text-xs text-gray-500">HOT만 — 일반배송 · 리뷰 40 · 평점 4.2</span>
-        <Badge {...args} item={goods({ shipping_type: "일반배송", review_count: 40 })} averageRating={4.2} />
+        <span className="w-64 text-xs text-gray-500">HOT만 — 일반배송 · 최근 리뷰 40 · 평점 4.2</span>
+        <Badge {...args} item={goods({ shipping_type: "일반배송", recent_review_count: 40 })} averageRating={4.2} />
       </div>
       <div className="flex items-center gap-3">
-        <span className="w-64 text-xs text-gray-500">조건 미충족 — 렌더 없음</span>
-        <Badge {...args} item={goods({ shipping_type: "일반배송", review_count: 2 })} averageRating={3.1} />
+        <span className="w-64 text-xs text-gray-500">조건 미충족 — 최근 리뷰 2건 · 평점 3.1</span>
+        <Badge {...args} item={goods({ shipping_type: "일반배송", recent_review_count: 2 })} averageRating={3.1} />
       </div>
     </div>
   ),

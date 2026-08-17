@@ -21,6 +21,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { loadEnv, requireEnv } from "./lib/loadEnv.mjs";
 import { buildReview } from "./data/goods-review-pool.mjs";
+import { GOODS_META } from "./data/goods-catalog.mjs";
 
 loadEnv();
 
@@ -33,10 +34,19 @@ const SHIPPING = { BASE_FEE: 3000, FREE_THRESHOLD: 30000 };
 const FREE_SHIPPING_LABEL = "무료배송";
 
 const MIN_REVIEWS_PER_GOODS = 2;
-//오래 팔린 상품에 얹는 추가 리뷰 — 상위 몇 개가 HOT 뱃지 기준(리뷰 10건 이상 & 평점 4.0 이상)을 넘게 한다
-const STEADY_SELLERS = 15; //가중치를 받을 상품 수 (등록이 오래된 순)
-const STEADY_TOP_BONUS = 13; //1위가 받는 추가 리뷰 수, 이후 선형 감쇠
+//추가 리뷰 가중치는 goods-catalog.mjs의 7번째 필드에서 읽는다.
+//HOT이 "최근 90일 반응" 기준이라 신보·최근 앨범에 리뷰가 쌓여야 뱃지가 붙는다.
 const DAY = 24 * 60 * 60 * 1000;
+
+//발매 직후가 아니라 전 기간에 고르게 발생시킬 주문 비율 — 스테디셀러의 최근 판매를 만든다
+const LONG_TAIL_RATIO = 0.45;
+
+//가중치를 받은 상품은 이 비율만큼을 "최근 주문"으로 강제 배치한다.
+//HOT이 최근 90일 리뷰 기준이라, 분포에 맡기면 최근 리뷰가 상품당 1건도 안 나온다.
+const RECENT_SHARE = 0.7;
+//최근 주문으로 잡을 경과일 범위 — 구매확정(10일)은 지났고 리뷰 작성일이 90일 안에 들어오는 구간
+const RECENT_AGE_MIN = 12;
+const RECENT_AGE_MAX = 62;
 
 const headers = {
   apikey: SERVICE_KEY,
@@ -113,22 +123,28 @@ const main = async () => {
     address_line2: "",
   };
 
-  //── 상품별 리뷰 목표 수: 모든 상품에 기본치를 깔고, 오래 팔린 상품일수록 리뷰가 누적되게 얹는다
-  //   난수로 뽑으면 한 상품에 쏠려 나머지가 HOT 기준에 못 미치므로, 감쇠 사다리로 결정적으로 배분한다
-  const targets = new Map(goods.map((g) => [g.id, MIN_REVIEWS_PER_GOODS]));
-  const steady = [...goods].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
-  for (let i = 0; i < Math.min(STEADY_SELLERS, steady.length); i++) {
-    const bonus = Math.max(1, Math.round(STEADY_TOP_BONUS * (1 - i / STEADY_SELLERS)));
-    targets.set(steady[i].id, targets.get(steady[i].id) + bonus);
-  }
+  //── 상품별 리뷰 목표 수: 모든 상품에 기본치를 깔고, 카탈로그의 가중치만큼 얹는다
+  const popularity = new Map(GOODS_META.filter((row) => row[6]).map((row) => [row[0], row[6]]));
+  const targets = new Map(goods.map((g) => [g.id, MIN_REVIEWS_PER_GOODS + (popularity.get(g.id) ?? 0)]));
+
+  const unknown = [...popularity.keys()].filter((id) => !targets.has(id));
+  if (unknown.length) console.warn(`[경고] 카탈로그 가중치에 DB에 없는 상품 ${unknown.length}건`);
 
   //── 리뷰 목표를 주문으로 환산 — 등록 시기가 비슷한 상품끼리 묶이도록 정렬 후 잘라 담는다
   //   (신상과 구상품이 한 주문에 섞이면 주문일이 신상 등록일 이후로 밀려 구상품 리뷰가 사라진다)
   const pending = [];
+  const recentPending = [];
   for (const g of goods) {
-    for (let i = 0; i < targets.get(g.id); i++) pending.push({ goods: g, seed: hashOf(g.id) + i * 7 });
+    const total = targets.get(g.id);
+    const recent = Math.round((popularity.get(g.id) ?? 0) * RECENT_SHARE);
+    for (let i = 0; i < total; i++) {
+      const line = { goods: g, seed: hashOf(g.id) + i * 7 };
+      (i < recent ? recentPending : pending).push(line);
+    }
   }
-  pending.sort((a, b) => new Date(a.goods.created_at) - new Date(b.goods.created_at));
+  const byRelease = (a, b) => new Date(a.goods.created_at) - new Date(b.goods.created_at);
+  pending.sort(byRelease);
+  recentPending.sort(byRelease);
 
   const payments = [];
   const orderItems = [];
@@ -155,10 +171,12 @@ const main = async () => {
     if (ageHint !== undefined) {
       orderedAt = new Date(Math.max(notBefore + DAY, NOW.getTime() - ageHint * DAY));
     } else {
-      //제곱 분포로 발매 직후에 몰리게 — 실제 판매 곡선과 비슷하고, 구매확정까지 갈 시간도 확보된다
+      //발매 직후에 몰리되(제곱 분포) 일부는 전 기간에 고르게 흩뿌린다.
+      //전부 발매 직후로 몰면 오래된 인기 상품의 "최근 리뷰"가 0이 되어 HOT이 신상 전용 뱃지가 된다.
       const span = Math.max(NOW.getTime() - notBefore, DAY);
       const r = rand();
-      orderedAt = new Date(notBefore + Math.floor(r * r * span));
+      const weight = rand() < LONG_TAIL_RATIO ? r : r * r;
+      orderedAt = new Date(notBefore + Math.floor(weight * span));
     }
 
     let orderId = makeOrderId(orderedAt, rand);
@@ -244,21 +262,27 @@ const main = async () => {
 
   //정렬 결과에서 같은 상품 항목은 서로 붙어 있으므로, 한 주문에 같은 상품이 두 번 담기지 않게 건너뛴다
   //(리뷰 조회가 order_id + product_id 조합이라 중복되면 같은 사람이 같은 상품에 두 번 쓴 꼴이 된다)
-  const queue = [...pending];
-  while (queue.length > 0) {
-    const size = 1 + Math.floor(mulberry(orderIndex * 31 + 5)() * 3); //1~3개
-    const lines = [];
-    const picked = new Set();
+  const drainQueue = (queue, ageFor) => {
+    while (queue.length > 0) {
+      const rand = mulberry(orderIndex * 31 + 5);
+      const size = 1 + Math.floor(rand() * 3); //1~3개
+      const lines = [];
+      const picked = new Set();
 
-    for (let i = 0; i < queue.length && lines.length < size; i++) {
-      if (picked.has(queue[i].goods.id)) continue;
-      picked.add(queue[i].goods.id);
-      lines.push(queue.splice(i, 1)[0]);
-      i--;
+      for (let i = 0; i < queue.length && lines.length < size; i++) {
+        if (picked.has(queue[i].goods.id)) continue;
+        picked.add(queue[i].goods.id);
+        lines.push(queue.splice(i, 1)[0]);
+        i--;
+      }
+
+      pushOrder(lines, ageFor?.(rand));
     }
+  };
 
-    pushOrder(lines);
-  }
+  drainQueue([...pending]);
+  //최근 주문 — 상품 등록일이 더 최근이면 pushOrder가 알아서 그 이후로 당겨준다
+  drainQueue([...recentPending], (rand) => RECENT_AGE_MIN + Math.floor(rand() * (RECENT_AGE_MAX - RECENT_AGE_MIN)));
 
   //── 보정 1: 등록 14일이 지났는데도 리뷰가 안 붙은 상품은 단독 주문으로 한 건 더 만든다
   //구매확정까지 10일이 걸리므로, 등록 12일이 지난 상품부터는 리뷰가 하나는 있어야 한다
