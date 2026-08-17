@@ -207,6 +207,7 @@ pnpm dev            # http://localhost:3000
 | `NAVER_CLIENT_ID` · `NAVER_CLIENT_SECRET` · `KOPIS_API_KEY` | 소식·일정 수집 |
 | `NEXT_PUBLIC_RANDOM_NICKNAME_URL` | 랜덤 닉네임 |
 | `CRON_SECRET` | 크론 엔드포인트 보호 (프로덕션) |
+| `NEXT_PUBLIC_VAPID_PUBLIC_KEY` · `VAPID_PRIVATE_KEY` · `VAPID_SUBJECT` | 웹 푸시(PWA) — `npx web-push generate-vapid-keys`로 생성 |
 
 ```bash
 pnpm lint            # ESLint

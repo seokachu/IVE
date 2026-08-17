@@ -3,8 +3,7 @@ import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 import { createClient } from "@supabase/supabase-js";
 import { truncate } from "lodash";
-
-const EXPO_PUSH_URL = "https://exp.host/--/api/v2/push/send";
+import { sendPushMessages } from "@/lib/push/sender";
 
 //댓글 작성 시 게시글 작성자(+대댓글이면 원댓글 작성자)에게 푸시 알림 발송
 export async function POST(request: Request) {
@@ -78,7 +77,7 @@ export async function POST(request: Request) {
 
     const { data: tokens } = await admin
       .from("push_tokens")
-      .select("token, user_id")
+      .select("token, user_id, platform")
       .in("user_id", [...recipients.keys()])
       .eq("enabled", true);
     if (!tokens || tokens.length === 0) {
@@ -94,34 +93,22 @@ export async function POST(request: Request) {
     //잠금화면 노출 여부는 OS의 민감한 알림 설정에 위임한다.
     const contentPreview = truncate((comment.content ?? "").trim(), { length: 40, omission: "..." });
 
-    const messages = tokens.map(({ token, user_id }) => ({
-      to: token,
+    //Expo(앱)·web-push(브라우저) 채널로 함께 발송
+    const { sent, staleTokens } = await sendPushMessages(tokens, (userId) => ({
       title:
-        recipients.get(user_id) === "reply"
+        recipients.get(userId) === "reply"
           ? "내 댓글에 답글이 달렸습니다"
           : `"${boardTitle}" 글에 새 댓글이 달렸습니다`,
       body: contentPreview ? `${commenterName}: ${contentPreview}` : `${commenterName}님이 댓글을 남겼습니다.`,
-      data: { url: `${origin}/board/${boardId}` },
+      url: `${origin}/board/${boardId}`,
     }));
 
-    const expoResponse = await fetch(EXPO_PUSH_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(messages),
-    });
-    const expoResult = await expoResponse.json();
-
     //만료된 토큰 정리
-    const staleTokens = (expoResult.data ?? [])
-      .map((ticket: { status: string; details?: { error?: string } }, index: number) =>
-        ticket.status === "error" && ticket.details?.error === "DeviceNotRegistered" ? tokens[index].token : null,
-      )
-      .filter(Boolean);
     if (staleTokens.length > 0) {
       await admin.from("push_tokens").delete().in("token", staleTokens);
     }
 
-    return NextResponse.json({ sent: messages.length - staleTokens.length });
+    return NextResponse.json({ sent });
   } catch (error) {
     console.error("푸시 발송 실패:", error);
     return NextResponse.json({ error: "푸시 발송에 실패했습니다." }, { status: 500 });

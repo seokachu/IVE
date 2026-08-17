@@ -12,7 +12,7 @@ import { useOrderItems } from "@/hooks/queries/useOrderItems";
 import { useShippingAddresses } from "@/hooks/queries/useShippingAddress";
 import { useMyMembership } from "@/hooks/queries/useMembership";
 import LogoutConfirmModal from "@/components/common/modal/LogoutConfirmModal";
-import { toast } from "@/hooks/use-toast";
+import WithdrawConfirmModal from "@/components/common/modal/WithdrawConfirmModal";
 import { useSession } from "@/store/zustand";
 import { cn } from "@/utils/utils";
 
@@ -116,10 +116,7 @@ const SideNav = () => {
 export const MyPageAccountSection = () => {
   const router = useRouter();
   const [logoutOpen, setLogoutOpen] = useState(false);
-
-  const onClickWithdraw = () => {
-    toast({ title: "회원탈퇴는 준비 중이에요.", description: "필요하시면 문의로 요청해주세요." });
-  };
+  const [withdrawOpen, setWithdrawOpen] = useState(false);
 
   return (
     <div className="flex flex-col gap-5">
@@ -135,9 +132,14 @@ export const MyPageAccountSection = () => {
         </button>
         {logoutOpen && <LogoutConfirmModal isOpen={setLogoutOpen} onSuccess={() => router.push("/")} />}
         <span className="h-2.5 w-px bg-gray-200" aria-hidden="true" />
-        <button type="button" onClick={onClickWithdraw} className="text-gray-300 hover:text-gray-400 transition-colors">
+        <button
+          type="button"
+          onClick={() => setWithdrawOpen(true)}
+          className="text-gray-300 hover:text-gray-400 transition-colors"
+        >
           회원탈퇴
         </button>
+        {withdrawOpen && <WithdrawConfirmModal isOpen={setWithdrawOpen} onSuccess={() => router.push("/")} />}
       </div>
     </div>
   );

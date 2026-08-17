@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
 const page = () => {
-  redirect("/mypage/wishlist");
+  redirect("/mypage/membership");
 };
 
 export default page;

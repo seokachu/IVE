@@ -1,7 +1,6 @@
 //토스페이먼츠 빌링(정기결제) 서버 헬퍼 — API 라우트 전용 (클라이언트에서 import 금지)
-import { createServerClient } from "@supabase/ssr";
-import { createClient } from "@supabase/supabase-js";
-import { cookies } from "next/headers";
+//getAuthUser·getAdminClient는 멤버십 전용이 아니게 되어 supabase/server로 이동, 기존 호출부 호환용 재노출
+export { getAuthUser, getAdminClient } from "@/lib/supabase/server";
 
 const TOSS_BILLING_ISSUE_URL = "https://api.tosspayments.com/v1/billing/authorizations/issue";
 const TOSS_BILLING_CHARGE_URL = "https://api.tosspayments.com/v1/billing";
@@ -15,34 +14,6 @@ const tossAuthHeader = () => ({
   Authorization: `Basic ${Buffer.from(`${process.env.TOSS_SECRET_KEY}:`).toString("base64")}`,
   "Content-Type": "application/json",
 });
-
-//쿠키 세션으로 로그인 유저 확인
-export const getAuthUser = async () => {
-  const cookieStore = await cookies();
-  const authClient = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll: () => cookieStore.getAll(),
-        setAll: () => {},
-      },
-    },
-  );
-  const {
-    data: { user },
-  } = await authClient.auth.getUser();
-  return user;
-};
-
-//서비스롤 클라이언트 (memberships 테이블은 RLS로 쓰기가 막혀 있어 서버에서만 조작)
-export const getAdminClient = () => {
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!serviceRoleKey) return null;
-  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, serviceRoleKey, {
-    auth: { persistSession: false },
-  });
-};
 
 //authKey → 빌링키 발급
 export const issueBillingKey = async (authKey: string, customerKey: string) => {
