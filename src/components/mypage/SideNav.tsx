@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import _ from "lodash";
 import { Crown, FileText, Heart, MapPin, ShoppingBag, type LucideIcon } from "lucide-react";
@@ -10,7 +10,7 @@ import { useWishLists } from "@/hooks/queries/useWishList";
 import { useMyBoards } from "@/hooks/queries/useBoard";
 import { useOrderItems } from "@/hooks/queries/useOrderItems";
 import { useShippingAddresses } from "@/hooks/queries/useShippingAddress";
-import useSignOut from "@/hooks/useSignOut";
+import LogoutConfirmModal from "@/components/common/modal/LogoutConfirmModal";
 import { toast } from "@/hooks/use-toast";
 import { useSession } from "@/store/zustand";
 import { cn } from "@/utils/utils";
@@ -102,7 +102,7 @@ const SideNav = () => {
 //푸시 알림 카드 + 계정 링크 — 데스크톱은 사이드바 하단, 모바일은 콘텐츠 아래 (.pen 모바일 시안 IA)
 export const MyPageAccountSection = () => {
   const router = useRouter();
-  const { handleSignOut } = useSignOut(() => router.push("/"));
+  const [logoutOpen, setLogoutOpen] = useState(false);
 
   const onClickWithdraw = () => {
     toast({ title: "회원탈퇴는 준비 중이에요.", description: "필요하시면 문의로 요청해주세요." });
@@ -113,9 +113,14 @@ export const MyPageAccountSection = () => {
       <hr className="border-gray-200" />
       <PushSettingRow />
       <div className="flex items-center gap-3 px-1 pb-2 text-[13px] lg:px-3.5">
-        <button type="button" onClick={handleSignOut} className="text-gray-500 hover:text-purple-500 transition-colors">
+        <button
+          type="button"
+          onClick={() => setLogoutOpen(true)}
+          className="text-gray-500 hover:text-purple-500 transition-colors"
+        >
           로그아웃
         </button>
+        {logoutOpen && <LogoutConfirmModal isOpen={setLogoutOpen} onSuccess={() => router.push("/")} />}
         <span className="h-2.5 w-px bg-gray-200" aria-hidden="true" />
         <button type="button" onClick={onClickWithdraw} className="text-gray-300 hover:text-gray-400 transition-colors">
           회원탈퇴

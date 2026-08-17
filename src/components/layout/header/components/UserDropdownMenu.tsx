@@ -7,7 +7,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import SignOutButton from "@/components/common/button/SignOutButton";
+import { useState } from "react";
+import LogoutConfirmModal from "@/components/common/modal/LogoutConfirmModal";
 import { useSession } from "@/store/zustand";
 import { Heart, LogOut, PencilLine, User } from "lucide-react";
 
@@ -20,8 +21,11 @@ const MENU_ITEMS = [
 
 const UserDropdownMenu = () => {
   const session = useSession();
+  //모달은 드롭다운 밖에 렌더 — 메뉴가 닫히며 언마운트돼도 유지되도록
+  const [logoutOpen, setLogoutOpen] = useState(false);
 
   return (
+    <>
     <DropdownMenu>
       <DropdownMenuTrigger aria-label="내 계정 메뉴">
         <UserAvatar size="sm" className="border-[1.5px] border-purple" />
@@ -44,12 +48,17 @@ const UserDropdownMenu = () => {
           </DropdownMenuItem>
         ))}
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer rounded-[10px] px-2.5 py-2.5 text-[13px] text-gray-500">
+        <DropdownMenuItem
+          onSelect={() => setLogoutOpen(true)}
+          className="cursor-pointer rounded-[10px] px-2.5 py-2.5 text-[13px] text-gray-500"
+        >
           <LogOut size={16} className="text-gray-400" aria-hidden />
-          <SignOutButton className="w-full text-left" />
+          로그아웃
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
+    {logoutOpen && <LogoutConfirmModal isOpen={setLogoutOpen} />}
+    </>
   );
 };
 
