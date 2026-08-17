@@ -1,0 +1,31 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="소개" />
+
+# IVE로 DIVE — 디자인 시스템
+
+아이브 팬페이지(Next.js 16 · App Router)의 UI 컴포넌트 문서입니다.
+2026-08 리디자인으로 확정된 토큰·컴포넌트를 실제 앱과 **같은 코드**로 렌더링합니다.
+
+## 구성
+
+| 섹션 | 내용 |
+| --- | --- |
+| **Foundations** | 색상 팔레트, 타이포그래피 스케일, 간격·라운드·그림자·브레이크포인트 |
+| **UI** | shadcn 기반 프리미티브 (`src/components/ui`) — Button, Input, Select, Avatar … |
+| **Common** | 서비스 공통 컴포넌트 (`src/components/common`) — SectionTitle, SortDropdown, ConfirmModal … |
+
+## 사용법
+
+- 상단 툴바의 **테마 토글**로 라이트/다크를 전환합니다. 앱과 동일하게 `html.dark` 클래스를 붙여 동작합니다.
+- **Controls** 탭에서 props를 바꿔가며 상태를 확인할 수 있습니다.
+- **Accessibility** 탭에서 대비·라벨 위반을 즉시 검사합니다.
+
+## 원칙
+
+1. 색은 반드시 토큰(`bg-primary`, `text-gray-500`)으로 지정하고 hex 리터럴을 새로 만들지 않습니다.
+2. 간격은 4px 배수만 사용합니다.
+3. 웨이트는 400 / 600 / 700 세 단계만 사용합니다.
+4. 로딩 표시는 `Spinner` 하나로 통일합니다.
+
+전체 규칙 원문은 저장소의 `public/docs/design-system.md`에 있습니다.

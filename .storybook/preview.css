@@ -1,0 +1,19 @@
+/* 앱은 next/font로 Pretendard Variable을 주입한다 (src/assets/fonts/fonts.tsx).
+   스토리북에는 라우터·레이아웃이 없으므로 같은 서체를 패키지 CSS로 직접 로드해 렌더를 일치시킨다 */
+html,
+body {
+  font-family:
+    "Pretendard Variable",
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
+  letter-spacing: -0.2px;
+  height: auto;
+}
+
+/* Docs 페이지 배경도 캔버스 테마를 따라가도록 */
+.sb-show-main.sb-main-padded {
+  padding: 0;
+}
