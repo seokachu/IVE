@@ -12,6 +12,7 @@ import { useOrderItems } from "@/hooks/queries/useOrderItems";
 import { useMyMembership } from "@/hooks/queries/useMembership";
 import { useSession } from "@/store/zustand";
 import { cn } from "@/utils/utils";
+import { getDisplayName } from "@/utils/userProfile";
 
 //프로필 밴드 — 아바타·닉네임·멤버십 뱃지·스탯 3종 (.pen 마이페이지 시안의 ProfileBand)
 const ProfileBand = () => {
@@ -57,7 +58,7 @@ const ProfileBand = () => {
           </button>
           <div className="flex flex-col gap-1.5">
             <div className="flex flex-wrap items-center gap-2.5">
-              <h1 className="text-lg font-bold leading-tight lg:text-[22px]">{session?.user.user_metadata.name}</h1>
+              <h1 className="text-lg font-bold leading-tight lg:text-[22px]">{getDisplayName(session?.user)}</h1>
               <MembershipBadge tier={tier} size="lg" />
               <button
                 type="button"

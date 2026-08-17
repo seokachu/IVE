@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { toast } from "@/hooks/use-toast";
 import { formatPrice } from "@/utils/calculateDiscount";
 import { useSession } from "@/store/zustand";
+import { getDisplayName } from "@/utils/userProfile";
 import type { MembershipTier } from "@/types/mypage";
 
 interface SubscribeModalProps {
@@ -42,7 +43,7 @@ const SubscribeModal = ({ tier, price, name, onClose }: SubscribeModalProps) => 
       await tossPayments.requestBillingAuth("카드", {
         customerKey: session.user.id,
         customerEmail: session.user.email,
-        customerName: session.user.user_metadata.name,
+        customerName: getDisplayName(session.user),
         successUrl: `${window.location.origin}/mypage/membership/billing?tier=${tier}`,
         failUrl: `${window.location.origin}/mypage/membership/billing?fail=1`,
       });

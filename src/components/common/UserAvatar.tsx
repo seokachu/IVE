@@ -2,6 +2,7 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useSession } from "@/store/zustand";
+import { getAvatarUrl, getDisplayName } from "@/utils/userProfile";
 
 interface AvatarProps {
   userId?: string | null;
@@ -15,14 +16,14 @@ const UserAvatar = ({ userId, avatarUrl, userName, size = "md", className }: Ava
   const session = useSession();
 
   const getUserImage = () => {
-    if (!userId) return session?.user.user_metadata.avatar_url;
-    if (session?.user.id === userId) return session?.user.user_metadata.avatar_url;
+    if (!userId) return getAvatarUrl(session?.user);
+    if (session?.user.id === userId) return getAvatarUrl(session?.user);
     return avatarUrl || undefined;
   };
 
   const getUserName = () => {
-    if (!userId) return session?.user.user_metadata.name;
-    if (session?.user.id === userId) return session?.user.user_metadata.name;
+    if (!userId) return getDisplayName(session?.user);
+    if (session?.user.id === userId) return getDisplayName(session?.user);
     return userName || undefined;
   };
 
@@ -58,7 +59,7 @@ const UserAvatar = ({ userId, avatarUrl, userName, size = "md", className }: Ava
 
   return (
     <Avatar className={`border ${sizeStyles[size]} ${className || ""}`}>
-      <AvatarImage src={imageUrl} alt={displayName || "유저 프로필"} key={avatarUrl} />
+      <AvatarImage src={imageUrl} alt={displayName || "유저 프로필"} key={imageUrl} />
       {/* 크기는 부모(Avatar)를 꽉 채움 — 고정 px를 주면 !w-5 같은 축소 오버라이드와 어긋나 글자가 밀림 */}
       <AvatarFallback className={`h-full w-full font-bold leading-none ${fallbackTextStyles[size]} ${fallbackStyle}`}>
         {nameForFallback.slice(0, 1)}

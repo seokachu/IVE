@@ -4,6 +4,7 @@ import { CreditCard, Plus } from "lucide-react";
 import { loadTossPayments } from "@tosspayments/payment-sdk";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useSession } from "@/store/zustand";
+import { getDisplayName } from "@/utils/userProfile";
 import type { MembershipRow } from "@/types/mypage";
 
 interface PaymentMethodModalProps {
@@ -28,7 +29,7 @@ const PaymentMethodModal = ({ membership, onClose }: PaymentMethodModalProps) =>
       await tossPayments.requestBillingAuth("카드", {
         customerKey: session.user.id,
         customerEmail: session.user.email,
-        customerName: session.user.user_metadata.name,
+        customerName: getDisplayName(session.user),
         successUrl: `${window.location.origin}/mypage/membership/billing?mode=card`,
         failUrl: `${window.location.origin}/mypage/membership/billing?fail=1`,
       });
