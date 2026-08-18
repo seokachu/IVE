@@ -9,6 +9,7 @@
  * 실행: pnpm community:seed              (실제 반영)
  *       pnpm community:seed --dry-run    (변경 없이 계획만 출력)
  *       pnpm community:seed --board-only (게시판만, 후기는 건드리지 않음)
+ *       pnpm community:seed --append     (기존 데이터를 지우지 않고, DB에 없는 제목의 글만 추가)
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -22,6 +23,7 @@ const SUPABASE_URL = requireEnv("NEXT_PUBLIC_SUPABASE_URL");
 const SERVICE_KEY = requireEnv("SUPABASE_SERVICE_ROLE_KEY");
 const DRY_RUN = process.argv.includes("--dry-run");
 const BOARD_ONLY = process.argv.includes("--board-only");
+const APPEND = process.argv.includes("--append");
 
 const headers = {
   apikey: SERVICE_KEY,
@@ -81,40 +83,53 @@ const main = async () => {
 
   const likePool = AUTHOR_POOL.map((name) => byName.get(name));
 
-  //2. 백업
-  const [oldBoards, oldComments, oldLikes, oldReviews] = await Promise.all([
-    select("board?select=*&order=id.asc"),
-    select("board_comments?select=*&order=id.asc"),
-    select("board_likes?select=*&order=id.asc"),
-    select("goods_reviews?select=*&order=created_at.asc"),
-  ]);
-
-  const stamp = NOW.toISOString().slice(0, 19).replace(/[:T]/g, "");
-  const backupDir = resolve(process.cwd(), "scripts/backup");
-  const backupPath = resolve(backupDir, `community-${stamp}.json`);
-  if (!DRY_RUN) {
-    mkdirSync(backupDir, { recursive: true });
-    writeFileSync(
-      backupPath,
-      JSON.stringify({ savedAt: NOW.toISOString(), board: oldBoards, board_comments: oldComments, board_likes: oldLikes, goods_reviews: oldReviews }, null, 2)
-    );
-  }
-
-  console.log(`현재 상태 — 게시글 ${oldBoards.length} · 댓글 ${oldComments.length} · 좋아요 ${oldLikes.length} · 굿즈후기 ${oldReviews.length}`);
-  console.log(`백업 — ${DRY_RUN ? "(dry-run, 저장 안 함)" : backupPath}`);
-
-  //3. 게시판 비우기 (자식 → 부모 순서)
-  if (!DRY_RUN) {
-    await remove("board_likes?id=gt.0");
-    await remove("board_comments?id=gt.0");
-    await remove("board?id=gt.0");
-    console.log("기존 게시판 데이터 삭제 완료");
+  //2·3. 백업 + 게시판 비우기 — append 모드에서는 아무것도 지우지 않고 DB에 없는 제목의 글만 골라낸다
+  let seedPosts = POSTS;
+  let oldReviews = [];
+  if (APPEND) {
+    const existing = await select("board?select=title");
+    const titles = new Set(existing.map((b) => b.title));
+    seedPosts = POSTS.filter((p) => !titles.has(p.title));
+    console.log(`append 모드 — 기존 게시글 ${existing.length}건 유지 · 새 글 ${seedPosts.length}건 추가 대상`);
+    if (!seedPosts.length) {
+      console.log("추가할 새 글이 없습니다.");
+      return;
+    }
   } else {
-    console.log("[dry-run] 게시판 데이터 삭제 예정");
+    const [oldBoards, oldComments, oldLikes, reviews] = await Promise.all([
+      select("board?select=*&order=id.asc"),
+      select("board_comments?select=*&order=id.asc"),
+      select("board_likes?select=*&order=id.asc"),
+      select("goods_reviews?select=*&order=created_at.asc"),
+    ]);
+    oldReviews = reviews;
+
+    const stamp = NOW.toISOString().slice(0, 19).replace(/[:T]/g, "");
+    const backupDir = resolve(process.cwd(), "scripts/backup");
+    const backupPath = resolve(backupDir, `community-${stamp}.json`);
+    if (!DRY_RUN) {
+      mkdirSync(backupDir, { recursive: true });
+      writeFileSync(
+        backupPath,
+        JSON.stringify({ savedAt: NOW.toISOString(), board: oldBoards, board_comments: oldComments, board_likes: oldLikes, goods_reviews: oldReviews }, null, 2)
+      );
+    }
+
+    console.log(`현재 상태 — 게시글 ${oldBoards.length} · 댓글 ${oldComments.length} · 좋아요 ${oldLikes.length} · 굿즈후기 ${oldReviews.length}`);
+    console.log(`백업 — ${DRY_RUN ? "(dry-run, 저장 안 함)" : backupPath}`);
+
+    if (!DRY_RUN) {
+      await remove("board_likes?id=gt.0");
+      await remove("board_comments?id=gt.0");
+      await remove("board?id=gt.0");
+      console.log("기존 게시판 데이터 삭제 완료");
+    } else {
+      console.log("[dry-run] 게시판 데이터 삭제 예정");
+    }
   }
 
   //4. 새 게시글 — 오래된 글부터 넣어 id 순서와 시간 순서를 맞춘다
-  const ordered = [...POSTS].sort((a, b) => b.day - a.day);
+  const ordered = [...seedPosts].sort((a, b) => b.day - a.day);
   const rows = ordered.map((post, i) => ({
     user_id: byName.get(post.author),
     title: post.title,
@@ -204,8 +219,8 @@ const main = async () => {
   }
 
   //7. 굿즈샵 후기 리라이트
-  if (BOARD_ONLY) {
-    console.log("--board-only 지정 — 굿즈 후기는 건너뜁니다");
+  if (BOARD_ONLY || APPEND) {
+    console.log(`${APPEND ? "--append" : "--board-only"} 지정 — 굿즈 후기는 건너뜁니다`);
     return;
   }
 
