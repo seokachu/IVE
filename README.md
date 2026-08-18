@@ -28,16 +28,32 @@
 ## 화면
 
 <p>
-  <img src="./public/docs/assets/design/screens/main-light.webp" width="19%" alt="메인" />
-  <img src="./public/docs/assets/design/screens/music-light.webp" width="19%" alt="음악" />
-  <img src="./public/docs/assets/design/screens/news-light.webp" width="19%" alt="소식" />
-  <img src="./public/docs/assets/design/screens/shop-detail-light.webp" width="19%" alt="굿즈샵 상세" />
-  <img src="./public/docs/assets/design/screens/board-list-light.webp" width="19%" alt="자유게시판" />
+  <img src="./public/docs/assets/design/screens/main-light-2.webp" width="19%" alt="메인" />
+  <img src="./public/docs/assets/design/screens/music-light-2.webp" width="19%" alt="음악" />
+  <img src="./public/docs/assets/design/screens/news-light-2.webp" width="19%" alt="소식" />
+  <img src="./public/docs/assets/design/screens/shop-detail-light-2.webp" width="19%" alt="굿즈샵 상세" />
+  <img src="./public/docs/assets/design/screens/board-list-light-2.webp" width="19%" alt="자유게시판" />
 </p>
 
 전체 시안은 [디자인 시안 (웹)](https://ive-three.vercel.app/docs/design.html)에서 —
 화면 57장을 라이트/다크로 배포된 서비스 안에서 그대로 열람할 수 있다.
 리뉴얼 전 화면은 [아래 아카이브](#리뉴얼-전-화면-v1-아카이브)에 남겨 두었다.
+
+---
+
+## 앱 다운로드
+
+<img src="./.github/assets/apk-qr.png" width="180" align="right" alt="APK 다운로드 QR" />
+
+Android 폰 카메라로 QR을 찍거나, 아래 링크로 받는다.
+
+**[⬇ ive-dive.apk 다운로드](https://github.com/seokachu/ive-app/releases/latest/download/ive-dive.apk)**
+
+- 배포된 웹을 그대로 담는 하이브리드 앱이라, 웹이 갱신되면 앱도 재설치 없이 함께 갱신된다
+- 설치 시 "출처를 알 수 없는 앱" 허용이 필요하다 (스토어 외 배포)
+- 앱에서만 되는 것 — 댓글·답글·좋아요 **네이티브 푸시 알림**, 브랜드 스플래시, 뒤로가기 2회 종료
+
+<br clear="right" />
 
 ---
 
@@ -154,22 +170,6 @@ pnpm storybook:deploy   # 빌드 후 Vercel(ive-storybook 프로젝트) 프로�
 - 설정: `.storybook/main.ts`(`@storybook/nextjs-vite`), `.storybook/preview.tsx`(globals.css·Pretendard·테마 데코레이터)
 - 스토리는 컴포넌트 옆에 `*.stories.tsx`로 두고, Foundations 문서만 `src/stories/`에 모은다
 - 규칙 원문은 [`public/docs/design-system.md`](public/docs/design-system.md)
-
----
-
-## 앱 다운로드
-
-<img src="./.github/assets/apk-qr.png" width="180" align="right" alt="APK 다운로드 QR" />
-
-Android 폰 카메라로 QR을 찍거나, 아래 링크로 받는다.
-
-**[⬇ ive-dive.apk 다운로드](https://github.com/seokachu/ive-app/releases/latest/download/ive-dive.apk)**
-
-- 배포된 웹을 그대로 담는 하이브리드 앱이라, 웹이 갱신되면 앱도 재설치 없이 함께 갱신된다
-- 설치 시 "출처를 알 수 없는 앱" 허용이 필요하다 (스토어 외 배포)
-- 앱에서만 되는 것 — 댓글·답글·좋아요 **네이티브 푸시 알림**, 브랜드 스플래시, 뒤로가기 2회 종료
-
-<br clear="right" />
 
 ---
 
