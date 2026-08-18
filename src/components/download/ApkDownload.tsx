@@ -22,7 +22,9 @@ import PinkLogoImage from "@/assets/images/logo_pink.svg";
  * 수동 안내와 다운로드 버튼을 항상 함께 보여준다.
  */
 
-const APK_URL = "https://github.com/seokachu/ive-app/releases/latest/download/ive-dive.apk";
+//같은 도메인의 프록시 경로(app/download/ive-dive.apk/route.ts)를 쓴다 —
+//GitHub 릴리스 저장소 직결이 일부 회선에서 끊겨 다운로드가 완료되지 않는 문제 우회
+const APK_URL = "/download/ive-dive.apk";
 
 type Env = "loading" | "inapp" | "ios" | "ready";
 
