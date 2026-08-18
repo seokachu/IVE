@@ -1,4 +1,4 @@
-<img width="1920" height="960" alt="cover" src="https://github.com/user-attachments/assets/6f73587c-9a34-4944-9d83-7651281b7ea8" />
+<img alt="IVE로 DIVE — 아이브 팬을 위한 커뮤니티 · 굿즈 커머스" src="./.github/assets/cover.png" />
 
 # IVE로 DIVE
 
@@ -13,8 +13,9 @@
 ![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?logo=supabase&logoColor=white)
 ![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=white)
 ![Toss Payments](https://img.shields.io/badge/Toss%20Payments-0064FF?logoColor=white)
+[![Android APK](https://img.shields.io/badge/Android%20APK-다운로드-F465A5?logo=android&logoColor=white)](https://github.com/seokachu/ive-app/releases/latest/download/ive-dive.apk)
 
-**바로 보기** — [서비스](https://ive-three.vercel.app) · [기능명세서](https://ive-three.vercel.app/docs) · [디자인 시안](https://ive-three.vercel.app/docs/design.html) · [스토리북](https://ive-storybook.vercel.app) · [하이브리드 앱](https://github.com/seokachu/ive-app)
+**바로 보기** — [서비스](https://ive-three.vercel.app) · [기능명세서](https://ive-three.vercel.app/docs) · [디자인 시안](https://ive-three.vercel.app/docs/design.html) · [스토리북](https://ive-storybook.vercel.app) · [앱 다운로드](#앱-다운로드) · [하이브리드 앱 레포](https://github.com/seokachu/ive-app)
 
 `1차 배포` 2024.10.18 ~ 2025.01.26 — 메인·로그인·회원가입·굿즈샵·장바구니·마이페이지·결제<br/>
 `2차 배포` 2025.01.26 ~ 2025.02.02 — 버그 수정<br/>
@@ -153,6 +154,22 @@ pnpm storybook:deploy   # 빌드 후 Vercel(ive-storybook 프로젝트) 프로�
 - 설정: `.storybook/main.ts`(`@storybook/nextjs-vite`), `.storybook/preview.tsx`(globals.css·Pretendard·테마 데코레이터)
 - 스토리는 컴포넌트 옆에 `*.stories.tsx`로 두고, Foundations 문서만 `src/stories/`에 모은다
 - 규칙 원문은 [`public/docs/design-system.md`](public/docs/design-system.md)
+
+---
+
+## 앱 다운로드
+
+<img src="./.github/assets/apk-qr.png" width="180" align="right" alt="APK 다운로드 QR" />
+
+Android 폰 카메라로 QR을 찍거나, 아래 링크로 받는다.
+
+**[⬇ ive-dive.apk 다운로드](https://github.com/seokachu/ive-app/releases/latest/download/ive-dive.apk)**
+
+- 배포된 웹을 그대로 담는 하이브리드 앱이라, 웹이 갱신되면 앱도 재설치 없이 함께 갱신된다
+- 설치 시 "출처를 알 수 없는 앱" 허용이 필요하다 (스토어 외 배포)
+- 앱에서만 되는 것 — 댓글·답글·좋아요 **네이티브 푸시 알림**, 브랜드 스플래시, 뒤로가기 2회 종료
+
+<br clear="right" />
 
 ---
 
