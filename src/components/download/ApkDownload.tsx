@@ -43,7 +43,8 @@ const ApkDownload = () => {
     } else if (/kakaotalk/i.test(ua)) {
       next = "inapp";
       go = "kakaotalk://web/openExternal?url=" + encodeURIComponent(window.location.href);
-    } else if (/naver|instagram|fbav|fban|line\//i.test(ua)) {
+    } else if (/naver|instagram|fbav|fban|line\//i.test(ua) || /;\s?wv\)/i.test(ua)) {
+      //"; wv)"는 안드로이드 WebView 공통 마커 — 카메라 QR 스캐너 등 이름 모를 인앱 브라우저까지 잡는다
       next = "inapp";
       go = `intent://${window.location.host}${window.location.pathname}#Intent;scheme=https;end`;
     }
@@ -89,12 +90,10 @@ const ApkDownload = () => {
             <a href={APK_URL}>APK 다시 받기</a>
           </Button>
           <div className="flex flex-col gap-1.5 text-xs text-gray-400">
-            {env === "inapp" && (
-              <p>
-                자동으로 열리지 않으면 오른쪽 위 ⋮ 메뉴에서{" "}
-                <strong className="font-semibold text-gray-500">다른 브라우저로 열기</strong>를 눌러주세요
-              </p>
-            )}
+            <p>
+              다운로드가 끝나도 설치로 넘어가지 않으면 오른쪽 위 ⋮ 메뉴에서{" "}
+              <strong className="font-semibold text-gray-500">다른 브라우저(Chrome)로 열기</strong> 후 다시 받아주세요
+            </p>
             <p>내려받은 파일을 열고 &ldquo;출처를 알 수 없는 앱&rdquo; 허용을 지나면 설치돼요</p>
           </div>
         </>
