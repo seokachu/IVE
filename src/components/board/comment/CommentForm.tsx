@@ -13,8 +13,9 @@ const CommentForm = ({ mode, type, initialContent, commentId, onSuccess, onCance
   const { id: boardId } = useParams();
   const session = useSession();
   const { checkAuth } = useAuthGuard();
-  const { mutate: addComment } = useAddComment(Number(boardId));
-  const { mutate: editComment } = useEditComment(Number(boardId));
+  //mutate는 에러를 삼켜 실패해도 성공 토스트가 뜨므로, await로 실패를 잡을 수 있는 mutateAsync 사용
+  const { mutateAsync: addComment } = useAddComment(Number(boardId));
+  const { mutateAsync: editComment } = useEditComment(Number(boardId));
 
   const form = useForm<BoardCommentType>({
     mode: "onSubmit",
@@ -83,14 +84,11 @@ const CommentForm = ({ mode, type, initialContent, commentId, onSuccess, onCance
       const actionText = mode === "create" ? "작성" : "수정";
       const typeText = type === "comment" ? "댓글" : "답글";
 
-      if (error instanceof Error) {
-        toast({
-          title: `${typeText} ${actionText} 실패`,
-          description: error.message ?? "알 수 없는 오류가 발생했습니다.",
-          variant: "destructive",
-        });
-      }
-      throw error;
+      toast({
+        title: `${typeText} ${actionText} 실패`,
+        description: error instanceof Error ? error.message : "알 수 없는 오류가 발생했습니다.",
+        variant: "destructive",
+      });
     }
   };
 

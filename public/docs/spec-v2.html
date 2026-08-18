@@ -123,10 +123,10 @@
   <table class="meta-table">
     <tr><th>문서 버전</th><td>v2 — Draft (리뉴얼 진행 중)</td></tr>
     <tr><th>서비스명</th><td>IVE로 DIVE (<a href="https://ive-three.vercel.app">ive-three.vercel.app</a>) · Expo 하이브리드 앱(Android WebView, <code>seokachu/ive-app</code>) 병행</td></tr>
-    <tr><th>문서 기준</th><td>2026 리뉴얼 진행 중 — dev 브랜치 커밋 <code>a33fe02</code> (2026-08-18) · 마이페이지 · DIVE 멤버십 · 모바일 대응(반응형 · 드로어 메뉴) · 2026 로고 리브랜딩(REVIVE+) · 테마 반응형 파비콘 · 프로필 수정 안정화(소셜 재로그인 원복 수정) · 이미지 크롭 모달 리뉴얼 · <b>멤버십 플랜 변경 · 해지 취소(구독 재개) · 해지 예정 표시 · 굿즈샵 배송비 정책 · 배송 상태 표기</b> 반영</td></tr>
+    <tr><th>문서 기준</th><td>2026 리뉴얼 진행 중 — dev 브랜치 커밋 <code>3b912be</code> (2026-08-18) · 마이페이지 · DIVE 멤버십 · 모바일 대응(반응형 · 드로어 메뉴) · 2026 로고 리브랜딩(REVIVE+) · 테마 반응형 파비콘 · 프로필 수정 안정화(소셜 재로그인 원복 수정) · 이미지 크롭 모달 리뉴얼 · 멤버십 플랜 변경 · 해지 취소(구독 재개) · 해지 예정 표시 · 굿즈샵 배송비 정책 · 배송 상태 표기 · <b>회원탈퇴(글·댓글 보존) · 웹 푸시(PWA)</b> 반영</td></tr>
     <tr><th>작성일</th><td>2026-07-29 생성 · 2026-08-17 갱신 (음악 · 소식 · 굿즈샵 상세 · 자유게시판 · 장바구니/결제 · 404 · 마이페이지 리디자인 + DIVE 멤버십 + 모바일 대응 반영)</td></tr>
     <tr><th>범위</th><td>메인 · 음악 · 소식 · 인증 · 자유게시판 · 굿즈샵 · 장바구니/결제 · 마이페이지 · DIVE 멤버십 · 푸시 알림 · 디자인 시스템 · 공통 UI · 모바일 대응</td></tr>
-    <tr><th>기술 스택</th><td>Next.js 16 (App Router, proxy) · React 19 · Supabase(<code>@supabase/ssr</code>) · Zustand · TanStack Query · Tailwind CSS · lucide-react · Tiptap v3(에디터) · 토스페이먼츠 · Expo Push · pnpm · Playwright E2E · 외부 API(네이버 API Hub 검색 · KOPIS · iTunes Search · Google News RSS · YouTube RSS) · Vercel Cron · GitHub Actions</td></tr>
+    <tr><th>기술 스택</th><td>Next.js 16 (App Router, proxy) · React 19 · Supabase(<code>@supabase/ssr</code>) · Zustand · TanStack Query · Tailwind CSS · lucide-react · Tiptap v3(에디터) · 토스페이먼츠 · Expo Push · web-push(VAPID) · pnpm · Playwright E2E · 외부 API(네이버 API Hub 검색 · KOPIS · iTunes Search · Google News RSS · YouTube RSS) · Vercel Cron · GitHub Actions</td></tr>
     <tr><th>권한 표기</th><td><span class="auth any">전체</span> 비로그인 포함 누구나 · <span class="auth login">로그인</span> 로그인 필요 · <span class="auth owner">작성자</span> 본인 리소스만 · <span class="auth app">앱</span> 하이브리드 앱 환경 필요</td></tr>
   </table>
 </header>
@@ -163,11 +163,12 @@
     <tr><td>상태 관리</td><td>Recoil 단일 스토어</td><td>Zustand — session / cart / checkout / ui 스토어 분리</td></tr>
     <tr><td>인증 클라이언트</td><td><code>@supabase/auth-helpers</code> (deprecated)</td><td><code>@supabase/ssr</code> — 쿠키 기반 서버 검증</td></tr>
     <tr><td>개발 인프라</td><td>npm · E2E 없음</td><td>pnpm · Playwright E2E 기준선(프로덕션 빌드 기준 15케이스)</td></tr>
-    <tr><td>플랫폼</td><td>웹 전용</td><td><b>Expo 하이브리드 앱(Android)</b> + <b>푸시 알림 3종</b>(댓글·답글·좋아요) + 수신 설정 토글 + Android App Links — 10·11장</td></tr>
+    <tr><td>플랫폼</td><td>웹 전용</td><td><b>Expo 하이브리드 앱(Android)</b> + <b>푸시 알림 3종</b>(댓글·답글·좋아요 — 앱 Expo Push · <b>웹 브라우저 PWA</b> 두 채널) + 수신 설정 토글 + Android App Links — 10·11장</td></tr>
     <tr><td>결제 복귀</td><td>PG 복귀 시 로그인 검사에 걸려 로그인 페이지로 튕기는 문제</td><td><b>수정됨</b> — 서버는 주문번호 검사만 수행하고 로그인 검사는 클라이언트 가드가 담당 (PAY-02)</td></tr>
     <tr><td>로그인 진입</td><td>헤더에서 2단계 모달(소셜 선택 → 이메일)</td><td>모달 제거, <code>/login</code> 페이지로 단일화 + 로그인 후 원래 페이지로 복귀(<code>?redirect</code>) — AUTH-07</td></tr>
     <tr><td>소셜 로그인</td><td>카카오 · 구글 · 깃허브 (원형 아이콘 3종)</td><td>카카오 · 구글 (전체 너비 라벨 버튼 2종) — 깃허브 제거</td></tr>
     <tr><td>회원가입</td><td>약관 동의 없음</td><td><b>필수 약관 2건</b>(이용약관 · 개인정보 수집·이용) 동의 시에만 가입 가능 + 약관 전문 모달 — AUTH-10</td></tr>
+    <tr><td>회원탈퇴</td><td>미구현 — 버튼이 주석 처리된 상태로만 존재</td><td><b>지원</b> — 계정·개인정보는 즉시 삭제하되 작성한 글·댓글은 “탈퇴한 회원”으로 보존 — MY-26</td></tr>
     <tr><td>테마</td><td>라이트 고정</td><td><b>다크모드 지원</b> — 헤더 토글(기본 라이트, 시스템 미연동), 다크 전용 팔레트, 하이브리드 앱 테마 연동 — COM-16 · PUSH-10</td></tr>
     <tr><td>UI 기반</td><td>하드코딩 hex · 컴포넌트별 개별 버튼/아이콘/스피너</td><td>디자인 토큰(색상 램프·타이포·스페이싱) + <code>ui/button</code>·<code>ui/input</code> 단일화 + lucide 아이콘 · 공용 Spinner(접근성 role 부여) — 12장</td></tr>
     <tr><td>화면 리디자인</td><td>—</td><td>디자인 파일(<code>design/ive-design-system.pen</code>)의 화면 시안을 기준으로 페이지별 전면 리디자인 — 로그인 · 회원가입 · 메인 · 음악 · 소식 · 굿즈샵(목록/상세) · 자유게시판(목록 · 글쓰기 · 상세 · 댓글) · 장바구니 · 결제 · 404 · 마이페이지 · <b>모바일 대응(14장)</b>까지 <b>완료</b>. 시안 목록은 <a href="./design.html">디자인 시스템 · 시안 문서</a> 참고.</td></tr>
@@ -473,18 +474,19 @@
 <!-- ══════════ 10. 마이페이지 ══════════ -->
 <section id="mypage">
   <h2 class="sec">10. 마이페이지</h2>
-  <p class="sec-desc">상단 프로필 밴드 + 좌측 사이드 내비(멤버십 · 찜 목록 · 결제 내역 · 내가 쓴 글 · 배송지 관리) + 우측 콘텐츠 구성. <code>/mypage</code> 진입 시 찜 목록으로 자동 이동. 전 영역 로그인 필수(서버·클라이언트 이중 가드).</p>
+  <p class="sec-desc">상단 프로필 밴드 + 좌측 사이드 내비(멤버십 · 찜 목록 · 결제 내역 · 내가 쓴 글 · 배송지 관리) + 우측 콘텐츠 구성. <code>/mypage</code> 진입 시 멤버십으로 자동 이동. 전 영역 로그인 필수(서버·클라이언트 이중 가드).</p>
   <div class="note"><b>구현 상태</b> — 마이페이지 리디자인과 DIVE 멤버십(10-6절)은 기준 커밋(<code>595e08c</code>)에 반영 완료. 다만 멤버십은 <b>Supabase에 <code>memberships</code> 테이블 마이그레이션(<code>supabase/memberships.sql</code>)을 먼저 실행해야</b> 구독이 동작하며, 미실행 상태에서는 결제 전에 서버가 차단한다(MY-20).</div>
 
   <h3>10-1. 프로필 밴드 · 사이드 내비 (공통)</h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">권한</th></tr>
     <tr><td>MY-17</td><td>프로필 밴드</td><td>페이지 상단 연보라 밴드: 88px 아바타(우하단 카메라 뱃지) + 닉네임(구독 시 티어 뱃지) + [프로필 수정] 필 + 이메일, 우측에 <b>찜한 굿즈 · 주문 내역 · 작성한 글</b> 3개 통계.</td><td>통계는 각 목록의 실제 개수와 동일.</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>MY-18</td><td>사이드 내비</td><td>좌측 240px 내비: 아이콘 + 라벨 + 개수 배지 형태의 메뉴(멤버십<span class="tag">NEW</span> · 찜 목록 · 결제 내역 · 내가 쓴 글 · 배송지 관리), 활성 항목은 연보라 필 + 보라 텍스트. 하단에 푸시 알림 토글 카드, 그 아래 [로그아웃] · [회원탈퇴].</td><td>하위 경로(주문 상세 · 배송지 추가 등)에 있어도 상위 메뉴가 활성 표시된다. 회원탈퇴는 화면에만 존재하고 기능은 미구현(부록 참고).</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-18</td><td>사이드 내비</td><td>좌측 240px 내비: 아이콘 + 라벨 + 개수 배지 형태의 메뉴(멤버십<span class="tag">NEW</span> · 찜 목록 · 결제 내역 · 내가 쓴 글 · 배송지 관리), 활성 항목은 연보라 필 + 보라 텍스트. 하단에 푸시 알림 토글 카드, 그 아래 [로그아웃] · [회원탈퇴].</td><td>하위 경로(주문 상세 · 배송지 추가 등)에 있어도 상위 메뉴가 활성 표시된다. 회원탈퇴는 MY-26.</td><td><span class="auth login">로그인</span></td></tr>
     <tr><td>MY-01</td><td>콘텐츠 헤더 · 정렬</td><td>각 목록 화면 상단에 타이틀 + 보라 개수 + (해당 목록의) 정렬 셀렉트(COM-17)를 배치. 배송지 관리 화면은 정렬 대신 [새 배송지 추가] 버튼.</td><td>—</td><td><span class="auth login">로그인</span></td></tr>
     <tr><td>MY-02</td><td>프로필 수정 (모달)</td><td>[프로필 수정]을 누르면 모달이 열린다: 아바타 + 카메라 뱃지(사진을 눌러 변경 · 업로드 후 크롭), 닉네임 입력(카운터 <code>n / 6</code> · 안내 “2~6자, 공백 없이 입력해주세요”), 읽기 전용 이메일(앞에 <b>소셜 로그인 아이콘</b> — 구글/카카오, 일반 이메일 가입은 미표시. 마이페이지 프로필 밴드 이메일 앞에도 동일 표시), [취소 · 저장하기]. 사진 선택 시 <b>크롭 모달</b>이 열린다: 원형 마스크 · 드래그 이동 · 휠/핀치/슬라이더 줌(1~3배), 안내 <span class="msg">“드래그로 위치를, 휠·핀치나 슬라이더로 배율을 조정하세요.”</span></td><td>로그인 시 아바타를 <code>public.user.avatar_url</code>에 <b>동기화</b>한다 — 소셜 프로필은 auth 메타데이터에만 있어 본인 세션에서만 읽히므로, 동기화하지 않으면 리뷰·댓글·게시판처럼 <code>user</code> 테이블을 조인하는 화면에서 남에게는 이니셜 서클로만 보인다. 직접 올린 이미지(<code>custom_avatar_url</code>)가 항상 우선하고 소셜 이미지는 DB가 비어 있을 때만 채우며, 카카오의 <code>http</code> URL은 <code>https</code>로 바꿔 저장한다(실패해도 로그인 흐름은 막지 않음). 크롭 모달은 <code>react-easy-crop</code> 기반으로 재작성(구 react-avatar-editor 대체). 크롭 결과는 최대 512px WebP로 저장하고 헤더 아바타에도 즉시 반영, 업로드 실패 시 크롭 모달을 유지해 재시도할 수 있다. 업로드 이미지는 커스텀 메타데이터 키(<code>custom_avatar_url</code>) + <code>user</code> 테이블에 저장해 <b>소셜 재로그인 시에도 유지</b>(소셜 이미지로 원복되던 버그 수정). 성공 시 <span class="msg">“프로필 이미지가 변경되었습니다.”</span></td><td><span class="auth login">로그인</span></td></tr>
     <tr><td>MY-03</td><td>닉네임 변경</td><td>프로필 수정 모달에서 닉네임을 바꾸고 저장. 성공 시 <span class="msg">“닉네임이 변경 되었습니다.”</span></td><td>2글자 이상(<span class="msg">“2글자 이상 입력해 주세요.”</span>) · 6자 이하(<span class="msg">“6글자 이하로 입력해 주세요.”</span>) · 공백 불가(<span class="msg">“공백 없이 입력해 주세요.”</span>)를 검증 스키마로 강제. 동일 닉네임 저장 시 <span class="msg">“변경된 닉네임이 없습니다.”</span> (구 인라인 편집 방식은 모달로 대체) 닉네임은 커스텀 메타데이터 키(<code>nickname</code>) + <code>user</code> 테이블에 저장해 <b>소셜 재로그인 시에도 유지</b>(소셜 이름으로 원복되던 버그 수정).</td><td><span class="auth login">로그인</span></td></tr>
-    <tr><td>MY-04</td><td>푸시 알림 수신 설정</td><td>사이드 내비 하단 카드의 스위치로 앱 푸시 수신 on/off(“댓글·답글 알림을 앱으로 받아요”). <span class="msg">“푸시 알림을 켰습니다/껐습니다.”</span> 토스트.</td><td>앱에서 로그인해 기기가 등록된 경우에만 조작 가능(미등록 시 “앱에서 로그인하면 받을 수 있어요” + 비활성). 설정은 등록된 모든 기기에 일괄 적용.</td><td><span class="auth app">앱</span></td></tr>
+    <tr><td>MY-04</td><td>푸시 알림 수신 설정</td><td>사이드 내비 하단 카드의 스위치로 푸시 수신 on/off — <b>웹 브라우저와 앱을 하나의 스위치로 관리</b>한다. 안내 문구는 상태별로 바뀐다: 켜짐 “댓글·답글 알림을 웹과 앱으로 받아요” / 웹 푸시 가능 “켜면 이 브라우저와 앱에서 알림을 받아요” / 앱 기기만 등록됨 “켜면 앱에서 알림을 받아요”. 웹 브라우저에서 켜면 <b>알림 권한 요청 후 이 브라우저를 수신 기기로 먼저 등록</b>(PUSH-11)하고 켠다. <span class="msg">“푸시 알림을 켰습니다/껐습니다.”</span> 토스트.</td><td>웹 푸시 미지원 브라우저 + 앱 기기 미등록이면 “이 브라우저는 알림을 지원하지 않아요. 앱에서 로그인하면 받을 수 있어요” + 비활성. 브라우저 알림 권한 거부 시 <span class="msg">“브라우저 알림 권한이 필요해요. / 주소창 옆 사이트 설정에서 알림을 허용한 뒤 다시 켜 주세요.”</span> 설정은 등록된 모든 기기(웹·앱)에 일괄 적용. 앱 WebView 안에서는 네이티브(Expo) 푸시가 담당하므로 웹 구독을 만들지 않는다.</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>MY-26</td><td>회원탈퇴 <span class="tag">v2 신규</span></td><td>사이드 내비 하단 [회원탈퇴] → destructive 확인 모달(<span class="msg">“정말 탈퇴하시겠어요? / 계정과 개인정보는 즉시 삭제되며 되돌릴 수 없어요. 작성한 글과 댓글은 &#39;탈퇴한 회원&#39;으로 남고, 구독 중인 멤버십도 함께 해지돼요.”</span> · [취소 · 탈퇴하기]) → 성공 시 <span class="msg">“회원탈퇴가 완료되었습니다. / 그동안 이용해 주셔서 감사합니다.”</span> 토스트와 함께 로컬 세션 · 장바구니 · 찜을 정리하고 메인으로 이동.</td><td>서버가 프로필을 <b>“탈퇴한 회원”으로 익명화</b>(아바타 제거, 이메일은 재가입 충돌 없는 자리표시자로 교체)해 작성한 글·댓글의 작성자 표시를 보존한 뒤, 개인정보 성격 테이블(배송지 · 주문자 정보 · 찜 · 푸시 수신 기기)을 즉시 삭제하고 auth 계정을 삭제한다(멤버십은 계정 삭제와 함께 연쇄 정리). 실패 시 <span class="msg">“회원탈퇴에 실패했습니다. / 잠시 후 다시 시도해 주세요.”</span> 운영 전제: <code>supabase/account-deletion.sql</code>(프로필 → 계정 FK 제거) 실행 필요(적용 완료).</td><td><span class="auth login">로그인</span></td></tr>
   </table>
 
   <h3>10-2. 찜 목록 <span class="path">/mypage/wishlist</span></h3>
@@ -536,24 +538,25 @@
 <!-- ══════════ 11. 푸시 알림 ══════════ -->
 <section id="push">
   <h2 class="sec">11. 푸시 알림 · 하이브리드 연동</h2>
-  <p class="sec-desc">v2 신규. 하이브리드 앱(Android WebView) 사용자 대상 Expo Push 기반 알림과 앱 연동 기능. 웹 자체 알림함(인앱 알림 목록)은 없다.</p>
+  <p class="sec-desc">v2 신규. 푸시 알림은 <b>두 채널</b>로 발송된다 — 하이브리드 앱(Android WebView)의 <b>Expo Push</b>와 웹 브라우저(PWA)의 <b>web-push(VAPID)</b>. 수신 기기는 <code>push_tokens</code>에 함께 저장되고(<code>platform</code>으로 구분) 같은 스위치(MY-04)로 관리된다. 웹 자체 알림함(인앱 알림 목록)은 없다.</p>
 
   <h3>11-1. 알림 종류</h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">알림</th><th>발송 시점 · 수신자</th><th>제목 · 본문 형식</th><th class="col-auth">채널</th></tr>
-    <tr><td>PUSH-01</td><td>새 댓글</td><td>내 게시글에 댓글이 달렸을 때 → 게시글 작성자.</td><td>제목: “&#8220;{글 제목 15자}&#8221; 글에 새 댓글이 달렸습니다” / 본문: “{작성자명}: {댓글 내용 40자 미리보기}”.</td><td><span class="auth app">앱</span></td></tr>
-    <tr><td>PUSH-02</td><td>새 답글</td><td>내 댓글에 답글이 달렸을 때 → 원댓글 작성자(+ 게시글 작성자에게는 PUSH-01 형식으로 함께 발송).</td><td>제목: “내 댓글에 답글이 달렸습니다” / 본문: 동일 형식.</td><td><span class="auth app">앱</span></td></tr>
-    <tr><td>PUSH-03</td><td>게시글 좋아요</td><td>내 게시글이 좋아요를 받았을 때(추가 시에만) → 게시글 작성자.</td><td>제목: “&#8220;{글 제목 15자}&#8221; 글에 좋아요를 받았습니다” / 본문: “{이름}님이 회원님의 글을 좋아합니다. ❤️”.</td><td><span class="auth app">앱</span></td></tr>
+    <tr><td>PUSH-01</td><td>새 댓글</td><td>내 게시글에 댓글이 달렸을 때 → 게시글 작성자.</td><td>제목: “&#8220;{글 제목 15자}&#8221; 글에 새 댓글이 달렸습니다” / 본문: “{작성자명}: {댓글 내용 40자 미리보기}”.</td><td><span class="auth app">앱 · 웹</span></td></tr>
+    <tr><td>PUSH-02</td><td>새 답글</td><td>내 댓글에 답글이 달렸을 때 → 원댓글 작성자(+ 게시글 작성자에게는 PUSH-01 형식으로 함께 발송).</td><td>제목: “내 댓글에 답글이 달렸습니다” / 본문: 동일 형식.</td><td><span class="auth app">앱 · 웹</span></td></tr>
+    <tr><td>PUSH-03</td><td>게시글 좋아요</td><td>내 게시글이 좋아요를 받았을 때(추가 시에만) → 게시글 작성자.</td><td>제목: “&#8220;{글 제목 15자}&#8221; 글에 좋아요를 받았습니다” / 본문: “{이름}님이 회원님의 글을 좋아합니다. ❤️”.</td><td><span class="auth app">앱 · 웹</span></td></tr>
   </table>
 
   <h3>11-2. 발송 규칙 · 인프라</h3>
   <table class="spec">
     <tr><th class="col-id">ID</th><th class="col-name">기능명</th><th>상세 설명</th><th>처리 기준 · 예외</th><th class="col-auth">채널</th></tr>
-    <tr><td>PUSH-04</td><td>발송 제외 규칙</td><td>본인 행동에 대한 알림은 발송하지 않음(내 글에 내가 단 댓글, 내 댓글에 내가 단 답글, 내 글 좋아요).</td><td>게시글 작성자 = 원댓글 작성자인 경우 더 구체적인 “답글” 알림 1건만 발송(중복 방지). 댓글 수정·삭제, 댓글 좋아요는 알림 없음. 좋아요 취소 시 미발송.</td><td><span class="auth app">앱</span></td></tr>
-    <tr><td>PUSH-05</td><td>알림 탭 이동</td><td>알림에 해당 게시글 URL이 포함되어, 탭하면 앱이 해당 게시글 화면을 연다.</td><td>—</td><td><span class="auth app">앱</span></td></tr>
-    <tr><td>PUSH-06</td><td>기기 토큰 등록</td><td>앱이 WebView에 푸시 토큰을 주입하면, 웹이 로그인 사용자와 연결해 서버에 자동 등록(기기당 1건, 계정 전환 시 갱신).</td><td>비로그인 상태에서는 등록되지 않음. 만료된 토큰은 발송 실패 감지 시 자동 삭제.</td><td><span class="auth app">앱</span></td></tr>
-    <tr><td>PUSH-07</td><td>수신 설정 반영</td><td>마이페이지 스위치(MY-04)로 끈 사용자는 발송 대상에서 제외(발송 직전 서버에서 필터링).</td><td>알림 종류별 세분화 설정은 없음(전체 on/off 단일 설정).</td><td><span class="auth app">앱</span></td></tr>
-    <tr><td>PUSH-08</td><td>발송 실패 무영향</td><td>푸시 발송은 백그라운드로 처리되어, 실패해도 댓글 작성·좋아요 등 원 기능에는 영향 없음.</td><td>발송 API는 요청자 세션·소유권을 서버에서 재검증(위조 요청 차단).</td><td><span class="auth app">앱</span></td></tr>
+    <tr><td>PUSH-04</td><td>발송 제외 규칙</td><td>본인 행동에 대한 알림은 발송하지 않음(내 글에 내가 단 댓글, 내 댓글에 내가 단 답글, 내 글 좋아요).</td><td>게시글 작성자 = 원댓글 작성자인 경우 더 구체적인 “답글” 알림 1건만 발송(중복 방지). 댓글 수정·삭제, 댓글 좋아요는 알림 없음. 좋아요 취소 시 미발송.</td><td><span class="auth app">앱 · 웹</span></td></tr>
+    <tr><td>PUSH-05</td><td>알림 탭 이동</td><td>알림에 해당 게시글 URL이 포함되어, 탭하면 앱/브라우저가 해당 게시글 화면을 연다.</td><td>웹은 서비스가 열린 창이 있으면 그 창을 게시글로 이동시켜 포커스하고, 없으면 새 창을 연다.</td><td><span class="auth app">앱 · 웹</span></td></tr>
+    <tr><td>PUSH-06</td><td>기기 토큰 등록 (앱)</td><td>앱이 WebView에 푸시 토큰을 주입하면, 웹이 로그인 사용자와 연결해 서버에 자동 등록(기기당 1건, 계정 전환 시 갱신).</td><td>비로그인 상태에서는 등록되지 않음. 만료된 토큰은 발송 실패 감지 시 자동 삭제.</td><td><span class="auth app">앱</span></td></tr>
+    <tr><td>PUSH-11</td><td>웹 푸시 구독 (PWA) <span class="tag">v2 신규</span></td><td>마이페이지 푸시 스위치(MY-04)를 웹 브라우저에서 켜면 <b>알림 권한 요청 → 서비스 워커(<code>sw.js</code>) 등록 → VAPID 구독 생성</b> 순으로 이 브라우저를 수신 기기로 등록한다(<code>push_tokens</code>에 <code>platform="web"</code>으로 저장). 페이지가 닫혀 있어도 브라우저가 워커를 깨워 알림을 표시한다. PWA 매니페스트를 제공해 홈 화면 설치를 지원한다.</td><td>iOS 사파리는 <b>홈 화면에 설치된 PWA에서만</b> 웹 푸시 수신 가능. 만료된 구독(알림 차단·구독 해제)은 발송 실패(404/410) 감지 시 자동 삭제. VAPID 키(환경 변수) 미설정 시 웹 채널만 건너뛴다(앱 발송 무영향). 서비스 워커는 푸시 수신·클릭 라우팅 전용(오프라인 캐싱 없음).</td><td><span class="auth login">로그인</span></td></tr>
+    <tr><td>PUSH-07</td><td>수신 설정 반영</td><td>마이페이지 스위치(MY-04)로 끈 사용자는 발송 대상에서 제외(발송 직전 서버에서 필터링).</td><td>알림 종류별 세분화 설정은 없음(전체 on/off 단일 설정). 설정은 웹·앱 모든 기기에 일괄 적용.</td><td><span class="auth app">앱 · 웹</span></td></tr>
+    <tr><td>PUSH-08</td><td>발송 실패 무영향</td><td>푸시 발송은 백그라운드로 처리되어, 실패해도 댓글 작성·좋아요 등 원 기능에는 영향 없음. 채널별 발송(Expo · web-push)은 서버 공통 모듈이 담당한다.</td><td>발송 API는 요청자 세션·소유권을 서버에서 재검증(위조 요청 차단).</td><td><span class="auth app">앱 · 웹</span></td></tr>
     <tr><td>PUSH-09</td><td>앱 링크 연결</td><td>도메인-앱 연결 선언 파일(assetlinks.json)을 제공해, 결제 등 외부 앱에서 서비스 주소로 복귀할 때 브라우저 대신 하이브리드 앱이 열리도록 지원.</td><td>스토어 배포 시 릴리즈 키 지문으로 교체 필요(현재 개발용).</td><td><span class="auth app">앱</span></td></tr>
     <tr><td>PUSH-10</td><td>앱 테마 연동</td><td>웹의 현재 테마(라이트/다크)가 바뀔 때마다 WebView 메시지로 앱에 전달되어, 네이티브 셸(상태바 · 세이프에어리어)이 웹 테마를 따라간다.</td><td>웹 단독(브라우저) 사용 시에는 동작하지 않음. COM-16 다크모드와 연동.</td><td><span class="auth app">앱</span></td></tr>
   </table>
@@ -616,7 +619,7 @@
   <table class="spec">
     <tr><th>구분</th><th>이름</th><th>용도</th></tr>
     <tr><td rowspan="17" style="font-weight:600;">테이블</td>
-        <td><code>user</code></td><td>회원 프로필(닉네임 · 아바타), Auth 계정과 연동</td></tr>
+        <td><code>user</code></td><td>회원 프로필(닉네임 · 아바타), Auth 계정과 연동 — 탈퇴 시 삭제되지 않고 “탈퇴한 회원”으로 익명화되어 글·댓글 작성자 표시를 보존(MY-26)</td></tr>
     <tr><td><code>album</code></td><td>메인 앨범 캐러셀(발매 정보 · 음원 플랫폼 링크)</td></tr>
     <tr><td><code>schedules</code></td><td>일정(제목 · 카테고리 · 기간 · 장소 · 설명 · 링크 · 출처 manual/auto) — 수동 큐레이션 + 크론 자동 추출 초안, 공개 읽기 전용 RLS — v2 신규</td></tr>
     <tr><td><code>news_gallery</code> / <code>gallery</code></td><td>(구) 소식 기사 / 사진 갤러리 — 2026-08 소식 개편으로 코드에서 미사용</td></tr>
@@ -631,7 +634,7 @@
     <tr><td><code>shipping_addresses</code></td><td>배송지(기본 배송지 플래그 포함)</td></tr>
     <tr><td><code>payments</code></td><td>결제 레코드(주문번호 · 결제수단 · 상태 · 배송지 스냅샷)</td></tr>
     <tr><td><code>order_items</code></td><td>주문 상품(수량 · 구매확정 여부)</td></tr>
-    <tr><td><code>push_tokens</code></td><td>앱 푸시 토큰(기기당 1건 · 수신 on/off) — v2 신규</td></tr>
+    <tr><td><code>push_tokens</code></td><td>푸시 수신 기기(기기당 1건 · 수신 on/off) — <code>platform</code>으로 앱(Expo 토큰)/웹(VAPID 구독 JSON) 구분 — v2 신규</td></tr>
     <tr><td><code>memberships</code> + <code>memberships_public</code>(뷰)</td><td>DIVE 멤버십 구독(유저당 1행 — 등급 · 상태 · 요금 · 빌링키 · 카드 정보 · 다음 결제일). 본인 조회만 허용하는 RLS + 쓰기는 서버 전용, 커뮤니티 뱃지용 공개 뷰는 민감 컬럼 제외 — v2 신규(<code>supabase/memberships.sql</code> 실행 필요)</td></tr>
     <tr><td style="font-weight:600;">스토리지</td><td><code>boards</code> / <code>avatars</code></td><td>게시글 본문 이미지 / 프로필 이미지</td></tr>
     <tr><td style="font-weight:600;">DB 함수</td><td><code>increment_view_count</code> 외</td><td>조회수 증가, 기본 배송지 지정·재지정(<code>set_default_address</code>, <code>update_default_address</code>)</td></tr>
@@ -663,7 +666,6 @@
   <h3>15-4. 미구현 · 알려진 한계</h3>
   <div class="note"><b>참고</b> — 아래는 기준 시점 코드에서 확인된 사실로, 이후 고도화 후보 목록으로 활용할 수 있다.</div>
   <ul class="tight">
-    <li><b>회원 탈퇴 미구현</b> — 버튼이 주석 처리된 상태로만 존재.</li>
     <li><b>비밀번호 찾기/재설정 없음</b>, 이메일 인증(확인 메일) 안내 플로우 없음.</li>
     <li><b>주문 취소 · 환불 기능 없음</b> — 약관 문구로만 안내(“결제 이후 환불·취소 불가”).</li>
     <li><b>상품 옵션(사이즈/색상) 선택 불가</b> — 정보 표시 전용.</li>
@@ -686,13 +688,14 @@
     <li>상품 목록 무한 스크롤이 매 페이지 전체 상품을 조회한 뒤 잘라내는 방식(서버 페이지네이션 없음).</li>
     <li>바로 구매로 결제하면 주문명이 기본값(“주문상품”)으로 저장될 수 있음 — 주문명 임시 저장이 장바구니 결제 경로에만 존재.</li>
     <li>알림 종류별 수신 설정 세분화 없음, 좋아요 재발송 방지(발송 이력) 없음, 웹 인앱 알림함 없음.</li>
+    <li><b>회원탈퇴 · 웹 푸시 운영 전제</b> — 회원탈퇴는 <code>supabase/account-deletion.sql</code>(프로필 → 계정 FK 제거) 실행이, 웹 푸시는 VAPID 키 환경 변수(공개키 · 비밀키 · subject) 등록이 선행돼야 한다(현 운영 환경에는 둘 다 적용 완료). 탈퇴한 계정의 게시글·댓글은 “탈퇴한 회원”으로 남으며 별도 삭제 수단은 없다.</li>
     <li>디자인 시스템 잔여 작업 — card/tabs 컴포넌트화 (DS-04).</li>
     <li>굿즈샵 상세 모바일에 하단 고정 구매 바 없음 — 구매 카드는 갤러리 아래 인라인 배치(구매하려면 스크롤 복귀 필요).</li>
   </ul>
 </section>
 
 <footer class="foot">
-  IVE로 DIVE 기능명세서 v2 (Draft) · 기준 커밋 <code>a33fe02</code> (2026 리뉴얼 진행 중) · 2026-07-29 생성 · 2026-08-18 갱신 · <a href="./index.html">기능명세서 아카이브</a> · <a href="./spec-v1.html">v1 보기</a> · <a href="./design.html">디자인 시스템 · 시안</a>
+  IVE로 DIVE 기능명세서 v2 (Draft) · 기준 커밋 <code>3b912be</code> (2026 리뉴얼 진행 중) · 2026-07-29 생성 · 2026-08-18 갱신 · <a href="./index.html">기능명세서 아카이브</a> · <a href="./spec-v1.html">v1 보기</a> · <a href="./design.html">디자인 시스템 · 시안</a>
 </footer>
 
 </div>
