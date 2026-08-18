@@ -1,4 +1,5 @@
 import { formatPrice } from "@/utils/calculateDiscount";
+import RollingNumber from "@/components/common/RollingNumber";
 import { MEMBERSHIP_DISCOUNT_RATES } from "@/lib/supabase/membership";
 import { SHIPPING_POLICY } from "@/utils/constants";
 import type { OrderPriceSummaryProps } from "@/types/cart";
@@ -61,7 +62,8 @@ const OrderPriceSummary = ({
         <span className="text-sm font-semibold">총 결제 금액</span>
         <span className="flex items-end gap-0.5">
           <strong className="text-[26px] font-bold leading-none text-purple-500 dark:text-purple-300">
-            {formatPrice(totalDiscountedPrice - membershipDiscount + shippingFee)}
+            {/* 수량·선택 변경으로 총액이 바뀌면 자릿수가 세로로 굴러가는 롤링 애니메이션 */}
+            <RollingNumber value={totalDiscountedPrice - membershipDiscount + shippingFee} />
           </strong>
           <span className="text-[15px] font-semibold leading-tight">원</span>
         </span>

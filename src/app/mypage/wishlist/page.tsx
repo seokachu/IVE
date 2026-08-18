@@ -29,7 +29,7 @@ const WishListPage = () => {
     return list;
   }, [wishlists, sort]);
 
-  if (isLoading || !isSuccess) return <MyPageLoading title="찜 목록" />;
+  if (isLoading || !isSuccess) return <MyPageLoading title="찜 목록" variant="grid" />;
 
   const isEmpty = sortedWishlists.length === 0;
 

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Eye, Flame, Heart, MessageCircle } from "lucide-react";
 import UserAvatar from "@/components/common/UserAvatar";
 import MoreLink from "@/components/common/MoreLink";
-import LogoImage from "@/assets/images/logo.svg";
+import BrandImageFallback from "@/components/common/BrandImageFallback";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useHotBoards } from "@/hooks/queries/useBoard";
 import type { BoardSummary } from "@/types/board";
@@ -67,17 +67,8 @@ const HotBoardCards = () => {
                   sizes="(max-width: 1024px) 100vw, 33vw"
                 />
               ) : (
-                //썸네일 없는 글 — 딥 퍼플 브랜드 카드: 어두운 그라데이션 + 로고 워터마크 (사진 도배·랭크 숫자 가독성 문제 회피)
-                <span
-                  className="absolute inset-0 bg-gradient-to-br from-[#3B2547] via-[#57346B] to-[#1E1526]"
-                  aria-hidden="true"
-                >
-                  <Image
-                    src={LogoImage}
-                    alt=""
-                    className="absolute -right-6 -bottom-8 h-[135%] w-auto rotate-[10deg] opacity-[0.08] transition-transform duration-700 group-hover:scale-105"
-                  />
-                </span>
+                //썸네일 없는 글 — 브랜드 폴백 카드 (사진 도배·랭크 숫자 가독성 문제 회피)
+                <BrandImageFallback />
               )}
               {/* 랭크 숫자 가독용 상단 스크림 — 밝은 썸네일에서도 흰 숫자가 묻히지 않게 */}
               <span

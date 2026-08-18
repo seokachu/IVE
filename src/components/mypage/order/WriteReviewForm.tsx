@@ -103,7 +103,7 @@ const WriteReviewForm = ({ mode, reviewData, orderId, goodsId, onClose }: WriteR
         <div className="mt-4">
           <Textarea
             {...register("content")}
-            className="min-h-[120px] w-full rounded-lg border-gray-200 text-[13px]"
+            className="h-[120px] w-full rounded-lg border-gray-200 text-[13px]"
             placeholder="좋았던 점을 다이브들과 나눠보세요 (최소 10자)"
             maxLength={200}
             aria-label="리뷰 내용"
