@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import DefaultImage from "@/assets/images/default_image.avif";
+import BrandImageFallback from "@/components/common/BrandImageFallback";
 import Image from "next/image";
 import { ExternalLink, Play, X } from "lucide-react";
 import { formatDate } from "@/utils/formatDate";
@@ -15,6 +15,7 @@ const getYouTubeEmbedUrl = (url: string) => {
 const NewsFeedItem = ({ item, index }: NewsFeedItemProps) => {
   const [playing, setPlaying] = useState(false);
   const [showSummary, setShowSummary] = useState(false);
+  const [thumbnailBroken, setThumbnailBroken] = useState(false);
   const isVideo = item.sourceType === "youtube";
   const embedUrl = isVideo ? getYouTubeEmbedUrl(item.url) : null;
 
@@ -79,14 +80,21 @@ const NewsFeedItem = ({ item, index }: NewsFeedItemProps) => {
 
   const card = (
     <div className="aspect-square">
-      <Image
-        src={item.thumbnail || DefaultImage}
-        alt={item.title}
-        className="absolute w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-        width={500}
-        height={500}
-        priority={index < 6}
-      />
+      {item.thumbnail && !thumbnailBroken ? (
+        //외부 뉴스 썸네일은 매일 새 URL이라 Vercel 이미지 최적화 할당량을 소모 — 이미 리사이즈된 CDN 이미지니 최적화 없이 직접 로드
+        <Image
+          src={item.thumbnail}
+          alt={item.title}
+          className="absolute w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          width={500}
+          height={500}
+          priority={index < 6}
+          unoptimized
+          onError={() => setThumbnailBroken(true)}
+        />
+      ) : (
+        <BrandImageFallback />
+      )}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70" />
       {isVideo && (
         <div className="absolute inset-0 flex items-center justify-center">

@@ -25,12 +25,14 @@ const ScheduleCardDetail = ({ item }: { item: ScheduleItem }) => {
               isPoster ? "aspect-[3/4] w-40" : "aspect-video w-full lg:w-64"
             }`}
           >
+            {/* 외부 수집 이미지(KOPIS 포스터·뉴스 썸네일)는 URL 회전이 잦아 최적화 없이 직접 로드 */}
             <Image
               src={heroImage}
               alt={item.title}
               fill
               className={isPoster ? "object-contain" : "object-cover"}
               sizes="16rem"
+              unoptimized
             />
           </div>
         )}
@@ -76,7 +78,7 @@ const ScheduleCardDetail = ({ item }: { item: ScheduleItem }) => {
                 <a href={news.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 group">
                   {news.thumbnail ? (
                     <span className="relative w-14 h-9 shrink-0 rounded overflow-hidden bg-gray-100">
-                      <Image src={news.thumbnail} alt="" fill className="object-cover" sizes="3.5rem" />
+                      <Image src={news.thumbnail} alt="" fill className="object-cover" sizes="3.5rem" unoptimized />
                     </span>
                   ) : news.sourceType === "youtube" ? (
                     <Play className="w-4 h-4 shrink-0 text-purple" />

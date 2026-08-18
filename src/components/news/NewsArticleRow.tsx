@@ -1,11 +1,15 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
-import DefaultImage from "@/assets/images/default_image.avif";
+import BrandImageFallback from "@/components/common/BrandImageFallback";
 import { formatDate } from "@/utils/formatDate";
 import type { FeedItem } from "@/types/news";
 
 //기사 가로형 카드 — 요약을 카드 안에 바로 노출하고, 클릭 시 원문을 새 탭으로 연다
 const NewsArticleRow = ({ item }: { item: FeedItem }) => {
+  const [thumbnailBroken, setThumbnailBroken] = useState(false);
+
   return (
     <li>
       <a
@@ -15,7 +19,20 @@ const NewsArticleRow = ({ item }: { item: FeedItem }) => {
         className="group flex items-center gap-4 p-3.5 lg:p-4 bg-background border border-gray-200 rounded-lg hover:border-purple transition-colors"
       >
         <span className="relative w-[72px] h-[72px] lg:w-[88px] lg:h-[88px] shrink-0 rounded-md overflow-hidden bg-gray-100">
-          <Image src={item.thumbnail || DefaultImage} alt="" fill className="object-cover" sizes="88px" />
+          {item.thumbnail && !thumbnailBroken ? (
+            //외부 뉴스 썸네일은 매일 새 URL이라 Vercel 이미지 최적화 할당량을 소모 — 이미 리사이즈된 CDN 이미지니 최적화 없이 직접 로드
+            <Image
+              src={item.thumbnail}
+              alt=""
+              fill
+              className="object-cover"
+              sizes="88px"
+              unoptimized
+              onError={() => setThumbnailBroken(true)}
+            />
+          ) : (
+            <BrandImageFallback />
+          )}
         </span>
         <span className="min-w-0 flex-1 flex flex-col gap-1">
           <span className="flex items-center gap-2 text-xs">
