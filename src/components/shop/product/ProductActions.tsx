@@ -7,8 +7,9 @@ import { toast } from "@/hooks/use-toast";
 import useWishListWithLocal from "@/hooks/queries/useWishListWithLocal";
 import { Heart } from "lucide-react";
 import DirectPaymentButton from "@/components/payment/DirectPaymentButton";
+import RollingNumber from "@/components/common/RollingNumber";
 import { useCartActions } from "@/store/zustand";
-import { formatPrice, getDiscountedPrice } from "@/utils/calculateDiscount";
+import { getDiscountedPrice } from "@/utils/calculateDiscount";
 import { useMyMembership } from "@/hooks/queries/useMembership";
 import { MEMBERSHIP_DISCOUNT_RATES, getMembershipDiscount } from "@/lib/supabase/membership";
 import type { ProductActionsProps } from "@/types/shop";
@@ -80,7 +81,7 @@ const ProductActions = ({ product, quantity }: ProductActionsProps) => {
           quantity={quantity}
           className="h-14 w-full rounded-full bg-gradient-to-r from-purple-400 to-orange-300 text-base font-bold text-white hover:opacity-90"
         >
-          {formatPrice(finalPrice)}원 바로 구매하기
+          <RollingNumber value={finalPrice} />원 바로 구매하기
         </DirectPaymentButton>
         <div className="flex items-center gap-2.5">
           <Button

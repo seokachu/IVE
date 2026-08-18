@@ -6,6 +6,7 @@ import MembershipBadge from "@/components/mypage/MembershipBadge";
 import { useMyMembership } from "@/hooks/queries/useMembership";
 import { MEMBERSHIP_DISCOUNT_RATES, getMembershipDiscount } from "@/lib/supabase/membership";
 import ShareButton from "@/components/common/button/ShareButton";
+import RollingNumber from "@/components/common/RollingNumber";
 import Error from "@/components/common/error/Error";
 import ProductInfoSkeleton from "@/components/common/loading/ProductInfoSkeleton";
 import { Button } from "@/components/ui/button";
@@ -174,7 +175,10 @@ const ProductInfo = ({ id, onClickReview }: ProductInfoProps) => {
             </div>
             <div className="flex flex-col items-end gap-0.5">
               <span className="text-xs text-gray-500">총 상품금액</span>
-              <strong className="text-2xl font-bold">{formatPrice(totalPrice)}원</strong>
+              {/* 수량 변경 시 자릿수가 세로로 굴러가는 롤링 애니메이션 (장바구니 총액과 동일) */}
+              <strong className="text-2xl font-bold">
+                <RollingNumber value={totalPrice} />원
+              </strong>
             </div>
           </div>
           <div className="mt-6">
