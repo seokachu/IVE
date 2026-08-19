@@ -17,6 +17,7 @@
     "orders:seed": "node scripts/seed-orders.mjs",
     "shipping:backfill": "node scripts/backfill-shipping-fee.mjs",
     "community:seed": "node scripts/seed-community.mjs",
+    "community:daily": "node scripts/post-daily-community.mjs",
     "avatars:sync": "node scripts/sync-avatars.mjs",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",

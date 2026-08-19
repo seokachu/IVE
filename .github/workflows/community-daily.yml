@@ -1,0 +1,29 @@
+#자유게시판 자동 포스팅 — 매일 2~3건의 글을 시간대를 나눠 올리고,
+#댓글·좋아요·조회수를 서서히 채운다 (scripts/post-daily-community.mjs)
+#글 풀이 소진되면 잡이 실패해 알림 메일이 온다 → community-daily-pool.mjs에 글 추가
+name: community-daily
+
+on:
+  schedule:
+    - cron: "45 0,4,8,11 * * *" #매일 09:45 · 13:45 · 17:45 · 20:45 KST
+  workflow_dispatch:
+
+concurrency:
+  group: community-daily
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      #의존성 없는 스크립트라 pnpm install 불필요 — 바로 실행
+      - name: 자유게시판 글·반응 갱신
+        run: node scripts/post-daily-community.mjs
