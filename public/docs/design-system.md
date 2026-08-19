@@ -112,11 +112,9 @@ Pencil 전용 참고: `primary-hover`는 다크에서 더 밝은 보라($purple-
 
 ## 2. 타이포그래피 (Typography)
 
-**서체**: Noto Sans KR · 자간 `-0.2px`
+**서체**: Pretendard 가변폰트 (`src/assets/fonts/fonts.tsx`, weight 45–920 전체 로드)
 
-> 🔧 **수정 필요 (현재 버그)**
-> 1. `src/assets/fonts/fonts.tsx`가 400/600만 로드하는데 코드에서 `font-bold`(700)를 81회 사용 중 → weight `"700"` 추가.
-> 2. `globals.css:29`의 `body { font-family: Arial, Helvetica, sans-serif }`가 Noto Sans KR과 경합 → 삭제.
+> 2026-08 변경: Noto Sans KR → Pretendard 가변폰트로 교체. 과거 지적됐던 weight 700 미로드·Arial 경합 버그는 해소됨.
 
 | 스타일 | 크기 | 굵기 | 행간 | Tailwind | 용도 |
 |---|---|---|---|---|---|
