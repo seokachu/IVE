@@ -19,6 +19,7 @@ export interface AlbumTrackListProps {
 //유튜브 IFrame Player API — 히어로 배경 영상 제어에 필요한 부분만 선언 (@types/youtube 미설치)
 export interface YouTubePlayer {
   playVideo: () => void;
+  unloadModule: (module: string) => void;
   destroy: () => void;
 }
 
@@ -42,7 +43,7 @@ declare global {
   interface Window {
     YT?: {
       Player: new (el: HTMLElement, options: YouTubePlayerOptions) => YouTubePlayer;
-      PlayerState: { PLAYING: number };
+      PlayerState: { PLAYING: number; BUFFERING: number };
     };
     onYouTubeIframeAPIReady?: () => void;
   }

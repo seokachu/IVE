@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
+import { cn } from "@/utils/utils";
 import type { YouTubePlayer } from "@/types/main";
 
 interface VisualSectionProps {
@@ -11,8 +12,19 @@ interface VisualSectionProps {
 
 //재생 실패 시 새 플레이어로 다시 붙이는 횟수 상한 — 넘으면 썸네일 폴백을 그대로 둔다
 const MAX_RETRY = 3;
-//플레이어를 만든 뒤 실제 재생이 시작될 때까지 기다리는 시간
-const BOOT_TIMEOUT_MS = 7000;
+//플레이어를 만든 뒤 재생이 시작될 때까지 기다리는 시간 — 짧게 잡으면 느릴 뿐인 플레이어를
+//죽이고 처음부터 다시 붙이느라 재생이 오히려 늦어진다(실측 1차 시도가 7초를 넘기는 경우가 있었다)
+const BOOT_TIMEOUT_MS = 12000;
+//버퍼링은 "막힘"이 아니라 진행 신호라 타이머를 이만큼 연장한다. 버퍼링이 반복되면 계속
+//연장되지만, 그건 플레이어가 살아 있다는 뜻이라 죽이지 않는 편이 낫다
+const BUFFER_GRACE_MS = 10000;
+
+//배경 장식 영상이라 자막을 끈다. playerVars의 cc_load_policy만으로는 시청자 기본 설정을 못 이기고,
+//onReady 시점엔 캡션 모듈이 아직 로드 전이라 먹지 않는다 — 재생이 시작된 뒤에도 한 번 더 호출한다
+const disableCaptions = (player: YouTubePlayer) => {
+  player.unloadModule("captions");
+  player.unloadModule("cc");
+};
 
 //IFrame API 스크립트는 문서당 한 번만 로드해 모든 호출이 같은 Promise를 공유한다
 let iframeApiPromise: Promise<void> | null = null;
@@ -48,6 +60,9 @@ const loadIframeApi = () => {
 
 //유튜브 최신 공식 영상을 배경으로 자동 재생하는 비주얼 히어로
 const VisualSection = ({ videoId }: VisualSectionProps) => {
+  //재생이 실제로 시작되기 전까지 iframe을 투명하게 둔다 — 유튜브 플레이어가 자기 검은 배경을
+  //깔아버려서, 그대로 두면 밑레이어의 썸네일 폴백이 정작 필요한 순간에 가려진다
+  const [playing, setPlaying] = useState(false);
   const hostRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<YouTubePlayer | null>(null);
 
@@ -69,6 +84,7 @@ const VisualSection = ({ videoId }: VisualSectionProps) => {
     const retry = () => {
       if (cancelled || attempt >= MAX_RETRY) return;
       attempt += 1;
+      setPlaying(false);
       teardown();
       void createPlayer();
     };
@@ -100,12 +116,26 @@ const VisualSection = ({ videoId }: VisualSectionProps) => {
           rel: 0,
           playsinline: 1,
           disablekb: 1,
+          cc_load_policy: 0,
+          iv_load_policy: 3,
           origin: window.location.origin,
         },
         events: {
-          onReady: (event) => event.target.playVideo(),
+          onReady: (event) => {
+            disableCaptions(event.target);
+            event.target.playVideo();
+          },
           onStateChange: (event) => {
-            if (event.data === window.YT?.PlayerState.PLAYING) clearTimeout(bootTimer);
+            if (event.data === window.YT?.PlayerState.PLAYING) {
+              clearTimeout(bootTimer);
+              disableCaptions(event.target);
+              setPlaying(true);
+              return;
+            }
+            if (event.data === window.YT?.PlayerState.BUFFERING) {
+              clearTimeout(bootTimer);
+              bootTimer = setTimeout(retry, BUFFER_GRACE_MS);
+            }
           },
           onError: () => {
             clearTimeout(bootTimer);
@@ -139,7 +169,10 @@ const VisualSection = ({ videoId }: VisualSectionProps) => {
           <div
             ref={hostRef}
             aria-hidden="true"
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[max(100vw,177.78vh)] h-[max(100vh,56.25vw)] pointer-events-none [&>iframe]:w-full [&>iframe]:h-full"
+            className={cn(
+              "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[max(100vw,177.78vh)] h-[max(100vh,56.25vw)] pointer-events-none transition-opacity duration-700 [&>iframe]:w-full [&>iframe]:h-full",
+              playing ? "opacity-100" : "opacity-0"
+            )}
           />
         </>
       ) : (
