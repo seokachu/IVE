@@ -39,6 +39,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://supabase.co" />
         <link rel="preconnect" href="https://kakaocdn.net" />
         <link rel="preconnect" href="https://img1.kakaocdn.net" />
+        {/* 히어로 배경 영상 — 썸네일(i.ytimg)과 IFrame API·임베드(www.youtube)의 연결을 미리 열어둔다 */}
+        <link rel="preconnect" href="https://i.ytimg.com" />
+        <link rel="preconnect" href="https://www.youtube.com" />
       </head>
       <body className={`${pretendard.className} w-screen overflow-x-hidden`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
