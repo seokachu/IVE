@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 import { createClient } from "@supabase/supabase-js";
-import { truncate } from "lodash";
+import { truncate } from "@/utils/truncate";
 import { sendPushMessages } from "@/lib/push/sender";
 
 //댓글 작성 시 게시글 작성자(+대댓글이면 원댓글 작성자)에게 푸시 알림 발송

@@ -1,6 +1,6 @@
 import { Search as SearchIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import debounce from "lodash/debounce";
+import { debounce } from "@/utils/timing";
 
 import { ChangeEvent, useEffect, useState, useRef } from "react";
 

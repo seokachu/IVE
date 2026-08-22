@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { cn } from "@/utils/utils";
 import ThemeToggle from "./components/ThemeToggle";
 import { useIsScrolled, useUiActions } from "@/store/zustand";
-import { throttle } from "lodash";
+import { throttle } from "@/utils/timing";
 
 const Header = () => {
   const pathname = usePathname();

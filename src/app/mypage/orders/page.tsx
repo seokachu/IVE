@@ -1,7 +1,7 @@
 "use client";
 import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
-import _ from "lodash";
+import { groupBy, sumBy } from "@/utils/collection";
 import { useOrderItems } from "@/hooks/queries/useOrderItems";
 import { usePaymentSummaries } from "@/hooks/queries/usePayment";
 import { useSession } from "@/store/zustand";
@@ -23,13 +23,13 @@ const OrderListPage = () => {
   const isEmpty = !orderItems || orderItems.length === 0;
 
   //주문목록 id별로 그룹화
-  const groupedOrders = _.groupBy(orderItems, "order_id");
+  const groupedOrders = groupBy(orderItems ?? [], "order_id");
 
   //주문 요약 정보 뽑아내기 — 금액은 실제 결제액(멤버십 할인 반영) 우선, 없으면 상품 합계 폴백
   const orderSummaries = Object.entries(groupedOrders).map(([orderId, items]) => ({
     orderId,
-    totalAmount: paymentSummaries?.[orderId]?.amount ?? _.sumBy(items, (item) => getDiscountedPrice(item) * item.quantity),
-    itemCount: _.sumBy(items, "quantity"),
+    totalAmount: paymentSummaries?.[orderId]?.amount ?? sumBy(items, (item) => getDiscountedPrice(item) * item.quantity),
+    itemCount: sumBy(items, "quantity"),
     orderDate: items[0]?.created_at,
     firstItemName: items[0]?.product_name,
     firstOrderImage: items[0]?.product_image,

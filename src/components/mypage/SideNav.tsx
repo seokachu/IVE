@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import _ from "lodash";
+import { groupBy } from "@/utils/collection";
 import { Crown, FileText, Heart, MapPin, ShoppingBag, type LucideIcon } from "lucide-react";
 import PushSettingRow from "@/components/mypage/PushSettingRow";
 import { MYPAGE_GNB_ARRAY } from "@/utils/constants";
@@ -45,7 +45,7 @@ const SideNav = () => {
   const counts: Record<string, number | null> = {
     membership: null,
     wishlist: wishlists?.length ?? 0,
-    orders: Object.keys(_.groupBy(orderItems || [], "order_id")).length,
+    orders: Object.keys(groupBy(orderItems || [], "order_id")).length,
     posts: myBoards?.length ?? 0,
     address: addresses?.length ?? 0,
   };
