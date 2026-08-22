@@ -1,24 +1,131 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronDown, Volume2, VolumeX } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import type { YouTubePlayer } from "@/types/main";
 
 interface VisualSectionProps {
   videoId: string | null;
 }
 
+//재생 실패 시 새 플레이어로 다시 붙이는 횟수 상한 — 넘으면 썸네일 폴백을 그대로 둔다
+const MAX_RETRY = 3;
+//플레이어를 만든 뒤 실제 재생이 시작될 때까지 기다리는 시간
+const BOOT_TIMEOUT_MS = 7000;
+
+//IFrame API 스크립트는 문서당 한 번만 로드해 모든 호출이 같은 Promise를 공유한다
+let iframeApiPromise: Promise<void> | null = null;
+
+const loadIframeApi = () => {
+  if (iframeApiPromise) return iframeApiPromise;
+
+  iframeApiPromise = new Promise<void>((resolve, reject) => {
+    if (window.YT?.Player) {
+      resolve();
+      return;
+    }
+
+    //API는 준비되면 전역 콜백을 호출한다 — 기존 콜백이 있으면 함께 살려둔다
+    const previous = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => {
+      previous?.();
+      resolve();
+    };
+
+    const script = document.createElement("script");
+    script.src = "https://www.youtube.com/iframe_api";
+    script.async = true;
+    script.onerror = () => {
+      iframeApiPromise = null;
+      reject(new Error("유튜브 IFrame API 로드 실패"));
+    };
+    document.head.appendChild(script);
+  });
+
+  return iframeApiPromise;
+};
+
 //유튜브 최신 공식 영상을 배경으로 자동 재생하는 비주얼 히어로
 const VisualSection = ({ videoId }: VisualSectionProps) => {
-  const [muted, setMuted] = useState(true);
+  const hostRef = useRef<HTMLDivElement>(null);
+  const playerRef = useRef<YouTubePlayer | null>(null);
 
-  const embedUrl = videoId
-    ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${muted ? 1 : 0}&controls=0&loop=1&playlist=${videoId}&modestbranding=1&rel=0&playsinline=1&disablekb=1`
-    : null;
+  //쿠키 없는 youtube-nocookie 임베드는 반복 접속 시 봇으로 걸려 플레이어가 부팅되지 않는다.
+  //www.youtube.com + origin으로 붙이고, 재생이 시작되지 않으면 IFrame API 이벤트로 감지해 재시도한다.
+  useEffect(() => {
+    if (!videoId) return;
+
+    let cancelled = false;
+    let attempt = 0;
+    let bootTimer: ReturnType<typeof setTimeout> | undefined;
+
+    const teardown = () => {
+      clearTimeout(bootTimer);
+      playerRef.current?.destroy();
+      playerRef.current = null;
+    };
+
+    const retry = () => {
+      if (cancelled || attempt >= MAX_RETRY) return;
+      attempt += 1;
+      teardown();
+      void createPlayer();
+    };
+
+    const createPlayer = async () => {
+      try {
+        await loadIframeApi();
+      } catch {
+        return; //스크립트 자체가 막히면 썸네일 폴백 유지
+      }
+      if (cancelled || !hostRef.current || !window.YT) return;
+
+      //Player 생성자가 대상 엘리먼트를 iframe으로 통째로 치환하므로 시도마다 새 마운트 지점을 깐다
+      const mount = document.createElement("div");
+      hostRef.current.replaceChildren(mount);
+
+      bootTimer = setTimeout(retry, BOOT_TIMEOUT_MS);
+
+      playerRef.current = new window.YT.Player(mount, {
+        videoId,
+        host: "https://www.youtube.com",
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          controls: 0,
+          loop: 1,
+          playlist: videoId,
+          modestbranding: 1,
+          rel: 0,
+          playsinline: 1,
+          disablekb: 1,
+          origin: window.location.origin,
+        },
+        events: {
+          onReady: (event) => event.target.playVideo(),
+          onStateChange: (event) => {
+            if (event.data === window.YT?.PlayerState.PLAYING) clearTimeout(bootTimer);
+          },
+          onError: () => {
+            clearTimeout(bootTimer);
+            retry();
+          },
+        },
+      });
+    };
+
+    void createPlayer();
+
+    return () => {
+      cancelled = true;
+      teardown();
+    };
+  }, [videoId]);
 
   return (
     <section className="h-[100dvh] lg:h-screen w-full relative overflow-hidden bg-gray-900 flex items-center justify-center">
-      {embedUrl ? (
+      {videoId ? (
         <>
           {/* 영상 로드 전·실패 시 폴백 — 유튜브 썸네일이 항상 밑레이어에 깔린다 */}
           <Image
@@ -29,14 +136,10 @@ const VisualSection = ({ videoId }: VisualSectionProps) => {
             className="object-cover"
             aria-hidden="true"
           />
-          <iframe
-            key={String(muted)}
-            src={embedUrl}
-            title="IVE 공식 최신 영상"
+          <div
+            ref={hostRef}
             aria-hidden="true"
-            tabIndex={-1}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[max(100vw,177.78vh)] h-[max(100vh,56.25vw)] pointer-events-none"
-            allow="autoplay; encrypted-media"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[max(100vw,177.78vh)] h-[max(100vh,56.25vw)] pointer-events-none [&>iframe]:w-full [&>iframe]:h-full"
           />
         </>
       ) : (
@@ -73,16 +176,6 @@ const VisualSection = ({ videoId }: VisualSectionProps) => {
         </div>
         <ChevronDown className="w-6 h-6 text-white/50 mt-8 animate-bounce" aria-hidden="true" />
       </div>
-
-      {videoId && (
-        <button
-          onClick={() => setMuted((prev) => !prev)}
-          aria-label={muted ? "배경 영상 소리 켜기" : "배경 영상 소리 끄기"}
-          className="absolute bottom-10 right-5 lg:right-10 flex items-center justify-center w-11 h-11 rounded-full bg-black/40 backdrop-blur-sm text-white hover:bg-black/60 transition-colors"
-        >
-          {muted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
-        </button>
-      )}
 
       <div
         className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent to-[#0A0A0A]"
