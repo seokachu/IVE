@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import _ from "lodash";
+import { groupBy } from "@/utils/collection";
 import { Camera, Pencil } from "lucide-react";
 import UserAvatar from "@/components/common/UserAvatar";
 import MembershipBadge from "@/components/mypage/MembershipBadge";
@@ -24,7 +24,7 @@ const ProfileBand = () => {
   const { data: orderItems } = useOrderItems(session?.user.id);
   const { tier, isCancelScheduled } = useMyMembership();
 
-  const orderCount = Object.keys(_.groupBy(orderItems || [], "order_id")).length;
+  const orderCount = Object.keys(groupBy(orderItems || [], "order_id")).length;
 
   const stats = [
     { label: "찜한 굿즈", value: wishlists?.length ?? 0, path: "/mypage/wishlist" },

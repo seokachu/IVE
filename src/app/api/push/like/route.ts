@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 import { createClient } from "@supabase/supabase-js";
-import { truncate } from "lodash";
+import { truncate } from "@/utils/truncate";
 import { sendPushMessages } from "@/lib/push/sender";
 
 //게시글 좋아요 시 글 작성자에게 푸시 알림 발송

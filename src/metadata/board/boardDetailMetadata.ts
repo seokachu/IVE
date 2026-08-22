@@ -1,4 +1,4 @@
-import { truncate } from "lodash";
+import { truncate } from "@/utils/truncate";
 import { getBoardDetail } from "@/lib/supabase/board";
 import type { BoardDetailPageParams } from "@/types/board";
 
