@@ -19,7 +19,7 @@ self.addEventListener("push", (event) => {
   }
 
   event.waitUntil(
-    self.registration.showNotification(payload.title ?? "IVE-DIVE", {
+    self.registration.showNotification(payload.title ?? "IVE DIVE", {
       body: payload.body ?? "",
       icon: "/images/app-icon-192.png",
       badge: "/images/app-icon-192.png",
