@@ -123,7 +123,7 @@
   <table class="meta-table">
     <tr><th>문서 버전</th><td>v2 — Draft (리뉴얼 진행 중)</td></tr>
     <tr><th>서비스명</th><td>IVE로 DIVE (<a href="https://ive-three.vercel.app">ive-three.vercel.app</a>) · Expo 하이브리드 앱(Android WebView, <code>seokachu/ive-app</code>) 병행</td></tr>
-    <tr><th>문서 기준</th><td>2026 리뉴얼 진행 중 — dev 브랜치 커밋 <code>3d46857</code> (2026-08-23) · 마이페이지 · DIVE 멤버십 · 모바일 대응(반응형 · 드로어 메뉴) · 2026 로고 리브랜딩(REVIVE+) · 테마 반응형 파비콘 · 프로필 수정 안정화(소셜 재로그인 원복 수정) · 이미지 크롭 모달 리뉴얼 · 멤버십 플랜 변경 · 해지 취소(구독 재개) · 해지 예정 표시 · 굿즈샵 배송비 정책 · 배송 상태 표기 · <b>회원탈퇴(글·댓글 보존) · 웹 푸시(PWA)</b> · 앱 다운로드 페이지(<code>/download</code>) · 자유게시판 자동 포스팅 크론 · 금액 숫자 롤링 · 마이페이지 스켈레톤 · 히어로 영상 재생 안정화 반영</td></tr>
+    <tr><th>문서 기준</th><td>2026 리뉴얼 진행 중 — dev 브랜치 커밋 <code>3d46857</code> (2026-08-23) · 마이페이지 · DIVE 멤버십 · 모바일 대응(반응형 · 드로어 메뉴) · 2026 로고 리브랜딩(REVIVE+) · 테마 반응형 파비콘 · 프로필 수정 안정화(소셜 재로그인 원복 수정) · 이미지 크롭 모달 리뉴얼 · 멤버십 플랜 변경 · 해지 취소(구독 재개) · 해지 예정 표시 · 굿즈샵 배송비 정책 · 배송 상태 표기 · <b>회원탈퇴(글·댓글 보존) · 웹 푸시(PWA)</b> · 앱 다운로드 페이지(<code>/download</code>) · 자유게시판 자동 포스팅 크론 · 금액 숫자 롤링 · 마이페이지 스켈레톤 · 히어로 영상 재생 안정화 반영 · 앱은 <code>seokachu/ive-app</code> <code>v1.0.1</code>(오프라인 · 로드 실패 화면) 기준</td></tr>
     <tr><th>작성일</th><td>2026-07-29 생성 · 2026-08-17 갱신 (음악 · 소식 · 굿즈샵 상세 · 자유게시판 · 장바구니/결제 · 404 · 마이페이지 리디자인 + DIVE 멤버십 + 모바일 대응 반영) · 2026-08-23 갱신 (앱 다운로드 · 자동 포스팅 · 숫자 롤링 · 스켈레톤 · 히어로 영상 반영)</td></tr>
     <tr><th>범위</th><td>메인 · 음악 · 소식 · 인증 · 자유게시판 · 굿즈샵 · 장바구니/결제 · 마이페이지 · DIVE 멤버십 · 푸시 알림 · 앱 다운로드 · 디자인 시스템 · 공통 UI · 모바일 대응</td></tr>
     <tr><th>기술 스택</th><td>Next.js 16 (App Router, proxy) · React 19 · Supabase(<code>@supabase/ssr</code>) · Zustand · TanStack Query · Tailwind CSS · lucide-react · Tiptap v3(에디터) · 토스페이먼츠 · Expo Push · web-push(VAPID) · pnpm · Playwright E2E · 외부 API(네이버 API Hub 검색 · KOPIS · iTunes Search · Google News RSS · YouTube RSS) · Vercel Cron · GitHub Actions</td></tr>
@@ -559,6 +559,8 @@
     <tr><td>PUSH-08</td><td>발송 실패 무영향</td><td>푸시 발송은 백그라운드로 처리되어, 실패해도 댓글 작성·좋아요 등 원 기능에는 영향 없음. 채널별 발송(Expo · web-push)은 서버 공통 모듈이 담당한다.</td><td>발송 API는 요청자 세션·소유권을 서버에서 재검증(위조 요청 차단).</td><td><span class="auth app">앱 · 웹</span></td></tr>
     <tr><td>PUSH-09</td><td>앱 링크 연결</td><td>도메인-앱 연결 선언 파일(assetlinks.json)을 제공해, 결제 등 외부 앱에서 서비스 주소로 복귀할 때 브라우저 대신 하이브리드 앱이 열리도록 지원.</td><td>스토어 배포 시 릴리즈 키 지문으로 교체 필요(현재 개발용).</td><td><span class="auth app">앱</span></td></tr>
     <tr><td>PUSH-10</td><td>앱 테마 연동</td><td>웹의 현재 테마(라이트/다크)가 바뀔 때마다 WebView 메시지로 앱에 전달되어, 네이티브 셸(상태바 · 세이프에어리어)이 웹 테마를 따라간다.</td><td>웹 단독(브라우저) 사용 시에는 동작하지 않음. COM-16 다크모드와 연동.</td><td><span class="auth app">앱</span></td></tr>
+    <tr><td>PUSH-12</td><td>앱 오프라인 · 로드 실패 화면 <span class="tag">v2 신규</span></td><td>앱에서 <b>네트워크가 끊기거나(NetInfo) 페이지 로드에 실패하면(WebView <code>onError</code>) WebView 내장 에러 페이지 대신 앱 자체 화면</b>을 전체 화면으로 덮는다. 구성은 404 화면(COM-11)의 디자인 언어를 그대로 옮겨 <b>브랜드 그라데이션 원 아이콘(wifi-off) + <span class="msg">“오프라인이에요”</span> + <span class="msg">“인터넷 연결을 확인한 뒤 다시 시도해 주세요.”</span> + 상태 칩 <span class="msg">“네트워크에 연결되어 있지 않아요”</span> + [다시 시도] · [홈으로 이동] 2단 CTA + Wi-Fi · 데이터 · 비행기 모드 점검 칩</b>. [다시 시도]는 연결을 다시 확인한 뒤 실패한 페이지를 새로고침하고, [홈으로 이동]은 WebView를 다시 마운트해 첫 화면부터 불러온다.</td><td><b>연결이 복구되면 실패했던 페이지를 자동으로 다시 불러온다</b>(NetInfo 이벤트 → reload). 화면 색은 웹 테마(PUSH-10)를 따라 라이트/다크로 바뀌며, 테마 신호를 받기 전(콜드 스타트 오프라인)에는 라이트. 웹 서비스 워커에는 오프라인 캐싱이 없어(PUSH-11) <b>브라우저 단독 사용 시에는 브라우저 기본 오프라인 페이지</b>가 뜬다. 앱 <code>v1.0.1</code>(versionCode 2)부터.</td><td><span class="auth app">앱</span></td></tr>
+    <tr><td>PUSH-13</td><td>앱 셸 조작 · 복구</td><td>네이티브 셸이 담당하는 기본 조작 — <b>Android 당겨서 새로고침</b>(웹 스크롤이 최상단일 때만 활성), <b>iOS 스와이프 뒤로/앞으로 · 당겨서 새로고침</b>, <b>Android 하드웨어 뒤로가기</b>는 웹 히스토리를 먼저 따라가고 첫 화면에서는 2초 안에 한 번 더 눌러야 종료(<span class="msg">“한 번 더 누르면 앱이 종료돼요”</span> 토스트), 첫 로딩 동안 시스템 스플래시와 이어지는 <b>브랜드 스플래시</b> 노출.</td><td>iOS에서 WebView 프로세스가 종료되면 빈 화면이 되므로 자동으로 다시 불러온다. 결제(토스 → 카드사 앱 → 복귀)가 여러 외부 도메인을 경유하므로 http/https는 전부 WebView 안에서 처리하고, <code>intent://</code> 등 앱 호출 스킴만 밖으로 넘긴다.</td><td><span class="auth app">앱</span></td></tr>
   </table>
 
   <h3>11-3. 앱 다운로드 <span class="path">/download</span></h3>
@@ -707,7 +709,7 @@
 </section>
 
 <footer class="foot">
-  IVE로 DIVE 기능명세서 v2 (Draft) · 기준 커밋 <code>3d46857</code> (2026 리뉴얼 진행 중) · 2026-07-29 생성 · 2026-08-23 갱신 · <a href="./index.html">기능명세서 아카이브</a> · <a href="./spec-v1.html">v1 보기</a> · <a href="./design.html">디자인 시스템 · 시안</a>
+  IVE로 DIVE 기능명세서 v2 (Draft) · 기준 커밋 <code>3d46857</code> (2026 리뉴얼 진행 중) · 2026-07-29 생성 · 2026-08-27 갱신 · <a href="./index.html">기능명세서 아카이브</a> · <a href="./spec-v1.html">v1 보기</a> · <a href="./design.html">디자인 시스템 · 시안</a>
 </footer>
 
 </div>
