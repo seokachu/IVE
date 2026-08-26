@@ -130901,6 +130901,732 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "LYI7W",
+      "x": 24360,
+      "y": 17516,
+      "name": "오프라인 · 라이트",
+      "theme": {
+        "mode": "light"
+      },
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "$bg-page",
+      "layout": "vertical",
+      "padding": [
+        0,
+        24
+      ],
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "m8MuK",
+          "name": "IconCircle",
+          "width": 96,
+          "height": 96,
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": 125,
+            "size": {
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "$purple-400",
+                "position": 0
+              },
+              {
+                "color": "$orange-300",
+                "position": 1
+              }
+            ]
+          },
+          "cornerRadius": "$radius-full",
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon",
+              "id": "csGpS",
+              "name": "IcWifiOff",
+              "width": 40,
+              "height": 40,
+              "icon": "wifi-off",
+              "library": "lucide",
+              "fill": "$text-inverse"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "cLpF2",
+          "name": "Sp20",
+          "width": 1,
+          "height": 20
+        },
+        {
+          "type": "text",
+          "id": "pfQk9",
+          "name": "OffTitle",
+          "fill": "$text-primary",
+          "content": "오프라인이에요",
+          "fontFamily": "$font-family",
+          "fontSize": 22,
+          "fontWeight": "$font-weight-bold"
+        },
+        {
+          "type": "frame",
+          "id": "u1vBm",
+          "name": "Sp10",
+          "width": 1,
+          "height": 10
+        },
+        {
+          "type": "text",
+          "id": "Pp7Ef",
+          "name": "OffSub",
+          "fill": "$text-secondary",
+          "textGrowth": "fixed-width",
+          "width": "fill_container",
+          "content": "인터넷 연결을 확인한 뒤 다시 시도해 주세요.",
+          "lineHeight": 1.5,
+          "textAlign": "center",
+          "fontFamily": "$font-family",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "frame",
+          "id": "hZWfg",
+          "name": "Sp20b",
+          "width": 1,
+          "height": 20
+        },
+        {
+          "type": "frame",
+          "id": "OIkl6",
+          "name": "StatusChip",
+          "fill": "$bg-muted",
+          "cornerRadius": "$radius-full",
+          "gap": 8,
+          "padding": [
+            8,
+            16
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon",
+              "id": "QEQV6",
+              "name": "IcUnplug",
+              "width": 14,
+              "height": 14,
+              "icon": "unplug",
+              "library": "lucide",
+              "fill": "$text-tertiary"
+            },
+            {
+              "type": "text",
+              "id": "R8GL6",
+              "name": "StatusText",
+              "fill": "$text-tertiary",
+              "content": "네트워크에 연결되어 있지 않아요",
+              "fontFamily": "$font-family",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "qfel2",
+          "name": "Sp28",
+          "width": 1,
+          "height": 28
+        },
+        {
+          "type": "frame",
+          "id": "bkuk8",
+          "name": "Actions",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 10,
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "xJvjg",
+              "type": "ref",
+              "ref": "q2pQUC",
+              "name": "다시 시도",
+              "width": "fill_container",
+              "height": 48,
+              "descendants": {
+                "jDkeV": {
+                  "content": "다시 시도"
+                }
+              }
+            },
+            {
+              "id": "H2HD2",
+              "type": "ref",
+              "ref": "cOfER",
+              "name": "홈으로 이동",
+              "width": "fill_container",
+              "height": 48,
+              "descendants": {
+                "ktfuh": {
+                  "content": "홈으로 이동"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "xqW88",
+          "name": "Sp32",
+          "width": 1,
+          "height": 32
+        },
+        {
+          "type": "frame",
+          "id": "W1YDo",
+          "name": "TipDivider",
+          "width": "fill_container",
+          "gap": 12,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "rectangle",
+              "id": "nYRBi",
+              "name": "LineL",
+              "fill": "$border-default",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "text",
+              "id": "tDTys",
+              "name": "DivLabel",
+              "fill": "$text-tertiary",
+              "content": "이럴 때 확인해 보세요",
+              "fontFamily": "$font-family",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "rectangle",
+              "id": "bDrn1",
+              "name": "LineR",
+              "fill": "$border-default",
+              "width": "fill_container",
+              "height": 1
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "V5L1kn",
+          "name": "Sp16",
+          "width": 1,
+          "height": 16
+        },
+        {
+          "type": "frame",
+          "id": "x4sjkM",
+          "name": "TipChips",
+          "gap": 8,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "dZqKX",
+              "name": "Tip-Wi-Fi",
+              "fill": "$bg-surface",
+              "cornerRadius": "$radius-full",
+              "stroke": "$border-default",
+              "strokeWidth": 1,
+              "gap": 6,
+              "padding": [
+                8,
+                14
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "WhmKi",
+                  "name": "Ic",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "wifi",
+                  "library": "lucide",
+                  "fill": "$text-secondary"
+                },
+                {
+                  "type": "text",
+                  "id": "VtZd6",
+                  "name": "L",
+                  "fill": "$text-secondary",
+                  "content": "Wi-Fi",
+                  "fontFamily": "$font-family",
+                  "fontSize": 13,
+                  "fontWeight": "$font-weight-semibold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "dQrxH",
+              "name": "Tip-데이터",
+              "fill": "$bg-surface",
+              "cornerRadius": "$radius-full",
+              "stroke": "$border-default",
+              "strokeWidth": 1,
+              "gap": 6,
+              "padding": [
+                8,
+                14
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "dBYDy",
+                  "name": "Ic",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "signal",
+                  "library": "lucide",
+                  "fill": "$text-secondary"
+                },
+                {
+                  "type": "text",
+                  "id": "FndFq",
+                  "name": "L",
+                  "fill": "$text-secondary",
+                  "content": "데이터",
+                  "fontFamily": "$font-family",
+                  "fontSize": 13,
+                  "fontWeight": "$font-weight-semibold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "pSCMk",
+              "name": "Tip-비행기 모드",
+              "fill": "$bg-surface",
+              "cornerRadius": "$radius-full",
+              "stroke": "$border-default",
+              "strokeWidth": 1,
+              "gap": 6,
+              "padding": [
+                8,
+                14
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "RFOq9",
+                  "name": "Ic",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "plane",
+                  "library": "lucide",
+                  "fill": "$text-secondary"
+                },
+                {
+                  "type": "text",
+                  "id": "vpwdE",
+                  "name": "L",
+                  "fill": "$text-secondary",
+                  "content": "비행기 모드",
+                  "fontFamily": "$font-family",
+                  "fontSize": 13,
+                  "fontWeight": "$font-weight-semibold"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "h2wga",
+      "x": 24810,
+      "y": 17516,
+      "name": "오프라인 · 다크",
+      "theme": {
+        "mode": "dark"
+      },
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "$bg-page",
+      "layout": "vertical",
+      "padding": [
+        0,
+        24
+      ],
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "L7SQA",
+          "name": "IconCircle",
+          "width": 96,
+          "height": 96,
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": 125,
+            "size": {
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "$purple-400",
+                "position": 0
+              },
+              {
+                "color": "$orange-300",
+                "position": 1
+              }
+            ]
+          },
+          "cornerRadius": "$radius-full",
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon",
+              "id": "GYqwp",
+              "name": "IcWifiOff",
+              "width": 40,
+              "height": 40,
+              "icon": "wifi-off",
+              "library": "lucide",
+              "fill": "$text-inverse"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "gSG51",
+          "name": "Sp20",
+          "width": 1,
+          "height": 20
+        },
+        {
+          "type": "text",
+          "id": "vIVAh",
+          "name": "OffTitle",
+          "fill": "$text-primary",
+          "content": "오프라인이에요",
+          "fontFamily": "$font-family",
+          "fontSize": 22,
+          "fontWeight": "$font-weight-bold"
+        },
+        {
+          "type": "frame",
+          "id": "rDhia",
+          "name": "Sp10",
+          "width": 1,
+          "height": 10
+        },
+        {
+          "type": "text",
+          "id": "zH36W",
+          "name": "OffSub",
+          "fill": "$text-secondary",
+          "textGrowth": "fixed-width",
+          "width": "fill_container",
+          "content": "인터넷 연결을 확인한 뒤 다시 시도해 주세요.",
+          "lineHeight": 1.5,
+          "textAlign": "center",
+          "fontFamily": "$font-family",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "frame",
+          "id": "Cv6YN",
+          "name": "Sp20b",
+          "width": 1,
+          "height": 20
+        },
+        {
+          "type": "frame",
+          "id": "X5T2PO",
+          "name": "StatusChip",
+          "fill": "$bg-muted",
+          "cornerRadius": "$radius-full",
+          "gap": 8,
+          "padding": [
+            8,
+            16
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon",
+              "id": "qRVpy",
+              "name": "IcUnplug",
+              "width": 14,
+              "height": 14,
+              "icon": "unplug",
+              "library": "lucide",
+              "fill": "$text-tertiary"
+            },
+            {
+              "type": "text",
+              "id": "F3kUwU",
+              "name": "StatusText",
+              "fill": "$text-tertiary",
+              "content": "네트워크에 연결되어 있지 않아요",
+              "fontFamily": "$font-family",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "zbhFd",
+          "name": "Sp28",
+          "width": 1,
+          "height": 28
+        },
+        {
+          "type": "frame",
+          "id": "NprZF",
+          "name": "Actions",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 10,
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "TBMOO",
+              "type": "ref",
+              "ref": "q2pQUC",
+              "name": "다시 시도",
+              "width": "fill_container",
+              "height": 48,
+              "descendants": {
+                "jDkeV": {
+                  "content": "다시 시도"
+                }
+              }
+            },
+            {
+              "id": "BdSna",
+              "type": "ref",
+              "ref": "cOfER",
+              "name": "홈으로 이동",
+              "width": "fill_container",
+              "height": 48,
+              "descendants": {
+                "ktfuh": {
+                  "content": "홈으로 이동"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "F2wAX",
+          "name": "Sp32",
+          "width": 1,
+          "height": 32
+        },
+        {
+          "type": "frame",
+          "id": "sJzio",
+          "name": "TipDivider",
+          "width": "fill_container",
+          "gap": 12,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "rectangle",
+              "id": "NKFtd",
+              "name": "LineL",
+              "fill": "$border-default",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "text",
+              "id": "CqaNw",
+              "name": "DivLabel",
+              "fill": "$text-tertiary",
+              "content": "이럴 때 확인해 보세요",
+              "fontFamily": "$font-family",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "rectangle",
+              "id": "M3HOK",
+              "name": "LineR",
+              "fill": "$border-default",
+              "width": "fill_container",
+              "height": 1
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "cymiQ",
+          "name": "Sp16",
+          "width": 1,
+          "height": 16
+        },
+        {
+          "type": "frame",
+          "id": "iSP9Z",
+          "name": "TipChips",
+          "gap": 8,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "JXbP5",
+              "name": "Tip-Wi-Fi",
+              "fill": "$bg-surface",
+              "cornerRadius": "$radius-full",
+              "stroke": "$border-default",
+              "strokeWidth": 1,
+              "gap": 6,
+              "padding": [
+                8,
+                14
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "VK6kL",
+                  "name": "Ic",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "wifi",
+                  "library": "lucide",
+                  "fill": "$text-secondary"
+                },
+                {
+                  "type": "text",
+                  "id": "DxtXA",
+                  "name": "L",
+                  "fill": "$text-secondary",
+                  "content": "Wi-Fi",
+                  "fontFamily": "$font-family",
+                  "fontSize": 13,
+                  "fontWeight": "$font-weight-semibold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "L2myI",
+              "name": "Tip-데이터",
+              "fill": "$bg-surface",
+              "cornerRadius": "$radius-full",
+              "stroke": "$border-default",
+              "strokeWidth": 1,
+              "gap": 6,
+              "padding": [
+                8,
+                14
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "G23xD",
+                  "name": "Ic",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "signal",
+                  "library": "lucide",
+                  "fill": "$text-secondary"
+                },
+                {
+                  "type": "text",
+                  "id": "hKLOo",
+                  "name": "L",
+                  "fill": "$text-secondary",
+                  "content": "데이터",
+                  "fontFamily": "$font-family",
+                  "fontSize": 13,
+                  "fontWeight": "$font-weight-semibold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "opPNy",
+              "name": "Tip-비행기 모드",
+              "fill": "$bg-surface",
+              "cornerRadius": "$radius-full",
+              "stroke": "$border-default",
+              "strokeWidth": 1,
+              "gap": 6,
+              "padding": [
+                8,
+                14
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "oO4PL",
+                  "name": "Ic",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "plane",
+                  "library": "lucide",
+                  "fill": "$text-secondary"
+                },
+                {
+                  "type": "text",
+                  "id": "bWPV8",
+                  "name": "L",
+                  "fill": "$text-secondary",
+                  "content": "비행기 모드",
+                  "fontFamily": "$font-family",
+                  "fontSize": 13,
+                  "fontWeight": "$font-weight-semibold"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "note",
+      "id": "Q6qJrx",
+      "x": 24360,
+      "y": 17217,
+      "name": "오프라인 노트",
+      "width": 900,
+      "height": 0,
+      "content": "앱(WebView) 오프라인·로드 실패 화면. 현재는 WebView 내장 에러 페이지(\"오프라인 상태예요\")가 그대로 노출됨 → 404 화면 언어를 그대로 옮겨 브랜드 화면으로 교체한다. 브랜드 그라데이션 아이콘 원(purple-400→orange-300, wifi-off) + 타이틀/서브 + 상태 칩(unplug) + CTA 2단(다시 시도 솔리드 / 홈으로 이동 아웃라인) + 하단 점검 칩(Wi-Fi·데이터·비행기 모드). RN 구현: WebView renderError/onError에서 이 화면을 띄우고, NetInfo 복구 시 자동 reload. 390x844 기준, 라이트·다크 모두 토큰 기반."
     }
   ],
   "themes": {
