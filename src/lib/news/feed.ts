@@ -64,8 +64,20 @@ const normalizeTitle = (title: string) =>
     .replace(/[^\p{L}\p{N}]/gu, "")
     .toLowerCase();
 
+//UA 없이 부르면 유튜브가 봇으로 보고 쓰로틀을 더 세게 건다 — 실측 8회 중 4회 성공이
+//브라우저 UA를 붙이면 6회로 올라간다. 나머지는 재시도로 메운다.
+const FEED_REQUEST_HEADERS = {
+  "User-Agent":
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+  Accept: "application/atom+xml,application/xml;q=0.9,*/*;q=0.8",
+  "Accept-Language": "ko-KR,ko;q=0.9,en;q=0.8",
+} as const;
+
 const fetchXml = async (url: string) => {
-  const res = await fetch(url, { next: { revalidate: FEED_REVALIDATE_SECONDS } });
+  const res = await fetch(url, {
+    headers: FEED_REQUEST_HEADERS,
+    next: { revalidate: FEED_REVALIDATE_SECONDS },
+  });
   if (!res.ok) throw new Error(`피드 요청 실패 (${res.status}): ${url}`);
   return res.text();
 };
@@ -116,20 +128,68 @@ const fetchYouTubeXmlFeed = async (feedQuery: string, sourceName: string): Promi
   });
 };
 
+//유튜브는 같은 IP에서 피드를 몰아서 요청하면 일부를 404/500으로 흘려버린다 — 단독으로 부르면
+//200인 URL이 7건을 동시에 던지면 500으로 돌아온다. 실패해도 Promise.allSettled가 삼켜서
+//영상이 통째로 비어도 조용했다(히어로 배경 영상이 사라진 원인).
+//공식 채널은 히어로 배경 영상의 유일한 출처라 넉넉히 재시도하고,
+//보조 소스는 실패해도 화면이 비지 않으므로 한 번만 더 두드린다(함수 실행 시간 보호).
+const PRIMARY_RETRY_BACKOFF_MS = [1000, 2500];
+const SECONDARY_RETRY_BACKOFF_MS = [800];
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+//쓰로틀은 일시적이라 잠깐 쉬었다 다시 부르면 통과한다 — 공식 채널 기준 실측 8/8
+const fetchYouTubeXmlFeedWithRetry = async (
+  feedQuery: string,
+  sourceName: string,
+  backoffMs: readonly number[]
+): Promise<FeedItem[]> => {
+  for (const delay of backoffMs) {
+    try {
+      return await fetchYouTubeXmlFeed(feedQuery, sourceName);
+    } catch {
+      await sleep(delay);
+    }
+  }
+  return fetchYouTubeXmlFeed(feedQuery, sourceName);
+};
+
 const fetchYouTubeFeed = async (): Promise<FeedItem[]> => {
+  //공식 채널 피드는 히어로 배경 영상(쇼츠가 아닌 최신 공식 영상)의 유일한 출처다.
+  //보조 피드와 같이 던지면 쓰로틀에 같이 휩쓸리므로 **단독으로 먼저** 받는다.
+  const primary = await fetchYouTubeXmlFeedWithRetry(
+    `channel_id=${IVE_YOUTUBE_CHANNEL_ID}`,
+    "IVE 공식 유튜브",
+    PRIMARY_RETRY_BACKOFF_MS
+  ).catch((error) => {
+    console.error("[news] 공식 유튜브 채널 피드 실패", error);
+    return [] as FeedItem[];
+  });
+
+  //나머지는 영상 수를 늘리는 보조 소스라 실패해도 화면이 비지 않는다
   const results = await Promise.allSettled([
-    fetchYouTubeXmlFeed(`channel_id=${IVE_YOUTUBE_CHANNEL_ID}`, "IVE 공식 유튜브"),
     ...IVE_YOUTUBE_PLAYLISTS.map((playlistId) =>
-      fetchYouTubeXmlFeed(`playlist_id=${playlistId}`, "IVE 공식 유튜브")
+      fetchYouTubeXmlFeedWithRetry(`playlist_id=${playlistId}`, "IVE 공식 유튜브", SECONDARY_RETRY_BACKOFF_MS)
     ),
     ...EXTRA_YOUTUBE_CHANNELS.map(async (channel) => {
-      const items = await fetchYouTubeXmlFeed(`channel_id=${channel.id}`, channel.name);
+      const items = await fetchYouTubeXmlFeedWithRetry(
+        `channel_id=${channel.id}`,
+        channel.name,
+        SECONDARY_RETRY_BACKOFF_MS
+      );
       return items.filter((item) => IVE_VIDEO_PATTERN.test(item.title));
     }),
   ]);
 
+  for (const result of results) {
+    if (result.status === "rejected") console.error("[news] 보조 유튜브 피드 실패", result.reason);
+  }
+
   //같은 영상이 업로드 피드와 재생목록에 중복으로 잡히면 하나만 유지
-  const items = results.flatMap((result) => (result.status === "fulfilled" ? result.value : []));
+  const items = [
+    ...primary,
+    ...results.flatMap((result) => (result.status === "fulfilled" ? result.value : [])),
+  ];
   return [...new Map(items.map((item) => [item.id, item])).values()];
 };
 
