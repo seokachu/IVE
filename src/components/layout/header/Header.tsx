@@ -5,15 +5,15 @@ import PinkLogoImage from "@/assets/images/logo_pink.svg";
 import Link from "next/link";
 import UserMenu from "./components/UserMenu";
 import HeaderAside from "./components/HeaderAside";
-import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { cn } from "@/utils/utils";
 import ThemeToggle from "./components/ThemeToggle";
 import { useIsScrolled, useUiActions } from "@/store/zustand";
+import { useRoutePath } from "@/hooks/useRoutePath";
 import { throttle } from "@/utils/timing";
 
 const Header = () => {
-  const pathname = usePathname();
+  const pathname = useRoutePath();
   const isMainPage = pathname === "/";
   const isScrolled = useIsScrolled();
   const { setScrolled } = useUiActions();
