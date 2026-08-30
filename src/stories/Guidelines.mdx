@@ -22,6 +22,7 @@ import { Meta } from "@storybook/addon-docs/blocks";
 | 사용자 아바타 | `common/UserAvatar` | `ui/avatar` 직접 조합 |
 | 섹션 제목 | `common/SectionTitle` | `h2` + 인라인 클래스 반복 |
 | 목록 페이지 이동 | `common/PaginationControl` | `ui/pagination` 직접 조합 |
+| 모바일 하단 내비 | `layout/BottomNav` (iOS 글라스 캡슐) | 드로어에 GNB 넣기 · 하단 고정 요소에 `bottom-[calc(...)]` |
 
 ## 버튼 variant 고르기
 
@@ -43,6 +44,8 @@ import { Meta } from "@storybook/addon-docs/blocks";
 - 색은 반드시 토큰으로 — `bg-primary`, `text-gray-500`, `border-border`.
   새 hex 리터럴을 만들지 않습니다. ([Foundations/Colors](?path=/docs/foundations-colors--docs))
 - `gray` 램프는 다크에서 값이 뒤집히므로 `dark:` 오버라이드가 필요 없습니다.
+- 모바일 하단 탭바 오프셋은 `--tabbar-h` 하나로 — 본문은 body `pb-tabbar`, 하단 고정 요소는 `mb-tabbar`, sticky는 `bottom-tabbar-10`.
+  lg 이상에서 변수가 0이 되므로 `lg:` 변형이 필요 없습니다.
 - CSS 변수 기반 색은 **불투명도 변형(`bg-purple-500/90`)을 지원하지 않습니다.** 솔리드로 쓰거나
   오버레이는 `black/white`로 얹습니다.
 - 간격은 4px 배수, 웨이트는 400/600/700 세 단계만. ([Foundations/Tokens](?path=/docs/foundations-tokens--docs))

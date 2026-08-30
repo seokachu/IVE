@@ -18,25 +18,26 @@ const TABS = [
   ...GNB_ARRAY.map((menu) => ({ ...menu, icon: GNB_ICONS[menu.path] })),
 ];
 
-//모바일(lg 미만) 하단 탭바 — 데스크톱 GNB를 대신한다. 드로어(HeaderAside)에는 GNB가 없다.
-//높이 56px + iOS safe-area. 탭바 위에 떠야 하는 요소는 mb-tabbar, 본문 하단 여백은 pb-tabbar(globals.css --tabbar-h)
+//모바일(lg 미만) 하단 탭바 — iOS 글라스 스타일의 플로팅 캡슐. 데스크톱 GNB를 대신하고 드로어(HeaderAside)에는 GNB가 없다.
+//캡슐 64px + 아래 8px + iOS safe-area 를 차지한다(globals.css --tabbar-h). 탭바 위에 떠야 하는 요소는 mb-tabbar, 본문 하단 여백은 pb-tabbar.
+//바깥 nav 는 pointer-events 를 끊어 캡슐 옆·아래 여백에서는 밑 콘텐츠를 그대로 누를 수 있다
 const BottomNav = () => {
   const pathname = useRoutePath();
 
   return (
-    <nav aria-label="하단 메뉴" className="fixed inset-x-0 bottom-0 z-50 border-t border-gray-200 bg-card pb-safe lg:hidden">
-      <ul className="flex h-14">
+    <nav aria-label="하단 메뉴" className="pointer-events-none fixed inset-x-0 bottom-0 z-50 pb-safe lg:hidden">
+      <ul className="pointer-events-auto mx-4 mb-2 flex h-16 items-center rounded-full border border-glass-stroke bg-glass px-1 shadow-lg backdrop-blur-xl">
         {TABS.map(({ label, path, exact, icon: Icon }) => {
           const active = exact ? pathname === path : pathname.startsWith(path);
 
           return (
-            <li key={path} className="flex-1">
+            <li key={path} className="h-full flex-1 p-1">
               <Link
                 href={path}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "flex h-full flex-col items-center justify-center gap-1 text-xs transition-colors",
-                  active ? "font-semibold text-purple-500 dark:text-purple-300" : "text-gray-500",
+                  "flex h-full flex-col items-center justify-center gap-1 rounded-full text-[11px] transition-colors",
+                  active ? "bg-glass-accent font-semibold text-purple-500 dark:text-purple-300" : "text-gray-500",
                 )}
               >
                 <Icon size={24} aria-hidden="true" />
