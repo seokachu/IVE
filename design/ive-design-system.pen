@@ -115347,11 +115347,11 @@
       },
       "clip": true,
       "width": 390,
-      "height": 4740,
+      "height": 4538,
       "fill": {
         "type": "image",
         "enabled": true,
-        "url": "assets/mobile/mobile-main-2.png",
+        "url": "assets/mobile/mobile-main-3.png",
         "mode": "fill"
       }
     },
@@ -115366,11 +115366,11 @@
       },
       "clip": true,
       "width": 390,
-      "height": 6106,
+      "height": 6498,
       "fill": {
         "type": "image",
         "enabled": true,
-        "url": "assets/mobile/mobile-news-2.png",
+        "url": "assets/mobile/mobile-news-3.png",
         "mode": "fill"
       }
     },
@@ -115385,11 +115385,11 @@
       },
       "clip": true,
       "width": 390,
-      "height": 4044,
+      "height": 4061,
       "fill": {
         "type": "image",
         "enabled": true,
-        "url": "assets/mobile/mobile-discography-2.png",
+        "url": "assets/mobile/mobile-discography-3.png",
         "mode": "fill"
       }
     },
@@ -115404,11 +115404,11 @@
       },
       "clip": true,
       "width": 390,
-      "height": 9578,
+      "height": 3849,
       "fill": {
         "type": "image",
         "enabled": true,
-        "url": "assets/mobile/mobile-shop-2.png",
+        "url": "assets/mobile/mobile-shop-3.png",
         "mode": "fill"
       }
     },
@@ -115423,11 +115423,11 @@
       },
       "clip": true,
       "width": 390,
-      "height": 4723,
+      "height": 4884,
       "fill": {
         "type": "image",
         "enabled": true,
-        "url": "assets/mobile/mobile-shop-detail-2.png",
+        "url": "assets/mobile/mobile-shop-detail-3.png",
         "mode": "fill"
       }
     },
@@ -115442,11 +115442,11 @@
       },
       "clip": true,
       "width": 390,
-      "height": 2455,
+      "height": 2464,
       "fill": {
         "type": "image",
         "enabled": true,
-        "url": "assets/mobile/mobile-board-2.png",
+        "url": "assets/mobile/mobile-board-3.png",
         "mode": "fill"
       }
     },
@@ -115461,11 +115461,11 @@
       },
       "clip": true,
       "width": 390,
-      "height": 1769,
+      "height": 2904,
       "fill": {
         "type": "image",
         "enabled": true,
-        "url": "assets/mobile/mobile-board-detail-2.png",
+        "url": "assets/mobile/mobile-board-detail-3.png",
         "mode": "fill"
       }
     },
@@ -115480,11 +115480,11 @@
       },
       "clip": true,
       "width": 390,
-      "height": 1917,
+      "height": 1935,
       "fill": {
         "type": "image",
         "enabled": true,
-        "url": "assets/mobile/mobile-cart-2.png",
+        "url": "assets/mobile/mobile-cart-3.png",
         "mode": "fill"
       }
     },
@@ -115492,10 +115492,10 @@
       "type": "note",
       "id": "n5NxC",
       "x": 11400,
-      "y": 26440,
+      "y": 26280,
       "name": "모바일 시안 노트",
       "width": 1400,
-      "height": 40,
+      "height": 231,
       "content": "모바일(390px) 시안 — 반응형 구현 실화면 캡처 기반 (기능명세서 모바일 버전 참조용). 마이페이지·드로어 메뉴는 왼쪽의 수작업 시안 프레임 참고. 다크 모드는 토큰 플립으로 동일 레이아웃."
     },
     {
@@ -131627,6 +131627,1341 @@
       "width": 900,
       "height": 0,
       "content": "앱(WebView) 오프라인·로드 실패 화면. 현재는 WebView 내장 에러 페이지(\"오프라인 상태예요\")가 그대로 노출됨 → 404 화면 언어를 그대로 옮겨 브랜드 화면으로 교체한다. 브랜드 그라데이션 아이콘 원(purple-400→orange-300, wifi-off) + 타이틀/서브 + 상태 칩(unplug) + CTA 2단(다시 시도 솔리드 / 홈으로 이동 아웃라인) + 하단 점검 칩(Wi-Fi·데이터·비행기 모드). RN 구현: WebView renderError/onError에서 이 화면을 띄우고, NetInfo 복구 시 자동 reload. 390x844 기준, 라이트·다크 모두 토큰 기반."
+    },
+    {
+      "type": "frame",
+      "id": "mb50W",
+      "x": 16000,
+      "y": 26600,
+      "name": "BottomNav",
+      "reusable": true,
+      "width": 390,
+      "fill": "$bg-surface",
+      "stroke": "$border-default",
+      "strokeWidth": {
+        "top": 1
+      },
+      "strokeAlignment": "inner",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "n4xpkj",
+          "name": "TabRow",
+          "width": "fill_container",
+          "height": 56,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "KRBxD",
+              "name": "Tab-홈",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": "$space-4",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "cuvke",
+                  "name": "TabIcon-홈",
+                  "width": 24,
+                  "height": 24,
+                  "icon": "house",
+                  "library": "lucide",
+                  "fill": "$nav-active"
+                },
+                {
+                  "type": "text",
+                  "id": "rj2VD",
+                  "name": "TabLabel-홈",
+                  "fill": "$nav-active",
+                  "content": "홈",
+                  "fontFamily": "$font-family",
+                  "fontSize": "$font-size-100",
+                  "fontWeight": "$font-weight-semibold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Ei4p3",
+              "name": "Tab-소식",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": "$space-4",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "l1LArT",
+                  "name": "TabIcon-소식",
+                  "width": 24,
+                  "height": 24,
+                  "icon": "newspaper",
+                  "library": "lucide",
+                  "fill": "$text-secondary"
+                },
+                {
+                  "type": "text",
+                  "id": "w9GF3",
+                  "name": "TabLabel-소식",
+                  "fill": "$text-secondary",
+                  "content": "소식",
+                  "fontFamily": "$font-family",
+                  "fontSize": "$font-size-100",
+                  "fontWeight": "$font-weight-regular"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "cvjhq",
+              "name": "Tab-음악",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": "$space-4",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "UIkUu",
+                  "name": "TabIcon-음악",
+                  "width": 24,
+                  "height": 24,
+                  "icon": "music",
+                  "library": "lucide",
+                  "fill": "$text-secondary"
+                },
+                {
+                  "type": "text",
+                  "id": "M5TRGE",
+                  "name": "TabLabel-음악",
+                  "fill": "$text-secondary",
+                  "content": "음악",
+                  "fontFamily": "$font-family",
+                  "fontSize": "$font-size-100",
+                  "fontWeight": "$font-weight-regular"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "YWPXG",
+              "name": "Tab-굿즈샵",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": "$space-4",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "Z1GrTJ",
+                  "name": "TabIcon-굿즈샵",
+                  "width": 24,
+                  "height": 24,
+                  "icon": "shopping-bag",
+                  "library": "lucide",
+                  "fill": "$text-secondary"
+                },
+                {
+                  "type": "text",
+                  "id": "CkhK2",
+                  "name": "TabLabel-굿즈샵",
+                  "fill": "$text-secondary",
+                  "content": "굿즈샵",
+                  "fontFamily": "$font-family",
+                  "fontSize": "$font-size-100",
+                  "fontWeight": "$font-weight-regular"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "N217Up",
+              "name": "Tab-자유게시판",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": "$space-4",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "yqPh6",
+                  "name": "TabIcon-자유게시판",
+                  "width": 24,
+                  "height": 24,
+                  "icon": "message-square",
+                  "library": "lucide",
+                  "fill": "$text-secondary"
+                },
+                {
+                  "type": "text",
+                  "id": "a5T1v",
+                  "name": "TabLabel-자유게시판",
+                  "fill": "$text-secondary",
+                  "content": "자유게시판",
+                  "fontFamily": "$font-family",
+                  "fontSize": "$font-size-100",
+                  "fontWeight": "$font-weight-regular"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "KVGr1",
+          "name": "SafeArea",
+          "width": "fill_container",
+          "height": 34,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "rectangle",
+              "cornerRadius": "$radius-full",
+              "id": "OsFTL",
+              "name": "HomeIndicator",
+              "fill": "$text-primary",
+              "width": 134,
+              "height": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "OuNOx",
+      "x": 16450,
+      "y": 26600,
+      "name": "모바일 · 메인 · 하단 네비",
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "$bg-page",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "bCNDq",
+          "x": 0,
+          "y": 0,
+          "name": "모바일 · 메인",
+          "theme": {
+            "mode": "light"
+          },
+          "clip": true,
+          "width": 390,
+          "height": 4538,
+          "fill": {
+            "type": "image",
+            "enabled": true,
+            "url": "assets/mobile/mobile-main-3.png",
+            "mode": "fill"
+          }
+        },
+        {
+          "id": "IPfxW",
+          "type": "ref",
+          "ref": "mb50W",
+          "name": "BottomNav",
+          "x": 0,
+          "y": 754
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ZeMs0",
+      "x": 16900,
+      "y": 26600,
+      "name": "모바일 · 소식 · 하단 네비",
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "$bg-page",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "e6fcj",
+          "x": 0,
+          "y": 0,
+          "name": "모바일 · 소식",
+          "theme": {
+            "mode": "light"
+          },
+          "clip": true,
+          "width": 390,
+          "height": 6498,
+          "fill": {
+            "type": "image",
+            "enabled": true,
+            "url": "assets/mobile/mobile-news-3.png",
+            "mode": "fill"
+          }
+        },
+        {
+          "id": "L12ZCh",
+          "type": "ref",
+          "ref": "mb50W",
+          "name": "BottomNav",
+          "x": 0,
+          "y": 754,
+          "descendants": {
+            "cuvke": {
+              "fill": "$text-secondary"
+            },
+            "rj2VD": {
+              "fill": "$text-secondary",
+              "fontWeight": "$font-weight-regular"
+            },
+            "l1LArT": {
+              "fill": "$nav-active"
+            },
+            "w9GF3": {
+              "fill": "$nav-active",
+              "fontWeight": "$font-weight-semibold"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "iRWxc",
+      "x": 17350,
+      "y": 26600,
+      "name": "모바일 · 게시판 · 하단 네비",
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "$bg-page",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "gt1DY",
+          "x": 0,
+          "y": 0,
+          "name": "모바일 · 게시판",
+          "theme": {
+            "mode": "light"
+          },
+          "clip": true,
+          "width": 390,
+          "height": 2464,
+          "fill": {
+            "type": "image",
+            "enabled": true,
+            "url": "assets/mobile/mobile-board-3.png",
+            "mode": "fill"
+          }
+        },
+        {
+          "id": "xnsw7",
+          "type": "ref",
+          "ref": "mb50W",
+          "name": "BottomNav",
+          "x": 0,
+          "y": 754,
+          "descendants": {
+            "cuvke": {
+              "fill": "$text-secondary"
+            },
+            "rj2VD": {
+              "fill": "$text-secondary",
+              "fontWeight": "$font-weight-regular"
+            },
+            "Z1GrTJ": {
+              "fill": "$text-secondary"
+            },
+            "CkhK2": {
+              "fill": "$text-secondary",
+              "fontWeight": "$font-weight-regular"
+            },
+            "yqPh6": {
+              "fill": "$nav-active"
+            },
+            "a5T1v": {
+              "fill": "$nav-active",
+              "fontWeight": "$font-weight-semibold"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "yKEN9",
+      "x": 17800,
+      "y": 26600,
+      "name": "모바일 메뉴 · 하단 네비 적용 · 라이트",
+      "clip": true,
+      "width": 390,
+      "height": 800,
+      "fill": "$bg-page",
+      "layout": "none",
+      "children": [
+        {
+          "id": "A2Qear",
+          "type": "ref",
+          "ref": "mb50W",
+          "name": "BottomNav",
+          "x": 0,
+          "y": 710
+        },
+        {
+          "type": "frame",
+          "id": "jvNRw",
+          "x": 0,
+          "y": 0,
+          "name": "모바일 메뉴 · 라이트",
+          "theme": {
+            "mode": "light"
+          },
+          "clip": true,
+          "width": 390,
+          "height": 800,
+          "fill": "#00000066",
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "waJeA",
+              "x": 0,
+              "y": 0,
+              "name": "Drawer",
+              "clip": true,
+              "width": 320,
+              "height": 800,
+              "fill": "$bg-page",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "PkBEd",
+                  "name": "DrTop",
+                  "width": "fill_container",
+                  "padding": [
+                    16,
+                    20
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "id": "hGamf",
+                      "type": "ref",
+                      "ref": "kgWTm",
+                      "name": "DrLogo",
+                      "width": 18,
+                      "height": 22
+                    },
+                    {
+                      "type": "icon",
+                      "id": "Im7TC",
+                      "name": "DrClose",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "x",
+                      "library": "lucide",
+                      "fill": "$text-tertiary"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "AGgh4",
+                  "name": "DrBody",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": [
+                    8,
+                    16,
+                    16,
+                    16
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "O7xxn",
+                      "name": "DrProfileCard",
+                      "width": "fill_container",
+                      "fill": "$primary-subtle",
+                      "cornerRadius": "$radius-xl",
+                      "gap": 12,
+                      "padding": 14,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "MN47Y",
+                          "name": "DrAvatar",
+                          "width": 44,
+                          "height": 44,
+                          "fill": "$purple-100",
+                          "cornerRadius": "$radius-full",
+                          "stroke": "$purple-300",
+                          "strokeWidth": 1.5,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "rPYqG",
+                              "name": "DrAvIcon",
+                              "width": 20,
+                              "height": 20,
+                              "icon": "user-round",
+                              "library": "lucide",
+                              "fill": "$purple-400"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "AqIKk",
+                          "name": "DrProfileCol",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 3,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "MI1Fm",
+                              "name": "DrNameRow",
+                              "gap": 6,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "h4GMi",
+                                  "name": "DrNick",
+                                  "fill": "$text-primary",
+                                  "content": "밤빔봄",
+                                  "fontFamily": "$font-family",
+                                  "fontSize": 14,
+                                  "fontWeight": "$font-weight-bold"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "b97gw",
+                                  "name": "DrDive",
+                                  "fill": "$purple-300",
+                                  "cornerRadius": "$radius-full",
+                                  "padding": [
+                                    2,
+                                    8
+                                  ],
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "n3DdNd",
+                                      "name": "DrDiveL",
+                                      "fill": "$white",
+                                      "content": "DIVE+",
+                                      "fontFamily": "$font-family",
+                                      "fontSize": 9,
+                                      "fontWeight": "$font-weight-bold"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "mKQKW",
+                              "name": "DrEmail",
+                              "fill": "$text-tertiary",
+                              "content": "staybomi@gmail.com",
+                              "fontFamily": "$font-family",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "icon",
+                          "id": "YkNmh",
+                          "name": "DrProfileChevron",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "chevron-right",
+                          "library": "lucide",
+                          "fill": "$text-tertiary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Xg2R9",
+                      "name": "DrTiles",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "W5S68l",
+                          "name": "DrTile-장바구니",
+                          "width": "fill_container",
+                          "cornerRadius": "$radius-lg",
+                          "stroke": "$border-default",
+                          "strokeWidth": 1,
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 14,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "NxrJY",
+                              "name": "DrTileTop",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "AQDjC",
+                                  "name": "DrTileIc",
+                                  "width": 18,
+                                  "height": 18,
+                                  "icon": "shopping-cart",
+                                  "library": "lucide",
+                                  "fill": "$purple-400"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "Jmtc3",
+                                  "name": "DrTileBadge",
+                                  "width": 18,
+                                  "height": 18,
+                                  "fill": "$purple-300",
+                                  "cornerRadius": "$radius-full",
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "XyueI",
+                                      "name": "DrTileBadgeL",
+                                      "fill": "$white",
+                                      "content": "2",
+                                      "fontFamily": "$font-family",
+                                      "fontSize": 10,
+                                      "fontWeight": "$font-weight-bold"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "Mt6vn",
+                              "name": "DrTileL",
+                              "fill": "$text-primary",
+                              "content": "장바구니",
+                              "fontFamily": "$font-family",
+                              "fontSize": 13,
+                              "fontWeight": "$font-weight-semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "mROHX",
+                          "name": "DrTile-멤버십",
+                          "width": "fill_container",
+                          "cornerRadius": "$radius-lg",
+                          "stroke": "$border-default",
+                          "strokeWidth": 1,
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 14,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "qgucW",
+                              "name": "DrTileTop",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "g8gQ9i",
+                                  "name": "DrTileIc",
+                                  "width": 18,
+                                  "height": 18,
+                                  "icon": "crown",
+                                  "library": "lucide",
+                                  "fill": "$purple-400"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "I4HhP",
+                                  "name": "DrTileNew",
+                                  "fill": "$accent-strong",
+                                  "content": "NEW",
+                                  "fontFamily": "$font-family",
+                                  "fontSize": 9,
+                                  "fontWeight": "$font-weight-bold"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "XkjGU",
+                              "name": "DrTileL",
+                              "fill": "$text-primary",
+                              "content": "멤버십",
+                              "fontFamily": "$font-family",
+                              "fontSize": 13,
+                              "fontWeight": "$font-weight-semibold"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "UxQHw",
+                  "layoutPosition": "absolute",
+                  "x": 0,
+                  "y": 716,
+                  "name": "DrFoot",
+                  "width": 320,
+                  "stroke": "$border-default",
+                  "strokeWidth": {
+                    "top": 1
+                  },
+                  "strokeAlignment": "inner",
+                  "layout": "vertical",
+                  "padding": [
+                    12,
+                    16,
+                    20,
+                    16
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "wDd7X",
+                      "name": "DrThemeRow",
+                      "width": "fill_container",
+                      "padding": [
+                        8,
+                        10
+                      ],
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "BP77m",
+                          "name": "DrThemeL",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "H44JfC",
+                              "name": "DrMoon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "moon",
+                              "library": "lucide",
+                              "fill": "$text-secondary"
+                            },
+                            {
+                              "type": "text",
+                              "id": "g8teM",
+                              "name": "DrThemeLb",
+                              "fill": "$text-primary",
+                              "content": "다크 모드",
+                              "fontFamily": "$font-family",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Myegy",
+                          "name": "DrToggle",
+                          "width": 36,
+                          "height": 20,
+                          "fill": "$gray-300",
+                          "cornerRadius": "$radius-full",
+                          "padding": 2,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "ellipse",
+                              "id": "n6IsC",
+                              "name": "DrKnob",
+                              "fill": "$white",
+                              "width": 16,
+                              "height": 16
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "FeFOq",
+                      "name": "DrLogoutRow",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "padding": [
+                        8,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "M0i3xA",
+                          "name": "DrLogoutIc",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "log-out",
+                          "library": "lucide",
+                          "fill": "$text-tertiary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "iH8yz",
+                          "name": "DrLogoutLb",
+                          "fill": "$text-secondary",
+                          "content": "로그아웃",
+                          "fontFamily": "$font-family",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "e5k7z",
+      "x": 18250,
+      "y": 26600,
+      "name": "모바일 메뉴 · 하단 네비 적용 · 다크",
+      "theme": {
+        "mode": "dark"
+      },
+      "clip": true,
+      "width": 390,
+      "height": 800,
+      "fill": "$bg-page",
+      "layout": "none",
+      "children": [
+        {
+          "id": "YXAjB",
+          "type": "ref",
+          "ref": "mb50W",
+          "name": "BottomNav",
+          "x": 0,
+          "y": 710
+        },
+        {
+          "type": "frame",
+          "id": "y7BDa",
+          "x": 0,
+          "y": 0,
+          "name": "모바일 메뉴 · 다크",
+          "theme": {
+            "mode": "dark"
+          },
+          "clip": true,
+          "width": 390,
+          "height": 800,
+          "fill": "#00000066",
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "sm0GB",
+              "x": 0,
+              "y": 0,
+              "name": "Drawer",
+              "clip": true,
+              "width": 320,
+              "height": 800,
+              "fill": "$bg-page",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "gvDay",
+                  "name": "DrTop",
+                  "width": "fill_container",
+                  "padding": [
+                    16,
+                    20
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "id": "XaPXR",
+                      "type": "ref",
+                      "ref": "kgWTm",
+                      "name": "DrLogo",
+                      "width": 18,
+                      "height": 22
+                    },
+                    {
+                      "type": "icon",
+                      "id": "n3vED",
+                      "name": "DrClose",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "x",
+                      "library": "lucide",
+                      "fill": "$text-tertiary"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "P8fqM6",
+                  "name": "DrBody",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": [
+                    8,
+                    16,
+                    16,
+                    16
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ARfvH",
+                      "name": "DrProfileCard",
+                      "width": "fill_container",
+                      "fill": "$primary-subtle",
+                      "cornerRadius": "$radius-xl",
+                      "gap": 12,
+                      "padding": 14,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "vdt6h",
+                          "name": "DrAvatar",
+                          "width": 44,
+                          "height": 44,
+                          "fill": "$purple-100",
+                          "cornerRadius": "$radius-full",
+                          "stroke": "$purple-300",
+                          "strokeWidth": 1.5,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "pVtMF",
+                              "name": "DrAvIcon",
+                              "width": 20,
+                              "height": 20,
+                              "icon": "user-round",
+                              "library": "lucide",
+                              "fill": "$purple-400"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ThBur",
+                          "name": "DrProfileCol",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 3,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "d7KWV",
+                              "name": "DrNameRow",
+                              "gap": 6,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "kVQKh",
+                                  "name": "DrNick",
+                                  "fill": "$text-primary",
+                                  "content": "밤빔봄",
+                                  "fontFamily": "$font-family",
+                                  "fontSize": 14,
+                                  "fontWeight": "$font-weight-bold"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "YrSeC",
+                                  "name": "DrDive",
+                                  "fill": "$purple-300",
+                                  "cornerRadius": "$radius-full",
+                                  "padding": [
+                                    2,
+                                    8
+                                  ],
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "jn5Wz",
+                                      "name": "DrDiveL",
+                                      "fill": "$white",
+                                      "content": "DIVE+",
+                                      "fontFamily": "$font-family",
+                                      "fontSize": 9,
+                                      "fontWeight": "$font-weight-bold"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "rGKhl",
+                              "name": "DrEmail",
+                              "fill": "$text-tertiary",
+                              "content": "staybomi@gmail.com",
+                              "fontFamily": "$font-family",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "icon",
+                          "id": "zAbRj",
+                          "name": "DrProfileChevron",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "chevron-right",
+                          "library": "lucide",
+                          "fill": "$text-tertiary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "AuVJj",
+                      "name": "DrTiles",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "D6Iw2j",
+                          "name": "DrTile-장바구니",
+                          "width": "fill_container",
+                          "cornerRadius": "$radius-lg",
+                          "stroke": "$border-default",
+                          "strokeWidth": 1,
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 14,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "PvaqQ",
+                              "name": "DrTileTop",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "fMv3r",
+                                  "name": "DrTileIc",
+                                  "width": 18,
+                                  "height": 18,
+                                  "icon": "shopping-cart",
+                                  "library": "lucide",
+                                  "fill": "$purple-400"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "wtsa6",
+                                  "name": "DrTileBadge",
+                                  "width": 18,
+                                  "height": 18,
+                                  "fill": "$purple-300",
+                                  "cornerRadius": "$radius-full",
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "I5MsBV",
+                                      "name": "DrTileBadgeL",
+                                      "fill": "$white",
+                                      "content": "2",
+                                      "fontFamily": "$font-family",
+                                      "fontSize": 10,
+                                      "fontWeight": "$font-weight-bold"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "GsU4Q",
+                              "name": "DrTileL",
+                              "fill": "$text-primary",
+                              "content": "장바구니",
+                              "fontFamily": "$font-family",
+                              "fontSize": 13,
+                              "fontWeight": "$font-weight-semibold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "xxfvf",
+                          "name": "DrTile-멤버십",
+                          "width": "fill_container",
+                          "cornerRadius": "$radius-lg",
+                          "stroke": "$border-default",
+                          "strokeWidth": 1,
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 14,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "rltbC",
+                              "name": "DrTileTop",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "eOmK2",
+                                  "name": "DrTileIc",
+                                  "width": 18,
+                                  "height": 18,
+                                  "icon": "crown",
+                                  "library": "lucide",
+                                  "fill": "$purple-400"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "voQR7",
+                                  "name": "DrTileNew",
+                                  "fill": "$accent-strong",
+                                  "content": "NEW",
+                                  "fontFamily": "$font-family",
+                                  "fontSize": 9,
+                                  "fontWeight": "$font-weight-bold"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "A2RUV",
+                              "name": "DrTileL",
+                              "fill": "$text-primary",
+                              "content": "멤버십",
+                              "fontFamily": "$font-family",
+                              "fontSize": 13,
+                              "fontWeight": "$font-weight-semibold"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "DEEwd",
+                  "layoutPosition": "absolute",
+                  "x": 0,
+                  "y": 716,
+                  "name": "DrFoot",
+                  "width": 320,
+                  "stroke": "$border-default",
+                  "strokeWidth": {
+                    "top": 1
+                  },
+                  "strokeAlignment": "inner",
+                  "layout": "vertical",
+                  "padding": [
+                    12,
+                    16,
+                    20,
+                    16
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n6HtkV",
+                      "name": "DrThemeRow",
+                      "width": "fill_container",
+                      "padding": [
+                        8,
+                        10
+                      ],
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "VtNsc",
+                          "name": "DrThemeL",
+                          "gap": 10,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "f1FSN",
+                              "name": "DrMoon",
+                              "width": 16,
+                              "height": 16,
+                              "icon": "moon",
+                              "library": "lucide",
+                              "fill": "$text-secondary"
+                            },
+                            {
+                              "type": "text",
+                              "id": "EbomS",
+                              "name": "DrThemeLb",
+                              "fill": "$text-primary",
+                              "content": "다크 모드",
+                              "fontFamily": "$font-family",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "RlMuq",
+                          "name": "DrToggle",
+                          "width": 36,
+                          "height": 20,
+                          "fill": "$gray-300",
+                          "cornerRadius": "$radius-full",
+                          "padding": 2,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "ellipse",
+                              "id": "sMXjx",
+                              "name": "DrKnob",
+                              "fill": "$white",
+                              "width": 16,
+                              "height": 16
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "hKeIZ",
+                      "name": "DrLogoutRow",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "padding": [
+                        8,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "l0ptj",
+                          "name": "DrLogoutIc",
+                          "width": 16,
+                          "height": 16,
+                          "icon": "log-out",
+                          "library": "lucide",
+                          "fill": "$text-tertiary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "jowYn",
+                          "name": "DrLogoutLb",
+                          "fill": "$text-secondary",
+                          "content": "로그아웃",
+                          "fontFamily": "$font-family",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Aj0jC",
+      "x": 16000,
+      "y": 26720,
+      "name": "BottomNav · 다크",
+      "theme": {
+        "mode": "dark"
+      },
+      "width": 390,
+      "fill": "$bg-page",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "g6ONz",
+          "type": "ref",
+          "ref": "mb50W",
+          "name": "BottomNav"
+        }
+      ]
+    },
+    {
+      "type": "note",
+      "id": "MJxCk",
+      "x": 16000,
+      "y": 26296,
+      "name": "하단 네비 시안 노트",
+      "width": 1330,
+      "height": 219,
+      "content": "하단 네비게이션 시안 (모바일, lg 미만) — 햄버거 GNB → 앱형 하단 탭바 전환\n· 탭 5개: 홈 / 소식 / 음악 / 굿즈샵 / 자유게시판 (GNB_ARRAY + 홈). 아이콘 lucide house·newspaper·music·shopping-bag·message-square 24px + 라벨 12px(font-size-100)\n· 높이 56 + iOS safe-area 34 (env(safe-area-inset-bottom)). 배경 bg-surface, 상단 1px border-default, fixed bottom-0 z-50, lg:hidden\n· 활성: nav-active(라이트 purple-500 / 다크 purple-300) + semibold, 비활성 text-secondary. 활성 판정 useRoutePath() startsWith (홈은 exact)\n· 드로어(햄버거)는 유지하되 '메뉴' GNB 섹션 제거 → 프로필 · 장바구니 · 멤버십 · 테마 · 로그아웃만\n· 본문 하단 패딩 90px(lg 미만), AlbumPlayerBar · GoTopButton 은 탭바 위로 올림"
     }
   ],
   "themes": {
@@ -132108,6 +133443,23 @@
         },
         {
           "value": "#38201A",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "nav-active": {
+      "type": "color",
+      "value": [
+        {
+          "value": "$purple-500",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "$purple-300",
           "theme": {
             "mode": "dark"
           }
