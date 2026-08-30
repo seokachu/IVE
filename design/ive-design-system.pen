@@ -131636,184 +131636,318 @@
       "name": "BottomNav",
       "reusable": true,
       "width": 390,
-      "fill": "$bg-surface",
-      "stroke": "$border-default",
-      "strokeWidth": {
-        "top": 1
-      },
+      "fill": "#00000000",
+      "stroke": "#00000000",
       "strokeAlignment": "inner",
       "layout": "vertical",
+      "gap": 8,
       "children": [
         {
           "type": "frame",
-          "id": "n4xpkj",
-          "name": "TabRow",
+          "id": "r48CAf",
+          "name": "BarWrap",
           "width": "fill_container",
-          "height": 56,
-          "alignItems": "center",
+          "padding": [
+            0,
+            16
+          ],
           "children": [
             {
               "type": "frame",
-              "id": "KRBxD",
-              "name": "Tab-홈",
+              "id": "lLRqq",
+              "name": "GlassBar",
               "width": "fill_container",
-              "height": "fill_container",
-              "layout": "vertical",
-              "gap": "$space-4",
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
+              "height": 64,
+              "fill": "$glass-bg",
+              "cornerRadius": "$radius-full",
+              "stroke": "$glass-stroke",
+              "strokeWidth": 1,
+              "strokeAlignment": "inner",
+              "effect": [
                 {
-                  "type": "icon",
-                  "id": "cuvke",
-                  "name": "TabIcon-홈",
-                  "width": 24,
-                  "height": 24,
-                  "icon": "house",
-                  "library": "lucide",
-                  "fill": "$nav-active"
+                  "type": "background_blur",
+                  "radius": 24
                 },
                 {
-                  "type": "text",
-                  "id": "rj2VD",
-                  "name": "TabLabel-홈",
-                  "fill": "$nav-active",
-                  "content": "홈",
-                  "fontFamily": "$font-family",
-                  "fontSize": "$font-size-100",
-                  "fontWeight": "$font-weight-semibold"
+                  "type": "shadow",
+                  "shadowType": "outer",
+                  "color": "#0000001F",
+                  "offset": {
+                    "x": 0,
+                    "y": 8
+                  },
+                  "blur": 24
+                },
+                {
+                  "type": "shadow",
+                  "shadowType": "outer",
+                  "color": "#FFFFFF80",
+                  "offset": {
+                    "x": 0,
+                    "y": 1
+                  }
                 }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "Ei4p3",
-              "name": "Tab-소식",
-              "width": "fill_container",
-              "height": "fill_container",
-              "layout": "vertical",
-              "gap": "$space-4",
-              "justifyContent": "center",
+              ],
+              "padding": [
+                0,
+                4
+              ],
               "alignItems": "center",
               "children": [
                 {
-                  "type": "icon",
-                  "id": "l1LArT",
-                  "name": "TabIcon-소식",
-                  "width": 24,
-                  "height": 24,
-                  "icon": "newspaper",
-                  "library": "lucide",
-                  "fill": "$text-secondary"
+                  "type": "frame",
+                  "id": "KRBxD",
+                  "name": "Tab-홈",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "layout": "vertical",
+                  "padding": [
+                    5,
+                    4
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "X9wGPY",
+                      "name": "TabInner-홈",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "$nav-active-bg",
+                      "cornerRadius": "$radius-full",
+                      "layout": "vertical",
+                      "gap": 2,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "cuvke",
+                          "name": "TabIcon-홈",
+                          "width": 24,
+                          "height": 24,
+                          "icon": "house",
+                          "library": "lucide",
+                          "fill": "$nav-active"
+                        },
+                        {
+                          "type": "text",
+                          "id": "rj2VD",
+                          "name": "TabLabel-홈",
+                          "fill": "$nav-active",
+                          "content": "홈",
+                          "fontFamily": "$font-family",
+                          "fontSize": 11,
+                          "fontWeight": "$font-weight-semibold"
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
-                  "type": "text",
-                  "id": "w9GF3",
-                  "name": "TabLabel-소식",
-                  "fill": "$text-secondary",
-                  "content": "소식",
-                  "fontFamily": "$font-family",
-                  "fontSize": "$font-size-100",
-                  "fontWeight": "$font-weight-regular"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "cvjhq",
-              "name": "Tab-음악",
-              "width": "fill_container",
-              "height": "fill_container",
-              "layout": "vertical",
-              "gap": "$space-4",
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "icon",
-                  "id": "UIkUu",
-                  "name": "TabIcon-음악",
-                  "width": 24,
-                  "height": 24,
-                  "icon": "music",
-                  "library": "lucide",
-                  "fill": "$text-secondary"
+                  "type": "frame",
+                  "id": "Ei4p3",
+                  "name": "Tab-소식",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "layout": "vertical",
+                  "padding": [
+                    5,
+                    4
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "SMt3F",
+                      "name": "TabInner-소식",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "#00000000",
+                      "cornerRadius": "$radius-full",
+                      "layout": "vertical",
+                      "gap": 2,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "l1LArT",
+                          "name": "TabIcon-소식",
+                          "width": 24,
+                          "height": 24,
+                          "icon": "newspaper",
+                          "library": "lucide",
+                          "fill": "$text-secondary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "w9GF3",
+                          "name": "TabLabel-소식",
+                          "fill": "$text-secondary",
+                          "content": "소식",
+                          "fontFamily": "$font-family",
+                          "fontSize": 11,
+                          "fontWeight": "$font-weight-regular"
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
-                  "type": "text",
-                  "id": "M5TRGE",
-                  "name": "TabLabel-음악",
-                  "fill": "$text-secondary",
-                  "content": "음악",
-                  "fontFamily": "$font-family",
-                  "fontSize": "$font-size-100",
-                  "fontWeight": "$font-weight-regular"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "YWPXG",
-              "name": "Tab-굿즈샵",
-              "width": "fill_container",
-              "height": "fill_container",
-              "layout": "vertical",
-              "gap": "$space-4",
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "icon",
-                  "id": "Z1GrTJ",
-                  "name": "TabIcon-굿즈샵",
-                  "width": 24,
-                  "height": 24,
-                  "icon": "shopping-bag",
-                  "library": "lucide",
-                  "fill": "$text-secondary"
+                  "type": "frame",
+                  "id": "cvjhq",
+                  "name": "Tab-음악",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "layout": "vertical",
+                  "padding": [
+                    5,
+                    4
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ywnb1",
+                      "name": "TabInner-음악",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "#00000000",
+                      "cornerRadius": "$radius-full",
+                      "layout": "vertical",
+                      "gap": 2,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "UIkUu",
+                          "name": "TabIcon-음악",
+                          "width": 24,
+                          "height": 24,
+                          "icon": "music",
+                          "library": "lucide",
+                          "fill": "$text-secondary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "M5TRGE",
+                          "name": "TabLabel-음악",
+                          "fill": "$text-secondary",
+                          "content": "음악",
+                          "fontFamily": "$font-family",
+                          "fontSize": 11,
+                          "fontWeight": "$font-weight-regular"
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
-                  "type": "text",
-                  "id": "CkhK2",
-                  "name": "TabLabel-굿즈샵",
-                  "fill": "$text-secondary",
-                  "content": "굿즈샵",
-                  "fontFamily": "$font-family",
-                  "fontSize": "$font-size-100",
-                  "fontWeight": "$font-weight-regular"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "N217Up",
-              "name": "Tab-자유게시판",
-              "width": "fill_container",
-              "height": "fill_container",
-              "layout": "vertical",
-              "gap": "$space-4",
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "icon",
-                  "id": "yqPh6",
-                  "name": "TabIcon-자유게시판",
-                  "width": 24,
-                  "height": 24,
-                  "icon": "message-square",
-                  "library": "lucide",
-                  "fill": "$text-secondary"
+                  "type": "frame",
+                  "id": "YWPXG",
+                  "name": "Tab-굿즈샵",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "layout": "vertical",
+                  "padding": [
+                    5,
+                    4
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "dGT0b",
+                      "name": "TabInner-굿즈샵",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "#00000000",
+                      "cornerRadius": "$radius-full",
+                      "layout": "vertical",
+                      "gap": 2,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "Z1GrTJ",
+                          "name": "TabIcon-굿즈샵",
+                          "width": 24,
+                          "height": 24,
+                          "icon": "shopping-bag",
+                          "library": "lucide",
+                          "fill": "$text-secondary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "CkhK2",
+                          "name": "TabLabel-굿즈샵",
+                          "fill": "$text-secondary",
+                          "content": "굿즈샵",
+                          "fontFamily": "$font-family",
+                          "fontSize": 11,
+                          "fontWeight": "$font-weight-regular"
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
-                  "type": "text",
-                  "id": "a5T1v",
-                  "name": "TabLabel-자유게시판",
-                  "fill": "$text-secondary",
-                  "content": "자유게시판",
-                  "fontFamily": "$font-family",
-                  "fontSize": "$font-size-100",
-                  "fontWeight": "$font-weight-regular"
+                  "type": "frame",
+                  "id": "N217Up",
+                  "name": "Tab-자유게시판",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "layout": "vertical",
+                  "padding": [
+                    5,
+                    4
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "qbLAO",
+                      "name": "TabInner-자유게시판",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "#00000000",
+                      "cornerRadius": "$radius-full",
+                      "layout": "vertical",
+                      "gap": 2,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "yqPh6",
+                          "name": "TabIcon-자유게시판",
+                          "width": 24,
+                          "height": 24,
+                          "icon": "message-square",
+                          "library": "lucide",
+                          "fill": "$text-secondary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "a5T1v",
+                          "name": "TabLabel-자유게시판",
+                          "fill": "$text-secondary",
+                          "content": "자유게시판",
+                          "fontFamily": "$font-family",
+                          "fontSize": 11,
+                          "fontWeight": "$font-weight-regular"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
@@ -131878,7 +132012,7 @@
           "ref": "mb50W",
           "name": "BottomNav",
           "x": 0,
-          "y": 754
+          "y": 738
         }
       ]
     },
@@ -131919,14 +132053,24 @@
           "ref": "mb50W",
           "name": "BottomNav",
           "x": 0,
-          "y": 754,
+          "y": 738,
+          "flipX": false,
+          "flipY": false,
+          "width": 390,
+          "height": "fit_content",
           "descendants": {
+            "X9wGPY": {
+              "fill": "#00000000"
+            },
             "cuvke": {
               "fill": "$text-secondary"
             },
             "rj2VD": {
               "fill": "$text-secondary",
               "fontWeight": "$font-weight-regular"
+            },
+            "SMt3F": {
+              "fill": "$nav-active-bg"
             },
             "l1LArT": {
               "fill": "$nav-active"
@@ -131976,8 +132120,11 @@
           "ref": "mb50W",
           "name": "BottomNav",
           "x": 0,
-          "y": 754,
+          "y": 738,
           "descendants": {
+            "X9wGPY": {
+              "fill": "#00000000"
+            },
             "cuvke": {
               "fill": "$text-secondary"
             },
@@ -131985,12 +132132,8 @@
               "fill": "$text-secondary",
               "fontWeight": "$font-weight-regular"
             },
-            "Z1GrTJ": {
-              "fill": "$text-secondary"
-            },
-            "CkhK2": {
-              "fill": "$text-secondary",
-              "fontWeight": "$font-weight-regular"
+            "qbLAO": {
+              "fill": "$nav-active-bg"
             },
             "yqPh6": {
               "fill": "$nav-active"
@@ -132021,7 +132164,7 @@
           "ref": "mb50W",
           "name": "BottomNav",
           "x": 0,
-          "y": 710
+          "y": 694
         },
         {
           "type": "frame",
@@ -132487,7 +132630,7 @@
           "ref": "mb50W",
           "name": "BottomNav",
           "x": 0,
-          "y": 710
+          "y": 694
         },
         {
           "type": "frame",
@@ -132961,7 +133104,7 @@
       "name": "하단 네비 시안 노트",
       "width": 1330,
       "height": 219,
-      "content": "하단 네비게이션 시안 (모바일, lg 미만) — 햄버거 GNB → 앱형 하단 탭바 전환\n· 탭 5개: 홈 / 소식 / 음악 / 굿즈샵 / 자유게시판 (GNB_ARRAY + 홈). 아이콘 lucide house·newspaper·music·shopping-bag·message-square 24px + 라벨 12px(font-size-100)\n· 높이 56 + iOS safe-area 34 (env(safe-area-inset-bottom)). 배경 bg-surface, 상단 1px border-default, fixed bottom-0 z-50, lg:hidden\n· 활성: nav-active(라이트 purple-500 / 다크 purple-300) + semibold, 비활성 text-secondary. 활성 판정 useRoutePath() startsWith (홈은 exact)\n· 드로어(햄버거)는 유지하되 '메뉴' GNB 섹션 제거 → 프로필 · 장바구니 · 멤버십 · 테마 · 로그아웃만\n· 본문 하단 패딩 90px(lg 미만), AlbumPlayerBar · GoTopButton 은 탭바 위로 올림"
+      "content": "하단 네비게이션 시안 v2 — iOS 리퀴드 글라스 플로팅 탭바 (모바일, lg 미만) · 2026-08-31\n· 캡슐: 좌우 16px 인셋 · 높이 64 · radius full · 배경 glass-bg(라이트 white 72% / 다크 #1E1E21 78%) + 배경 블러 24 · 보더 1px glass-stroke(white 65% / white 18%) · 그림자 0 8 24 black 12% + 상단 1px 화이트 인너 하이라이트\n· 탭 5개(홈 / 소식 / 음악 / 굿즈샵 / 자유게시판) 균등 분할, 아이콘 lucide 24 + 라벨 11px. 활성 탭은 아이콘·라벨 nav-active(purple-500 / 다크 purple-300) + semibold, 뒤에 nav-active-bg(purple-300 26%) 필(radius full, padding 6)\n· 캡슐 아래 8px 띄우고 iOS 홈 인디케이터 safe-area 34 → 컴포넌트 총 높이 106. 코드: fixed bottom-0, safe-area 패딩은 env(safe-area-inset-bottom), 배경 backdrop-blur-xl + bg-white/70(다크 bg-gray-… /80) + border-white/60 + shadow-lg\n· 드로어(햄버거)는 유지하되 GNB 섹션 제거 → 프로필 · 장바구니 · 멤버십 · 테마 · 로그아웃만. 본문 하단 패딩 = 탭바 높이, AlbumPlayerBar · GoTopButton 은 탭바 위로"
     }
   ],
   "themes": {
@@ -133460,6 +133603,57 @@
         },
         {
           "value": "$purple-300",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "glass-bg": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#FFFFFFB8",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#1E1E21C7",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "glass-stroke": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#FFFFFFA6",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#FFFFFF2E",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "nav-active-bg": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#DB97E942",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#DB97E938",
           "theme": {
             "mode": "dark"
           }
