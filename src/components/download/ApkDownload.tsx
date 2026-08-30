@@ -47,8 +47,10 @@ const ApkDownload = () => {
     } else if (/kakaotalk/i.test(ua)) {
       next = "inapp";
       go = "kakaotalk://web/openExternal?url=" + encodeURIComponent(window.location.href);
-    } else if (/naver|instagram|fbav|fban|line\//i.test(ua) || /;\s?wv\)/i.test(ua)) {
-      //"; wv)"는 안드로이드 WebView 공통 마커 — 카메라 QR 스캐너 등 이름 모를 인앱 브라우저까지 잡는다
+    } else if (/naver|instagram|fbav|fban|line\//i.test(ua)) {
+      //한때 "; wv)"(안드로이드 WebView 공통 마커)까지 인앱으로 잡아 intent:// 로 넘겼는데,
+      //이름 모를 WebView(카메라 QR 스캐너 등)는 intent 스킴을 처리하지 않아 "여는 중…"에서 멈췄다.
+      //그냥 내려받기를 시작하면 대부분 WebView 도 다운로드를 시스템에 넘겨준다 (vidding-re · energy-meal 과 동일)
       next = "inapp";
       go = `intent://${window.location.host}${window.location.pathname}#Intent;scheme=https;end`;
     }
