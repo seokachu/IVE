@@ -25,7 +25,8 @@
     "test:e2e:debug": "playwright test --debug",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "storybook:deploy": "pnpm build-storybook && npx vercel@latest deploy --prod --yes --cwd storybook-static --project ive-storybook --scope seoyoungs-projects-aabd6a70"
+    "storybook:deploy": "pnpm build-storybook && npx vercel@latest deploy --prod --yes --cwd storybook-static --project ive-storybook --scope seoyoungs-projects-aabd6a70",
+    "capture:mobile": "node scripts/capture-mobile.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

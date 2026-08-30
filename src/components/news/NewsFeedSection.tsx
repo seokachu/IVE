@@ -66,7 +66,7 @@ const NewsFeedSection = ({ type }: NewsFeedSectionProps) => {
           ))}
         </ul>
       )}
-      <div className="text-center sticky bottom-10">
+      <div className="text-center sticky bottom-tabbar-10">
         {filteredItems.length > visibleCount && (
           <Button
             onClick={handleLoadMore}

@@ -48,7 +48,7 @@ const AlbumPlayerBar = () => {
   //미니 디스크 — 회전하는 커버, 호버 시 펼치기 안내 (GoTop 버튼 위에 배치)
   if (isMinimized) {
     return (
-      <div className="fixed bottom-20 right-6 z-[60] flex items-center gap-2 group">
+      <div className="fixed bottom-20 mb-tabbar right-6 z-[60] flex items-center gap-2 group">
         {/* 호버·포커스·탭 직후에 왼쪽으로 슬라이드되는 보조 컨트롤 — 펼치기·종료 */}
         <div
           className={`flex items-center gap-1.5 transition-all duration-200 ${
@@ -101,7 +101,7 @@ const AlbumPlayerBar = () => {
 
   return (
     //디자인 시스템 PlayerBar — 하단 고정 풀폭 바 대신 플로팅 카드 형태
-    <div className="fixed bottom-3 lg:bottom-6 left-1/2 -translate-x-1/2 z-[60] w-[calc(100%-1.5rem)] max-w-3xl rounded-xl bg-black/85 backdrop-blur-md text-white border border-white/10 shadow-2xl">
+    <div className="fixed bottom-3 mb-tabbar lg:bottom-6 left-1/2 -translate-x-1/2 z-[60] w-[calc(100%-1.5rem)] max-w-3xl rounded-xl bg-black/85 backdrop-blur-md text-white border border-white/10 shadow-2xl">
       <div className="flex items-center gap-4 px-4 py-3 lg:px-6">
         <div className="flex items-center gap-3 min-w-0 flex-1 lg:w-52 lg:flex-none">
           <div className="relative w-11 h-11 shrink-0 rounded overflow-hidden bg-white/10">

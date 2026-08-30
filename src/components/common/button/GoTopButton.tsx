@@ -35,7 +35,7 @@ const GoTopButton = () => {
       size="auto"
       onClick={onClickToTop}
       aria-label="최상단으로 이동"
-      className="fixed bottom-6 right-6 z-50 flex w-11 h-11 items-center justify-center rounded-full bg-purple text-white shadow-[0_4px_12px_rgba(0,0,0,0.2)] transition-colors hover:bg-purple-400"
+      className="fixed bottom-6 mb-tabbar right-6 z-50 flex w-11 h-11 items-center justify-center rounded-full bg-purple text-white shadow-[0_4px_12px_rgba(0,0,0,0.2)] transition-colors hover:bg-purple-400"
     >
       <ChevronUp className="w-5 h-5" />
     </Button>

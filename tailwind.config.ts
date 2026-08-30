@@ -96,6 +96,12 @@ const config: Config = {
           "5": "hsl(var(--chart-5))",
         },
       },
+      // 모바일 하단 탭바 오프셋 토큰 — 임의값(bottom-[calc(...)]) 대신 사용. --tabbar-h는 globals.css에서 lg 이상 0
+      spacing: {
+        safe: "env(safe-area-inset-bottom, 0px)",
+        tabbar: "var(--tabbar-h)",
+        "tabbar-10": "calc(var(--tabbar-h) + 2.5rem)",
+      },
       // 컨테이너 폭 토큰 — 임의값(max-w-[1320px] 등) 대신 사용
       maxWidth: {
         container: "1320px",

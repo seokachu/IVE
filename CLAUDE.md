@@ -56,3 +56,4 @@ UI 작업 시 아래 토큰·규칙이 단일 기준(SSOT)이다. 상세 근거�
 - 로딩은 `common/Spinner`만 (react-spinners 금지)
 - 진입 애니메이션은 tailwindcss-animate(`animate-in fade-in …`) — framer-motion 금지
 - 다크모드는 next-themes class 전략, 브랜드 원색(purple 300+/orange 300+/status)은 다크에서도 동일
+- 모바일(lg 미만) GNB는 `layout/BottomNav` 하단 탭바 — 드로어(HeaderAside)엔 GNB 없음. 하단 고정 요소는 `mb-tabbar`(sticky는 `bottom-tabbar-10`)로 탭바 위에, 본문 여백은 body `pb-tabbar` — `--tabbar-h`가 lg 이상 0이라 `lg:` 변형 불필요
