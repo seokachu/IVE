@@ -19,6 +19,7 @@ export interface AlbumTrackListProps {
 //유튜브 IFrame Player API — 히어로 배경 영상 제어에 필요한 부분만 선언 (@types/youtube 미설치)
 export interface YouTubePlayer {
   playVideo: () => void;
+  getPlayerState: () => number;
   unloadModule: (module: string) => void;
   destroy: () => void;
 }
@@ -28,8 +29,9 @@ interface YouTubePlayerEvent {
   data: number;
 }
 
+//기존 <iframe>에 붙일 때는 videoId·playerVars 없이 events만 넘긴다
 interface YouTubePlayerOptions {
-  videoId: string;
+  videoId?: string;
   host?: string;
   playerVars?: Record<string, string | number>;
   events?: {

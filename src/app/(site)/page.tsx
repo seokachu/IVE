@@ -13,6 +13,7 @@ import NewsPreviewSection from "@/components/main/NewsPreviewSection";
 import HotBoardSection from "@/components/main/HotBoardSection";
 import ShopSection from "@/components/main/ShopSection";
 import GoTopButton from "@/components/common/button/GoTopButton";
+import { getSiteOrigin } from "@/utils/siteOrigin";
 
 export const revalidate = 1800;
 
@@ -38,7 +39,7 @@ export default async function Home() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <main>
-        <VisualSection videoId={pickHeroVideoId(feed)} />
+        <VisualSection videoId={pickHeroVideoId(feed)} siteOrigin={getSiteOrigin()} />
         <MarqueeStrip />
         <AlbumSection />
         <div className="relative z-10 bg-background">
