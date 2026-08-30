@@ -35,6 +35,12 @@ const config: Config = {
         warning: "var(--warning)",
         info: "var(--info)",
         kakao: "var(--kakao)",
+        // 모바일 하단 탭바 글라스 — 반투명이라 gray 램프 대신 전용 변수(globals.css, 다크 자동 플립)
+        glass: {
+          DEFAULT: "var(--glass-bg)",
+          stroke: "var(--glass-stroke)",
+          accent: "var(--glass-accent)",
+        },
         // Neutral 램프 — 기본 Tailwind gray를 디자인 시스템 값으로 재정의 (docs/design-system.md §1-1)
         // 불투명도 변형(bg-gray-500/90 등) 지원을 위해 hex 리터럴 사용
         // 다크모드에서 값이 플립되도록 CSS 변수 참조 (불투명도 변형이 필요하면 오버레이는 black/white 사용)

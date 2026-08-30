@@ -110,6 +110,11 @@ export const Semantic: Story = {
         <Swatch className="bg-red" name="red (error)" token="#e72424" />
         <Swatch className="bg-kakao" name="kakao" token="#fee500" />
       </Group>
+      <Group title="Glass (모바일 하단 탭바)" description="반투명이라 gray 램프 대신 전용 변수 — backdrop-blur-xl 과 함께 쓴다 (layout/BottomNav)">
+        <Swatch className="bg-glass" name="glass" token="--glass-bg · white 72% / #1E1E21 78%" dark />
+        <Swatch className="bg-glass-stroke" name="glass-stroke" token="--glass-stroke · white 65% / 18%" dark />
+        <Swatch className="bg-glass-accent" name="glass-accent" token="--glass-accent · purple-300 26% / 22%" dark />
+      </Group>
     </div>
   ),
 };

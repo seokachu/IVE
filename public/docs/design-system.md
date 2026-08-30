@@ -180,6 +180,14 @@ Pencil에 재사용 컴포넌트로 등록된 목록과 대응 코드:
 
 ---
 
+### 4-1. 모바일 하단 탭바 — iOS 글라스 (2026-08-31)
+
+- lg(1024px) 미만은 데스크톱 GNB 대신 `components/layout/BottomNav`가 화면 하단에 뜬다 — 좌우 16px 인셋의 캡슐(64px, `rounded-full`), `bg-glass` + `backdrop-blur-xl` + `border-glass-stroke` + `shadow-lg`. 드로어(HeaderAside)에는 GNB가 없다.
+- 글라스 전용 변수(`globals.css`, 다크 자동 플립): `--glass-bg` white 72% / #1E1E21 78%, `--glass-stroke` white 65% / 18%, `--glass-accent` purple-300 26% / 22% → Tailwind `glass` · `glass-stroke` · `glass-accent`. gray 램프는 CSS 변수라 `/70` 불투명도 변형이 안 되기 때문에 따로 둔다. `.pen` 변수 `glass-bg` · `glass-stroke` · `nav-active-bg`와 같은 값.
+- 활성 탭은 `bg-glass-accent` 필(탭 셀 기준 고정 크기) + `text-purple-500`(다크 `purple-300`) + `font-semibold`, 비활성은 `text-gray-500`. 아이콘 24 + 라벨 11px.
+- 탭바 오프셋은 `--tabbar-h`(캡슐 64 + 아래 8 + safe-area, lg 이상 0) 하나로 관리한다 — body `pb-tabbar`, 하단 고정 요소 `mb-tabbar`, sticky 요소 `bottom-tabbar-10`. `bottom-[calc(...)]` 같은 임의값 금지, `lg:` 변형 불필요.
+- 시안: `.pen` `BottomNav` 컴포넌트(라이트/다크) · "모바일 · 메인/소식/게시판 · 하단 네비" · "모바일 메뉴 · 하단 네비 적용".
+
 ## 5. 코드 적용 — **2026-07-29 전면 적용 완료**
 
 > 아래 스니펫 대로 적용됐고, 추가로:

@@ -124,12 +124,12 @@
       1440px 데스크톱을 기준선으로 삼는다. 라이트 · 다크 두 모드를 하나의 시맨틱 토큰 세트로 운용한다.
     </p>
     <p class="desc">
-      <b>화면 시안 65종</b>을 서비스 흐름 순으로, 이어서 <b>디자인 시스템 6개 문서</b>를 정리했다. 이미지를 누르면 원본 크기로 열린다.
+      <b>화면 시안 72종</b>을 서비스 흐름 순으로, 이어서 <b>디자인 시스템 6개 문서</b>를 정리했다. 이미지를 누르면 원본 크기로 열린다.
     </p>
     <div class="meta-line">
       디자인 파일 <code>design/ive-design-system.pen</code> · 토큰 문서 <code>public/docs/design-system.md</code>
       · 기능 명세 <a href="./spec-v2.html#design">기능명세서 v2 — 12. 디자인 시스템 (DS-01~06)</a>
-      · 컴포넌트 카탈로그 <a href="https://ive-storybook.vercel.app" target="_blank" rel="noreferrer">스토리북 ↗</a> · 2026-08-23 기준
+      · 컴포넌트 카탈로그 <a href="https://ive-storybook.vercel.app" target="_blank" rel="noreferrer">스토리북 ↗</a> · 2026-08-31 기준
     </div>
   </header>
 
@@ -144,6 +144,7 @@
     <a href="#mypage">마이페이지</a>
     <a href="#membership">DIVE 멤버십</a>
     <a href="#common">공통 · 시스템</a>
+    <a href="#mobile">모바일 · 하단 네비</a>
     <a href="#system">디자인 시스템</a>
   </nav>
 
@@ -622,6 +623,42 @@
     </div>
   </section>
 
+  <!-- ── 모바일 · 하단 네비 ── -->
+  <section id="mobile">
+    <h2 class="sec">모바일 · 하단 네비 <span class="count">7</span></h2>
+    <p class="lead">lg(1024px) 미만에서 데스크톱 GNB · 드로어 GNB를 대신하는 iOS 글라스 스타일의 플로팅 탭바(홈 · 소식 · 음악 · 굿즈샵 · 자유게시판). 화면 시안은 390px 실화면 캡처(<code>pnpm capture:mobile</code>) 위에 <code>BottomNav</code> 컴포넌트를 얹은 것. 동작 명세는 <a href="./spec-v2.html#common">기능명세서 v2 — 2-2 (COM-22)</a> · <a href="./spec-v2.html#mobile">14장 (MOB-09)</a> 참고.</p>
+    <div class="flow">
+      <figure>
+        <a class="shot" href="./assets/design/screens/mobile-home-bottomnav.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/mobile-home-bottomnav.webp" alt="모바일 · 메인 · 하단 네비" loading="lazy" /></a>
+        <figcaption><b>S66</b> 모바일 · 메인 · 하단 네비<span>홈 탭 활성 — 영상 히어로 위에 반투명 캡슐이 떠서 뒤가 비친다</span></figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="./assets/design/screens/mobile-news-bottomnav.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/mobile-news-bottomnav.webp" alt="모바일 · 소식 · 하단 네비" loading="lazy" /></a>
+        <figcaption><b>S67</b> 모바일 · 소식 · 하단 네비<span>소식 탭 활성 — 하위 경로 포함 startsWith 판정</span></figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="./assets/design/screens/mobile-board-bottomnav.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/mobile-board-bottomnav.webp" alt="모바일 · 게시판 · 하단 네비" loading="lazy" /></a>
+        <figcaption><b>S68</b> 모바일 · 게시판 · 하단 네비<span>자유게시판 탭 활성 — 활성 필은 탭마다 62×54 고정</span></figcaption>
+      </figure>
+      <figure>
+        <a class="shot" href="./assets/design/screens/mobile-menu-bottomnav-light.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/mobile-menu-bottomnav-light.webp" alt="모바일 메뉴 · 하단 네비 적용 · 라이트" loading="lazy" /></a>
+        <figcaption><b>S69</b> 모바일 메뉴 · 하단 네비 적용 · 라이트<span>드로어에서 “메뉴” GNB 섹션 제거 — 프로필 · 퀵 타일 · 테마 · 로그아웃만, 스크림 뒤로 탭바가 비친다</span></figcaption>
+      </figure>
+      <figure class="dark">
+        <a class="shot" href="./assets/design/screens/mobile-menu-bottomnav-dark.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/mobile-menu-bottomnav-dark.webp" alt="모바일 메뉴 · 하단 네비 적용 · 다크" loading="lazy" /></a>
+        <figcaption><b>S70</b> 모바일 메뉴 · 하단 네비 적용 · 다크<span>다크 드로어 + 다크 글라스 탭바</span></figcaption>
+      </figure>
+      <figure class="fit">
+        <a class="shot" href="./assets/design/screens/bottomnav-light.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/bottomnav-light.webp" alt="BottomNav 컴포넌트 · 라이트" loading="lazy" /></a>
+        <figcaption><b>S71</b> BottomNav 컴포넌트 · 라이트<span>캡슐 358×64(좌우 16 인셋) — glass-bg white 72% + 배경 블러 24 + glass-stroke 보더 + 그림자. 활성 탭 nav-active-bg 필 + nav-active(purple-500) semibold, 라벨 11px. 아래 8px + safe-area 34 → 106</span></figcaption>
+      </figure>
+      <figure class="dark fit">
+        <a class="shot" href="./assets/design/screens/bottomnav-dark.webp" target="_blank" rel="noreferrer"><img src="./assets/design/screens/bottomnav-dark.webp" alt="BottomNav 컴포넌트 · 다크" loading="lazy" /></a>
+        <figcaption><b>S72</b> BottomNav 컴포넌트 · 다크<span>다크 글라스 #1E1E21 78% + white 18% 보더, 활성 purple-300 — 브랜드 원색 유지</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
   <!-- ── 디자인 시스템 ── -->
   <section id="system">
     <h2 class="sec">디자인 시스템 <span class="count">6</span></h2>
@@ -655,7 +692,7 @@
   </section>
 
   <footer class="foot">
-    IVE로 DIVE · 디자인 시스템 · 화면 시안 65종 · 이미지는 <code>design/ive-design-system.pen</code>에서 내보냄 · 2026-08-27
+    IVE로 DIVE · 디자인 시스템 · 화면 시안 72종 · 이미지는 <code>design/ive-design-system.pen</code>에서 내보냄 · 2026-08-31
   </footer>
 
 </div>
