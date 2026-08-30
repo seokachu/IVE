@@ -11,7 +11,6 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { getDisplayName } from "@/utils/userProfile";
 import {
@@ -19,13 +18,8 @@ import {
   Crown,
   LogOut,
   Menu,
-  MessageSquare,
   Moon,
-  Music,
-  Newspaper,
-  ShoppingBag,
   ShoppingCart,
-  type LucideIcon,
 } from "lucide-react";
 import LogoImage from "@/assets/images/logo_black.svg";
 import WhiteLogoImage from "@/assets/images/logo.svg";
@@ -33,23 +27,15 @@ import UserAvatar from "@/components/common/UserAvatar";
 import MembershipBadge from "@/components/mypage/MembershipBadge";
 import ProviderBadge, { getSigninProvider } from "@/components/auth/ProviderMark";
 import LoginLink from "@/components/auth/login/LoginLink";
-import { GNB_ARRAY } from "@/utils/constants";
 import { useMyMembership } from "@/hooks/queries/useMembership";
 import LogoutConfirmModal from "@/components/common/modal/LogoutConfirmModal";
 import { useCartItems, useSession } from "@/store/zustand";
 import { cn } from "@/utils/utils";
 
-const GNB_ICONS: Record<string, LucideIcon> = {
-  "/news": Newspaper,
-  "/discography": Music,
-  "/shop": ShoppingBag,
-  "/board": MessageSquare,
-};
-
-//모바일 좌측 드로어 메뉴 — 프로필 카드 + 퀵 타일 + GNB + 테마·로그아웃 (.pen "모바일 메뉴" 시안)
+//모바일 좌측 드로어 메뉴 — 프로필 카드 + 퀵 타일 + 테마·로그아웃 (.pen "모바일 메뉴 · 하단 네비 적용" 시안)
+//GNB는 하단 탭바(layout/BottomNav)로 옮겨져 드로어에는 없다
 const HeaderAside = () => {
   const session = useSession();
-  const pathname = usePathname();
   const cartItems = useCartItems();
   const { tier } = useMyMembership();
   const { resolvedTheme, setTheme } = useTheme();
@@ -162,49 +148,6 @@ const HeaderAside = () => {
                 </Link>
               </SheetClose>
             </div>
-            {/* GNB */}
-            <nav aria-label="주요 메뉴">
-              <p className="px-1 pb-1 text-[11px] font-semibold text-gray-400">메뉴</p>
-              <ul className="flex flex-col gap-0.5">
-                {GNB_ARRAY.map((menu) => {
-                  const Icon = GNB_ICONS[menu.path];
-                  const active = pathname.startsWith(menu.path);
-
-                  return (
-                    <li key={menu.path}>
-                      <SheetClose asChild>
-                        <Link
-                          href={menu.path}
-                          className={cn(
-                            "flex items-center justify-between rounded-lg px-2.5 py-3 transition-colors",
-                            active ? "bg-purple-50 dark:bg-purple-50" : "hover:bg-gray-50",
-                          )}
-                        >
-                          <span className="flex items-center gap-2.5">
-                            {Icon && (
-                              <Icon
-                                size={17}
-                                className={active ? "text-purple-500 dark:text-purple-300" : "text-gray-400"}
-                                aria-hidden="true"
-                              />
-                            )}
-                            <span
-                              className={cn(
-                                "text-sm",
-                                active ? "font-semibold text-purple-500 dark:text-purple-300" : "",
-                              )}
-                            >
-                              {menu.label}
-                            </span>
-                          </span>
-                          <ChevronRight size={14} className="text-gray-300" aria-hidden="true" />
-                        </Link>
-                      </SheetClose>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
           </div>
           {/* 하단 고정 — 다크 모드 · 로그아웃 */}
           <div className="border-t border-gray-200 px-4 py-3">

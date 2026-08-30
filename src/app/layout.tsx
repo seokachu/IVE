@@ -10,6 +10,7 @@ import { AuthProvider } from "@/providers/AuthProvider";
 import PushTokenSync from "@/components/common/PushTokenSync";
 import ThemeBridge from "@/components/common/ThemeBridge";
 import AlbumPlayerBar from "@/components/main/AlbumPlayerBar";
+import BottomNav from "@/components/layout/BottomNav";
 
 export const metadata: Metadata = {
   title: "IVE DIVE",
@@ -43,7 +44,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://i.ytimg.com" />
         <link rel="preconnect" href="https://www.youtube.com" />
       </head>
-      <body className={`${pretendard.className} w-screen overflow-x-hidden`}>
+      {/* pb-tabbar: 모바일 하단 탭바만큼 본문 여백 — lg 이상은 0 */}
+      <body className={`${pretendard.className} w-screen overflow-x-hidden pb-tabbar`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <AuthProvider>
             <PushTokenSync />
@@ -57,6 +59,7 @@ export default function RootLayout({
             </QueryProvider>
           </AuthProvider>
           <Footer />
+          <BottomNav />
         </ThemeProvider>
       </body>
     </html>
