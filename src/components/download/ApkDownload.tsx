@@ -22,9 +22,11 @@ import PinkLogoImage from "@/assets/images/logo_pink.svg";
  * 수동 안내와 다운로드 버튼을 항상 함께 보여준다.
  */
 
-//같은 도메인의 프록시 경로(app/download/ive-dive.apk/route.ts)를 쓴다 —
-//GitHub 릴리스 저장소 직결이 일부 회선에서 끊겨 다운로드가 완료되지 않는 문제 우회
-const APK_URL = "/download/ive-dive.apk";
+//GitHub 릴리스 자산을 직접 가리킨다 (vidding-re · energy-meal 과 동일).
+//한때 같은 도메인 프록시(/download/ive-dive.apk)로 우회했지만, 그 프록시는 Range 요청을
+//처리하지 못해 폰이 네트워크 전환·화면 꺼짐 뒤 이어받기를 시도하는 순간 다운로드가 실패했다.
+//GitHub CDN 은 206/Accept-Ranges 를 지원해 끊겨도 이어받는다.
+const APK_URL = "https://github.com/seokachu/ive-app/releases/latest/download/ive-dive.apk";
 
 type Env = "loading" | "inapp" | "ios" | "ready";
 
