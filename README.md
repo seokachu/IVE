@@ -238,6 +238,8 @@ pnpm dev            # http://localhost:3000
 | `CRON_SECRET` | 크론 엔드포인트 보호 (프로덕션) |
 | `NEXT_PUBLIC_VAPID_PUBLIC_KEY` · `VAPID_PRIVATE_KEY` · `VAPID_SUBJECT` | 웹 푸시(PWA) — `npx web-push generate-vapid-keys`로 생성 |
 
+Supabase 테이블은 `supabase/*.sql`을 SQL Editor에서 실행해 만든다. `site-state.sql`은 메인 히어로가 유튜브 수집 실패 시 마지막 성공 영상으로 폴백하는 데 쓰인다(없으면 정적 이미지 폴백으로만 동작).
+
 ```bash
 pnpm lint            # ESLint
 pnpm test:e2e        # Playwright (프로덕션 빌드 기준)

@@ -5,6 +5,7 @@ import {
 } from "@tanstack/react-query";
 import { getAlbums } from "@/lib/supabase/album";
 import { getNewsFeed } from "@/lib/news/feed";
+import { resolveHeroVideoId } from "@/lib/news/heroVideo";
 import { getScheduleFeed } from "@/lib/schedule/feed";
 import AlbumSection from "@/components/main/AlbumSection";
 import VisualSection from "@/components/main/VisualSection";
@@ -17,14 +18,6 @@ import { getSiteOrigin } from "@/utils/siteOrigin";
 
 export const revalidate = 1800;
 
-//히어로 배경용 최신 공식 영상 (쇼츠 제외)
-const pickHeroVideoId = (feed: Awaited<ReturnType<typeof getNewsFeed>>) => {
-  const video = feed.find(
-    (item) => item.sourceType === "youtube" && !/shorts/i.test(item.title)
-  );
-  return video?.url.match(/[?&]v=([\w-]+)/)?.[1] || null;
-};
-
 export default async function Home() {
   const queryClient = new QueryClient();
 
@@ -35,11 +28,13 @@ export default async function Home() {
     queryClient.prefetchQuery({ queryKey: ["scheduleFeed"], queryFn: getScheduleFeed }),
   ]);
   queryClient.setQueryData(["newsFeed"], feed);
+  //히어로 배경 영상 — 피드가 비어 와도(유튜브 쓰로틀) 마지막 성공 영상으로 폴백해 정적 이미지로 떨어지지 않게
+  const heroVideoId = await resolveHeroVideoId(feed);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <main>
-        <VisualSection videoId={pickHeroVideoId(feed)} siteOrigin={getSiteOrigin()} />
+        <VisualSection videoId={heroVideoId} siteOrigin={getSiteOrigin()} />
         <MarqueeStrip />
         <AlbumSection />
         <div className="relative z-10 bg-background">
