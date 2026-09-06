@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/providers/AuthProvider";
 import PushTokenSync from "@/components/common/PushTokenSync";
 import ThemeBridge from "@/components/common/ThemeBridge";
+import NavigationBridge from "@/components/common/NavigationBridge";
 import AlbumPlayerBar from "@/components/main/AlbumPlayerBar";
 import BottomNav from "@/components/layout/BottomNav";
 
@@ -50,6 +51,7 @@ export default function RootLayout({
           <AuthProvider>
             <PushTokenSync />
             <ThemeBridge />
+            <NavigationBridge />
             <QueryProvider>
               <Header />
               {children}
