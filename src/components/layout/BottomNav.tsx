@@ -3,6 +3,7 @@ import Link from "next/link";
 import { House, MessageSquare, Music, Newspaper, ShoppingBag, type LucideIcon } from "lucide-react";
 import { GNB_ARRAY } from "@/utils/constants";
 import { useRoutePath } from "@/hooks/useRoutePath";
+import { useIsApp } from "@/hooks/useIsApp";
 import { cn } from "@/utils/utils";
 
 const GNB_ICONS: Record<string, LucideIcon> = {
@@ -23,6 +24,10 @@ const TABS = [
 //바깥 nav 는 pointer-events 를 끊어 캡슐 옆·아래 여백에서는 밑 콘텐츠를 그대로 누를 수 있다
 const BottomNav = () => {
   const pathname = useRoutePath();
+  //앱(WebView)에서는 탭 전환을 히스토리에 쌓지 않는다 — 뒤로가기가 탭을 되감지 않고
+  //"상세 → 탭 루트 → 홈 → 종료"로 끝나게(ive-app WebViewScreen 의 뒤로가기 규칙).
+  //모바일 브라우저는 브라우저 뒤로가기 관행대로 push 를 유지한다.
+  const isApp = useIsApp();
 
   return (
     <nav aria-label="하단 메뉴" className="pointer-events-none fixed inset-x-0 bottom-0 z-50 pb-safe lg:hidden">
@@ -34,6 +39,7 @@ const BottomNav = () => {
             <li key={path} className="h-full flex-1 p-1">
               <Link
                 href={path}
+                replace={isApp}
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "flex h-full flex-col items-center justify-center gap-1 rounded-full text-[11px] transition-colors",
