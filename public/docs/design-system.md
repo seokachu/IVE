@@ -187,6 +187,7 @@ Pencil에 재사용 컴포넌트로 등록된 목록과 대응 코드:
 - 활성 탭은 `bg-glass-accent` 필(탭 셀 기준 고정 크기) + `text-purple-500`(다크 `purple-300`) + `font-semibold`, 비활성은 `text-gray-500`. 아이콘 24 + 라벨 11px.
 - 탭바 오프셋은 `--tabbar-h`(캡슐 64 + 아래 8 + safe-area, lg 이상 0) 하나로 관리한다 — body `pb-tabbar`, 하단 고정 요소 `mb-tabbar`, sticky 요소 `bottom-tabbar-10`. `bottom-[calc(...)]` 같은 임의값 금지, `lg:` 변형 불필요.
 - 시안: `.pen` `BottomNav` 컴포넌트(라이트/다크) · "모바일 · 메인/소식/게시판 · 하단 네비" · "모바일 메뉴 · 하단 네비 적용".
+- 앱(WebView, `useIsApp`)에서는 탭 전환을 Link `replace`로 해 히스토리에 쌓지 않는다 — Android 뒤로가기가 "상세 → 탭 루트 → 홈 → 종료"로 끝나게(홈 2회 종료 · 탭 루트 → 홈, 앱 `docs/decisions.md` §9 · 명세 PUSH-14). 모바일 브라우저는 push 유지. `NavigationBridge`가 현재 라우트를 앱에 알리고 `window.__iveNavigate` 진입점을 연다(2026-09-06).
 
 ## 5. 코드 적용 — **2026-07-29 전면 적용 완료**
 
