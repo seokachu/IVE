@@ -188,6 +188,7 @@ Pencil에 재사용 컴포넌트로 등록된 목록과 대응 코드:
 - 탭바 오프셋은 `--tabbar-h`(캡슐 64 + 아래 8 + safe-area, lg 이상 0) 하나로 관리한다 — body `pb-tabbar`, 하단 고정 요소 `mb-tabbar`, sticky 요소 `bottom-tabbar-10`. `bottom-[calc(...)]` 같은 임의값 금지, `lg:` 변형 불필요.
 - 시안: `.pen` `BottomNav` 컴포넌트(라이트/다크) · "모바일 · 메인/소식/게시판 · 하단 네비" · "모바일 메뉴 · 하단 네비 적용".
 - 앱(WebView, `useIsApp`)에서는 탭 전환을 Link `replace`로 해 히스토리에 쌓지 않는다 — Android 뒤로가기가 "상세 → 탭 루트 → 홈 → 종료"로 끝나게(홈 2회 종료 · 탭 루트 → 홈, 앱 `docs/decisions.md` §9 · 명세 PUSH-14). 모바일 브라우저는 push 유지. `NavigationBridge`가 현재 라우트를 앱에 알리고 `window.__iveNavigate` 진입점을 연다(2026-09-06).
+- 앱 안에서는 핀치 · 더블탭 확대를 막는다 — `AppViewportLock`이 앱 셸을 감지하면 viewport 메타를 `maximum-scale=1, user-scalable=no`로 바꾼다(확대되면 탭바 · 시트가 밀려 되돌리기 어려움). 모바일 브라우저는 접근성을 위해 확대 유지, 웹 배포만으로 적용(2026-09-14, 명세 PUSH-13).
 
 ## 5. 코드 적용 — **2026-07-29 전면 적용 완료**
 
