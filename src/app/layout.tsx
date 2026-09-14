@@ -10,6 +10,7 @@ import { AuthProvider } from "@/providers/AuthProvider";
 import PushTokenSync from "@/components/common/PushTokenSync";
 import ThemeBridge from "@/components/common/ThemeBridge";
 import NavigationBridge from "@/components/common/NavigationBridge";
+import AppViewportLock from "@/components/common/AppViewportLock";
 import AlbumPlayerBar from "@/components/main/AlbumPlayerBar";
 import BottomNav from "@/components/layout/BottomNav";
 
@@ -52,6 +53,7 @@ export default function RootLayout({
             <PushTokenSync />
             <ThemeBridge />
             <NavigationBridge />
+            <AppViewportLock />
             <QueryProvider>
               <Header />
               {children}
