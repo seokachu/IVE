@@ -42,7 +42,7 @@ export const useCommentLikeStatus = (commentId: number, userId?: string) => {
   return useQuery({
     queryKey: ["comments", "like", commentId, userId],
     queryFn: () => getCommentLikeStatus(commentId, userId),
-    enabled: !!userId,
+    enabled: !!userId && commentId > 0, //낙관적 임시 댓글(음수 id)은 조회 생략
   });
 };
 

@@ -13,9 +13,9 @@ const CommentForm = ({ mode, type, initialContent, commentId, onSuccess, onCance
   const { id: boardId } = useParams();
   const session = useSession();
   const { checkAuth } = useAuthGuard();
-  //mutate는 에러를 삼켜 실패해도 성공 토스트가 뜨므로, await로 실패를 잡을 수 있는 mutateAsync 사용
+  //낙관적 업데이트로 폼이 먼저 닫혀 언마운트돼도 결과를 받을 수 있도록 mutate 대신 mutateAsync를 await
   const { mutateAsync: addComment } = useAddComment(Number(boardId));
-  const { mutateAsync: editComment } = useEditComment(Number(boardId));
+  const { mutateAsync: editComment } = useEditComment(Number(boardId), parentId);
 
   const form = useForm<BoardCommentType>({
     mode: "onSubmit",
@@ -52,25 +52,31 @@ const CommentForm = ({ mode, type, initialContent, commentId, onSuccess, onCance
           return;
         }
 
+        //캐시에 먼저 반영되므로 편집 폼은 바로 닫고, 실패하면 훅에서 롤백
+        onSuccess?.();
         await editComment({
           commentId: commentId,
           content,
         });
-        reset();
-        onSuccess?.();
       }
 
       if (mode === "create") {
-        await addComment({
-          board_id: Number(boardId),
-          user_id: session?.user.id,
-          content,
-          parent_id: type === "reply" ? parentId : null,
-        });
+        //목록에 임시 댓글이 먼저 붙으므로 입력창은 바로 비우고, 실패하면 입력 내용을 되살린다
         reset();
-
         if (type === "reply") {
           onSuccess?.();
+        }
+
+        try {
+          await addComment({
+            board_id: Number(boardId),
+            user_id: session?.user.id,
+            content,
+            parent_id: type === "reply" ? parentId : null,
+          });
+        } catch (error) {
+          form.setValue("content", content);
+          throw error;
         }
       }
 
