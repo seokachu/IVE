@@ -1,7 +1,7 @@
 import UserAvatar from "@/components/common/UserAvatar";
 import { CornerDownRight, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useDeleteComment, useRepliesCommentList } from "@/hooks/queries/useComment";
+import { isTempCommentId, useDeleteComment, useRepliesCommentList } from "@/hooks/queries/useComment";
 import { formatRelativeTime } from "@/utils/formatDate";
 import EditDeleteActions from "@/components/common/EditDeleteActions";
 import { toast } from "@/hooks/use-toast";
@@ -18,7 +18,7 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange, boardA
   const session = useSession();
   const [showReplyForm, setShowReplyForm] = useState(false);
   const { checkAuth } = useAuthGuard();
-  const { mutate: deleteComment } = useDeleteComment(boardId, item.id, item.parent_id);
+  const { mutateAsync: deleteComment } = useDeleteComment(boardId, item.id, item.parent_id);
   const { data: replies } = useRepliesCommentList(item.id);
   const { data: isCommentLiked } = useCommentLikeStatus(item.id, session?.user?.id);
   const { mutate: toggleCommentLike, isPending } = useToggleCommentLike(item.id, session?.user?.id);
@@ -29,12 +29,23 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange, boardA
   const isBoardAuthor = !!item.user_id && item.user_id === boardAuthorId;
   const isEditing = activeEditId === item.id;
   const isReply = !!item.parent_id;
+  //서버 저장 전 임시 댓글 — 좋아요·답글·수정·삭제를 막는다
+  const isTemp = isTempCommentId(item.id);
 
-  const onClickDelete = () => {
-    deleteComment();
+  //목록에서 먼저 사라져 언마운트되므로 mutate 콜백 대신 mutateAsync로 실패를 잡는다
+  const onClickDelete = async () => {
     toast({
       title: "댓글이 삭제 되었습니다.",
     });
+    try {
+      await deleteComment();
+    } catch (error) {
+      toast({
+        title: "댓글 삭제 실패",
+        description: error instanceof Error ? error.message : "알 수 없는 오류가 발생했습니다.",
+        variant: "destructive",
+      });
+    }
   };
 
   const onClickEdit = () => {
@@ -90,6 +101,7 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange, boardA
                 type={item.parent_id ? "reply" : "comment"}
                 initialContent={item.content}
                 commentId={item.id}
+                parentId={item.parent_id ?? undefined}
                 onSuccess={() => handleEditChange(null)}
                 onCancel={() => handleEditChange(null)}
               />
@@ -102,7 +114,7 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange, boardA
                   <div className="flex items-center gap-3.5">
                     <Button
                       onClick={handleCommentLikeToggle}
-                      disabled={isPending}
+                      disabled={isPending || isTemp}
                       variant="plain" size="auto"
                       className={`flex items-center gap-1 font-semibold hover:text-purple ${
                         isReply ? "text-[11px]" : "text-xs"
@@ -111,7 +123,7 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange, boardA
                       <Heart size={isReply ? 12 : 13} fill={isCommentLiked ? "currentColor" : "none"} />
                       <span>{item?.likes[0]?.count || 0}</span>
                     </Button>
-                    {!item.parent_id && (
+                    {!item.parent_id && !isTemp && (
                       <Button
                         onClick={onClickReplies}
                         variant="plain" size="auto"
@@ -121,7 +133,7 @@ const CommentListItem = ({ item, boardId, activeEditId, handleEditChange, boardA
                       </Button>
                     )}
                   </div>
-                  {isAuthor && (
+                  {isAuthor && !isTemp && (
                     <EditDeleteActions
                       size="sm"
                       onEdit={onClickEdit}
