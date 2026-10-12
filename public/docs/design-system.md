@@ -189,6 +189,7 @@ Pencil에 재사용 컴포넌트로 등록된 목록과 대응 코드:
 - 시안: `.pen` `BottomNav` 컴포넌트(라이트/다크) · "모바일 · 메인/소식/게시판 · 하단 네비" · "모바일 메뉴 · 하단 네비 적용".
 - 앱(WebView, `useIsApp`)에서는 탭 전환을 Link `replace`로 해 히스토리에 쌓지 않는다 — Android 뒤로가기가 "상세 → 탭 루트 → 홈 → 종료"로 끝나게(홈 2회 종료 · 탭 루트 → 홈, 앱 `docs/decisions.md` §9 · 명세 PUSH-14). 모바일 브라우저는 push 유지. `NavigationBridge`가 현재 라우트를 앱에 알리고 `window.__iveNavigate` 진입점을 연다(2026-09-06).
 - 앱 안에서는 핀치 · 더블탭 확대를 막는다 — `AppViewportLock`이 앱 셸을 감지하면 viewport 메타를 `maximum-scale=1, user-scalable=no`로 바꾼다(확대되면 탭바 · 시트가 밀려 되돌리기 어려움). 모바일 브라우저는 접근성을 위해 확대 유지, 웹 배포만으로 적용(2026-09-14, 명세 PUSH-13). Next가 라우트 이동마다 메타를 새로 그리므로 MutationObserver로 재적용하고 `touch-action: pan-x pan-y`로 제스처도 막는다(2026-09-15).
+- **iOS 앱은 이 탭바 대신 시스템 탭바(Liquid Glass)를 쓴다** — 앱이 `adoptedStyleSheets`로 `nav[aria-label="하단 메뉴"]`를 숨기고 `--tabbar-h`를 `env(safe-area-inset-bottom)`(= 시스템 탭바 높이)로 덮어쓴다. 그래서 하단 고정 요소가 `mb-tabbar` · `pb-tabbar` 토큰을 쓰는 한 iOS 앱에서도 탭바 위로 올라간다 — 이 규칙을 지켜야 하는 이유가 하나 더 생긴 셈. 탭바의 `aria-label`을 바꾸면 앱 주입 선택자도 같이 바꿔야 한다(앱 v1.0.8, ive-app `docs/decisions.md` §10 · 명세 PUSH-15, 2026-10-12).
 
 ## 5. 코드 적용 — **2026-07-29 전면 적용 완료**
 
