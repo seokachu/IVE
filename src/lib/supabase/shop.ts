@@ -1,6 +1,6 @@
 import { supabase } from "@/lib/supabase/client";
 import { getDiscountedPrice } from "@/utils/calculateDiscount";
-import { countRecentReviews } from "@/utils/calculateBadge";
+import { countRecentReviews, isAlbumGoods, isNewGoods } from "@/utils/calculateBadge";
 import type { GoodsItem, SortOptionList } from "@/types/shop";
 
 const CAROUSEL_ITEM_COUNT = 12;
@@ -50,11 +50,18 @@ export const sortGoods = (items: GoodsItem[], sortBy: SortOptionList): GoodsItem
     case "price_high_to_low":
       return sorted.sort((a, b) => getDiscountedPrice(b) - getDiscountedPrice(a));
     case "best":
-    default:
+    default: {
+      //신보(NEW 뱃지 앨범)는 리뷰가 쌓이기 전이라 인기순 바닥에 깔린다 — 컴백 직후 바로 보이도록 맨 앞에 고정
+      const isFreshAlbum = (item: GoodsItem) => isNewGoods(item.created_at) && isAlbumGoods(item.title);
       return sorted.sort(
         (a, b) =>
-          b.review_count - a.review_count || b.average_rating - a.average_rating || time(b.created_at) - time(a.created_at),
+          Number(isFreshAlbum(b)) - Number(isFreshAlbum(a)) ||
+          (isFreshAlbum(a) && isFreshAlbum(b) ? time(b.created_at) - time(a.created_at) : 0) ||
+          b.review_count - a.review_count ||
+          b.average_rating - a.average_rating ||
+          time(b.created_at) - time(a.created_at),
       );
+    }
   }
 };
 

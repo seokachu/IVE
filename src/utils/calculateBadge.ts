@@ -24,6 +24,11 @@ export const isNewGoods = (createdAt: string | null | undefined, now = Date.now(
   return now - registered <= GOODS_NEW_DAYS * DAY_IN_MS;
 };
 
+//음반 상품 — 정규·미니(EP)·싱글·플랫폼반. 굿즈에 category 컬럼이 없어 제목으로 판별한다
+const ALBUM_TITLE_PATTERN = /(?<![A-Za-z])(EP|ALBUM|Single)(?![A-Za-z])|미니\s*\d+집/i;
+
+export const isAlbumGoods = (title: string) => ALBUM_TITLE_PATTERN.test(title);
+
 //HOT 판정에 쓰는 최근 리뷰 수 — 목록(조인 결과)과 상세(리뷰 조회 결과) 양쪽에서 같은 기준을 쓴다
 export const countRecentReviews = (
   reviews: { created_at: string | null }[] | null | undefined,

@@ -1,4 +1,5 @@
 import { findNaverImage } from "@/lib/news/naverImage";
+import { readSiteState, writeSiteState } from "@/lib/siteState";
 import type { FeedItem } from "@/types/news";
 
 //피드 캐싱 주기(30분) — page/route revalidate와 동일하게 유지
@@ -33,6 +34,8 @@ const NAVER_NEWS_API_URL =
 
 const FEED_ARTICLE_LIMIT = 50;
 const FEED_VIDEO_LIMIT = 30;
+//마지막으로 수집에 성공한 영상 목록 (site_state 키)
+const NEWS_VIDEOS_KEY = "news_videos";
 
 //XML/HTML 문자열 정리 헬퍼
 const decodeEntities = (text: string) =>
@@ -236,7 +239,6 @@ export const getNewsFeed = async (): Promise<FeedItem[]> => {
   const results = await Promise.allSettled([fetchNaverNews(), fetchGoogleNews(), fetchYouTubeFeed()]);
 
   const items = results.flatMap((result) => (result.status === "fulfilled" ? result.value : []));
-  if (items.length === 0) throw new Error("모든 뉴스 소스를 가져오는데 실패했습니다.");
 
   //같은 제목이 여러 소스에서 잡히면 썸네일 있는 쪽(유튜브)을 우선
   const byTitle = new Map<string, FeedItem>();
@@ -251,8 +253,18 @@ export const getNewsFeed = async (): Promise<FeedItem[]> => {
 
   //영상은 채널당 최신 15개뿐이라 기사에 밀려 잘리지 않도록 소스별로 따로 컷
   const sorted = [...byTitle.values()].sort(byDateDesc);
-  const videos = sorted.filter((item) => item.sourceType === "youtube").slice(0, FEED_VIDEO_LIMIT);
+  const freshVideos = sorted.filter((item) => item.sourceType === "youtube").slice(0, FEED_VIDEO_LIMIT);
   const articles = sorted.filter((item) => item.sourceType !== "youtube").slice(0, FEED_ARTICLE_LIMIT);
+
+  //유튜브 RSS가 통째로 404/500을 내는 날이 있다 — 재시도로도 비면 마지막 성공 목록으로 폴백 (heroVideo와 같은 방식)
+  let videos = freshVideos;
+  if (freshVideos.length > 0) {
+    await writeSiteState(NEWS_VIDEOS_KEY, freshVideos);
+  } else {
+    videos = (await readSiteState<FeedItem[]>(NEWS_VIDEOS_KEY)) ?? [];
+    console.error(`[news] 유튜브 피드가 비어 마지막 성공 영상 ${videos.length}건으로 폴백`);
+  }
+  if (videos.length === 0 && articles.length === 0) throw new Error("모든 뉴스 소스를 가져오는데 실패했습니다.");
   const deduped = [...videos, ...articles].sort(byDateDesc);
 
   //썸네일 없는 기사는 이미지 검색으로 대표 이미지를 채움 (검색 결과는 하루 캐싱)
