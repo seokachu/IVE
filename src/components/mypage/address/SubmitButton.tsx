@@ -1,9 +1,9 @@
 import { UseFormReturn } from "react-hook-form";
-import { AddressType } from "@/hooks/user";
+import { AddressInputType, AddressType } from "@/hooks/user";
 
 interface SubmitButtonProps {
   mode: "create" | "edit";
-  form: UseFormReturn<AddressType>;
+  form: UseFormReturn<AddressInputType, unknown, AddressType>;
 }
 
 export const SubmitButton = ({ mode, form }: SubmitButtonProps) => {
