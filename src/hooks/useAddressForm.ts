@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { RECIPIENT_DELIVERY_OPTIONS } from "@/utils/constants";
-import { AddressType, myPageAddressSchema, userDefaultValues } from "./user";
+import { AddressInputType, AddressType, myPageAddressSchema, userDefaultValues } from "./user";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { AddressChange, UseAddressFormProps } from "@/types/mypage";
@@ -70,7 +70,7 @@ export const useAddressForm = ({ mode, initialData, isFirstAddress }: UseAddress
     };
   };
 
-  const form = useForm<AddressType>({
+  const form = useForm<AddressInputType, unknown, AddressType>({
     mode: "onChange",
     resolver: zodResolver(myPageAddressSchema),
     defaultValues: getInitialValues(),

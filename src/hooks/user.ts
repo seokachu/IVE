@@ -9,7 +9,7 @@ function extractDefaultValues<T extends z.ZodTypeAny>(schema: T): Partial<z.infe
 
     for (const key in shape) {
       if (shape[key] instanceof z.ZodString) {
-        parsedData[key as keyof z.infer<T>] = "";
+        parsedData[key as keyof z.infer<T>] = "" as z.infer<T>[keyof z.infer<T>];
       }
     }
   }
@@ -99,6 +99,7 @@ export type SignUpType = z.infer<typeof signUpSchema>;
 export type LoginType = z.infer<typeof loginSchema>;
 export type NicknameType = z.infer<typeof myPageNicknameSchema>;
 export type AddressType = z.infer<typeof myPageAddressSchema>;
+export type AddressInputType = z.input<typeof myPageAddressSchema>;
 export type CustomerInfoType = z.infer<typeof customerInfoSchema>;
 export type ReviewType = z.infer<typeof reviewSchema>;
 export type BoardWriteType = z.infer<typeof boardWriteSchema>;

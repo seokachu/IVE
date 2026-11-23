@@ -30,7 +30,7 @@
     "capture:mobile": "node scripts/capture-mobile.mjs"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.10.0",
+    "@hookform/resolvers": "^5.9.2",
     "@radix-ui/react-accordion": "^1.2.20",
     "@radix-ui/react-alert-dialog": "^1.1.23",
     "@radix-ui/react-avatar": "^1.2.6",
@@ -70,7 +70,7 @@
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^1.1.2",
     "web-push": "^3.6.7",
-    "zod": "^3.25.76",
+    "zod": "^4.6.7",
     "zustand": "^5.0.14"
   },
   "devDependencies": {
@@ -101,6 +101,7 @@
       "esbuild"
     ],
     "overrides": {
+      "zod@<4.6.6": "^4.6.7",
       "postcss@<8.5.18": "^8.5.24",
       "sharp@<0.35.0": "^0.35.3",
       "@babel/helpers@<7.29.7": "^7.29.7",
